@@ -2,6 +2,7 @@ var VideoPlayer = new Class({
     initialize : function() {
         // alert("Alive");
     },
+    
     setSource : function(src) {
         this.filename = src;
         this.myVideoPlayer.src([{
@@ -15,9 +16,11 @@ var VideoPlayer = new Class({
             src : "http://video-js.zencoder.com/oceans-clip.ogv"
         }]);
     },
+    
     play : function() {
         this.myVideoPlayer.play();
     },
+    
     addVideoPlayer : function(divName) {
         videoElement = document.createElement("video");
         videoElement.setAttribute("id", divName);
