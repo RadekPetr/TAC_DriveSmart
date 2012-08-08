@@ -8,13 +8,13 @@ var VideoPlayer = new Class({
         this.filename = src;
         this.myVideoPlayer.src([{
             type : "video/mp4",
-            src : "http://www.jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v"
+            src : "media/video/country/country_cla01_next.m4v"
         }, {
             type : "video/webm",
-            src : "http://video-js.zencoder.com/oceans-clip.webm"
+            src : "media/video/country/country_cla01_next.webm"
         }, {
             type : "video/ogg",
-            src : "http://video-js.zencoder.com/oceans-clip.ogv"
+            src : "media/video/country/country_cla01_next.ogg"
         }]);
     },
     // ---------------------------
