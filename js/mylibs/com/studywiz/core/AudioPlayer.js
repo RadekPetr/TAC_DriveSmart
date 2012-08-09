@@ -9,12 +9,12 @@ var AudioPlayer = new Class({
         //this.preloader.onProgress = this.handleProgress();
 
     },
-    // ---------------------------
+    // ----------------------------------------------------------
     setSource : function(src, id) {
         this.source.src = src;
         this.source.id = id;
     },
-    // ---------------------------
+    // ----------------------------------------------------------
     play : function() {
 
         this.preloader.loadFile(this.source, false);
@@ -24,6 +24,8 @@ var AudioPlayer = new Class({
         this.preloader.onComplete = this._loadComplete();
 
     },
+    // ----------------------------------------------------------
+    // PRIVATE - handle load complete
     _loadComplete : function() {
         SoundJS.play(this.source.id);
         alert(this.source.id);

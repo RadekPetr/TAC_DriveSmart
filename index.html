@@ -10,26 +10,18 @@
 		<!-- CSS concatenated and minified via ant build script-->
 		<link rel="stylesheet" href="css/style.css">
 		<!-- end CSS-->
-
-		<script src="js/libs/jquery-1.6.2.min.js"></script>
-		<script src="js/mylibs/createjs/easeljs-0.4.2.min.js"></script>
-		<script src="js/mylibs/createjs/tweenjs-0.2.0.min.js"></script>
 		<script src="js/mylibs/mootools/mootools-core-1.4.5-full-nocompat.js"></script>
 		<script src="js/mylibs/mootools/mootools-more-1.4.0.1.js"></script>
 		<script src="js/main.js"></script>
-
 		<script>
             var init = function() {
                 var main = new Main();
-
                 main.addEvent('READY:once', function() {
-                    //alert("Ready !!");
                     main.start();
                 });
 
             }
 		</script>
-	
 
 		<!-- JavaScript at the bottom for fast page loading -->
 
