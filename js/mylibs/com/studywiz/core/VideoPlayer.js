@@ -1,4 +1,5 @@
 var VideoPlayer = new Class({
+    Implements : Events,
 
     initialize : function(myID) {
         this.id = myID
@@ -23,9 +24,13 @@ var VideoPlayer = new Class({
     play : function() {
         this.myVideoPlayer = _V_(this.id);
         this.myVideoPlayer.src(this.videoSource);
-        this.myVideoPlayer.ready((function(videoPlayer) {
-            this.myVideoPlayer.play();
-        }).bind(this))
+        this.myVideoPlayer.ready((function() {
+            this.play();
+        }));
+        
+        this.myVideoPlayer.addEvent("ended", function() {
+            this.fireEvent("TIMELINE", {type:"video.finished", id : this.id});
+        }.bind(this));
     },
     // ---------------------------
     addVideoPlayer : function() {
@@ -33,14 +38,15 @@ var VideoPlayer = new Class({
             id : "videoHolder"
         });
         videoDiv.inject(document.body);
-        this.videoElement.inject(videoDiv)
+        this.videoElement.inject(videoDiv);
+        this.hide();
     },
-    
-    show : function (){
+
+    show : function() {
         this.videoElement.show();
-    }, 
-    
-    hide : function () {
+    },
+
+    hide : function() {
         this.videoElement.hide();
     }
 })

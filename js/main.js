@@ -16,7 +16,7 @@ var Main = new Class({
     },
     // ----------------------------------------------------------
     start : function() {
-        var vp = new VideoPlayer("video_1");
+        this.vp = new VideoPlayer("video_1");
         var params = new Object();
         params.source = [{
             type : "video/mp4",
@@ -31,16 +31,17 @@ var Main = new Class({
         params.poster = {
             src : "http://video-js.zencoder.com/oceans-clip.png"
         };
-        vp.setParams(params);
-        vp.addVideoPlayer();
-        vp.show();
-        
-        vp.play();
-        
+        this.vp.setParams(params);
+        this.vp.addVideoPlayer();
+        this.vp.show();
+
+        this.vp.play();
+        this.vp.addEvent("TIMELINE", this._handleTimelineEvents);
+
         var sound = new AudioPlayer();
         sound.setSource("media/sound/country/mp3/country_accident.mp3|media/sound/country/mp3/country_accident.ogg", "Sound_1")
         sound.play();
-        vp.hide();
+        // vp.hide();
     },
     // ----------------------------------------------------------
     // PRIVATE - load external js libraries so they are available to the project
@@ -50,10 +51,17 @@ var Main = new Class({
             onLoad : function() {
                 this.listOfLibrariesCounter++;
                 if (this.listOfLibrariesCounter == this.listOfLibraries.length) {
-                    this.fireEvent('READY');
+                  this.fireEvent('READY');
+                    console.log ("Fired event READY");
                 }
             }.bind(this)
         });
+    }.protect(),
+    // ----------------------------------------------------------
+    // PRIVATE - 
+    _handleTimelineEvents : function(params) {
+        console.log (params);
+        console.log ("Got  event TIMELINE");
     }.protect()
 })
 

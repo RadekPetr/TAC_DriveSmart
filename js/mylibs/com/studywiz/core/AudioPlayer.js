@@ -1,5 +1,5 @@
 var AudioPlayer = new Class({
-
+    Implements : Events,
     initialize : function() {
         this.source = new Object();
         this.preloader = new PreloadJS();
@@ -19,7 +19,7 @@ var AudioPlayer = new Class({
 
         this.preloader.loadFile(this.source, false);
 
-        alert("Setting src: " + this.source.src);
+        // alert("Setting src: " + this.source.src);
         this.preloader.load();
         this.preloader.onComplete = this._loadComplete();
 
@@ -28,7 +28,7 @@ var AudioPlayer = new Class({
     // PRIVATE - handle load complete
     _loadComplete : function() {
         SoundJS.play(this.source.id);
-        alert(this.source.id);
+        //alert(this.source.id);
         if (!SoundJS.checkPlugin(true)) {
             alert('plugin issue');
         }
