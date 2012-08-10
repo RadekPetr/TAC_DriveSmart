@@ -1,10 +1,11 @@
 var VideoPlayer = new Class({
     Implements : Events,
-
+    // ---------------------------
     initialize : function(myID) {
-        this.id = myID
+        this.id = myID;
+        this.nextAction = new String();
         this.videoSource = new Array();
-        this.myVideoPlayer = {};
+        this.myVideoPlayer = null;
         this.videoElement = new Element("video", {
             id : this.id,
             preload : "auto",
@@ -12,7 +13,6 @@ var VideoPlayer = new Class({
             height : "600",
             poster : ""
         });
-
         console.log("-------------- Created Video Player: " + myID);
     },
     // ---------------------------
@@ -21,16 +21,23 @@ var VideoPlayer = new Class({
         this.videoElement.setProperty("poster", params.poster.src)
     },
     // ---------------------------
-    play : function() {
-        this.myVideoPlayer = _V_(this.id);
-        this.myVideoPlayer.src(this.videoSource);
+    start : function() {
+        if (this.myVideoPlayer == null) {
+            this.myVideoPlayer = _V_(this.id);
+            this.myVideoPlayer.src(this.videoSource);
+
+            this.myVideoPlayer.addEvent("ended", function() {
+                this.fireEvent("TIMELINE", {
+                    type : "video.finished",
+                    id : this.id
+                });
+            }.bind(this));
+        }
+
         this.myVideoPlayer.ready((function() {
             this.play();
         }));
-        
-        this.myVideoPlayer.addEvent("ended", function() {
-            this.fireEvent("TIMELINE", {type:"video.finished", id : this.id});
-        }.bind(this));
+
     },
     // ---------------------------
     addVideoPlayer : function() {
@@ -41,13 +48,22 @@ var VideoPlayer = new Class({
         this.videoElement.inject(videoDiv);
         this.hide();
     },
-
+    // ---------------------------
     show : function() {
         this.videoElement.show();
     },
-
+    // ---------------------------
     hide : function() {
         this.videoElement.hide();
+    },
+    // ---------------------------
+    stop : function() {
+        this.myVideoPlayer.pause();
+        this.myVideoPlayer.currentTime(0);
+    },
+    // ---------------------------
+    pause : function() {
+        this.myVideoPlayer.pause();
     }
 })
 

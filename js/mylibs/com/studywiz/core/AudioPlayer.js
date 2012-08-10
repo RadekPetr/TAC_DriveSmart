@@ -1,6 +1,8 @@
 var AudioPlayer = new Class({
     Implements : Events,
-    initialize : function() {
+    initialize : function(myID) {
+        this.id = myID;
+        this.nextAction = new String();
         this.source = new Object();
         this.preloader = new PreloadJS();
         this.preloader.installPlugin(SoundJS);
@@ -27,51 +29,20 @@ var AudioPlayer = new Class({
     // ----------------------------------------------------------
     // PRIVATE - handle load complete
     _loadComplete : function() {
-        SoundJS.play(this.source.id);
-        //alert(this.source.id);
+        this.soundInstance = SoundJS.play(this.source.id);
+
         if (!SoundJS.checkPlugin(true)) {
-            alert('plugin issue');
+            alert('Sound plugin issue');
+        } else {
+            this.soundInstance.onComplete = function() {
+                console.log("got audio finished event");
+                this.fireEvent("TIMELINE", {
+                    type : "audio.finished",
+                    id : this.id
+                });
+            }.bind(this);
         }
     }.protect()
 
-    /*
-
-     SoundJS.FlashPlugin.BASE_PATH = "assets/" // Initialize the base path from this document to the Flash Plugin
-
-     // Instantiate a queue.
-     queue = new PreloadJS();
-     queue.installPlugin(SoundJS); // Plug in SoundJS to handle browser-specific paths
-     queue.onComplete = loadComplete;
-     queue.onFileError = handleFileError;
-     queue.onProgress = handleProgress;
-     queue.loadFile(item, true);
-     }
-
-     function stop() {
-     if (queue != null) { queue.cancel(); }
-     SoundJS.stop();
-     }
-
-     function handleFileError(o) {
-     // An error occurred.
-     displayStatus.innerText = "Error :("
-     }
-
-     function handleProgress(event) {
-     // Progress happened.
-     displayStatus.innerText = "Loading: " + (queue.progress.toFixed(2) * 100) + "%";
-     }
-
-     function loadComplete() {
-     // Load completed.
-     displayStatus.innerText = "Complete :)";
-     playSound("music");
-     }
-
-     function playSound(name, loop) {
-     // Play the sound using the ID created above.
-     return SoundJS.play(name);
-     }
-     */
 })
 
