@@ -17,6 +17,7 @@ var Main = new Class({
     // ----------------------------------------------------------
     start : function() {
         this.vp = new VideoPlayer("video_1");
+        this.vp.nextAction = "play next video";
         var params = new Object();
         params.source = [{
             type : "video/mp4",
@@ -35,13 +36,22 @@ var Main = new Class({
         this.vp.addVideoPlayer();
         this.vp.show();
 
-        this.vp.play();
+        this.vp.start();
         this.vp.addEvent("TIMELINE", this._handleTimelineEvents);
 
-        var sound = new AudioPlayer();
+        var sound = new AudioPlayer("Sound_1");
+        sound.addEvent("TIMELINE", this._handleTimelineEvents);
+        sound.nextAction = "play next sound";
         sound.setSource("media/sound/country/mp3/country_accident.mp3|media/sound/country/mp3/country_accident.ogg", "Sound_1")
         sound.play();
         // vp.hide();
+        //   alert("will pause");
+        //      this.vp.pause();
+        //   alert("will resume");
+        // this.vp.start();
+
+        //    console.log ("Video "  + this.vp.nextAction);
+        // console.log ("Audio "  + sound.nextAction);
     },
     // ----------------------------------------------------------
     // PRIVATE - load external js libraries so they are available to the project
@@ -51,17 +61,17 @@ var Main = new Class({
             onLoad : function() {
                 this.listOfLibrariesCounter++;
                 if (this.listOfLibrariesCounter == this.listOfLibraries.length) {
-                  this.fireEvent('READY');
-                    console.log ("Fired event READY");
+                    this.fireEvent('READY');
+                    console.log("Fired event READY");
                 }
             }.bind(this)
         });
     }.protect(),
     // ----------------------------------------------------------
-    // PRIVATE - 
+    // PRIVATE -
     _handleTimelineEvents : function(params) {
-        console.log (params);
-        console.log ("Got  event TIMELINE");
+        console.log(params);
+        console.log("Got  event TIMELINE");
     }.protect()
 })
 
