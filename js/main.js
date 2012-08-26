@@ -44,6 +44,7 @@ var Main = new Class({
         sound.nextAction = "play next sound";
         sound.setSource("media/sound/country/mp3/country_accident.mp3|media/sound/country/mp3/country_accident.ogg", "Sound_1")
         sound.play();
+
         // vp.hide();
         //   alert("will pause");
         //      this.vp.pause();
@@ -52,6 +53,9 @@ var Main = new Class({
 
         //    console.log ("Video "  + this.vp.nextAction);
         // console.log ("Audio "  + sound.nextAction);
+    },
+    seek : function(time) {
+        // TODO: start playback from time
     },
     // ----------------------------------------------------------
     // PRIVATE - load external js libraries so they are available to the project
@@ -68,7 +72,7 @@ var Main = new Class({
         });
     }.protect(),
     // ----------------------------------------------------------
-    // PRIVATE -
+    // PRIVATE - handle events for timeline
     _handleTimelineEvents : function(params) {
         console.log(params);
         console.log("Got  event TIMELINE");

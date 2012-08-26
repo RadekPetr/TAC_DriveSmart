@@ -14,12 +14,13 @@
 		<script src="js/mylibs/mootools/mootools-more-1.4.0.1.js"></script>
 		<script src="js/Main.js"></script>
 		<script>
-         function init () {
+            function init() {
                 var main = new Main();
                 main.addEvent('READY:once', function() {
+                	console.log ("got event READY");
                     main.start();
                 });
-
+               
             }
 		</script>
 

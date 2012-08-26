@@ -23,6 +23,7 @@ var AudioPlayer = new Class({
 
         // alert("Setting src: " + this.source.src);
         this.preloader.load();
+        // TODO: maybe move preloading to initialize so playback starts directly
         this.preloader.onComplete = this._loadComplete();
 
     },

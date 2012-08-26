@@ -4,6 +4,7 @@ var VideoPlayer = new Class({
     initialize : function(myID) {
         this.id = myID;
         this.nextAction = new String();
+        // TODO: change to .source - Object
         this.videoSource = new Array();
         this.myVideoPlayer = null;
         this.videoElement = new Element("video", {
