@@ -1,8 +1,9 @@
 var VideoPlayer = new Class({
     Implements : Events,
     // ---------------------------
-    initialize : function(myID) {
+    initialize : function(myID, myParent) {
         this.id = myID;
+        this.parent = myParent;
         this.nextAction = new String();
         // TODO: change to .source - Object
         this.videoSource = new Array();
@@ -26,11 +27,12 @@ var VideoPlayer = new Class({
         if (this.myVideoPlayer == null) {
             this.myVideoPlayer = _V_(this.id);
             this.myVideoPlayer.src(this.videoSource);
-
+            // Fire event to whotever object is my parent
             this.myVideoPlayer.addEvent("ended", function() {
-                this.fireEvent("TIMELINE", {
+                this.parent.fireEvent("TIMELINE", {
                     type : "video.finished",
-                    id : this.id
+                    id : this.id,
+                    next : this.nextAction
                 });
             }.bind(this));
         }
@@ -65,6 +67,9 @@ var VideoPlayer = new Class({
     // ---------------------------
     pause : function() {
         this.myVideoPlayer.pause();
-    }
+    },
+    seek : function(time) {
+        // TODO: start playback from time
+    },
 })
 

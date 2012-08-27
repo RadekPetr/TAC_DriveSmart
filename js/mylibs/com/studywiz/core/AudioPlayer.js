@@ -1,7 +1,8 @@
 var AudioPlayer = new Class({
     Implements : Events,
-    initialize : function(myID) {
+    initialize : function(myID, myParent) {
         this.id = myID;
+        this.parent = myParent;
         this.nextAction = new String();
         this.source = new Object();
         this.preloader = new PreloadJS();
@@ -37,9 +38,10 @@ var AudioPlayer = new Class({
         } else {
             this.soundInstance.onComplete = function() {
                 console.log("got audio finished event");
-                this.fireEvent("TIMELINE", {
+                this.parent.fireEvent("TIMELINE", {
                     type : "audio.finished",
-                    id : this.id
+                    id : this.id,
+                    next: this.nextAction
                 });
             }.bind(this);
         }
