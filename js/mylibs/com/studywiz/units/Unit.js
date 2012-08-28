@@ -19,26 +19,20 @@ var Unit = new Class({
         this.data = new Object();
         this.data.entry_sound = new AudioPlayer("Sound_1", this);
         this.data.entry_video = new VideoPlayer("Video_1", this);
-        
-        
+        var self = this;
+
         this.data.button = new Button({
-            text : "some textttt",
             style : {
                 left : '150px'
-            }
-        });
+            },
+            text : 'START',
+            id : 'start.btn',
+            next : 'next.action'
+        }, this);
+
         this.data.button.addButton();
         this.data.button.show();
-        
-        
-        this.data.button_1 = new Button({
-            text : "some other",
-            style : {
-                left : '250px'
-            }
-        });
-        this.data.button_1.addButton();
-        this.data.button_1.show();
+
     },
     setupMedia : function() {
         //TODO : split to separate methods for each media type
@@ -49,16 +43,16 @@ var Unit = new Class({
         var params = new Object();
         params.source = [{
             type : "video/mp4",
-            src : "media/video/country/country_cla01_next.m4v"
+            src : "media/video/country/country_cla01_start.m4v"
         }, {
             type : "video/webm",
-            src : "media/video/country/country_cla01_next.webm"
+            src : "media/video/country/country_cla01_start.webm"
         }, {
             type : "video/ogg",
-            src : "media/video/country/country_cla01_next.ogg"
+            src : "media/video/country/country_cla01_start.ogg"
         }];
-        params.poster = {
-            src : "http://video-js.zencoder.com/oceans-clip.png"
+       params.poster = {
+            src : "media/video/country/country_cla01_start_first.jpg"
         };
         this.data.entry_video.setParams(params);
         this.data.entry_video.addVideoPlayer();
@@ -71,7 +65,6 @@ var Unit = new Class({
         switch (params.next) {
             case "entry.sound.done":
                 this.data.entry_video.start();
-                //this.playVideo.bind(this);
                 break;
             case "entry.video.done":
                 this.log("Video Done");
