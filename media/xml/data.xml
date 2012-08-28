@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Seq Ex="4">
+	<Step fmt="PlayVideo">
+		<Video>country_cla01_start</Video>
+	</Step>
+	<Step fmt="Question">
+		<Video></Video>
+		<Audio >sound/country/mp3/country_vdcb1b.mp3</Audio>
+	</Step>
+	<Step fmt="QuestionUser">
+		<Video></Video>
+		<Audio />
+		<Inter>
+			<Elements>
+				<Element >
+					<Data>Slow down immediately</Data>
+					<Data>Slow down as we come into the bend</Data>
+					<Data>Maintain our current speed until any hazard is visible</Data>
+					<Data>2</Data>
+				</Element>
+			</Elements>
+		</Inter>
+		<Post></Post>
+	</Step>
+	<Step fmt="QuestionFeedback" FadeQ="1,3">
+		<Video></Video>
+		<Audio>sound/country/mp3/country_vdcb4c.mp3</Audio>
+	</Step>
+
+	<Step>
+		<Video></Video>
+		<Audio >sound/country/mp3/country_vdcb4d.mp3</Audio>
+		<Inter/>
+		<Post/>
+	</Step>
+	<Step fmt="PlayVideo">
+		<Video>country_cla01_next</Video>
+		<Audio />
+	</Step>
+	<Step fmt="Question">
+		<Video></Video>
+		<Audio >sound/country/mp3/country_vdcb1f.mp3</Audio>
+	</Step>
+	<Step fmt="QuestionUser" notrack="true" image="country_cla01_next_first.jpg">
+		<Video></Video>
+		<Audio />
+		<Inter>
+			<Elements>
+				<Element >
+					<Data>Some cattle stray out in front of us, just as we come around the corner</Data>
+					<Data>A farmhand on a motorbike darts out in front of us.</Data>
+					<Data></Data>
+					<Data>1</Data>
+				</Element>
+			</Elements>
+		</Inter>
+		<Post></Post>
+	</Step>
+	<Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+		<Video></Video>
+		<Audio >sound/country/mp3/country_vdcb4f.mp3</Audio>
+	</Step>
+	<Step fmt="Continue">
+	</Step>
+</Seq>
