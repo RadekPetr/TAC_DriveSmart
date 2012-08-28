@@ -13,15 +13,17 @@ var Button = new Class({
             width : '100px',
             height : '60px'
         },
-        text : 'button text'
-
+        text : 'button text',
+        id : 'element.id',
+        next : 'next.action',
+        parent : null
     },
-    initialize : function(myOptions) {
+    initialize : function(myOptions, myParent) {
+
         this.setOptions(myOptions);
-        this.data = new Object();
-        this.data.text = this.options.text;
+        this.options.parent = myParent;
         this.buttonElement = new Element("button", {
-            id : this.id,
+            id : this.options.id,
             text : this.options.text
         });
 
@@ -35,6 +37,14 @@ var Button = new Class({
         this.hide();
 
         this.buttonElement.setStyles(this.options.style);
+
+        this.buttonElement.addEvent("click", function() {
+            this.options.parent.fireEvent("TIMELINE", {
+                type : "button.clicked",
+                id : this.options.id,
+                next : this.options.nextAction
+            });
+        }.bind(this));
 
     },
     // ---------------------------
