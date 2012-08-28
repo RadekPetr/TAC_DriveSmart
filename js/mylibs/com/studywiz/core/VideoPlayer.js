@@ -11,9 +11,8 @@ var VideoPlayer = new Class({
         this.videoElement = new Element("video", {
             id : this.id,
             preload : "auto",
-            width : "800",
-            height : "600",
-            poster : ""
+            poster : "",
+            class : 'video-js'
         });
         console.log("-------------- Created Video Player: " + myID);
     },
@@ -21,12 +20,15 @@ var VideoPlayer = new Class({
     setParams : function(params) {
         this.videoSource = params.source;
         this.videoElement.setProperty("poster", params.poster.src)
+       
+
     },
     // ---------------------------
     start : function() {
         if (this.myVideoPlayer == null) {
             this.myVideoPlayer = _V_(this.id);
             this.myVideoPlayer.src(this.videoSource);
+            
             // Fire event to whotever object is my parent
             this.myVideoPlayer.addEvent("ended", function() {
                 this.parent.fireEvent("TIMELINE", {
@@ -38,8 +40,9 @@ var VideoPlayer = new Class({
         }
 
         this.myVideoPlayer.ready((function() {
-            this.play();
-        }));
+            this.myVideoPlayer.size('640', '480');
+            this.myVideoPlayer.play();
+        }.bind(this)));
 
     },
     // ---------------------------
@@ -63,13 +66,16 @@ var VideoPlayer = new Class({
     stop : function() {
         this.myVideoPlayer.pause();
         this.myVideoPlayer.currentTime(0);
+        this.myVideoPlayer.pause();
     },
     // ---------------------------
     pause : function() {
         this.myVideoPlayer.pause();
     },
     seek : function(time) {
-        // TODO: start playback from time
-    },
+        this.myVideoPlayer.pause();
+        this.myVideoPlayer.currentTime = time;
+        this.myVideoPlayer.pause();
+    }
 })
 
