@@ -36,15 +36,61 @@ var Unit = new Class({
                 this.data.start_button = null;
                 this.data.video.nextAction = "entry.video.done"
                 this.data.video.start();
-                this.data.questions = this._setupQuestions("Text","q","next",100, 100);
+
                 break;
             case "entry.video.done":
-                this.data.audio = this._setupAudio("media/sound/country/country_vdcb1b", "audio_1", "question.sound.done");
+                this.data.audio = this._setupAudio("media/sound/country/country_vdcb1b", "audio_1", "question.1.sound.done");
                 this.data.audio.start();
                 break;
-            case "question.sound.done":
+            case "question.1.sound.done":
                 this.log("Sound done");
+                this.data.questions = this._setupQuestions({
+                    data : ["Slow down immediately", "Slow down as we come into the bend", "Maintain our current speed until any hazard is visible", "2"]
+                });
+                this.data.submit_button = this._setupButton("Submit answer", "button_2", "submit.1.clicked", 10, 470);
                 break;
+            case "submit.1.clicked":
+                this.data.submit_button.remove();
+                this.data.submit_button = null;
+                this.data.questions.remove();
+                this.data.audio = this._setupAudio("media/sound/country/country_vdcb4c", "audio_2", "feedback.1.sound.done");
+                this.data.audio.start();
+                break;
+            case "feedback.1.sound.done":
+                this.data.audio = this._setupAudio("media/sound/country/country_vdcb4d", "audio_3", "next.sound.done");
+                this.data.audio.start();
+                break;
+            case "next.sound.done":
+                // show video and  start button
+                this._setVideoSource(this.data.video, "media/video/country/country_cla01_next");
+
+                this.data.continue_button = this._setupButton("Continue", "button_3", "continue.clicked", 10, 470);
+                break;
+            case "continue.clicked":
+                this.data.continue_button.remove();
+                this.data.continue_button = null;
+                this.data.video.nextAction = "next.video.done"
+                this.data.video.start();
+                break;
+            case "next.video.done":
+                this.data.audio = this._setupAudio("media/sound/country/country_vdcb1f", "audio_4", "question.2.sound.done");
+                this.data.audio.start();
+                break;
+            case "question.2.sound.done":
+                this.log("Sound done");
+                this.data.questions = this._setupQuestions({
+                    data : ["Some cattle stray out in front of us, just as we come around the corner", "A farmhand on a motorbike darts out in front of us.", "1"]
+                });
+                this.data.submit_button = this._setupButton("Submit answer", "button_4", "submit.2.clicked", 10, 470);
+                break;
+            case "submit.2.clicked":
+                this.data.submit_button.remove();
+                this.data.submit_button = null;
+                this.data.questions.remove();
+                this.data.audio = this._setupAudio("media/sound/country/country_vdcb4f", "audio_5", "feedback.2.sound.done");
+                this.data.audio.start();
+                break;
+
         };
     },
     log : function(logValue) {
@@ -54,6 +100,13 @@ var Unit = new Class({
     _setupVideo : function(filename, id, nextAction) {
         var videoPlayer = new VideoPlayer(id, this);
         videoPlayer.nextAction = nextAction;
+        this._setVideoSource(videoPlayer, filename);
+        videoPlayer.add();
+        videoPlayer.show();
+        return videoPlayer;
+    }.protect(),
+    //------------------------------------------------------------------------
+    _setVideoSource : function(player, filename) {
         var params = new Object();
         params.source = [{
             type : "video/mp4",
@@ -68,10 +121,8 @@ var Unit = new Class({
         params.poster = {
             src : filename + "_first.jpg"
         };
-        videoPlayer.setParams(params);
-        videoPlayer.add();
-        videoPlayer.show();
-        return videoPlayer;
+        console.log(params)
+        player.setParams(params);
     }.protect(),
     //------------------------------------------------------------------------
     _setupAudio : function(filename, id, nextAction) {
@@ -98,16 +149,8 @@ var Unit = new Class({
     }.protect(),
 
     //------------------------------------------------------------------------
-    _setupQuestions : function(text, id, nextAction, x, y) {
-        var questions = new Questions({
-            style : {
-                left : x + 'px',
-                top : y + 'px'
-            },
-            id : id,
-            next : nextAction
-        }, this);
-
+    _setupQuestions : function(options) {
+        var questions = new Questions(options, this);
         questions.add();
         questions.show();
         return questions;
