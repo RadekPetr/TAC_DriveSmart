@@ -7,7 +7,7 @@ var AudioPlayer = new Class({
         this.source = new Object();
         this.preloader = new PreloadJS();
         this.preloader.installPlugin(SoundJS);
-
+        console.log("New Audio created");
         //this.preloader.onFileError = this.handleFileError();
         //this.preloader.onProgress = this.handleProgress();
 
