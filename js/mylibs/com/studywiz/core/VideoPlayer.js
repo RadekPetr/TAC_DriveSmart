@@ -9,10 +9,10 @@ var VideoPlayer = new Class({
         this.videoSource = new Array();
         this.myVideoPlayer = null;
         this.videoElement = new Element("video", {
-            id : this.id,
-            preload : "auto",
-            poster : "",
-            class : 'video-js'
+            'id' : this.id,
+            'preload' : 'auto',
+            'poster' : '',
+            'class' : 'video-js'
         });
         console.log("-------------- Created Video Player: " + myID);
     },
