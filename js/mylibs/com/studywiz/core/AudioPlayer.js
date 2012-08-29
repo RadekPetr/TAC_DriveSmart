@@ -19,7 +19,7 @@ var AudioPlayer = new Class({
     },
     // ----------------------------------------------------------
     start : function() {
-
+        console.log("Loading Sound" + this.source);
         this.preloader.loadFile(this.source, false);
 
         // alert("Setting src: " + this.source.src);
@@ -41,7 +41,7 @@ var AudioPlayer = new Class({
                 this.parent.fireEvent("TIMELINE", {
                     type : "audio.finished",
                     id : this.id,
-                    next: this.nextAction
+                    next : this.nextAction
                 });
             }.bind(this);
         }
