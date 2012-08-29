@@ -8,70 +8,109 @@ var Unit = new Class({
 
     initialize : function(arguments) {
         this.setupData();
-        this.setupMedia();
         this.addEvent("TIMELINE", this.handleNavigationEvent);
     },
     start : function() {
-        this.data.entry_sound.play();
+        this.setupScene();
+        //this.data.entry_audio.play();
     },
     setupData : function(argument) {
         //TODO: define proper unit Data object or hashmap based on unit data
         this.data = new Object();
-        this.data.entry_sound = new AudioPlayer("Sound_1", this);
-        this.data.entry_video = new VideoPlayer("Video_1", this);
-        var self = this;
-
-        this.data.button = new Button({
-            style : {
-                left : '150px'
-            },
-            text : 'START',
-            id : 'start.btn',
-            next : 'next.action'
-        }, this);
-
-        this.data.button.addButton();
-        this.data.button.show();
-
     },
-    setupMedia : function() {
-        //TODO : split to separate methods for each media type
-        this.data.entry_sound.nextAction = "entry.sound.done";
-        this.data.entry_sound.setSource("media/sound/country/mp3/country_accident.mp3|media/sound/country/mp3/country_accident.ogg", "Sound_1");
+    setupScene : function() {
+        // Intial scene setup
+        //this.data.entry_audio = this._setupAudio("media/sound/country/mp3/country_accident", "audio_1", "entry.sound.done");
 
-        this.data.entry_video.nextAction = "entry.video.done";
-        var params = new Object();
-        params.source = [{
-            type : "video/mp4",
-            src : "media/video/country/country_cla01_start.m4v"
-        }, {
-            type : "video/webm",
-            src : "media/video/country/country_cla01_start.webm"
-        }, {
-            type : "video/ogg",
-            src : "media/video/country/country_cla01_start.ogg"
-        }];
-       params.poster = {
-            src : "media/video/country/country_cla01_start_first.jpg"
-        };
-        this.data.entry_video.setParams(params);
-        this.data.entry_video.addVideoPlayer();
-        this.data.entry_video.show();
+        // show video and  start button
+        this.data.video = this._setupVideo("media/video/country/country_cla01_start", "video_1", "entry.video.done");
+        this.data.start_button = this._setupButton("Start", "button_1", "start.clicked", 10, 470);
     },
     // This handles all timeline events and emulates the timeline
     handleNavigationEvent : function(params) {
         console.log("Timeline event");
         console.log(params);
         switch (params.next) {
-            case "entry.sound.done":
-                this.data.entry_video.start();
+            case "start.clicked":
+                this.data.start_button.remove();
+                this.data.start_button = null;
+                this.data.video.nextAction = "entry.video.done"
+                this.data.video.start();
+                this.data.questions = this._setupQuestions("Text","q","next",100, 100);
                 break;
             case "entry.video.done":
-                this.log("Video Done");
+                this.data.audio = this._setupAudio("media/sound/country/country_vdcb1b", "audio_1", "question.sound.done");
+                this.data.audio.start();
+                break;
+            case "question.sound.done":
+                this.log("Sound done");
                 break;
         };
     },
     log : function(logValue) {
         console.log("****** " + logValue + " ******");
+    },
+    //---------------------- PRIVATE FUNCTIONS --------------------------------
+    _setupVideo : function(filename, id, nextAction) {
+        var videoPlayer = new VideoPlayer(id, this);
+        videoPlayer.nextAction = nextAction;
+        var params = new Object();
+        params.source = [{
+            type : "video/mp4",
+            src : filename + ".m4v"
+        }, {
+            type : "video/webm",
+            src : filename + ".webm"
+        }, {
+            type : "video/ogg",
+            src : filename + ".ogg"
+        }];
+        params.poster = {
+            src : filename + "_first.jpg"
+        };
+        videoPlayer.setParams(params);
+        videoPlayer.add();
+        videoPlayer.show();
+        return videoPlayer;
+    }.protect(),
+    //------------------------------------------------------------------------
+    _setupAudio : function(filename, id, nextAction) {
+        var audioPlayer = new AudioPlayer(id, this);
+        audioPlayer.nextAction = nextAction;
+        audioPlayer.setSource(filename + ".mp3|" + filename + ".ogg");
+        return audioPlayer;
+    }.protect(),
+    //------------------------------------------------------------------------
+    _setupButton : function(text, id, nextAction, x, y) {
+        var button = new Button({
+            style : {
+                left : x + 'px',
+                top : y + 'px'
+            },
+            text : text,
+            id : id,
+            next : nextAction
+        }, this);
+
+        button.add();
+        button.show();
+        return button;
+    }.protect(),
+
+    //------------------------------------------------------------------------
+    _setupQuestions : function(text, id, nextAction, x, y) {
+        var questions = new Questions({
+            style : {
+                left : x + 'px',
+                top : y + 'px'
+            },
+            value : text,
+            id : id,
+            next : nextAction
+        }, this);
+
+        questions.add();
+        questions.show();
+        return questions;
     }
 });

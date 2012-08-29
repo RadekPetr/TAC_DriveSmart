@@ -1,7 +1,7 @@
 /**
  * @author Radek
  */
-var Button = new Class({
+var Questions = new Class({
 
     Implements : [Options, Events],
 
@@ -9,11 +9,9 @@ var Button = new Class({
         style : {
             position : 'absolute',
             top : '0px',
-            left : '0px',
-            width : '100px',
-            height : '60px'
+            left : '0px'
         },
-        text : 'button text',
+        value : 'radio text',
         id : 'element.id',
         next : 'next.action',
         parent : null
@@ -22,23 +20,41 @@ var Button = new Class({
 
         this.setOptions(myOptions);
         this.options.parent = myParent;
-        this.buttonElement = new Element("button", {
-            id : this.options.id,
-            text : this.options.text
+        //  this.panelElement = new Element("input", {
+        //       type : 'radio',
+        //        id : 'q1',
+        //       name : 'question1',
+        //        value : "Question1"
+        //   });
+
+
+// make a panel div
+// loop and inject add radio  + lable 
+
+        this.panelElement = new Element('label', {
+            'for' : 'chk1',
+            html : "Some text",
+            align : 'right'
         });
+        var newCheckbox = new Element('input', {
+            'type' : 'radio',
+            'id' : 'chk1',
+            'name' : 'aChk'
+        });
+        this.panelElement.adopt(newCheckbox);
 
     }, // ---------------------------
     add : function() {
         var myDiv = new Element("div", {
-            id : "buttonHolder"
+            id : "panelHolder"
         });
         myDiv.inject(document.body);
-        this.buttonElement.inject(myDiv);
+        this.panelElement.inject(myDiv);
         this.hide();
 
-        this.buttonElement.setStyles(this.options.style);
+        this.panelElement.setStyles(this.options.style);
 
-        this.buttonElement.addEvent("click", function() {
+        this.panelElement.addEvent("click", function() {
             this.options.parent.fireEvent("TIMELINE", {
                 type : "button.clicked",
                 id : this.options.id,
@@ -55,12 +71,12 @@ var Button = new Class({
     show : function() {
         // TODO : fade in
         // this.buttonElement.show();
-        this.buttonElement.fade('hide');
-        this.buttonElement.fade('in');
+        this.panelElement.fade('hide');
+        this.panelElement.fade('in');
     },
     // ---------------------------
     hide : function() {
-        this.buttonElement.fade('out');
+        this.panelElement.fade('out');
         // this.buttonElement.hide();
     }
 });

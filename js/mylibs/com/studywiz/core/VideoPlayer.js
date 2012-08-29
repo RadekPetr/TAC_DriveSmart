@@ -46,7 +46,7 @@ var VideoPlayer = new Class({
 
     },
     // ---------------------------
-    addVideoPlayer : function() {
+    add : function() {
         var videoDiv = new Element("div", {
             id : "videoHolder"
         });
@@ -56,11 +56,13 @@ var VideoPlayer = new Class({
     },
     // ---------------------------
     show : function() {
-        this.videoElement.show();
+       // this.videoElement.show();
+       this.videoElement.fade('in');
     },
     // ---------------------------
     hide : function() {
-        this.videoElement.hide();
+      // this.videoElement.hide();
+         this.videoElement.fade('out');
     },
     // ---------------------------
     stop : function() {

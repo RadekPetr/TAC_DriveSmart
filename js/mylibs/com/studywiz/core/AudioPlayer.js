@@ -13,12 +13,12 @@ var AudioPlayer = new Class({
 
     },
     // ----------------------------------------------------------
-    setSource : function(src, id) {
+    setSource : function(src) {
         this.source.src = src;
-        this.source.id = id;
+        this.source.id = this.id;
     },
     // ----------------------------------------------------------
-    play : function() {
+    start : function() {
 
         this.preloader.loadFile(this.source, false);
 
