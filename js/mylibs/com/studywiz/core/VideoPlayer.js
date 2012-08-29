@@ -20,15 +20,13 @@ var VideoPlayer = new Class({
     setParams : function(params) {
         this.videoSource = params.source;
         this.videoElement.setProperty("poster", params.poster.src)
-       
 
     },
     // ---------------------------
     start : function() {
         if (this.myVideoPlayer == null) {
             this.myVideoPlayer = _V_(this.id);
-            this.myVideoPlayer.src(this.videoSource);
-            
+
             // Fire event to whotever object is my parent
             this.myVideoPlayer.addEvent("ended", function() {
                 this.parent.fireEvent("TIMELINE", {
@@ -38,31 +36,37 @@ var VideoPlayer = new Class({
                 });
             }.bind(this));
         }
+        this.myVideoPlayer.src(this.videoSource);
 
-        this.myVideoPlayer.ready((function() {
-            this.myVideoPlayer.size('640', '480');
-            this.myVideoPlayer.play();
-        }.bind(this)));
+        this.myVideoPlayer.ready(( function() {
+                this.myVideoPlayer.size('640', '480');
+                this.myVideoPlayer.play();
+            }.bind(this)));
 
     },
     // ---------------------------
     add : function() {
-        var videoDiv = new Element("div", {
-            id : "videoHolder"
-        });
-        videoDiv.inject(document.body);
-        this.videoElement.inject(videoDiv);
+        var videoDiv = document.getElementById('videoHolder');
+        console.log(videoDiv);
+        if (videoDiv == null) {
+            videoDiv = new Element("div", {
+                id : "videoHolder"
+            })
+            videoDiv.inject(document.body);
+            this.videoElement.inject(videoDiv);
+        }
+
         this.hide();
     },
     // ---------------------------
     show : function() {
-       // this.videoElement.show();
-       this.videoElement.fade('in');
+        // this.videoElement.show();
+        this.videoElement.fade('in');
     },
     // ---------------------------
     hide : function() {
-      // this.videoElement.hide();
-         this.videoElement.fade('out');
+        // this.videoElement.hide();
+        this.videoElement.fade('out');
     },
     // ---------------------------
     stop : function() {
