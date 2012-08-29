@@ -9,7 +9,7 @@ var Main = new Class({
 
         // load external js libraries so they are available to the project
         var _self = this;
-        this.listOfLibraries = new Array("js/mylibs/video-js/video-js.css", "js/mylibs/createjs/easeljs-0.4.2.min.js", "js/libs/jquery-1.6.2.min.js", "js/mylibs/createjs/soundjs-0.2.0.min.js", "js/mylibs/video-js/video.js", "js/mylibs/com/studywiz/core/VideoPlayer.js", "js/mylibs/com/studywiz/core/AudioPlayer.js", "js/mylibs/com/studywiz/core/Button.js", "js/mylibs/createjs/preloadjs-0.1.0.min.js", "js/mylibs/com/studywiz/units/Unit.js")
+        this.listOfLibraries = new Array("js/mylibs/video-js/video-js.css", "js/mylibs/createjs/easeljs-0.4.2.min.js", "js/libs/jquery-1.6.2.min.js", "js/mylibs/createjs/soundjs-0.2.0.min.js", "js/mylibs/video-js/video.js", "js/mylibs/com/studywiz/core/VideoPlayer.js", "js/mylibs/com/studywiz/core/AudioPlayer.js", "js/mylibs/com/studywiz/core/Button.js", "js/mylibs/createjs/preloadjs-0.1.0.min.js", "js/mylibs/com/studywiz/units/Unit.js", "js/mylibs/com/studywiz/ui/Questions.js")
         this.listOfLibrariesCounter = 0;
         this.listOfLibraries.each( function(item, index) {
             this._loadAsset(item, index)

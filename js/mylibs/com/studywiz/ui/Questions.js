@@ -11,7 +11,7 @@ var Questions = new Class({
             top : '0px',
             left : '0px'
         },
-        value : 'radio text',
+        data : ["Slow down immediately", "Slow down as we come into the bend", "Maintain our current speed until any hazard is visible", "2"],
         id : 'element.id',
         next : 'next.action',
         parent : null
@@ -20,41 +20,46 @@ var Questions = new Class({
 
         this.setOptions(myOptions);
         this.options.parent = myParent;
-        //  this.panelElement = new Element("input", {
-        //       type : 'radio',
-        //        id : 'q1',
-        //       name : 'question1',
-        //        value : "Question1"
-        //   });
 
-
-// make a panel div
-// loop and inject add radio  + lable 
-
-        this.panelElement = new Element('label', {
-            'for' : 'chk1',
-            html : "Some text",
-            align : 'right'
+        this.panel = new Element("div", {
+            id : "questionPanel"
         });
-        var newCheckbox = new Element('input', {
-            'type' : 'radio',
-            'id' : 'chk1',
-            'name' : 'aChk'
-        });
-        this.panelElement.adopt(newCheckbox);
 
+        this.options.data.each( function(item, index) {
+            if (index != this.options.data.length - 1) {
+                var radio = new Element('input', {
+                    'type' : 'radio',
+                    'id' : "item_" + index,
+                    'group' : 'questionPanel'
+                })
+
+                var label = new Element('label', {
+                    'for' : "item_" + index,
+                    html : item
+                });
+
+                var paragraph = new Element('p', {});
+                paragraph.adopt(radio);
+                paragraph.adopt(label);
+                this.panel.adopt(paragraph);
+            }
+
+        }.bind(this))
     }, // ---------------------------
     add : function() {
         var myDiv = new Element("div", {
             id : "panelHolder"
         });
         myDiv.inject(document.body);
-        this.panelElement.inject(myDiv);
+
+        myDiv.adopt(this.panel);
+
+        this.panel.inject(myDiv);
         this.hide();
 
-        this.panelElement.setStyles(this.options.style);
+        this.panel.setStyles(this.options.style);
 
-        this.panelElement.addEvent("click", function() {
+        this.panel.addEvent("click", function() {
             this.options.parent.fireEvent("TIMELINE", {
                 type : "button.clicked",
                 id : this.options.id,
@@ -71,12 +76,12 @@ var Questions = new Class({
     show : function() {
         // TODO : fade in
         // this.buttonElement.show();
-        this.panelElement.fade('hide');
-        this.panelElement.fade('in');
+        this.panel.fade('hide');
+        this.panel.fade('in');
     },
     // ---------------------------
     hide : function() {
-        this.panelElement.fade('out');
+        this.panel.fade('out');
         // this.buttonElement.hide();
     }
 });

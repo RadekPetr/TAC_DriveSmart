@@ -104,7 +104,6 @@ var Unit = new Class({
                 left : x + 'px',
                 top : y + 'px'
             },
-            value : text,
             id : id,
             next : nextAction
         }, this);
