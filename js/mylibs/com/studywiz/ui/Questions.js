@@ -9,8 +9,17 @@ var Questions = new Class({
         style : {
             position : 'absolute',
             top : '0px',
-            left : '0px'
+            left : '0px',
+            'background-color' : '#464646',
+            'float' : 'left',
+            'border-radius' : '1em 1em 1em 1em',
+            'text-align' : 'left',
+            'padding' : '8px 8px 8px 8px',
+            'font-family' : 'Arial',
+            '-moz-border-radius' : '0.5em 0.5em 0.5em 0.5em',
+            'background' : 'rgba(0, 0, 0, 0.6)'
         },
+
         data : ["Slow down immediately", "Slow down as we come into the bend", "Maintain our current speed until any hazard is visible", "2"],
         id : 'element.id',
         next : 'next.action',
@@ -30,13 +39,17 @@ var Questions = new Class({
                 var radio = new Element('input', {
                     'type' : 'radio',
                     'id' : "item_" + index,
-                    'group' : 'questionPanel'
+                    'group' : 'questionPanel',
+                    'name': 'question_item'
                 })
 
                 var label = new Element('label', {
                     'for' : "item_" + index,
-                    html : item
+                    'html' : item
                 });
+                label.setStyles({
+                    'color' : '#FFFFFF'
+                })
 
                 var paragraph = new Element('p', {});
                 paragraph.adopt(radio);
