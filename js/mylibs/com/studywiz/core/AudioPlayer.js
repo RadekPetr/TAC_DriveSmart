@@ -5,8 +5,8 @@ var AudioPlayer = new Class({
         this.parent = myParent;
         this.nextAction = new String();
         this.source = new Object();
-        this.preloader = new PreloadJS();
-        this.preloader.installPlugin(SoundJS);
+        this.preloader = new createjs.PreloadJS();
+        this.preloader.installPlugin(createjs.SoundJS);
         console.log("New Audio created");
         //this.preloader.onFileError = this.handleFileError();
         //this.preloader.onProgress = this.handleProgress();
@@ -31,9 +31,9 @@ var AudioPlayer = new Class({
     // ----------------------------------------------------------
     // PRIVATE - handle load complete
     _loadComplete : function() {
-        this.soundInstance = SoundJS.play(this.source.id);
+        this.soundInstance = createjs.SoundJS.play(this.source.id);
 
-        if (!SoundJS.checkPlugin(true)) {
+        if (!createjs.SoundJS.checkPlugin(true)) {
             alert('Sound plugin issue');
         } else {
             this.soundInstance.onComplete = function() {
