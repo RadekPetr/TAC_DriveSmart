@@ -594,6 +594,16 @@
         <replaceregexp match="jquery-(\d|\d(\.\d)+)\.js" replace="jquery-\1.min.js" flags="g">
             <fileset dir="./${dir.intermediate}" includes="${page-files}"/>
         </replaceregexp>
+        
+        <!-- switch from a regular mootools-core to minified -->
+        <replaceregexp match="mootools-core-(\d|\d(\.\d)+)\.js" replace="mootools-core-\1.min.js" flags="g">
+            <fileset dir="./${dir.intermediate}" includes="${page-files}"/>
+        </replaceregexp>
+        
+        <!-- switch from a regular mootools-core to minified -->
+        <replaceregexp match="mootools-more-(\d|\d(\.\d)+)\.js" replace="mootools-more-\1.min.js" flags="g">
+            <fileset dir="./${dir.intermediate}" includes="${page-files}"/>
+        </replaceregexp>
         <!-- switch any google CDN reference to minified -->
         <replaceregexp match="(\d|\d(\.\d)+)\/jquery\.js" replace="\1/jquery.min.js" flags="g">
             <fileset dir="./${dir.intermediate}" includes="${page-files}"/>
