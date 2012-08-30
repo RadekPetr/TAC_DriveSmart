@@ -20,9 +20,10 @@ var Questions = new Class({
             'background' : 'rgba(0, 0, 0, 0.6)'
         },
 
-        data : ["Slow down immediately", "Slow down as we come into the bend", "Maintain our current speed until any hazard is visible", "2"],
+        data : ["Q1", "Q2", "Q3"],
         id : 'element.id',
         next : 'next.action',
+        correct : null,
         parent : null
     },
     initialize : function(myOptions, myParent) {
@@ -35,35 +36,39 @@ var Questions = new Class({
         });
 
         this.options.data.each( function(item, index) {
-            if (index != this.options.data.length - 1) {
-                var radio = new Element('input', {
-                    'type' : 'radio',
-                    'id' : "item_" + index,
-                    'group' : 'questionPanel',
-                    'name': 'question_item'
-                })
 
-                var label = new Element('label', {
-                    'for' : "item_" + index,
-                    'html' : item
-                });
-                label.setStyles({
-                    'color' : '#FFFFFF'
-                })
+            var radio = new Element('input', {
+                'type' : 'radio',
+                'id' : "item_" + index,
+                'group' : 'questionPanel',
+                'name' : 'question_item'
+            })
 
-                var paragraph = new Element('p', {});
-                paragraph.adopt(radio);
-                paragraph.adopt(label);
-                this.panel.adopt(paragraph);
-            }
+            var label = new Element('label', {
+                'for' : "item_" + index,
+                'html' : item,
+                'id' : "item_label_" + index
+            });
+            label.setStyles({
+                'color' : '#FFFFFF'
+            })
+
+            var paragraph = new Element('p', {});
+            paragraph.adopt(radio);
+            paragraph.adopt(label);
+
+            this.panel.adopt(paragraph);
 
         }.bind(this))
     }, // ---------------------------
     add : function() {
-        var myDiv = new Element("div", {
-            id : "panelHolder"
-        });
-        myDiv.inject(document.body);
+        var myDiv = document.getElementById('panelHolder');
+        if (myDiv == null) {
+            var myDiv = new Element("div", {
+                id : "panelHolder"
+            });
+            myDiv.inject(document.body);
+        }
 
         myDiv.adopt(this.panel);
 
@@ -83,7 +88,7 @@ var Questions = new Class({
     },
     remove : function() {
         this.hide();
-        //var removedElement = this.buttonElement.dispose();
+        var removedElement = this.panel.dispose();
     },
     // ---------------------------
     show : function() {
@@ -96,5 +101,30 @@ var Questions = new Class({
     hide : function() {
         this.panel.fade('out');
         // this.buttonElement.hide();
+    },
+    showCorrect : function() {
+
+        this.options.data.each( function(item, index) {
+
+            var label = document.getElementById("item_label_" + index);
+            var radio = document.getElementById("item_" + index);
+            console.log("Disabling");
+            console.log(radio);
+            radio.set('disabled', true);
+
+            if (this.options.correct != null) {
+                if (this.options.correct != index + 1) {
+                    label.setStyles({
+                        'color' : '#CCCCCC'
+                    })
+                } else {
+                    label.setStyles({
+                        'color' : '#00FF00',
+                        'font-weight' : 'bold'
+                    })
+                }
+            }
+
+        }.bind(this));
     }
 });

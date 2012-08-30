@@ -15,6 +15,7 @@ var VideoPlayer = new Class({
             'class' : 'video-js'
         });
         console.log("-------------- Created Video Player: " + myID);
+
     },
     // ---------------------------
     setParams : function(params) {
@@ -47,7 +48,7 @@ var VideoPlayer = new Class({
     // ---------------------------
     add : function() {
         var videoDiv = document.getElementById('videoHolder');
-        console.log(videoDiv);
+
         if (videoDiv == null) {
             videoDiv = new Element("div", {
                 id : "videoHolder"
@@ -55,7 +56,8 @@ var VideoPlayer = new Class({
             videoDiv.inject(document.body);
             this.videoElement.inject(videoDiv);
         }
-
+        this.start();
+        this.stop();
         this.hide();
     },
     // ---------------------------

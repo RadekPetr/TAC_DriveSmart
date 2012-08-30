@@ -29,10 +29,14 @@ var Button = new Class({
 
     }, // ---------------------------
     add : function() {
-        var myDiv = new Element("div", {
-            id : "buttonHolder"
-        });
-        myDiv.inject(document.body);
+        var myDiv = document.getElementById('buttonHolder');
+
+        if (myDiv == null) {
+            var myDiv = new Element("div", {
+                id : "buttonHolder"
+            });
+            myDiv.inject(document.body);
+        }
         this.buttonElement.inject(myDiv);
         this.hide();
 
@@ -49,7 +53,7 @@ var Button = new Class({
     },
     remove : function() {
         this.hide();
-        //var removedElement = this.buttonElement.dispose();
+        var removedElement = this.buttonElement.dispose();
     },
     // ---------------------------
     show : function() {

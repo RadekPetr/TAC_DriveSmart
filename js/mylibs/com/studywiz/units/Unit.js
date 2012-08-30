@@ -36,7 +36,6 @@ var Unit = new Class({
                 this.data.start_button = null;
                 this.data.video.nextAction = "entry.video.done"
                 this.data.video.start();
-
                 break;
             case "entry.video.done":
                 this.data.audio = this._setupAudio("media/sound/country/country_vdcb1b", "audio_1", "question.1.sound.done");
@@ -45,28 +44,36 @@ var Unit = new Class({
             case "question.1.sound.done":
                 this.log("Sound done");
                 this.data.questions = this._setupQuestions({
-                    data : ["Slow down immediately", "Slow down as we come into the bend", "Maintain our current speed until any hazard is visible", "2"]
+                    data : ["Slow down immediately", "Slow down as we come into the bend", "Maintain our current speed until any hazard is visible"],
+                    correct : '2'
                 });
+
                 this.data.submit_button = this._setupButton("Submit answer", "button_2", "submit.1.clicked", 10, 470);
                 break;
             case "submit.1.clicked":
                 this.data.submit_button.remove();
                 this.data.submit_button = null;
-                this.data.questions.remove();
+                this.data.questions.showCorrect();
                 this.data.audio = this._setupAudio("media/sound/country/country_vdcb4c", "audio_2", "feedback.1.sound.done");
                 this.data.audio.start();
+                
+                // we want to start buffering ahead of time
+                this._setVideoSource(this.data.video, "media/video/country/country_cla01_next");
+                this.data.video.start();
+                this.data.video.stop();
                 break;
             case "feedback.1.sound.done":
                 this.data.audio = this._setupAudio("media/sound/country/country_vdcb4d", "audio_3", "next.sound.done");
                 this.data.audio.start();
                 break;
             case "next.sound.done":
-                // show video and  start button
-                this._setVideoSource(this.data.video, "media/video/country/country_cla01_next");
+                
+                
 
                 this.data.continue_button = this._setupButton("Continue", "button_3", "continue.clicked", 10, 470);
                 break;
             case "continue.clicked":
+                this.data.questions.remove();
                 this.data.continue_button.remove();
                 this.data.continue_button = null;
                 this.data.video.nextAction = "next.video.done"
@@ -79,14 +86,14 @@ var Unit = new Class({
             case "question.2.sound.done":
                 this.log("Sound done");
                 this.data.questions = this._setupQuestions({
-                    data : ["Some cattle stray out in front of us, just as we come around the corner", "A farmhand on a motorbike darts out in front of us.", "1"]
+                    data : ["Some cattle stray out in front of us, just as we come around the corner", "A farmhand on a motorbike darts out in front of us."]
                 });
                 this.data.submit_button = this._setupButton("Submit answer", "button_4", "submit.2.clicked", 10, 470);
                 break;
             case "submit.2.clicked":
                 this.data.submit_button.remove();
                 this.data.submit_button = null;
-                this.data.questions.remove();
+                this.data.questions.showCorrect();
                 this.data.audio = this._setupAudio("media/sound/country/country_vdcb4f", "audio_5", "feedback.2.sound.done");
                 this.data.audio.start();
                 break;
