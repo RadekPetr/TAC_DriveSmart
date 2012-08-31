@@ -1,0 +1,16 @@
+- Handle video Preloading better - IE issue, use events
+- Try preloadJS thingy maybe ?
+- Move Buttons to the right
+- Style buttons better
+- Move the whole thing to the middle
+- Fix Build process
+- Review usage of holders - maybe use on central DIV for the whoe thing
+- use options correctly in all Classes
+- Make Media class and extend it to Audio and video maybe ?
+- Loading data dynamically
+- Od data files playback engine - XML to json conversion ?
+- Scoring
+- main menu
+
+
+

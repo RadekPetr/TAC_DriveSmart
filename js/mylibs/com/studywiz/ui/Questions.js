@@ -79,7 +79,7 @@ var Questions = new Class({
 
         this.panel.addEvent("click", function() {
             this.options.parent.fireEvent("TIMELINE", {
-                type : "button.clicked",
+                type : "panel.clicked",
                 id : this.options.id,
                 next : this.options.next
             });

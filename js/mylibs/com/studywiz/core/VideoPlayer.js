@@ -5,7 +5,7 @@ var VideoPlayer = new Class({
         this.id = myID;
         this.parent = myParent;
         this.nextAction = new String();
-        // TODO: change to .source - Object
+
         this.videoSource = new Array();
         this.myVideoPlayer = null;
         this.videoElement = new Element("video", {
@@ -14,35 +14,63 @@ var VideoPlayer = new Class({
             'poster' : '',
             'class' : 'video-js'
         });
-        console.log("-------------- Created Video Player: " + myID);
+
+        this.add();
 
     },
     // ---------------------------
     setParams : function(params) {
         this.videoSource = params.source;
         this.videoElement.setProperty("poster", params.poster.src)
+        if (this.myVideoPlayer != null) {
+            this.myVideoPlayer.src(this.videoSource);
+        }
+
+    },
+    // ---------------------------
+    preload : function() {
+        if (this.myVideoPlayer == null) {
+            this.myVideoPlayer = _V_(this.id, {
+                "controls" : false,
+                "autoplay" : false,
+                "preload" : "auto"
+            });
+
+            this.myVideoPlayer.ready(( function() {
+
+                    this.myVideoPlayer.src(this.videoSource);
+                    this.myVideoPlayer.size('640', '480');
+                    //this.myVideoPlayer.play();
+                    this.myVideoPlayer.pause();
+
+                    this.myVideoPlayer.addEvent("loadstart", function() {
+                        console.log("Loading");
+                    });
+                    this.myVideoPlayer.addEvent("progress", function() {
+                        console.log("Progress");
+                    });
+                    // this.myVideoPlayer.removeEvents();
+                    console.log("Adding ended listener");
+                    this.myVideoPlayer.addEvent("ended", function() {
+                        this.parent.fireEvent("TIMELINE", {
+                            type : "video.finished",
+                            id : this.id,
+                            next : this.nextAction
+                        });
+                    }.bind(this));
+
+                }.bind(this)));
+        }
 
     },
     // ---------------------------
     start : function() {
-        if (this.myVideoPlayer == null) {
-            this.myVideoPlayer = _V_(this.id);
-
+        if (this.myVideoPlayer != null) {
+            console.log(this.myVideoPlayer.bufferedPercent());
+            this.myVideoPlayer.play();
             // Fire event to whotever object is my parent
-            this.myVideoPlayer.addEvent("ended", function() {
-                this.parent.fireEvent("TIMELINE", {
-                    type : "video.finished",
-                    id : this.id,
-                    next : this.nextAction
-                });
-            }.bind(this));
-        }
-        this.myVideoPlayer.src(this.videoSource);
 
-        this.myVideoPlayer.ready(( function() {
-                this.myVideoPlayer.size('640', '480');
-                this.myVideoPlayer.play();
-            }.bind(this)));
+        }
 
     },
     // ---------------------------
@@ -56,8 +84,7 @@ var VideoPlayer = new Class({
             videoDiv.inject(document.body);
             this.videoElement.inject(videoDiv);
         }
-        this.start();
-        this.stop();
+
         this.hide();
     },
     // ---------------------------

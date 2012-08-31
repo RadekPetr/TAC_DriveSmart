@@ -24,6 +24,7 @@ var Unit = new Class({
 
         // show video and  start button
         this.data.video = this._setupVideo("media/video/country/country_cla01_start", "video_1", "entry.video.done");
+        this.data.video.preload();
         this.data.start_button = this._setupButton("Start", "button_1", "start.clicked", 10, 470);
     },
     // This handles all timeline events and emulates the timeline
@@ -40,6 +41,11 @@ var Unit = new Class({
             case "entry.video.done":
                 this.data.audio = this._setupAudio("media/sound/country/country_vdcb1b", "audio_1", "question.1.sound.done");
                 this.data.audio.start();
+
+                // we want to start buffering ahead of time
+                this._setVideoSource(this.data.video, "media/video/country/country_cla01_next");
+                this.data.video.preload();
+
                 break;
             case "question.1.sound.done":
                 this.log("Sound done");
@@ -56,19 +62,13 @@ var Unit = new Class({
                 this.data.questions.showCorrect();
                 this.data.audio = this._setupAudio("media/sound/country/country_vdcb4c", "audio_2", "feedback.1.sound.done");
                 this.data.audio.start();
-                
-                // we want to start buffering ahead of time
-                this._setVideoSource(this.data.video, "media/video/country/country_cla01_next");
-                this.data.video.start();
-                this.data.video.stop();
+
                 break;
             case "feedback.1.sound.done":
                 this.data.audio = this._setupAudio("media/sound/country/country_vdcb4d", "audio_3", "next.sound.done");
                 this.data.audio.start();
                 break;
             case "next.sound.done":
-                
-                
 
                 this.data.continue_button = this._setupButton("Continue", "button_3", "continue.clicked", 10, 470);
                 break;
@@ -80,11 +80,12 @@ var Unit = new Class({
                 this.data.video.start();
                 break;
             case "next.video.done":
+                console.log("next.video.done");
                 this.data.audio = this._setupAudio("media/sound/country/country_vdcb1f", "audio_4", "question.2.sound.done");
                 this.data.audio.start();
                 break;
             case "question.2.sound.done":
-                this.log("Sound done");
+                this.log("question.2.sound.done");
                 this.data.questions = this._setupQuestions({
                     data : ["Some cattle stray out in front of us, just as we come around the corner", "A farmhand on a motorbike darts out in front of us."]
                 });
@@ -108,7 +109,7 @@ var Unit = new Class({
         var videoPlayer = new VideoPlayer(id, this);
         videoPlayer.nextAction = nextAction;
         this._setVideoSource(videoPlayer, filename);
-        videoPlayer.add();
+        // videoPlayer.add();
         videoPlayer.show();
         return videoPlayer;
     }.protect(),
@@ -117,7 +118,7 @@ var Unit = new Class({
         var params = new Object();
         params.source = [{
             type : "video/mp4",
-            src : filename + ".m4v"
+            src : filename + ".mp4"
         }, {
             type : "video/webm",
             src : filename + ".webm"
