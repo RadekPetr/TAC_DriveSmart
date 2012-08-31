@@ -1,6 +1,7 @@
 var AudioPlayer = new Class({
     Implements : Events,
     initialize : function(myID, myParent) {
+        this.preloaded = false;
         this.id = myID;
         this.parent = myParent;
         this.nextAction = new String();
@@ -19,18 +20,25 @@ var AudioPlayer = new Class({
     },
     // ----------------------------------------------------------
     start : function() {
-        console.log("Loading Sound" + this.source);
+        if (this.preloaded = false) {
+            console.log("++ Not preloaded yet - Loading Sound" + this.source);
+            this.preloader.loadFile(this.source, false);
+            this.preloader.load();
+            this.preloader.onComplete = this._playSound();
+        } else {
+            this._playSound()
+        }
+
+    },
+    preload : function() {
+        console.log ("++ Audio Preload started: " + this.id)
         this.preloader.loadFile(this.source, false);
-
-        // alert("Setting src: " + this.source.src);
         this.preloader.load();
-        // TODO: maybe move preloading to initialize so playback starts directly
-        this.preloader.onComplete = this._loadComplete();
-
+        this.preloader.onComplete = this._preloadComplete();
     },
     // ----------------------------------------------------------
     // PRIVATE - handle load complete
-    _loadComplete : function() {
+    _playSound : function() {
         this.soundInstance = createjs.SoundJS.play(this.source.id);
 
         if (!createjs.SoundJS.checkPlugin(true)) {
@@ -45,6 +53,11 @@ var AudioPlayer = new Class({
                 });
             }.bind(this);
         }
+    }.protect(), // PRIVATE - handle preload complete
+    // ----------------------------------------------------------
+    _preloadComplete : function() {
+        console.log ("++ Audio Preloaded: " + this.id)
+        this.preloaded = true;
     }.protect()
 
 })

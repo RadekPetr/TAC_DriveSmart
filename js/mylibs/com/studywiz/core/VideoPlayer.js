@@ -47,8 +47,9 @@ var VideoPlayer = new Class({
                         console.log("Loading");
                     });
                     this.myVideoPlayer.addEvent("progress", function() {
-                        console.log("Progress");
-                    });
+                        console.log("Progress: " + (this.myVideoPlayer.bufferedPercent()*100.00));
+                    }.bind(this));
+                    
                     // this.myVideoPlayer.removeEvents();
                     console.log("Adding ended listener");
                     this.myVideoPlayer.addEvent("ended", function() {
