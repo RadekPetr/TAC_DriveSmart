@@ -9,6 +9,8 @@ var Unit = new Class({
     initialize : function(arguments) {
         this.setupData();
         this.addEvent("TIMELINE", this.handleNavigationEvent);
+        
+        this.buttonPosition = {x:535, y:415}
     },
     start : function() {
         this.setupScene();
@@ -25,11 +27,11 @@ var Unit = new Class({
         // show video and  start button
         this.data.video = this._setupVideo("media/video/country/country_cla01_start", "video_1", "entry.video.done");
         this.data.video.preload();
-        this.data.start_button = this._setupButton("Start", "button_1", "start.clicked", 10, 470);
+        this.data.start_button = this._setupButton("Start", "button_1", "start.clicked", this.buttonPosition.x, this.buttonPosition.y);
     },
     // This handles all timeline events and emulates the timeline
     handleNavigationEvent : function(params) {
-        console.log("Timeline event");
+        console.log("****** Timeline event:");
         console.log(params);
         switch (params.next) {
             case "start.clicked":
@@ -54,7 +56,7 @@ var Unit = new Class({
                     correct : '2'
                 });
 
-                this.data.submit_button = this._setupButton("Submit answer", "button_2", "submit.1.clicked", 10, 470);
+                this.data.submit_button = this._setupButton("Submit answer", "button_2", "submit.1.clicked", this.buttonPosition.x, this.buttonPosition.y);
                 break;
             case "submit.1.clicked":
                 this.data.submit_button.remove();
@@ -70,7 +72,7 @@ var Unit = new Class({
                 break;
             case "next.sound.done":
 
-                this.data.continue_button = this._setupButton("Continue", "button_3", "continue.clicked", 10, 470);
+                this.data.continue_button = this._setupButton("Continue", "button_3", "continue.clicked", this.buttonPosition.x, this.buttonPosition.y);
                 break;
             case "continue.clicked":
                 this.data.questions.remove();
@@ -89,7 +91,7 @@ var Unit = new Class({
                 this.data.questions = this._setupQuestions({
                     data : ["Some cattle stray out in front of us, just as we come around the corner", "A farmhand on a motorbike darts out in front of us."]
                 });
-                this.data.submit_button = this._setupButton("Submit answer", "button_4", "submit.2.clicked", 10, 470);
+                this.data.submit_button = this._setupButton("Submit answer", "button_4", "submit.2.clicked", this.buttonPosition.x, this.buttonPosition.y);
                 break;
             case "submit.2.clicked":
                 this.data.submit_button.remove();
