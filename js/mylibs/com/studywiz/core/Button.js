@@ -35,7 +35,7 @@ var Button = new Class({
             var myDiv = new Element("div", {
                 id : "buttonHolder"
             });
-            myDiv.inject(document.body);
+            myDiv.inject($("drivesmart"));
         }
         this.buttonElement.inject(myDiv);
         this.hide();

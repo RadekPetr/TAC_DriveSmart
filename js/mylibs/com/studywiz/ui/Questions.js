@@ -17,7 +17,7 @@ var Questions = new Class({
             'padding' : '8px 8px 8px 8px',
             'font-family' : 'Arial',
             '-moz-border-radius' : '0.5em 0.5em 0.5em 0.5em',
-            'background' : 'rgba(0, 0, 0, 0.6)'
+            'background' : 'rgba(0, 0, 0, 0.6)'            
         },
 
         data : ["Q1", "Q2", "Q3"],
@@ -67,7 +67,7 @@ var Questions = new Class({
             var myDiv = new Element("div", {
                 id : "panelHolder"
             });
-            myDiv.inject(document.body);
+            myDiv.inject($("drivesmart"));
         }
 
         myDiv.adopt(this.panel);

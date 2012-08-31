@@ -81,7 +81,8 @@ var VideoPlayer = new Class({
             videoDiv = new Element("div", {
                 id : "videoHolder"
             })
-            videoDiv.inject(document.body);
+            // TODO: move outside this class ?
+            videoDiv.inject($("drivesmart"));
             this.videoElement.inject(videoDiv);
         }
 
