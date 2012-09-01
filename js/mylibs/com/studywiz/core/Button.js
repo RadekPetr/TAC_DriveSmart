@@ -54,6 +54,9 @@ var Button = new Class({
     remove : function() {
         this.hide();
         var removedElement = this.buttonElement.dispose();
+        var myDiv = document.getElementById('buttonHolder');
+        myDiv.dispose();
+
     },
     // ---------------------------
     show : function() {
