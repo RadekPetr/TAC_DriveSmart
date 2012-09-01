@@ -89,6 +89,7 @@ var Questions = new Class({
     remove : function() {
         this.hide();
         var removedElement = this.panel.dispose();
+        document.getElementById('panelHolder').dispose();
     },
     // ---------------------------
     show : function() {
