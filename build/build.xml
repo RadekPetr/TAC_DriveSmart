@@ -20,6 +20,8 @@
 
     <!-- merge the stylesheet properties -->
     <var name="stylesheet-files" value="${file.default.stylesheets}, ${file.stylesheets}"/>
+	 <echo message= "Text  ${stylesheet-files}" />
+	
 
     <!-- merge the pages properties -->
     <var name="page-files" value="${file.pages}, ${file.pages.default.include}"/>
@@ -630,10 +632,20 @@
             <fileset dir="${dir.intermediate}" includes="${page-files}"/>
         </replaceregexp>
         <!--[! use comments like this one to avoid having them get minified -->
+		
+<concat destfile="${dir.publish}/${dir.css}/styles.min.css" force="yes">
+			 <fileset dir="${dir.publish}/${dir.css}/" includes="*.css" excludes = "*.min.css" />
+		</concat>		
+		
+		<delete>
+			<fileset dir="${dir.publish}/${dir.css}/" includes="*.css" excludes = "*.min.css"/>
+				
+		</delete> 
+		
+		
+        <echo message="Updating the HTML with the new css filename: styles.min.css"/>
 
-        <echo message="Updating the HTML with the new css filename: ${style.css}"/>
-
-        <replaceregexp match="&lt;!-- CSS concatenated [\d\w\s\W]*?!-- end CSS--&gt;" replace="&lt;link rel='stylesheet' href='${style.css}'&gt;" flags="m">
+        <replaceregexp match="&lt;!-- CSS concatenated [\d\w\s\W]*?!-- end CSS--&gt;" replace="&lt;link rel='stylesheet' href='${dir.css}/styles.min.css'&gt;" flags="m">
             <fileset dir="${dir.intermediate}" includes="${page-files}"/>
         </replaceregexp>
 
@@ -856,6 +868,10 @@
 
         <!-- copy source file to intermediate directory -->
         <copy file="${dir.source}/${dir.css}/${file.root.stylesheet}" tofile="${dir.intermediate}/${dir.css}/${file.root.stylesheet}"/>
+		<echo message="File ${dir.source}/${dir.css}/${file.root.stylesheet} to ${dir.intermediate}/${dir.css}/${file.root.stylesheet}"/>
+		
+		
+		
 
         <!-- replace imports with h5bp-import tags (part 1) this one wraps @media types -->
         <replaceregexp file="${dir.intermediate}/${dir.css}/${file.root.stylesheet}" 
@@ -932,7 +948,9 @@
             <mapper type="glob" from="*.css" to="${basedir}/${dir.publish}/${dir.css}/*.css"/>
             <targetfile/>
         </apply>
-        <foreach list="${file.stylesheets}" param="css_file" target="-css-remove-concatenated-stylesheets" />        
+        <foreach list="${file.stylesheets}" param="css_file" target="-css-remove-concatenated-stylesheets" />  
+
+
     </target>
     
     

@@ -6,7 +6,7 @@ var Unit = new Class({
 
     Implements : [Options, Events],
 
-    initialize : function(arguments) {
+    initialize : function() {
         this.setupData();
         this.addEvent("TIMELINE", this.handleNavigationEvent);
 
@@ -43,21 +43,47 @@ var Unit = new Class({
     setupScene : function() {
         // Intial scene setup
         //this.data.entry_audio = this._setupAudio("media/sound/country/mp3/country_accident", "audio_1", "entry.sound.done");
+        this.intro_image = Asset.image("img/country_intro.png", {
+            id : 'introImage',
+            title : 'Country Intro',
+            onLoad : function() {
+                this.fireEvent("TIMELINE", {
+                    type : "image.ready",
+                    id : this.id,
+                    next : "scene.ready"
+                });
 
+            }.bind(this)
+
+        });
         // show video and  start button
         this.data.video = this._setupVideo("media/video/country/country_cla01_start", "video_1", "entry.video.done");
         this.data.video.preload();
-        this.data.start_button = this._setupButton("Start", "button_1", "start.clicked", this.buttonPosition.x, this.buttonPosition.y);
+
     },
     // This handles all timeline events and emulates the timeline
     handleNavigationEvent : function(params) {
         console.log("****** Timeline event:");
         console.log(params);
         switch (params.next) {
+            case "scene.ready":
+                var imageDiv = new Element("div", {
+                    style : "left: 0;top:0; position: absolute",
+                    id : 'imagHolder'
+                })
+
+                this.intro_image.inject(imageDiv);
+                imageDiv.inject($("drivesmart"));
+
+                this.data.start_button = this._setupButton("Start", "button_1", "start.clicked", this.buttonPosition.x, this.buttonPosition.y);
+
+                break;
             case "start.clicked":
+                this.intro_image.dispose();
                 this.data.start_button.remove();
                 this.data.start_button = null;
                 this.data.video.nextAction = "entry.video.done"
+                this.data.video.show();
                 this.data.video.start();
                 break;
             case "entry.video.done":
@@ -137,7 +163,7 @@ var Unit = new Class({
         videoPlayer.nextAction = nextAction;
         this._setVideoSource(videoPlayer, filename);
         // videoPlayer.add();
-        videoPlayer.show();
+        //videoPlayer.show();
         return videoPlayer;
     }.protect(),
     //------------------------------------------------------------------------

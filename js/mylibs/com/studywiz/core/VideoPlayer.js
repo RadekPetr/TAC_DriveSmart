@@ -91,13 +91,13 @@ var VideoPlayer = new Class({
     },
     // ---------------------------
     show : function() {
-        // this.videoElement.show();
+       // this.videoElement.show();
         this.videoElement.fade('in');
     },
     // ---------------------------
     hide : function() {
-        // this.videoElement.hide();
-        this.videoElement.fade('out');
+         //this.videoElement.hide();
+        this.videoElement.fade('out',0);
     },
     // ---------------------------
     stop : function() {
