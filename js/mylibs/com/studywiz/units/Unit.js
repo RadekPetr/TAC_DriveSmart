@@ -14,6 +14,11 @@ var Unit = new Class({
             x : 535,
             y : 415
         }
+
+        this.panelPosition = {
+            left : '5%',
+            top : '25%'
+        }
     },
     start : function() {
         this.setupScene();
@@ -100,7 +105,8 @@ var Unit = new Class({
                 this.log("Sound done");
                 this.data.questions = this._setupQuestions({
                     data : ["Slow down immediately", "Slow down as we come into the bend", "Maintain our current speed until any hazard is visible"],
-                    correct : '2'
+                    correct : '2',
+                    style : this.panelPosition
                 });
 
                 this.data.submit_button = this._setupButton("Submit answer", "button_2", "submit.1.clicked", this.buttonPosition.x, this.buttonPosition.y);
@@ -139,7 +145,8 @@ var Unit = new Class({
             case "question.2.sound.done":
                 this.log("question.2.sound.done");
                 this.data.questions = this._setupQuestions({
-                    data : ["Some cattle stray out in front of us, just as we come around the corner", "A farmhand on a motorbike darts out in front of us."]
+                    data : ["Some cattle stray out in front of us, just as we come around the corner", "A farmhand on a motorbike darts out in front of us."],
+                    style : this.panelPosition
                 });
                 this.data.submit_button = this._setupButton("Submit answer", "button_4", "submit.2.clicked", this.buttonPosition.x, this.buttonPosition.y);
                 break;

@@ -8,8 +8,8 @@ var Questions = new Class({
     options : {
         style : {
             position : 'absolute',
-            top : '100px',
-            left : '100px',
+            top : '0px',
+            left : '0px',
             'background-color' : '#464646',
             'float' : 'left',
             'border-radius' : '1em 1em 1em 1em',
