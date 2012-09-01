@@ -2258,7 +2258,9 @@ _V_.Player = _V_.Component.extend({
     _V_.players[this.id] = null;
     delete _V_.players[this.id];
     this.tech.destroy();
-    this.el.parentNode.removeChild(this.el);
+    if (null !== this.el.parentNode) {
+        this.el.parentNode.removeChild(this.el);
+    }
   },
 
   createElement: function(type, options){},
@@ -3103,7 +3105,9 @@ _V_.html5 = _V_.PlaybackTech.extend({
   destroy: function(){
     this.player.tag = false;
     this.removeTriggers();
-    this.el.parentNode.removeChild(this.el);
+    if (null !== this.el.parentNode) {
+     this.el.parentNode.removeChild(this.el);
+    }
   },
 
   createElement: function(){
@@ -3486,7 +3490,9 @@ _V_.flash = _V_.PlaybackTech.extend({
   },
 
   destroy: function(){
+      if (null !== this.el.parentNode) {
     this.el.parentNode.removeChild(this.el);
+    }
   },
 
   // setupTriggers: function(){}, // Using global onEvent func to distribute events
