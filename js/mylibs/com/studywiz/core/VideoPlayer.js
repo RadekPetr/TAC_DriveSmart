@@ -8,12 +8,6 @@ var VideoPlayer = new Class({
 
         this.videoSource = new Array();
         this.myVideoPlayer = null;
-        this.videoElement = new Element("video", {
-            'id' : this.id,
-            'preload' : 'auto',
-            'poster' : '',
-            'class' : 'video-js'
-        });
 
         this.add();
 
@@ -21,6 +15,8 @@ var VideoPlayer = new Class({
     // ---------------------------
     setParams : function(params) {
         this.videoSource = params.source;
+        
+       // this.videoElement = this._getVideoTag(this.id);
         this.videoElement.setProperty("poster", params.poster.src)
         if (this.myVideoPlayer != null) {
             this.myVideoPlayer.src(this.videoSource);
@@ -30,6 +26,7 @@ var VideoPlayer = new Class({
     // ---------------------------
     preload : function() {
         if (this.myVideoPlayer == null) {
+            console.log(" Video player does not exist, creating a new one for " + this.id);
             this.myVideoPlayer = _V_(this.id, {
                 "controls" : false,
                 "autoplay" : false,
@@ -44,12 +41,12 @@ var VideoPlayer = new Class({
                     this.myVideoPlayer.pause();
 
                     this.myVideoPlayer.addEvent("loadstart", function() {
-                        console.log("Loading");
-                    });
-                    this.myVideoPlayer.addEvent("progress", function() {
-                        console.log("Progress: " + (this.myVideoPlayer.bufferedPercent()*100.00));
+                        console.log("Video Started to Load");
                     }.bind(this));
-                    
+                    this.myVideoPlayer.addEvent("progress", function() {
+                        console.log("Video Load progress: " + (this.myVideoPlayer.bufferedPercent() * 100.00));
+                    }.bind(this));
+
                     // this.myVideoPlayer.removeEvents();
                     console.log("Adding ended listener");
                     this.myVideoPlayer.addEvent("ended", function() {
@@ -84,6 +81,7 @@ var VideoPlayer = new Class({
             })
             // TODO: move outside this class ?
             videoDiv.inject($("drivesmart"));
+            this.videoElement = this._getVideoTag(this.id);
             this.videoElement.inject(videoDiv);
         }
 
@@ -91,13 +89,13 @@ var VideoPlayer = new Class({
     },
     // ---------------------------
     show : function() {
-       // this.videoElement.show();
+       
         this.videoElement.fade('in');
     },
     // ---------------------------
     hide : function() {
-         //this.videoElement.hide();
-        this.videoElement.fade('out',0);
+     
+       this.videoElement.fade('out');
     },
     // ---------------------------
     stop : function() {
@@ -113,6 +111,46 @@ var VideoPlayer = new Class({
         this.myVideoPlayer.pause();
         this.myVideoPlayer.currentTime = time;
         this.myVideoPlayer.pause();
+    },
+    remove : function(time) {
+
+        // get the videojs player with id of "video_1"
+        var player = _V_("video_1");
+
+        // for html5 - clear out the src which solves a browser memory leak
+        //  this workaround was found here: http://stackoverflow.com/questions/5170398/ios-safari-memory-leak-when-loading-unloading-html5-video
+        if (player.techName == "html5") {
+            player.tag.src = "";
+            player.tech.removeTriggers();
+            player.load();
+        }
+
+        // destroy the parts of the player which are specific to html5 or flash
+        player.tech.destroy();
+
+        // destroy the player
+        player.destroy();
+
+        document.getElementById('videoHolder').dispose();
+        this.videoElement.dispose();
+        //this.videoElement = null;
+        // this.myVideoPlayer = null;
+
+        delete this.videoElement;
+        delete this.myVideoPlayer;
+
+    },
+    _getVideoTag : function(myID) {
+        var myElement = document.getElementById(myID);
+        if (myElement == null) {
+            myElement = new Element("video", {
+                'id' : myID,
+                'preload' : 'auto',
+                'poster' : '',
+                'class' : 'video-js'
+            });
+        }
+        return myElement;
     }
 })
 
