@@ -1,10 +1,24 @@
 var VideoPlayer = new Class({
-    Implements : Events,
+    Implements : [Options, Events],
     // ---------------------------
-    initialize : function(myID, myParent) {
-        this.id = myID;
-        this.parent = myParent;
-        this.nextAction = new String();
+    options : {
+        style : {
+            width : '640px',
+            height : '480px'
+        },
+        'class' : 'video-js',
+        poster : '',
+        id : 'element.id',
+        next : 'next.action',
+        parent : null,
+        preload : 'auto',
+        autoplay : false,
+        controls : false
+    },
+    initialize : function(myOptions, myParent) {
+        this.setOptions(myOptions);
+        this.options.parent = myParent;
+        this.id = this.options.id;
 
         this.videoSource = new Array();
         this.myVideoPlayer = null;
@@ -28,9 +42,9 @@ var VideoPlayer = new Class({
         if (this.myVideoPlayer == null) {
             console.log(" Video player does not exist, creating a new one for " + this.id);
             this.myVideoPlayer = _V_(this.id, {
-                "controls" : false,
-                "autoplay" : false,
-                "preload" : "auto"
+                "controls" : this.options.controls,
+                "autoplay" : this.options.autoplay,
+                "preload" : this.options.preload
             });
 
             this.myVideoPlayer.ready(( function() {
@@ -50,10 +64,10 @@ var VideoPlayer = new Class({
                     // this.myVideoPlayer.removeEvents();
                     console.log("Adding ended listener");
                     this.myVideoPlayer.addEvent("ended", function() {
-                        this.parent.fireEvent("TIMELINE", {
+                        this.options.parent.fireEvent("TIMELINE", {
                             type : "video.finished",
-                            id : this.id,
-                            next : this.nextAction
+                            id : this.options.id,
+                            next : this.options.next
                         });
                     }.bind(this));
 
@@ -81,7 +95,7 @@ var VideoPlayer = new Class({
             })
             // TODO: move outside this class ?
             videoDiv.inject($("drivesmart"));
-            this.videoElement = this._getVideoTag(this.id);
+            this.videoElement = this._getVideoTag(this.options.id);
             this.videoElement.inject(videoDiv);
         }
 
@@ -95,7 +109,7 @@ var VideoPlayer = new Class({
     // ---------------------------
     hide : function() {
 
-        this.videoElement.fade('out',0);
+        this.videoElement.fade('out', 0);
     },
     // ---------------------------
     stop : function() {
@@ -115,7 +129,7 @@ var VideoPlayer = new Class({
     remove : function(time) {
         // see http://help.videojs.com/discussions/problems/861-how-to-destroy-a-video-js-object
         // get the videojs player with id of "video_1"
-        var player = _V_(this.id);
+        var player = _V_(this.options.id);
 
         // for html5 - clear out the src which solves a browser memory leak
         //  this workaround was found here: http://stackoverflow.com/questions/5170398/ios-safari-memory-leak-when-loading-unloading-html5-video

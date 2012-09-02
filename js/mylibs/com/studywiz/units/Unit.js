@@ -94,9 +94,7 @@ var Unit = new Class({
                 this.data.video.start();
                 break;
             case "entry.video.done":
-
                 (this.data.audios.get('audio_1')).start();
-
                 // we want to start buffering ahead of time
                 this._setVideoSource(this.data.video, "media/video/country/country_cla01_next");
                 this.data.video.preload();
@@ -109,21 +107,15 @@ var Unit = new Class({
                     correct : '2',
                     style : this.panelPosition
                 });
-
                 this.data.submit_button = this._setupButton("Submit answer", "button_2", "submit.1.clicked", this.buttonPosition.x, this.buttonPosition.y);
                 break;
             case "submit.1.clicked":
                 this.data.submit_button.remove();
                 this.data.submit_button = null;
                 this.data.questions.showCorrect();
-                //  this.data.audio = this._setupAudio("media/sound/country/country_vdcb4c", "audio_2", "feedback.1.sound.done");
-                // this.data.audio.start();
                 (this.data.audios.get('audio_2')).start();
-
                 break;
             case "feedback.1.sound.done":
-                //this.data.audio = this._setupAudio("media/sound/country/country_vdcb4d", "audio_3", "next.sound.done");
-                // this.data.audio.start();
                 (this.data.audios.get('audio_3')).start();
                 break;
             case "next.sound.done":
@@ -134,11 +126,11 @@ var Unit = new Class({
                 this.data.questions.remove();
                 this.data.continue_button.remove();
                 this.data.continue_button = null;
-                this.data.video.nextAction = "next.video.done"
+                this.data.video.options.next = "next.video.done";
                 this.data.video.start();
                 break;
-            case "next.video.done":              
-                 (this.data.audios.get('audio_4')).start();
+            case "next.video.done":
+                (this.data.audios.get('audio_4')).start();
                 break;
             case "question.2.sound.done":
                 this.log("question.2.sound.done");
@@ -152,8 +144,6 @@ var Unit = new Class({
                 this.data.submit_button.remove();
                 this.data.submit_button = null;
                 this.data.questions.showCorrect();
-                // this.data.audio = this._setupAudio("media/sound/country/country_vdcb4f", "audio_5", "feedback.2.sound.done");
-                //this.data.audio.start();
                 (this.data.audios.get('audio_5')).start();
                 break;
             case "feedback.2.sound.done":
@@ -162,12 +152,7 @@ var Unit = new Class({
             case "repeat.clicked":
                 this.data.repeat_button.remove();
                 this.data.questions.remove();
-
                 this.data.video.remove();
-                //  this.data.video = null;
-                // delete this.data
-                //  delete this.data;
-                //  this.setupData();
                 this.setupScene();
                 break;
 
@@ -178,8 +163,11 @@ var Unit = new Class({
     },
     //---------------------- PRIVATE FUNCTIONS --------------------------------
     _setupVideo : function(filename, id, nextAction) {
-        var videoPlayer = new VideoPlayer(id, this);
-        videoPlayer.nextAction = nextAction;
+        var videoPlayer = new VideoPlayer({
+            id : id,
+            next : nextAction
+        }, this);
+
         this._setVideoSource(videoPlayer, filename);
         // videoPlayer.add();
         //videoPlayer.show();
