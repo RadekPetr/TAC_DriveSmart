@@ -1,0 +1,88 @@
+/* ::::: http://s7.addthis.com/static/r07/counter002C.css ::::: */
+
+.addthis_counter { font-weight: bold; display: block; border: 0px none; cursor: pointer; color: rgb(255, 255, 255); }
+.addthis_counter a { display: block; font-family: arial,helvetica,sans-serif ! important; text-decoration: none ! important; border: 0px none; }
+.addthis_counter { text-decoration: none ! important; text-align: left; }
+.addthis_counter .atc_s, .addthis_counter .addthis_button_expanded { background: url('../undefined') no-repeat scroll 0% 0% transparent; }
+.addthis_counter.addthis_bubble_style { background: url('../undefined') no-repeat scroll 0% 0% transparent  ! important; }
+.addthis_counter a.atc_s { display: block; background-repeat: no-repeat; background-position: 0px 0px; width: 50px; height: 20px; line-height: 20px; overflow: hidden; cursor: pointer; }
+.addthis_counter a.atc_s:hover { background-position: 0px -20px; height: 20px; }
+.addthis_counter.addthis_pill_style a.addthis_button_expanded:hover, .addthis_counter.addthis_pill_style a.atc_s:hover, .addthis_counter a.addthis_button_expanded:hover, .addthis_counter a.atc_s:hover { text-decoration: none; color: rgb(0, 0, 0); }
+.addthis_counter .addthis_button_expanded { display: block; background-repeat: no-repeat; background-position: 0px -40px; width: 50px; height: 33px; line-height: 33px; padding-bottom: 4px; margin-bottom: 3px; text-align: center; text-decoration: none; font-size: 16px; font-weight: bold; color: rgb(51, 51, 51); }
+.addthis_counter .addthis_button_expanded:hover { background-position: 0px -77px; cursor: pointer; color: rgb(0, 0, 0); }
+.addthis_default_style .addthis_counter { display: block; float: left; }
+.addthis_counter.addthis_bubble_style { display: block; margin: 0px 0px 0px -2px; text-align: center; font-weight: bold; font-family: arial,helvetica,sans-serif; color: rgb(0, 0, 0); background-repeat: no-repeat; background-position: 0px -64px ! important; padding: 0px 0px 0px 4px; height: 16px; width: 32px ! important; }
+.addthis_counter.addthis_bubble_style a.addthis_button_expanded { font-size: 11px; height: 16px; line-height: 16px; width: 34px; background: none repeat scroll 0% 0% transparent; }
+.addthis_counter.addthis_bubble_style:hover { background-position: -36px -64px ! important; }
+.addthis_counter.addthis_bubble_style .atc_s { display: none ! important; }
+/* ::::: http://s7.addthis.com/static/r07/widget092.css ::::: */
+
+.addthis_toolbox.addthis_default_style span { line-height: 16px; }
+div.atclear { clear: both; }
+.addthis_default_style .addthis_separator, .addthis_default_style .at300b, .addthis_default_style .at300bo, .addthis_default_style .at300m, .addthis_default_style .at300bs { float: left; }
+.addthis_default_style .at300b, .addthis_default_style .at300bo, .addthis_default_style .at300m { padding: 0px 2px; }
+.at300b, .at300bo, .at300m, .at300bs { cursor: pointer; }
+.at300b:hover { opacity: 0.8; }
+.at300bs:hover { opacity: 0.8; }
+.at300bs { background: url('../img/widget045.png') no-repeat scroll 0px 0px transparent; overflow: hidden; display: block; height: 16px; width: 16px; line-height: 16px ! important; }
+.at16nc { background: url('../img/widget006_top.png') no-repeat scroll 0% 0% transparent; overflow: hidden; display: block; height: 16px; width: 16px; line-height: 16px ! important; }
+.at15t_email { background-position: 0px -1472px; }
+.at15t_facebook { background-position: 0px -1584px; }
+.at15t_google_plusone_share { background-position: 0px -2144px; }
+.at15t_pinterest_share { background-position: 0px -3920px; }
+.at15t_twitter { background-position: 0px -5168px; }
+.at15t_compact { background-position: 0px -3376px; }
+.at16nc.at16t_email { background-position: 0px -272px; }
+.at16nc.at16t_facebook { background-position: 0px -288px; }
+.at16nc.at16t_google_plusone_share { background-position: 0px -368px; }
+.at16nc.at16t_pinterest_share { background-position: 0px -720px; }
+.at16nc.at16t_twitter { background-position: 0px -896px; }
+.at16nc.at16t_compact { background-position: 0px -576px; }
+.addthis_default_style .at15t_expanded, .addthis_default_style .at15t_compact { margin-right: 4px; }
+:first-child + html #at_email textarea { height: 42px ! important; }
+* html #at16psf input, :first-child + html #at16psf input { padding: 0px; }
+:first-child + html #at_email #at16eatdr { top: 115px ! important; width: 272px ! important; }
+#_atssh { width: 1px ! important; height: 1px ! important; border: 0px none ! important; }
+.at_a11y { position: absolute ! important; left: -10000px ! important; top: auto ! important; width: 1px ! important; height: 1px ! important; overflow: hidden ! important; }
+#at3win *::-moz-selection { background: none repeat scroll 0% 0% rgb(254, 109, 76); color: rgb(255, 255, 255); }
+/* ::::: http://tac.studywiz.com/stylesheets/main.css?1345635142 ::::: */
+
+html, body { height: 100%; min-height: 780px; width: 100%; margin: 0px; padding: 0px; font-family: Arial,Helvetica,sans-serif; font-size: 14px; font-weight: normal; background: url('../img/bg.jpg') no-repeat scroll center top rgb(0, 0, 0); color: rgb(255, 255, 255); }
+body {  }
+h2, h3, h4, h5 { font-weight: normal; margin: 0px; color: rgb(234, 199, 73); }
+h1 { font-weight: normal; margin: 0px 0px 0.2em; color: rgb(234, 199, 73); font-size: 1.8em; }
+p { margin: 0.2em 0px 0.7em; }
+a { color: rgb(234, 199, 73); text-decoration: none; }
+a:hover { text-decoration: underline; }
+#allcontents { padding-top: 20px; margin-left: auto; margin-right: auto; width: 706px; }
+#vertical {  }
+#content {
+	min-height: 480px;
+	background: url('../img/contents-body.png') repeat-y scroll left center rgb(0, 0, 0);
+	padding: 10px 10px 20px;
+	line-height: 1.6em;
+	border-radius: 0px 0px 20px 20px;
+}
+#header { height: 85px; background: url('../img/header.png') no-repeat scroll 20px 0px transparent; }
+.menu-link { display: block; float: left; margin: 0px 10px 0px 0px; padding: 8px 0px 0px; height: 23px; width: 120px; text-align: center; background: url('../img/tab.png') no-repeat scroll center top transparent; overflow: hidden; color: rgb(255, 255, 255); font-size: 12px; }
+.menu-link.last { float: right; margin-right: 0px; }
+.menu-link:hover { color: rgb(255, 255, 255); text-decoration: underline; }
+.menu-link.current { color: rgb(234, 199, 73); }
+#menu-bar { height: 46px; position: relative; background: url('../img/undertab-none.png') no-repeat scroll center bottom transparent; }
+.homepage #menu-bar { background: url('../img/undertab-home.png') no-repeat scroll center bottom transparent; }
+.footer-link { display: inline; margin: 0px 22px; color: rgb(255, 255, 255); font-size: 11px; }
+.footer-link:hover { color: rgb(238, 238, 238); text-decoration: underline; }
+.footer {
+	color: rgb(170, 170, 170);
+	font-size: 9px;
+	bottom: 0px;
+	height: 20px;
+	padding: 20px;
+	text-align: left;
+	position: relative;
+}
+.logo-link { width: 41px; height: 25px; position: absolute; margin-top: -5px; font-size: 0px; }
+.tac-logo { background: url('../img/tac-logo.png') repeat scroll 0% 0% transparent; right: 40px; margin-top: -7px; }
+.spokes-logo { background: url('../spokes-logo.png') repeat scroll 0% 0% transparent; right: 93px; width: 80px; }
+#home_link { width: 180px; height: 70px; left: 20px; display: block; position: relative; font-size: 0px; }
+.addthis_toolbox { width: 180px; margin: 0px auto 20px; }

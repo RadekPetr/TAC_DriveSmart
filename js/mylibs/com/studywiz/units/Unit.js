@@ -24,7 +24,7 @@ var Unit = new Class({
         this.setupScene();
         //this.data.entry_audio.play();
     },
-    setupData : function(argument) {
+    setupData : function() {
         //TODO: define proper unit Data object or hashmap based on unit data
         this.data = new Object();
         this.data.audios = new Hash();
@@ -47,7 +47,7 @@ var Unit = new Class({
     },
     setupScene : function() {
         // Intial scene setup
-        //this.data.entry_audio = this._setupAudio("media/sound/country/mp3/country_accident", "audio_1", "entry.sound.done");
+
         this.intro_image = Asset.image("img/country_intro.png", {
             id : 'introImage',
             title : 'Country Intro',
@@ -68,13 +68,13 @@ var Unit = new Class({
     },
     // This handles all timeline events and emulates the timeline
     handleNavigationEvent : function(params) {
-        console.log("****** Timeline event:");
-        console.log(params);
+        console.log("****** Timeline event:" + params.next);
+        console.log(params.next);
         switch (params.next) {
             case "scene.ready":
                 var imageDiv = new Element("div", {
                     style : "left: 0;top:0; position: absolute",
-                    id : 'imagHolder'
+                    id : 'imageHolder'
                 })
 
                 this.intro_image.inject(imageDiv);
@@ -85,6 +85,8 @@ var Unit = new Class({
                 break;
             case "start.clicked":
                 this.intro_image.dispose();
+                var myDiv = document.getElementById('imageHolder');
+                myDiv.dispose();
                 this.data.start_button.remove();
                 this.data.start_button = null;
                 this.data.video.nextAction = "entry.video.done"
@@ -92,8 +94,7 @@ var Unit = new Class({
                 this.data.video.start();
                 break;
             case "entry.video.done":
-                // this.data.audio = this._setupAudio("media/sound/country/country_vdcb1b", "audio_1", "question.1.sound.done");
-                // this.data.audio.start();
+
                 (this.data.audios.get('audio_1')).start();
 
                 // we want to start buffering ahead of time
@@ -136,11 +137,8 @@ var Unit = new Class({
                 this.data.video.nextAction = "next.video.done"
                 this.data.video.start();
                 break;
-            case "next.video.done":
-                console.log("next.video.done");
-                // this.data.audio = this._setupAudio("media/sound/country/country_vdcb1f", "audio_4", "question.2.sound.done");
-                //  this.data.audio.start();
-                (this.data.audios.get('audio_4')).start();
+            case "next.video.done":              
+                 (this.data.audios.get('audio_4')).start();
                 break;
             case "question.2.sound.done":
                 this.log("question.2.sound.done");
@@ -157,6 +155,20 @@ var Unit = new Class({
                 // this.data.audio = this._setupAudio("media/sound/country/country_vdcb4f", "audio_5", "feedback.2.sound.done");
                 //this.data.audio.start();
                 (this.data.audios.get('audio_5')).start();
+                break;
+            case "feedback.2.sound.done":
+                this.data.repeat_button = this._setupButton("Repeat", "button_5", "repeat.clicked", this.buttonPosition.x, this.buttonPosition.y);
+                break;
+            case "repeat.clicked":
+                this.data.repeat_button.remove();
+                this.data.questions.remove();
+
+                this.data.video.remove();
+                //  this.data.video = null;
+                // delete this.data
+                //  delete this.data;
+                //  this.setupData();
+                this.setupScene();
                 break;
 
         };
