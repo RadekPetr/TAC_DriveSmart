@@ -163,10 +163,10 @@ var Unit = new Class({
     },
     //---------------------- PRIVATE FUNCTIONS --------------------------------
     _setupVideo : function(filename, id, nextAction) {
-        var videoPlayer = new VideoPlayer({
+        var videoPlayer = new VideoPlayer(this, {
             id : id,
             next : nextAction
-        }, this);
+        });
 
         this._setVideoSource(videoPlayer, filename);
         // videoPlayer.add();
@@ -202,7 +202,7 @@ var Unit = new Class({
     }.protect(),
     //------------------------------------------------------------------------
     _setupButton : function(text, id, nextAction, x, y) {
-        var button = new Button({
+        var button = new Button(this, {
             style : {
                 left : x + 'px',
                 top : y + 'px'
@@ -210,7 +210,7 @@ var Unit = new Class({
             text : text,
             id : id,
             next : nextAction
-        }, this);
+        });
 
         button.add();
         button.show();
@@ -219,7 +219,7 @@ var Unit = new Class({
 
     //------------------------------------------------------------------------
     _setupQuestions : function(options) {
-        var questions = new Questions(options, this);
+        var questions = new Questions(this, options);
         questions.add();
         questions.show();
         return questions;

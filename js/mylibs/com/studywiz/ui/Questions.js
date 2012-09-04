@@ -17,7 +17,7 @@ var Questions = new Class({
             'padding' : '8px 8px 8px 8px',
             'font-family' : 'Arial',
             '-moz-border-radius' : '0.5em 0.5em 0.5em 0.5em',
-            'background' : 'rgba(0, 0, 0, 0.6)'            
+            'background' : 'rgba(0, 0, 0, 0.6)'
         },
 
         data : ["Q1", "Q2", "Q3"],
@@ -26,7 +26,7 @@ var Questions = new Class({
         correct : null,
         parent : null
     },
-    initialize : function(myOptions, myParent) {
+    initialize : function(myParent, myOptions) {
 
         this.setOptions(myOptions);
         this.options.parent = myParent;

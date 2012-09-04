@@ -15,7 +15,8 @@ var VideoPlayer = new Class({
         autoplay : false,
         controls : false
     },
-    initialize : function(myOptions, myParent) {
+    initialize : function(myParent, myOptions) {
+
         this.setOptions(myOptions);
         this.options.parent = myParent;
         this.id = this.options.id;

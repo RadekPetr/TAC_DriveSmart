@@ -18,7 +18,7 @@ var Button = new Class({
         next : 'next.action',
         parent : null
     },
-    initialize : function(myOptions, myParent) {
+    initialize : function(myParent, myOptions) {
 
         this.setOptions(myOptions);
         this.options.parent = myParent;
