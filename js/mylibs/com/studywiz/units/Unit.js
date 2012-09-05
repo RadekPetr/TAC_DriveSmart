@@ -25,10 +25,17 @@ var Unit = new Class({
         //this.data.entry_audio.play();
     },
     setupData : function() {
+        this.mediaLoader = new MediaLoader(this, {});
         // TODO: load data from external source, parse it and populate
         // TODO: define proper unit Data object or hashmap based on unit data
         // TODO: preload all required media and only then allow the user to continue, show progress
         this.data = new Object();
+        this.data.video = this._setupVideo("media/video/country/country_cla01_start", "video_1", "entry.video.done");
+        var loaderInfo = {};
+        loaderInfo[this.data.video.id()] = 0;
+        this.mediaLoader.register(loaderInfo);
+        this.data.video.preload();
+
         this.data.audios = new Hash();
         this.data.audios.extend({
             audio_1 : this._setupAudio("media/sound/country/country_vdcb1b", "audio_1", "question.1.sound.done")
@@ -63,9 +70,6 @@ var Unit = new Class({
             }.bind(this)
 
         });
-        // show video and  start button
-        this.data.video = this._setupVideo("media/video/country/country_cla01_start", "video_1", "entry.video.done");
-        this.data.video.preload();
 
     },
     // This handles all timeline events and emulates the timeline
@@ -162,6 +166,9 @@ var Unit = new Class({
     },
     log : function(logValue) {
         console.log("****** " + logValue + " ******");
+    },
+    handleMediaReady : function() {
+
     },
     //---------------------- PRIVATE FUNCTIONS --------------------------------
     _setupVideo : function(filename, id, nextAction) {

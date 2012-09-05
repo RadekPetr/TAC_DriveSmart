@@ -11,7 +11,13 @@ var AudioPlayer = new Class({
         console.log("New Audio created");
         // TODO: handle these events handleFileError, handleProgress
         //this.preloader.onFileError = this.handleFileError();
-        //this.preloader.onProgress = this.handleProgress();
+        this.preloader.onProgress = function() {
+
+            var loaderInfo = {};
+            loaderInfo[this.id] = this.preloader.progress;
+
+            this.parent.mediaLoader.reportProgress(loaderInfo);
+        }.bind(this)
 
     },
     // ----------------------------------------------------------
@@ -32,10 +38,13 @@ var AudioPlayer = new Class({
 
     },
     preload : function() {
-        console.log ("++ Audio Preload started: " + this.id)
+        console.log("++ Audio Preload started: " + this.id)
         this.preloader.loadFile(this.source, false);
         this.preloader.load();
         this.preloader.onComplete = this._preloadComplete();
+    },
+    id : function (){
+        return this.id;
     },
     // ----------------------------------------------------------
     // PRIVATE - handle load complete
@@ -57,7 +66,7 @@ var AudioPlayer = new Class({
     }.protect(), // PRIVATE - handle preload complete
     // ----------------------------------------------------------
     _preloadComplete : function() {
-        console.log ("++ Audio Preloaded: " + this.id)
+        console.log("++ Audio Preloaded: " + this.id)
         this.preloaded = true;
     }.protect()
 

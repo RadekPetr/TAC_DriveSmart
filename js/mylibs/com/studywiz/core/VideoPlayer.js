@@ -19,7 +19,6 @@ var VideoPlayer = new Class({
 
         this.setOptions(myOptions);
         this.options.parent = myParent;
-        this.id = this.options.id;
 
         this.videoSource = new Array();
         this.myVideoPlayer = null;
@@ -31,7 +30,7 @@ var VideoPlayer = new Class({
     setParams : function(params) {
         this.videoSource = params.source;
 
-        // this.videoElement = this._getVideoTag(this.id);
+        // this.videoElement = this._getVideoTag(this.options.id);
         this.videoElement.setProperty("poster", params.poster.src)
         if (this.myVideoPlayer != null) {
             this.myVideoPlayer.src(this.videoSource);
@@ -41,8 +40,8 @@ var VideoPlayer = new Class({
     // ---------------------------
     preload : function() {
         if (this.myVideoPlayer == null) {
-            console.log(" Video player does not exist, creating a new one for " + this.id);
-            this.myVideoPlayer = _V_(this.id, {
+            console.log(" Video player does not exist, creating a new one for " + this.options.id);
+            this.myVideoPlayer = _V_(this.options.id, {
                 "controls" : this.options.controls,
                 "autoplay" : this.options.autoplay,
                 "preload" : this.options.preload
@@ -59,7 +58,19 @@ var VideoPlayer = new Class({
                         console.log("Video Started to Load");
                     }.bind(this));
                     this.myVideoPlayer.addEvent("progress", function() {
+                        var loaderInfo = {};
+                        loaderInfo[this.options.id] = this.myVideoPlayer.bufferedPercent();
+
+                        this.options.parent.mediaLoader.reportProgress(loaderInfo);
                         console.log("Video Load progress: " + (this.myVideoPlayer.bufferedPercent() * 100.00));
+                    }.bind(this));
+                    
+                    this.myVideoPlayer.addEvent("loadedalldata", function() {
+                        var loaderInfo = {};
+                        loaderInfo[this.options.id] = 1;
+
+                        this.options.parent.mediaLoader.reportProgress(loaderInfo);
+                        console.log("Video Loaded all: " + (this.myVideoPlayer.bufferedPercent() * 100.00));
                     }.bind(this));
 
                     // this.myVideoPlayer.removeEvents();
@@ -71,6 +82,9 @@ var VideoPlayer = new Class({
                             next : this.options.next
                         });
                     }.bind(this));
+                 
+                    
+                    
 
                 }.bind(this)));
         }
@@ -101,6 +115,9 @@ var VideoPlayer = new Class({
         }
 
         this.hide();
+    },
+    id : function (){
+        return this.options.id;
     },
     // ---------------------------
     show : function() {
