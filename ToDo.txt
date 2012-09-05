@@ -1,3 +1,8 @@
+- Recode ogg files - bad quality
+- Preload media first and show progress
+- Style Submit button 
+
+
 - Handle video Preloading better - IE issue, use events
 - Try preloadJS thingy maybe ?
 - Move Buttons to the right
@@ -11,6 +16,9 @@
 - Od data files playback engine - XML to json conversion ?
 - Scoring
 - main menu
+-----------------------------------------------------------------
+DONE:
+- Change radio cross to tick
 
 
 

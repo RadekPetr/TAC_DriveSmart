@@ -25,7 +25,9 @@ var Unit = new Class({
         //this.data.entry_audio.play();
     },
     setupData : function() {
-        //TODO: define proper unit Data object or hashmap based on unit data
+        // TODO: load data from external source, parse it and populate
+        // TODO: define proper unit Data object or hashmap based on unit data
+        // TODO: preload all required media and only then allow the user to continue, show progress
         this.data = new Object();
         this.data.audios = new Hash();
         this.data.audios.extend({

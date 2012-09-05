@@ -9,6 +9,7 @@ var AudioPlayer = new Class({
         this.preloader = new createjs.PreloadJS();
         this.preloader.installPlugin(createjs.SoundJS);
         console.log("New Audio created");
+        // TODO: handle these events handleFileError, handleProgress
         //this.preloader.onFileError = this.handleFileError();
         //this.preloader.onProgress = this.handleProgress();
 
