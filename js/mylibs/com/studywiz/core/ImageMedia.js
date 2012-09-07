@@ -70,9 +70,8 @@ var ImageMedia = new Class({
         this.image.setStyles(this.options.style);
     },
     show : function() {
-        // TODO : fade in
-        // this.buttonElement.show();
-        this.image.fade('hide');
+     
+        this.image.fade('hide',0);
         this.image.fade('in');
     },
     // ---------------------------

@@ -35,7 +35,7 @@ var MediaLoader = new Class({
         })
         overAllProgress = (sum / this.loadQueue.getLength()) * 100.00;
         console.log("Overall progress " + overAllProgress);
-        console.log(this.loadQueue);
+       // console.log(this.loadQueue);
         if (overAllProgress == 100) {
             console.log("Preload Finished");
             this.options.parent.handleMediaReady();

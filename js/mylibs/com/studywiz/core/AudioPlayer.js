@@ -8,7 +8,7 @@ var AudioPlayer = new Class({
         this.source = new Object();
         this.preloader = new createjs.PreloadJS();
         this.preloader.installPlugin(createjs.SoundJS);
-        console.log("New Audio created");
+        //console.log("New Audio created");
         // TODO: handle these events handleFileError, handleProgress
         //this.preloader.onFileError = this.handleFileError();
         this.preloader.onProgress = function() {
@@ -54,8 +54,7 @@ var AudioPlayer = new Class({
         if (!createjs.SoundJS.checkPlugin(true)) {
             alert('Sound plugin issue');
         } else {
-            this.soundInstance.onComplete = function() {
-                console.log("got audio finished event");
+            this.soundInstance.onComplete = function() {                
                 this.parent.fireEvent("TIMELINE", {
                     type : "audio.finished",
                     id : this.id,
