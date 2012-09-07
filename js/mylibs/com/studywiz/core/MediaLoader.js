@@ -2,10 +2,12 @@
  * @author Radek
  */
 var MediaLoader = new Class({
+    // TODO: handle preloading completely to the Media Loader and remove it from Unit
 
     Implements : [Options, Events],
     options : {
-        parent : null
+        parent : null,
+        next : "data.loaded"
     },
     initialize : function(myParent, myOptions) {
         this.setOptions(myOptions);
