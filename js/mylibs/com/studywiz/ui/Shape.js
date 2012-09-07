@@ -10,7 +10,7 @@ var Shape = new Class({
         id : "shape_1",
         parent : null,
         next : "next.action",
-        polygonStyle : {            
+        polygonStyle : {
             'fill' : 'lime',
             'opacity' : '0.5'
         },
@@ -63,6 +63,14 @@ var Shape = new Class({
         // this.hide();
         this.shapeElement.setStyles(this.options.polygonStyle);
         myDiv.setStyles(this.options.shapeStyle);
+
+        /*ParamArray = ZoneArray[z].split(":")                    //Get Params
+         setProperty(oElem,_x,82+Number(ParamArray[0]));         //Offset a bit for our backgroudns creens
+         setProperty(oElem,_y,64+Number(ParamArray[1]));
+         setProperty(oElem,_width,ParamArray[2]);
+         setProperty(oElem,_height,ParamArray[3]);
+
+         */
 
     },
     svgTags : function(svgtags) {
