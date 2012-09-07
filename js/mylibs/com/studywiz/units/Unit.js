@@ -24,8 +24,8 @@ var Unit = new Class({
         this.setupScene();
         //this.data.entry_audio.play();
 
-        this.shape = new Shape(this, {});
-        this.shape.add();
+        // this.shape = new Shape(this, {});
+        // this.shape.add();
     },
     setupData : function() {
         this.mediaLoader = new MediaLoader(this, {});
@@ -59,19 +59,11 @@ var Unit = new Class({
     },
     setupScene : function() {
         // Intial scene setup
-
-        this.intro_image = Asset.image("img/country_intro.png", {
-            id : 'introImage',
+        this.intro_image = new ImageMedia(this, {
+            src : 'img/country_intro.png',
+            next : "scene.ready",
             title : 'Country Intro',
-            onLoad : function() {
-                this.fireEvent("TIMELINE", {
-                    type : "image.ready",
-                    id : this.id,
-                    next : "scene.ready"
-                });
-
-            }.bind(this)
-
+            id : 'introImage'
         });
 
     },
@@ -81,18 +73,14 @@ var Unit = new Class({
         console.log(params.next);
         switch (params.next) {
             case "scene.ready":
-                var imageDiv = new Element("div", {
-                    style : "left: 0;top:0; position: absolute",
-                    id : 'imageHolder'
-                })
-
-                this.intro_image.inject(imageDiv);
-                imageDiv.inject($("drivesmart"));
+                this.intro_image.add();
+                this.intro_image.show();
+               //this.intro_image.flash('0', '1', 50, 'opacity', 250);
 
                 this.data.start_button = this._setupButton("Start", "button_1", "start.clicked", this.buttonPosition.x, this.buttonPosition.y);
                 break;
             case "start.clicked":
-                this.intro_image.dispose();
+                this.intro_image.hide();
                 var myDiv = document.getElementById('imageHolder');
                 myDiv.dispose();
                 this.data.start_button.remove();
