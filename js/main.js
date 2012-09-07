@@ -9,7 +9,7 @@ var Main = new Class({
         if (isDev == true) {
             // load external js libraries so they are available to the project
             var _self = this;
-            this.listOfLibraries = new Array("css/radios.css", "js/mylibs/video-js/video-js.css", "js/mylibs/createjs/soundjs-0.3.0.min.js", "js/mylibs/video-js/video.js", "js/mylibs/com/studywiz/core/MediaLoader.js","js/mylibs/com/studywiz/core/ImageMedia.js", "js/mylibs/com/studywiz/core/VideoPlayer.js", "js/mylibs/com/studywiz/core/AudioPlayer.js", "js/mylibs/com/studywiz/core/Button.js", "js/mylibs/createjs/preloadjs-0.2.0.min.js", "js/mylibs/com/studywiz/units/Unit.js", "js/mylibs/com/studywiz/ui/Questions.js", "js/mylibs/com/studywiz/ui/Shape.js")
+            this.listOfLibraries = new Array("css/radios.css", "js/mylibs/video-js/video-js.css", "css/progressBar.css", "js/mylibs/createjs/soundjs-0.3.0.min.js", "js/mylibs/video-js/video.js", "js/mylibs/com/studywiz/core/MediaLoader.js","js/mylibs/com/studywiz/ui/dwProgressBar.js","js/mylibs/com/studywiz/core/ImageMedia.js", "js/mylibs/com/studywiz/core/VideoPlayer.js", "js/mylibs/com/studywiz/core/AudioPlayer.js", "js/mylibs/com/studywiz/core/Button.js", "js/mylibs/createjs/preloadjs-0.2.0.min.js", "js/mylibs/com/studywiz/units/Unit.js", "js/mylibs/com/studywiz/ui/Questions.js", "js/mylibs/com/studywiz/ui/Shape.js")
             this.listOfLibrariesCounter = 0;
             this.listOfLibraries.each( function(item, index) {
                 this._loadAsset(item, index)
@@ -20,8 +20,8 @@ var Main = new Class({
     },
     // ----------------------------------------------------------
     start : function() {
-        var myUnit = new Unit();
-        myUnit.start();
+       var myUnit = new Unit({});
+       myUnit.start();
     },
     // ----------------------------------------------------------
     // PRIVATE - load external js libraries so they are available to the project
@@ -51,7 +51,7 @@ var Main = new Class({
         this.listOfLibrariesCounter--;
         if (this.listOfLibrariesCounter == 0) {
             this.fireEvent('READY');
-            console.log("Fired event READY");
+            //console.log("Fired event READY");
         }
     }
 })
