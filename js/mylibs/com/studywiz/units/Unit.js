@@ -5,8 +5,11 @@
 var Unit = new Class({
 
     Implements : [Options, Events],
-
-    initialize : function() {
+    options : {
+        unitTagId : 'drivesmart'
+    },
+    initialize : function(myOptions) {
+        this.setOptions(myOptions);
         this.setupData();
         this.addEvent("TIMELINE", this.handleNavigationEvent);
 
@@ -25,15 +28,19 @@ var Unit = new Class({
         //this.data.entry_audio.play();
 
         // this.shape = new Shape(this, {});
-        // this.shape.add();
+        // this.shape.add(this.options.unitTagId);
     },
     setupData : function() {
-        this.mediaLoader = new MediaLoader(this, {});
+        this.mediaLoader = new MediaLoader(this, {
+            next : 'scene.ready'
+        });
+        this.mediaLoader.add('drivesmart')
         // TODO: load data from external source, parse it and populate
         // TODO: define proper unit Data object or hashmap based on unit data
         // TODO: preload all required media and only then allow the user to continue, show progress
         this.data = new Object();
         this.data.video = this._setupVideo("media/video/country/country_cla01_start", "video_1", "entry.video.done");
+
         var loaderInfo = {};
         loaderInfo[this.data.video.id()] = 0;
         this.mediaLoader.register(loaderInfo);
@@ -61,7 +68,7 @@ var Unit = new Class({
         // Intial scene setup
         this.intro_image = new ImageMedia(this, {
             src : 'img/country_intro.png',
-            next : "scene.ready",
+            next : "image.ready",
             title : 'Country Intro',
             id : 'introImage'
         });
@@ -73,9 +80,10 @@ var Unit = new Class({
         console.log(params.next);
         switch (params.next) {
             case "scene.ready":
-                this.intro_image.add();
+                this.mediaLoader.hide();
+                this.intro_image.add(this.options.unitTagId);
                 this.intro_image.show();
-               //this.intro_image.flash('0', '1', 50, 'opacity', 250);
+                //this.intro_image.flash('0', '1', 50, 'opacity', 250);
 
                 this.data.start_button = this._setupButton("Start", "button_1", "start.clicked", this.buttonPosition.x, this.buttonPosition.y);
                 break;
@@ -157,7 +165,7 @@ var Unit = new Class({
     log : function(logValue) {
         console.log("****** " + logValue + " ******");
     },
-    handleMediaReady : function() {
+    handleMediaReady : function(nextAction) {
 
     },
     //---------------------- PRIVATE FUNCTIONS --------------------------------
@@ -166,8 +174,9 @@ var Unit = new Class({
             id : id,
             next : nextAction
         });
-
+        videoPlayer.add(this.options.unitTagId);
         this._setVideoSource(videoPlayer, filename);
+        //  videoPlayer.add(this.options.unitTagId);
         // videoPlayer.add();
         //videoPlayer.show();
         return videoPlayer;
@@ -211,7 +220,7 @@ var Unit = new Class({
             next : nextAction
         });
 
-        button.add();
+        button.add(this.options.unitTagId);
         button.show();
         return button;
     }.protect(),
@@ -219,7 +228,7 @@ var Unit = new Class({
     //------------------------------------------------------------------------
     _setupQuestions : function(options) {
         var questions = new Questions(this, options);
-        questions.add();
+        questions.add(this.options.unitTagId);
         questions.show();
         return questions;
     }
