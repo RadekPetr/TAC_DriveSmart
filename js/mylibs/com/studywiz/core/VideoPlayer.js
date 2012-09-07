@@ -22,9 +22,7 @@ var VideoPlayer = new Class({
 
         this.videoSource = new Array();
         this.myVideoPlayer = null;
-
-        this.add();
-
+       
     },
     // ---------------------------
     setParams : function(params) {
@@ -64,7 +62,7 @@ var VideoPlayer = new Class({
                         this.options.parent.mediaLoader.reportProgress(loaderInfo);
                         console.log("Video Load progress: " + (this.myVideoPlayer.bufferedPercent() * 100.00));
                     }.bind(this));
-                    
+
                     this.myVideoPlayer.addEvent("loadedalldata", function() {
                         var loaderInfo = {};
                         loaderInfo[this.options.id] = 1;
@@ -82,9 +80,6 @@ var VideoPlayer = new Class({
                             next : this.options.next
                         });
                     }.bind(this));
-                 
-                    
-                    
 
                 }.bind(this)));
         }
@@ -101,7 +96,7 @@ var VideoPlayer = new Class({
 
     },
     // ---------------------------
-    add : function() {
+    add : function(parentTagID) {
         var videoDiv = document.getElementById('videoHolder');
 
         if (videoDiv == null) {
@@ -109,14 +104,14 @@ var VideoPlayer = new Class({
                 id : "videoHolder"
             })
             // TODO: move outside this class ?
-            videoDiv.inject($("drivesmart"));
+            videoDiv.inject($(parentTagID));
             this.videoElement = this._getVideoTag(this.options.id);
             this.videoElement.inject(videoDiv);
         }
 
         this.hide();
     },
-    id : function (){
+    id : function() {
         return this.options.id;
     },
     // ---------------------------

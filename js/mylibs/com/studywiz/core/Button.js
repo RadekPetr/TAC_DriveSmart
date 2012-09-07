@@ -28,14 +28,14 @@ var Button = new Class({
         });
 
     }, // ---------------------------
-    add : function() {
+    add : function(parentTagID) {
         var myDiv = document.getElementById('buttonHolder');
 
         if (myDiv == null) {
             var myDiv = new Element("div", {
                 id : "buttonHolder"
             });
-            myDiv.inject($("drivesmart"));
+            myDiv.inject($(parentTagID));
         }
         this.buttonElement.inject(myDiv);
         this.hide();

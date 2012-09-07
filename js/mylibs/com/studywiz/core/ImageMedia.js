@@ -56,14 +56,14 @@ var ImageMedia = new Class({
             effect.start(prop, from, to).start(prop, to, from);
         }
     },
-    add : function() {
+    add : function(parentTagID) {
         var myDiv = document.getElementById('imageHolder');
 
         if (myDiv == null) {
             var myDiv = new Element("div", {
                 id : "imageHolder"
             });
-            myDiv.inject($("drivesmart"));
+            myDiv.inject($(parentTagID));
         }
         this.image.inject(myDiv);   
 
