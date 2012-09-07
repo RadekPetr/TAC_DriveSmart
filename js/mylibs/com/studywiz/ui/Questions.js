@@ -61,13 +61,13 @@ var Questions = new Class({
 
         }.bind(this))
     }, // ---------------------------
-    add : function() {
+    add : function(parentTagID) {
         var myDiv = document.getElementById('panelHolder');
         if (myDiv == null) {
             var myDiv = new Element("div", {
                 id : "panelHolder"
             });
-            myDiv.inject($("drivesmart"));
+            myDiv.inject($(parentTagID));
         }
 
         myDiv.adopt(this.panel);
