@@ -23,6 +23,9 @@ var Unit = new Class({
     start : function() {
         this.setupScene();
         //this.data.entry_audio.play();
+
+        this.shape = new Shape(this, {});
+        this.shape.add();
     },
     setupData : function() {
         this.mediaLoader = new MediaLoader(this, {});
@@ -87,7 +90,6 @@ var Unit = new Class({
                 imageDiv.inject($("drivesmart"));
 
                 this.data.start_button = this._setupButton("Start", "button_1", "start.clicked", this.buttonPosition.x, this.buttonPosition.y);
-
                 break;
             case "start.clicked":
                 this.intro_image.dispose();
