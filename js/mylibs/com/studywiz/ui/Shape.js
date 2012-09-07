@@ -70,6 +70,9 @@ var Shape = new Class({
          setProperty(oElem,_width,ParamArray[2]);
          setProperty(oElem,_height,ParamArray[3]);
 
+         x:y:w:h
+         points = x,y x,y-h x+w,y-h x+w,y x,y
+
          */
 
     },
