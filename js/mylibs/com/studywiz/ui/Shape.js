@@ -6,7 +6,7 @@ var Shape = new Class({
 
     Implements : [Options, Events],
     options : {
-        data : "200,10 250,190 160,210",
+        data : "167:131:77:82,3:254:168:69,327:214:79:26,390:239:103:47",
         id : "shape_1",
         parent : null,
         next : "next.action",
@@ -17,7 +17,9 @@ var Shape = new Class({
         shapeStyle : {
             'left' : "0px",
             'top' : '0px',
-            position : 'absolute'
+            position : 'absolute',
+            'z-index' : '99998',
+            '-webkit-transform-origin-z' : '99998'
         }
     },
     initialize : function(myParent, myOptions) {
@@ -25,6 +27,55 @@ var Shape = new Class({
         this.setOptions(myOptions);
         this.options.parent = myParent;
 
+        var arrayOfShapes = this.options.data.split(",");
+        this.polygons = new Array();
+        this.polygonsArray = new Array();
+
+        Array.each(arrayOfShapes, function(shape, index) {
+            var temp = shape.split(":");
+            var left = Number.from(temp[0]);
+            var top = Number.from(temp[1]);
+            var width = Number.from(temp[2]);
+            var height = Number.from(temp[3]);
+
+            // var test = (left + width) + "," + (top - height);
+            // console.log (test);
+
+            var polygon = left + "," + top + " " + left + "," + (top - height) + " " + (left + width) + "," + (top - height) + " " + (left + width) + "," + top + " " + left + "," + top;
+
+            var polygonArray = [{
+                x : left,
+                y : top
+            }, {
+                x : left,
+                y : (top - height)
+            }, {
+                x : (left + width),
+                y : (top - height)
+            }, {
+                x : (left + width),
+                y : top
+            }, {
+                x : left,
+                y : top
+            }]
+
+            this.polygons.push(polygon);
+            this.polygonsArray.push(polygonArray);
+
+            console.log("Polygon " + polygon);
+            /*
+             x:y:w:h
+             points =
+             x,y
+             x,y-h
+             x+w,y-h
+             x+w,y
+             x,y
+             */
+
+        }.bind(this))
+        console.log("Polygons " + this.polygons);
     },
     show : function() {
 
@@ -44,25 +95,51 @@ var Shape = new Class({
             });
 
             // Fix for svg, no ide how it works ....
-            this.svgTags(['svg', 'polygon']);
+            this.svgTags(['svg', 'polygon', 'polyline']);
             this.shapeWrapper = new Element("svg", {
-                id : this.options.id,
+                id : "holder_" + this.options.id,
                 xmlns : "http://www.w3.org/2000/svg",
-                version : "1.1"
+                version : "1.1",
+                width : '640px',
+                height : '480px'
             });
             this.shapeWrapper.inject(myDiv);
-            myDiv.inject($("drivesmart"));
+
         }
-        this.shapeElement = new Element("polygon", {
-            'id' : this.options.id,
-            'points' : this.options.data
 
-        });
+        Array.each(this.polygons, function(item, index) {
+            // Fix for svg, no ide how it works ....
+            this.svgTags(['svg', 'polygon', 'polyline']);
+            var shapeElement = new Element("polyline", {
+                'id' : 'shape_' + index,
+                'points' : item
 
-        this.shapeElement.inject(this.shapeWrapper);
-        // this.hide();
-        this.shapeElement.setStyles(this.options.polygonStyle);
+            });
+            myDiv.inject($("drivesmart"));
+          
+            
+            var elem = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+            elem.setStyles(this.options.polygonStyle);
+            elem.setAttribute ('points', item);
+          
+            
+           document.getElementById("holder_shape_1").appendChild(elem);
+
+         //  elem.appendChild("<polyline points='167,131 167,49 244,49 244,131 167,131' opacity='0.5'/>")
+
+           // shapeElement.inject(this.shapeWrapper);
+            // this.hide();
+          //  shapeElement.setStyles(this.options.polygonStyle);
+
+           // shapeElement.addEvent('click', function(e) {
+            //    alert('clicked' + this.id);
+
+           // })
+        }.bind(this))
+
         myDiv.setStyles(this.options.shapeStyle);
+
+        
 
         /*ParamArray = ZoneArray[z].split(":")                    //Get Params
          setProperty(oElem,_x,82+Number(ParamArray[0]));         //Offset a bit for our backgroudns creens
@@ -93,6 +170,14 @@ var Shape = new Class({
             };
         });
 
+    },
+    //+ Jonas Raoni Soares Silva
+    //@ http://jsfromhell.com/math/is-point-in-poly [v1.0]
+    isInside : function(poly, pt) {
+
+        for (var c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i)
+            ((poly[i].y <= pt.y && pt.y < poly[j].y) || (poly[j].y <= pt.y && pt.y < poly[i].y)) && (pt.x < (poly[j].x - poly[i].x) * (pt.y - poly[i].y) / (poly[j].y - poly[i].y) + poly[i].x) && ( c = !c);
+        return c;
     }
 })
 
