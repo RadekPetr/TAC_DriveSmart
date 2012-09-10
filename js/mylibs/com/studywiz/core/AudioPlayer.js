@@ -13,8 +13,11 @@ var AudioPlayer = new Class({
         //this.preloader.onFileError = this.handleFileError();
         this.preloader.onProgress = function() {
 
-            var loaderInfo = {};
-            loaderInfo[this.id] = this.preloader.progress;
+            var loaderInfo = new Object();
+            loaderInfo[this.id] = {
+                'progress' : this.preloader.progress,
+                'weight' : 1
+            };
 
             this.parent.mediaLoader.reportProgress(loaderInfo);
         }.bind(this)
@@ -43,7 +46,7 @@ var AudioPlayer = new Class({
         this.preloader.load();
         this.preloader.onComplete = this._preloadComplete();
     },
-    id : function (){
+    id : function() {
         return this.id;
     },
     // ----------------------------------------------------------
@@ -54,7 +57,7 @@ var AudioPlayer = new Class({
         if (!createjs.SoundJS.checkPlugin(true)) {
             alert('Sound plugin issue');
         } else {
-            this.soundInstance.onComplete = function() {                
+            this.soundInstance.onComplete = function() {
                 this.parent.fireEvent("TIMELINE", {
                     type : "audio.finished",
                     id : this.id,

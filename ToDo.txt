@@ -2,6 +2,10 @@
 - Preload media first and show progress
 - Style Submit button 
 
+- risks - create click areas, and show image on feedback
+
+- Implement UI calss and make the media classes to implement it it so common methods can be done only once
+
 
 - Handle video Preloading better - IE issue, use events
 - Try preloadJS thingy maybe ?
