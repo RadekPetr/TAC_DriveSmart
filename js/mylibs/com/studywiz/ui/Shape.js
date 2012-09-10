@@ -38,31 +38,8 @@ var Shape = new Class({
             var width = Number.from(temp[2]);
             var height = Number.from(temp[3]);
 
-            // var test = (left + width) + "," + (top - height);
-            // console.log (test);
-
             var polygon = left + "," + top + " " + left + "," + (top - height) + " " + (left + width) + "," + (top - height) + " " + (left + width) + "," + top + " " + left + "," + top;
-
-            var polygonArray = [{
-                x : left,
-                y : top
-            }, {
-                x : left,
-                y : (top - height)
-            }, {
-                x : (left + width),
-                y : (top - height)
-            }, {
-                x : (left + width),
-                y : top
-            }, {
-                x : left,
-                y : top
-            }]
-
-            this.polygons.push(polygon);
-            this.polygonsArray.push(polygonArray);
-
+            this.polygons.push(polygon);      
             console.log("Polygon " + polygon);
             /*
              x:y:w:h
@@ -75,7 +52,6 @@ var Shape = new Class({
              */
 
         }.bind(this))
-        console.log("Polygons " + this.polygons);
     },
     show : function() {
 
@@ -95,65 +71,39 @@ var Shape = new Class({
             });
 
             // Fix for svg, no ide how it works ....
-            this.svgTags(['svg', 'polygon', 'polyline']);
+            this._svgTags(['svg', 'polygon', 'polyline']);
+            
             this.shapeWrapper = new Element("svg", {
-                id : "holder_" + this.options.id,
+                id : "holder" + this.options.id,
                 xmlns : "http://www.w3.org/2000/svg",
                 version : "1.1",
                 width : '640px',
                 height : '480px'
             });
-            this.shapeWrapper.inject(myDiv);
-
+            this.shapeWrapper.inject(myDiv);       
         }
 
         Array.each(this.polygons, function(item, index) {
-            // Fix for svg, no ide how it works ....
-            this.svgTags(['svg', 'polygon', 'polyline']);
+           
             var shapeElement = new Element("polyline", {
                 'id' : 'shape_' + index,
                 'points' : item
-
             });
-            myDiv.inject($("drivesmart"));
-          
-            
-            var elem = document.createElementNS('http://www.w3.org/2000/svg','polygon');
-            elem.setStyles(this.options.polygonStyle);
-            elem.setAttribute ('points', item);
-          
-            
-           document.getElementById("holder_shape_1").appendChild(elem);
 
-         //  elem.appendChild("<polyline points='167,131 167,49 244,49 244,131 167,131' opacity='0.5'/>")
-
-           // shapeElement.inject(this.shapeWrapper);
+            shapeElement.inject(this.shapeWrapper);
             // this.hide();
-          //  shapeElement.setStyles(this.options.polygonStyle);
+            shapeElement.setStyles(this.options.polygonStyle);
 
-           // shapeElement.addEvent('click', function(e) {
-            //    alert('clicked' + this.id);
-
-           // })
+            shapeElement.addEvent('click', function(e) {
+                alert('clicked' + this.id);
+            })
         }.bind(this))
 
         myDiv.setStyles(this.options.shapeStyle);
 
-        
-
-        /*ParamArray = ZoneArray[z].split(":")                    //Get Params
-         setProperty(oElem,_x,82+Number(ParamArray[0]));         //Offset a bit for our backgroudns creens
-         setProperty(oElem,_y,64+Number(ParamArray[1]));
-         setProperty(oElem,_width,ParamArray[2]);
-         setProperty(oElem,_height,ParamArray[3]);
-
-         x:y:w:h
-         points = x,y x,y-h x+w,y-h x+w,y x,y
-
-         */
-
+        myDiv.inject($("drivesmart"));
     },
-    svgTags : function(svgtags) {
+    _svgTags : function(svgtags) {
         var ns = 'http://www.w3.org/2000/svg', methods = (function(proto, cls) {
             var hash = {};
             for (var f in proto) {
@@ -169,7 +119,6 @@ var Shape = new Class({
                 return (Object.append(document.createElementNS(ns, tag), methods).set(props));
             };
         });
-
     },
     //+ Jonas Raoni Soares Silva
     //@ http://jsfromhell.com/math/is-point-in-poly [v1.0]
