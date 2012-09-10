@@ -22,7 +22,7 @@ var VideoPlayer = new Class({
 
         this.videoSource = new Array();
         this.myVideoPlayer = null;
-       
+
     },
     // ---------------------------
     setParams : function(params) {
@@ -54,10 +54,32 @@ var VideoPlayer = new Class({
 
                     this.myVideoPlayer.addEvent("loadstart", function() {
                         console.log("Video Started to Load");
+                        var loaderInfo = new Object();
+                        loaderInfo[this.options.id] = {
+                            'progress' : this.myVideoPlayer.bufferedPercent(),
+                            'weight' : 800
+                        }
+
+                        this.options.parent.mediaLoader.reportProgress(loaderInfo);
+                        console.log("Video Load progress: " + (this.myVideoPlayer.bufferedPercent() * 100.00));
+                    }.bind(this));
+                    
+                    this.myVideoPlayer.addEvent("loadedmetadata", function() {
+                        var loaderInfo = new Object();
+                        loaderInfo[this.options.id] = {
+                            'progress' : this.myVideoPlayer.bufferedPercent(),
+                            'weight' : 800
+                        }
+
+                        this.options.parent.mediaLoader.reportProgress(loaderInfo);
+                        console.log("Video Load progress: " + (this.myVideoPlayer.bufferedPercent() * 100.00));
                     }.bind(this));
                     this.myVideoPlayer.addEvent("progress", function() {
-                        var loaderInfo = {};
-                        loaderInfo[this.options.id] = this.myVideoPlayer.bufferedPercent();
+                        var loaderInfo = new Object();
+                        loaderInfo[this.options.id] = {
+                            'progress' : this.myVideoPlayer.bufferedPercent(),
+                            'weight' : 800
+                        }
 
                         this.options.parent.mediaLoader.reportProgress(loaderInfo);
                         console.log("Video Load progress: " + (this.myVideoPlayer.bufferedPercent() * 100.00));
@@ -65,7 +87,10 @@ var VideoPlayer = new Class({
 
                     this.myVideoPlayer.addEvent("loadedalldata", function() {
                         var loaderInfo = {};
-                        loaderInfo[this.options.id] = 1;
+                        loaderInfo[this.options.id] = {
+                            'progress' : 1,
+                            'weight' : 800
+                        };
 
                         this.options.parent.mediaLoader.reportProgress(loaderInfo);
                         console.log("Video Loaded all: " + (this.myVideoPlayer.bufferedPercent() * 100.00));

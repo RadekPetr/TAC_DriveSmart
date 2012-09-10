@@ -10,7 +10,13 @@ var Unit = new Class({
     },
     initialize : function(myOptions) {
         this.setOptions(myOptions);
-        this.setupData();
+
+    },
+    start : function() {
+        // TODO handle mobile platforms: Browser.Platform.android
+        this.mediaLoader = new MediaLoader(this, { });
+        this.mediaLoader.add('drivesmart')
+
         this.addEvent("TIMELINE", this.handleNavigationEvent);
 
         this.buttonPosition = {
@@ -22,19 +28,21 @@ var Unit = new Class({
             left : '5%',
             top : '25%'
         }
-    },
-    start : function() {
-        this.setupScene();
-        //this.data.entry_audio.play();
 
-        // this.shape = new Shape(this, {});
-        // this.shape.add(this.options.unitTagId);
+        this.setupData();
+
     },
     setupData : function() {
-        this.mediaLoader = new MediaLoader(this, {
-            next : 'scene.ready'
+        // Intial scene setup
+        this.intro_image = new ImageMedia(this, {
+            src : 'img/country_intro.png',
+            next : "image.ready",
+            title : 'Country Intro',
+            id : 'introImage'
         });
-        this.mediaLoader.add('drivesmart')
+
+        this.mediaLoader.options.next = 'scene.ready';
+        this.mediaLoader.show();
         // TODO: load data from external source, parse it and populate
         // TODO: define proper unit Data object or hashmap based on unit data
         // TODO: preload all required media and only then allow the user to continue, show progress
@@ -42,7 +50,11 @@ var Unit = new Class({
         this.data.video = this._setupVideo("media/video/country/country_cla01_start", "video_1", "entry.video.done");
 
         var loaderInfo = {};
-        loaderInfo[this.data.video.id()] = 0;
+        loaderInfo[this.data.video.id] = {
+            'progress' : 0,
+            'weight' : 90
+        };
+        // making sure the video is registered with the loader before the sounds are finished
         this.mediaLoader.register(loaderInfo);
         this.data.video.preload();
 
@@ -64,25 +76,20 @@ var Unit = new Class({
         });
 
     },
-    setupScene : function() {
-        // Intial scene setup
-        this.intro_image = new ImageMedia(this, {
-            src : 'img/country_intro.png',
-            next : "image.ready",
-            title : 'Country Intro',
-            id : 'introImage'
-        });
 
-    },
     // This handles all timeline events and emulates the timeline
     handleNavigationEvent : function(params) {
         console.log("****** Timeline event:" + params.next);
         console.log(params.next);
         switch (params.next) {
             case "scene.ready":
+                this.mediaLoader.options.next = null;
                 this.mediaLoader.hide();
                 this.intro_image.add(this.options.unitTagId);
                 this.intro_image.show();
+                this.shape = new Shape(this, {});
+                this.shape.add(this.options.unitTagId);
+
                 //this.intro_image.flash('0', '1', 50, 'opacity', 250);
 
                 this.data.start_button = this._setupButton("Start", "button_1", "start.clicked", this.buttonPosition.x, this.buttonPosition.y);
@@ -100,6 +107,7 @@ var Unit = new Class({
             case "entry.video.done":
                 (this.data.audios.get('audio_1')).start();
                 // we want to start buffering ahead of time
+                this.mediaLoader.options.next = null;
                 this._setVideoSource(this.data.video, "media/video/country/country_cla01_next");
                 this.data.video.preload();
 
@@ -157,7 +165,9 @@ var Unit = new Class({
                 this.data.repeat_button.remove();
                 this.data.questions.remove();
                 this.data.video.remove();
-                this.setupScene();
+
+                this.setupData();
+
                 break;
 
         };

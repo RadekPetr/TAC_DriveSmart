@@ -35,7 +35,9 @@ var Questions = new Class({
             id : "questionPanel"
         });
 
-        this.options.data.each( function(item, index) {
+        //this.options.data.each( function(item, index) {
+
+        Array.each(this.options.data, function(item, index) {
 
             var radio = new Element('input', {
                 'type' : 'radio',
@@ -105,7 +107,7 @@ var Questions = new Class({
     },
     showCorrect : function() {
 
-        this.options.data.each( function(item, index) {
+        Array.each(this.options.data, function(item, index) {
 
             var label = document.getElementById("item_label_" + index);
             var radio = document.getElementById("item_" + index);

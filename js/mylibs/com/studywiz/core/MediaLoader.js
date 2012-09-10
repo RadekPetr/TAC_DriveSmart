@@ -20,46 +20,66 @@ var MediaLoader = new Class({
             // notning already exists
         } else {
             this.loadQueue.extend(loaderInfo);
+            console.log('Register');
         }
     },
     reportProgress : function(loaderInfo) {
+        //console.log(loaderInfo.keys());
 
-        if (this.loadQueue.has(loaderInfo.id)) {
-            this.loadQueue.set(loaderInfo.id, loaderInfo.progress)
+        if (this.options.next == null) {
+            // ignore
         } else {
-            this.register(loaderInfo)
+            Object.each(loaderInfo, function(value, key) {
+                if (this.loadQueue.has(key)) {
+                    this.loadQueue.set(key, value);
+
+                } else {
+                    this.register(loaderInfo)
+                }
+
+            }.bind(this))
+
+            var overAllProgress = 0;
+            var sum = 0;
+            var sum2 = 0;
+            this.loadQueue.each( function(value, key) {
+                if (value.progress == undefined) {
+                    value.progress = 0
+                }
+                sum += (value.progress * value.weight);
+                sum2 += value.weight;
+
+            }.bind(this))
+            // TODO use weighted average instead
+            // overAllProgress = (sum / this.loadQueue.getLength()) * 100.00;
+            overAllProgress = (sum / sum2) * 100.00;
+
+            if (this.progressBar != null) {
+                this.progressBar.set(overAllProgress);
+            }
+
+            console.log("Overall progress " + overAllProgress);
+
+            if (overAllProgress > 80) {
+                console.log("Preload Finished");
+                //  this.options.parent.handleMediaReady(this.options.next);
+                this.loadQueue.empty();
+
+                this.options.parent.fireEvent("TIMELINE", {
+                    type : "preload.finished",
+                    id : this.options.id,
+                    next : this.options.next
+                })
+
+            }
         }
-        var overAllProgress = 0;
-        var sum = 0;
-        this.loadQueue.each(function(value, key) {
-            sum = sum + value;
-        })
-        overAllProgress = (sum / this.loadQueue.getLength()) * 100.00;
 
-        if (this.progressBar != null) {
-            this.progressBar.set(overAllProgress);
-        }
-
-        console.log("Overall progress " + overAllProgress);
-        // console.log(this.loadQueue);
-        if (overAllProgress > 80) {
-            console.log("Preload Finished");
-            this.options.parent.handleMediaReady(this.options.next);
-            this.loadQueue.empty();
-
-            this.options.parent.fireEvent("TIMELINE", {
-                type : "preload.finished",
-                id : this.options.id,
-                next : this.options.next
-            })
-
-        }
     },
     add : function(myContainer) {
         this.progressBar = new dwProgressBar({
             container : $(myContainer),
             startPercentage : 0,
-            speed : 2000,
+            speed : 10,
             boxID : 'box',
             percentageID : 'perc',
             displayID : 'disp',
@@ -67,14 +87,16 @@ var MediaLoader = new Class({
             style : {
                 'left' : '220px',
                 'top' : '240px',
-                'position' : 'absolute'
+                'position' : 'absolute',
+                'z-index' : '99999'
             }
         });
     },
     show : function() {
-
+        this.progressBar.show();
     },
     hide : function() {
-        //this.progressBar.hide();
+        this.progressBar.hide();
+
     }
 })

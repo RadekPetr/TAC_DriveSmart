@@ -87,6 +87,9 @@ var dwProgressBar = new Class({
     },
     hide : function() {
         this.container.hide();
+    },
+    show : function (){
+        this.container.show();
     }
 });
 
