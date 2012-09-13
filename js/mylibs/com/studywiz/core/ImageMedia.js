@@ -21,7 +21,7 @@ var ImageMedia = new Class({
 
         this.image = new Asset.image(this.options.src, {
             style : this.options.style,
-            id : this.options.id,           
+            id : this.options.id,
             onLoad : function() {
                 console.log("************************************* Loaded image");
                 this.options.parent.fireEvent("TIMELINE", {
@@ -65,13 +65,13 @@ var ImageMedia = new Class({
             });
             myDiv.inject($(parentTagID));
         }
-        this.image.inject(myDiv);   
+        this.image.inject(myDiv);
 
         this.image.setStyles(this.options.style);
     },
     show : function() {
-     
-        this.image.fade('hide',0);
+
+        this.image.fade('hide', 0);
         this.image.fade('in');
     },
     // ---------------------------

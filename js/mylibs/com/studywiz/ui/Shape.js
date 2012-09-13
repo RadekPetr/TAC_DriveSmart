@@ -9,7 +9,7 @@ var Shape = new Class({
         data : "167:131:77:82,3:254:168:69,327:214:79:26,390:239:103:47",
         id : "shape_1",
         parent : null,
-        next : "next.action",
+        next : "shape.clicked",
         polygonStyle : {
             'fill' : 'lime',
             'opacity' : '0.5'
@@ -17,9 +17,10 @@ var Shape = new Class({
         shapeStyle : {
             'left' : "0px",
             'top' : '0px',
-            position : 'absolute',
-            'z-index' : '99998',
-            '-webkit-transform-origin-z' : '99998'
+            position : 'absolute'
+            //,
+            // 'z-index' : '99998',
+            // '-webkit-transform-origin-z' : '99998'
         }
     },
     initialize : function(myParent, myOptions) {
@@ -39,7 +40,7 @@ var Shape = new Class({
             var height = Number.from(temp[3]);
 
             var polygon = left + "," + top + " " + left + "," + (top - height) + " " + (left + width) + "," + (top - height) + " " + (left + width) + "," + top + " " + left + "," + top;
-            this.polygons.push(polygon);      
+            this.polygons.push(polygon);
             console.log("Polygon " + polygon);
             /*
              x:y:w:h
@@ -62,7 +63,7 @@ var Shape = new Class({
     draw : function() {
 
     },
-    add : function() {
+    add : function(parentTagID) {
         var myDiv = document.getElementById('shapeHolder');
 
         if (myDiv == null) {
@@ -72,7 +73,7 @@ var Shape = new Class({
 
             // Fix for svg, no ide how it works ....
             this._svgTags(['svg', 'polygon', 'polyline']);
-            
+
             this.shapeWrapper = new Element("svg", {
                 id : "holder" + this.options.id,
                 xmlns : "http://www.w3.org/2000/svg",
@@ -80,13 +81,13 @@ var Shape = new Class({
                 width : '640px',
                 height : '480px'
             });
-            this.shapeWrapper.inject(myDiv);       
+            this.shapeWrapper.inject(myDiv);
         }
 
         Array.each(this.polygons, function(item, index) {
-           
+            var shapeID = 'shape_' + index;
             var shapeElement = new Element("polyline", {
-                'id' : 'shape_' + index,
+                'id' : shapeID,
                 'points' : item
             });
 
@@ -95,13 +96,20 @@ var Shape = new Class({
             shapeElement.setStyles(this.options.polygonStyle);
 
             shapeElement.addEvent('click', function(e) {
-                alert('clicked' + this.id);
-            })
+                //alert('clicked' + this.options.id);
+                this.options.parent.fireEvent("TIMELINE", {
+                    type : "shape.clicked",
+                    id : shapeID,
+                    next : this.options.next,
+                    _x : e.page.x,
+                    _y : e.page.y
+                });
+            }.bind(this))
         }.bind(this))
 
         myDiv.setStyles(this.options.shapeStyle);
 
-        myDiv.inject($("drivesmart"));
+        myDiv.inject($(parentTagID));
     },
     _svgTags : function(svgtags) {
         var ns = 'http://www.w3.org/2000/svg', methods = (function(proto, cls) {

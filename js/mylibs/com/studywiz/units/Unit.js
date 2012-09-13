@@ -33,6 +33,9 @@ var Unit = new Class({
 
     },
     setupData : function() {
+        // var dataLoader = new DataLoader(this, {});
+        //dataLoader.start();
+
         // Intial scene setup
         this.intro_image = new ImageMedia(this, {
             src : 'img/country_intro.png',
@@ -46,6 +49,7 @@ var Unit = new Class({
         // TODO: load data from external source, parse it and populate
         // TODO: define proper unit Data object or hashmap based on unit data
         // TODO: preload all required media and only then allow the user to continue, show progress
+
         this.data = new Object();
         this.data.video = this._setupVideo("media/video/country/country_cla01_start", "video_1", "entry.video.done");
 
@@ -80,15 +84,17 @@ var Unit = new Class({
     // This handles all timeline events and emulates the timeline
     handleNavigationEvent : function(params) {
         console.log("****** Timeline event:" + params.next);
-        console.log(params.next);
+
         switch (params.next) {
             case "scene.ready":
                 this.mediaLoader.options.next = null;
                 this.mediaLoader.hide();
                 this.intro_image.add(this.options.unitTagId);
                 this.intro_image.show();
-                this.shape = new Shape(this, {});
-                this.shape.add(this.options.unitTagId);
+
+                // Tests:
+                // this.shape = new Shape(this, {});
+                //  this.shape.add(this.options.unitTagId);
 
                 //this.intro_image.flash('0', '1', 50, 'opacity', 250);
 
@@ -103,8 +109,29 @@ var Unit = new Class({
                 this.data.video.nextAction = "entry.video.done"
                 this.data.video.show();
                 this.data.video.start();
+
                 break;
             case "entry.video.done":
+
+                // TEST:
+                // make sure the shapes are the child of the clickable area so they recieve the click events too
+                var videoDiv = document.getElementById('videoHolder');
+                this.shape = new Shape(this, {});
+                this.shape.add('videoHolder');
+
+                videoDiv.addEvent('click', function(e) {
+                    this.fireEvent("TIMELINE", {
+                        type : "risk.clicked",
+                        id : this.options.id,
+                        next : 'risk.selected',
+                        _x : e.page.x,
+                        _y : e.page.y
+                    });
+                    var shapeDiv = document.getElementById('shapeHolder');
+                    // console.log(e.page.x + " " + e.page.y);
+
+                }.bind(this));
+
                 (this.data.audios.get('audio_1')).start();
                 // we want to start buffering ahead of time
                 this.mediaLoader.options.next = null;
@@ -168,6 +195,29 @@ var Unit = new Class({
 
                 this.setupData();
 
+                break;
+
+            case "risk.selected":
+
+                var el = document.getElementById('drivesmart');
+
+                var elOffset = getPos(el);
+
+                this.risk_image = new ImageMedia(this, {
+                    src : 'img/selected_risk.png',
+                    next : "none",
+                    title : 'Risk',
+                    id : 'Risk',
+                    style : {
+                        left : params._x - elOffset.x - 30,
+                        top : params._y - elOffset.y - 30
+                    }
+                });
+                this.risk_image.add('drivesmart');
+                this.risk_image.show();
+                break;
+            case "shape.clicked":
+                console.log("Shape clicked ID: " + params.id)
                 break;
 
         };
