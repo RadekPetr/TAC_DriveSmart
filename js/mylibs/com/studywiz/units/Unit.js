@@ -33,9 +33,13 @@ var Unit = new Class({
 
     },
     setupData : function() {
-        // var dataLoader = new DataLoader(this, {});
-        //dataLoader.start();
-
+        var dataLoader = new DataLoader(this, {
+            src : 'data/Country.xml',
+            next : 'data.ready'
+        });
+        dataLoader.start();
+    },
+    setupMedia : function() {
         // Intial scene setup
         this.intro_image = new ImageMedia(this, {
             src : 'img/country_intro.png',
@@ -86,6 +90,9 @@ var Unit = new Class({
         console.log("****** Timeline event:" + params.next);
 
         switch (params.next) {
+            case "data.ready":
+                this.setupMedia();
+                break;
             case "scene.ready":
                 this.mediaLoader.options.next = null;
                 this.mediaLoader.hide();
