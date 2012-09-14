@@ -20,6 +20,7 @@
 - Od data files playback engine - XML to json conversion ?
 - Scoring
 - main menu
+- add browser and version detection IE9 +, ...
 -----------------------------------------------------------------
 DONE:
 - Change radio cross to tick

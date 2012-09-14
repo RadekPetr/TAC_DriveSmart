@@ -3,18 +3,18 @@
 
 
 /* TEAM */
-  <your title>: <your name>
+  Developer: Radek PETR
   Site: 
   Twitter: 
-  Location: 
+  Location: Prague
 
 /* THANKS */
   Names (& URL): 
 
 /* SITE */
   Standards: HTML5, CSS3
-  Components: Modernizr, jQuery
-  Software:
+  Components: Modernizr, MooTools, VideoJS, CreateJS
+  Software: Aptana, Notepad++
   
 
                                     
