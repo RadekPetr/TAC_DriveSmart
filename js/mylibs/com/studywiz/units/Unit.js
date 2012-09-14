@@ -10,8 +10,11 @@ var Unit = new Class({
     },
     initialize : function(myOptions) {
         this.setOptions(myOptions);
+        this.sequences = null;
+        this.currentSequence = null;
 
     },
+    // ----------------------------------------------------------
     start : function() {
         // TODO handle mobile platforms: Browser.Platform.android
         this.mediaLoader = new MediaLoader(this, { });
@@ -32,6 +35,7 @@ var Unit = new Class({
         this.setupData();
 
     },
+    // ----------------------------------------------------------
     setupData : function() {
         var dataLoader = new DataLoader(this, {
             src : 'data/Country.xml',
@@ -39,7 +43,13 @@ var Unit = new Class({
         });
         dataLoader.start();
     },
+    // ----------------------------------------------------------
     setupMedia : function() {
+        // we get a copy of the array so we can keep the original for repeat
+        this.currentSequence = Array.clone(this.sequences.seq_4);
+        // add players to media so they can be preloaded
+        this._setupSequenceMedia(this.currentSequence);
+
         // Intial scene setup
         this.intro_image = new ImageMedia(this, {
             src : 'img/country_intro.png',
@@ -48,23 +58,13 @@ var Unit = new Class({
             id : 'introImage'
         });
 
-        this.mediaLoader.options.next = 'scene.ready';
+        this.mediaLoader.options.next = 'media.ready';
         this.mediaLoader.show();
-        // TODO: load data from external source, parse it and populate
-        // TODO: define proper unit Data object or hashmap based on unit data
-        // TODO: preload all required media and only then allow the user to continue, show progress
 
+        // TODO: remove this as the objects will be stored in the sequence object in the steps
         this.data = new Object();
         this.data.video = this._setupVideo("media/video/country/country_cla01_start", "video_1", "entry.video.done");
-
-        var loaderInfo = {};
-        loaderInfo[this.data.video.id] = {
-            'progress' : 0,
-            'weight' : 90
-        };
-        // making sure the video is registered with the loader before the sounds are finished
-        this.mediaLoader.register(loaderInfo);
-        this.data.video.preload();
+        this.mediaLoader.register(this.data.video.getLoaderInfo());
 
         this.data.audios = new Hash();
         this.data.audios.extend({
@@ -83,25 +83,25 @@ var Unit = new Class({
             audio_5 : this._setupAudio("media/sound/country/country_vdcb4f", "audio_5", "feedback.2.sound.done")
         });
 
-    },
+        this.mediaLoader.start();
 
+    },
+    // ----------------------------------------------------------
     // This handles all timeline events and emulates the timeline
     handleNavigationEvent : function(params) {
         console.log("****** Timeline event:" + params.next);
 
         switch (params.next) {
             case "data.ready":
+                this.sequences = params.data;
                 this.setupMedia();
                 break;
-            case "scene.ready":
+            case "media.ready":
                 this.mediaLoader.options.next = null;
                 this.mediaLoader.hide();
+
                 this.intro_image.add(this.options.unitTagId);
                 this.intro_image.show();
-
-                // Tests:
-                // this.shape = new Shape(this, {});
-                //  this.shape.add(this.options.unitTagId);
 
                 //this.intro_image.flash('0', '1', 50, 'opacity', 250);
 
@@ -119,7 +119,7 @@ var Unit = new Class({
 
                 break;
             case "entry.video.done":
-
+/*
                 // TEST:
                 // make sure the shapes are the child of the clickable area so they recieve the click events too
                 var videoDiv = document.getElementById('videoHolder');
@@ -138,6 +138,7 @@ var Unit = new Class({
                     // console.log(e.page.x + " " + e.page.y);
 
                 }.bind(this));
+                */
 
                 (this.data.audios.get('audio_1')).start();
                 // we want to start buffering ahead of time
@@ -226,12 +227,13 @@ var Unit = new Class({
             case "shape.clicked":
                 console.log("Shape clicked ID: " + params.id)
                 break;
-
         };
     },
+    // ----------------------------------------------------------
     log : function(logValue) {
         console.log("****** " + logValue + " ******");
     },
+    // ----------------------------------------------------------
     handleMediaReady : function(nextAction) {
 
     },
@@ -269,10 +271,13 @@ var Unit = new Class({
     }.protect(),
     //------------------------------------------------------------------------
     _setupAudio : function(filename, id, nextAction) {
-        var audioPlayer = new AudioPlayer(id, this);
-        audioPlayer.nextAction = nextAction;
-        audioPlayer.setSource(filename + ".mp3|" + filename + ".ogg");
-        audioPlayer.preload();
+        var audioPlayer = new AudioPlayer(this, {
+            next : nextAction,
+            id : id,
+            src : filename + ".mp3|" + filename + ".ogg",
+            preload : 'false'
+        });
+        this.mediaLoader.register(audioPlayer.getLoaderInfo());
         return audioPlayer;
     }.protect(),
     //------------------------------------------------------------------------
@@ -298,5 +303,42 @@ var Unit = new Class({
         questions.add(this.options.unitTagId);
         questions.show();
         return questions;
+    },
+    // ----------------------------------------------------------
+    _setupSequenceMedia : function(seq) {
+        // get array of media for each step so it can be preloaded
+        var media = new Hash({});
+        Array.each(seq, function(item, stepOrder) {
+            var stepItems = item.childNodes;
+            this._setupStepMedia(stepItems);
+        }.bind(this))
+        console.log("---------------------------- Finished setting up media from xml");
+        console.log(seq);
+    },
+    // ----------------------------------------------------------
+    _setupStepMedia : function(stepItems) {
+        Array.each(stepItems, function(item, index) {
+            switch (item.name) {
+                case "Video" :
+                    break;
+                case "Audio" :
+                    if (item.value != '') {
+                        var fileName = stripFileExtension(item.value);
+                        item.player = new AudioPlayer(this, {
+                            next : 'not.set',
+                            id : "audio_" + index,
+                            src : fileName + ".mp3|" + fileName + ".ogg",
+                            preload : 'false'
+                        });
+                        this.mediaLoader.register(item.player.getLoaderInfo());
+                    }
+                    break;
+                default:
+                // nothing
+            }
+        }.bind(this))
+        // now start the preloading for each of the items
+        console.log("---------------------------- Step Items");
+        console.log(stepItems)
     }
 });

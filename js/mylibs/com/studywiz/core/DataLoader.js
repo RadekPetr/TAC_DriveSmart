@@ -11,12 +11,14 @@ var DataLoader = new Class({
         next : 'data.ready',
         parent : null
     },
+    // ----------------------------------------------------------
     initialize : function(myParent, myOptions) {
         // Intial scene setup
         this.setOptions(myOptions);
         this.options.parent = myParent;
         this.data = null;
     },
+    // ----------------------------------------------------------
     start : function() {
         /*
          var myRequest = new Request({
@@ -41,21 +43,17 @@ var DataLoader = new Class({
 
         //  myRequest.send();
     },
+    // ----------------------------------------------------------
     handleXMLLoaded : function(responseXML) {
         console.log("Loaded XML");
         this._setupSequences();
-        // console.log(responseXML.selectNodes('Seq'));
-        // console.log(responseXML.evaluate('Seq', responseXML, null, XPathResult.ANY_TYPE, null));
-        //   console.log(responseXML.getElements('Seq'));
-        //   var mySeq = responseXML.getElements('Seq')[0];
-        //  var myStep = mySeq.getElements ('Step')[0];
-        // console.log(myStep.get('fmt'));
-
     },
+    // ----------------------------------------------------------
     getSteps : function(sequenceId) {
         var steps = Array.clone(this.sequences[sequenceId])
         return steps;
     },
+    // ----------------------------------------------------------
     _setupSequences : function() {
         var sequencesData = this.data.childNodes;
         this.sequences = new Hash({});
@@ -71,7 +69,8 @@ var DataLoader = new Class({
         this.options.parent.fireEvent("TIMELINE", {
             type : "data.ready",
             id : this.options.id,
-            next : this.options.next
+            next : this.options.next,
+            data : this.sequences
         })
 
     }

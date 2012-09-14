@@ -6,7 +6,7 @@
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb1b.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb1b.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Video></Video>
@@ -25,22 +25,22 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="1,2">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb1c.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb1c.mp3</Audio>
     </Step>
     <Step>
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb1d.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb1d.mp3</Audio>
     </Step>
     <Step fmt="PlayVideo">
       <Video>country_cst26_next</Video>
     </Step>
     <Step>
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb1e.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb1e.mp3</Audio>
     </Step>
     <Step fmt="Question" image="country_cst26_next_first.jpg">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb1f.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb1f.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser" notrack="true">
       <Video></Video>
@@ -59,7 +59,7 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb1g.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb1g.mp3</Audio>
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
@@ -69,7 +69,7 @@
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb1b.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb1b.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Video></Video>
@@ -88,22 +88,22 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2,3">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb2c.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb2c.mp3</Audio>
     </Step>
     <Step>
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb2d.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb2d.mp3</Audio>
     </Step>
     <Step fmt="PlayVideo" noBg1="1">
       <Video>country_cst16_next</Video>
     </Step>
     <Step>
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb2e.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb2e.mp3</Audio>
     </Step>
     <Step fmt="Question" image="country_cst16_next_first.jpg">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb1f.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb1f.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser" notrack="true">
       <Video></Video>
@@ -122,7 +122,7 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb2g.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb2g.mp3</Audio>
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
@@ -132,7 +132,7 @@
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb1b.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb1b.mp3</Audio>
       <Inter />
       <Post />
     </Step>
@@ -153,22 +153,22 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2,3">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb3c.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb3c.mp3</Audio>
     </Step>
     <Step>
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb3d.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb3d.mp3</Audio>
     </Step>
     <Step fmt="PlayVideo">
       <Video>country_cst14_next</Video>
     </Step>
     <Step>
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb3e.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb3e.mp3</Audio>
     </Step>
     <Step fmt="Question" image="country_cst14_next_first.jpg">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb1f.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb1f.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser" notrack="true">
       <Video></Video>
@@ -187,7 +187,7 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb3g.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb3g.mp3</Audio>
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
@@ -197,7 +197,7 @@
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb1b.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb1b.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Video></Video>
@@ -216,11 +216,11 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="1,3">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb4c.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb4c.mp3</Audio>
     </Step>
     <Step>
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb4d.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb4d.mp3</Audio>
       <Inter />
       <Post />
     </Step>
@@ -230,7 +230,7 @@
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb1f.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb1f.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser" notrack="true" image="country_cla01_next_first.jpg">
       <Video></Video>
@@ -249,7 +249,7 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb4f.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb4f.mp3</Audio>
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
@@ -259,7 +259,7 @@
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb1b.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb1b.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Video></Video>
@@ -278,18 +278,18 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdca1c.mp3</Audio>
+      <Audio>media/sound/country/country_vdca1c.mp3</Audio>
     </Step>
     <Step>
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdca1d.mp3</Audio>
+      <Audio>media/sound/country/country_vdca1d.mp3</Audio>
     </Step>
     <Step fmt="PlayVideo">
       <Video>country_cst25_next</Video>
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb4e.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb4e.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser" notrack="true" image="country_cst25_next_first.jpg">
       <Video></Video>
@@ -308,7 +308,7 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdca1f.mp3</Audio>
+      <Audio>media/sound/country/country_vdca1f.mp3</Audio>
     </Step>
     <Step fmt="Continue">
       <Video></Video>
@@ -326,7 +326,7 @@
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb1b.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb1b.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Video></Video>
@@ -345,18 +345,18 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdfa1c.mp3</Audio>
+      <Audio>media/sound/country/country_vdfa1c.mp3</Audio>
     </Step>
     <Step>
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdbc1e.mp3</Audio>
+      <Audio>media/sound/country/country_vdbc1e.mp3</Audio>
     </Step>
     <Step fmt="PlayVideo">
       <Video>country_fto04_next</Video>
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdcb4e.mp3</Audio>
+      <Audio>media/sound/country/country_vdcb4e.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser" notrack="true" image="country_fto04_next_first.jpg">
       <Video></Video>
@@ -375,7 +375,7 @@
     </Step>
     <Step fmt="QuestionFeedback" notrack="true" FadeQ="" KeepUserSelection="1">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdfa1f.mp3</Audio>
+      <Audio>media/sound/country/country_vdfa1f.mp3</Audio>
     </Step>
     <Step fmt="Continue">
       <Video></Video>
@@ -388,7 +388,7 @@
     </Step>
     <Step fmt="QuestionUser" cmd="">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdfa2b.mp3</Audio>
+      <Audio>media/sound/country/country_vdfa2b.mp3</Audio>
       <Inter>
         <Elements>
           <Element>
@@ -403,7 +403,7 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="1,2">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdfa2c.mp3</Audio>
+      <Audio>media/sound/country/country_vdfa2c.mp3</Audio>
     </Step>
     <Step fmt="PlayVideo">
       <Video>country_fat08_next</Video>
@@ -416,14 +416,14 @@
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdbc1b.mp3</Audio>
+      <Audio>media/sound/country/country_vdbc1b.mp3</Audio>
     </Step>
     <Step fmt="Cameo">
       <Video>video/Cameo/cameo_cdbc1.swf</Video>
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdbc1c.mp3</Audio>
+      <Audio>media/sound/country/country_vdbc1c.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Video></Video>
@@ -442,11 +442,11 @@
     </Step>
     <Step hide="box">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdbc1d.mp3</Audio>
+      <Audio>media/sound/country/country_vdbc1d.mp3</Audio>
     </Step>
     <Step>
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdbc1e.mp3</Audio>
+      <Audio>media/sound/country/country_vdbc1e.mp3</Audio>
     </Step>
     <Step fmt="PlayVideo">
       <Video>country_cst23_next</Video>
@@ -457,11 +457,11 @@
     </Step>
     <Step fmt="KRFeedback" image="images/keyrisks/country_cst23_next.jpg">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdbc1h.mp3</Audio>
+      <Audio>media/sound/country/country_vdbc1h.mp3</Audio>
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdbc1i.mp3</Audio>
+      <Audio>media/sound/country/country_vdbc1i.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser" notrack="true">
       <Video></Video>
@@ -485,7 +485,7 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="1">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdbc1j.mp3</Audio>
+      <Audio>media/sound/country/country_vdbc1j.mp3</Audio>
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
@@ -495,14 +495,14 @@
     </Step>
     <Step>
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdbc2b.mp3</Audio>
+      <Audio>media/sound/country/country_vdbc2b.mp3</Audio>
     </Step>
     <Step fmt="Cameo">
       <Video>video/Cameo/cameo_cdbc2.swf</Video>
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdbc1c.mp3</Audio>
+      <Audio>media/sound/country/country_vdbc1c.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Video></Video>
@@ -520,11 +520,11 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="1,2">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdbc2d.mp3</Audio>
+      <Audio>media/sound/country/country_vdbc2d.mp3</Audio>
     </Step>
     <Step>
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdbc1e.mp3</Audio>
+      <Audio>media/sound/country/country_vdbc1e.mp3</Audio>
     </Step>
     <Step fmt="PlayVideo">
       <Video>country_cst09_next</Video>
@@ -537,11 +537,11 @@
     </Step>
     <Step fmt="KRFeedback" image="images/keyrisks/country_cst09_next.jpg">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdbc2h.mp3</Audio>
+      <Audio>media/sound/country/country_vdbc2h.mp3</Audio>
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdbc2i.mp3</Audio>
+      <Audio>media/sound/country/country_vdbc2i.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser" notrack="true">
       <Video></Video>
@@ -565,11 +565,11 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="1,3">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdbc2j.mp3</Audio>
+      <Audio>media/sound/country/country_vdbc2j.mp3</Audio>
     </Step>
     <Step fmt="Commentary" exe="country,country_vdbc1k,country_cst09_next,country_vdbc1l">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdbc1k.mp3</Audio>
+      <Audio>media/sound/country/country_vdbc1k.mp3</Audio>
     </Step>
   </Seq>
   <Seq desc="Exercise 11" Ex="11">
@@ -578,7 +578,7 @@
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdac1e.mp3</Audio>
+      <Audio>media/sound/country/country_vdac1e.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Video></Video>
@@ -597,7 +597,7 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdac1f.mp3</Audio>
+      <Audio>media/sound/country/country_vdac1f.mp3</Audio>
     </Step>
     <Step>
       <Video></Video>
@@ -617,7 +617,7 @@
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdac2e.mp3</Audio>
+      <Audio>media/sound/country/country_vdac2e.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Video></Video>
@@ -636,7 +636,7 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdac2f.mp3</Audio>
+      <Audio>media/sound/country/country_vdac2f.mp3</Audio>
     </Step>
     <Step>
       <Video></Video>
@@ -656,7 +656,7 @@
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdac3e.mp3</Audio>
+      <Audio>media/sound/country/country_vdac3e.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Video></Video>
@@ -675,7 +675,7 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdac3f.mp3</Audio>
+      <Audio>media/sound/country/country_vdac3f.mp3</Audio>
     </Step>
     <Step>
       <Video></Video>
@@ -695,7 +695,7 @@
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdac4e.mp3</Audio>
+      <Audio>media/sound/country/country_vdac4e.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Video></Video>
@@ -714,7 +714,7 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdac4f.mp3</Audio>
+      <Audio>media/sound/country/country_vdac4f.mp3</Audio>
     </Step>
     <Step>
       <Video></Video>
@@ -734,7 +734,7 @@
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdac5e.mp3</Audio>
+      <Audio>media/sound/country/country_vdac5e.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Video></Video>
@@ -753,7 +753,7 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdac5f.mp3</Audio>
+      <Audio>media/sound/country/country_vdac5f.mp3</Audio>
     </Step>
     <Step>
       <Video></Video>
@@ -773,7 +773,7 @@
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdac6e.mp3</Audio>
+      <Audio>media/sound/country/country_vdac6e.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Video></Video>
@@ -792,7 +792,7 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdac6f.mp3</Audio>
+      <Audio>media/sound/country/country_vdac6f.mp3</Audio>
     </Step>
     <Step>
       <Video></Video>
@@ -812,7 +812,7 @@
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdac7e.mp3</Audio>
+      <Audio>media/sound/country/country_vdac7e.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Video></Video>
@@ -831,7 +831,7 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="1,2">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdac7f.mp3</Audio>
+      <Audio>media/sound/country/country_vdac7f.mp3</Audio>
     </Step>
     <Step>
       <Video></Video>
@@ -851,7 +851,7 @@
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdac8e.mp3</Audio>
+      <Audio>media/sound/country/country_vdac8e.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Video></Video>
@@ -870,7 +870,7 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdac8f.mp3</Audio>
+      <Audio>media/sound/country/country_vdac8f.mp3</Audio>
     </Step>
     <Step>
       <Video></Video>
@@ -890,7 +890,7 @@
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdac9e.mp3</Audio>
+      <Audio>media/sound/country/country_vdac9e.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Video></Video>
@@ -909,7 +909,7 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdac9f.mp3</Audio>
+      <Audio>media/sound/country/country_vdac9f.mp3</Audio>
     </Step>
     <Step>
       <Video></Video>
@@ -1007,7 +1007,7 @@
     </Step>
     <Step fmt="Question">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdaf7e.mp3</Audio>
+      <Audio>media/sound/country/country_vdaf7e.mp3</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Video></Video>
@@ -1026,7 +1026,7 @@
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="1">
       <Video></Video>
-      <Audio>sound/country/mp3/country_vdaf7f.mp3</Audio>
+      <Audio>media/sound/country/country_vdaf7f.mp3</Audio>
     </Step>
     <Step>
       <Video></Video>

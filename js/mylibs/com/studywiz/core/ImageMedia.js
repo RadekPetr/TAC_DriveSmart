@@ -16,14 +16,10 @@ var ImageMedia = new Class({
         // Intial scene setup
         this.setOptions(myOptions);
         this.options.parent = myParent;
-
-        // this.imageElement = new Element("img", this.options);
-
         this.image = new Asset.image(this.options.src, {
             style : this.options.style,
             id : this.options.id,
             onLoad : function() {
-                console.log("************************************* Loaded image");
                 this.options.parent.fireEvent("TIMELINE", {
                     type : "image.ready",
                     id : this.options.id,
@@ -31,7 +27,6 @@ var ImageMedia = new Class({
                 })
             }.bind(this)
         });
-
     },
     flash : function(to, from, reps, prop, dur) {
 
@@ -70,7 +65,6 @@ var ImageMedia = new Class({
         this.image.setStyles(this.options.style);
     },
     show : function() {
-
         this.image.fade('hide', 0);
         this.image.fade('in');
     },
