@@ -19,7 +19,7 @@ var MediaLoader = new Class({
     // ----------------------------------------------------------
     register : function(loaderInfo) {
         if (this.loadQueue.has(loaderInfo.id)) {
-            // notning - already exists
+            // nothing - already exists
         } else {
             this.loadQueue.extend(loaderInfo);
             console.log('Registered ');
@@ -28,7 +28,7 @@ var MediaLoader = new Class({
     },
     // ----------------------------------------------------------
     reportProgress : function(loaderInfo) {
-        console.log(loaderInfo);
+        //console.log(loaderInfo);
 
         if (this.options.next == null) {
             // if next action is not set do not allow reporting progress, not sure ???
@@ -46,7 +46,6 @@ var MediaLoader = new Class({
             this._updateProgressBar(overAllProgress);
             this._handleFinished(overAllProgress);
         }
-
     },
     // ----------------------------------------------------------
     add : function(myContainer) {
@@ -73,12 +72,11 @@ var MediaLoader = new Class({
     // ----------------------------------------------------------
     hide : function() {
         this.progressBar.hide();
-
     },
     // ----------------------------------------------------------
     start : function() {
-        console.log("Prerload: ");
-        console.log(this.loadQueue);
+        //console.log("Prerload: ");
+        //console.log(this.loadQueue);
         // loop the list and start preloading all of the items there
         this.loadQueue.each(function(value, key) {
             console.log('Starting preload');
@@ -107,7 +105,6 @@ var MediaLoader = new Class({
         if (this.progressBar != null) {
             this.progressBar.set(progress);
         }
-
     }.protect(),
     // ----------------------------------------------------------
     _handleFinished : function(progress) {
@@ -121,7 +118,6 @@ var MediaLoader = new Class({
                 id : this.options.id,
                 next : this.options.next
             })
-
         }
     }
 })

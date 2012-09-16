@@ -45,7 +45,7 @@ var DataLoader = new Class({
     },
     // ----------------------------------------------------------
     handleXMLLoaded : function(responseXML) {
-        console.log("Loaded XML");
+        // console.log("Loaded XML");
         this._setupSequences();
     },
     // ----------------------------------------------------------
@@ -64,7 +64,7 @@ var DataLoader = new Class({
             this.sequences.extend(seq);
         }.bind(this))
 
-        console.log(this.sequences);
+        //console.log(this.sequences);
 
         this.options.parent.fireEvent("TIMELINE", {
             type : "data.ready",
