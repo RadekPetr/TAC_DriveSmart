@@ -63,33 +63,62 @@ var Unit = new Class({
 
         // TODO: remove this as the objects will be stored in the sequence object in the steps
         this.data = new Object();
-        this.data.video = this._setupVideo("media/video/country/country_cla01_start", "video_1", "entry.video.done");
-        this.mediaLoader.register(this.data.video.getLoaderInfo());
-
-        this.data.audios = new Hash();
-        this.data.audios.extend({
-            audio_1 : this._setupAudio("media/sound/country/country_vdcb1b", "audio_1", "question.1.sound.done")
-        });
-        this.data.audios.extend({
-            audio_2 : this._setupAudio("media/sound/country/country_vdcb4c", "audio_2", "feedback.1.sound.done")
-        });
-        this.data.audios.extend({
-            audio_3 : this._setupAudio("media/sound/country/country_vdcb4d", "audio_3", "next.sound.done")
-        });
-        this.data.audios.extend({
-            audio_4 : this._setupAudio("media/sound/country/country_vdcb1f", "audio_4", "question.2.sound.done")
-        });
-        this.data.audios.extend({
-            audio_5 : this._setupAudio("media/sound/country/country_vdcb4f", "audio_5", "feedback.2.sound.done")
-        });
+        // this.data.video = this._setupVideo("media/video/country/country_cla01_start", "video_1", "entry.video.done");
+        // this.mediaLoader.register(this.data.video.getLoaderInfo());
 
         this.mediaLoader.start();
+
+    },
+    nextStep : function() {
+        // take first step and decide what to do with it
+        if (this.currentSequence.length > 0) {
+            var currentStep = this.currentSequence.shift();
+            var stepType = currentStep.attributes.fmt;
+            console.log("Step type: " + stepType);
+            switch (stepType) {
+                case "PlayVideo":
+                    this._cleanUp();
+                    currentStep.player.options.next = 'PlayVideo.done';
+                    currentStep.player.show();
+                    currentStep.player.start();
+                    break;
+                case "Question":
+                    currentStep.player.options.next = 'Question.done';
+                    currentStep.player.start();
+                    break;
+                case "QuestionUser":
+                    //currentStep.player.start();
+                    this.data.questions = this._setupQuestions({
+                        data : ["Slow down immediately", "Slow down as we come into the bend", "Maintain our current speed until any hazard is visible"],
+                        correct : '2',
+                        style : this.panelPosition
+                    });
+                    this.data.submit_button = this._setupButton("Submit answer", "button_2", "QuestionUser.done", this.buttonPosition.x, this.buttonPosition.y);
+                    break;
+                case "QuestionFeedback":
+                    this.data.submit_button.remove();
+                    this.data.submit_button = null;
+                    this.data.questions.showCorrect();
+                    currentStep.player.options.next = 'QuestionFeedback.done';
+                    currentStep.player.start();
+                    break;
+                case "":
+                    currentStep.player.options.next = '.done';
+                    currentStep.player.start();
+                    break;
+                case "Continue":
+                    this.data.continue_button = this._setupButton("Continue", "button_3", "Continue.done", this.buttonPosition.x, this.buttonPosition.y);
+                    break;
+            }
+
+        } else {
+            // seq finished
+        }
 
     },
     // ----------------------------------------------------------
     // This handles all timeline events and emulates the timeline
     handleNavigationEvent : function(params) {
-        console.log("****** Timeline event:" + params.next);
 
         switch (params.next) {
             case "data.ready":
@@ -113,89 +142,25 @@ var Unit = new Class({
                 myDiv.dispose();
                 this.data.start_button.remove();
                 this.data.start_button = null;
-                this.data.video.nextAction = "entry.video.done"
-                this.data.video.show();
-                this.data.video.start();
+                this.nextStep();
 
                 break;
-            case "entry.video.done":
-/*
-                // TEST:
-                // make sure the shapes are the child of the clickable area so they recieve the click events too
-                var videoDiv = document.getElementById('videoHolder');
-                this.shape = new Shape(this, {});
-                this.shape.add('videoHolder');
+            case "PlayVideo.done":
+                this.nextStep();
+                break;
+            case "Question.done":
+                this.nextStep();
+                break;
+            case "QuestionUser.done":
+                this.nextStep();
+                break;
+            case "QuestionFeedback.done":
+                this.nextStep();
+                break;
+            case ".done":
+                this.nextStep();
+                break;
 
-                videoDiv.addEvent('click', function(e) {
-                    this.fireEvent("TIMELINE", {
-                        type : "risk.clicked",
-                        id : this.options.id,
-                        next : 'risk.selected',
-                        _x : e.page.x,
-                        _y : e.page.y
-                    });
-                    var shapeDiv = document.getElementById('shapeHolder');
-                    // console.log(e.page.x + " " + e.page.y);
-
-                }.bind(this));
-                */
-
-                (this.data.audios.get('audio_1')).start();
-                // we want to start buffering ahead of time
-                this.mediaLoader.options.next = null;
-                this._setVideoSource(this.data.video, "media/video/country/country_cla01_next");
-                this.data.video.preload();
-
-                break;
-            case "question.1.sound.done":
-                this.log("Sound done");
-                this.data.questions = this._setupQuestions({
-                    data : ["Slow down immediately", "Slow down as we come into the bend", "Maintain our current speed until any hazard is visible"],
-                    correct : '2',
-                    style : this.panelPosition
-                });
-                this.data.submit_button = this._setupButton("Submit answer", "button_2", "submit.1.clicked", this.buttonPosition.x, this.buttonPosition.y);
-                break;
-            case "submit.1.clicked":
-                this.data.submit_button.remove();
-                this.data.submit_button = null;
-                this.data.questions.showCorrect();
-                (this.data.audios.get('audio_2')).start();
-                break;
-            case "feedback.1.sound.done":
-                (this.data.audios.get('audio_3')).start();
-                break;
-            case "next.sound.done":
-
-                this.data.continue_button = this._setupButton("Continue", "button_3", "continue.clicked", this.buttonPosition.x, this.buttonPosition.y);
-                break;
-            case "continue.clicked":
-                this.data.questions.remove();
-                this.data.continue_button.remove();
-                this.data.continue_button = null;
-                this.data.video.options.next = "next.video.done";
-                this.data.video.start();
-                break;
-            case "next.video.done":
-                (this.data.audios.get('audio_4')).start();
-                break;
-            case "question.2.sound.done":
-                this.log("question.2.sound.done");
-                this.data.questions = this._setupQuestions({
-                    data : ["Some cattle stray out in front of us, just as we come around the corner", "A farmhand on a motorbike darts out in front of us."],
-                    style : this.panelPosition
-                });
-                this.data.submit_button = this._setupButton("Submit answer", "button_4", "submit.2.clicked", this.buttonPosition.x, this.buttonPosition.y);
-                break;
-            case "submit.2.clicked":
-                this.data.submit_button.remove();
-                this.data.submit_button = null;
-                this.data.questions.showCorrect();
-                (this.data.audios.get('audio_5')).start();
-                break;
-            case "feedback.2.sound.done":
-                this.data.repeat_button = this._setupButton("Repeat", "button_5", "repeat.clicked", this.buttonPosition.x, this.buttonPosition.y);
-                break;
             case "repeat.clicked":
                 this.data.repeat_button.remove();
                 this.data.questions.remove();
@@ -243,7 +208,7 @@ var Unit = new Class({
             id : id,
             next : nextAction
         });
-        videoPlayer.add(this.options.unitTagId);
+       // videoPlayer.add(this.options.unitTagId);
         this._setVideoSource(videoPlayer, filename);
         //  videoPlayer.add(this.options.unitTagId);
         // videoPlayer.add();
@@ -308,29 +273,42 @@ var Unit = new Class({
     _setupSequenceMedia : function(seq) {
         // get array of media for each step so it can be preloaded
         var media = new Hash({});
-        Array.each(seq, function(item, stepOrder) {
-            var stepItems = item.childNodes;
-            this._setupStepMedia(stepItems);
+        Array.each(seq, function(step, stepOrder) {
+            //var stepItems = step.childNodes;
+            this._setupStepMedia(step, stepOrder);
         }.bind(this))
         console.log("---------------------------- Finished setting up media from xml");
         console.log(seq);
     },
     // ----------------------------------------------------------
-    _setupStepMedia : function(stepItems) {
-        Array.each(stepItems, function(item, index) {
+    _setupStepMedia : function(step, stepOrder) {
+        Array.each(step.childNodes, function(item, index) {
             switch (item.name) {
                 case "Video" :
+                    if (item.value != '') {
+                        var fileName = 'media/video/country/' + stripFileExtension(item.value);
+
+                        step.player = new VideoPlayer(this, {
+                            id : "video_" + index + "_" + stepOrder,
+                            next : 'not.set'
+                        });
+                       // step.player.add(this.options.unitTagId);
+                        this._setVideoSource(step.player, fileName);
+                        this.mediaLoader.register(step.player.getLoaderInfo());
+                        
+                    }
+
                     break;
                 case "Audio" :
                     if (item.value != '') {
                         var fileName = stripFileExtension(item.value);
-                        item.player = new AudioPlayer(this, {
+                        step.player = new AudioPlayer(this, {
                             next : 'not.set',
-                            id : "audio_" + index,
+                            id : "audio_" + index + "_" + stepOrder,
                             src : fileName + ".mp3|" + fileName + ".ogg",
                             preload : 'false'
                         });
-                        this.mediaLoader.register(item.player.getLoaderInfo());
+                        this.mediaLoader.register(step.player.getLoaderInfo());
                     }
                     break;
                 default:
@@ -338,7 +316,43 @@ var Unit = new Class({
             }
         }.bind(this))
         // now start the preloading for each of the items
-        console.log("---------------------------- Step Items");
-        console.log(stepItems)
+        console.log("---------------------------- Step");
+        console.log(step)
+    },
+    _cleanUp : function() {
+        var imageDiv = document.getElementById('imageHolder');
+        if (imageDiv != null) {
+            imageDiv.dispose();
+        }
+        var buttonDiv = document.getElementById('buttonHolder');
+        if (buttonDiv != null) {
+            buttonDiv.dispose();
+        }
+
+        var panelDiv = document.getElementById('panelHolder');
+        if (panelDiv != null) {
+            panelDiv.dispose();
+        }
     }
 });
+
+/*
+ // TEST:
+ // make sure the shapes are the child of the clickable area so they recieve the click events too
+ var videoDiv = document.getElementById('videoHolder');
+ this.shape = new Shape(this, {});
+ this.shape.add('videoHolder');
+
+ videoDiv.addEvent('click', function(e) {
+ this.fireEvent("TIMELINE", {
+ type : "risk.clicked",
+ id : this.options.id,
+ next : 'risk.selected',
+ _x : e.page.x,
+ _y : e.page.y
+ });
+ var shapeDiv = document.getElementById('shapeHolder');
+ // console.log(e.page.x + " " + e.page.y);
+
+ }.bind(this));
+ */

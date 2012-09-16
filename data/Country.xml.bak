@@ -1,0 +1,1043 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Seq Ex="1">
+    <Step fmt="PlayVideo">
+      <Video>country_cst26_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb1b.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Speed up</Data>
+            <Data>Continue at the same speed</Data>
+            <Data>Slow down</Data>
+            <Data>3</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb1c.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb1d.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_cst26_next</Video>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb1e.mp3</Audio>
+    </Step>
+    <Step fmt="Question" image="country_cst26_next_first.jpg">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb1f.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>The car behind us skids on the soft edge, and hits our car</Data>
+            <Data>The red car continues into the intersection, then brakes and stops in front of us</Data>
+            <Data></Data>
+            <Data>2</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb1g.mp3</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq Ex="2">
+    <Step fmt="PlayVideo">
+      <Video>country_cst16_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb1b.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Slow down and move to the far left of our lane</Data>
+            <Data>Keep going at the same speed, but move to the far left of our lane</Data>
+            <Data>Keep going at the same speed and don't move to the left</Data>
+            <Data>1</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2,3">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb2c.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb2d.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo" noBg1="1">
+      <Video>country_cst16_next</Video>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb2e.mp3</Audio>
+    </Step>
+    <Step fmt="Question" image="country_cst16_next_first.jpg">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb1f.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>The soft gravel at the side of the road makes our car skid into the path of the oncoming car</Data>
+            <Data>The oncoming car loses control and moves further right</Data>
+            <Data></Data>
+            <Data>1</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb2g.mp3</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq Ex="3">
+    <Step fmt="PlayVideo">
+      <Video>country_cst14_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb1b.mp3</Audio>
+      <Inter />
+      <Post />
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Slow down</Data>
+            <Data>Keep going at the same speed</Data>
+            <Data>Accelerate into the bend</Data>
+            <Data>1</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2,3">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb3c.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb3d.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_cst14_next</Video>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb3e.mp3</Audio>
+    </Step>
+    <Step fmt="Question" image="country_cst14_next_first.jpg">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb1f.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>The tractor moves left at the same time as our own car</Data>
+            <Data>A car behind kept coming at high speed</Data>
+            <Data>Our car loses control on the soft edge and skids into the tractor</Data>
+            <Data>1</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb3g.mp3</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq Ex="4">
+    <Step fmt="PlayVideo">
+      <Video>country_cla01_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb1b.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Slow down immediately</Data>
+            <Data>Slow down as we come into the bend</Data>
+            <Data>Maintain our current speed until any hazard is visible</Data>
+            <Data>2</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,3">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb4c.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb4d.mp3</Audio>
+      <Inter />
+      <Post />
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_cla01_next</Video>
+      <Audio />
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb1f.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true" image="country_cla01_next_first.jpg">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Some cattle stray out in front of us, just as we come around the corner</Data>
+            <Data>A farmhand on a motorbike darts out in front of us.</Data>
+            <Data></Data>
+            <Data>1</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb4f.mp3</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 5" Ex="5">
+    <Step fmt="PlayVideo">
+      <Video>country_cst25_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb1b.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Slow down so we have a clearer view of the road</Data>
+            <Data>Speed up so we can keep the car ahead in view</Data>
+            <Data></Data>
+            <Data>1</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdca1c.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>media/sound/country/country_vdca1d.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_cst25_next</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb4e.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true" image="country_cst25_next_first.jpg">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Oncoming cars appear, one overtaking the other, while we've got a really poor view of the road</Data>
+            <Data>We come across a bend in the road, when we've got a really poor view of the road</Data>
+            <Data></Data>
+            <Data>1</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdca1f.mp3</Audio>
+    </Step>
+    <Step fmt="Continue">
+      <Video></Video>
+      <Audio />
+      <Inter />
+      <Post>
+        <Element show="false" element="ContinueButton" />
+      </Post>
+    </Step>
+  </Seq>
+  <Seq desc="This exercise is handled by the content def" Ex="6"></Seq>
+  <Seq desc="Exercise 7" Ex="7">
+    <Step fmt="PlayVideo">
+      <Video>country_fto04_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb1b.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Slow down and wait for the cars on our right to pass</Data>
+            <Data>Speed up and start to move right so that the passing cars make room for us</Data>
+            <Data></Data>
+            <Data>1</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdfa1c.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>media/sound/country/country_vdbc1e.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_fto04_next</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdcb4e.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true" image="country_fto04_next_first.jpg">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>The truck brakes suddenly when our car is close behind</Data>
+            <Data>Our driver manages to squeeze in between the two cars in the right lane, but the car ahead then brakes suddenly</Data>
+            <Data></Data>
+            <Data>1</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" notrack="true" FadeQ="" KeepUserSelection="1">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdfa1f.mp3</Audio>
+    </Step>
+    <Step fmt="Continue">
+      <Video></Video>
+      <Audio />
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 8" Ex="8">
+    <Step fmt="PlayVideo">
+      <Video>country_fat08_start</Video>
+    </Step>
+    <Step fmt="QuestionUser" cmd="">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdfa2b.mp3</Audio>
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Below the speed limit</Data>
+            <Data>At or around the speed limit</Data>
+            <Data>Above the speed limit</Data>
+            <Data>3</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdfa2c.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_fat08_next</Video>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 9" Ex="9">
+    <Step fmt="PlayVideo">
+      <Video>country_cst23_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdbc1b.mp3</Audio>
+    </Step>
+    <Step fmt="Cameo">
+      <Video>video/Cameo/cameo_cdbc1.swf</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdbc1c.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Good</Data>
+            <Data>Reasonable</Data>
+            <Data>Poor</Data>
+            <Data>3</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step hide="box">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdbc1d.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>media/sound/country/country_vdbc1e.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_cst23_next</Video>
+    </Step>
+    <Step fmt="KeyRisk">
+      <Video Zones="229:172:37:28,215:200:23:21,192:222:29:21,150:243:57:33"></Video>
+      <Audio waitfor="true">sound/scanning/mp3/scan_vsbkr1b.mp3</Audio>
+    </Step>
+    <Step fmt="KRFeedback" image="images/keyrisks/country_cst23_next.jpg">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdbc1h.mp3</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdbc1i.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Continue to pass</Data>
+            <Data>Brake and pull in behind slower car</Data>
+            <Data></Data>
+            <Data>2</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post>
+        <Element />
+      </Post>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_cst23_next_next</Video>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdbc1j.mp3</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 10" Ex="10">
+    <Step fmt="PlayVideo">
+      <Video>country_cst09_start</Video>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>media/sound/country/country_vdbc2b.mp3</Audio>
+    </Step>
+    <Step fmt="Cameo">
+      <Video>video/Cameo/cameo_cdbc2.swf</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdbc1c.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Good</Data>
+            <Data>Reasonable</Data>
+            <Data>Poor</Data>
+            <Data>3</Data>
+          </Element>
+        </Elements>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdbc2d.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>media/sound/country/country_vdbc1e.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_cst09_next</Video>
+    </Step>
+    <Step fmt="KeyRisk">
+      <Video Zones="167:131:77:82,267:138:71:74,136:2124:84:34,3:254:168:69,327:214:79:26,390:239:103:47"></Video>
+      <Audio waitfor="true">sound/scanning/mp3/scan_vsbkr1b.mp3</Audio>
+      <Inter />
+      <Post />
+    </Step>
+    <Step fmt="KRFeedback" image="images/keyrisks/country_cst09_next.jpg">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdbc2h.mp3</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdbc2i.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Continue its U-turn</Data>
+            <Data>Brake and stop still on the other side of the road</Data>
+            <Data>Brake and stop, ending up partially on our side of the road</Data>
+            <Data>2</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post>
+        <Element />
+      </Post>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_cst09_next_next</Video>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,3">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdbc2j.mp3</Audio>
+    </Step>
+    <Step fmt="Commentary" exe="country,country_vdbc1k,country_cst09_next,country_vdbc1l">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdbc1k.mp3</Audio>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 11" Ex="11">
+    <Step fmt="PlayVideo">
+      <Video>country_cst11_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdac1e.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Slow down and give way to oncoming car</Data>
+            <Data>Continue, because the turning car will have left the road by the time our car gets there</Data>
+            <Data></Data>
+            <Data>1</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdac1f.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_rest_vid.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_cst11_next</Video>
+    </Step>
+    <Step fmt="Commentary" exe="country,extra_vcomi,country_cst11_start,country_vdac1y.wav,oncoming car,slow car ahead,overtook when safe,car blocking our lane,oncoming car">
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_vcomi.mp3</Audio>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 12" Ex="12">
+    <Step fmt="PlayVideo">
+      <Video>shared_cst12_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdac2e.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Prepare to brake in case the car on our right pulls out of the rest area</Data>
+            <Data>Keep going at this speed, because we have the right of way over the car pulling out of the rest area</Data>
+            <Data></Data>
+            <Data>1</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdac2f.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_rest_vid.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>shared_cst12_next</Video>
+    </Step>
+    <Step fmt="Commentary" exe="country,extra_vcomi,shared_cst12_start,country_vdac2y.wav,car ahead indicated,motorcyclist overtook us,car leaving rest area,oncoming car">
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_vcomi.mp3</Audio>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 13" Ex="13">
+    <Step fmt="PlayVideo">
+      <Video>country_cst16_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdac3e.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Slow down and move left to make room for the oncoming car</Data>
+            <Data>Continue, the driver is about to return to his or her own side of the road</Data>
+            <Data></Data>
+            <Data>1</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdac3f.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_rest_vid.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_cst16_next</Video>
+    </Step>
+    <Step fmt="Commentary" exe="country,extra_vcomi,country_cst16_start,country_vdac3y.wav,advisory road sign,car entering road,oncoming car">
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_vcomi.mp3</Audio>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 14" Ex="14">
+    <Step fmt="PlayVideo">
+      <Video>country_cst13_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdac4e.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Slow down and wait for the car from your right</Data>
+            <Data>Continue because the car on your right needs to slow down for the green car anyway</Data>
+            <Data></Data>
+            <Data>1</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdac4f.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_rest_vid.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_cst13_next</Video>
+    </Step>
+    <Step fmt="Commentary" exe="country,extra_vcomi,country_cst13_start,country_vdac4y.wav,we turned right,we indicated to turn left,car approaching from right">
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_vcomi.mp3</Audio>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 15" Ex="15">
+    <Step fmt="PlayVideo">
+      <Video>country_cst01_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdac5e.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Slow down and give way to the oncoming car</Data>
+            <Data>Continue and expect the oncoming car to give way</Data>
+            <Data></Data>
+            <Data>1</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdac5f.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_rest_vid.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_cst01_next</Video>
+    </Step>
+    <Step fmt="Commentary" exe="country,extra_vcomi,country_cst01_start,country_vdac5y.wav,motorcycle overtaking,car and pedestrian at bridge,pedestrian crossing the bridge,oncoming car">
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_vcomi.mp3</Audio>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 16" Ex="16">
+    <Step fmt="PlayVideo">
+      <Video>country_cst20_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdac6e.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Brake to give way to the car pulling out</Data>
+            <Data>Continue and move slightly to the right to make room for the car pulling out</Data>
+            <Data></Data>
+            <Data>1</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdac6f.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_rest_vid.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_cst20_next</Video>
+    </Step>
+    <Step fmt="Commentary" exe="country,extra_vcomi,country_cst20_start,country_vdac6y.wav,oncoming car,car started to enter road">
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_vcomi.mp3</Audio>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 17" Ex="17">
+    <Step fmt="PlayVideo">
+      <Video>country_cst21_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdac7e.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Maintain our speed and position on the road</Data>
+            <Data>Maintain our speed and move onto the gravel edge</Data>
+            <Data>Slow down immediately and try to get out of the way of the oncoming car</Data>
+            <Data>3</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdac7f.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_rest_vid.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_cst21_next</Video>
+    </Step>
+    <Step fmt="Commentary" exe="country,extra_vcomi,country_cst21_start,country_vdac7y.wav,slow car,advisory road sign,oncoming car overtaking truck">
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_vcomi.mp3</Audio>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 18" Ex="18">
+    <Step fmt="PlayVideo">
+      <Video>country_cla03_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdac8e.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Slow down early on to give way to the horses and the oncoming car</Data>
+            <Data>Continue, the oncoming car will make room</Data>
+            <Data></Data>
+            <Data>1</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdac8f.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_rest_vid.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_cla03_next</Video>
+    </Step>
+    <Step fmt="Commentary" exe="country,extra_vcomi,country_cla03_start,country_vdac8y.wav,horses,car ahead pulled over,horses moved onto road,oncoming car,our car slowed">
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_vcomi.mp3</Audio>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 19" Ex="19">
+    <Step fmt="PlayVideo">
+      <Video>country_clp02_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdac9e.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Slow down to give way to the oncoming car and the horse</Data>
+            <Data>Continue, the oncoming car will give way</Data>
+            <Data></Data>
+            <Data>1</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdac9f.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_rest_vid.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_clp02_next</Video>
+    </Step>
+    <Step fmt="Commentary" exe="country,extra_vcomi,country_clp02_start,country_vdac9y.wav,horses on road,we overtook first horse,oncoming car,we slowed and moved left">
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_vcomi.mp3</Audio>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 20" Ex="20">
+    <Step fmt="PlayVideo">
+      <Video>country_fto01_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>sound/Freeway/mp3/freeway_vdaf1e.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Accelerate and indicate to merge right, the blue car on our right should give way to us</Data>
+            <Data>Wait for the blue car and the white car on our right to pass before trying to merge right</Data>
+            <Data></Data>
+            <Data>2</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1">
+      <Video></Video>
+      <Audio>sound/Freeway/mp3/freeway_vdaf1f.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_rest_vid.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_fto01_next</Video>
+    </Step>
+    <Step fmt="Commentary" exe="country,extra_vcomi,country_fto01_start,country_vdaf1y.wav,overtook car,fast car approaching from behind,merged left">
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_vcomi.mp3</Audio>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 21" Ex="21">
+    <Step fmt="PlayVideo">
+      <Video>shared_faj09_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>sound/Freeway/mp3/freeway_vdaf2e.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Slow to make room for the second overtaking car</Data>
+            <Data>Maintain speed and expect the second overtaking car to merge behind our car</Data>
+            <Data></Data>
+            <Data>1</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2">
+      <Video></Video>
+      <Audio>sound/Freeway/mp3/freeway_vdaf2f.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_rest_vid.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>shared_faj09_next</Video>
+    </Step>
+    <Step fmt="Commentary" exe="country,extra_vcomi,shared_faj09_start,country_vdaf2y.wav,merged left,fast cars approaching">
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_vcomi.mp3</Audio>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 22" Ex="22">
+    <Step fmt="PlayVideo">
+      <Video>country_fat14_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdaf7e.mp3</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Video></Video>
+      <Audio />
+      <Inter>
+        <Elements>
+          <Element>
+            <Data>Continue in the right lane until we pass the next car, and then merge left</Data>
+            <Data>Check your rear view mirror first, and when safe, merge left so the car behind can pass</Data>
+            <Data></Data>
+            <Data>2</Data>
+          </Element>
+        </Elements>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1">
+      <Video></Video>
+      <Audio>media/sound/country/country_vdaf7f.mp3</Audio>
+    </Step>
+    <Step>
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_rest_vid.mp3</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country_fat14_next</Video>
+    </Step>
+    <Step fmt="Commentary" exe="country,extra_vcomi,country_fat14_start,country_vdaf7y.wav,slow car ahead,we overtook,car behind approaching quickly">
+      <Video></Video>
+      <Audio>sound/extra/mp3/extra_vcomi.mp3</Audio>
+    </Step>
+  </Seq>
+</root>

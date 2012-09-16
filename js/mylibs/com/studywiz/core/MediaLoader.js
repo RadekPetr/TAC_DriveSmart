@@ -22,12 +22,13 @@ var MediaLoader = new Class({
             // notning - already exists
         } else {
             this.loadQueue.extend(loaderInfo);
-            console.log('Register');
+            console.log('Registered ');
+            console.log(loaderInfo);
         }
     },
     // ----------------------------------------------------------
     reportProgress : function(loaderInfo) {
-        //console.log(loaderInfo);
+        console.log(loaderInfo);
 
         if (this.options.next == null) {
             // if next action is not set do not allow reporting progress, not sure ???
@@ -76,9 +77,12 @@ var MediaLoader = new Class({
     },
     // ----------------------------------------------------------
     start : function() {
+        console.log("Prerload: ");
+        console.log(this.loadQueue);
         // loop the list and start preloading all of the items there
         this.loadQueue.each(function(value, key) {
-
+            console.log('Starting preload');
+            console.log(value.ref);
             value.ref.preload();
         })
     },

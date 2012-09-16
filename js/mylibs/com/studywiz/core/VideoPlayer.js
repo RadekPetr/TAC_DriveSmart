@@ -4,7 +4,10 @@ var VideoPlayer = new Class({
     options : {
         style : {
             width : '640px',
-            height : '480px'
+            height : '480px',
+            position : 'absolute',
+            left : '0px',
+            top : '0px'
         },
         'class' : 'video-js',
         poster : '',
@@ -13,7 +16,8 @@ var VideoPlayer = new Class({
         parent : null,
         preload : 'auto',
         autoplay : false,
-        controls : false
+        controls : false,
+        parentTag : 'drivesmart'
     },
     // ----------------------------------------------------------
     initialize : function(myParent, myOptions) {
@@ -22,64 +26,45 @@ var VideoPlayer = new Class({
         this.options.parent = myParent;
 
         this.videoSource = new Array();
-        this.myVideoPlayer = null;
+        this.containerID = 'container_' + this.options.id;
+        this.playerID = 'player_' + this.options.id;
+
+        this.videoContainer = null;
+
+        this.videoContainer = new Element("div", {
+            id : this.containerID
+        })
+
+        this.videoContainer.setStyles(this.options.style)
+        this.videoContainer.inject($(this.options.parentTag));
+
+        this.videoContainer.player = new Element("video", {
+            'id' : this.playerID,
+            'preload' : 'auto',
+            'poster' : '',
+            'class' : 'video-js',
+
+        });
+        this.videoContainer.player.inject(this.videoContainer);
+        this.myVideoPlayer = _V_('player_' + this.options.id, {
+            "controls" : this.options.controls,
+            "autoplay" : this.options.autoplay,
+            "preload" : this.options.preload
+        });
+
+        this.videoContainer.hide();
 
     },
     // ---------------------------
     setParams : function(params) {
         this.videoSource = params.source;
-        // this.videoElement = this._getVideoTag(this.options.id);
-        this.videoElement.setProperty("poster", params.poster.src)
-        if (this.myVideoPlayer != null) {
-            this.myVideoPlayer.src(this.videoSource);
-        }
+        this.videoContainer.player.setProperty("poster", params.poster.src)
     },
     // ---------------------------
     preload : function() {
-        if (this.myVideoPlayer == null) {
-            console.log(" Video player does not exist, creating a new one for " + this.options.id);
-            this.myVideoPlayer = _V_(this.options.id, {
-                "controls" : this.options.controls,
-                "autoplay" : this.options.autoplay,
-                "preload" : this.options.preload
-            });
 
-            this.myVideoPlayer.ready(( function() {
-                    this.myVideoPlayer.src(this.videoSource);
-                    this.myVideoPlayer.size('640', '480');
-                    //this.myVideoPlayer.play();
-                    this.myVideoPlayer.pause();
-
-                    this.myVideoPlayer.addEvent("loadstart", function() {
-                        console.log("Video Started to Load");
-
-                        this.options.parent.mediaLoader.reportProgress(this.getLoaderInfo());
-                        console.log("Video Load progress: " + (this.myVideoPlayer.bufferedPercent() * 100.00));
-                    }.bind(this));
-
-                    this.myVideoPlayer.addEvent("loadedmetadata", function() {
-                        this._reportProgress()
-                    }.bind(this));
-
-                    this.myVideoPlayer.addEvent("progress", function() {
-                        this._reportProgress()
-                    }.bind(this));
-
-                    this.myVideoPlayer.addEvent("loadedalldata", function() {
-                        this._reportProgress()
-                    }.bind(this));
-
-                    // this.myVideoPlayer.removeEvents();
-                    console.log("Adding ended listener");
-                    this.myVideoPlayer.addEvent("ended", function() {
-                        this.options.parent.fireEvent("TIMELINE", {
-                            type : "video.finished",
-                            id : this.options.id,
-                            next : this.options.next
-                        });
-                    }.bind(this));
-                }.bind(this)));
-        }
+        this.myVideoPlayer.src(this.videoSource);
+        console.log("++ Video Preload started: " + this.options.id)
     },
     // ---------------------------
     start : function() {
@@ -90,27 +75,12 @@ var VideoPlayer = new Class({
         }
     },
     // ---------------------------
-    add : function(parentTagID) {
-        var videoDiv = document.getElementById('videoHolder');
-
-        if (videoDiv == null) {
-            videoDiv = new Element("div", {
-                id : "videoHolder"
-            })
-            // TODO: move outside this class ?
-            videoDiv.inject($(parentTagID));
-            this.videoElement = this._getVideoTag(this.options.id);
-            this.videoElement.inject(videoDiv);
-        }
-        this.hide();
-    },
-    // ---------------------------
     show : function() {
-        this.videoElement.fade('in');
+        this.videoContainer.fade('in');
     },
     // ---------------------------
     hide : function() {
-        this.videoElement.fade('out', 0);
+        this.videoContainer.fade('out', 0);
     },
     // ---------------------------
     stop : function() {
@@ -146,25 +116,11 @@ var VideoPlayer = new Class({
         // destroy the player
         player.destroy();
 
-        document.getElementById('videoHolder').dispose();
-        this.videoElement.dispose();
-        //this.videoElement = null;
-        // this.myVideoPlayer = null;
-
-        delete this.videoElement;
+        this.videoContainer.dispose();
+        this.videoContainer.player.dispose();
+        delete this.videoContainer.player;
+        delete this.videoContainer
         delete this.myVideoPlayer;
-    },
-    _getVideoTag : function(myID) {
-        var myElement = document.getElementById(myID);
-        if (myElement == null) {
-            myElement = new Element("video", {
-                'id' : myID,
-                'preload' : 'auto',
-                'poster' : '',
-                'class' : 'video-js'
-            });
-        }
-        return myElement;
     },
     // ----------------------------------------------------------
     getLoaderInfo : function() {
