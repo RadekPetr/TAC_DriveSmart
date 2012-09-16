@@ -12,6 +12,10 @@ var Unit = new Class({
         this.setOptions(myOptions);
         this.sequences = null;
         this.currentSequence = null;
+        this.dataLoader = null;
+        this.mediaLoader = null;
+        this.buttons = new Array();
+        this.interactions = null;
 
     },
     // ----------------------------------------------------------
@@ -31,17 +35,20 @@ var Unit = new Class({
             left : '5%',
             top : '25%'
         }
-
+        // make sure there are no objects left
+        this.buttons.empty();
+        this.interactions = null;
+        //
         this.setupData();
 
     },
     // ----------------------------------------------------------
     setupData : function() {
-        var dataLoader = new DataLoader(this, {
+        this.dataLoader = new DataLoader(this, {
             src : 'data/Country.xml',
             next : 'data.ready'
         });
-        dataLoader.start();
+        this.dataLoader.start();
     },
     // ----------------------------------------------------------
     setupMedia : function() {
@@ -77,19 +84,21 @@ var Unit = new Class({
                     currentStep.player.options.next = 'PlayVideo.done';
                     currentStep.player.show();
                     currentStep.player.start();
+                    this._hideOtherVideos(currentStep.player.containerID);
+                    
                     break;
                 case "Question":
                     currentStep.player.options.next = 'Question.done';
                     currentStep.player.start();
                     break;
                 case "QuestionUser":
-                    this.data.questions = this._setupQuestions(currentStep.data);
-                    this.data.submit_button = this._setupButton("Submit answer", "button_2", "QuestionUser.done", this.buttonPosition.x, this.buttonPosition.y);
+                    this.interactions = this._setupQuestions(currentStep.data);
+                    var button = this._setupButton("Submit answer", "button_2", "QuestionUser.done", this.buttonPosition.x, this.buttonPosition.y);
+                    this.buttons.push(button);
                     break;
                 case "QuestionFeedback":
-                    this.data.submit_button.remove();
-                    this.data.submit_button = null;
-                    this.data.questions.showCorrect();
+                    this._removeButtons();
+                    this.interactions.showCorrect();
                     currentStep.player.options.next = 'QuestionFeedback.done';
                     currentStep.player.start();
                     break;
@@ -122,7 +131,8 @@ var Unit = new Class({
 
                 this.intro_image.add(this.options.unitTagId);
                 this.intro_image.show();
-                this.data.start_button = this._setupButton("Start", "button_1", "start.clicked", this.buttonPosition.x, this.buttonPosition.y);
+                var button = this._setupButton("Start", "button_1", "start.clicked", this.buttonPosition.x, this.buttonPosition.y);
+                this.buttons.push(button);
                 break;
             case "start.clicked":
                 this.intro_image.hide();
@@ -203,7 +213,7 @@ var Unit = new Class({
         params.poster = {
             src : filename + "_first.jpg"
         };
-        console.log(params)
+        //console.log(params)
         player.setParams(params);
     }.protect(),
     //------------------------------------------------------------------------
@@ -239,7 +249,7 @@ var Unit = new Class({
             this._setupStepMedia(step, stepOrder);
         }.bind(this))
         console.log("---------------------------- Finished setting up media from xml");
-        console.log(seq);
+        //console.log(seq);
     },
     // ----------------------------------------------------------
     _setupStepMedia : function(step, stepOrder) {
@@ -256,9 +266,7 @@ var Unit = new Class({
                         // step.player.add(this.options.unitTagId);
                         this._setVideoSource(step.player, fileName);
                         this.mediaLoader.register(step.player.getLoaderInfo());
-
                     }
-
                     break;
                 case "Audio" :
                     if (item.value != '') {
@@ -294,23 +302,40 @@ var Unit = new Class({
             }
         }.bind(this))
         // now start the preloading for each of the items
-        console.log("---------------------------- Step");
-        console.log(step)
+        //console.log("---------------------------- Step");
+        //console.log(step)
     },
     _cleanUp : function() {
         var imageDiv = document.getElementById('imageHolder');
         if (imageDiv != null) {
             imageDiv.dispose();
         }
-        var buttonDiv = document.getElementById('buttonHolder');
-        if (buttonDiv != null) {
-            buttonDiv.dispose();
+        this._removeButtons();
+        this._removeInteractions();
+    },
+    _removeButtons : function() {
+        Array.each(this.buttons, function(item, index) {
+            item.remove();
+        })
+        this.buttons.empty();
+    },
+    _removeInteractions : function() {
+        if (this.interactions != null) {
+            this.interactions.remove();
+            this.interactions = null;
         }
-
-        var panelDiv = document.getElementById('panelHolder');
-        if (panelDiv != null) {
-            panelDiv.dispose();
-        }
+    },
+    _hideOtherVideos : function(excludedId) {
+        var videos = $$('div.videoContainer');
+        Array.each(videos, function(item, index) {
+            var containerID = item.id;
+            if (containerID == excludedId) {
+                //item.show();
+            } else {
+                item.fade('out', 0);
+            }
+            //console.log("Container " + containerID + " to keep " + excludedId)
+        })
     }
 });
 

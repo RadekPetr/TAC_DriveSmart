@@ -34,11 +34,12 @@ var VideoPlayer = new Class({
         this.videoContainer = null;
 
         this.videoContainer = new Element("div", {
-            id : this.containerID
+            id : this.containerID,
+            'class' : 'videoContainer'
         })
 
-        this.videoContainer.setStyles(this.options.style)
-     
+        this.videoContainer.setStyles(this.options.style);
+
         this.videoContainer.inject($(this.options.parentTag));
 
         this.videoContainer.player = new Element("video", {
@@ -68,12 +69,10 @@ var VideoPlayer = new Class({
         console.log("++ Video Preload started: " + this.options.id);
         this.myVideoPlayer.ready(( function() {
                 this.myVideoPlayer.src(this.videoSource);
-                this.myVideoPlayer.size('640', '480');
-                //this.myVideoPlayer.play();
+                this.myVideoPlayer.size('640', '480');                
                 this.myVideoPlayer.pause();
 
-                this.myVideoPlayer.addEvent("loadstart", function() {
-                    console.log("Video Started to Load");
+                this.myVideoPlayer.addEvent("loadstart", function() {                  
 
                     this.options.parent.mediaLoader.reportProgress(this.getLoaderInfo());
                     console.log("Video Load progress: " + (this.myVideoPlayer.bufferedPercent() * 100.00));
@@ -92,7 +91,7 @@ var VideoPlayer = new Class({
                 }.bind(this));
 
                 // this.myVideoPlayer.removeEvents();
-                console.log("Adding ended listener");
+                //console.log("Adding ended listener");
                 this.myVideoPlayer.addEvent("ended", function() {
                     this.options.parent.fireEvent("TIMELINE", {
                         type : "video.finished",
@@ -105,7 +104,7 @@ var VideoPlayer = new Class({
     // ---------------------------
     start : function() {
         if (this.myVideoPlayer != null) {
-            console.log(this.myVideoPlayer.bufferedPercent());
+            //console.log(this.myVideoPlayer.bufferedPercent());
             this.myVideoPlayer.play();
             // Fire event to whotever object is my parent
         }
