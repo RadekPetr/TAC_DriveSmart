@@ -66,7 +66,7 @@ var Unit = new Class({
 
     },
     nextStep : function() {
-        // take first step and decide what to do with it
+        // take a step and decide what to do with it
         if (this.currentSequence.length > 0) {
             var currentStep = this.currentSequence.shift();
             var stepType = currentStep.attributes.fmt;
@@ -83,11 +83,7 @@ var Unit = new Class({
                     currentStep.player.start();
                     break;
                 case "QuestionUser":
-                    this.data.questions = this._setupQuestions({
-                        data : ["Slow down immediately", "Slow down as we come into the bend", "Maintain our current speed until any hazard is visible"],
-                        correct : '2',
-                        style : this.panelPosition
-                    });
+                    this.data.questions = this._setupQuestions(currentStep.data);
                     this.data.submit_button = this._setupButton("Submit answer", "button_2", "QuestionUser.done", this.buttonPosition.x, this.buttonPosition.y);
                     break;
                 case "QuestionFeedback":
@@ -126,17 +122,11 @@ var Unit = new Class({
 
                 this.intro_image.add(this.options.unitTagId);
                 this.intro_image.show();
-
-                //this.intro_image.flash('0', '1', 50, 'opacity', 250);
-
                 this.data.start_button = this._setupButton("Start", "button_1", "start.clicked", this.buttonPosition.x, this.buttonPosition.y);
                 break;
             case "start.clicked":
                 this.intro_image.hide();
-                var myDiv = document.getElementById('imageHolder');
-                myDiv.dispose();
-                this.data.start_button.remove();
-                this.data.start_button = null;
+                this._cleanUp();
                 this.nextStep();
 
                 break;
@@ -156,12 +146,11 @@ var Unit = new Class({
                 this.nextStep();
                 break;
 
-            case "repeat.clicked":
-                this.data.repeat_button.remove();
-                this.data.questions.remove();
-                this.data.video.remove();
+            case "Continue.done":
+                this._cleanUp();
+                //this.data.video.remove();
 
-                this.setupData();
+                // this.setupData();
 
                 break;
 
@@ -198,18 +187,6 @@ var Unit = new Class({
 
     },
     //---------------------- PRIVATE FUNCTIONS --------------------------------
-    _setupVideo : function(filename, id, nextAction) {
-        var videoPlayer = new VideoPlayer(this, {
-            id : id,
-            next : nextAction
-        });
-        // videoPlayer.add(this.options.unitTagId);
-        this._setVideoSource(videoPlayer, filename);
-        //  videoPlayer.add(this.options.unitTagId);
-        // videoPlayer.add();
-        //videoPlayer.show();
-        return videoPlayer;
-    }.protect(),
     //------------------------------------------------------------------------
     _setVideoSource : function(player, filename) {
         var params = new Object();
@@ -228,17 +205,6 @@ var Unit = new Class({
         };
         console.log(params)
         player.setParams(params);
-    }.protect(),
-    //------------------------------------------------------------------------
-    _setupAudio : function(filename, id, nextAction) {
-        var audioPlayer = new AudioPlayer(this, {
-            next : nextAction,
-            id : id,
-            src : filename + ".mp3|" + filename + ".ogg",
-            preload : 'false'
-        });
-        this.mediaLoader.register(audioPlayer.getLoaderInfo());
-        return audioPlayer;
     }.protect(),
     //------------------------------------------------------------------------
     _setupButton : function(text, id, nextAction, x, y) {
@@ -306,6 +272,23 @@ var Unit = new Class({
                         this.mediaLoader.register(step.player.getLoaderInfo());
                     }
                     break;
+                case "Inter":
+                    var questionsRawData = item.childNodes;
+                    var questions = {
+                        data : [],
+                        correct : '',
+                        style : this.panelPosition
+                    }
+
+                    Array.each(questionsRawData, function(question, index) {
+                        questions.data.push(question.value);
+                        if (question.attributes.correct == true) {
+                            questions.correct = index;
+                        }
+                    })
+                    step.data = questions;
+                    break;
+
                 default:
                 // nothing
             }
@@ -332,22 +315,24 @@ var Unit = new Class({
 });
 
 /*
- // TEST:
- // make sure the shapes are the child of the clickable area so they recieve the click events too
- var videoDiv = document.getElementById('videoHolder');
- this.shape = new Shape(this, {});
- this.shape.add('videoHolder');
+// TEST:
+// make sure the shapes are the child of the clickable area so they recieve the click events too
+var videoDiv = document.getElementById('videoHolder');
+this.shape = new Shape(this, {});
+this.shape.add('videoHolder');
 
- videoDiv.addEvent('click', function(e) {
- this.fireEvent("TIMELINE", {
- type : "risk.clicked",
- id : this.options.id,
- next : 'risk.selected',
- _x : e.page.x,
- _y : e.page.y
- });
- var shapeDiv = document.getElementById('shapeHolder');
- // console.log(e.page.x + " " + e.page.y);
+videoDiv.addEvent('click', function(e) {
+this.fireEvent("TIMELINE", {
+type : "risk.clicked",
+id : this.options.id,
+next : 'risk.selected',
+_x : e.page.x,
+_y : e.page.y
+});
+var shapeDiv = document.getElementById('shapeHolder');
+// console.log(e.page.x + " " + e.page.y);
 
- }.bind(this));
- */
+}.bind(this));
+*/
+
+//this.intro_image.flash('0', '1', 50, 'opacity', 250);

@@ -116,7 +116,7 @@ var Questions = new Class({
             radio.set('disabled', true);
 
             if (this.options.correct != null) {
-                if (this.options.correct != index + 1) {
+                if (this.options.correct != index) {
                     label.setStyles({
                         'color' : '#CCCCCC'
                     })
