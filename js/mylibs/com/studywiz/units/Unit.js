@@ -10,21 +10,24 @@ var Unit = new Class({
     },
     initialize : function(myOptions) {
         this.setOptions(myOptions);
-        this.sequences = null;
-        this.currentSequence = null;
+
+        this.sequences = new Array();
+        this.currentSequence = new Array();
         this.dataLoader = null;
         this.mediaLoader = null;
         this.buttons = new Array();
         this.interactions = null;
+        this.videos = new Array();
+
+        this.mediaLoader = new MediaLoader(this, { });
+        this.mediaLoader.add('drivesmart')
+
+        this.addEvent("TIMELINE", this.handleNavigationEvent);
 
     },
     // ----------------------------------------------------------
     start : function() {
         // TODO handle mobile platforms: Browser.Platform.android
-        this.mediaLoader = new MediaLoader(this, { });
-        this.mediaLoader.add('drivesmart')
-
-        this.addEvent("TIMELINE", this.handleNavigationEvent);
 
         this.buttonPosition = {
             x : 535,
@@ -37,10 +40,11 @@ var Unit = new Class({
         }
         // make sure there are no objects left
         this.buttons.empty();
+        this.currentSequence.empty();
         this.interactions = null;
+        this.videos.empty();
         //
         this.setupData();
-
     },
     // ----------------------------------------------------------
     setupData : function() {
@@ -68,9 +72,7 @@ var Unit = new Class({
         this.mediaLoader.options.next = 'media.ready';
         this.mediaLoader.show();
 
-        this.data = new Object();
         this.mediaLoader.start();
-
     },
     nextStep : function() {
         // take a step and decide what to do with it
@@ -85,7 +87,6 @@ var Unit = new Class({
                     currentStep.player.show();
                     currentStep.player.start();
                     this._hideOtherVideos(currentStep.player.containerID);
-                    
                     break;
                 case "Question":
                     currentStep.player.options.next = 'Question.done';
@@ -107,14 +108,14 @@ var Unit = new Class({
                     currentStep.player.start();
                     break;
                 case "Continue":
-                    this.data.continue_button = this._setupButton("Continue", "button_3", "Continue.done", this.buttonPosition.x, this.buttonPosition.y);
+                    var button = this._setupButton("Continue", "button_3", "Continue.done", this.buttonPosition.x, this.buttonPosition.y);
+                    this.buttons.push(button);
                     break;
             }
 
         } else {
             // seq finished
         }
-
     },
     // ----------------------------------------------------------
     // This handles all timeline events and emulates the timeline
@@ -138,7 +139,6 @@ var Unit = new Class({
                 this.intro_image.hide();
                 this._cleanUp();
                 this.nextStep();
-
                 break;
             case "PlayVideo.done":
                 this.nextStep();
@@ -155,13 +155,10 @@ var Unit = new Class({
             case "PlayAudio.done":
                 this.nextStep();
                 break;
-
             case "Continue.done":
+                this._removeVideos();
                 this._cleanUp();
-                //this.data.video.remove();
-
-                // this.setupData();
-
+                this.start();
                 break;
 
             case "risk.selected":
@@ -192,11 +189,6 @@ var Unit = new Class({
     log : function(logValue) {
         console.log("****** " + logValue + " ******");
     },
-    // ----------------------------------------------------------
-    handleMediaReady : function(nextAction) {
-
-    },
-    //---------------------- PRIVATE FUNCTIONS --------------------------------
     //------------------------------------------------------------------------
     _setVideoSource : function(player, filename) {
         var params = new Object();
@@ -266,6 +258,8 @@ var Unit = new Class({
                         // step.player.add(this.options.unitTagId);
                         this._setVideoSource(step.player, fileName);
                         this.mediaLoader.register(step.player.getLoaderInfo());
+                        // we want to store this so all VideoJS player can be removed correctly (see remove() in VideoPlayer)
+                        this.videos.push(step.player);
                     }
                     break;
                 case "Audio" :
@@ -324,6 +318,12 @@ var Unit = new Class({
             this.interactions.remove();
             this.interactions = null;
         }
+    },
+    _removeVideos : function() {
+        Array.each(this.videos, function(item, index) {
+            item.remove();
+        })
+        this.videos.empty();
     },
     _hideOtherVideos : function(excludedId) {
         var videos = $$('div.videoContainer');

@@ -132,10 +132,10 @@ var VideoPlayer = new Class({
         this.myVideoPlayer.currentTime = time;
         this.myVideoPlayer.pause();
     },
-    remove : function(time) {
+    remove : function() {
         // see http://help.videojs.com/discussions/problems/861-how-to-destroy-a-video-js-object
         // get the videojs player with id of "video_1"
-        var player = _V_(this.options.id);
+        var player = _V_(this.playerID);
 
         // for html5 - clear out the src which solves a browser memory leak
         //  this workaround was found here: http://stackoverflow.com/questions/5170398/ios-safari-memory-leak-when-loading-unloading-html5-video
