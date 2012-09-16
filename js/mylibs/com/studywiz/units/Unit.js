@@ -61,11 +61,7 @@ var Unit = new Class({
         this.mediaLoader.options.next = 'media.ready';
         this.mediaLoader.show();
 
-        // TODO: remove this as the objects will be stored in the sequence object in the steps
         this.data = new Object();
-        // this.data.video = this._setupVideo("media/video/country/country_cla01_start", "video_1", "entry.video.done");
-        // this.mediaLoader.register(this.data.video.getLoaderInfo());
-
         this.mediaLoader.start();
 
     },
@@ -87,7 +83,6 @@ var Unit = new Class({
                     currentStep.player.start();
                     break;
                 case "QuestionUser":
-                    //currentStep.player.start();
                     this.data.questions = this._setupQuestions({
                         data : ["Slow down immediately", "Slow down as we come into the bend", "Maintain our current speed until any hazard is visible"],
                         correct : '2',
@@ -102,8 +97,8 @@ var Unit = new Class({
                     currentStep.player.options.next = 'QuestionFeedback.done';
                     currentStep.player.start();
                     break;
-                case "":
-                    currentStep.player.options.next = '.done';
+                case "PlayAudio":
+                    currentStep.player.options.next = 'PlayAudio.done';
                     currentStep.player.start();
                     break;
                 case "Continue":
@@ -157,7 +152,7 @@ var Unit = new Class({
             case "QuestionFeedback.done":
                 this.nextStep();
                 break;
-            case ".done":
+            case "PlayAudio.done":
                 this.nextStep();
                 break;
 
@@ -208,7 +203,7 @@ var Unit = new Class({
             id : id,
             next : nextAction
         });
-       // videoPlayer.add(this.options.unitTagId);
+        // videoPlayer.add(this.options.unitTagId);
         this._setVideoSource(videoPlayer, filename);
         //  videoPlayer.add(this.options.unitTagId);
         // videoPlayer.add();
@@ -292,10 +287,10 @@ var Unit = new Class({
                             id : "video_" + index + "_" + stepOrder,
                             next : 'not.set'
                         });
-                       // step.player.add(this.options.unitTagId);
+                        // step.player.add(this.options.unitTagId);
                         this._setVideoSource(step.player, fileName);
                         this.mediaLoader.register(step.player.getLoaderInfo());
-                        
+
                     }
 
                     break;

@@ -7,7 +7,9 @@ var VideoPlayer = new Class({
             height : '480px',
             position : 'absolute',
             left : '0px',
-            top : '0px'
+            top : '0px',
+            opacity : '0',
+            visibility : 'hidden'
         },
         'class' : 'video-js',
         poster : '',
@@ -36,6 +38,7 @@ var VideoPlayer = new Class({
         })
 
         this.videoContainer.setStyles(this.options.style)
+     
         this.videoContainer.inject($(this.options.parentTag));
 
         this.videoContainer.player = new Element("video", {
@@ -52,8 +55,6 @@ var VideoPlayer = new Class({
             "preload" : this.options.preload
         });
 
-        this.videoContainer.hide();
-
     },
     // ---------------------------
     setParams : function(params) {
@@ -64,7 +65,42 @@ var VideoPlayer = new Class({
     preload : function() {
 
         this.myVideoPlayer.src(this.videoSource);
-        console.log("++ Video Preload started: " + this.options.id)
+        console.log("++ Video Preload started: " + this.options.id);
+        this.myVideoPlayer.ready(( function() {
+                this.myVideoPlayer.src(this.videoSource);
+                this.myVideoPlayer.size('640', '480');
+                //this.myVideoPlayer.play();
+                this.myVideoPlayer.pause();
+
+                this.myVideoPlayer.addEvent("loadstart", function() {
+                    console.log("Video Started to Load");
+
+                    this.options.parent.mediaLoader.reportProgress(this.getLoaderInfo());
+                    console.log("Video Load progress: " + (this.myVideoPlayer.bufferedPercent() * 100.00));
+                }.bind(this));
+
+                this.myVideoPlayer.addEvent("loadedmetadata", function() {
+                    this._reportProgress()
+                }.bind(this));
+
+                this.myVideoPlayer.addEvent("progress", function() {
+                    this._reportProgress()
+                }.bind(this));
+
+                this.myVideoPlayer.addEvent("loadedalldata", function() {
+                    this._reportProgress()
+                }.bind(this));
+
+                // this.myVideoPlayer.removeEvents();
+                console.log("Adding ended listener");
+                this.myVideoPlayer.addEvent("ended", function() {
+                    this.options.parent.fireEvent("TIMELINE", {
+                        type : "video.finished",
+                        id : this.options.id,
+                        next : this.options.next
+                    });
+                }.bind(this));
+            }.bind(this)));
     },
     // ---------------------------
     start : function() {

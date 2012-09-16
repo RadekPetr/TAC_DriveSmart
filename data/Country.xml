@@ -27,7 +27,7 @@
 			<Video></Video>
 			<Audio>media/sound/country/country_vdcb1c.mp3</Audio>
 		</Step>
-		<Step>
+		<Step fmt="PlayAudio">
 			<Video></Video>
 			<Audio>media/sound/country/country_vdcb1d.mp3</Audio>
 		</Step>
@@ -90,14 +90,14 @@
 			<Video></Video>
 			<Audio>media/sound/country/country_vdcb2c.mp3</Audio>
 		</Step>
-		<Step>
+		<Step fmt="PlayAudio">
 			<Video></Video>
 			<Audio>media/sound/country/country_vdcb2d.mp3</Audio>
 		</Step>
 		<Step fmt="PlayVideo" noBg1="1">
 			<Video>country_cst16_next</Video>
 		</Step>
-		<Step>
+		<Step fmt="PlayAudio">
 			<Video></Video>
 			<Audio>media/sound/country/country_vdcb2e.mp3</Audio>
 		</Step>
@@ -155,14 +155,14 @@
 			<Video></Video>
 			<Audio>media/sound/country/country_vdcb3c.mp3</Audio>
 		</Step>
-		<Step>
+		<Step fmt="PlayAudio">
 			<Video></Video>
 			<Audio>media/sound/country/country_vdcb3d.mp3</Audio>
 		</Step>
 		<Step fmt="PlayVideo">
 			<Video>country_cst14_next</Video>
 		</Step>
-		<Step>
+		<Step fmt="PlayAudio">
 			<Video></Video>
 			<Audio>media/sound/country/country_vdcb3e.mp3</Audio>
 		</Step>
@@ -218,7 +218,7 @@
 			<Video></Video>
 			<Audio>media/sound/country/country_vdcb4c.mp3</Audio>
 		</Step>
-		<Step>
+		<Step fmt="PlayAudio">
 			<Video></Video>
 			<Audio>media/sound/country/country_vdcb4d.mp3</Audio>
 			<Inter />
