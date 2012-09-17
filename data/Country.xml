@@ -294,7 +294,7 @@
       </Inter>
       <Post></Post>
     </Step>
-    <Step hide="box">
+    <Step fmt="PlayAudio" hide="box">
       <Audio>country/country_vdbc1d</Audio>
     </Step>
     <Step fmt="PlayAudio">
@@ -305,7 +305,7 @@
     </Step>
     <Step fmt="KeyRisk">
       <Video Zones="229:172:37:28,215:200:23:21,192:222:29:21,150:243:57:33"></Video>
-      <Audio waitfor="true">sound/scanning/scan_vsbkr1b</Audio>
+      <Audio waitfor="true">scanning/scan_vsbkr1b</Audio>
     </Step>
     <Step fmt="KRFeedback" image="images/keyrisks/country_cst23_next.jpg">
       <Audio>country/country_vdbc1h</Audio>
@@ -330,6 +330,47 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
+  
+  <Seq desc="Exercise 9" Ex="90">
+   
+    <Step fmt="PlayAudio">
+      <Audio>country/country_vdbc1e</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country/country_cst23_next</Video>
+    </Step>
+    <Step fmt="KeyRisk">
+      <Video Zones="229:172:37:28,215:200:23:21,192:222:29:21,150:243:57:33"></Video>
+      <Audio waitfor="true">scanning/scan_vsbkr1b</Audio>
+    </Step>
+    <Step fmt="KRFeedback" image="images/keyrisks/country_cst23_next.jpg">
+      <Audio>country/country_vdbc1h</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>country/country_vdbc1i</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true">
+      <Inter>
+        <Data correct="false">Continue to pass</Data>
+        <Data correct="true">Brake and pull in behind slower car</Data>
+      </Inter>
+      <Post>
+        <Element />
+      </Post>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country/country_cst23_next_next</Video>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1">
+      <Audio>country/country_vdbc1j</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  
+  
+  
+  
+  
   <Seq desc="Exercise 10" Ex="10">
     <Step fmt="PlayVideo">
       <Video>country/country_cst09_start</Video>
@@ -361,7 +402,7 @@
     </Step>
     <Step fmt="KeyRisk">
       <Video Zones="167:131:77:82,267:138:71:74,136:2124:84:34,3:254:168:69,327:214:79:26,390:239:103:47"></Video>
-      <Audio waitfor="true">sound/scanning/scan_vsbkr1b</Audio>
+      <Audio waitfor="true">scanning/scan_vsbkr1b</Audio>
       <Inter />
       <Post />
     </Step>

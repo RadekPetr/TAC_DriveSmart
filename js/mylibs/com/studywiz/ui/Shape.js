@@ -12,7 +12,7 @@ var Shape = new Class({
         next : "shape.clicked",
         polygonStyle : {
             'fill' : 'lime',
-            'opacity' : '0.5'
+            'opacity' : '0'
         },
         shapeStyle : {
             'left' : "0px",

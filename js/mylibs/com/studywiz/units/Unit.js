@@ -20,6 +20,7 @@ var Unit = new Class({
         this.buttons = new Array();
         this.interactions = null;
         this.videos = new Array();
+        this.activeVideo = null;
 
         this.mediaLoader = new MediaLoader(this, { });
         this.mediaLoader.add('drivesmart')
@@ -45,6 +46,7 @@ var Unit = new Class({
         this.currentSequence.empty();
         this.interactions = null;
         this.videos.empty();
+        this.activeVideo = null;
         //
         this.setupData();
     },
@@ -59,7 +61,7 @@ var Unit = new Class({
     // ----------------------------------------------------------
     setupMedia : function() {
         // we get a copy of the array so we can keep the original for repeat
-        this.currentSequence = Array.clone(this.sequences.seq_4);
+        this.currentSequence = Array.clone(this.sequences.seq_90);
         // add players to media so they can be preloaded
         this._setupSequenceMedia(this.currentSequence);
 
@@ -88,7 +90,7 @@ var Unit = new Class({
                     currentStep.player.options.next = 'PlayVideo.done';
                     currentStep.player.show();
                     currentStep.player.start();
-                    this._hideOtherVideos(currentStep.player.containerID);
+                    this._hideOtherVideos(currentStep.player.playerID);
                     break;
                 case "Question":
                     currentStep.player.options.next = 'Question.done';
@@ -112,6 +114,14 @@ var Unit = new Class({
                 case "Continue":
                     var button = this._setupButton("Continue", "button_3", "Continue.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
+                    break;
+                case "Commentary":
+                    // not implemented
+                    break;
+                case "KeyRisk" :
+                    this._setupRisks();
+                    break;
+                case "KRFeedback":
                     break;
             }
 
@@ -322,44 +332,59 @@ var Unit = new Class({
         }
     },
     _removeVideos : function() {
+        this.activeVideo = null;
         Array.each(this.videos, function(item, index) {
             item.remove();
         })
         this.videos.empty();
+
     },
     _hideOtherVideos : function(excludedId) {
-        var videos = $$('div.videoContainer');
-        Array.each(videos, function(item, index) {
-            var containerID = item.id;
-            if (containerID == excludedId) {
+        //var videos = $$('div.videoContainer');
+        Array.each(this.videos, function(item, index) {
+            var playerID = item.playerID;
+            if (playerID == excludedId) {
                 //item.show();
+                this.activeVideo = item;
             } else {
-                item.fade('out', 0);
+                // item.fade('out', 0);
+                item.hide();
             }
-            //console.log("Container " + containerID + " to keep " + excludedId)
-        })
+            console.log("Player " + playerID + " to keep " + excludedId)
+        }.bind(this))
+    },
+    _setupRisks : function() {
+        // make sure the shapes are the child of the clickable area so they recieve the click events too
+        myVideoTag = $$('div.videoContainer');
+        var myMask = new Mask('drivesmart', {
+            inject : {
+                where : 'after',
+                target : this.activeVideo.containerID
+            }
+        });
+        myMask.show();
+        //var videoDiv = document.getElementById('videoHolder');
+        this.shape = new Shape(this, {});
+        this.shape.add(myMask);
+
+        myMask.addEvent('click', function(e) {
+            this.fireEvent("TIMELINE", {
+                type : "risk.clicked",
+                id : this.options.id,
+                next : 'risk.selected',
+                _x : e.page.x,
+                _y : e.page.y
+            });
+            var shapeDiv = document.getElementById('shapeHolder');
+            // console.log(e.page.x + " " + e.page.y);
+
+        }.bind(this));
     }
 });
 
 /*
 // TEST:
-// make sure the shapes are the child of the clickable area so they recieve the click events too
-var videoDiv = document.getElementById('videoHolder');
-this.shape = new Shape(this, {});
-this.shape.add('videoHolder');
 
-videoDiv.addEvent('click', function(e) {
-this.fireEvent("TIMELINE", {
-type : "risk.clicked",
-id : this.options.id,
-next : 'risk.selected',
-_x : e.page.x,
-_y : e.page.y
-});
-var shapeDiv = document.getElementById('shapeHolder');
-// console.log(e.page.x + " " + e.page.y);
-
-}.bind(this));
 */
 
 //this.intro_image.flash('0', '1', 50, 'opacity', 250);
