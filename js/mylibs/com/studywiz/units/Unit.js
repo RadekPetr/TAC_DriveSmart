@@ -6,7 +6,9 @@ var Unit = new Class({
 
     Implements : [Options, Events],
     options : {
-        unitTagId : 'drivesmart'
+        unitTagId : 'drivesmart',
+        audioFolder : 'media/sound/',
+        videoFolder : 'media/video/'
     },
     initialize : function(myOptions) {
         this.setOptions(myOptions);
@@ -200,7 +202,7 @@ var Unit = new Class({
             src : filename + ".webm"
         }, {
             type : "video/ogg",
-            src : filename + ".ogg"
+            src : filename + ".ogv"
         }];
         params.poster = {
             src : filename + "_first.jpg"
@@ -249,7 +251,7 @@ var Unit = new Class({
             switch (item.name) {
                 case "Video" :
                     if (item.value != '') {
-                        var fileName = 'media/video/country/' + stripFileExtension(item.value);
+                        var fileName = this.options.videoFolder + stripFileExtension(item.value);
 
                         step.player = new VideoPlayer(this, {
                             id : "video_" + index + "_" + stepOrder,
@@ -264,7 +266,7 @@ var Unit = new Class({
                     break;
                 case "Audio" :
                     if (item.value != '') {
-                        var fileName = stripFileExtension(item.value);
+                        var fileName = this.options.audioFolder + stripFileExtension(item.value);
                         step.player = new AudioPlayer(this, {
                             next : 'not.set',
                             id : "audio_" + index + "_" + stepOrder,
