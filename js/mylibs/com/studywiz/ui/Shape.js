@@ -7,7 +7,7 @@ var Shape = new Class({
     Implements : [Options, Events],
     options : {
         data : "167:131:77:82,3:254:168:69,327:214:79:26,390:239:103:47",
-        id : "shape_1",
+        id : "shape",
         parent : null,
         next : "shape.clicked",
         polygonStyle : {
@@ -31,6 +31,7 @@ var Shape = new Class({
         var arrayOfShapes = this.options.data.split(",");
         this.polygons = new Array();
         this.polygonsArray = new Array();
+        this.container = null;
 
         Array.each(arrayOfShapes, function(shape, index) {
             var temp = shape.split(":");
@@ -64,13 +65,15 @@ var Shape = new Class({
 
     },
     add : function(parentTagID) {
-        var myDiv = document.getElementById('shapeHolder');
 
+        var myParent = document.getElementById(parentTagID);
+        console.log(myParent);
+        var myDiv = myParent.getElement('div[id=shapeContainer]');
         if (myDiv == null) {
             var myDiv = new Element("div", {
-                id : "shapeHolder"
+                id : "shapeContainer"
             });
-
+            this.container = myDiv;
             // Fix for svg, no ide how it works ....
             this._svgTags(['svg', 'polygon', 'polyline']);
 
@@ -81,7 +84,7 @@ var Shape = new Class({
                 width : '640px',
                 height : '480px'
             });
-            this.shapeWrapper.inject(myDiv);
+            this.shapeWrapper.inject(this.container);
         }
 
         Array.each(this.polygons, function(item, index) {
@@ -110,6 +113,11 @@ var Shape = new Class({
         myDiv.setStyles(this.options.shapeStyle);
 
         myDiv.inject($(parentTagID));
+    },
+    remove : function() {
+        //TODO: use the container with other UI things, make suer null is handled
+        this.container.dispose();
+        this.container = null;
     },
     _svgTags : function(svgtags) {
         var ns = 'http://www.w3.org/2000/svg', methods = (function(proto, cls) {

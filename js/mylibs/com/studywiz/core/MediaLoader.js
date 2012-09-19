@@ -108,7 +108,7 @@ var MediaLoader = new Class({
     }.protect(),
     // ----------------------------------------------------------
     _handleFinished : function(progress) {
-        if (progress > 80) {
+        if (progress > 50) {
             console.log("Preload Finished");
             this.loadQueue.empty();
             this.options.parent.fireEvent("TIMELINE", {

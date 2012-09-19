@@ -52,11 +52,13 @@ var ImageMedia = new Class({
         }
     },
     add : function(parentTagID) {
-        var myDiv = document.getElementById('imageHolder');
-
+        console.log("parentTagID  " + parentTagID);
+        var myParent = document.getElementById(parentTagID);
+        var myDiv = myParent.getElement('div[id=imageContainer]');
         if (myDiv == null) {
+            console.log("Container not found in " + parentTagID + " adding a new one");
             var myDiv = new Element("div", {
-                id : "imageHolder"
+                id : "imageContainer"
             });
             myDiv.inject($(parentTagID));
         }
@@ -65,12 +67,21 @@ var ImageMedia = new Class({
         this.image.setStyles(this.options.style);
     },
     show : function() {
-        this.image.fade('hide', 0);
-        this.image.fade('in');
+        if (this.image.isVisible() == false) {
+            this.image.fade('hide', 0);
+            this.image.fade('in');
+        }
+
     },
     // ---------------------------
     hide : function() {
-        this.image.fade('out');
+        if (this.image.isVisible() == true) {
+            this.image.fade('out');
+        }
+    },
+    // ---------------------------
+    remove : function() {
+        this.hide();
         this.image.dispose();
     }
 })

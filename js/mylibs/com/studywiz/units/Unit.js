@@ -8,7 +8,9 @@ var Unit = new Class({
     options : {
         unitTagId : 'drivesmart',
         audioFolder : 'media/sound/',
-        videoFolder : 'media/video/'
+        videoFolder : 'media/video/',
+        imageFolder : 'media/images/',
+        sequenceID : 'seq_90'
     },
     initialize : function(myOptions) {
         this.setOptions(myOptions);
@@ -21,6 +23,8 @@ var Unit = new Class({
         this.interactions = null;
         this.videos = new Array();
         this.activeVideo = null;
+        this.shape = null;
+        this.currentStep = null;
 
         this.mediaLoader = new MediaLoader(this, { });
         this.mediaLoader.add('drivesmart')
@@ -47,6 +51,8 @@ var Unit = new Class({
         this.interactions = null;
         this.videos.empty();
         this.activeVideo = null;
+        this.shape = null;
+        this.currentStep = null;
         //
         this.setupData();
     },
@@ -61,7 +67,7 @@ var Unit = new Class({
     // ----------------------------------------------------------
     setupMedia : function() {
         // we get a copy of the array so we can keep the original for repeat
-        this.currentSequence = Array.clone(this.sequences.seq_90);
+        this.currentSequence = Array.clone(this.sequences[this.options.sequenceID]);
         // add players to media so they can be preloaded
         this._setupSequenceMedia(this.currentSequence);
 
@@ -81,35 +87,39 @@ var Unit = new Class({
     nextStep : function() {
         // take a step and decide what to do with it
         if (this.currentSequence.length > 0) {
-            var currentStep = this.currentSequence.shift();
-            var stepType = currentStep.attributes.fmt;
+            var step = this.currentSequence.shift();
+            this.currentStep = step;
+            var stepType = step.attributes.fmt;
             console.log("Step type: " + stepType);
             switch (stepType) {
                 case "PlayVideo":
                     this._cleanUp();
-                    currentStep.player.options.next = 'PlayVideo.done';
-                    currentStep.player.show();
-                    currentStep.player.start();
-                    this._hideOtherVideos(currentStep.player.playerID);
+                    this._hideInteractions();
+                    step.player.options.next = 'PlayVideo.done';
+                    step.player.show();
+                    step.player.start();
+                    this._hideOtherVideos(step.player.playerID);
                     break;
                 case "Question":
-                    currentStep.player.options.next = 'Question.done';
-                    currentStep.player.start();
+                    step.player.options.next = 'Question.done';
+                    step.player.start();
                     break;
                 case "QuestionUser":
-                    this.interactions = this._setupQuestions(currentStep.data);
+                    this._removeInteractions();
+                    this.interactions = this._setupQuestions(step.data);
                     var button = this._setupButton("Submit answer", "button_2", "QuestionUser.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
                     break;
                 case "QuestionFeedback":
                     this._removeButtons();
+                    this._showInteractions();
                     this.interactions.showCorrect();
-                    currentStep.player.options.next = 'QuestionFeedback.done';
-                    currentStep.player.start();
+                    step.player.options.next = 'QuestionFeedback.done';
+                    step.player.start();
                     break;
                 case "PlayAudio":
-                    currentStep.player.options.next = 'PlayAudio.done';
-                    currentStep.player.start();
+                    step.player.options.next = 'PlayAudio.done';
+                    step.player.start();
                     break;
                 case "Continue":
                     var button = this._setupButton("Continue", "button_3", "Continue.done", this.buttonPosition.x, this.buttonPosition.y);
@@ -117,11 +127,22 @@ var Unit = new Class({
                     break;
                 case "Commentary":
                     // not implemented
+                    var button = this._setupButton("Continue", "button_3", "Continue.done", this.buttonPosition.x, this.buttonPosition.y);
+                    this.buttons.push(button);
                     break;
                 case "KeyRisk" :
                     this._setupRisks();
+                    step.player.options.next = 'Risks.ready';
+                    step.player.start();
                     break;
                 case "KRFeedback":
+                    this.KRFeedbackImage = new ImageMedia(this, {
+                        src : this.options.imageFolder + step.attributes.image,
+                        next : "KRFeedback.ready",
+                        title : 'Feedback',
+                        id : 'KRFeedback'
+                    });
+                    this._removeButtons();
                     break;
             }
 
@@ -148,7 +169,7 @@ var Unit = new Class({
                 this.buttons.push(button);
                 break;
             case "start.clicked":
-                this.intro_image.hide();
+                this.intro_image.remove();
                 this._cleanUp();
                 this.nextStep();
                 break;
@@ -167,15 +188,47 @@ var Unit = new Class({
             case "PlayAudio.done":
                 this.nextStep();
                 break;
+            case "Risks.ready":
+                var button = this._setupButton("Done", "button_Done", "Risks.done", this.buttonPosition.x, this.buttonPosition.y);
+                this.buttons.push(button);
+                break;
+            case "Risks.done" :
+                this.activeVideo.videoContainer.removeEvents('click');
+                this.nextStep();
+                break;
+            case "KRFeedback.ready":
+
+                this.KRFeedbackImage.add(this.shape.container.id);
+                this.KRFeedbackImage.show();
+                this.currentStep.player.options.next = 'KRFeedback.done';
+                this.currentStep.player.start();
+                break;
+            case 'KRFeedback.done':
+                // add continue button
+                var button = this._setupButton("Continue", "button_Done", "KRFeedback.continue.done", this.buttonPosition.x, this.buttonPosition.y);
+                this.buttons.push(button);
+
+                break;
+            case 'KRFeedback.continue.done':
+                this._removeButtons();
+                this.shape.remove();
+
+                this._cleanUp();
+                // TODO: remove image if I'll use it
+                this.nextStep();
+                break;
+
             case "Continue.done":
                 this._removeVideos();
+                this._removeVideos();
                 this._cleanUp();
+                this._removeInteractions();
                 this.start();
                 break;
 
             case "risk.selected":
-
-                var el = document.getElementById('drivesmart');
+                /// the risks need to be inside some div which could be deleted later
+                var el = document.getElementById(this.options.unitTagId);
 
                 var elOffset = getPos(el);
 
@@ -189,7 +242,7 @@ var Unit = new Class({
                         top : params._y - elOffset.y - 30
                     }
                 });
-                this.risk_image.add('drivesmart');
+                this.risk_image.add(this.options.unitTagId);
                 this.risk_image.show();
                 break;
             case "shape.clicked":
@@ -267,7 +320,6 @@ var Unit = new Class({
                             id : "video_" + index + "_" + stepOrder,
                             next : 'not.set'
                         });
-                        // step.player.add(this.options.unitTagId);
                         this._setVideoSource(step.player, fileName);
                         this.mediaLoader.register(step.player.getLoaderInfo());
                         // we want to store this so all VideoJS player can be removed correctly (see remove() in VideoPlayer)
@@ -289,16 +341,16 @@ var Unit = new Class({
                 case "Inter":
                     var questionsRawData = item.childNodes;
                     var questions = {
-                        data : [],
-                        correct : '',
+                        data : new Array(),
                         style : this.panelPosition
                     }
 
-                    Array.each(questionsRawData, function(question, index) {
-                        questions.data.push(question.value);
-                        if (question.attributes.correct == true) {
-                            questions.correct = index;
+                    Array.each(questionsRawData, function(questionData, index) {
+                        var question = {
+                            text : questionData.value,
+                            correct : questionData.attributes.correct
                         }
+                        questions.data.push(question);
                     })
                     step.data = questions;
                     break;
@@ -312,12 +364,12 @@ var Unit = new Class({
         //console.log(step)
     },
     _cleanUp : function() {
-        var imageDiv = document.getElementById('imageHolder');
+        var imageDiv = document.getElementById('imageContainer');
         if (imageDiv != null) {
             imageDiv.dispose();
         }
         this._removeButtons();
-        this._removeInteractions();
+        //this._removeInteractions();
     },
     _removeButtons : function() {
         Array.each(this.buttons, function(item, index) {
@@ -331,13 +383,22 @@ var Unit = new Class({
             this.interactions = null;
         }
     },
+    _hideInteractions : function() {
+        if (this.interactions != null) {
+            this.interactions.hide();
+        }
+    },
+    _showInteractions : function() {
+        if (this.interactions != null) {
+            this.interactions.show();
+        }
+    },
     _removeVideos : function() {
         this.activeVideo = null;
         Array.each(this.videos, function(item, index) {
             item.remove();
         })
         this.videos.empty();
-
     },
     _hideOtherVideos : function(excludedId) {
         //var videos = $$('div.videoContainer');
@@ -354,20 +415,9 @@ var Unit = new Class({
         }.bind(this))
     },
     _setupRisks : function() {
-        // make sure the shapes are the child of the clickable area so they recieve the click events too
-        myVideoTag = $$('div.videoContainer');
-        var myMask = new Mask('drivesmart', {
-            inject : {
-                where : 'after',
-                target : this.activeVideo.containerID
-            }
-        });
-        myMask.show();
-        //var videoDiv = document.getElementById('videoHolder');
         this.shape = new Shape(this, {});
-        this.shape.add(myMask);
-
-        myMask.addEvent('click', function(e) {
+        this.shape.add(this.activeVideo.containerID);
+        this.activeVideo.videoContainer.addEvent('click', function(e) {
             this.fireEvent("TIMELINE", {
                 type : "risk.clicked",
                 id : this.options.id,
@@ -375,8 +425,6 @@ var Unit = new Class({
                 _x : e.page.x,
                 _y : e.page.y
             });
-            var shapeDiv = document.getElementById('shapeHolder');
-            // console.log(e.page.x + " " + e.page.y);
 
         }.bind(this));
     }

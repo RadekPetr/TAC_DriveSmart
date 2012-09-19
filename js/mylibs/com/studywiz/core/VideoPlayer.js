@@ -69,10 +69,10 @@ var VideoPlayer = new Class({
         console.log("++ Video Preload started: " + this.options.id);
         this.myVideoPlayer.ready(( function() {
                 this.myVideoPlayer.src(this.videoSource);
-                this.myVideoPlayer.size('640', '480');                
+                this.myVideoPlayer.size('640', '480');
                 this.myVideoPlayer.pause();
 
-                this.myVideoPlayer.addEvent("loadstart", function() {                  
+                this.myVideoPlayer.addEvent("loadstart", function() {
 
                     this.options.parent.mediaLoader.reportProgress(this.getLoaderInfo());
                     console.log("Video Load progress: " + (this.myVideoPlayer.bufferedPercent() * 100.00));
@@ -115,7 +115,7 @@ var VideoPlayer = new Class({
     },
     // ---------------------------
     hide : function() {
-        this.videoContainer.fade('out', 0);
+        this.videoContainer.fade('out');
     },
     // ---------------------------
     stop : function() {
@@ -163,6 +163,11 @@ var VideoPlayer = new Class({
         var progress = 0;
         if (this.myVideoPlayer != null) {
             progress = this.myVideoPlayer.bufferedPercent();
+
+            console.log("**** Video Load progress: " + (this.myVideoPlayer.bufferedPercent() * 100.00));
+            console.log("**** Video Load progress buffered: " + this.myVideoPlayer.buffered());
+            console.log("**** Video duration: " + this.myVideoPlayer.duration());
+
         }
         loaderInfo[this.options.id] = {
             'progress' : progress,
@@ -174,7 +179,7 @@ var VideoPlayer = new Class({
     // ----------------------------------------------------------
     _reportProgress : function() {
         this.options.parent.mediaLoader.reportProgress(this.getLoaderInfo());
-        console.log("Video Load progress: " + (this.myVideoPlayer.bufferedPercent() * 100.00));
+
     }
 })
 
