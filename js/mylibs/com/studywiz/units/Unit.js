@@ -10,7 +10,7 @@ var Unit = new Class({
         audioFolder : 'media/sound/',
         videoFolder : 'media/video/',
         imageFolder : 'media/images/',
-        sequenceID : 'seq_90'
+        sequenceID : 'seq_4'
     },
     initialize : function(myOptions) {
         this.setOptions(myOptions);
@@ -99,16 +99,21 @@ var Unit = new Class({
                     step.player.show();
                     step.player.start();
                     this._hideOtherVideos(step.player.playerID);
+                    //TODO: noBg1="1"
                     break;
                 case "Question":
                     step.player.options.next = 'Question.done';
                     step.player.start();
+                    //TODO: cmd="hidescreen"
                     break;
                 case "QuestionUser":
                     this._removeInteractions();
                     this.interactions = this._setupQuestions(step.data);
                     var button = this._setupButton("Submit answer", "button_2", "QuestionUser.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
+                    //TODO: resp="3"
+                    //TODO: notrack="true"
+                    //TODO: image="country_cla01_next_first.jpg"
                     break;
                 case "QuestionFeedback":
                     this._removeButtons();
@@ -116,10 +121,13 @@ var Unit = new Class({
                     this.interactions.showCorrect();
                     step.player.options.next = 'QuestionFeedback.done';
                     step.player.start();
+                    //TODO: show="MudScreen"
+                    //TODO:  KeepUserSelection="1"
                     break;
                 case "PlayAudio":
                     step.player.options.next = 'PlayAudio.done';
                     step.player.start();
+                    //TODO: hide="box"
                     break;
                 case "Continue":
                     var button = this._setupButton("Continue", "button_3", "Continue.done", this.buttonPosition.x, this.buttonPosition.y);
@@ -134,6 +142,7 @@ var Unit = new Class({
                     this._setupRisks();
                     step.player.options.next = 'Risks.ready';
                     step.player.start();
+                    //TODO: <Audio waitfor="true">sound/scanning/mp3/scan_vsbkr1b.mp3</Audio>
                     break;
                 case "KRFeedback":
                     this.KRFeedbackImage = new ImageMedia(this, {

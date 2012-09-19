@@ -2,10 +2,10 @@
 <root>
   <Seq Ex="1">
     <Step fmt="PlayVideo">
-      <Video>country_cst26_start</Video>
+      <Video>country/country_cst26_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdcb1b.mp3</Audio>
+      <Audio>country/country_vdcb1b</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -16,19 +16,19 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="1,2">
-      <Audio>media/sound/country/country_vdcb1c.mp3</Audio>
+      <Audio>country/country_vdcb1c</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/country/country_vdcb1d.mp3</Audio>
+      <Audio>country/country_vdcb1d</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_cst26_next</Video>
+      <Video>country/country_cst26_next</Video>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/country/country_vdcb1e.mp3</Audio>
+      <Audio>country/country_vdcb1e</Audio>
     </Step>
     <Step fmt="Question" image="country_cst26_next_first.jpg">
-      <Audio>media/sound/country/country_vdcb1f.mp3</Audio>
+      <Audio>country/country_vdcb1f</Audio>
     </Step>
     <Step fmt="QuestionUser" notrack="true">
       <Inter>
@@ -38,16 +38,16 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-      <Audio>media/sound/country/country_vdcb1g.mp3</Audio>
+      <Audio>country/country_vdcb1g</Audio>
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
   <Seq Ex="2">
     <Step fmt="PlayVideo">
-      <Video>country_cst16_start</Video>
+      <Video>country/country_cst16_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdcb1b.mp3</Audio>
+      <Audio>country/country_vdcb1b</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -58,19 +58,19 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2,3">
-      <Audio>media/sound/country/country_vdcb2c.mp3</Audio>
+      <Audio>country/country_vdcb2c</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/country/country_vdcb2d.mp3</Audio>
+      <Audio>country/country_vdcb2d</Audio>
     </Step>
     <Step fmt="PlayVideo" noBg1="1">
-      <Video>country_cst16_next</Video>
+      <Video>country/country_cst16_next</Video>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/country/country_vdcb2e.mp3</Audio>
+      <Audio>country/country_vdcb2e</Audio>
     </Step>
     <Step fmt="Question" image="country_cst16_next_first.jpg">
-      <Audio>media/sound/country/country_vdcb1f.mp3</Audio>
+      <Audio>country/country_vdcb1f</Audio>
     </Step>
     <Step fmt="QuestionUser" notrack="true">
       <Inter>
@@ -80,16 +80,16 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-      <Audio>media/sound/country/country_vdcb2g.mp3</Audio>
+      <Audio>country/country_vdcb2g</Audio>
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
   <Seq Ex="3">
     <Step fmt="PlayVideo">
-      <Video>country_cst14_start</Video>
+      <Video>country/country_cst14_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdcb1b.mp3</Audio>
+      <Audio>country/country_vdcb1b</Audio>
       <Inter />
       <Post />
     </Step>
@@ -102,19 +102,19 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2,3">
-      <Audio>media/sound/country/country_vdcb3c.mp3</Audio>
+      <Audio>country/country_vdcb3c</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/country/country_vdcb3d.mp3</Audio>
+      <Audio>country/country_vdcb3d</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_cst14_next</Video>
+      <Video>country/country_cst14_next</Video>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/country/country_vdcb3e.mp3</Audio>
+      <Audio>country/country_vdcb3e</Audio>
     </Step>
     <Step fmt="Question" image="country_cst14_next_first.jpg">
-      <Audio>media/sound/country/country_vdcb1f.mp3</Audio>
+      <Audio>country/country_vdcb1f</Audio>
     </Step>
     <Step fmt="QuestionUser" notrack="true">
       <Inter>
@@ -125,16 +125,16 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-      <Audio>media/sound/country/country_vdcb3g.mp3</Audio>
+      <Audio>country/country_vdcb3g</Audio>
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
   <Seq Ex="4">
     <Step fmt="PlayVideo">
-      <Video>country_cla01_start</Video>
+      <Video>country/country_cla01_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdcb1b.mp3</Audio>
+      <Audio>country/country_vdcb1b</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -145,18 +145,18 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="1,3">
-      <Audio>media/sound/country/country_vdcb4c.mp3</Audio>
+      <Audio>country/country_vdcb4c</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/country/country_vdcb4d.mp3</Audio>
+      <Audio>country/country_vdcb4d</Audio>
       <Inter />
       <Post />
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_cla01_next</Video>
+      <Video>country/country_cla01_next</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdcb1f.mp3</Audio>
+      <Audio>country/country_vdcb1f</Audio>
     </Step>
     <Step fmt="QuestionUser" notrack="true" image="country_cla01_next_first.jpg">
       <Inter>
@@ -166,16 +166,16 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-      <Audio>media/sound/country/country_vdcb4f.mp3</Audio>
+      <Audio>country/country_vdcb4f</Audio>
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
   <Seq desc="Exercise 5" Ex="5">
     <Step fmt="PlayVideo">
-      <Video>country_cst25_start</Video>
+      <Video>country/country_cst25_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdcb1b.mp3</Audio>
+      <Audio>country/country_vdcb1b</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -185,16 +185,16 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
-      <Audio>media/sound/country/country_vdca1c.mp3</Audio>
+      <Audio>country/country_vdca1c</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/country/country_vdca1d.mp3</Audio>
+      <Audio>country/country_vdca1d</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_cst25_next</Video>
+      <Video>country/country_cst25_next</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdcb4e.mp3</Audio>
+      <Audio>country/country_vdcb4e</Audio>
     </Step>
     <Step fmt="QuestionUser" notrack="true" image="country_cst25_next_first.jpg">
       <Inter>
@@ -204,7 +204,7 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-      <Audio>media/sound/country/country_vdca1f.mp3</Audio>
+      <Audio>country/country_vdca1f</Audio>
     </Step>
     <Step fmt="Continue">
       <Inter />
@@ -216,10 +216,10 @@
   <Seq desc="This exercise is handled by the content def" Ex="6"></Seq>
   <Seq desc="Exercise 7" Ex="7">
     <Step fmt="PlayVideo">
-      <Video>country_fto04_start</Video>
+      <Video>country/country_fto04_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdcb1b.mp3</Audio>
+      <Audio>country/country_vdcb1b</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -229,16 +229,16 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
-      <Audio>media/sound/country/country_vdfa1c.mp3</Audio>
+      <Audio>country/country_vdfa1c</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/country/country_vdbc1e.mp3</Audio>
+      <Audio>country/country_vdbc1e</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_fto04_next</Video>
+      <Video>country/country_fto04_next</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdcb4e.mp3</Audio>
+      <Audio>country/country_vdcb4e</Audio>
     </Step>
     <Step fmt="QuestionUser" notrack="true" image="country_fto04_next_first.jpg">
       <Inter>
@@ -248,16 +248,16 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" notrack="true" FadeQ="" KeepUserSelection="1">
-      <Audio>media/sound/country/country_vdfa1f.mp3</Audio>
+      <Audio>country/country_vdfa1f</Audio>
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
   <Seq desc="Exercise 8" Ex="8">
     <Step fmt="PlayVideo">
-      <Video>country_fat08_start</Video>
+      <Video>country/country_fat08_start</Video>
     </Step>
     <Step fmt="QuestionUser" cmd="">
-      <Audio>media/sound/country/country_vdfa2b.mp3</Audio>
+      <Audio>country/country_vdfa2b</Audio>
       <Inter>
         <Data correct="false">Below the speed limit</Data>
         <Data correct="false">At or around the speed limit</Data>
@@ -266,25 +266,25 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="1,2">
-      <Audio>media/sound/country/country_vdfa2c.mp3</Audio>
+      <Audio>country/country_vdfa2c</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_fat08_next</Video>
+      <Video>country/country_fat08_next</Video>
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
   <Seq desc="Exercise 9" Ex="9">
     <Step fmt="PlayVideo">
-      <Video>country_cst23_start</Video>
+      <Video>country/country_cst23_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdbc1b.mp3</Audio>
+      <Audio>country/country_vdbc1b</Audio>
     </Step>
     <Step fmt="Cameo">
       <Video>video/Cameo/cameo_cdbc1.swf</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdbc1c.mp3</Audio>
+      <Audio>country/country_vdbc1c</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -294,24 +294,24 @@
       </Inter>
       <Post></Post>
     </Step>
-    <Step hide="box">
-      <Audio>media/sound/country/country_vdbc1d.mp3</Audio>
+    <Step fmt="PlayAudio" hide="box">
+      <Audio>country/country_vdbc1d</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/country/country_vdbc1e.mp3</Audio>
+      <Audio>country/country_vdbc1e</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_cst23_next</Video>
+      <Video>country/country_cst23_next</Video>
     </Step>
     <Step fmt="KeyRisk">
       <Video Zones="229:172:37:28,215:200:23:21,192:222:29:21,150:243:57:33"></Video>
-      <Audio waitfor="true">sound/scanning/scan_vsbkr1b.mp3</Audio>
+      <Audio waitfor="true">scanning/scan_vsbkr1b</Audio>
     </Step>
-    <Step fmt="KRFeedback" image="images/keyrisks/country_cst23_next.jpg">
-      <Audio>media/sound/country/country_vdbc1h.mp3</Audio>
+    <Step fmt="KRFeedback" image="keyrisks/country_cst23_next.jpg">
+      <Audio>country/country_vdbc1h</Audio>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdbc1i.mp3</Audio>
+      <Audio>country/country_vdbc1i</Audio>
     </Step>
     <Step fmt="QuestionUser" notrack="true">
       <Inter>
@@ -323,25 +323,61 @@
       </Post>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_cst23_next_next</Video>
+      <Video>country/country_cst23_next_next</Video>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="1">
-      <Audio>media/sound/country/country_vdbc1j.mp3</Audio>
+      <Audio>country/country_vdbc1j</Audio>
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
+  
+  <Seq desc="Exercise 9" Ex="90">
+   
+    <Step fmt="PlayAudio">
+      <Audio>country/country_vdbc1e</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>country/country_cst23_next</Video>
+    </Step>
+    <Step fmt="KeyRisk">
+      <Video Zones="229:172:37:28,215:200:23:21,192:222:29:21,150:243:57:33"></Video>
+      <Audio waitfor="true">scanning/scan_vsbkr1b</Audio>
+    </Step>
+    <Step fmt="KRFeedback" image="keyrisks/country_cst23_next.jpg">
+      <Audio>country/country_vdbc1h</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>country/country_vdbc1i</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true">
+      <Inter>
+        <Data correct="false">Continue to pass</Data>
+        <Data correct="true">Brake and pull in behind slower car</Data>
+      </Inter>
+      <Post>
+        <Element />
+      </Post>
+    </Step>
+   
+    <Step fmt="Continue"></Step>
+  </Seq>
+  
+  
+  
+  
+  
   <Seq desc="Exercise 10" Ex="10">
     <Step fmt="PlayVideo">
-      <Video>country_cst09_start</Video>
+      <Video>country/country_cst09_start</Video>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/country/country_vdbc2b.mp3</Audio>
+      <Audio>country/country_vdbc2b</Audio>
     </Step>
     <Step fmt="Cameo">
       <Video>video/Cameo/cameo_cdbc2.swf</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdbc1c.mp3</Audio>
+      <Audio>country/country_vdbc1c</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -351,25 +387,25 @@
       </Inter>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="1,2">
-      <Audio>media/sound/country/country_vdbc2d.mp3</Audio>
+      <Audio>country/country_vdbc2d</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/country/country_vdbc1e.mp3</Audio>
+      <Audio>country/country_vdbc1e</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_cst09_next</Video>
+      <Video>country/country_cst09_next</Video>
     </Step>
     <Step fmt="KeyRisk">
       <Video Zones="167:131:77:82,267:138:71:74,136:2124:84:34,3:254:168:69,327:214:79:26,390:239:103:47"></Video>
-      <Audio waitfor="true">sound/scanning/scan_vsbkr1b.mp3</Audio>
+      <Audio waitfor="true">scanning/scan_vsbkr1b</Audio>
       <Inter />
       <Post />
     </Step>
-    <Step fmt="KRFeedback" image="images/keyrisks/country_cst09_next.jpg">
-      <Audio>media/sound/country/country_vdbc2h.mp3</Audio>
+    <Step fmt="KRFeedback" image="keyrisks/country_cst09_next.jpg">
+      <Audio>country/country_vdbc2h</Audio>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdbc2i.mp3</Audio>
+      <Audio>country/country_vdbc2i</Audio>
     </Step>
     <Step fmt="QuestionUser" notrack="true">
       <Inter>
@@ -382,21 +418,21 @@
       </Post>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_cst09_next_next</Video>
+      <Video>country/country_cst09_next_next</Video>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="1,3">
-      <Audio>media/sound/country/country_vdbc2j.mp3</Audio>
+      <Audio>country/country_vdbc2j</Audio>
     </Step>
     <Step fmt="Commentary" exe="country,country_vdbc1k,country_cst09_next,country_vdbc1l">
-      <Audio>media/sound/country/country_vdbc1k.mp3</Audio>
+      <Audio>country/country_vdbc1k</Audio>
     </Step>
   </Seq>
   <Seq desc="Exercise 11" Ex="11">
     <Step fmt="PlayVideo">
-      <Video>country_cst11_start</Video>
+      <Video>country/country_cst11_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdac1e.mp3</Audio>
+      <Audio>country/country_vdac1e</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -406,24 +442,24 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
-      <Audio>media/sound/country/country_vdac1f.mp3</Audio>
+      <Audio>country/country_vdac1f</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/extra/extra_rest_vid.mp3</Audio>
+      <Audio>extra/extra_rest_vid</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_cst11_next</Video>
+      <Video>country/country_cst11_next</Video>
     </Step>
     <Step fmt="Commentary" exe="country,extra_vcomi,country_cst11_start,country_vdac1y.wav,oncoming car,slow car ahead,overtook when safe,car blocking our lane,oncoming car">
-      <Audio>media/sound/extra/extra_vcomi.mp3</Audio>
+      <Audio>extra/extra_vcomi</Audio>
     </Step>
   </Seq>
   <Seq desc="Exercise 12" Ex="12">
     <Step fmt="PlayVideo">
-      <Video>shared_cst12_start</Video>
+      <Video>shared/shared_cst12_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdac2e.mp3</Audio>
+      <Audio>country/country_vdac2e</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -433,24 +469,24 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
-      <Audio>media/sound/country/country_vdac2f.mp3</Audio>
+      <Audio>country/country_vdac2f</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/extra/extra_rest_vid.mp3</Audio>
+      <Audio>extra/extra_rest_vid</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>shared_cst12_next</Video>
+      <Video>shared/shared_cst12_next</Video>
     </Step>
     <Step fmt="Commentary" exe="country,extra_vcomi,shared_cst12_start,country_vdac2y.wav,car ahead indicated,motorcyclist overtook us,car leaving rest area,oncoming car">
-      <Audio>media/sound/extra/extra_vcomi.mp3</Audio>
+      <Audio>extra/extra_vcomi</Audio>
     </Step>
   </Seq>
   <Seq desc="Exercise 13" Ex="13">
     <Step fmt="PlayVideo">
-      <Video>country_cst16_start</Video>
+      <Video>country/country_cst16_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdac3e.mp3</Audio>
+      <Audio>country/country_vdac3e</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -460,24 +496,24 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
-      <Audio>media/sound/country/country_vdac3f.mp3</Audio>
+      <Audio>country/country_vdac3f</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/extra/extra_rest_vid.mp3</Audio>
+      <Audio>extra/extra_rest_vid</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_cst16_next</Video>
+      <Video>country/country_cst16_next</Video>
     </Step>
     <Step fmt="Commentary" exe="country,extra_vcomi,country_cst16_start,country_vdac3y.wav,advisory road sign,car entering road,oncoming car">
-      <Audio>media/sound/extra/extra_vcomi.mp3</Audio>
+      <Audio>extra/extra_vcomi</Audio>
     </Step>
   </Seq>
   <Seq desc="Exercise 14" Ex="14">
     <Step fmt="PlayVideo">
-      <Video>country_cst13_start</Video>
+      <Video>country/country_cst13_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdac4e.mp3</Audio>
+      <Audio>country/country_vdac4e</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -487,24 +523,24 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
-      <Audio>media/sound/country/country_vdac4f.mp3</Audio>
+      <Audio>country/country_vdac4f</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/extra/extra_rest_vid.mp3</Audio>
+      <Audio>extra/extra_rest_vid</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_cst13_next</Video>
+      <Video>country/country_cst13_next</Video>
     </Step>
     <Step fmt="Commentary" exe="country,extra_vcomi,country_cst13_start,country_vdac4y.wav,we turned right,we indicated to turn left,car approaching from right">
-      <Audio>media/sound/extra/extra_vcomi.mp3</Audio>
+      <Audio>extra/extra_vcomi</Audio>
     </Step>
   </Seq>
   <Seq desc="Exercise 15" Ex="15">
     <Step fmt="PlayVideo">
-      <Video>country_cst01_start</Video>
+      <Video>country/country_cst01_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdac5e.mp3</Audio>
+      <Audio>country/country_vdac5e</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -514,24 +550,24 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
-      <Audio>media/sound/country/country_vdac5f.mp3</Audio>
+      <Audio>country/country_vdac5f</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/extra/extra_rest_vid.mp3</Audio>
+      <Audio>extra/extra_rest_vid</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_cst01_next</Video>
+      <Video>country/country_cst01_next</Video>
     </Step>
     <Step fmt="Commentary" exe="country,extra_vcomi,country_cst01_start,country_vdac5y.wav,motorcycle overtaking,car and pedestrian at bridge,pedestrian crossing the bridge,oncoming car">
-      <Audio>media/sound/extra/extra_vcomi.mp3</Audio>
+      <Audio>extra/extra_vcomi</Audio>
     </Step>
   </Seq>
   <Seq desc="Exercise 16" Ex="16">
     <Step fmt="PlayVideo">
-      <Video>country_cst20_start</Video>
+      <Video>country/country_cst20_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdac6e.mp3</Audio>
+      <Audio>country/country_vdac6e</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -541,24 +577,24 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
-      <Audio>media/sound/country/country_vdac6f.mp3</Audio>
+      <Audio>country/country_vdac6f</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/extra/extra_rest_vid.mp3</Audio>
+      <Audio>extra/extra_rest_vid</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_cst20_next</Video>
+      <Video>country/country_cst20_next</Video>
     </Step>
     <Step fmt="Commentary" exe="country,extra_vcomi,country_cst20_start,country_vdac6y.wav,oncoming car,car started to enter road">
-      <Audio>media/sound/extra/extra_vcomi.mp3</Audio>
+      <Audio>extra/extra_vcomi</Audio>
     </Step>
   </Seq>
   <Seq desc="Exercise 17" Ex="17">
     <Step fmt="PlayVideo">
-      <Video>country_cst21_start</Video>
+      <Video>country/country_cst21_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdac7e.mp3</Audio>
+      <Audio>country/country_vdac7e</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -569,24 +605,24 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="1,2">
-      <Audio>media/sound/country/country_vdac7f.mp3</Audio>
+      <Audio>country/country_vdac7f</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/extra/extra_rest_vid.mp3</Audio>
+      <Audio>extra/extra_rest_vid</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_cst21_next</Video>
+      <Video>country/country_cst21_next</Video>
     </Step>
     <Step fmt="Commentary" exe="country,extra_vcomi,country_cst21_start,country_vdac7y.wav,slow car,advisory road sign,oncoming car overtaking truck">
-      <Audio>media/sound/extra/extra_vcomi.mp3</Audio>
+      <Audio>extra/extra_vcomi</Audio>
     </Step>
   </Seq>
   <Seq desc="Exercise 18" Ex="18">
     <Step fmt="PlayVideo">
-      <Video>country_cla03_start</Video>
+      <Video>country/country_cla03_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdac8e.mp3</Audio>
+      <Audio>country/country_vdac8e</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -596,24 +632,24 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
-      <Audio>media/sound/country/country_vdac8f.mp3</Audio>
+      <Audio>country/country_vdac8f</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/extra/extra_rest_vid.mp3</Audio>
+      <Audio>extra/extra_rest_vid</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_cla03_next</Video>
+      <Video>country/country_cla03_next</Video>
     </Step>
     <Step fmt="Commentary" exe="country,extra_vcomi,country_cla03_start,country_vdac8y.wav,horses,car ahead pulled over,horses moved onto road,oncoming car,our car slowed">
-      <Audio>media/sound/extra/extra_vcomi.mp3</Audio>
+      <Audio>extra/extra_vcomi</Audio>
     </Step>
   </Seq>
   <Seq desc="Exercise 19" Ex="19">
     <Step fmt="PlayVideo">
-      <Video>country_clp02_start</Video>
+      <Video>country/country_clp02_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdac9e.mp3</Audio>
+      <Audio>country/country_vdac9e</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -623,24 +659,24 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
-      <Audio>media/sound/country/country_vdac9f.mp3</Audio>
+      <Audio>country/country_vdac9f</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/extra/extra_rest_vid.mp3</Audio>
+      <Audio>extra/extra_rest_vid</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_clp02_next</Video>
+      <Video>country/country_clp02_next</Video>
     </Step>
     <Step fmt="Commentary" exe="country,extra_vcomi,country_clp02_start,country_vdac9y.wav,horses on road,we overtook first horse,oncoming car,we slowed and moved left">
-      <Audio>media/sound/extra/extra_vcomi.mp3</Audio>
+      <Audio>extra/extra_vcomi</Audio>
     </Step>
   </Seq>
   <Seq desc="Exercise 20" Ex="20">
     <Step fmt="PlayVideo">
-      <Video>country_fto01_start</Video>
+      <Video>country/country_fto01_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/freeway/freeway_vdaf1e.mp3</Audio>
+      <Audio>freeway/freeway_vdaf1e</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -650,24 +686,24 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="1">
-      <Audio>media/sound/freeway/freeway_vdaf1f.mp3</Audio>
+      <Audio>freeway/freeway_vdaf1f</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/extra/extra_rest_vid.mp3</Audio>
+      <Audio>extra/extra_rest_vid</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_fto01_next</Video>
+      <Video>country/country_fto01_next</Video>
     </Step>
     <Step fmt="Commentary" exe="country,extra_vcomi,country_fto01_start,country_vdaf1y.wav,overtook car,fast car approaching from behind,merged left">
-      <Audio>media/sound/extra/extra_vcomi.mp3</Audio>
+      <Audio>extra/extra_vcomi</Audio>
     </Step>
   </Seq>
   <Seq desc="Exercise 21" Ex="21">
     <Step fmt="PlayVideo">
-      <Video>shared_faj09_start</Video>
+      <Video>shared/shared_faj09_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/freeway/freeway_vdaf2e.mp3</Audio>
+      <Audio>freeway/freeway_vdaf2e</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -677,24 +713,24 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="2">
-      <Audio>media/sound/freeway/freeway_vdaf2f.mp3</Audio>
+      <Audio>freeway/freeway_vdaf2f</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/extra/extra_rest_vid.mp3</Audio>
+      <Audio>extra/extra_rest_vid</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>shared_faj09_next</Video>
+      <Video>shared/shared_faj09_next</Video>
     </Step>
     <Step fmt="Commentary" exe="country,extra_vcomi,shared_faj09_start,country_vdaf2y.wav,merged left,fast cars approaching">
-      <Audio>media/sound/extra/extra_vcomi.mp3</Audio>
+      <Audio>extra/extra_vcomi</Audio>
     </Step>
   </Seq>
   <Seq desc="Exercise 22" Ex="22">
     <Step fmt="PlayVideo">
-      <Video>country_fat14_start</Video>
+      <Video>country/country_fat14_start</Video>
     </Step>
     <Step fmt="Question">
-      <Audio>media/sound/country/country_vdaf7e.mp3</Audio>
+      <Audio>country/country_vdaf7e</Audio>
     </Step>
     <Step fmt="QuestionUser">
       <Inter>
@@ -704,16 +740,16 @@
       <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="1">
-      <Audio>media/sound/country/country_vdaf7f.mp3</Audio>
+      <Audio>country/country_vdaf7f</Audio>
     </Step>
     <Step fmt="PlayAudio">
-      <Audio>media/sound/extra/extra_rest_vid.mp3</Audio>
+      <Audio>extra/extra_rest_vid</Audio>
     </Step>
     <Step fmt="PlayVideo">
-      <Video>country_fat14_next</Video>
+      <Video>country/country_fat14_next</Video>
     </Step>
     <Step fmt="Commentary" exe="country,extra_vcomi,country_fat14_start,country_vdaf7y.wav,slow car ahead,we overtook,car behind approaching quickly">
-      <Audio>media/sound/extra/extra_vcomi.mp3</Audio>
+      <Audio>extra/extra_vcomi</Audio>
     </Step>
   </Seq>
 </root>

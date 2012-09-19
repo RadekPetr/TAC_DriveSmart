@@ -343,7 +343,7 @@
       <Video Zones="229:172:37:28,215:200:23:21,192:222:29:21,150:243:57:33"></Video>
       <Audio waitfor="true">scanning/scan_vsbkr1b</Audio>
     </Step>
-    <Step fmt="KRFeedback" image="images/keyrisks/country_cst23_next.jpg">
+    <Step fmt="KRFeedback" image="keyrisks/country_cst23_next.jpg">
       <Audio>country/country_vdbc1h</Audio>
     </Step>
     <Step fmt="Question">
@@ -406,7 +406,7 @@
       <Inter />
       <Post />
     </Step>
-    <Step fmt="KRFeedback" image="images/keyrisks/country_cst09_next.jpg">
+    <Step fmt="KRFeedback" image="keyrisks/country_cst09_next.jpg">
       <Audio>country/country_vdbc2h</Audio>
     </Step>
     <Step fmt="Question">
