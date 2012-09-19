@@ -17,7 +17,10 @@ var Questions = new Class({
             'padding' : '8px 8px 8px 8px',
             'font-family' : 'Arial',
             '-moz-border-radius' : '0.5em 0.5em 0.5em 0.5em',
-            'background' : 'rgba(0, 0, 0, 0.6)'
+            'background' : 'rgba(0, 0, 0, 0.6)',
+            'width' : '550px',
+            'opacity' : '0',
+            'visibility' : 'hidden'
         },
 
         data : ["Q1", "Q2", "Q3"],
@@ -37,7 +40,7 @@ var Questions = new Class({
 
         //this.options.data.each( function(item, index) {
 
-        Array.each(this.options.data, function(item, index) {
+        Array.each(this.options.data, function(question, index) {
 
             var radio = new Element('input', {
                 'type' : 'radio',
@@ -48,11 +51,13 @@ var Questions = new Class({
 
             var label = new Element('label', {
                 'for' : "item_" + index,
-                'html' : item,
+                'html' : question.text,
                 'id' : "item_label_" + index
             });
             label.setStyles({
-                'color' : '#FFFFFF'
+                'color' : '#FFFFFF',
+                'display' : 'block',
+                'margin-left' : '18px'
             })
 
             var paragraph = new Element('p', {});
@@ -64,10 +69,11 @@ var Questions = new Class({
         }.bind(this))
     }, // ---------------------------
     add : function(parentTagID) {
-        var myDiv = document.getElementById('panelHolder');
+        var myParent = document.getElementById(parentTagID);
+        var myDiv = myParent.getElement('div[id=panelContainer]');
         if (myDiv == null) {
             var myDiv = new Element("div", {
-                id : "panelHolder"
+                id : "panelContainer"
             });
             myDiv.inject($(parentTagID));
         }
@@ -75,7 +81,7 @@ var Questions = new Class({
         myDiv.adopt(this.panel);
 
         this.panel.inject(myDiv);
-        this.hide();
+        // this.panel.fade('hide', 0);
 
         this.panel.setStyles(this.options.style);
 
@@ -91,32 +97,35 @@ var Questions = new Class({
     remove : function() {
         this.hide();
         var removedElement = this.panel.dispose();
-        document.getElementById('panelHolder').dispose();
+        document.getElementById('panelContainer').dispose();
     },
     // ---------------------------
     show : function() {
-        // TODO : fade in
-        // this.buttonElement.show();
-        this.panel.fade('hide');
-        this.panel.fade('in');
+        if (this.panel.style.opacity == 0) {
+            //this.panel.fade('hide', 0);
+            this.panel.fade('in');
+        }
+
     },
     // ---------------------------
     hide : function() {
-        this.panel.fade('out');
-        // this.buttonElement.hide();
+        if (this.panel.style.opacity > 0) {
+            this.panel.fade('out');
+        }
     },
     showCorrect : function() {
 
-        Array.each(this.options.data, function(item, index) {
+        Array.each(this.options.data, function(question, index) {
 
             var label = document.getElementById("item_label_" + index);
             var radio = document.getElementById("item_" + index);
+            
             console.log("Disabling");
             console.log(radio);
             radio.set('disabled', true);
 
-            if (this.options.correct != null) {
-                if (this.options.correct != index) {
+           
+                if (question.correct == false) {
                     label.setStyles({
                         'color' : '#CCCCCC'
                     })
@@ -126,7 +135,7 @@ var Questions = new Class({
                         'font-weight' : 'bold'
                     })
                 }
-            }
+            
 
         }.bind(this));
     }
