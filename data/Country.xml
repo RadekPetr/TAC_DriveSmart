@@ -281,7 +281,7 @@
       <Audio>country/country_vdbc1b</Audio>
     </Step>
     <Step fmt="Cameo">
-      <Video>video/Cameo/cameo_cdbc1.swf</Video>
+      <Video>cameo/cameo_cdbc1</Video>
     </Step>
     <Step fmt="Question">
       <Audio>country/country_vdbc1c</Audio>
@@ -294,7 +294,7 @@
       </Inter>
       <Post></Post>
     </Step>
-    <Step fmt="PlayAudio" hide="box">
+    <Step fmt="QuestionFeedback" hide="box">
       <Audio>country/country_vdbc1d</Audio>
     </Step>
     <Step fmt="PlayAudio">
@@ -307,7 +307,7 @@
       <Video Zones="229:172:37:28,215:200:23:21,192:222:29:21,150:243:57:33"></Video>
       <Audio waitfor="true">scanning/scan_vsbkr1b</Audio>
     </Step>
-    <Step fmt="KRFeedback" image="images/keyrisks/country_cst23_next.jpg">
+    <Step fmt="KRFeedback" image="keyrisks/country_cst23_next.jpg">
       <Audio>country/country_vdbc1h</Audio>
     </Step>
     <Step fmt="Question">
@@ -332,12 +332,11 @@
   </Seq>
   
   <Seq desc="Exercise 9" Ex="90">
-   
-    <Step fmt="PlayAudio">
-      <Audio>country/country_vdbc1e</Audio>
-    </Step>
     <Step fmt="PlayVideo">
       <Video>country/country_cst23_next</Video>
+    </Step>
+    <Step fmt="Cameo">
+      <Video>cameo/cameo_cdbc1</Video>
     </Step>
     <Step fmt="KeyRisk">
       <Video Zones="229:172:37:28,215:200:23:21,192:222:29:21,150:243:57:33"></Video>
@@ -379,7 +378,7 @@
       <Audio>country/country_vdbc2b</Audio>
     </Step>
     <Step fmt="Cameo">
-      <Video>video/Cameo/cameo_cdbc2.swf</Video>
+      <Video>cameo/cameo_cdbc2</Video>
     </Step>
     <Step fmt="Question">
       <Audio>country/country_vdbc1c</Audio>
