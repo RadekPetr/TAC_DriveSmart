@@ -28,8 +28,7 @@ var ImageMedia = new Class({
             }.bind(this)
         });
     },
-    flash : function(to, from, reps, prop, dur) {
-
+    tween : function(to, from, reps, prop, dur, link, next) {
         //defaults
         if (!reps) {
             reps = 1;
@@ -40,18 +39,28 @@ var ImageMedia = new Class({
         if (!dur) {
             dur = 250;
         }
+        if (!link) {
+            link = 'chain';
+        }
 
         //create effect
         var effect = new Fx.Tween(this.image, {
             duration : dur,
-            link : 'chain'
+            link : link
         })
         //do it!
         for ( x = 1; x <= reps; x++) {
             effect.start(prop, from, to).start(prop, to, from);
         }
+        effect.addEvent("complete", function() {
+            this.options.parent.fireEvent("TIMELINE", {
+                type : "tween.done",
+                id : this.options.id,
+                next : next
+            })
+        }.bind(this))
     },
-    add : function(parentTagID) {
+    add : function(parentTagID, where) {
         console.log("parentTagID  " + parentTagID);
         var myParent = document.getElementById(parentTagID);
         var myDiv = myParent.getElement('div[id=imageContainer]');
@@ -60,7 +69,7 @@ var ImageMedia = new Class({
             var myDiv = new Element("div", {
                 id : "imageContainer"
             });
-            myDiv.inject($(parentTagID));
+            myDiv.inject($(parentTagID), where);
         }
         this.image.inject(myDiv);
 

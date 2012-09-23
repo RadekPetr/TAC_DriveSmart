@@ -17,6 +17,7 @@ var DataLoader = new Class({
         this.setOptions(myOptions);
         this.options.parent = myParent;
         this.data = null;
+        this.sequences = null;
     },
     // ----------------------------------------------------------
     start : function() {
@@ -52,6 +53,14 @@ var DataLoader = new Class({
     getSteps : function(sequenceId) {
         var steps = Array.clone(this.sequences[sequenceId])
         return steps;
+    },
+    getSequenceIDs : function() {
+        if (this.sequences != null) {
+            var IDs = this.sequences.getKeys();
+        } else {
+            var IDs = new Array();
+        }
+        return IDs;
     },
     // ----------------------------------------------------------
     _setupSequences : function() {

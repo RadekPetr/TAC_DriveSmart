@@ -3,8 +3,8 @@ var VideoPlayer = new Class({
     // ---------------------------
     options : {
         style : {
-            width : '640px',
-            height : '480px',
+            width : '640',
+            height : '480',
             position : 'absolute',
             left : '0px',
             top : '0px',
@@ -69,7 +69,8 @@ var VideoPlayer = new Class({
         console.log("++ Video Preload started: " + this.options.id);
         this.myVideoPlayer.ready(( function() {
                 this.myVideoPlayer.src(this.videoSource);
-                this.myVideoPlayer.size('640', '480');
+                console.log ("BLA" + this.options.style.width);
+                this.myVideoPlayer.size(this.options.style.width, this.options.style.height);
                 this.myVideoPlayer.pause();
 
                 this.myVideoPlayer.addEvent("loadstart", function() {

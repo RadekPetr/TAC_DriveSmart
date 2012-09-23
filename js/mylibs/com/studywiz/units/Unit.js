@@ -10,7 +10,7 @@ var Unit = new Class({
         audioFolder : 'media/sound/',
         videoFolder : 'media/video/',
         imageFolder : 'media/images/',
-        sequenceID : 'seq_4'
+        sequenceID : 'seq_1'
     },
     initialize : function(myOptions) {
         this.setOptions(myOptions);
@@ -35,7 +35,7 @@ var Unit = new Class({
     // ----------------------------------------------------------
     start : function() {
         // TODO handle mobile platforms: Browser.Platform.android
-
+        console.log("Starting SEQUENCE: " + this.options.sequenceID);
         this.buttonPosition = {
             x : 535,
             y : 415
@@ -45,6 +45,11 @@ var Unit = new Class({
             left : '5%',
             top : '25%'
         }
+
+        this._removeVideos();
+        this._cleanUp();
+        this._removeInteractions();
+
         // make sure there are no objects left
         this.buttons.empty();
         this.currentSequence.empty();
@@ -134,8 +139,9 @@ var Unit = new Class({
                     this.buttons.push(button);
                     break;
                 case "Commentary":
-                    // not implemented
-                    var button = this._setupButton("Continue", "button_3", "Continue.done", this.buttonPosition.x, this.buttonPosition.y);
+                    console.log("##### Commentary ######");
+                    alert("Commentary - Not implemented");
+                    var button = this._setupButton("Skip", "Skip", "Skip.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
                     break;
                 case "KeyRisk" :
@@ -153,10 +159,24 @@ var Unit = new Class({
                     });
                     this._removeButtons();
                     break;
+                case "Cameo":
+
+                    this.cameo_image = new ImageMedia(this, {
+                        src : 'img/visor.png',
+                        next : "Cameo.visor.image.ready",
+                        title : 'Visor',
+                        id : 'visor',
+                        style : {
+                            'left' : '170px'
+                        }
+                    });
+
+                    break;
             }
 
         } else {
             // seq finished
+            alert("Sequence finished, select another one");
         }
     },
     // ----------------------------------------------------------
@@ -166,6 +186,7 @@ var Unit = new Class({
         switch (params.next) {
             case "data.ready":
                 this.sequences = params.data;
+                this.setupDebug();
                 this.setupMedia();
                 break;
             case "media.ready":
@@ -229,10 +250,29 @@ var Unit = new Class({
 
             case "Continue.done":
                 this._removeVideos();
-                this._removeVideos();
+
                 this._cleanUp();
                 this._removeInteractions();
                 this.start();
+                break;
+
+            case "Cameo.visor.image.ready":
+                this.cameo_image.add(this.currentStep.player.containerID, 'before');
+                this.cameo_image.show();
+                this.cameo_image.tween('203px', '0px', 1, 'height', 400, 'ignore', 'Cameo.visor.tween.done')
+                break;
+            case "Cameo.visor.tween.done":
+                this.currentStep.player.options.next = 'Cameo.done';
+                this.currentStep.player.show();
+                this.currentStep.player.start();
+                break;
+            case "Cameo.done":
+                this.nextStep();
+                break;
+            case "Skip.done":
+                this._removeButtons();
+                this._cleanUp();
+                this.nextStep();
                 break;
 
             case "risk.selected":
@@ -266,6 +306,7 @@ var Unit = new Class({
     //------------------------------------------------------------------------
     _setVideoSource : function(player, filename) {
         var params = new Object();
+        var rand = "?" + Math.random();
         params.source = [{
             type : "video/mp4",
             src : filename + ".mp4"
@@ -319,20 +360,40 @@ var Unit = new Class({
     },
     // ----------------------------------------------------------
     _setupStepMedia : function(step, stepOrder) {
+        var stepType = step.attributes.fmt;
         Array.each(step.childNodes, function(item, index) {
             switch (item.name) {
                 case "Video" :
                     if (item.value != '') {
                         var fileName = this.options.videoFolder + stripFileExtension(item.value);
 
+                        if (stepType == 'Cameo') {
+                            var style = {
+                                'left' : '315px',
+                                'top' : '20px',
+                                'width' : '240',
+                                'height' : '175'
+                            }
+                        } else {
+                            style = {
+                                width : '640',
+                                height : '480',
+                                left : '0px',
+                                top : '0px'
+                            }
+
+                        }
                         step.player = new VideoPlayer(this, {
                             id : "video_" + index + "_" + stepOrder,
-                            next : 'not.set'
+                            next : 'not.set',
+                            'style' : style
                         });
+
                         this._setVideoSource(step.player, fileName);
                         this.mediaLoader.register(step.player.getLoaderInfo());
                         // we want to store this so all VideoJS player can be removed correctly (see remove() in VideoPlayer)
                         this.videos.push(step.player);
+
                     }
                     break;
                 case "Audio" :
@@ -371,6 +432,44 @@ var Unit = new Class({
         // now start the preloading for each of the items
         //console.log("---------------------------- Step");
         //console.log(step)
+    },
+    setupDebug : function() {
+        // add dropdown
+        var myDiv = $('debugContainer');
+        if (myDiv == null) {
+            var myDiv = new Element("div", {
+                id : "debugContainer"
+            });
+            myDiv.inject(this.options.unitTagId, 'before');
+            var sequenceSelector = new Element('select', {});
+            var sequenceSelectorButton = new Element('button', {
+                html : 'Start',
+                id : 'debug',
+                styles : {
+                },
+                events : {
+                    click : function() {
+                        this.options.sequenceID = sequenceSelector.options[sequenceSelector.selectedIndex].value;
+                        ;
+                        this.start();
+                    }.bind(this)
+                }
+            });
+            var sequenceList = this.dataLoader.getSequenceIDs();
+            Array.each(sequenceList, function(item, index) {
+                var option = new Element('option', {
+                    value : item,
+                    html : item
+                })
+                option.inject(sequenceSelector);
+
+            })
+
+            sequenceSelector.inject(myDiv);
+
+            sequenceSelectorButton.inject(myDiv);
+
+        }
     },
     _cleanUp : function() {
         var imageDiv = document.getElementById('imageContainer');
@@ -444,4 +543,4 @@ var Unit = new Class({
 
 */
 
-//this.intro_image.flash('0', '1', 50, 'opacity', 250);
+//this.intro_image.tween('0', '1', 50, 'opacity', 250);
