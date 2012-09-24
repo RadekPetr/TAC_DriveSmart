@@ -165,9 +165,9 @@ var VideoPlayer = new Class({
         if (this.myVideoPlayer != null) {
             progress = this.myVideoPlayer.bufferedPercent();
 
-            console.log("**** Video Load progress: " + (this.myVideoPlayer.bufferedPercent() * 100.00));
-            console.log("**** Video Load progress buffered: " + this.myVideoPlayer.buffered());
-            console.log("**** Video duration: " + this.myVideoPlayer.duration());
+            console.log(this.playerID + " **** Video Load progress: " + (this.myVideoPlayer.bufferedPercent() * 100.00));
+           // console.log(this.playerID + " **** Video Load progress buffered: " + this.myVideoPlayer.buffered());
+            console.log(this.playerID + " **** Video duration: " + this.myVideoPlayer.duration());
 
         }
         loaderInfo[this.options.id] = {

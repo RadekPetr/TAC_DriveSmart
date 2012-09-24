@@ -22,6 +22,7 @@ var Main = new Class({
     start : function() {
         var myUnit = new Unit({});
         myUnit.start();
+      //  myUnit.setupDebug();
     },
     // ----------------------------------------------------------
     // PRIVATE - load external js libraries so they are available to the project

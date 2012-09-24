@@ -10,7 +10,8 @@ var Unit = new Class({
         audioFolder : 'media/sound/',
         videoFolder : 'media/video/',
         imageFolder : 'media/images/',
-        sequenceID : 'seq_1'
+        sequenceID : 'seq_1',
+        module : 'country'
     },
     initialize : function(myOptions) {
         this.setOptions(myOptions);
@@ -25,6 +26,7 @@ var Unit = new Class({
         this.activeVideo = null;
         this.shape = null;
         this.currentStep = null;
+        this.cameo_image = null;
 
         this.mediaLoader = new MediaLoader(this, { });
         this.mediaLoader.add('drivesmart')
@@ -58,13 +60,14 @@ var Unit = new Class({
         this.activeVideo = null;
         this.shape = null;
         this.currentStep = null;
+        this.cameo_image = null;
         //
         this.setupData();
     },
     // ----------------------------------------------------------
     setupData : function() {
         this.dataLoader = new DataLoader(this, {
-            src : 'data/Country.xml',
+            src : 'data/' + this.options.module + '.xml',
             next : 'data.ready'
         });
         this.dataLoader.start();
@@ -80,7 +83,7 @@ var Unit = new Class({
         this.intro_image = new ImageMedia(this, {
             src : 'img/country_intro.png',
             next : "image.ready",
-            title : 'Country Intro',
+            title : 'Intro',
             id : 'introImage'
         });
 
@@ -442,6 +445,28 @@ var Unit = new Class({
             });
             myDiv.inject(this.options.unitTagId, 'before');
             var sequenceSelector = new Element('select', {});
+            var moduleSelector = new Element('select', {
+                events : {
+                    change : function() {
+
+                        this.options.module = moduleSelector.options[moduleSelector.selectedIndex].value;
+
+                        this.start();
+                    }.bind(this)
+                }
+            });
+
+            var option = new Element('option', {
+                value : 'country',
+                html : 'country'
+            })
+            option.inject(moduleSelector);
+            var option = new Element('option', {
+                value : 'urban',
+                html : 'urban'
+            })
+            option.inject(moduleSelector);
+
             var sequenceSelectorButton = new Element('button', {
                 html : 'Start',
                 id : 'debug',
@@ -450,7 +475,7 @@ var Unit = new Class({
                 events : {
                     click : function() {
                         this.options.sequenceID = sequenceSelector.options[sequenceSelector.selectedIndex].value;
-                        ;
+                        this.options.module = moduleSelector.options[moduleSelector.selectedIndex].value;
                         this.start();
                     }.bind(this)
                 }
@@ -464,9 +489,9 @@ var Unit = new Class({
                 option.inject(sequenceSelector);
 
             })
-
+            moduleSelector.inject(myDiv);
+            moduleSelector.value = this.options.module;
             sequenceSelector.inject(myDiv);
-
             sequenceSelectorButton.inject(myDiv);
 
         }
@@ -478,6 +503,12 @@ var Unit = new Class({
         }
         this._removeButtons();
         //this._removeInteractions();
+
+        var debugPanel = $('debugContainer');
+
+        if (debugPanel != null) {
+            debugPanel.dispose();
+        }
     },
     _removeButtons : function() {
         Array.each(this.buttons, function(item, index) {
