@@ -492,6 +492,7 @@ var Unit = new Class({
             moduleSelector.inject(myDiv);
             moduleSelector.value = this.options.module;
             sequenceSelector.inject(myDiv);
+            sequenceSelector.value = this.options.sequenceID;
             sequenceSelectorButton.inject(myDiv);
 
         }

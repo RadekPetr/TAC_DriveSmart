@@ -2416,7 +2416,7 @@ _V_.Player = _V_.Component.extend({
   trackProgress: function(){
     this.progressInterval = setInterval(_V_.proxy(this, function(){
       // Don't trigger unless buffered amount is greater than last time
-      // log(this.values.bufferEnd, this.buffered().end(0), this.duration())
+      console.log("VJS:" + this.values.bufferEnd, this.buffered().end(0), this.duration())
       /* TODO: update for multiple buffered regions */
       if (this.values.bufferEnd < this.buffered().end(0)) {
         this.triggerEvent("progress");
@@ -2636,6 +2636,7 @@ _V_.Player = _V_.Component.extend({
 
   // Calculates amount of buffer is full. Not in spec but useful.
   bufferedPercent: function(){
+      console.log ("VJSSSS: duration" + this.duration() + " end: " + this.buffered().end());
     return (this.duration()) ? this.buffered().end(0) / this.duration() : 0;
   },
 
