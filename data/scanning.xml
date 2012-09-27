@@ -1,0 +1,636 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Seq Ex="1">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_uia06_start</Video>
+    </Step>
+    <Step fmt="KeyRisk">
+      <Video Zones="393:1:230:300"></Video>
+      <Audio>scanning/scan_vsbkr1b</Audio>
+    </Step>
+    <Step fmt="KRFeedback" image="keyrisks/scanning_uia06.jpg">
+      <Audio>scanning/scan_vsbkr1d</Audio>
+    </Step>
+    <Step fmt="PlayVideo" noBg1="1">
+      <Video>scanning/scan_uia06_next</Video>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq Ex="2">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_urt10_start</Video>
+    </Step>
+    <Step fmt="KeyRisk">
+      <Video Zones="156:182:73:64,246:189:47:37,336:180:36:61"></Video>
+      <Audio>scanning/scan_vsbkr1b</Audio>
+    </Step>
+    <Step fmt="KRFeedback" image="keyrisks/scanning_urt10.jpg">
+      <Audio>scanning/scan_vsbkr2d</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsbkr2e</Audio>
+    </Step>
+    <Step fmt="PlayVideo" noBg1="1">
+      <Video>scanning/scan_urt10_next</Video>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 3" Ex="3">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_cst18_start</Video>
+    </Step>
+    <Step fmt="KeyRisk">
+      <Video image="keyrisks/scanning_cst18.jpg" Zones="519:176:57:44"></Video>
+      <Audio>scanning/scan_vsbkr1b</Audio>
+    </Step>
+    <Step fmt="KRFeedback" image="keyrisks/scanning_cst18.jpg">
+      <Audio>scanning/scan_vsbkr3d</Audio>
+    </Step>
+    <Step fmt="PlayVideo" noBg1="1">
+      <Video>scanning/scan_cst18_next</Video>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq Ex="4">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_umt02_duplicate</Video>
+      <Audio />
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsbre1c</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Audio />
+      <Inter>
+        <Data correct="false">Below the speed limit</Data>
+        <Data correct="false">On the speed limit</Data>
+        <Data correct="true">Faster than the speed limit</Data>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2" show="MudScreen">
+      <Audio>scanning/scan_vsbre1d</Audio>
+    </Step>
+    <Step fmt="PlayVideo" noBg1="1">
+      <Video>scanning/scan_umt02_duplicate</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsbre1e</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq Ex="5">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_cst11_duplicate</Video>
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsbre2b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Audio />
+      <Inter>
+        <Data correct="true">A car entering a driveway</Data>
+        <Data correct="true">An oncoming car</Data>
+        <Data correct="false">A pedestrian on the other side of the road, waiting to cross</Data>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="3" show="MudScreen">
+      <Audio>scanning/scan_vsbre2c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_cst11_duplicate</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsbre2d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 6" Ex="6">
+    <Step fmt="PlayVideo">
+      <Video>shared/shared_uia08_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>scanning/scan_vsbp1b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Audio />
+      <Inter>
+        <Data correct="true">The car on the left fails to stop</Data>
+        <Data correct="false">The pedestrian on our left steps out onto the road</Data>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step hide="box">
+      <Audio>scanning/scan_vsbp1c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>shared/shared_uia08_next</Video>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2">
+      <Audio>scanning/scan_vsbp1d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq Ex="7">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_urt04_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>scanning/scan_vsbp1b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Audio />
+      <Inter>
+        <Data correct="true">A child cyclist appears, crossing the road</Data>
+        <Data correct="false">The van pulls out as we are passing it</Data>
+        <Data correct="false">The pedestrian in the driveway on the right starts to cross</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2,3">
+      <Audio>scanning/scan_vsbp2c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_urt04_next</Video>
+    </Step>
+    <Step show="box">
+      <Audio>scanning/scan_vsbp2d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 8" Ex="8">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_umt04_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>scanning/scan_vsbp1b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Audio />
+      <Inter>
+        <Data correct="true">Car ahead turns right</Data>
+        <Data correct="false">Car ahead merges left</Data>
+        <Data correct="false">Car ahead slows down and continues</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step hide="box">
+      <Audio>scanning/scan_vsbp1c</Audio>
+      <Inter />
+      <Post></Post>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_umt04_next</Video>
+      <Inter />
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2,3" KeepUserSelection="1">
+      <Audio>scanning/scan_vsbp3d</Audio>
+      <Inter />
+      <Post></Post>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 9" Ex="9">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_uia01_duplicate</Video>
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsar1b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="true">A four-wheel drive on left side of road indicating to pull out</Data>
+        <Data correct="false">A four-wheel drive which has just pulled into the kerb</Data>
+        <Data correct="false">A four-wheel drive, not indicating</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2,3" show="MudScreen">
+      <Audio>scanning/scan_vsar1c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_uia01_duplicate</Video>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 10" Ex="10">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_uia03_duplicate</Video>
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsar2b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="true">A pedestrian walking towards the road</Data>
+        <Data correct="false">A pedestrian walking along the footpath</Data>
+        <Data correct="false">A pedestrian on the far side of the road</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2,3" show="MudScreen">
+      <Audio>scanning/scan_vsar2c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_uia03_duplicate</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsar2d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 11" Ex="11">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_uic02_similar</Video>
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsar3b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="true">Slowing down in its right turn lane</Data>
+        <Data correct="false">Slowing down in its left turn lane</Data>
+        <Data correct="false">Not slowing down, travelling straight through the intersection</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2,3" show="MudScreen">
+      <Audio>scanning/scan_vsar3c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_uic02_similar</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsar3d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 12" Ex="12">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_uit01_similar</Video>
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsar4b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="true">A cyclist on the footpath, going in the same direction as our car</Data>
+        <Data correct="false">A cyclist going in the opposite direction to our car</Data>
+        <Data correct="false">A man walking in the same direction as our car</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2,3" show="MudScreen">
+      <Audio>scanning/scan_vsar4c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_uit01_similar</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsar4d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 13" Ex="13">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_urt01_duplicate</Video>
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsar5b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Audio />
+      <Inter>
+        <Data correct="true">A child on the nature strip past the reversing four-wheel drive</Data>
+        <Data correct="false">An adult waiting to cross the road</Data>
+        <Data correct="false">A child walking on the footpath on our side of the road</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2,3" show="MudScreen">
+      <Audio>scanning/scan_vsar5c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_urt01_duplicate</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsar5d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 14" Ex="14">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_urt07_start</Video>
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsar6b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">A Ute going into a driveway on our side of the road</Data>
+        <Data correct="true">A Ute reversing from a driveway on our side of the road</Data>
+        <Data correct="false">A Ute reversing from a driveway on the opposite side of the road</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,3" show="MudScreen">
+      <Audio>scanning/scan_vsar6c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_urt07_start</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsar6d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 15" Ex="15">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_urt08_duplicate</Video>
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsar7b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">A car reversing onto the road, from a driveway on the far side of the road</Data>
+        <Data correct="true">An oncoming car</Data>
+        <Data correct="true">A car reversing onto the road from a driveway on our side of the road</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1" show="MudScreen">
+      <Audio>scanning/scan_vsar7c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_urt08_duplicate</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsar7d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 16" Ex="16">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_umj05_start</Video>
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsar5b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">A cyclist, and an oncoming car</Data>
+        <Data correct="true">A cyclist, and a parked car ahead</Data>
+        <Data correct="false">An oncoming car</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,3" show="MudScreen">
+      <Audio>scanning/scan_vsar9c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_umj05_next</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsar9d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 17" Ex="17">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_umt01_duplicate</Video>
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsar10b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">No pedestrians in the carpark area</Data>
+        <Data correct="false">Some pedestrians in the car park area, but none on the road</Data>
+        <Data correct="true">Some pedestrians in the carpark area, and one about to cross the road</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2" show="MudScreen">
+      <Audio>scanning/scan_vxc</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_umt01_duplicate</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsar10d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 18" Ex="18">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_umt06_start</Video>
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsar11b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">There were no cars travelling ahead of us</Data>
+        <Data correct="false">There was one car travelling ahead of us</Data>
+        <Data correct="true">There were two cars travelling ahead of us</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2" show="MudScreen">
+      <Audio>scanning/scan_vsar11c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_umt06_next</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsar11d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 19" Ex="19">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_cst26_duplicate</Video>
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsar12b</Audio>
+      <Post />
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">All the cars on our left had stopped</Data>
+        <Data correct="false">None of the cars on our left had stopped</Data>
+        <Data correct="true">Only one car on our left was continuing into the intersection</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2" show="MudScreen">
+      <Audio>scanning/scan_vsar12c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_cst26_duplicate</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsar12d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq Ex="20">
+    <Step fmt="PlayVideo">
+      <Video>shared/shared_cst12_start</Video>
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsar13b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="true">One car just entered the rest area, and one car was about to exit</Data>
+        <Data correct="false">One car just entered the rest area, and two cars were about to exit</Data>
+        <Data correct="false">No cars were entering or exiting the rest area</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2,3" show="MudScreen">
+      <Audio>scanning/scan_vsar13c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>shared/shared_cst12_start</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsar13d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 21" Ex="21">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_cst23_duplicate</Video>
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsar14b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Going downhill</Data>
+        <Data correct="false">Winding</Data>
+        <Data correct="true">Going uphill to a crest</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2" show="MudScreen">
+      <Audio>scanning/scan_vsar14c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_cst23_duplicate</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsar14d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq Ex="22">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_cla01_duplicate</Video>
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsar6b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">A speed sign e.g. 100km speed limit</Data>
+        <Data correct="true">An advisory sign e.g. Stock Ahead, Winding Road</Data>
+        <Data correct="false">A direction sign e.g. Flinders 10km</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,3" show="MudScreen">
+      <Audio>scanning/scan_vsar15c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_cla01_duplicate</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsar15d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 23" Ex="23">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_fto01_duplicate</Video>
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsar16b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">One car and one truck, both catching up to our car</Data>
+        <Data correct="true">Two cars, both catching up to our car</Data>
+        <Data correct="false">One car catching up to our car, and one car travelling at about the same speed as our car</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,3" show="MudScreen">
+      <Audio>scanning/scan_vsar16c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_fto01_duplicate</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsar16d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 24" Ex="24">
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_faj01_start</Video>
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsar17b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">There is one car in the left lane</Data>
+        <Data correct="false">There are two cars in the left lane</Data>
+        <Data correct="true">There are three cars in the left lane</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2" show="MudScreen">
+      <Audio>scanning/scan_vsar17c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>scanning/scan_faj01_start</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsar17d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq Ex="25">
+    <Step fmt="PlayVideo">
+      <Video>shared/shared_faj09_start</Video>
+    </Step>
+    <Step fmt="Question" cmd="hidescreen">
+      <Audio>scanning/scan_vsar16b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">One car, travelling faster than us</Data>
+        <Data correct="false">Two cars, going at a similar speed to us</Data>
+        <Data correct="true">Two cars, going faster than us</Data>
+      </Inter>
+      <Post />
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2" show="MudScreen">
+      <Audio>scanning/scan_vsar18c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>shared/shared_faj09_start</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>scanning/scan_vsar18d</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+</root>

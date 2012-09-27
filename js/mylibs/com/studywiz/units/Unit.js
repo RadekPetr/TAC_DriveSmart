@@ -36,7 +36,7 @@ var Unit = new Class({
     },
     // ----------------------------------------------------------
     start : function() {
-        // TODO handle mobile platforms: Browser.Platform.android
+        // TODO handle mobile platforms: Browser.Platform.android, handle incompatible old browsers
         console.log("Starting SEQUENCE: " + this.options.sequenceID);
         this.buttonPosition = {
             x : 535,
@@ -112,16 +112,16 @@ var Unit = new Class({
                 case "Question":
                     step.player.options.next = 'Question.done';
                     step.player.start();
-                    //TODO: cmd="hidescreen"
+                    //TODO: cmd="hidescreen" - show the mudscreen
                     break;
                 case "QuestionUser":
                     this._removeInteractions();
                     this.interactions = this._setupQuestions(step.data);
                     var button = this._setupButton("Submit answer", "button_2", "QuestionUser.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
-                    //TODO: resp="3"
+                    //TODO: resp="3" - allow multiple choices
                     //TODO: notrack="true"
-                    //TODO: image="country_cla01_next_first.jpg"
+                    //TODO: image="country_cla01_next_first.jpg" - override background image ...
                     break;
                 case "QuestionFeedback":
                     this._removeButtons();
@@ -129,13 +129,13 @@ var Unit = new Class({
                     this.interactions.showCorrect();
                     step.player.options.next = 'QuestionFeedback.done';
                     step.player.start();
-                    //TODO: show="MudScreen"
+                    //TODO: show="MudScreen" - show mudscreen during feedback
                     //TODO:  KeepUserSelection="1"
                     break;
                 case "PlayAudio":
                     step.player.options.next = 'PlayAudio.done';
                     step.player.start();
-                    //TODO: hide="box"
+                    //TODO: hide="box" not used ?
                     break;
                 case "Continue":
                     var button = this._setupButton("Continue", "button_3", "Continue.done", this.buttonPosition.x, this.buttonPosition.y);
@@ -464,6 +464,16 @@ var Unit = new Class({
             var option = new Element('option', {
                 value : 'urban',
                 html : 'urban'
+            })
+            option.inject(moduleSelector);
+            var option = new Element('option', {
+                value : 'scanning',
+                html : 'scanning'
+            })
+            option.inject(moduleSelector);
+             var option = new Element('option', {
+                value : 'kaps',
+                html : 'kaps'
             })
             option.inject(moduleSelector);
 
