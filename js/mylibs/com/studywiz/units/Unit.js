@@ -11,7 +11,8 @@ var Unit = new Class({
         videoFolder : 'media/video/',
         imageFolder : 'media/images/',
         sequenceID : 'seq_1',
-        module : 'country'
+        moduleID : 'country',
+        moduleTitle : 'Country driving'
     },
     initialize : function(myOptions) {
         this.setOptions(myOptions);
@@ -25,6 +26,7 @@ var Unit = new Class({
         this.videos = new Array();
         this.activeVideo = null;
         this.shape = null;
+
         this.currentStep = null;
         this.cameo_image = null;
 
@@ -59,6 +61,9 @@ var Unit = new Class({
         this.videos.empty();
         this.activeVideo = null;
         this.shape = null;
+        if (this.currentStep != null) {
+            this.currentStep.player.stop();
+        }
         this.currentStep = null;
         this.cameo_image = null;
         //
@@ -67,7 +72,7 @@ var Unit = new Class({
     // ----------------------------------------------------------
     setupData : function() {
         this.dataLoader = new DataLoader(this, {
-            src : 'data/' + this.options.module + '.xml',
+            src : 'data/' + this.options.moduleID + '.xml',
             next : 'data.ready'
         });
         this.dataLoader.start();
@@ -81,8 +86,8 @@ var Unit = new Class({
 
         // Intial scene setup
         this.intro_image = new ImageMedia(this, {
-            src : 'img/country_intro.png',
-            next : "image.ready",
+            src : 'img/sequence_intro.png',
+            next : "",
             title : 'Intro',
             id : 'introImage'
         });
@@ -100,6 +105,41 @@ var Unit = new Class({
             var stepType = step.attributes.fmt;
             console.log("Step type: " + stepType);
             switch (stepType) {
+                case "SequenceIntro":
+
+                    var myDiv = new Element("div", {
+                        id : 'SequenceIntro.container'
+                    });
+                    myDiv.inject($(this.options.unitTagId));
+
+                    this.intro_image.add('SequenceIntro.container');
+                    this.intro_image.show();
+
+                    step.previewImage.add('SequenceIntro.container');
+                    step.previewImage.show();
+
+                    var textDiv = new Element("h1", {
+                        html : this.options.moduleTitle,
+                        styles : {
+                            position : 'absolute',
+                            left : '0px',
+                            top : '20%',
+                            'color' : '#EAC749',
+                            'font-style' : 'italic',
+                            'font-size' : '3em',
+                            'font-weight' : 'bold'
+                        }
+                    })
+                    textDiv.inject($('SequenceIntro.container'));
+
+                    var button = this._setupButton("Continue", "continue_button", "SequenceIntro.done", this.buttonPosition.x, this.buttonPosition.y);
+                    this.buttons.push(button);
+                    var button = this._setupButton("Main Menu", "main_menu_button", "MainMenu.clicked", this.buttonPosition.x, this.buttonPosition.y - 80);
+                    this.buttons.push(button);
+                    step.player.options.next = '';
+                    step.player.start();
+
+                    break;
                 case "PlayVideo":
                     this._cleanUp();
                     this._hideInteractions();
@@ -117,7 +157,7 @@ var Unit = new Class({
                 case "QuestionUser":
                     this._removeInteractions();
                     this.interactions = this._setupQuestions(step.data);
-                    var button = this._setupButton("Submit answer", "button_2", "QuestionUser.done", this.buttonPosition.x, this.buttonPosition.y);
+                    var button = this._setupButton("Submit answer", "submit_button", "QuestionUser.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
                     //TODO: resp="3" - allow multiple choices
                     //TODO: notrack="true"
@@ -138,13 +178,17 @@ var Unit = new Class({
                     //TODO: hide="box" not used ?
                     break;
                 case "Continue":
-                    var button = this._setupButton("Continue", "button_3", "Continue.done", this.buttonPosition.x, this.buttonPosition.y);
+                    var button = this._setupButton("Continue", "continue_button", "Continue.clicked", this.buttonPosition.x, this.buttonPosition.y);
+                    this.buttons.push(button);
+                    var button = this._setupButton("Main Menu", "main_menu_button", "MainMenu.clicked", this.buttonPosition.x, this.buttonPosition.y - 80);
+                    this.buttons.push(button);
+                    var button = this._setupButton("Repeat", "repeat_button", "Repeat.clicked", this.buttonPosition.x, this.buttonPosition.y - 160);
                     this.buttons.push(button);
                     break;
                 case "Commentary":
                     console.log("##### Commentary ######");
                     alert("Commentary - Not implemented");
-                    var button = this._setupButton("Skip", "Skip", "Skip.done", this.buttonPosition.x, this.buttonPosition.y);
+                    var button = this._setupButton("Skip", "skip_button", "Skip.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
                     break;
                 case "KeyRisk" :
@@ -170,11 +214,20 @@ var Unit = new Class({
                         title : 'Visor',
                         id : 'visor',
                         style : {
-                            'left' : '170px'
+                            'left' : '170px',
+                            height : '0px'
                         }
                     });
 
                     break;
+                case "DragNDrop":
+                    console.log("##### DragNDrop ######");
+                    alert("DragNDrop - Not implemented");
+                    var button = this._setupButton("Skip", "skip_button", "Skip.done", this.buttonPosition.x, this.buttonPosition.y);
+                    this.buttons.push(button);
+
+                    break;
+
             }
 
         } else {
@@ -195,15 +248,13 @@ var Unit = new Class({
             case "media.ready":
                 this.mediaLoader.options.next = null;
                 this.mediaLoader.hide();
-
-                this.intro_image.add(this.options.unitTagId);
-                this.intro_image.show();
-                var button = this._setupButton("Start", "button_1", "start.clicked", this.buttonPosition.x, this.buttonPosition.y);
-                this.buttons.push(button);
+                this.nextStep();
                 break;
-            case "start.clicked":
-                this.intro_image.remove();
+            case "SequenceIntro.done":
+                //  $('SequenceIntro.container').dispose();
                 this._cleanUp();
+                this.currentStep.previewImage.remove();
+                this.currentStep.player.stop();
                 this.nextStep();
                 break;
             case "PlayVideo.done":
@@ -222,11 +273,11 @@ var Unit = new Class({
                 this.nextStep();
                 break;
             case "Risks.ready":
-                var button = this._setupButton("Done", "button_Done", "Risks.done", this.buttonPosition.x, this.buttonPosition.y);
+                var button = this._setupButton("Done", "don_button", "Risks.done", this.buttonPosition.x, this.buttonPosition.y);
                 this.buttons.push(button);
                 break;
             case "Risks.done" :
-                this.activeVideo.videoContainer.removeEvents('click');
+                this.activeVideo.container.removeEvents('click');
                 this.nextStep();
                 break;
             case "KRFeedback.ready":
@@ -238,7 +289,7 @@ var Unit = new Class({
                 break;
             case 'KRFeedback.done':
                 // add continue button
-                var button = this._setupButton("Continue", "button_Done", "KRFeedback.continue.done", this.buttonPosition.x, this.buttonPosition.y);
+                var button = this._setupButton("Continue", "krFeedback_done_button", "KRFeedback.continue.done", this.buttonPosition.x, this.buttonPosition.y);
                 this.buttons.push(button);
 
                 break;
@@ -251,18 +302,32 @@ var Unit = new Class({
                 this.nextStep();
                 break;
 
-            case "Continue.done":
+            case "Continue.clicked":
                 this._removeVideos();
+                this._cleanUp();
+                this._removeInteractions();
+                //this.start();
+                //TODO: get next sequence and start it
+                break;
 
+            case "Repeat.clicked":
+                this._removeVideos();
                 this._cleanUp();
                 this._removeInteractions();
                 this.start();
                 break;
 
+            case "MainMenu.clicked":
+                this._removeVideos();
+                this._cleanUp();
+                this._removeInteractions();
+                //TODO: go to main menu;
+                break;
+
             case "Cameo.visor.image.ready":
                 this.cameo_image.add(this.currentStep.player.containerID, 'before');
                 this.cameo_image.show();
-                this.cameo_image.tween('203px', '0px', 1, 'height', 400, 'ignore', 'Cameo.visor.tween.done')
+                this.cameo_image.tween('203px', '0px', 1, 'height', 300, 'ignore', 'Cameo.visor.tween.done')
                 break;
             case "Cameo.visor.tween.done":
                 this.currentStep.player.options.next = 'Cameo.done';
@@ -270,6 +335,8 @@ var Unit = new Class({
                 this.currentStep.player.start();
                 break;
             case "Cameo.done":
+                this.currentStep.player.hide(0);
+                this.cameo_image.tween('0px', '203px', 1, 'height', 200, 'ignore', '')
                 this.nextStep();
                 break;
             case "Skip.done":
@@ -296,9 +363,13 @@ var Unit = new Class({
                 });
                 this.risk_image.add(this.options.unitTagId);
                 this.risk_image.show();
+                // TODO: warp all risks to a div and get rid of them whne no needed
+                // TODO: limit to 5
+                // TODO: blink nicely few times
                 break;
             case "shape.clicked":
                 console.log("Shape clicked ID: " + params.id)
+                //TODO: scoring
                 break;
         };
     },
@@ -368,7 +439,7 @@ var Unit = new Class({
             switch (item.name) {
                 case "Video" :
                     if (item.value != '') {
-                        var fileName = this.options.videoFolder + stripFileExtension(item.value);
+                        var file = this.options.videoFolder + stripFileExtension(item.value);
 
                         if (stepType == 'Cameo') {
                             var style = {
@@ -392,7 +463,7 @@ var Unit = new Class({
                             'style' : style
                         });
 
-                        this._setVideoSource(step.player, fileName);
+                        this._setVideoSource(step.player, file);
                         this.mediaLoader.register(step.player.getLoaderInfo());
                         // we want to store this so all VideoJS player can be removed correctly (see remove() in VideoPlayer)
                         this.videos.push(step.player);
@@ -401,14 +472,31 @@ var Unit = new Class({
                     break;
                 case "Audio" :
                     if (item.value != '') {
-                        var fileName = this.options.audioFolder + stripFileExtension(item.value);
+                        var file = this.options.audioFolder + stripFileExtension(item.value);
                         step.player = new AudioPlayer(this, {
                             next : 'not.set',
                             id : "audio_" + index + "_" + stepOrder,
-                            src : fileName + ".mp3|" + fileName + ".ogg",
+                            src : file + ".mp3|" + file + ".ogg",
                             preload : 'false'
                         });
                         this.mediaLoader.register(step.player.getLoaderInfo());
+                    }
+                    break;
+                case "Preview" :
+                    if (item.value != '') {
+                        var file = this.options.videoFolder + item.value;
+                        // Intial scene setup
+                        step.previewImage = new ImageMedia(this, {
+                            src : file,
+                            title : 'Preview',
+                            id : 'PreviewImage',
+                            style : {
+                                width : '40%',
+                                height : '40%',
+                                top : '148px'
+                            }
+                        });
+                        this.mediaLoader.register(step.previewImage.getLoaderInfo());
                     }
                     break;
                 case "Inter":
@@ -449,8 +537,9 @@ var Unit = new Class({
                 events : {
                     change : function() {
 
-                        this.options.module = moduleSelector.options[moduleSelector.selectedIndex].value;
-
+                        this.options.moduleID = moduleSelector.options[moduleSelector.selectedIndex].value;
+                        this.options.moduleTitle = moduleSelector.options[moduleSelector.selectedIndex].text;
+                        console.log("Selected: " + this.options.moduleTitle);
                         this.start();
                     }.bind(this)
                 }
@@ -458,22 +547,22 @@ var Unit = new Class({
 
             var option = new Element('option', {
                 value : 'country',
-                html : 'country'
+                html : 'Country driving'
             })
             option.inject(moduleSelector);
             var option = new Element('option', {
                 value : 'urban',
-                html : 'urban'
+                html : 'Urban driving'
             })
             option.inject(moduleSelector);
             var option = new Element('option', {
                 value : 'scanning',
-                html : 'scanning'
+                html : 'Scanning'
             })
             option.inject(moduleSelector);
-             var option = new Element('option', {
+            var option = new Element('option', {
                 value : 'kaps',
-                html : 'kaps'
+                html : 'Keeping ahead & play safe'
             })
             option.inject(moduleSelector);
 
@@ -485,7 +574,8 @@ var Unit = new Class({
                 events : {
                     click : function() {
                         this.options.sequenceID = sequenceSelector.options[sequenceSelector.selectedIndex].value;
-                        this.options.module = moduleSelector.options[moduleSelector.selectedIndex].value;
+                        this.options.moduleID = moduleSelector.options[moduleSelector.selectedIndex].value;
+                        this.options.moduleTitle = moduleSelector.options[moduleSelector.selectedIndex].text;
                         this.start();
                     }.bind(this)
                 }
@@ -500,7 +590,7 @@ var Unit = new Class({
 
             })
             moduleSelector.inject(myDiv);
-            moduleSelector.value = this.options.module;
+            moduleSelector.value = this.options.moduleID;
             sequenceSelector.inject(myDiv);
             sequenceSelector.value = this.options.sequenceID;
             sequenceSelectorButton.inject(myDiv);
@@ -520,6 +610,11 @@ var Unit = new Class({
         if (debugPanel != null) {
             debugPanel.dispose();
         }
+        var sequenceIntroTag = $('SequenceIntro.container');
+        if (sequenceIntroTag != null) {
+            sequenceIntroTag.dispose();
+        }
+
     },
     _removeButtons : function() {
         Array.each(this.buttons, function(item, index) {
@@ -567,7 +662,7 @@ var Unit = new Class({
     _setupRisks : function() {
         this.shape = new Shape(this, {});
         this.shape.add(this.activeVideo.containerID);
-        this.activeVideo.videoContainer.addEvent('click', function(e) {
+        this.activeVideo.container.addEvent('click', function(e) {
             this.fireEvent("TIMELINE", {
                 type : "risk.clicked",
                 id : this.options.id,

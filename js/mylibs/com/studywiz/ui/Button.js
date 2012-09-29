@@ -29,7 +29,7 @@ var Button = new Class({
 
     }, // ---------------------------
     add : function(parentTagID) {
-        var myDiv = document.getElementById('buttonHolder');
+        /*var myDiv = document.getElementById('buttonHolder');
 
         if (myDiv == null) {
             var myDiv = new Element("div", {
@@ -49,13 +49,42 @@ var Button = new Class({
                 next : this.options.next
             });
         }.bind(this));
+        */
+        
+        this.containerID = 'container_' + this.options.id;   
+
+        this.container = null;
+
+        this.container = new Element("div", {
+            id : this.containerID,
+            'class' : 'buttonContainer'
+        })
+
+      // this.container.setStyles(this.options.style);
+
+        this.container.inject($(parentTagID));
+        this.buttonElement.inject(this.container);
+        this.hide();
+        
+         this.buttonElement.setStyles(this.options.style);
+
+        this.buttonElement.addEvent("click", function() {
+            this.options.parent.fireEvent("TIMELINE", {
+                type : "button.clicked",
+                id : this.options.id,
+                next : this.options.next
+            });
+        }.bind(this));
+        
+        
+        
+        
 
     },
     remove : function() {
         this.hide();
-        var removedElement = this.buttonElement.dispose();
-        var myDiv = document.getElementById('buttonHolder');
-        myDiv.dispose();
+        var removedElement = this.buttonElement.dispose();      
+        this.container.dispose();
 
     },
     // ---------------------------

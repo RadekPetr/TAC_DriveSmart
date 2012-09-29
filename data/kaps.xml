@@ -1,13 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <Seq desc="Kaps Exercise 1" Ex="1">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Audio>kaps/kaps_vtt1a</Audio>
+    </Step>
     <Step fmt="PlayVideo">
       <Video>shared/shared_uia17_start</Video>
     </Step>
     <Step fmt="Cameo">
       <Video>cameo/cameo_ctt1</Video>
-    </Step>
-    <Step fmt="Question">
       <Audio>kaps/kaps_vtt1b</Audio>
     </Step>
     <Step fmt="QuestionUser">
@@ -29,6 +31,10 @@
     </Step>
   </Seq>
   <Seq desc="Kaps Exercise 2" Ex="2">
+    <Step fmt="SequenceIntro">
+      <Preview>kaps/kaps_uit03_start_first.jpg</Preview>
+      <Audio>kaps/kaps_vtt2a"</Audio>
+    </Step>
     <Step fmt="PlayVideo">
       <Video>kaps/kaps_uit03_start</Video>
     </Step>
@@ -39,7 +45,6 @@
       <Audio>kaps/kaps_vtt1b</Audio>
     </Step>
     <Step fmt="QuestionUser">
-      
       <Inter>
         <Data correct="false">Good</Data>
         <Data correct="false">Reasonable</Data>
@@ -56,6 +61,10 @@
     <Step fmt="Continue"></Step>
   </Seq>
   <Seq desc="Kaps Exercise 3" Ex="3">
+    <Step fmt="SequenceIntro">
+      <Preview>kaps/kaps_cst14_start_first.jpg</Preview>
+      <Audio>kaps/kaps_vtt2a"</Audio>
+    </Step>
     <Step fmt="PlayVideo">
       <Video>kaps/kaps_cst14_start</Video>
     </Step>
