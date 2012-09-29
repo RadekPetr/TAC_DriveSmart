@@ -1,29 +1,24 @@
-- Recode ogg files - bad quality
-- Preload media first and show progress
 - Style Submit button 
-
-- risks - create click areas, and show image on feedback
-
 - Implement UI calss and make the media classes to implement it it so common methods can be done only once
-
-
-- Handle video Preloading better - IE issue, use events
 - Try preloadJS thingy maybe ?
-- Move Buttons to the right
 - Style buttons better
-- Move the whole thing to the middle
-- Fix Build process
 - Review usage of holders - maybe use on central DIV for the whoe thing
 - use options correctly in all Classes
 - Make Media class and extend it to Audio and video maybe ?
-- Loading data dynamically
 - Od data files playback engine - XML to json conversion ?
 - Scoring
 - main menu
 - add browser and version detection IE9 +, ...
+- Commentary Kaps 3-6 - missing videos ? Get copy of the released CD
+- each step could be wrapped ina step div for easier disposal
+- Extract data handling to Module class
 -----------------------------------------------------------------
 DONE:
 - Change radio cross to tick
-
+- DONE Handle video Preloading better - IE issue, use events
+- Loading data dynamically
+- risks - create click areas, and show image on feedback
+- Preload media first and show progress
+- Recode ogg files - bad quality
 
 
