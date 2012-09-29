@@ -5,12 +5,16 @@ var ImageMedia = new Class({
         style : {
             position : 'absolute',
             top : '0px',
-            left : '0px'
+            left : '0px',
+            opacity : '0',
+            visibility : 'hidden'
         },
         src : '',
         id : 'element.id',
         next : 'next.action',
-        parent : null
+        loaded : false,
+        parent : null,
+        parentTag : 'drivesmart'
     },
     initialize : function(myParent, myOptions) {
         // Intial scene setup
@@ -20,6 +24,7 @@ var ImageMedia = new Class({
             style : this.options.style,
             id : this.options.id,
             onLoad : function() {
+                this.options.loaded = true;
                 this.options.parent.fireEvent("TIMELINE", {
                     type : "image.ready",
                     id : this.options.id,
@@ -27,6 +32,7 @@ var ImageMedia = new Class({
                 })
             }.bind(this)
         });
+        this.containerID = 'imageContainer';
     },
     tween : function(to, from, reps, prop, dur, link, next) {
         //defaults
@@ -63,11 +69,11 @@ var ImageMedia = new Class({
     add : function(parentTagID, where) {
         console.log("parentTagID  " + parentTagID);
         var myParent = document.getElementById(parentTagID);
-        var myDiv = myParent.getElement('div[id=imageContainer]');
+        var myDiv = myParent.getElement('div[id=' + this.containerID + ']');
         if (myDiv == null) {
             console.log("Container not found in " + parentTagID + " adding a new one");
             var myDiv = new Element("div", {
-                id : "imageContainer"
+                id : this.containerID
             });
             myDiv.inject($(parentTagID), where);
         }
@@ -76,10 +82,10 @@ var ImageMedia = new Class({
         this.image.setStyles(this.options.style);
     },
     show : function() {
-        if (this.image.isVisible() == false) {
-            this.image.fade('hide', 0);
+        
+
             this.image.fade('in');
-        }
+       
 
     },
     // ---------------------------
@@ -92,5 +98,22 @@ var ImageMedia = new Class({
     remove : function() {
         this.hide();
         this.image.dispose();
+    },
+    // ----------------------------------------------------------
+    getLoaderInfo : function() {
+        var loaderInfo = new Object();
+        var progress = 0;
+        if (this.options.loaded == true) {
+            progress = 1;
+        }
+        loaderInfo[this.options.id] = {
+            'progress' : progress,
+            'weight' : 1,
+            ref : this
+        };
+        return loaderInfo
+    },
+    preload : function() {
+        // do nothing
     }
 })

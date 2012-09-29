@@ -39,6 +39,12 @@ var AudioPlayer = new Class({
             this._playSound()
         }
     },
+
+    // ----------------------------------------------------------
+    stop : function() {
+        this.soundInstance.stop();
+       // createjs.SoundJS.stop();
+    },
     // ----------------------------------------------------------
     preload : function() {
         console.log("++ Audio Preload started: " + this.options.id)
