@@ -31,25 +31,25 @@ var VideoPlayer = new Class({
         this.containerID = 'container_' + this.options.id;
         this.playerID = 'player_' + this.options.id;
 
-        this.videoContainer = null;
+        this.container = null;
 
-        this.videoContainer = new Element("div", {
+        this.container = new Element("div", {
             id : this.containerID,
             'class' : 'videoContainer'
         })
 
-        this.videoContainer.setStyles(this.options.style);
+        this.container.setStyles(this.options.style);
 
-        this.videoContainer.inject($(this.options.parentTag));
+        this.container.inject($(this.options.parentTag));
 
-        this.videoContainer.player = new Element("video", {
+        this.container.player = new Element("video", {
             'id' : this.playerID,
             'preload' : 'auto',
             'poster' : '',
             'class' : 'video-js',
 
         });
-        this.videoContainer.player.inject(this.videoContainer);
+        this.container.player.inject(this.container);
         this.myVideoPlayer = _V_('player_' + this.options.id, {
             "controls" : this.options.controls,
             "autoplay" : this.options.autoplay,
@@ -60,7 +60,7 @@ var VideoPlayer = new Class({
     // ---------------------------
     setParams : function(params) {
         this.videoSource = params.source;
-        this.videoContainer.player.setProperty("poster", params.poster.src)
+        this.container.player.setProperty("poster", params.poster.src)
     },
     // ---------------------------
     preload : function() {
@@ -111,12 +111,12 @@ var VideoPlayer = new Class({
         }
     },
     // ---------------------------
-    show : function() {
-        this.videoContainer.fade('in');
+    show : function(speed) {
+        this.container.fade('show');
     },
     // ---------------------------
-    hide : function() {
-        this.videoContainer.fade('out');
+    hide : function(speed) {
+        this.container.fade('hide');
     },
     // ---------------------------
     stop : function() {
@@ -152,10 +152,10 @@ var VideoPlayer = new Class({
         // destroy the player
         player.destroy();
 
-        this.videoContainer.dispose();
-        this.videoContainer.player.dispose();
-        delete this.videoContainer.player;
-        delete this.videoContainer
+        this.container.dispose();
+        this.container.player.dispose();
+        delete this.container.player;
+        delete this.container
         delete this.myVideoPlayer;
     },
     // ----------------------------------------------------------
