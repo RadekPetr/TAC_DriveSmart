@@ -4,15 +4,20 @@
 var Module = new Class({
     Implements : [Options, Events],
     options : {
-        moduleID : '',
         parent : null,
+        id : "",
+        title : "",
+        score : 0,
+        sequenceID : "seq_1"
     },
-     initialize : function(myParent, myOptions) {
+    initialize : function(myParent, myOptions) {
         this.setOptions(myOptions);
         this.options.parent = myParent;
         this.sequences = null;
-        this.addEvent("DATA", this.handleNavigationEvent);
+        this.addEvent("DATA", this.handleDataEvent);
+        this.addEvent("SEQUENCE", this.handleSequenceEvent);
         this.setupData();
+        this.sequencePlayer = null;
     },
     // ----------------------------------------------------------
     setupData : function() {
@@ -21,15 +26,43 @@ var Module = new Class({
             next : 'data.ready'
         });
         this.dataLoader.start();
-    }, 
-    handleNavigationEvent : function(params) {
+    },
+    handleDataEvent : function(params) {
         switch (params.next) {
             case "data.ready":
-                console.log("Loaded module XML");
+                //console.log("Loaded module XML");
                 this.sequences = params.data;
                 this.options.parent.fireEvent("MODULE", {
                     next : "module.ready"
                 })
+        }
+    },
+    handleSequenceEvent : function(params) {
+        switch (params.next) {
+            case "sequence.repeat":
+                this.playSequence(this.options.sequenceID);
+                break;
+            case "sequence.next":
+                // TODO marking sequence as complete and making sure next one is incomplete
+                var moduleSequences = this.getModuleSequenceIDs()
+                var index = moduleSequences.indexOf(this.options.sequenceID);
+                if (index == moduleSequences.length) {
+                    // is last
+                    //TODO: handle module end
+                    this.options.parent.fireEvent("MODULE", {
+                        next : "module.finished"
+                    })
+                } else {
+                    // get the next one
+                    this.options.sequenceID = moduleSequences[index + 1];
+                }
+                this.playSequence(this.options.sequenceID);
+                break;
+            case "sequence.exit":
+                this.options.parent.fireEvent("MODULE", {
+                    next : "module.exit"
+                })
+                break;
         }
     },
     getModuleSequenceIDs : function() {
@@ -39,5 +72,21 @@ var Module = new Class({
             var IDs = new Array();
         }
         return IDs;
+    },
+    playSequence : function(sequenceID) {
+        this.options.sequenceID = sequenceID;
+
+        if (this.sequencePlayer == null) {
+            this.sequencePlayer = new SequencePlayer(this, {});
+        }
+        var currentSequence = this.sequences[sequenceID];
+        this.sequencePlayer.start(currentSequence);
+    },
+    getModuleInfo : function() {
+        return {
+            moduleID : this.options.id,
+            moduleTitle : this.options.title,
+            sequenceID : this.options.sequenceID
+        }
     }
 })

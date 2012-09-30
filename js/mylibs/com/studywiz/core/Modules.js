@@ -15,36 +15,7 @@ var Modules = new Class({
         this.activeModuleID = 'country';
 
         this.setOptions(myOptions);
-        this.modules = new Hash({
-            kaps : {
-                data : {},
-                score : 0,
-                title : "Keeping ahead & play safe",
-                id : 'kaps',
-                sequenceID : 'seq_1'
-            },
-            scanning : {
-                data : {},
-                score : 0,
-                title : "Scanning",
-                id : 'scanning',
-                sequenceID : 'seq_1'
-            },
-            country : {
-                data : {},
-                score : 0,
-                title : "Country driving",
-                id : 'country',
-                sequenceID : 'seq_1'
-            },
-            urban : {
-                data : {},
-                score : 0,
-                title : "Urban driving",
-                id : 'urban',
-                sequenceID : 'seq_1'
-            },
-        });
+        this.modules = new Hash();
 
     },
     start : function() {
@@ -56,36 +27,53 @@ var Modules = new Class({
     // ----------------------------------------------------------
     setupModules : function() {
         this.listOfModulesCounter = 0;
-        this.modules.each( function(value, key) {
+
+        var modules = new Hash({
+            kaps : {
+                score : 0,
+                title : "Keeping ahead & play safe",
+                id : 'kaps',
+                sequenceID : 'seq_1'
+            },
+            scanning : {
+
+                score : 0,
+                title : "Scanning",
+                id : 'scanning',
+                sequenceID : 'seq_1'
+            },
+            country : {
+
+                score : 0,
+                title : "Country driving",
+                id : 'country',
+                sequenceID : 'seq_1'
+            },
+            urban : {
+
+                score : 0,
+                title : "Urban driving",
+                id : 'urban',
+                sequenceID : 'seq_1'
+            }
+        });
+
+        modules.each( function(value, key) {
 
             this.listOfModulesCounter++;
-            console.log("++++" + this.listOfModulesCounter);
-            var module = new Module(this, {
-                moduleID : key
+            //console.log("++++" + this.listOfModulesCounter);
+            var module = new Object();
+            //console.log(value);
+
+            module[key] = new Module(this, {
+                moduleID : key,
+                score : value.score,
+                title : value.title,
+                id : key,
+                sequenceID : value.sequenceID
             });
-
-            value.data = module;
-
+            this.modules.extend(module);
         }.bind(this))
-    },
-    playModule : function(selectedModule) {
-        if (this.sequencePlayer == null) {
-            this.sequencePlayer = new SequencePlayer(this, {
-                moduleID : selectedModule.id,
-                moduleTitle : selectedModule.title,
-                moduleSequences : selectedModule.data.sequences,
-                sequenceID : selectedModule.sequenceID
-            });
-        } else {
-            this.sequencePlayer.setOptions({
-                moduleID : selectedModule.id,
-                moduleTitle : selectedModule.title,
-                moduleSequences : selectedModule.data.sequences,
-                sequenceID : selectedModule.sequenceID
-            })
-        }
-
-        this.sequencePlayer.start();
 
     },
     // This handles all timeline events and emulates the timeline
@@ -95,12 +83,23 @@ var Modules = new Class({
             case "module.ready":
 
                 this.listOfModulesCounter--;
-                console.log("Modules count: " + this.listOfModulesCounter);
+                //console.log("Modules count: " + this.listOfModulesCounter);
                 if (this.listOfModulesCounter === 0) {
 
-                    console.log("Modules  READY");
+                    console.log("Modules READY");
                     this.setupDebug();
                 }
+                break;
+            case "module.exit":
+                console.log("Module Exited");
+                this.setupDebug();
+
+                break;
+
+            case "module.finished":
+
+                console.log("Module Finished");
+                break;
 
         }
     },
@@ -112,13 +111,14 @@ var Modules = new Class({
                 id : "debugContainer"
             });
             myDiv.inject(this.options.unitTagId, 'before');
-            var sequenceSelector = new Element('select', {});
+
             var moduleSelector = new Element('select', {
                 events : {
                     change : function() {
                         var selectedModuleID = moduleSelector.options[moduleSelector.selectedIndex].value;
-                        var selectedModule = this.modules[selectedModuleID]
-                        console.log("Selected: " + selectedModuleID);
+                        var selectedModule = this.modules.get(selectedModuleID);
+                        console.log("Selected Module: " + selectedModuleID);
+                        this._populateSequenceSelector(sequenceSelector, selectedModule);
                     }.bind(this)
                 }
             });
@@ -152,36 +152,43 @@ var Modules = new Class({
                 events : {
                     click : function() {
                         var selectedModuleID = moduleSelector.options[moduleSelector.selectedIndex].value;
-                        var selectedModule = this.modules[selectedModuleID];
-                        selectedModule.sequenceID = sequenceSelector.options[sequenceSelector.selectedIndex].value;
-                        console.log("Selected: " + selectedModuleID);
-                        this.playModule(selectedModule);
+                        var selectedModule = this.modules.get(selectedModuleID);
+                        var sequenceID = sequenceSelector.options[sequenceSelector.selectedIndex].value;
+                        console.log("Selected Module: " + selectedModuleID);
+                        selectedModule.playSequence(sequenceID);
                     }.bind(this)
                 }
             });
 
             var selectedModuleID = 'country';
             //moduleSelector.options[moduleSelector.selectedIndex].value;
-            var selectedModule = this.modules[selectedModuleID];
-            console.log(selectedModule);
+            var selectedModule = this.modules.get(selectedModuleID);
+           // console.log(selectedModule);
 
-            var sequenceList = selectedModule.getModuleSequenceIDs();
-            Array.each(sequenceList, function(item, index) {
-                var option = new Element('option', {
-                    value : item,
-                    html : item
-                })
-                option.inject(sequenceSelector);
-
-            })
             moduleSelector.inject(myDiv);
             moduleSelector.value = this.options.moduleID;
+            var sequenceSelector = new Element('select', {});
+
+            this._populateSequenceSelector(sequenceSelector, selectedModule);
+
             sequenceSelector.inject(myDiv);
             sequenceSelector.value = this.options.sequenceID;
             sequenceSelectorButton.inject(myDiv);
 
         }
 
+    },
+    _populateSequenceSelector : function(el, selectedModule) {
+        el.empty();
+        var sequenceList = selectedModule.getModuleSequenceIDs();
+        Array.each(sequenceList, function(item, index) {
+            var option = new Element('option', {
+                value : item,
+                html : item
+            })
+            option.inject(el);
+
+        })
     }
 })
 

@@ -22,8 +22,8 @@ var MediaLoader = new Class({
             // nothing - already exists
         } else {
             this.loadQueue.extend(loaderInfo);
-            console.log('Registered ');
-            console.log(loaderInfo);
+           // console.log('Registered ');
+            //console.log(loaderInfo);
         }
     },
     // ----------------------------------------------------------
@@ -79,8 +79,8 @@ var MediaLoader = new Class({
         //console.log(this.loadQueue);
         // loop the list and start preloading all of the items there
         this.loadQueue.each(function(value, key) {
-           console.log('Starting preload >');
-           console.log(value.ref);
+          // console.log('Starting preload >');
+           //console.log(value.ref);
             value.ref.preload();
         })
     },
@@ -109,7 +109,7 @@ var MediaLoader = new Class({
     // ----------------------------------------------------------
     _handleFinished : function(progress) {
         if (progress > 80) {
-            console.log("Preload Finished");
+            //console.log("Preload Finished");
             this.loadQueue.empty();
             this.options.parent.fireEvent("TIMELINE", {
                 type : "preload.finished",

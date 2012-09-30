@@ -10,18 +10,15 @@ var SequencePlayer = new Class({
         audioFolder : 'media/sound/',
         videoFolder : 'media/video/',
         imageFolder : 'media/images/',
-        sequenceID : 'seq_1',
-        moduleID : '',
-        moduleTitle : '',
-        moduleSequences: null,
         parent : null
+
     },
-    initialize : function(myParent, myOptions) {
+    initialize : function(myParent, module, myOptions) {
 
         this.setOptions(myOptions);
-        this.options.parent = myParent;    
+        this.options.parent = myParent;
         this.currentSequence = new Array();
-        this.dataLoader = null;
+
         this.mediaLoader = null;
         this.buttons = new Array();
         this.interactions = null;
@@ -39,9 +36,15 @@ var SequencePlayer = new Class({
 
     },
     // ----------------------------------------------------------
-    start : function() {
+    start : function(sequenceData) {
+
+        this.currentSequence.empty();
+        this.currentSequence = Array.clone(sequenceData);
+        this.moduleInfo = this.options.parent.getModuleInfo();
+
         // TODO handle mobile platforms: Browser.Platform.android, handle incompatible old browsers
-        console.log("Starting SEQUENCE: " + this.options.sequenceID);
+        console.log("Starting SEQUENCE: " + this.moduleInfo.sequenceID);
+        //console.log(this.currentSequence);
         this.buttonPosition = {
             x : 535,
             y : 415
@@ -58,16 +61,12 @@ var SequencePlayer = new Class({
 
         // make sure there are no objects left
         this.buttons.empty();
-        this.currentSequence.empty();
+
         this.interactions = null;
         this.videos.empty();
         this.activeVideo = null;
         this.shape = null;
-        if (this.currentStep != null) {
-            if (this.currentStep.player != null) {
-                this.currentStep.player.stop();
-            }
-        }
+
         this.currentStep = null;
         this.cameo_image = null;
         //
@@ -76,7 +75,7 @@ var SequencePlayer = new Class({
     // ----------------------------------------------------------
     setupMedia : function() {
         // we get a copy of the array so we can keep the original for repeat
-        this.currentSequence = Array.clone(this.options.moduleSequences[this.options.sequenceID]);
+        //this.currentSequence = Array.clone(this.options.moduleSequences[this.options.sequenceID]);
         // add players to media so they can be preloaded
         this._setupSequenceMedia(this.currentSequence);
 
@@ -91,7 +90,7 @@ var SequencePlayer = new Class({
         this.mediaLoader.options.next = 'media.ready';
         this.mediaLoader.show();
 
-       this.mediaLoader.start();
+        this.mediaLoader.start();
     },
     nextStep : function() {
         // take a step and decide what to do with it
@@ -99,7 +98,7 @@ var SequencePlayer = new Class({
             var step = this.currentSequence.shift();
             this.currentStep = step;
             var stepType = step.attributes.fmt;
-            console.log("Step type: " + stepType);
+            //console.log("Step type: " + stepType);
             switch (stepType) {
                 case "SequenceIntro":
 
@@ -115,7 +114,7 @@ var SequencePlayer = new Class({
                     step.previewImage.show();
 
                     var textDiv = new Element("h1", {
-                        html : this.options.moduleTitle,
+                        html : this.moduleInfo.moduleTitle,
                         styles : {
                             position : 'absolute',
                             left : '0px',
@@ -297,22 +296,32 @@ var SequencePlayer = new Class({
                 this._removeVideos();
                 this._cleanUp();
                 this._removeInteractions();
-                //this.start();
-                //TODO: get next sequence and start it
+                this.options.parent.fireEvent("SEQUENCE", {
+                    type : "sequence.event",
+                    next : 'sequence.next'
+                });
                 break;
 
             case "Repeat.clicked":
                 this._removeVideos();
                 this._cleanUp();
                 this._removeInteractions();
-                this.start();
+                // this.start();
+
+                this.options.parent.fireEvent("SEQUENCE", {
+                    type : "sequence.event",
+                    next : 'sequence.repeat'
+                });
                 break;
 
             case "MainMenu.clicked":
                 this._removeVideos();
                 this._cleanUp();
                 this._removeInteractions();
-                //TODO: go to main menu;
+                this.options.parent.fireEvent("SEQUENCE", {
+                    type : "sequence.event",
+                    next : 'sequence.exit'
+                });
                 break;
 
             case "Cameo.visor.image.ready":
@@ -409,7 +418,7 @@ var SequencePlayer = new Class({
         Array.each(step.childNodes, function(item, index) {
             switch (item.name) {
                 case "Video" :
-               
+
                     if (item.value != '') {
                         var filename = this.options.videoFolder + stripFileExtension(item.value);
 
@@ -433,15 +442,15 @@ var SequencePlayer = new Class({
                             id : "video_" + index + "_" + stepOrder,
                             next : 'not.set',
                             'style' : style,
-                            filename: filename
+                            filename : filename
                         });
-                      
-                      this.mediaLoader.register(step.player.getLoaderInfo());
+
+                        this.mediaLoader.register(step.player.getLoaderInfo());
                         // we want to store this so all VideoJS player can be removed correctly (see remove() in VideoPlayer)
-                      this.videos.push(step.player);
+                        this.videos.push(step.player);
 
                     }
-                    
+
                     break;
                 case "Audio" :
                     if (item.value != '') {
@@ -498,6 +507,11 @@ var SequencePlayer = new Class({
         //console.log(step)
     },
     _cleanUp : function() {
+        if (this.currentStep != null) {
+            if (this.currentStep.player != null) {
+                this.currentStep.player.stop();
+            }
+        }
         var imageDiv = document.getElementById('imageContainer');
         if (imageDiv != null) {
             imageDiv.dispose();
@@ -556,7 +570,7 @@ var SequencePlayer = new Class({
                 // item.fade('out', 0);
                 item.hide();
             }
-            console.log("Player " + playerID + " to keep " + excludedId)
+            //console.log("Player " + playerID + " to keep " + excludedId)
         }.bind(this))
     },
     _setupRisks : function() {

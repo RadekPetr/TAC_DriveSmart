@@ -33,7 +33,7 @@
   <Seq desc="Kaps Exercise 2" Ex="2">
     <Step fmt="SequenceIntro">
       <Preview>kaps/kaps_uit03_start_first.jpg</Preview>
-      <Audio>kaps/kaps_vtt2a"</Audio>
+      <Audio>kaps/kaps_vtt2a</Audio>
     </Step>
     <Step fmt="PlayVideo">
       <Video>kaps/kaps_uit03_start</Video>
@@ -63,7 +63,7 @@
   <Seq desc="Kaps Exercise 3" Ex="3">
     <Step fmt="SequenceIntro">
       <Preview>kaps/kaps_cst14_start_first.jpg</Preview>
-      <Audio>kaps/kaps_vtt2a"</Audio>
+      <Audio>kaps/kaps_vtt2a</Audio>
     </Step>
     <Step fmt="PlayVideo">
       <Video>kaps/kaps_cst14_start</Video>

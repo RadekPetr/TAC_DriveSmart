@@ -37,11 +37,10 @@ var DataLoader = new Class({
          })
          */
         var xml2json = new XML2Object();
-        
-        
+
         xml2json.convertFromURL(this.options.src, function(response) {
             this.data = response;
-           
+
             this._setupSequences();
         }.bind(this));
 
@@ -49,7 +48,7 @@ var DataLoader = new Class({
     },
     // ----------------------------------------------------------
     getSteps : function(sequenceId) {
-        var steps = Array.clone(this.sequences[sequenceId])
+        var steps = Array.clone(this.sequences.get(sequenceId))
         return steps;
     },
     getSequenceIDs : function() {
@@ -70,8 +69,6 @@ var DataLoader = new Class({
             //  console.log(seq);
             this.sequences.extend(seq);
         }.bind(this))
-
-        
 
         this.options.parent.fireEvent("DATA", {
             type : "data.ready",
