@@ -19,7 +19,8 @@ var VideoPlayer = new Class({
         preload : 'auto',
         autoplay : false,
         controls : false,
-        parentTag : 'drivesmart'
+        parentTag : 'drivesmart',
+        filename : null
     },
     // ----------------------------------------------------------
     initialize : function(myParent, myOptions) {
@@ -27,7 +28,7 @@ var VideoPlayer = new Class({
         this.setOptions(myOptions);
         this.options.parent = myParent;
 
-        this.videoSource = new Array();
+        this.source = new Array();
         this.containerID = 'container_' + this.options.id;
         this.playerID = 'player_' + this.options.id;
 
@@ -50,7 +51,7 @@ var VideoPlayer = new Class({
 
         });
         this.container.player.inject(this.container);
-        this.myVideoPlayer = _V_('player_' + this.options.id, {
+        this.player = _V_('player_' + this.options.id, {
             "controls" : this.options.controls,
             "autoplay" : this.options.autoplay,
             "preload" : this.options.preload
@@ -58,42 +59,39 @@ var VideoPlayer = new Class({
 
     },
     // ---------------------------
-    setParams : function(params) {
-        this.videoSource = params.source;
-        this.container.player.setProperty("poster", params.poster.src)
-    },
-    // ---------------------------
     preload : function() {
 
-        this.myVideoPlayer.src(this.videoSource);
         console.log("++ Video Preload started: " + this.options.id);
-        this.myVideoPlayer.ready(( function() {
-                this.myVideoPlayer.src(this.videoSource);
-                console.log ("BLA" + this.options.style.width);
-                this.myVideoPlayer.size(this.options.style.width, this.options.style.height);
-                this.myVideoPlayer.pause();
 
-                this.myVideoPlayer.addEvent("loadstart", function() {
+        this.player.ready(( function() {
+                var data = this._getVideoData();
+                this.container.player.setProperty("poster", data.poster.src);
+                this.player.src(data.video);
+                console.log("BLA" + this.options.style.width);
+                this.player.size(this.options.style.width, this.options.style.height);
+                this.player.pause();
+
+                this.player.addEvent("loadstart", function() {
 
                     this.options.parent.mediaLoader.reportProgress(this.getLoaderInfo());
-                    console.log("Video Load progress: " + (this.myVideoPlayer.bufferedPercent() * 100.00));
+                    console.log("Video Load progress: " + (this.player.bufferedPercent() * 100.00));
                 }.bind(this));
 
-                this.myVideoPlayer.addEvent("loadedmetadata", function() {
+                this.player.addEvent("loadedmetadata", function() {
                     this._reportProgress()
                 }.bind(this));
 
-                this.myVideoPlayer.addEvent("progress", function() {
+                this.player.addEvent("progress", function() {
                     this._reportProgress()
                 }.bind(this));
 
-                this.myVideoPlayer.addEvent("loadedalldata", function() {
+                this.player.addEvent("loadedalldata", function() {
                     this._reportProgress()
                 }.bind(this));
 
-                // this.myVideoPlayer.removeEvents();
+                // this.player.removeEvents();
                 //console.log("Adding ended listener");
-                this.myVideoPlayer.addEvent("ended", function() {
+                this.player.addEvent("ended", function() {
                     this.options.parent.fireEvent("TIMELINE", {
                         type : "video.finished",
                         id : this.options.id,
@@ -101,12 +99,13 @@ var VideoPlayer = new Class({
                     });
                 }.bind(this));
             }.bind(this)));
+
     },
     // ---------------------------
     start : function() {
-        if (this.myVideoPlayer != null) {
-            //console.log(this.myVideoPlayer.bufferedPercent());
-            this.myVideoPlayer.play();
+        if (this.player != null) {
+            //console.log(this.player.bufferedPercent());
+            this.player.play();
             // Fire event to whotever object is my parent
         }
     },
@@ -120,18 +119,18 @@ var VideoPlayer = new Class({
     },
     // ---------------------------
     stop : function() {
-        this.myVideoPlayer.pause();
-        this.myVideoPlayer.currentTime(0);
-        this.myVideoPlayer.pause();
+        this.player.pause();
+        this.player.currentTime(0);
+        this.player.pause();
     },
     // ---------------------------
     pause : function() {
-        this.myVideoPlayer.pause();
+        this.player.pause();
     },
     seek : function(time) {
-        this.myVideoPlayer.pause();
-        this.myVideoPlayer.currentTime = time;
-        this.myVideoPlayer.pause();
+        this.player.pause();
+        this.player.currentTime = time;
+        this.player.pause();
     },
     remove : function() {
         // see http://help.videojs.com/discussions/problems/861-how-to-destroy-a-video-js-object
@@ -156,18 +155,18 @@ var VideoPlayer = new Class({
         this.container.player.dispose();
         delete this.container.player;
         delete this.container
-        delete this.myVideoPlayer;
+        delete this.player;
     },
     // ----------------------------------------------------------
     getLoaderInfo : function() {
         var loaderInfo = new Object();
         var progress = 0;
-        if (this.myVideoPlayer != null) {
-            progress = this.myVideoPlayer.bufferedPercent();
+        if (this.player != null) {
+            progress = this.player.bufferedPercent();
 
-            console.log(this.playerID + " **** Video Load progress: " + (this.myVideoPlayer.bufferedPercent() * 100.00));
-           // console.log(this.playerID + " **** Video Load progress buffered: " + this.myVideoPlayer.buffered());
-            console.log(this.playerID + " **** Video duration: " + this.myVideoPlayer.duration());
+            console.log(this.playerID + " **** Video Load progress: " + (this.player.bufferedPercent() * 100.00));
+            // console.log(this.playerID + " **** Video Load progress buffered: " + this.player.buffered());
+            console.log(this.playerID + " **** Video duration: " + this.player.duration());
 
         }
         loaderInfo[this.options.id] = {
@@ -181,6 +180,25 @@ var VideoPlayer = new Class({
     _reportProgress : function() {
         this.options.parent.mediaLoader.reportProgress(this.getLoaderInfo());
 
+    },
+    _getVideoData : function() {
+        var data = {};
+        var myFilename = this.options.filename;
+        // var rand = "?" + Math.random();
+        data.video = [{
+            type : "video/mp4",
+            src : myFilename + ".mp4"
+        }, {
+            type : "video/webm",
+            src : myFilename + ".webm"
+        }, {
+            type : "video/ogg",
+            src : myFilename + ".ogv"
+        }];
+        data.poster = {
+            src : myFilename + "_first.jpg"
+        };
+        return data;
     }
 })
 

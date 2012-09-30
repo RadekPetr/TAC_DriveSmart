@@ -32,6 +32,7 @@ var Shape = new Class({
         this.polygons = new Array();
         this.polygonsArray = new Array();
         this.container = null;
+        this.containerID = 'shapeContainer';
 
         Array.each(arrayOfShapes, function(shape, index) {
             var temp = shape.split(":");
@@ -68,10 +69,10 @@ var Shape = new Class({
 
         var myParent = document.getElementById(parentTagID);
         console.log(myParent);
-        var myDiv = myParent.getElement('div[id=shapeContainer]');
+        var myDiv = myParent.getElement('div[id=' + this.containerID + ']');
         if (myDiv == null) {
             var myDiv = new Element("div", {
-                id : "shapeContainer"
+                id : this.containerID
             });
             this.container = myDiv;
             // Fix for svg, no ide how it works ....

@@ -79,8 +79,8 @@ var MediaLoader = new Class({
         //console.log(this.loadQueue);
         // loop the list and start preloading all of the items there
         this.loadQueue.each(function(value, key) {
-            console.log('Starting preload');
-            console.log(value.ref);
+           console.log('Starting preload >');
+           console.log(value.ref);
             value.ref.preload();
         })
     },

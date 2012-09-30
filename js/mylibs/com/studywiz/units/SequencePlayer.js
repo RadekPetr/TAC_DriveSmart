@@ -2,7 +2,7 @@
  * @author Radek
  */
 
-var Unit = new Class({
+var SequencePlayer = new Class({
 
     Implements : [Options, Events],
     options : {
@@ -11,13 +11,15 @@ var Unit = new Class({
         videoFolder : 'media/video/',
         imageFolder : 'media/images/',
         sequenceID : 'seq_1',
-        moduleID : 'country',
-        moduleTitle : 'Country driving'
+        moduleID : '',
+        moduleTitle : '',
+        moduleSequences: null,
+        parent : null
     },
-    initialize : function(myOptions) {
-        this.setOptions(myOptions);
+    initialize : function(myParent, myOptions) {
 
-        this.sequences = new Array();
+        this.setOptions(myOptions);
+        this.options.parent = myParent;    
         this.currentSequence = new Array();
         this.dataLoader = null;
         this.mediaLoader = null;
@@ -62,25 +64,19 @@ var Unit = new Class({
         this.activeVideo = null;
         this.shape = null;
         if (this.currentStep != null) {
-            this.currentStep.player.stop();
+            if (this.currentStep.player != null) {
+                this.currentStep.player.stop();
+            }
         }
         this.currentStep = null;
         this.cameo_image = null;
         //
-        this.setupData();
-    },
-    // ----------------------------------------------------------
-    setupData : function() {
-        this.dataLoader = new DataLoader(this, {
-            src : 'data/' + this.options.moduleID + '.xml',
-            next : 'data.ready'
-        });
-        this.dataLoader.start();
+        this.setupMedia();
     },
     // ----------------------------------------------------------
     setupMedia : function() {
         // we get a copy of the array so we can keep the original for repeat
-        this.currentSequence = Array.clone(this.sequences[this.options.sequenceID]);
+        this.currentSequence = Array.clone(this.options.moduleSequences[this.options.sequenceID]);
         // add players to media so they can be preloaded
         this._setupSequenceMedia(this.currentSequence);
 
@@ -95,7 +91,7 @@ var Unit = new Class({
         this.mediaLoader.options.next = 'media.ready';
         this.mediaLoader.show();
 
-        this.mediaLoader.start();
+       this.mediaLoader.start();
     },
     nextStep : function() {
         // take a step and decide what to do with it
@@ -240,11 +236,6 @@ var Unit = new Class({
     handleNavigationEvent : function(params) {
 
         switch (params.next) {
-            case "data.ready":
-                this.sequences = params.data;
-                this.setupDebug();
-                this.setupMedia();
-                break;
             case "media.ready":
                 this.mediaLoader.options.next = null;
                 this.mediaLoader.hide();
@@ -378,26 +369,6 @@ var Unit = new Class({
         console.log("****** " + logValue + " ******");
     },
     //------------------------------------------------------------------------
-    _setVideoSource : function(player, filename) {
-        var params = new Object();
-        var rand = "?" + Math.random();
-        params.source = [{
-            type : "video/mp4",
-            src : filename + ".mp4"
-        }, {
-            type : "video/webm",
-            src : filename + ".webm"
-        }, {
-            type : "video/ogg",
-            src : filename + ".ogv"
-        }];
-        params.poster = {
-            src : filename + "_first.jpg"
-        };
-        //console.log(params)
-        player.setParams(params);
-    }.protect(),
-    //------------------------------------------------------------------------
     _setupButton : function(text, id, nextAction, x, y) {
         var button = new Button(this, {
             style : {
@@ -438,8 +409,9 @@ var Unit = new Class({
         Array.each(step.childNodes, function(item, index) {
             switch (item.name) {
                 case "Video" :
+               
                     if (item.value != '') {
-                        var file = this.options.videoFolder + stripFileExtension(item.value);
+                        var filename = this.options.videoFolder + stripFileExtension(item.value);
 
                         if (stepType == 'Cameo') {
                             var style = {
@@ -460,15 +432,16 @@ var Unit = new Class({
                         step.player = new VideoPlayer(this, {
                             id : "video_" + index + "_" + stepOrder,
                             next : 'not.set',
-                            'style' : style
+                            'style' : style,
+                            filename: filename
                         });
-
-                        this._setVideoSource(step.player, file);
-                        this.mediaLoader.register(step.player.getLoaderInfo());
+                      
+                      this.mediaLoader.register(step.player.getLoaderInfo());
                         // we want to store this so all VideoJS player can be removed correctly (see remove() in VideoPlayer)
-                        this.videos.push(step.player);
+                      this.videos.push(step.player);
 
                     }
+                    
                     break;
                 case "Audio" :
                     if (item.value != '') {
@@ -523,79 +496,6 @@ var Unit = new Class({
         // now start the preloading for each of the items
         //console.log("---------------------------- Step");
         //console.log(step)
-    },
-    setupDebug : function() {
-        // add dropdown
-        var myDiv = $('debugContainer');
-        if (myDiv == null) {
-            var myDiv = new Element("div", {
-                id : "debugContainer"
-            });
-            myDiv.inject(this.options.unitTagId, 'before');
-            var sequenceSelector = new Element('select', {});
-            var moduleSelector = new Element('select', {
-                events : {
-                    change : function() {
-
-                        this.options.moduleID = moduleSelector.options[moduleSelector.selectedIndex].value;
-                        this.options.moduleTitle = moduleSelector.options[moduleSelector.selectedIndex].text;
-                        console.log("Selected: " + this.options.moduleTitle);
-                        this.start();
-                    }.bind(this)
-                }
-            });
-
-            var option = new Element('option', {
-                value : 'country',
-                html : 'Country driving'
-            })
-            option.inject(moduleSelector);
-            var option = new Element('option', {
-                value : 'urban',
-                html : 'Urban driving'
-            })
-            option.inject(moduleSelector);
-            var option = new Element('option', {
-                value : 'scanning',
-                html : 'Scanning'
-            })
-            option.inject(moduleSelector);
-            var option = new Element('option', {
-                value : 'kaps',
-                html : 'Keeping ahead & play safe'
-            })
-            option.inject(moduleSelector);
-
-            var sequenceSelectorButton = new Element('button', {
-                html : 'Start',
-                id : 'debug',
-                styles : {
-                },
-                events : {
-                    click : function() {
-                        this.options.sequenceID = sequenceSelector.options[sequenceSelector.selectedIndex].value;
-                        this.options.moduleID = moduleSelector.options[moduleSelector.selectedIndex].value;
-                        this.options.moduleTitle = moduleSelector.options[moduleSelector.selectedIndex].text;
-                        this.start();
-                    }.bind(this)
-                }
-            });
-            var sequenceList = this.dataLoader.getSequenceIDs();
-            Array.each(sequenceList, function(item, index) {
-                var option = new Element('option', {
-                    value : item,
-                    html : item
-                })
-                option.inject(sequenceSelector);
-
-            })
-            moduleSelector.inject(myDiv);
-            moduleSelector.value = this.options.moduleID;
-            sequenceSelector.inject(myDiv);
-            sequenceSelector.value = this.options.sequenceID;
-            sequenceSelectorButton.inject(myDiv);
-
-        }
     },
     _cleanUp : function() {
         var imageDiv = document.getElementById('imageContainer');

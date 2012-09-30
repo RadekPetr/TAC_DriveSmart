@@ -37,17 +37,15 @@ var DataLoader = new Class({
          })
          */
         var xml2json = new XML2Object();
+        
+        
         xml2json.convertFromURL(this.options.src, function(response) {
             this.data = response;
+           
             this._setupSequences();
         }.bind(this));
 
         //  myRequest.send();
-    },
-    // ----------------------------------------------------------
-    handleXMLLoaded : function(responseXML) {
-        // console.log("Loaded XML");
-        this._setupSequences();
     },
     // ----------------------------------------------------------
     getSteps : function(sequenceId) {
@@ -73,9 +71,9 @@ var DataLoader = new Class({
             this.sequences.extend(seq);
         }.bind(this))
 
-        //console.log(this.sequences);
+        
 
-        this.options.parent.fireEvent("TIMELINE", {
+        this.options.parent.fireEvent("DATA", {
             type : "data.ready",
             id : this.options.id,
             next : this.options.next,
