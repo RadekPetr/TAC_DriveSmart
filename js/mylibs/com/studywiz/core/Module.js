@@ -31,5 +31,13 @@ var Module = new Class({
                     next : "module.ready"
                 })
         }
+    },
+    getModuleSequenceIDs : function() {
+        if (this.sequences != null) {
+            var IDs = this.sequences.getKeys();
+        } else {
+            var IDs = new Array();
+        }
+        return IDs;
     }
 })

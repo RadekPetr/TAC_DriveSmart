@@ -57,25 +57,34 @@ var Modules = new Class({
     setupModules : function() {
         this.listOfModulesCounter = 0;
         this.modules.each( function(value, key) {
-            
+
             this.listOfModulesCounter++;
             console.log("++++" + this.listOfModulesCounter);
             var module = new Module(this, {
                 moduleID : key
             });
-        
+
             value.data = module;
 
         }.bind(this))
     },
     playModule : function(selectedModule) {
+        if (this.sequencePlayer == null) {
+            this.sequencePlayer = new SequencePlayer(this, {
+                moduleID : selectedModule.id,
+                moduleTitle : selectedModule.title,
+                moduleSequences : selectedModule.data.sequences,
+                sequenceID : selectedModule.sequenceID
+            });
+        } else {
+            this.sequencePlayer.setOptions({
+                moduleID : selectedModule.id,
+                moduleTitle : selectedModule.title,
+                moduleSequences : selectedModule.data.sequences,
+                sequenceID : selectedModule.sequenceID
+            })
+        }
 
-        this.sequencePlayer = new SequencePlayer(this, {
-            moduleID : selectedModule.id,
-            moduleTitle : selectedModule.title,
-            moduleSequences : selectedModule.data.sequences,
-            sequenceID : selectedModule.sequenceID
-        });
         this.sequencePlayer.start();
 
     },
@@ -156,7 +165,7 @@ var Modules = new Class({
             var selectedModule = this.modules[selectedModuleID];
             console.log(selectedModule);
 
-            var sequenceList = this.getModuleSequenceIDs(selectedModule);
+            var sequenceList = selectedModule.getModuleSequenceIDs();
             Array.each(sequenceList, function(item, index) {
                 var option = new Element('option', {
                     value : item,
@@ -173,14 +182,6 @@ var Modules = new Class({
 
         }
 
-    },
-    getModuleSequenceIDs : function(module) {
-        if (module.data.sequences != null) {
-            var IDs = module.data.sequences.getKeys();
-        } else {
-            var IDs = new Array();
-        }
-        return IDs;
-    },
+    }
 })
 
