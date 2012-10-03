@@ -42,8 +42,11 @@ var AudioPlayer = new Class({
 
     // ----------------------------------------------------------
     stop : function() {
-        this.soundInstance.stop();
-       // createjs.SoundJS.stop();
+        if (this.soundInstance != null) {
+            this.soundInstance.stop();
+        }
+
+        // createjs.SoundJS.stop();
     },
     // ----------------------------------------------------------
     preload : function() {
