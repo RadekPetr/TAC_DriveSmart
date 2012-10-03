@@ -43,7 +43,7 @@ var SequencePlayer = new Class({
         this.moduleInfo = this.options.parent.getModuleInfo();
 
         // TODO handle mobile platforms: Browser.Platform.android, handle incompatible old browsers
-        console.log("Starting SEQUENCE: " + this.moduleInfo.sequenceID);
+        this.log("Starting SEQUENCE: " + this.moduleInfo.sequenceID);
         //console.log(this.currentSequence);
         this.buttonPosition = {
             x : 535,
@@ -181,8 +181,16 @@ var SequencePlayer = new Class({
                     var button = this._setupButton("Repeat", "repeat_button", "Repeat.clicked", this.buttonPosition.x, this.buttonPosition.y - 160);
                     this.buttons.push(button);
                     break;
+                case "End.Module.Continue":
+                    step.player.start();
+                    var button = this._setupButton("Continue", "continue_button", "End.Module.Continue.clicked", this.buttonPosition.x, this.buttonPosition.y);
+                    this.buttons.push(button);
+                    var button = this._setupButton("Repeat", "repeat_button", "Repeat.clicked", this.buttonPosition.x, this.buttonPosition.y - 160);
+                    this.buttons.push(button);
+
+                    break;
                 case "Commentary":
-                    console.log("##### Commentary ######");
+                    this.log("##### Commentary ######");
                     alert("Commentary - Not implemented");
                     var button = this._setupButton("Skip", "skip_button", "Skip.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
@@ -217,7 +225,7 @@ var SequencePlayer = new Class({
 
                     break;
                 case "DragNDrop":
-                    console.log("##### DragNDrop ######");
+                    this.log("##### DragNDrop ######");
                     alert("DragNDrop - Not implemented");
                     var button = this._setupButton("Skip", "skip_button", "Skip.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
@@ -315,7 +323,7 @@ var SequencePlayer = new Class({
                     next : 'sequence.repeat'
                 });
                 break;
-
+            case "End.Module.Continue.clicked":
             case "MainMenu.clicked":
                 this._removeVideos();
                 this._cleanUp();
@@ -327,7 +335,7 @@ var SequencePlayer = new Class({
                 break;
 
             case "Cameo.visor.image.ready":
-                console.log(this.currentStep.player);
+                this.log(this.currentStep.player);
                 this.cameo_image.add(this.currentStep.player.containerID, 'before');
                 this.cameo_image.show();
                 this.cameo_image.tween('203px', '0px', 1, 'height', 300, 'ignore', 'Cameo.visor.tween.done')
@@ -339,7 +347,7 @@ var SequencePlayer = new Class({
                 break;
             case "Cameo.done":
                 this.currentStep.player.hide(0);
-                this.cameo_image.tween('0px', '203px', 1, 'height', 200, 'ignore', '')
+                this.cameo_image.tween('0px', '203px', 1, 'height', 300, 'ignore', '')
                 this.nextStep();
                 break;
             case "Skip.done":
@@ -371,7 +379,7 @@ var SequencePlayer = new Class({
                 // TODO: blink nicely few times
                 break;
             case "shape.clicked":
-                console.log("Shape clicked ID: " + params.id)
+                this.log("Shape clicked ID: " + params.id)
                 //TODO: scoring
                 break;
         };
@@ -412,7 +420,7 @@ var SequencePlayer = new Class({
             //var stepItems = step.childNodes;
             this._setupStepMedia(step, stepOrder);
         }.bind(this))
-        console.log("---------------------------- Finished setting up media from xml");
+        this.log("---------------------------- Finished setting up media from xml");
         console.log(seq);
     },
     // ----------------------------------------------------------
@@ -420,7 +428,7 @@ var SequencePlayer = new Class({
         var stepType = step.attributes.fmt;
         Array.each(step.childNodes, function(item, index) {
             if (step.player != undefined) {
-                console.log("!!!!!!!!!!!!!!!!!!!!! ERROR - Two players in this step !!!!!!!!!!!!!!!!!!!!!!!!!" + stepType);
+                this.log("!!!!!!!!!!!!!!!!!!!!! ERROR - Two players in this step !!!!!!!!!!!!!!!!!!!!!!!!!" + stepType);
             }
             switch (item.name) {
                 case "Video" :
@@ -509,8 +517,8 @@ var SequencePlayer = new Class({
             }
         }.bind(this))
         // now start the preloading for each of the items
-        //console.log("---------------------------- Step");
-        //console.log(step)
+        this.log("---------------------------- Step");
+        console.log(step)
     },
     _cleanUp : function() {
         if (this.currentStep != null) {

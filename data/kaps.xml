@@ -91,4 +91,42 @@
 		</Step>
 		<Step fmt="Continue"></Step>
 	</Seq>
+	<Seq desc="Kaps Exercise 4" Ex="4">
+		<Step fmt="SequenceIntro">
+			<Preview>kaps/kaps_shops_start_first.jpg</Preview>
+			<Audio>extra/extra_vopcom.mp3</Audio>
+		</Step>
+		<Step fmt="PlayAudio">
+			<Audio>kaps/kaps_vtt2a</Audio>
+		</Step>
+		<Step fmt="Commentary" PlayCommentary="true">
+			kaps,kaps_opdrive,kaps_shops_start,opshops
+			<Audio>extra/extra_vcomi</Audio>
+		</Step>
+		<Step fmt="Continue"></Step>
+	</Seq>
+	<Seq desc="Kaps Exercise 5" Ex="5">
+		<Step fmt="SequenceIntro">
+			<Preview>kaps/kaps_indust_start_first.jpg</Preview>
+			<Audio>extra/kaps_vtt2a</Audio>
+		</Step>
+		<Step fmt="Commentary" PlayCommentary="true">
+			kaps,kaps_opdrive,kaps_Indust_start,opindust
+			<Audio>extra/extra_vcomi</Audio>
+		</Step>
+		<Step fmt="Continue"></Step>
+	</Seq>
+	<Seq desc="Kaps Exercise 6" Ex="6">
+		<Step fmt="SequenceIntro">
+			<Preview>kaps/kaps_fway_start_first.jpg</Preview>
+			<Audio>kaps/kaps_vtt2a</Audio>
+		</Step>
+		<Step fmt="Commentary" PlayCommentary="true">
+			kaps,kaps_opdrive,kaps_fway_start,opfreeway
+			<Audio>extra/extra_vcomi</Audio>
+		</Step>
+		<Step fmt="End.Module.Continue">
+			<Audio>extra/extra_end_module</Audio>
+		</Step>
+	</Seq>
 </root>
