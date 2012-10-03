@@ -74,6 +74,11 @@ var MediaLoader = new Class({
         this.progressBar.hide();
     },
     // ----------------------------------------------------------
+    remove : function() {
+        this.progressBar.remove();
+        this.progressBar = null;
+    },
+    // ----------------------------------------------------------
     start : function() {
         //console.log("Prerload: ");
         //console.log(this.loadQueue);

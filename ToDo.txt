@@ -12,6 +12,7 @@
 - Commentary Kaps 3-6 - missing videos ? Get copy of the released CD
 - each step could be wrapped ina step div for easier disposal
 - Extract data handling to Module class
+- handle the progress bar between modules
 -----------------------------------------------------------------
 DONE:
 - Change radio cross to tick

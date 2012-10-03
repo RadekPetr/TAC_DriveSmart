@@ -59,6 +59,8 @@ var Module = new Class({
                 this.playSequence(this.options.sequenceID);
                 break;
             case "sequence.exit":
+
+                //TODO: handle cleanup of the player - like removing assets, loader etc.
                 this.options.parent.fireEvent("MODULE", {
                     next : "module.exit"
                 })

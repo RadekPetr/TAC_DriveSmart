@@ -69,6 +69,7 @@ var SequencePlayer = new Class({
 
         this.currentStep = null;
         this.cameo_image = null;
+
         //
         this.setupMedia();
     },
@@ -238,6 +239,7 @@ var SequencePlayer = new Class({
             case "media.ready":
                 this.mediaLoader.options.next = null;
                 this.mediaLoader.hide();
+
                 this.nextStep();
                 break;
             case "SequenceIntro.done":
@@ -325,6 +327,7 @@ var SequencePlayer = new Class({
                 break;
 
             case "Cameo.visor.image.ready":
+                console.log(this.currentStep.player);
                 this.cameo_image.add(this.currentStep.player.containerID, 'before');
                 this.cameo_image.show();
                 this.cameo_image.tween('203px', '0px', 1, 'height', 300, 'ignore', 'Cameo.visor.tween.done')
@@ -410,12 +413,15 @@ var SequencePlayer = new Class({
             this._setupStepMedia(step, stepOrder);
         }.bind(this))
         console.log("---------------------------- Finished setting up media from xml");
-        //console.log(seq);
+        console.log(seq);
     },
     // ----------------------------------------------------------
     _setupStepMedia : function(step, stepOrder) {
         var stepType = step.attributes.fmt;
         Array.each(step.childNodes, function(item, index) {
+            if (step.player != undefined) {
+                console.log("!!!!!!!!!!!!!!!!!!!!! ERROR - Two players in this step !!!!!!!!!!!!!!!!!!!!!!!!!" + stepType);
+            }
             switch (item.name) {
                 case "Video" :
 

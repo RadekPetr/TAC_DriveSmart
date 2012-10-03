@@ -170,8 +170,7 @@
     </Step>
     <Step fmt="PlayAudio">
       <Audio>country/country_vdcb4d</Audio>
-      <Inter />
-      <Post />
+     
     </Step>
     <Step fmt="PlayVideo">
       <Video>country/country_cla01_next</Video>

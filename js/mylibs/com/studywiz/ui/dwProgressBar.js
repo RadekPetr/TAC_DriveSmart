@@ -40,7 +40,7 @@ var dwProgressBar = new Class({
         this.container = new Element('div', {
             id : 'progressBarHolder'
         });
-      
+
         this.container.setStyles(this.options.style);
 
         var box = new Element('div', {
@@ -88,7 +88,10 @@ var dwProgressBar = new Class({
     hide : function() {
         this.container.hide();
     },
-    show : function (){
+    remove : function() {
+        this.container.dispose();
+    },
+    show : function() {
         this.container.show();
     }
 });

@@ -67,7 +67,7 @@ var ImageMedia = new Class({
         }.bind(this))
     },
     add : function(parentTagID, where) {
-        //console.log("parentTagID  " + parentTagID);
+        console.log("###### parentTagID  " + parentTagID);
         var myParent = document.getElementById(parentTagID);
         var myDiv = myParent.getElement('div[id=' + this.containerID + ']');
         if (myDiv == null) {
