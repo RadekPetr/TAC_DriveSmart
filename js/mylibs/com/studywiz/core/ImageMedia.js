@@ -20,18 +20,19 @@ var ImageMedia = new Class({
         // Intial scene setup
         this.setOptions(myOptions);
         this.options.parent = myParent;
-        this.image = new Asset.image(this.options.src, {
-            style : this.options.style,
-            id : this.options.id,
-            onLoad : function() {
-                this.options.loaded = true;
-                this.options.parent.fireEvent("TIMELINE", {
-                    type : "image.ready",
-                    id : this.options.id,
-                    next : this.options.next
-                })
-            }.bind(this)
-        });
+        /*this.image = new Asset.image(this.options.src, {
+         style : this.options.style,
+         id : this.options.id,
+         onLoad : function() {
+         this.options.loaded = true;
+         this.options.parent.fireEvent("TIMELINE", {
+         type : "image.ready",
+         id : this.options.id,
+         next : this.options.next
+         })
+         }.bind(this)
+         });
+         */
         this.containerID = 'imageContainer';
     },
     tween : function(to, from, reps, prop, dur, link, next) {
@@ -82,10 +83,8 @@ var ImageMedia = new Class({
         this.image.setStyles(this.options.style);
     },
     show : function() {
-        
 
-            this.image.fade('in');
-       
+        this.image.fade('in');
 
     },
     // ---------------------------
@@ -114,6 +113,18 @@ var ImageMedia = new Class({
         return loaderInfo
     },
     preload : function() {
-        // do nothing
+        this.image = new Asset.image(this.options.src, {
+            style : this.options.style,
+            id : this.options.id,
+            onLoad : function() {
+                this.options.loaded = true;
+                this.options.parent.mediaLoader.reportProgress(this.getLoaderInfo());
+                this.options.parent.fireEvent("TIMELINE", {
+                    type : "image.ready",
+                    id : this.options.id,
+                    next : this.options.next
+                })
+            }.bind(this)
+        });
     }
 })
