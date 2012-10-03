@@ -6,15 +6,15 @@ var Modules = new Class({
     Implements : [Options, Events],
     options : {
         unitTagId : 'drivesmart',
-        moduleID : "country",
+        moduleID : "main_menu",
         moduleTitle : "Country driving",
         sequenceID : "seq_1"
 
     },
     initialize : function(myOptions) {
-        this.activeModuleID = 'country';
 
         this.setOptions(myOptions);
+
         this.modules = new Hash();
 
     },
@@ -29,6 +29,12 @@ var Modules = new Class({
         this.listOfModulesCounter = 0;
 
         var modules = new Hash({
+            main_menu : {
+                score : 0,
+                title : "Main menu",
+                id : 'main_menu',
+                sequenceID : 'seq_1'
+            },
             kaps : {
                 score : 0,
                 title : "Keeping ahead & play safe",
@@ -66,7 +72,7 @@ var Modules = new Class({
             //console.log(value);
 
             module[key] = new Module(this, {
-                moduleID : key,
+                id : key,
                 score : value.score,
                 title : value.title,
                 id : key,
@@ -87,22 +93,34 @@ var Modules = new Class({
                 if (this.listOfModulesCounter === 0) {
 
                     console.log("Modules READY");
-                    this.setupDebug();
+                    this._startMainMenu();
                 }
                 break;
+
             case "module.exit":
-                console.log("Module Exited");
-                this.setupDebug();
+                this._startMainMenu();
 
                 break;
-
             case "module.finished":
 
                 console.log("Module Finished");
                 break;
+            case "module.start":
+                console.log("Module Exited");
+                var selectedModule = this.modules.get(this.options.moduleID);
+                var sequenceID = "seq_1";
+                selectedModule.playSequence(sequenceID);
+
+                this.setupDebug();
+                break;
 
         }
     },
+    _startMainMenu : function() {
+        var selectedModule = this.modules.get("main_menu");
+        var sequenceID = "seq_1";
+        selectedModule.playSequence(sequenceID);
+    }.protect(),
     setupDebug : function() {
         // add dropdown
         var myDiv = $('debugContainer');
@@ -144,6 +162,12 @@ var Modules = new Class({
             })
             option.inject(moduleSelector);
 
+            var option = new Element('option', {
+                value : 'main_menu',
+                html : 'Main menu'
+            })
+            option.inject(moduleSelector);
+
             var sequenceSelectorButton = new Element('button', {
                 html : 'Start',
                 id : 'debug',
@@ -160,12 +184,13 @@ var Modules = new Class({
                 }
             });
 
-            var selectedModuleID = 'country';
+            var selectedModuleID = this.options.moduleID;
             //moduleSelector.options[moduleSelector.selectedIndex].value;
             var selectedModule = this.modules.get(selectedModuleID);
-           // console.log(selectedModule);
+            // console.log(selectedModule);
 
             moduleSelector.inject(myDiv);
+
             moduleSelector.value = this.options.moduleID;
             var sequenceSelector = new Element('select', {});
 

@@ -22,7 +22,7 @@ var Module = new Class({
     // ----------------------------------------------------------
     setupData : function() {
         this.dataLoader = new DataLoader(this, {
-            src : 'data/' + this.options.moduleID + '.xml',
+            src : 'data/' + this.options.id + '.xml',
             next : 'data.ready'
         });
         this.dataLoader.start();
@@ -63,6 +63,13 @@ var Module = new Class({
                 //TODO: handle cleanup of the player - like removing assets, loader etc.
                 this.options.parent.fireEvent("MODULE", {
                     next : "module.exit"
+                })
+                break;
+            case "module.selected":
+
+                //TODO: handle cleanup of the player - like removing assets, loader etc.
+                this.options.parent.fireEvent("MODULE", {
+                    next : "module.start"
                 })
                 break;
         }

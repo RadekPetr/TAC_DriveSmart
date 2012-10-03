@@ -80,14 +80,6 @@ var SequencePlayer = new Class({
         // add players to media so they can be preloaded
         this._setupSequenceMedia(this.currentSequence);
 
-        // Intial scene setup
-        this.intro_image = new ImageMedia(this, {
-            src : 'img/sequence_intro.png',
-            next : "",
-            title : 'Intro',
-            id : 'introImage'
-        });
-
         this.mediaLoader.options.next = 'media.ready';
         this.mediaLoader.show();
 
@@ -101,17 +93,46 @@ var SequencePlayer = new Class({
             var stepType = step.attributes.fmt;
             //console.log("Step type: " + stepType);
             switch (stepType) {
-                case "SequenceIntro":
-
+                case "Menu":
+                    var myContainerID = 'Menu.container';
                     var myDiv = new Element("div", {
-                        id : 'SequenceIntro.container'
+                        id : myContainerID
+                    });
+                    myDiv.inject($(this.options.unitTagId));
+                    step.image.add(myContainerID);
+                    step.image.show();
+                    var textDiv = new Element("h1", {
+                        html : this.moduleInfo.moduleTitle,
+                        styles : {
+                            'color' : '#EAC749',
+                            'font-style' : 'italic',
+                            'font-size' : '2.5em',
+                            'font-weight' : 'bold',
+                            'text-align' : 'center'
+                        }
+                    })
+                    textDiv.inject(myDiv);
+                    step.data.style = {
+                        left : '10px',
+                        top : '40px'
+                    }
+                    var menu = new MenuItems(this, step.data);
+                    menu.add(myContainerID);
+                    menu.show();
+
+                    break;
+
+                case "SequenceIntro":
+                    var myContainerID = 'SequenceIntro.container';
+                    var myDiv = new Element("div", {
+                        id : myContainerID
                     });
                     myDiv.inject($(this.options.unitTagId));
 
-                    this.intro_image.add('SequenceIntro.container');
-                    this.intro_image.show();
+                    step.image.add(myContainerID);
+                    step.image.show();
 
-                    step.previewImage.add('SequenceIntro.container');
+                    step.previewImage.add(myContainerID);
                     step.previewImage.show();
 
                     var textDiv = new Element("h1", {
@@ -126,7 +147,7 @@ var SequencePlayer = new Class({
                             'font-weight' : 'bold'
                         }
                     })
-                    textDiv.inject($('SequenceIntro.container'));
+                    textDiv.inject($(myContainerID));
 
                     var button = this._setupButton("Continue", "continue_button", "SequenceIntro.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
@@ -208,20 +229,22 @@ var SequencePlayer = new Class({
                         title : 'Feedback',
                         id : 'KRFeedback'
                     });
+                    this.KRFeedbackImage.preload();
                     this._removeButtons();
                     break;
                 case "Cameo":
-
+                    var file = this.options.imageFolder + 'cameos/visor.png';
                     this.cameo_image = new ImageMedia(this, {
-                        src : 'img/visor.png',
+                        src : file,
                         next : "Cameo.visor.image.ready",
                         title : 'Visor',
                         id : 'visor',
                         style : {
                             'left' : '170px',
-                            height : '0px'
+                            'height' : '0px'
                         }
                     });
+                    this.cameo_image.preload();
 
                     break;
                 case "DragNDrop":
@@ -361,10 +384,10 @@ var SequencePlayer = new Class({
                 var el = document.getElementById(this.options.unitTagId);
 
                 var elOffset = getPos(el);
-
+                var file = this.options.imageFolder + 'keyrisks/selected_risk.png';
                 this.risk_image = new ImageMedia(this, {
-                    src : 'img/selected_risk.png',
-                    next : "none",
+                    src : file,
+                    next : "",
                     title : 'Risk',
                     id : 'Risk',
                     style : {
@@ -372,6 +395,8 @@ var SequencePlayer = new Class({
                         top : params._y - elOffset.y - 30
                     }
                 });
+                this.risk_image.preload();
+
                 this.risk_image.add(this.options.unitTagId);
                 this.risk_image.show();
                 // TODO: warp all risks to a div and get rid of them whne no needed
@@ -381,6 +406,19 @@ var SequencePlayer = new Class({
             case "shape.clicked":
                 this.log("Shape clicked ID: " + params.id)
                 //TODO: scoring
+                break;
+
+            case "Menu.item.clicked":
+            console.log (params.id);
+                this._cleanUp();
+                
+                this.options.parent.options.parent.setOptions({
+                    moduleID : params.id
+                });
+                this.options.parent.fireEvent("SEQUENCE", {
+                    type : "sequence.event",
+                    next : 'module.selected'
+                });
                 break;
         };
     },
@@ -495,6 +533,35 @@ var SequencePlayer = new Class({
                         this.mediaLoader.register(step.previewImage.getLoaderInfo());
                     }
                     break;
+                case "Image" :
+                    if (item.value != '') {
+                        var file = this.options.imageFolder + item.value;
+                        // Intial scene setup
+                        step.image = new ImageMedia(this, {
+                            src : file,
+                            title : 'Image',
+                            id : 'Image',
+                        });
+                        this.mediaLoader.register(step.image.getLoaderInfo());
+                    }
+                    break;
+                case "Items":
+                    var menuItemsRawData = item.childNodes;
+                    var menuItems = {
+                        data : new Array()
+                    }
+
+                    Array.each(menuItemsRawData, function(menuItemData, index) {
+                        var menuItem = {
+                            text : menuItemData.value,
+                            description : menuItemData.attributes.description,
+                            moduleID : menuItemData.attributes.moduleID
+
+                        }
+                        menuItems.data.push(menuItem);
+                    })
+                    step.data = menuItems;
+                    break;
                 case "Inter":
                     var questionsRawData = item.childNodes;
                     var questions = {
@@ -541,6 +608,11 @@ var SequencePlayer = new Class({
         var sequenceIntroTag = $('SequenceIntro.container');
         if (sequenceIntroTag != null) {
             sequenceIntroTag.dispose();
+        }
+
+        var menuTag = $('Menu.container');
+        if (menuTag != null) {
+            menuTag.dispose();
         }
 
     },

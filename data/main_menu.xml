@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Seq Ex="1">
+		<Step fmt="Menu">
+			<Items>
+				<Data moduleID="intro" description="The Introduction Tutorial provides an overview of the basic concepts of safe driving. You will be applying these concepts in the rest of the program. This section must be viewed prior to entering the other modules.">introduction</Data>
+				<Data moduleID="scanning" description="The Scanning module consists of 25 driving situations. You must complete this module prior to accessing Urban Driving or Country Driving.">key skills training - scanning</Data>
+				<Data moduleID="kaps" description="The Keeping Ahead and Playing Safe module consists of 6 driving exercises. You must complete this module prior to accessing Urban Driving or Country Driving.">key skills training - keep ahead and play safe</Data>
+				<Data moduleID="country" description="The Country Driving module consists of 22 driving exercises. You need to have completed     the Scanning, Keeping Ahead and Playing Safe modules prior to accessing this module.">on the road - country driving</Data>
+				<Data moduleID="urban" description="The Urban Driving module consists of 36 driving exercises. You need to have completed the Scanning, Keeping Ahead and Playing Safe modules prior to accessing this module.">on the road - urban driving</Data>
+			</Items>
+			<Image>menu/main_menu.png</Image>
+			<Audio>country/country_vdcb1a</Audio>
+		</Step>
+	</Seq>
+</root>
