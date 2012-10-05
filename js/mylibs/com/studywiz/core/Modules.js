@@ -72,7 +72,7 @@ var Modules = new Class({
             var module = new Object();
             //console.log(value);
 
-            module[key] = new Module(this, {
+            module[key] = new ModulePlayer(this, {
                 id : key,
                 score : value.score,
                 title : value.title,

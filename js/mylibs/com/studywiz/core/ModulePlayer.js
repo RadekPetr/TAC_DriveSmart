@@ -1,7 +1,7 @@
 /**
  * @author Radek
  */
-var Module = new Class({
+var ModulePlayer = new Class({
     Implements : [Options, Events],
     options : {
         parent : null,

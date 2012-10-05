@@ -1,4 +1,4 @@
-var ImageMedia = new Class({
+var ImagePlayer = new Class({
 
     Implements : [Options, Events],
     options : {

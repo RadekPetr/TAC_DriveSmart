@@ -226,7 +226,7 @@ var SequencePlayer = new Class({
                     //TODO: <Audio waitfor="true">sound/scanning/mp3/scan_vsbkr1b.mp3</Audio>
                     break;
                 case "KRFeedback":
-                    this.KRFeedbackImage = new ImageMedia(this, {
+                    this.KRFeedbackImage = new ImagePlayer(this, {
                         src : this.options.imageFolder + step.attributes.image,
                         next : "KRFeedback.ready",
                         title : 'Feedback',
@@ -237,7 +237,7 @@ var SequencePlayer = new Class({
                     break;
                 case "Cameo":
                     var file = this.options.imageFolder + 'cameos/visor.png';
-                    this.cameo_image = new ImageMedia(this, {
+                    this.cameo_image = new ImagePlayer(this, {
                         src : file,
                         next : "Cameo.visor.image.ready",
                         title : 'Visor',
@@ -388,7 +388,7 @@ var SequencePlayer = new Class({
 
                 var elOffset = getPos(el);
                 var file = this.options.imageFolder + 'keyrisks/selected_risk.png';
-                this.risk_image = new ImageMedia(this, {
+                this.risk_image = new ImagePlayer(this, {
                     src : file,
                     next : "",
                     title : 'Risk',
@@ -523,7 +523,7 @@ var SequencePlayer = new Class({
                     if (item.value != '') {
                         var file = this.options.videoFolder + item.value;
                         // Intial scene setup
-                        step.previewImage = new ImageMedia(this, {
+                        step.previewImage = new ImagePlayer(this, {
                             src : file,
                             title : 'Preview',
                             id : 'PreviewImage',
@@ -540,7 +540,7 @@ var SequencePlayer = new Class({
                     if (item.value != '') {
                         var file = this.options.imageFolder + item.value;
                         // Intial scene setup
-                        step.image = new ImageMedia(this, {
+                        step.image = new ImagePlayer(this, {
                             src : file,
                             title : 'Image',
                             id : 'Image',
