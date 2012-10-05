@@ -7,7 +7,11 @@ var MediaLoader = new Class({
     Implements : [Options, Events],
     options : {
         parent : null,
-        next : "data.loaded"
+        next : "data.loaded",
+        progress: false
+    },    
+    myParent : function (){
+       return this.options.parent;
     },
     // ----------------------------------------------------------
     initialize : function(myParent, myOptions) {
@@ -116,7 +120,7 @@ var MediaLoader = new Class({
         if (progress > 80) {
             //console.log("Preload Finished");
             this.loadQueue.empty();
-            this.options.parent.fireEvent("TIMELINE", {
+            this.myParent().fireEvent("TIMELINE", {
                 type : "preload.finished",
                 id : this.options.id,
                 next : this.options.next

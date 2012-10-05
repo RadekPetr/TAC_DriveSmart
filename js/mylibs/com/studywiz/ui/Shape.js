@@ -56,6 +56,9 @@ var Shape = new Class({
 
         }.bind(this))
     },
+    myParent : function() {
+        return this.options.parent;
+    },
     show : function() {
 
     },
@@ -101,7 +104,7 @@ var Shape = new Class({
 
             shapeElement.addEvent('click', function(e) {
                 //alert('clicked' + this.options.id);
-                this.options.parent.fireEvent("TIMELINE", {
+                this.myParent().fireEvent("TIMELINE", {
                     type : "shape.clicked",
                     id : shapeID,
                     next : this.options.next,

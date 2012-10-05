@@ -18,10 +18,13 @@ var AudioPlayer = new Class({
         // TODO: handle these events handleFileError, handleProgress
         //this.preloader.onFileError = this.handleFileError();
         this.preloader.onProgress = function() {
-            this.options.parent.mediaLoader.reportProgress(this.getLoaderInfo());
+            this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
         }.bind(this)
     },
-    // ----------------------------------------------------------
+    myParent : function() {
+        return this.options.parent;
+    },
+    //----------------------------------------------------------
     setSource : function(src) {
         this.options.src = src;
     },
@@ -72,7 +75,7 @@ var AudioPlayer = new Class({
             alert('Sound plugin issue');
         } else {
             this.soundInstance.onComplete = function() {
-                this.options.parent.fireEvent("TIMELINE", {
+                this.myParent().fireEvent("TIMELINE", {
                     type : "audio.finished",
                     id : this.options.id,
                     next : this.options.next

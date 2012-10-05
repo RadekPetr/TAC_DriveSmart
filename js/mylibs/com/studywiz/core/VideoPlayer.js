@@ -58,6 +58,9 @@ var VideoPlayer = new Class({
         });
 
     },
+    myParent : function() {
+        return this.options.parent;
+    },
     // ---------------------------
     preload : function() {
 
@@ -73,7 +76,7 @@ var VideoPlayer = new Class({
 
                 this.player.addEvent("loadstart", function() {
 
-                    this.options.parent.mediaLoader.reportProgress(this.getLoaderInfo());
+                    this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
                     //console.log("Video Load progress: " + (this.player.bufferedPercent() * 100.00));
                 }.bind(this));
 
@@ -92,7 +95,7 @@ var VideoPlayer = new Class({
                 // this.player.removeEvents();
                 //console.log("Adding ended listener");
                 this.player.addEvent("ended", function() {
-                    this.options.parent.fireEvent("TIMELINE", {
+                    this.myParent().fireEvent("TIMELINE", {
                         type : "video.finished",
                         id : this.options.id,
                         next : this.options.next
@@ -178,7 +181,7 @@ var VideoPlayer = new Class({
     },
     // ----------------------------------------------------------
     _reportProgress : function() {
-        this.options.parent.mediaLoader.reportProgress(this.getLoaderInfo());
+        this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
 
     },
     _getVideoData : function() {

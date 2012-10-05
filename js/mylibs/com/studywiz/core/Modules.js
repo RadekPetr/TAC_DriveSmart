@@ -8,7 +8,8 @@ var Modules = new Class({
         unitTagId : 'drivesmart',
         moduleID : "main_menu",
         moduleTitle : "Country driving",
-        sequenceID : "seq_1"
+        sequenceID : "seq_1",
+        id : "Modules"
 
     },
     initialize : function(myOptions) {

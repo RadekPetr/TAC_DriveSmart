@@ -34,13 +34,16 @@ var SequencePlayer = new Class({
 
         this.addEvent("TIMELINE", this.handleNavigationEvent);
 
+    },   
+    myParent : function (){
+       return this.options.parent;
     },
     // ----------------------------------------------------------
     start : function(sequenceData) {
 
         this.currentSequence.empty();
         this.currentSequence = Array.clone(sequenceData);
-        this.moduleInfo = this.options.parent.getModuleInfo();
+        this.moduleInfo = this.myParent().getModuleInfo();
 
         // TODO handle mobile platforms: Browser.Platform.android, handle incompatible old browsers
         this.log("Starting SEQUENCE: " + this.moduleInfo.sequenceID);
@@ -329,7 +332,7 @@ var SequencePlayer = new Class({
                 this._removeVideos();
                 this._cleanUp();
                 this._removeInteractions();
-                this.options.parent.fireEvent("SEQUENCE", {
+                this.myParent().fireEvent("SEQUENCE", {
                     type : "sequence.event",
                     next : 'sequence.next'
                 });
@@ -341,7 +344,7 @@ var SequencePlayer = new Class({
                 this._removeInteractions();
                 // this.start();
 
-                this.options.parent.fireEvent("SEQUENCE", {
+                this.myParent().fireEvent("SEQUENCE", {
                     type : "sequence.event",
                     next : 'sequence.repeat'
                 });
@@ -351,7 +354,7 @@ var SequencePlayer = new Class({
                 this._removeVideos();
                 this._cleanUp();
                 this._removeInteractions();
-                this.options.parent.fireEvent("SEQUENCE", {
+                this.myParent().fireEvent("SEQUENCE", {
                     type : "sequence.event",
                     next : 'sequence.exit'
                 });
@@ -412,10 +415,10 @@ var SequencePlayer = new Class({
             console.log (params.id);
                 this._cleanUp();
                 
-                this.options.parent.options.parent.setOptions({
+                this.myParent().myParent().setOptions({
                     moduleID : params.id
                 });
-                this.options.parent.fireEvent("SEQUENCE", {
+                this.myParent().fireEvent("SEQUENCE", {
                     type : "sequence.event",
                     next : 'module.selected'
                 });

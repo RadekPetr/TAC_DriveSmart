@@ -19,6 +19,9 @@ var DataLoader = new Class({
         this.data = null;
         this.sequences = null;
     },
+    myParent : function() {
+        return this.options.parent;
+    },
     // ----------------------------------------------------------
     start : function() {
         /*
@@ -41,7 +44,7 @@ var DataLoader = new Class({
         xml2json.convertFromURL(this.options.src, function(response) {
             this.data = response;
 
-            this._setupSequences();
+            this.setupSequences();
         }.bind(this));
 
         //  myRequest.send();
@@ -60,7 +63,8 @@ var DataLoader = new Class({
         return IDs;
     },
     // ----------------------------------------------------------
-    _setupSequences : function() {
+    setupSequences : function() {
+       
         var sequencesData = this.data.childNodes;
         this.sequences = new Hash({});
         Array.each(sequencesData, function(item, index) {
@@ -70,7 +74,7 @@ var DataLoader = new Class({
             this.sequences.extend(seq);
         }.bind(this))
 
-        this.options.parent.fireEvent("DATA", {
+        this.myParent().fireEvent("DATA", {
             type : "data.ready",
             id : this.options.id,
             next : this.options.next,

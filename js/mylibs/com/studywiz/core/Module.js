@@ -10,7 +10,7 @@ var Module = new Class({
         score : 0,
         sequenceID : "seq_1"
     },
-    initialize : function(myParent, myOptions) {
+    initialize : function(myParent, myOptions) {     
         this.setOptions(myOptions);
         this.options.parent = myParent;
         this.sequences = null;
@@ -18,6 +18,9 @@ var Module = new Class({
         this.addEvent("SEQUENCE", this.handleSequenceEvent);
         this.setupData();
         this.sequencePlayer = null;
+    },
+    myParent : function (){
+       return this.options.parent;
     },
     // ----------------------------------------------------------
     setupData : function() {
@@ -32,7 +35,7 @@ var Module = new Class({
             case "data.ready":
                 //console.log("Loaded module XML");
                 this.sequences = params.data;
-                this.options.parent.fireEvent("MODULE", {
+                this.myParent().fireEvent("MODULE", {
                     next : "module.ready"
                 })
         }
@@ -49,7 +52,7 @@ var Module = new Class({
                 if (index == moduleSequences.length) {
                     // is last
                     //TODO: handle module end
-                    this.options.parent.fireEvent("MODULE", {
+                    this.myParent().fireEvent("MODULE", {
                         next : "module.finished"
                     })
                 } else {
@@ -61,14 +64,14 @@ var Module = new Class({
             case "sequence.exit":
 
                 //TODO: handle cleanup of the player - like removing assets, loader etc.
-                this.options.parent.fireEvent("MODULE", {
+                this.myParent().fireEvent("MODULE", {
                     next : "module.exit"
                 })
                 break;
             case "module.selected":
 
                 //TODO: handle cleanup of the player - like removing assets, loader etc.
-                this.options.parent.fireEvent("MODULE", {
+                this.myParent().fireEvent("MODULE", {
                     next : "module.start"
                 })
                 break;

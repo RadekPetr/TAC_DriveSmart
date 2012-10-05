@@ -27,31 +27,13 @@ var Button = new Class({
             text : this.options.text
         });
 
+    },
+    myParent : function() {
+        return this.options.parent;
     }, // ---------------------------
-    add : function(parentTagID) {
-        /*var myDiv = document.getElementById('buttonHolder');
+    add : function(parentTagID) {       
 
-        if (myDiv == null) {
-            var myDiv = new Element("div", {
-                id : "buttonHolder"
-            });
-            myDiv.inject($(parentTagID));
-        }
-        this.buttonElement.inject(myDiv);
-        this.hide();
-
-        this.buttonElement.setStyles(this.options.style);
-
-        this.buttonElement.addEvent("click", function() {
-            this.options.parent.fireEvent("TIMELINE", {
-                type : "button.clicked",
-                id : this.options.id,
-                next : this.options.next
-            });
-        }.bind(this));
-        */
-        
-        this.containerID = 'container_' + this.options.id;   
+        this.containerID = 'container_' + this.options.id;
 
         this.container = null;
 
@@ -60,30 +42,26 @@ var Button = new Class({
             'class' : 'buttonContainer'
         })
 
-      // this.container.setStyles(this.options.style);
+        // this.container.setStyles(this.options.style);
 
         this.container.inject($(parentTagID));
         this.buttonElement.inject(this.container);
         this.hide();
-        
-         this.buttonElement.setStyles(this.options.style);
+
+        this.buttonElement.setStyles(this.options.style);
 
         this.buttonElement.addEvent("click", function() {
-            this.options.parent.fireEvent("TIMELINE", {
+            this.myParent().fireEvent("TIMELINE", {
                 type : "button.clicked",
                 id : this.options.id,
                 next : this.options.next
             });
         }.bind(this));
-        
-        
-        
-        
 
     },
     remove : function() {
         this.hide();
-        var removedElement = this.buttonElement.dispose();      
+        var removedElement = this.buttonElement.dispose();
         this.container.dispose();
 
     },

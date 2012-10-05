@@ -20,20 +20,10 @@ var ImageMedia = new Class({
         // Intial scene setup
         this.setOptions(myOptions);
         this.options.parent = myParent;
-        /*this.image = new Asset.image(this.options.src, {
-         style : this.options.style,
-         id : this.options.id,
-         onLoad : function() {
-         this.options.loaded = true;
-         this.options.parent.fireEvent("TIMELINE", {
-         type : "image.ready",
-         id : this.options.id,
-         next : this.options.next
-         })
-         }.bind(this)
-         });
-         */
         this.containerID = 'imageContainer';
+    },
+      myParent : function (){
+       return this.options.parent;
     },
     tween : function(to, from, reps, prop, dur, link, next) {
         //defaults
@@ -60,7 +50,7 @@ var ImageMedia = new Class({
             effect.start(prop, from, to).start(prop, to, from);
         }
         effect.addEvent("complete", function() {
-            this.options.parent.fireEvent("TIMELINE", {
+            this.myParent().fireEvent("TIMELINE", {
                 type : "tween.done",
                 id : this.options.id,
                 next : next
@@ -118,8 +108,8 @@ var ImageMedia = new Class({
             id : this.options.id,
             onLoad : function() {
                 this.options.loaded = true;
-                this.options.parent.mediaLoader.reportProgress(this.getLoaderInfo());
-                this.options.parent.fireEvent("TIMELINE", {
+                this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
+                this.myParent().fireEvent("TIMELINE", {
                     type : "image.ready",
                     id : this.options.id,
                     next : this.options.next

@@ -67,6 +67,9 @@ var Questions = new Class({
             this.panel.adopt(paragraph);
 
         }.bind(this))
+    },
+    myParent : function() {
+        return this.options.parent;
     }, // ---------------------------
     add : function(parentTagID) {
         var myParent = document.getElementById(parentTagID);
@@ -86,7 +89,7 @@ var Questions = new Class({
         this.panel.setStyles(this.options.style);
 
         this.panel.addEvent("click", function() {
-            this.options.parent.fireEvent("TIMELINE", {
+            this.myParent().fireEvent("TIMELINE", {
                 type : "panel.clicked",
                 id : this.options.id,
                 next : this.options.next
@@ -119,23 +122,21 @@ var Questions = new Class({
 
             var label = document.getElementById("item_label_" + index);
             var radio = document.getElementById("item_" + index);
-            
+
             console.log("Disabling");
             console.log(radio);
             radio.set('disabled', true);
 
-           
-                if (question.correct == false) {
-                    label.setStyles({
-                        'color' : '#CCCCCC'
-                    })
-                } else {
-                    label.setStyles({
-                        'color' : '#00FF00',
-                        'font-weight' : 'bold'
-                    })
-                }
-            
+            if (question.correct == false) {
+                label.setStyles({
+                    'color' : '#CCCCCC'
+                })
+            } else {
+                label.setStyles({
+                    'color' : '#00FF00',
+                    'font-weight' : 'bold'
+                })
+            }
 
         }.bind(this));
     }
