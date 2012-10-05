@@ -29,14 +29,16 @@ var SequencePlayer = new Class({
         this.currentStep = null;
         this.cameo_image = null;
 
-        this.mediaLoader = new MediaLoader(this, { });
-        this.mediaLoader.add('drivesmart')
+        this.mediaLoader = new MediaLoader(this, {
+            parentElementID : this.options.unitTagId
+        });
+        // this.mediaLoader.add('drivesmart')
 
         this.addEvent("TIMELINE", this.handleNavigationEvent);
 
-    },   
-    myParent : function (){
-       return this.options.parent;
+    },
+    myParent : function() {
+        return this.options.parent;
     },
     // ----------------------------------------------------------
     start : function(sequenceData) {
@@ -84,7 +86,7 @@ var SequencePlayer = new Class({
         this._setupSequenceMedia(this.currentSequence);
 
         this.mediaLoader.options.next = 'media.ready';
-        this.mediaLoader.show();
+        // this.mediaLoader.show();
 
         this.mediaLoader.start();
     },
@@ -272,7 +274,7 @@ var SequencePlayer = new Class({
         switch (params.next) {
             case "media.ready":
                 this.mediaLoader.options.next = null;
-                this.mediaLoader.hide();
+                //this.mediaLoader.hide();
 
                 this.nextStep();
                 break;
@@ -412,9 +414,9 @@ var SequencePlayer = new Class({
                 break;
 
             case "Menu.item.clicked":
-            console.log (params.id);
+                console.log(params.id);
                 this._cleanUp();
-                
+
                 this.myParent().myParent().setOptions({
                     moduleID : params.id
                 });

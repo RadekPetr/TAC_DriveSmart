@@ -8,10 +8,11 @@ var MediaLoader = new Class({
     options : {
         parent : null,
         next : "data.loaded",
-        progress: false
-    },    
-    myParent : function (){
-       return this.options.parent;
+        progress : false,
+        parentElementID : "drivesmart"
+    },
+    myParent : function() {
+        return this.options.parent;
     },
     // ----------------------------------------------------------
     initialize : function(myParent, myOptions) {
@@ -26,7 +27,7 @@ var MediaLoader = new Class({
             // nothing - already exists
         } else {
             this.loadQueue.extend(loaderInfo);
-           // console.log('Registered ');
+            // console.log('Registered ');
             //console.log(loaderInfo);
         }
     },
@@ -52,9 +53,10 @@ var MediaLoader = new Class({
         }
     },
     // ----------------------------------------------------------
-    add : function(myContainer) {
+    _addProgressBar : function() {
+        
         this.progressBar = new dwProgressBar({
-            container : $(myContainer),
+            container : $(this.options.parentElementID),
             startPercentage : 0,
             speed : 10,
             boxID : 'box',
@@ -70,7 +72,7 @@ var MediaLoader = new Class({
         });
     },
     // ----------------------------------------------------------
-    show : function() {
+    _show : function() {
         this.progressBar.show();
     },
     // ----------------------------------------------------------
@@ -83,13 +85,15 @@ var MediaLoader = new Class({
         this.progressBar = null;
     },
     // ----------------------------------------------------------
-    start : function() {
+    start : function() {this
+        this._addProgressBar();
+        this._show();
         //console.log("Prerload: ");
         //console.log(this.loadQueue);
         // loop the list and start preloading all of the items there
         this.loadQueue.each(function(value, key) {
-          // console.log('Starting preload >');
-           //console.log(value.ref);
+            // console.log('Starting preload >');
+            //console.log(value.ref);
             value.ref.preload();
         })
     },
@@ -120,6 +124,8 @@ var MediaLoader = new Class({
         if (progress > 80) {
             //console.log("Preload Finished");
             this.loadQueue.empty();
+            this.progressBar.remove();
+            this.progressBar = null;
             this.myParent().fireEvent("TIMELINE", {
                 type : "preload.finished",
                 id : this.options.id,
