@@ -12,7 +12,7 @@
 - Commentary Kaps 3-6 - missing videos ? Get copy of the released CD
 - each step could be wrapped ina step div for easier disposal
 - Extract data handling to Module class
-- handle the progress bar between modules
+- handle debug while module is still loading
 -----------------------------------------------------------------
 DONE:
 - Change radio cross to tick
@@ -21,5 +21,6 @@ DONE:
 - risks - create click areas, and show image on feedback
 - Preload media first and show progress
 - Recode ogg files - bad quality
+- handle the progress bar between modules
 
 
