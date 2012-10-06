@@ -33,7 +33,7 @@ var ModulePlayer = new Class({
     handleDataEvent : function(params) {
         switch (params.next) {
             case "data.ready":
-                //console.log("Loaded module XML");
+                //log("Loaded module XML");
                 this.sequences = params.data;
                 this.myParent().fireEvent("MODULE", {
                     next : "module.ready"
@@ -41,6 +41,12 @@ var ModulePlayer = new Class({
         }
     },
     handleSequenceEvent : function(params) {
+        // save the state of the current Sequence
+        this.myParent().fireEvent("MODULE", {
+            next : "update.user",
+            data : this.sequencePlayer.getSequenceState()
+        });
+
         switch (params.next) {
             case "sequence.repeat":
                 this.playSequence(this.options.currentSequenceID);
@@ -54,7 +60,7 @@ var ModulePlayer = new Class({
                     //TODO: handle module end
                     this.myParent().fireEvent("MODULE", {
                         next : "module.finished"
-                    })
+                    });
                 } else {
                     // get the next one
                     this.options.currentSequenceID = moduleSequences[index + 1];
@@ -66,14 +72,17 @@ var ModulePlayer = new Class({
                 //TODO: handle cleanup of the player - like removing assets, loader etc.
                 this.myParent().fireEvent("MODULE", {
                     next : "module.exit"
-                })
+                });
                 break;
+
             case "module.selected":
 
+                // For debugging only - whne the debug switches the module wityhout going to the main menu
                 //TODO: handle cleanup of the player - like removing assets, loader etc.
+
                 this.myParent().fireEvent("MODULE", {
                     next : "module.start"
-                })
+                });
                 break;
         }
     },

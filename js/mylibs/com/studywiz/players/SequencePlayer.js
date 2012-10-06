@@ -18,6 +18,7 @@ var SequencePlayer = new Class({
         this.setOptions(myOptions);
         this.options.parent = myParent;
         this.currentSequence = new Array();
+        this.sequenceState = null;
 
         this.mediaLoader = null;
         this.buttons = new Array();
@@ -47,9 +48,16 @@ var SequencePlayer = new Class({
         this.currentSequence = Array.clone(sequenceData);
         this.moduleInfo = this.myParent().getModuleInfo();
 
+        this.sequenceState = {
+            moduleID : this.moduleInfo.moduleID,
+            id : this.moduleInfo.currentSequenceID,
+            completed : false,
+            score : 0
+        }
+
         // TODO handle mobile platforms: Browser.Platform.android, handle incompatible old browsers
-        this.log("Starting SEQUENCE: " + this.moduleInfo.currentSequenceID);
-        //console.log(this.currentSequence);
+        log("Starting SEQUENCE: " + this.moduleInfo.currentSequenceID);
+        //log(this.currentSequence);
         this.buttonPosition = {
             x : 535,
             y : 415
@@ -96,7 +104,7 @@ var SequencePlayer = new Class({
             var step = this.currentSequence.shift();
             this.currentStep = step;
             var stepType = step.attributes.fmt;
-            //console.log("Step type: " + stepType);
+            //log("Step type: " + stepType);
             switch (stepType) {
                 case "Menu":
                     var myContainerID = 'Menu.container';
@@ -156,7 +164,7 @@ var SequencePlayer = new Class({
 
                     var button = this._setupButton("Continue", "continue_button", "SequenceIntro.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
-                    var button = this._setupButton("Main Menu", "main_menu_button", "MainMenu.clicked", this.buttonPosition.x, this.buttonPosition.y - 80);
+                    var button = this._setupButton("Main Menu", "main_menu_button", "MainMenuIntro.clicked", this.buttonPosition.x, this.buttonPosition.y - 80);
                     this.buttons.push(button);
                     step.player.options.next = '';
                     step.player.start();
@@ -200,12 +208,20 @@ var SequencePlayer = new Class({
                     //TODO: hide="box" not used ?
                     break;
                 case "Continue":
+                    // NOTE - this only can be at the end of the sequence !!!!
                     var button = this._setupButton("Continue", "continue_button", "Continue.clicked", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
                     var button = this._setupButton("Main Menu", "main_menu_button", "MainMenu.clicked", this.buttonPosition.x, this.buttonPosition.y - 80);
                     this.buttons.push(button);
                     var button = this._setupButton("Repeat", "repeat_button", "Repeat.clicked", this.buttonPosition.x, this.buttonPosition.y - 160);
                     this.buttons.push(button);
+
+                    // Update state to completed = true;
+                    this.sequenceState.completed = true;
+
+                    // TODO: remove this whne scoring is implemnted
+                    this.sequenceState.score = 100;
+
                     break;
                 case "End.Module.Continue":
                     step.player.start();
@@ -216,7 +232,7 @@ var SequencePlayer = new Class({
 
                     break;
                 case "Commentary":
-                    this.log("##### Commentary ######");
+                    log("##### Commentary ######");
                     alert("Commentary - Not implemented");
                     var button = this._setupButton("Skip", "skip_button", "Skip.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
@@ -253,7 +269,7 @@ var SequencePlayer = new Class({
 
                     break;
                 case "DragNDrop":
-                    this.log("##### DragNDrop ######");
+                    log("##### DragNDrop ######");
                     alert("DragNDrop - Not implemented");
                     var button = this._setupButton("Skip", "skip_button", "Skip.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
@@ -353,6 +369,7 @@ var SequencePlayer = new Class({
                 break;
             case "End.Module.Continue.clicked":
             case "MainMenu.clicked":
+            case "MainMenuIntro.clicked":
                 this._removeVideos();
                 this._cleanUp();
                 this._removeInteractions();
@@ -363,7 +380,7 @@ var SequencePlayer = new Class({
                 break;
 
             case "Cameo.visor.image.ready":
-                this.log(this.currentStep.player);
+                log(this.currentStep.player);
                 this.cameo_image.add(this.currentStep.player.containerID, 'before');
                 this.cameo_image.show();
                 this.cameo_image.tween('203px', '0px', 1, 'height', 300, 'ignore', 'Cameo.visor.tween.done')
@@ -409,12 +426,13 @@ var SequencePlayer = new Class({
                 // TODO: blink nicely few times
                 break;
             case "shape.clicked":
-                this.log("Shape clicked ID: " + params.id)
+                log("Shape clicked ID: " + params.id)
                 //TODO: scoring
                 break;
 
             case "Menu.item.clicked":
-                console.log(params.id);
+
+                log(params.id);
                 this._cleanUp();
 
                 this.myParent().myParent().setOptions({
@@ -427,9 +445,8 @@ var SequencePlayer = new Class({
                 break;
         };
     },
-    // ----------------------------------------------------------
-    log : function(logValue) {
-        console.log("****** " + logValue + " ******");
+    getSequenceState : function() {
+        return this.sequenceState;
     },
     //------------------------------------------------------------------------
     _setupButton : function(text, id, nextAction, x, y) {
@@ -463,15 +480,15 @@ var SequencePlayer = new Class({
             //var stepItems = step.childNodes;
             this._setupStepMedia(step, stepOrder);
         }.bind(this))
-        this.log("---------------------------- Finished setting up media from xml");
-        console.log(seq);
+        log("---------------------------- Finished setting up media from xml");
+        log(seq);
     },
     // ----------------------------------------------------------
     _setupStepMedia : function(step, stepOrder) {
         var stepType = step.attributes.fmt;
         Array.each(step.childNodes, function(item, index) {
             if (step.player != undefined) {
-                this.log("!!!!!!!!!!!!!!!!!!!!! ERROR - Two players in this step !!!!!!!!!!!!!!!!!!!!!!!!!" + stepType);
+                log("!!!!!!!!!!!!!!!!!!!!! ERROR - Two players in this step !!!!!!!!!!!!!!!!!!!!!!!!!" + stepType);
             }
             switch (item.name) {
                 case "Video" :
@@ -589,8 +606,8 @@ var SequencePlayer = new Class({
             }
         }.bind(this))
         // now start the preloading for each of the items
-        this.log("---------------------------- Step");
-        console.log(step)
+        log("---------------------------- Step");
+        log(step)
     },
     _cleanUp : function() {
         if (this.currentStep != null) {
@@ -661,7 +678,7 @@ var SequencePlayer = new Class({
                 // item.fade('out', 0);
                 item.hide();
             }
-            //console.log("Player " + playerID + " to keep " + excludedId)
+            //log("Player " + playerID + " to keep " + excludedId)
         }.bind(this))
     },
     _setupRisks : function() {

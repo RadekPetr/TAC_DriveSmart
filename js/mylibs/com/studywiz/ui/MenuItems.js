@@ -46,7 +46,7 @@ var MenuItems = new Class({
             //    'margin-left' : '18px'
             //   })
             var selectedModuleID = menuItem.moduleID;
-            console.log("Sel menu itemid: " + selectedModuleID);
+           // log("Sel menu itemid: " + selectedModuleID);
             item.addEvent("click", function() {
                 this.myParent().fireEvent("TIMELINE", {
                     type : "item.clicked",

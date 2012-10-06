@@ -27,13 +27,13 @@ var MediaLoader = new Class({
             // nothing - already exists
         } else {
             this.loadQueue.extend(loaderInfo);
-            // console.log('Registered ');
-            //console.log(loaderInfo);
+            // log('Registered ');
+            //log(loaderInfo);
         }
     },
     // ----------------------------------------------------------
     reportProgress : function(loaderInfo) {
-        console.log(loaderInfo);
+        //log(loaderInfo);
 
         if (this.options.next == null) {
             // if next action is not set do not allow reporting progress, not sure ???
@@ -88,12 +88,12 @@ var MediaLoader = new Class({
     start : function() {this
         this._addProgressBar();
         this._show();
-        //console.log("Prerload: ");
-        //console.log(this.loadQueue);
+        //log("Prerload: ");
+        //log(this.loadQueue);
         // loop the list and start preloading all of the items there
         this.loadQueue.each(function(value, key) {
-            // console.log('Starting preload >');
-            //console.log(value.ref);
+            // log('Starting preload >');
+            //log(value.ref);
             value.ref.preload();
         })
     },
@@ -122,7 +122,7 @@ var MediaLoader = new Class({
     // ----------------------------------------------------------
     _handleFinished : function(progress) {
         if (progress > 80) {
-            //console.log("Preload Finished");
+            //log("Preload Finished");
             this.loadQueue.empty();
             this.progressBar.remove();
             this.progressBar = null;

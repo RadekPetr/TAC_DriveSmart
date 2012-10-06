@@ -64,20 +64,20 @@ var VideoPlayer = new Class({
     // ---------------------------
     preload : function() {
 
-        //console.log("++ Video Preload started: " + this.options.id);
+        //log("++ Video Preload started: " + this.options.id);
 
         this.player.ready(( function() {
                 var data = this._getVideoData();
                 this.container.player.setProperty("poster", data.poster.src);
                 this.player.src(data.video);
-                //console.log("BLA" + this.options.style.width);
+                //log("BLA" + this.options.style.width);
                 this.player.size(this.options.style.width, this.options.style.height);
                 this.player.pause();
 
                 this.player.addEvent("loadstart", function() {
 
                     this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
-                    //console.log("Video Load progress: " + (this.player.bufferedPercent() * 100.00));
+                    //log("Video Load progress: " + (this.player.bufferedPercent() * 100.00));
                 }.bind(this));
 
                 this.player.addEvent("loadedmetadata", function() {
@@ -93,7 +93,7 @@ var VideoPlayer = new Class({
                 }.bind(this));
 
                 // this.player.removeEvents();
-                //console.log("Adding ended listener");
+                //log("Adding ended listener");
                 this.player.addEvent("ended", function() {
                     this.myParent().fireEvent("TIMELINE", {
                         type : "video.finished",
@@ -107,7 +107,7 @@ var VideoPlayer = new Class({
     // ---------------------------
     start : function() {
         if (this.player != null) {
-            //console.log(this.player.bufferedPercent());
+            //log(this.player.bufferedPercent());
             this.player.play();
             // Fire event to whotever object is my parent
         }
@@ -167,9 +167,9 @@ var VideoPlayer = new Class({
         if (this.player != null) {
             progress = this.player.bufferedPercent();
 
-            //console.log(this.playerID + " **** Video Load progress: " + (this.player.bufferedPercent() * 100.00));
-            // console.log(this.playerID + " **** Video Load progress buffered: " + this.player.buffered());
-            //console.log(this.playerID + " **** Video duration: " + this.player.duration());
+            //log(this.playerID + " **** Video Load progress: " + (this.player.bufferedPercent() * 100.00));
+            // log(this.playerID + " **** Video Load progress buffered: " + this.player.buffered());
+            //log(this.playerID + " **** Video duration: " + this.player.duration());
 
         }
         loaderInfo[this.options.id] = {

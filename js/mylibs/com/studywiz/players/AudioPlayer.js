@@ -31,7 +31,7 @@ var AudioPlayer = new Class({
     // ----------------------------------------------------------
     start : function() {
         if (this.preloaded = false) {
-            //console.log("++ Not preloaded yet - Loading Sound" + this.options.src);
+            //log("++ Not preloaded yet - Loading Sound" + this.options.src);
             this.preloader.loadFile({
                 src : this.options.src,
                 id : this.options.id
@@ -53,7 +53,7 @@ var AudioPlayer = new Class({
     },
     // ----------------------------------------------------------
     preload : function() {
-        //console.log("++ Audio Preload started: " + this.options.id)
+        //log("++ Audio Preload started: " + this.options.id)
         this.preloader.loadFile({
             src : this.options.src,
             id : this.options.id
@@ -67,10 +67,10 @@ var AudioPlayer = new Class({
     // ----------------------------------------------------------
     // PRIVATE - handle load complete
     _playSound : function() {
-        //console.log('Play sound: ' + this.options.id + " " + this.options.src)
-        //console.log(this.preloader);
+        //log('Play sound: ' + this.options.id + " " + this.options.src)
+        //log(this.preloader);
         this.soundInstance = createjs.SoundJS.play(this.options.id);
-        //console.log(this.soundInstance);
+        //log(this.soundInstance);
         if (!createjs.SoundJS.checkPlugin(true)) {
             alert('Sound plugin issue');
         } else {
@@ -85,7 +85,7 @@ var AudioPlayer = new Class({
     }.protect(),
     // ----------------------------------------------------------
     _preloadComplete : function() {
-        console.log("++ Audio Preloaded: " + this.options.id)
+        log("++ Audio Preloaded: " + this.options.id)
         this.preloaded = true;
     }.protect(),
     // ----------------------------------------------------------

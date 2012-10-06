@@ -68,9 +68,9 @@ var Modules = new Class({
         modules.each( function(value, key) {
 
             this.listOfModulesCounter++;
-            //console.log("++++" + this.listOfModulesCounter);
+            //log("++++" + this.listOfModulesCounter);
             var module = new Object();
-            //console.log(value);
+            //log(value);
 
             module[key] = new ModulePlayer(this, {
                 id : key,
@@ -90,10 +90,10 @@ var Modules = new Class({
             case "module.ready":
 
                 this.listOfModulesCounter--;
-                //console.log("Modules count: " + this.listOfModulesCounter);
+                //log("Modules count: " + this.listOfModulesCounter);
                 if (this.listOfModulesCounter === 0) {
-                    this.setupUser();
-                    console.log("Modules READY");
+                    this._setupUser();
+                    log("Modules READY");
                     this._startMainMenu();
                 }
                 break;
@@ -104,20 +104,23 @@ var Modules = new Class({
                 break;
             case "module.finished":
 
-                console.log("Module Finished");
+                log("Module Finished");
                 break;
             case "module.start":
-                console.log("Module Exited");
+                log("Module Exited");
                 var selectedModule = this.modules.get(this.options.moduleID);
                 var sequenceID = "seq_1";
                 selectedModule.playSequence(sequenceID);
 
                 this.setupDebug();
                 break;
+            case "update.user":
+                this.userTracker.updateSequenceProgress(params.data);
+                break;
 
         }
     },
-    setupUser : function() {
+    _setupUser : function() {
         this.userTracker = new User(this, {});
         this.userTracker.setDefaultUserData(this.modules);
         this.userTracker.loadProgress();
@@ -127,7 +130,7 @@ var Modules = new Class({
         var selectedModule = this.modules.get("main_menu");
         var sequenceID = "seq_1";
         selectedModule.playSequence(sequenceID);
-    }.protect(),
+    },
     setupDebug : function() {
         // add dropdown
         var myDiv = $('debugContainer');
@@ -142,7 +145,7 @@ var Modules = new Class({
                     change : function() {
                         var selectedModuleID = moduleSelector.options[moduleSelector.selectedIndex].value;
                         var selectedModule = this.modules.get(selectedModuleID);
-                        console.log("Selected Module: " + selectedModuleID);
+                        log("Selected Module: " + selectedModuleID);
                         this._populateSequenceSelector(sequenceSelector, selectedModule);
                     }.bind(this)
                 }
@@ -185,7 +188,7 @@ var Modules = new Class({
                         var selectedModuleID = moduleSelector.options[moduleSelector.selectedIndex].value;
                         var selectedModule = this.modules.get(selectedModuleID);
                         var sequenceID = sequenceSelector.options[sequenceSelector.selectedIndex].value;
-                        console.log("Selected Module: " + selectedModuleID);
+                        log("Selected Module: " + selectedModuleID);
                         selectedModule.playSequence(sequenceID);
                     }.bind(this)
                 }
@@ -194,7 +197,7 @@ var Modules = new Class({
             var selectedModuleID = this.options.moduleID;
             //moduleSelector.options[moduleSelector.selectedIndex].value;
             var selectedModule = this.modules.get(selectedModuleID);
-            // console.log(selectedModule);
+            // log(selectedModule);
 
             moduleSelector.inject(myDiv);
 

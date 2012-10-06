@@ -43,7 +43,7 @@ var Shape = new Class({
 
             var polygon = left + "," + top + " " + left + "," + (top - height) + " " + (left + width) + "," + (top - height) + " " + (left + width) + "," + top + " " + left + "," + top;
             this.polygons.push(polygon);
-            console.log("Polygon " + polygon);
+            log("Polygon " + polygon);
             /*
              x:y:w:h
              points =
@@ -71,7 +71,7 @@ var Shape = new Class({
     add : function(parentTagID) {
 
         var myParent = document.getElementById(parentTagID);
-        console.log(myParent);
+        log(myParent);
         var myDiv = myParent.getElement('div[id=' + this.containerID + ']');
         if (myDiv == null) {
             var myDiv = new Element("div", {

@@ -123,8 +123,8 @@ var Questions = new Class({
             var label = document.getElementById("item_label_" + index);
             var radio = document.getElementById("item_" + index);
 
-            console.log("Disabling");
-            console.log(radio);
+            log("Disabling");
+            log(radio);
             radio.set('disabled', true);
 
             if (question.correct == false) {

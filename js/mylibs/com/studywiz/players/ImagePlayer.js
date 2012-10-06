@@ -58,11 +58,11 @@ var ImagePlayer = new Class({
         }.bind(this))
     },
     add : function(parentTagID, where) {
-        console.log("###### parentTagID  " + parentTagID);
+        log("###### parentTagID  " + parentTagID);
         var myParent = document.getElementById(parentTagID);
         var myDiv = myParent.getElement('div[id=' + this.containerID + ']');
         if (myDiv == null) {
-            //console.log("Container not found in " + parentTagID + " adding a new one");
+            //log("Container not found in " + parentTagID + " adding a new one");
             var myDiv = new Element("div", {
                 id : this.containerID
             });
