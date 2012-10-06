@@ -13,14 +13,13 @@ var User = new Class({
         this.setOptions(myOptions);
         this.options.parent = myParent;
 
-        this.defaultData = new Hash({});
+        this.defaultData = new Array();
         this.userData = null;
     },
     loadProgress : function() {
         // try loading userdata from server
         // if fails, clone defaults
-        this.userData = Object.clone(this.defaultData);
-       
+        this.userData = Array.clone(this.defaultData);
 
     },
     saveProgress : function() {
@@ -28,31 +27,36 @@ var User = new Class({
         // ajax request ?
         //console.log (this.userData);
         var data = JSON.encode(this.userData);
-        var output = lzw_encode(data)
-      //  alert("Data :" +  output);
-       // var output2 = lzw_decode(output)
-        //TODO: make an AJAX request
-      //  alert("Data :" +  output2);
+        var output = lzw_encode(data);
+        
+        console.log (data);
+        alert("Data :" +  output);
+        // var output2 = lzw_decode(output)
+        //TODO: make an AJAX request and handle errors
+        //  alert("Data :" +  output2);
     },
     setDefaultUserData : function(data) {
-        data.each( function(moduleObject, key, hash) {
 
-            var moduleSequences = moduleObject.sequences;
-            var sequenceIds = moduleSequences.getKeys();
-            var sequences = new Array();
+        data.each( function(moduleObject, key, hash) {
+            var moduleInfo = moduleObject.getModuleInfo();
+            var sequenceIds = moduleInfo.sequences.getKeys();
+
             Array.each(sequenceIds, function(value, index) {
                 var seqObject = new Object({
+                    moduleID : moduleInfo.moduleID,
                     id : value,
                     completed : false,
                     score : 0
                 })
-                sequences.push(seqObject);
-            })
-            var moduleData = new Object();
-            moduleData[key] = sequences;
-            this.defaultData.extend(moduleData);
+
+                this.defaultData.push(seqObject);
+
+            }.bind(this))
         }.bind(this))
 
         console.log(this.defaultData);
+    },
+    updateSequenceProgress : function(sequenceState) {
+        /// get the sequence Object and update it
     }
 })

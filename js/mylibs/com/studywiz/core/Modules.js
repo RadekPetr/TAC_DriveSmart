@@ -7,7 +7,7 @@ var Modules = new Class({
     options : {
         unitTagId : 'drivesmart',
         moduleID : "main_menu",
-        moduleTitle : "Country driving",
+        moduleTitle : "Main Menu",
         sequenceID : "seq_1",
         id : "Modules"
 
@@ -77,7 +77,7 @@ var Modules = new Class({
                 score : value.score,
                 title : value.title,
                 id : key,
-                sequenceID : value.sequenceID
+                currentSequenceID : value.sequenceID
             });
             this.modules.extend(module);
         }.bind(this))

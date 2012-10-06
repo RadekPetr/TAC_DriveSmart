@@ -8,9 +8,9 @@ var ModulePlayer = new Class({
         id : "",
         title : "",
         score : 0,
-        sequenceID : "seq_1"
+        currentSequenceID : "seq_1"
     },
-    initialize : function(myParent, myOptions) {     
+    initialize : function(myParent, myOptions) {
         this.setOptions(myOptions);
         this.options.parent = myParent;
         this.sequences = null;
@@ -19,8 +19,8 @@ var ModulePlayer = new Class({
         this.setupData();
         this.sequencePlayer = null;
     },
-    myParent : function (){
-       return this.options.parent;
+    myParent : function() {
+        return this.options.parent;
     },
     // ----------------------------------------------------------
     setupData : function() {
@@ -43,12 +43,12 @@ var ModulePlayer = new Class({
     handleSequenceEvent : function(params) {
         switch (params.next) {
             case "sequence.repeat":
-                this.playSequence(this.options.sequenceID);
+                this.playSequence(this.options.currentSequenceID);
                 break;
             case "sequence.next":
                 // TODO marking sequence as complete and making sure next one is incomplete
                 var moduleSequences = this.getModuleSequenceIDs()
-                var index = moduleSequences.indexOf(this.options.sequenceID);
+                var index = moduleSequences.indexOf(this.options.currentSequenceID);
                 if (index == moduleSequences.length) {
                     // is last
                     //TODO: handle module end
@@ -57,9 +57,9 @@ var ModulePlayer = new Class({
                     })
                 } else {
                     // get the next one
-                    this.options.sequenceID = moduleSequences[index + 1];
+                    this.options.currentSequenceID = moduleSequences[index + 1];
                 }
-                this.playSequence(this.options.sequenceID);
+                this.playSequence(this.options.currentSequenceID);
                 break;
             case "sequence.exit":
 
@@ -86,19 +86,20 @@ var ModulePlayer = new Class({
         return IDs;
     },
     playSequence : function(sequenceID) {
-        this.options.sequenceID = sequenceID;
+        this.options.currentSequenceID = sequenceID;
 
         if (this.sequencePlayer == null) {
             this.sequencePlayer = new SequencePlayer(this, {});
         }
-        var currentSequence = this.sequences[sequenceID];
+        var currentSequence = this.sequences[this.options.currentSequenceID];
         this.sequencePlayer.start(currentSequence);
     },
     getModuleInfo : function() {
         return {
             moduleID : this.options.id,
             moduleTitle : this.options.title,
-            sequenceID : this.options.sequenceID
+            currentSequenceID : this.options.currentSequenceID,
+            sequences : this.sequences
         }
     }
 })

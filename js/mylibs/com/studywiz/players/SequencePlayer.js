@@ -48,7 +48,7 @@ var SequencePlayer = new Class({
         this.moduleInfo = this.myParent().getModuleInfo();
 
         // TODO handle mobile platforms: Browser.Platform.android, handle incompatible old browsers
-        this.log("Starting SEQUENCE: " + this.moduleInfo.sequenceID);
+        this.log("Starting SEQUENCE: " + this.moduleInfo.currentSequenceID);
         //console.log(this.currentSequence);
         this.buttonPosition = {
             x : 535,
