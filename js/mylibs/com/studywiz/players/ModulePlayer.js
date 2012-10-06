@@ -8,7 +8,7 @@ var ModulePlayer = new Class({
         id : "",
         title : "",
         score : 0,
-        currentSequenceID : "seq_1"
+        currentSequenceID : "1"
     },
     initialize : function(myParent, myOptions) {
         this.setOptions(myOptions);

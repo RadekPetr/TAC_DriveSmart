@@ -15,7 +15,10 @@ function stripFileExtension(filename) {
     return filename;
 }
 
+
 // LZW-compress a string
+
+
 function lzw_encode(s) {
     var dict = {};
     var data = (s + "").split("");

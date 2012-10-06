@@ -8,7 +8,7 @@ var Modules = new Class({
         unitTagId : 'drivesmart',
         moduleID : "main_menu",
         moduleTitle : "Main Menu",
-        sequenceID : "seq_1",
+        sequenceID : "1",
         id : "Modules"
 
     },
@@ -34,34 +34,34 @@ var Modules = new Class({
                 score : 0,
                 title : "Main menu",
                 id : 'main_menu',
-                sequenceID : 'seq_1'
+                sequenceID : '1'
             },
             kaps : {
                 score : 0,
                 title : "Keeping ahead & play safe",
                 id : 'kaps',
-                sequenceID : 'seq_1'
+                sequenceID : '1'
             },
             scanning : {
 
                 score : 0,
                 title : "Scanning",
                 id : 'scanning',
-                sequenceID : 'seq_1'
+                sequenceID : '1'
             },
             country : {
 
                 score : 0,
                 title : "Country driving",
                 id : 'country',
-                sequenceID : 'seq_1'
+                sequenceID : '1'
             },
             urban : {
 
                 score : 0,
                 title : "Urban driving",
                 id : 'urban',
-                sequenceID : 'seq_1'
+                sequenceID : '1'
             }
         });
 
@@ -109,7 +109,7 @@ var Modules = new Class({
             case "module.start":
                 log("Module Exited");
                 var selectedModule = this.modules.get(this.options.moduleID);
-                var sequenceID = "seq_1";
+                var sequenceID = "1";
                 selectedModule.playSequence(sequenceID);
 
                 this.setupDebug();
@@ -128,7 +128,7 @@ var Modules = new Class({
     },
     _startMainMenu : function() {
         var selectedModule = this.modules.get("main_menu");
-        var sequenceID = "seq_1";
+        var sequenceID = "1";
         selectedModule.playSequence(sequenceID);
     },
     setupDebug : function() {

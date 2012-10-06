@@ -69,7 +69,7 @@ var DataLoader = new Class({
         this.sequences = new Hash({});
         Array.each(sequencesData, function(item, index) {
             var seq = new Object();
-            seq["seq_" + item.attributes.Ex] = item.childNodes;
+            seq[ item.attributes.Ex] = item.childNodes;
             //  console.log(seq);
             this.sequences.extend(seq);
         }.bind(this))
