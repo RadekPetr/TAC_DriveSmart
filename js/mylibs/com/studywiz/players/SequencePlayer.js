@@ -114,17 +114,19 @@ var SequencePlayer = new Class({
                     myDiv.inject($(this.options.unitTagId));
                     step.image.add(myContainerID);
                     step.image.show();
-                    var textDiv = new Element("h1", {
+                    var moduleTitle = new Element("h1", {
                         html : this.moduleInfo.moduleTitle,
                         styles : {
-                            'color' : '#EAC749',
+                            'color' : '#ff9900',
                             'font-style' : 'italic',
                             'font-size' : '2.5em',
                             'font-weight' : 'bold',
                             'text-align' : 'center'
                         }
                     })
-                    textDiv.inject(myDiv);
+
+                    moduleTitle.inject(myDiv);
+
                     step.data.style = {
                         left : '10px',
                         top : '40px'
@@ -148,19 +150,35 @@ var SequencePlayer = new Class({
                     step.previewImage.add(myContainerID);
                     step.previewImage.show();
 
-                    var textDiv = new Element("h1", {
+                    var moduleTitle = new Element("h1", {
                         html : this.moduleInfo.moduleTitle,
                         styles : {
                             position : 'absolute',
                             left : '0px',
                             top : '20%',
-                            'color' : '#EAC749',
+                            'color' : '#ff9900',
                             'font-style' : 'italic',
                             'font-size' : '3em',
                             'font-weight' : 'bold'
                         }
                     })
-                    textDiv.inject($(myContainerID));
+                    moduleTitle.inject($(myContainerID));
+
+                    var moduleProgress = userTracker.getModuleProgress(this.moduleInfo.moduleID);
+                    var sequenceTitleText = "Exercise " + moduleProgress.finishedCount + " of " + moduleProgress.total + " completed";
+                    var sequenceTitle = new Element("h1", {
+                        html : sequenceTitleText,
+                        styles : {
+                            position : 'absolute',
+                            left : '0px',
+                            top : '10%',
+                            'color' : '#EAC749',
+                            'font-size' : '1em',
+                            'font-weight' : 'bold'
+                        }
+                        
+                    })
+                    sequenceTitle.inject($(myContainerID));
 
                     var button = this._setupButton("Continue", "continue_button", "SequenceIntro.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);

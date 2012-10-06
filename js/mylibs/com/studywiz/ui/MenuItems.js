@@ -40,11 +40,7 @@ var MenuItems = new Class({
             });
 
             this.setupTips(item, menuItem.description);
-
-            // item.setStyles({
-
-            //    'margin-left' : '18px'
-            //   })
+         
             var selectedModuleID = menuItem.moduleID;
            // log("Sel menu itemid: " + selectedModuleID);
             item.addEvent("click", function() {

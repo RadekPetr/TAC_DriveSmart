@@ -1,5 +1,5 @@
 #navigation li:hover {
-	color: #EAC749;
+	color: #FFFF99;
 	cursor: pointer;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -23,6 +23,11 @@
 }
 #navigation {
 	font-size: 1em;
+	font-weight: bold;
+	color: #EAC749;
+	font-style: italic;
+	font-size: 1em;
+	text-align: left;
 }
 #navigation ul {
 	margin: 0px;
@@ -38,5 +43,8 @@
 	-ms-user-select: none;
 	user-select: none;
 	text-decoration: none;
+	list-style-position: outside;
+	list-style-image: url(../media/images/menu/triagle.png);
+	margin-top: 8px;
 }
 

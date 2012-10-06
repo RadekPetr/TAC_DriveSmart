@@ -85,5 +85,18 @@ var User = new Class({
         }
 
         return unfinishedSequences;
+    },
+    getModuleProgress : function(moduleID) {
+
+        var sequencesInModule = this.userData[moduleID];
+        var unfinishedSequences = sequencesInModule.filter(function(item, index) {
+            return item.completed == false;
+        });
+
+        var progress = {};
+        progress.total = sequencesInModule.length;
+        progress.finishedCount = progress.total - unfinishedSequences.length;
+
+        return progress;
     }
 })
