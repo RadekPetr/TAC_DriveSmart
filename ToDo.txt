@@ -1,11 +1,11 @@
 - Style Submit button 
 - Implement UI calss and make the media classes to implement it it so common methods can be done only once
-- Try preloadJS thingy maybe ?
+
 - Style buttons better
 - Review usage of holders - maybe use on central DIV for the whoe thing
 - use options correctly in all Classes
 - Make Media class and extend it to Audio and video maybe ?
-- Od data files playback engine - XML to json conversion ?
+
 - Scoring
 - main menu
 - add browser and version detection IE9 +, ...
@@ -22,5 +22,6 @@ DONE:
 - Preload media first and show progress
 - Recode ogg files - bad quality
 - handle the progress bar between modules
+- Od data files playback engine - XML to json conversion ?
 
 

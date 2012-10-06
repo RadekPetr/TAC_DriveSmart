@@ -216,11 +216,7 @@ var SequencePlayer = new Class({
                     var button = this._setupButton("Repeat", "repeat_button", "Repeat.clicked", this.buttonPosition.x, this.buttonPosition.y - 160);
                     this.buttons.push(button);
 
-                    // Update state to completed = true;
-                    this.sequenceState.completed = true;
-
-                    // TODO: remove this whne scoring is implemnted
-                    this.sequenceState.score = 100;
+                    this._updateUserProgress();
 
                     break;
                 case "End.Module.Continue":
@@ -229,6 +225,8 @@ var SequencePlayer = new Class({
                     this.buttons.push(button);
                     var button = this._setupButton("Repeat", "repeat_button", "Repeat.clicked", this.buttonPosition.x, this.buttonPosition.y - 160);
                     this.buttons.push(button);
+
+                    this._updateUserProgress();
 
                     break;
                 case "Commentary":
@@ -694,6 +692,18 @@ var SequencePlayer = new Class({
             });
 
         }.bind(this));
+    },
+    _updateUserProgress : function() {
+        // Update state to completed = true;
+        this.sequenceState.completed = true;
+
+        // TODO: remove this whne scoring is implemnted
+        this.sequenceState.score = 100;
+
+        this.myParent().fireEvent("SEQUENCE", {
+            type : "module.event",
+            next : 'sequence.completed'
+        });
     }
 });
 

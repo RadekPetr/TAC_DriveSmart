@@ -49,10 +49,10 @@ var User = new Class({
                 sequences.push(seqObject);
             })
             var moduleData = new Object();
-            sequences.sortOn ("id", Array.NUMERIC);
+            sequences.sortOn("id", Array.NUMERIC);
             moduleData[key] = sequences;
             this.defaultData.extend(moduleData);
-            
+
         }.bind(this))
 
         log(this.defaultData);
@@ -69,22 +69,21 @@ var User = new Class({
         log(userSequence);
         if (userSequence.length > 1) {
             log("ERROR");
-
         }
         Object.append(userSequence[0], currentSequenceData);
+        log("*** User data :")
         log(this.userData);
     },
-    getUnfinishedSequences : function (moduleID){ 
-     
+    getUnfinishedSequences : function(moduleID) {
+
         var sequencesInModule = this.userData[moduleID];
         var unfinishedSequences = sequencesInModule.filter(function(item, index) {
             return item.completed == false;
-        });       
-        if (userSequence.length == 0) {
+        });
+        if (unfinishedSequences.length == 0) {
             log("Module is Finished");
         }
-        
-        unfinishedSequences.sort(sort_by('id', true, parseInt));
-      return unfinishedSequences;
+
+        return unfinishedSequences;
     }
 })

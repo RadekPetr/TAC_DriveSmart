@@ -115,16 +115,17 @@ var Modules = new Class({
                 this.setupDebug();
                 break;
             case "update.user":
-                this.userTracker.updateSequenceProgress(params.data);
+            log ("***** Updating User ***** ")
+                userTracker.updateSequenceProgress(params.data);
                 break;
 
         }
     },
     _setupUser : function() {
-        this.userTracker = new User(this, {});
-        this.userTracker.setDefaultUserData(this.modules);
-        this.userTracker.loadProgress();
-        this.userTracker.saveProgress();
+       userTracker = new User(this, {});
+        userTracker.setDefaultUserData(this.modules);
+       userTracker.loadProgress();
+       userTracker.saveProgress();
     },
     _startMainMenu : function() {
         var selectedModule = this.modules.get("main_menu");

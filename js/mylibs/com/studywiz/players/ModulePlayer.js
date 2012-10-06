@@ -41,21 +41,24 @@ var ModulePlayer = new Class({
         }
     },
     handleSequenceEvent : function(params) {
-        // save the state of the current Sequence
-        this.myParent().fireEvent("MODULE", {
-            next : "update.user",
-            data : this.sequencePlayer.getSequenceState()
-        });
 
         switch (params.next) {
+            case "sequence.completed":
+                // save the state of the current Sequence
+                this.myParent().fireEvent("MODULE", {
+                    next : "update.user",
+                    data : this.sequencePlayer.getSequenceState()
+                });
+                break;
             case "sequence.repeat":
                 this.playSequence(this.options.currentSequenceID);
                 break;
             case "sequence.next":
                 // TODO marking sequence as complete and making sure next one is incomplete
-                var moduleSequences = this.getModuleSequenceIDs()
-                var index = moduleSequences.indexOf(this.options.currentSequenceID);
-                if (index == moduleSequences.length) {
+                var moduleSequences = this.getModuleSequenceIDs();
+                var unfinishedSequences = userTracker.getUnfinishedSequences(this.options.id);
+                log("unfinished:", unfinishedSequences);
+                if (unfinishedSequences.length == 0) {
                     // is last
                     //TODO: handle module end
                     this.myParent().fireEvent("MODULE", {
@@ -63,8 +66,10 @@ var ModulePlayer = new Class({
                     });
                 } else {
                     // get the next one
-                    this.options.currentSequenceID = moduleSequences[index + 1];
+                    this.options.currentSequenceID = unfinishedSequences[0].id;
                 }
+
+                log("Next unfinished ID:", this.options.currentSequenceID);
                 this.playSequence(this.options.currentSequenceID);
                 break;
             case "sequence.exit":

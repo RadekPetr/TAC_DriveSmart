@@ -63,8 +63,7 @@ var DataLoader = new Class({
         return IDs;
     },
     // ----------------------------------------------------------
-    setupSequences : function() {
-       
+    setupSequences : function() {       
         var sequencesData = this.data.childNodes;
         this.sequences = new Hash({});
         Array.each(sequencesData, function(item, index) {
