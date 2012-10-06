@@ -32,12 +32,15 @@ var MenuItems = new Class({
             id : 'navigation'
         });
         Array.each(this.options.data, function(menuItem, index) {
-
+            var elemID = "menu_item_" + index;
             var item = new Element('li', {
                 'html' : menuItem.text,
-                'id' : "menu_item_" + index,
+                'id' : elemID,
                 'onselectstart' : 'return false;'
             });
+
+            this.setupTips(item, menuItem.description);
+
             // item.setStyles({
 
             //    'margin-left' : '18px'
@@ -85,5 +88,9 @@ var MenuItems = new Class({
         if (this.container.style.opacity > 0) {
             this.container.fade('out');
         }
+    },
+    setupTips : function(attachToElemId, content) {
+        // TODO - show the description on rollover
+
     }
 });

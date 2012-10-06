@@ -92,7 +92,7 @@ var Modules = new Class({
                 this.listOfModulesCounter--;
                 //console.log("Modules count: " + this.listOfModulesCounter);
                 if (this.listOfModulesCounter === 0) {
-
+                    this.setupUser();
                     console.log("Modules READY");
                     this._startMainMenu();
                 }
@@ -116,6 +116,12 @@ var Modules = new Class({
                 break;
 
         }
+    },
+    setupUser : function() {
+        this.userTracker = new User(this, {});
+        this.userTracker.setDefaultUserData(this.modules);
+        this.userTracker.loadProgress();
+        this.userTracker.saveProgress();
     },
     _startMainMenu : function() {
         var selectedModule = this.modules.get("main_menu");
