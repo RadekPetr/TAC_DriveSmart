@@ -4,7 +4,6 @@
 		<Step fmt="SequenceIntro">
 			<Preview>country/country_cst26_start_first.jpg</Preview>
 			<Image>intros/sequence_intro.png</Image>
-			<Audio>country/country_vdcb1a</Audio>
 		</Step>
 		<Step fmt="PlayAudio">
 			<Audio>country/country_vdcb1d</Audio>
@@ -365,7 +364,8 @@
 			<Video Zones="229:172:37:28,215:200:23:21,192:222:29:21,150:243:57:33"></Video>
 			<Audio waitfor="true">scanning/scan_vsbkr1b</Audio>
 		</Step>
-		<Step fmt="KRFeedback" image="keyrisks/country_cst23_next.jpg">
+		<Step fmt="KRFeedback">
+			<Image>keyrisks/country_cst23_next.jpg</Image>
 			<Audio>country/country_vdbc1h</Audio>
 		</Step>
 		<Step fmt="Question">
@@ -399,7 +399,8 @@
 			<Video Zones="229:172:37:28,215:200:23:21,192:222:29:21,150:243:57:33"></Video>
 			<Audio waitfor="true">scanning/scan_vsbkr1b</Audio>
 		</Step>
-		<Step fmt="KRFeedback" image="keyrisks/country_cst23_next.jpg">
+		<Step fmt="KRFeedback" >
+			<Image>keyrisks/country_cst23_next.jpg</Image>
 			<Audio>country/country_vdbc1h</Audio>
 		</Step>
 		<Step fmt="Question">
@@ -460,7 +461,8 @@
 			<Inter />
 			<Post />
 		</Step>
-		<Step fmt="KRFeedback" image="keyrisks/country_cst09_next.jpg">
+		<Step fmt="KRFeedback" >
+			<Image>keyrisks/country_cst09_next.jpg</Image>
 			<Audio>country/country_vdbc2h</Audio>
 		</Step>
 		<Step fmt="Question">
