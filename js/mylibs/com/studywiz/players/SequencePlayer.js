@@ -88,15 +88,9 @@ var SequencePlayer = new Class({
     },
     // ----------------------------------------------------------
     setupMedia : function() {
-        // we get a copy of the array so we can keep the original for repeat
-        //this.currentSequence = Array.clone(this.options.moduleSequences[this.options.sequenceID]);
-        // add players to media so they can be preloaded
         this._setupSequenceMedia(this.currentSequence);
-
         this.mediaLoader.options.next = 'media.ready';
-        // this.mediaLoader.show();
-
-        this.mediaLoader.start();
+        this.mediaLoader.start(true);
     },
     nextStep : function() {
         // take a step and decide what to do with it
@@ -176,7 +170,7 @@ var SequencePlayer = new Class({
                             'font-size' : '1em',
                             'font-weight' : 'bold'
                         }
-                        
+
                     })
                     sequenceTitle.inject($(myContainerID));
 
@@ -260,14 +254,12 @@ var SequencePlayer = new Class({
                     //TODO: <Audio waitfor="true">sound/scanning/mp3/scan_vsbkr1b.mp3</Audio>
                     break;
                 case "KRFeedback":
-                    this.KRFeedbackImage = new ImagePlayer(this, {
-                        src : this.options.imageFolder + step.attributes.image,
-                        next : "KRFeedback.ready",
-                        title : 'Feedback',
-                        id : 'KRFeedback'
-                    });
-                    this.KRFeedbackImage.preload();
                     this._removeButtons();
+                    step.image.add(this.shape.container.id);
+                    step.image.show();                   
+                    this.currentStep.player.options.next = 'KRFeedback.done';
+                    this.currentStep.player.start();               
+
                     break;
                 case "Cameo":
                     var file = this.options.imageFolder + 'cameos/visor.png';
@@ -305,7 +297,7 @@ var SequencePlayer = new Class({
 
         switch (params.next) {
             case "media.ready":
-                this.mediaLoader.options.next = null;
+                //this.mediaLoader.options.next = null;
                 //this.mediaLoader.hide();
 
                 this.nextStep();
@@ -339,13 +331,6 @@ var SequencePlayer = new Class({
             case "Risks.done" :
                 this.activeVideo.container.removeEvents('click');
                 this.nextStep();
-                break;
-            case "KRFeedback.ready":
-
-                this.KRFeedbackImage.add(this.shape.container.id);
-                this.KRFeedbackImage.show();
-                this.currentStep.player.options.next = 'KRFeedback.done';
-                this.currentStep.player.start();
                 break;
             case 'KRFeedback.done':
                 // add continue button
@@ -561,7 +546,7 @@ var SequencePlayer = new Class({
                         step.previewImage = new ImagePlayer(this, {
                             src : file,
                             title : 'Preview',
-                            id : 'PreviewImage',
+                            id : 'preview_image',
                             style : {
                                 width : '40%',
                                 height : '40%',
@@ -578,7 +563,7 @@ var SequencePlayer = new Class({
                         step.image = new ImagePlayer(this, {
                             src : file,
                             title : 'Image',
-                            id : 'Image',
+                            id : 'image' + index + "_" + stepOrder,
                         });
                         this.mediaLoader.register(step.image.getLoaderInfo());
                     }

@@ -708,7 +708,8 @@
 			<Video Zones="333:159:167:124,73:163:54:77"></Video>
 			<Audio>scanning/scan_vsbkr1b</Audio>
 		</Step>
-		<Step fmt="KRFeedback" image="keyrisks/urban_uic02.jpg">
+		<Step fmt="KRFeedback" >
+			<Image>keyrisks/urban_uic02.jpg</Image>
 			<Audio>urban/urban_vdbu1i</Audio>
 		</Step>
 		<Step fmt="Question">
@@ -804,7 +805,8 @@
 			<Video keyrisk="true" Zones="75:172:136:104,253:189:67:50,421:171:44:86"></Video>
 			<Audio>scanning/scan_vsbkr1b</Audio>
 		</Step>
-		<Step fmt="KRFeedback" image="keyrisks/urban_urt10.jpg">
+		<Step fmt="KRFeedback" >
+			<Image>keyrisks/urban_urt10.jpg</Image>
 			<Audio>urban/urban_vdbu3g</Audio>
 		</Step>
 		<Step fmt="Question">
@@ -864,7 +866,8 @@
 			<Video keyrisk="true" Zones="0:87:76:234,76:180:60:76,363:157:40:78"></Video>
 			<Audio>scanning/scan_vsbkr1b</Audio>
 		</Step>
-		<Step fmt="KRFeedback" image="keyrisks/urban_urt04.jpg">
+		<Step fmt="KRFeedback">
+			<Image>keyrisks/urban_urt04.jpg</Image>
 			<Audio>urban/urban_vdbu4h</Audio>
 		</Step>
 		<Step fmt="Question">
@@ -924,7 +927,8 @@
 			<Video keyrisk="true" Zones="3:227:178:70,178:225:48:41"></Video>
 			<Audio>scanning/scan_vsbkr1b</Audio>
 		</Step>
-		<Step fmt="KRFeedback" image="keyrisks/urban_umt01.jpg">
+		<Step fmt="KRFeedback">
+			<Image>keyrisks/urban_umt01.jpg</Image>
 			<Audio>urban/urban_vdbu5h</Audio>
 		</Step>
 		<Step fmt="Question">

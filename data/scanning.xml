@@ -12,7 +12,8 @@
 			<Video Zones="393:1:230:300"></Video>
 			<Audio>scanning/scan_vsbkr1b</Audio>
 		</Step>
-		<Step fmt="KRFeedback" image="keyrisks/scanning_uia06.jpg">
+		<Step fmt="KRFeedback">
+			<Image>keyrisks/scanning_uia06.jpg</Image>
 			<Audio>scanning/scan_vsbkr1d</Audio>
 		</Step>
 		<Step fmt="PlayVideo" noBg1="1">
@@ -32,7 +33,8 @@
 			<Video Zones="156:182:73:64,246:189:47:37,336:180:36:61"></Video>
 			<Audio>scanning/scan_vsbkr1b</Audio>
 		</Step>
-		<Step fmt="KRFeedback" image="keyrisks/scanning_urt10.jpg">
+		<Step fmt="KRFeedback">
+			<Image>keyrisks/scanning_urt10.jpg</Image>
 			<Audio>scanning/scan_vsbkr2d</Audio>
 		</Step>
 		<Step fmt="PlayAudio">
@@ -55,7 +57,8 @@
 			<Video image="keyrisks/scanning_cst18.jpg" Zones="519:176:57:44"></Video>
 			<Audio>scanning/scan_vsbkr1b</Audio>
 		</Step>
-		<Step fmt="KRFeedback" image="keyrisks/scanning_cst18.jpg">
+		<Step fmt="KRFeedback">
+			<Image>keyrisks/scanning_cst18.jpg</Image>
 			<Audio>scanning/scan_vsbkr3d</Audio>
 		</Step>
 		<Step fmt="PlayVideo" noBg1="1">
