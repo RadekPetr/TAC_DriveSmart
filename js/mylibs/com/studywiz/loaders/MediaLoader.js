@@ -42,7 +42,7 @@ var MediaLoader = new Class({
     },
     // ----------------------------------------------------------
     reportProgress : function(loaderInfo) {
-        //log(loaderInfo);
+        log(loaderInfo);
 
         if (this.options.next == null) {
             // if next action is not set do not allow reporting progress, not sure ???
@@ -50,8 +50,11 @@ var MediaLoader = new Class({
         } else {
             Object.each(loaderInfo, function(value, key) {
                 if (this.loadQueue.has(key)) {
-                    this.loadQueue.set(key, value);
-                    log (key, value.progress);
+                    // so video can keep loading but won't chnage the overall score aswe ahve already reported 100% by the canplaythrough event'
+                    if (this.loadQueue[key].progress < value.progress) {
+                        this.loadQueue.set(key, value);
+                    }
+                    log(key, value.progress);
                 } else {
                     // don't have to add this now as we do not start the preload automatically
                     // this.register(loaderInfo)
@@ -135,7 +138,7 @@ var MediaLoader = new Class({
     // ----------------------------------------------------------
     _handleFinished : function(progress) {
         log('progress: ', progress);
-        if (progress > 80) {
+        if (progress > 99) {
             log("Preload Finished");
             this.loadQueue.empty();
             this.remove();
@@ -147,18 +150,17 @@ var MediaLoader = new Class({
             this.options.next = "next.video.preloaded";
             this.start(false);
         }
-         if (progress > 30) {
-            
-         
-            this.myParent().fireEvent("TIMELINE", {
-                type : "preload.finished",
-                id : this.options.id,
-                next : this.options.next
-            })
-             this.options.next = "almost ready";
-           
+        if (progress > 30) {
+
+            // this.myParent().fireEvent("TIMELINE", {
+            //    type : "preload.finished",
+            //   id : this.options.id,
+            //    next : this.options.next
+            // })
+            // this.options.next = "almost ready";
+
         }
-        
+
     },
     _addOneVideoToQueue : function() {
         log("this.videoQueue: ", this.videoQueue);

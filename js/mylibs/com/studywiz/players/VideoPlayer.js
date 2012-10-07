@@ -127,7 +127,7 @@ var VideoPlayer = new Class({
                 }.bind(this));
                 this.player.addEvent("canplaythrough", function() {
                     log("EVENT: **********************   canplaythrough");
-                    this._reportProgress(100);
+                    this._reportProgress(true);
                 }.bind(this));
 
                 // this.player.removeEvents();
@@ -212,7 +212,7 @@ var VideoPlayer = new Class({
         }
         loaderInfo[this.options.id] = {
             'progress' : progress,
-            'weight' : 50,
+            'weight' : 2,
             ref : this,
             type : 'VIDEO'
         };
@@ -221,7 +221,7 @@ var VideoPlayer = new Class({
     // ----------------------------------------------------------
     _reportProgress : function(isReady) {
         var loaderInfo = this.getLoaderInfo()
-        if (isReady) {
+        if (isReady==true) {
             loaderInfo[this.options.id].progress = 1;
         }
         this.myParent().mediaLoader.reportProgress(loaderInfo);
