@@ -63,10 +63,10 @@ var VideoPlayer = new Class({
     },
     // ---------------------------
     preload : function() {
-
-        //log("++ Video Preload started: " + this.options.id);
+        log("++ Video Preload started: " + this.options.id);
 
         this.player.ready(( function() {
+                log('Player ready');
                 var data = this._getVideoData();
                 this.container.player.setProperty("poster", data.poster.src);
                 this.player.src(data.video);
@@ -75,21 +75,59 @@ var VideoPlayer = new Class({
                 this.player.pause();
 
                 this.player.addEvent("loadstart", function() {
-
-                    this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
-                    //log("Video Load progress: " + (this.player.bufferedPercent() * 100.00));
+                    log("EVENT: loadstart");
+                    this._reportProgress();
                 }.bind(this));
 
                 this.player.addEvent("loadedmetadata", function() {
-                    this._reportProgress()
+                    log("EVENT: loadedmetadata");
+                    this._reportProgress();
+                }.bind(this));
+                this.player.addEvent("loadeddata", function() {
+                    log("EVENT: loadeddata");
+                    this._reportProgress();
+                }.bind(this));
+                this.player.addEvent("play", function() {
+                    log("EVENT: play");
+                    this._reportProgress();
                 }.bind(this));
 
+                this.player.addEvent("ended", function() {
+                    log("EVENT: ended");
+                    this._reportProgress();
+                }.bind(this));
                 this.player.addEvent("progress", function() {
-                    this._reportProgress()
+                    log("EVENT: progress");
+                    this._reportProgress();
                 }.bind(this));
 
                 this.player.addEvent("loadedalldata", function() {
-                    this._reportProgress()
+                    log("EVENT: loadedalldata");
+                    this._reportProgress();
+                }.bind(this));
+
+                this.player.addEvent("timeupdate", function() {
+                    log("EVENT: timeupdate");
+                    this._reportProgress();
+                }.bind(this));
+
+                this.player.addEvent("suspend", function() {
+                    log("EVENT: suspend");
+                    this._reportProgress();
+                }.bind(this));
+
+                this.player.addEvent("waiting", function() {
+                    log("EVENT: **********************   waiting");
+                    this._reportProgress();
+                }.bind(this));
+
+                this.player.addEvent("canplay", function() {
+                    log("EVENT: **********************   canplay");
+                    this._reportProgress();
+                }.bind(this));
+                this.player.addEvent("canplaythrough", function() {
+                    log("EVENT: **********************   canplaythrough");
+                    this._reportProgress(100);
                 }.bind(this));
 
                 // this.player.removeEvents();
@@ -174,14 +212,19 @@ var VideoPlayer = new Class({
         }
         loaderInfo[this.options.id] = {
             'progress' : progress,
-            'weight' : 800,
-            ref : this
+            'weight' : 50,
+            ref : this,
+            type : 'VIDEO'
         };
         return loaderInfo
     },
     // ----------------------------------------------------------
-    _reportProgress : function() {
-        this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
+    _reportProgress : function(isReady) {
+        var loaderInfo = this.getLoaderInfo()
+        if (isReady) {
+            loaderInfo[this.options.id].progress = 1;
+        }
+        this.myParent().mediaLoader.reportProgress(loaderInfo);
 
     },
     _getVideoData : function() {

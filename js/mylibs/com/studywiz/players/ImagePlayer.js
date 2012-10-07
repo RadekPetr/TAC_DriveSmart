@@ -22,8 +22,8 @@ var ImagePlayer = new Class({
         this.options.parent = myParent;
         this.containerID = 'imageContainer';
     },
-      myParent : function (){
-       return this.options.parent;
+    myParent : function() {
+        return this.options.parent;
     },
     tween : function(to, from, reps, prop, dur, link, next) {
         //defaults
@@ -98,7 +98,8 @@ var ImagePlayer = new Class({
         loaderInfo[this.options.id] = {
             'progress' : progress,
             'weight' : 1,
-            ref : this
+            ref : this,
+            type : 'IMAGE'
         };
         return loaderInfo
     },

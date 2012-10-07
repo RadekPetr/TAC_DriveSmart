@@ -95,7 +95,8 @@ var AudioPlayer = new Class({
         loaderInfo[this.options.id] = {
             'progress' : this.preloader.progress,
             'weight' : 1,
-            ref : this
+            ref : this,
+            type : 'AUDIO'
         };
         return loaderInfo
     }

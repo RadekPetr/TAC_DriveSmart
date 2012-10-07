@@ -2,8 +2,6 @@
  * @author Radek
  */
 var MediaLoader = new Class({
-    // TODO: handle preloading completely to the Media Loader and remove it from Unit
-
     Implements : [Options, Events],
     options : {
         parent : null,
@@ -20,15 +18,26 @@ var MediaLoader = new Class({
         this.options.parent = myParent;
         this.loadQueue = new Hash({});
         this.progressBar = null;
+
+        this.videoQueue = new Array();
     },
     // ----------------------------------------------------------
     register : function(loaderInfo) {
         if (this.loadQueue.has(loaderInfo.id)) {
             // nothing - already exists
         } else {
-            this.loadQueue.extend(loaderInfo);
-            // log('Registered ');
-            //log(loaderInfo);
+            var type = '';
+            Object.each(loaderInfo, function(value, key) {
+                type = value.type;
+            })
+            log("Loader: ", type);
+            if (type == 'VIDEO') {
+
+                this.videoQueue.push(loaderInfo);
+            } else {
+                this.loadQueue.extend(loaderInfo);
+            }
+
         }
     },
     // ----------------------------------------------------------
@@ -42,6 +51,7 @@ var MediaLoader = new Class({
             Object.each(loaderInfo, function(value, key) {
                 if (this.loadQueue.has(key)) {
                     this.loadQueue.set(key, value);
+                    log (key, value.progress);
                 } else {
                     // don't have to add this now as we do not start the preload automatically
                     // this.register(loaderInfo)
@@ -54,7 +64,7 @@ var MediaLoader = new Class({
     },
     // ----------------------------------------------------------
     _addProgressBar : function() {
-        
+
         this.progressBar = new dwProgressBar({
             container : $(this.options.parentElementID),
             startPercentage : 0,
@@ -81,21 +91,24 @@ var MediaLoader = new Class({
     },
     // ----------------------------------------------------------
     remove : function() {
-        this.progressBar.remove();
-        this.progressBar = null;
+        if (this.progressBar != null) {
+            this.progressBar.remove();
+            this.progressBar = null;
+        }
     },
     // ----------------------------------------------------------
-    start : function() {this
-        this._addProgressBar();
-        this._show();
-        //log("Prerload: ");
-        //log(this.loadQueue);
-        // loop the list and start preloading all of the items there
+    start : function(showProgressBar) {
+        if (showProgressBar == true) {
+            this._addProgressBar();
+            this._show();
+        }
+
+        this._addOneVideoToQueue();
         this.loadQueue.each(function(value, key) {
-            // log('Starting preload >');
-            //log(value.ref);
+
             value.ref.preload();
         })
+        log(this.loadQueue);
     },
     // ----------------------------------------------------------
     _calculateProgress : function() {
@@ -121,16 +134,41 @@ var MediaLoader = new Class({
     }.protect(),
     // ----------------------------------------------------------
     _handleFinished : function(progress) {
+        log('progress: ', progress);
         if (progress > 80) {
-            //log("Preload Finished");
+            log("Preload Finished");
             this.loadQueue.empty();
-            this.progressBar.remove();
-            this.progressBar = null;
+            this.remove();
             this.myParent().fireEvent("TIMELINE", {
                 type : "preload.finished",
                 id : this.options.id,
                 next : this.options.next
             })
+            this.options.next = "next.video.preloaded";
+            this.start(false);
+        }
+         if (progress > 30) {
+            
+         
+            this.myParent().fireEvent("TIMELINE", {
+                type : "preload.finished",
+                id : this.options.id,
+                next : this.options.next
+            })
+             this.options.next = "almost ready";
+           
+        }
+        
+    },
+    _addOneVideoToQueue : function() {
+        log("this.videoQueue: ", this.videoQueue);
+        if (this.videoQueue.length > 0) {
+            log('preloading next video');
+            var currentVideo = this.videoQueue.shift();
+            this.loadQueue.extend(currentVideo);
+        } else {
+            // nothing, all loaded
+            log("all videos done");
         }
     }
 })
