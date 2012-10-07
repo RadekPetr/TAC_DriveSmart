@@ -55,6 +55,8 @@ var MenuItems = new Class({
 
         }.bind(this))
         this.container.adopt(ul);
+        
+        // TODO: implement access module logic here - disabling menu items and indicating finished modules
     },
     myParent : function() {
         return this.options.parent;
