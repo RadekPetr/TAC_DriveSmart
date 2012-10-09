@@ -11,9 +11,9 @@ var Button = new Class({
             top : '0px',
             left : '0px',
             'width' : '140px'
-            
+
         },
-        'class': 'button',
+        'class' : 'button',
         text : 'button text',
         id : 'element.id',
         next : 'next.action',
@@ -26,14 +26,14 @@ var Button = new Class({
         this.buttonElement = new Element("button", {
             id : this.options.id,
             text : this.options.text,
-            'class': this.options.class
+           'class' : this.options['class']
         });
 
     },
     myParent : function() {
         return this.options.parent;
     }, // ---------------------------
-    add : function(parentTagID) {       
+    add : function(parentTagID) {
 
         this.containerID = 'container_' + this.options.id;
 

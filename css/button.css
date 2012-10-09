@@ -3,13 +3,6 @@
 	display: inline-block;
 	white-space: nowrap;
 	background-color: #EEC955;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#EAC749));
-	background-image: -webkit-linear-gradient(top, #ffffff, #EAC749);
-	background-image: -moz-linear-gradient(top, #ffffff, #EAC749);
-	background-image: -ms-linear-gradient(top, #ffffff, #EAC749);
-	background-image: -o-linear-gradient(top, #ffffff, #EAC749);
-	background-image: linear-gradient(top, #ffffff, #EAC749);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#EAC749');
 	border: 1px solid #777;
 	padding: 0 1.5em;
 	margin: 0.5em;
@@ -17,9 +10,9 @@
 	text-decoration: none;
 	color: #333;
 	text-shadow: 0 1px 0 rgba(255,255,255,.8);
-	-moz-border-radius: .2em;
-	-webkit-border-radius: .2em;
-	border-radius: .2em;
+	-moz-border-radius: .3em;
+	-webkit-border-radius: .3em;
+	border-radius: .3em;
 	-moz-box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
 	-webkit-box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
 	box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
@@ -28,13 +21,7 @@
 .button:hover
 {
 	background-color: #FF9900;        
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#FF9900));
-	background-image: -webkit-linear-gradient(top, #fafafa, #FF9900);
-	background-image: -moz-linear-gradient(top, #fafafa, #FF9900);
-	background-image: -ms-linear-gradient(top, #fafafa, #FF9900);
-	background-image: -o-linear-gradient(top, #fafafa, #FF9900);
-	background-image: linear-gradient(top, #fafafa, #FF9900);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafafa', EndColorStr='#FF9900');        
+	       
 }
 
 .button:active

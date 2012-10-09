@@ -175,7 +175,7 @@ var SequencePlayer = new Class({
 
                     var button = this._setupButton("Continue", "button next", "SequenceIntro.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
-                    var button = this._setupButton("Main Menu", "button star", "MainMenuIntro.clicked", this.buttonPosition.x, this.buttonPosition.y - 45);
+                    button = this._setupButton("Main Menu", "button star", "MainMenuIntro.clicked", this.buttonPosition.x, this.buttonPosition.y - 45);
                     this.buttons.push(button);
                     step.player.options.next = '';
                     step.player.start();
@@ -285,7 +285,7 @@ var SequencePlayer = new Class({
 
         } else {
             // seq finished
-            log( '******** ERROR - Missing COntinue STEP in this sequence');
+            log('******** ERROR - Missing COntinue STEP in this sequence');
         }
     },
     // ----------------------------------------------------------
@@ -421,7 +421,7 @@ var SequencePlayer = new Class({
                 this.risk_image.display();
                 // TODO: wrap all risks to a div and get rid of them whne no needed
                 // TODO: limit to 5
-                // TODO: blink nicely few times
+
                 this.risk_image.tween('0', '1', 4, 'opacity', 100);
                 break;
             case "shape.clicked":
@@ -698,7 +698,7 @@ var SequencePlayer = new Class({
         // Update state to completed = true;
         this.sequenceState.completed = true;
 
-        // TODO: remove this whne scoring is implemnted
+        // TODO: remove this whne scoring is implemented
         this.sequenceState.score = 100;
 
         this.myParent().fireEvent("SEQUENCE", {
@@ -708,9 +708,3 @@ var SequencePlayer = new Class({
     }
 });
 
-/*
-// TEST:
-
-*/
-
-//this.intro_image.tween('0', '1', 50, 'opacity', 250);
