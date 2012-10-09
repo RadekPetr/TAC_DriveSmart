@@ -10,9 +10,10 @@ var Button = new Class({
             position : 'absolute',
             top : '0px',
             left : '0px',
-            width : '100px',
-            height : '60px'
+            'width' : '140px'
+            
         },
+        'class': 'button',
         text : 'button text',
         id : 'element.id',
         next : 'next.action',
@@ -24,7 +25,8 @@ var Button = new Class({
         this.options.parent = myParent;
         this.buttonElement = new Element("button", {
             id : this.options.id,
-            text : this.options.text
+            text : this.options.text,
+            'class': this.options.class
         });
 
     },
