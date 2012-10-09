@@ -33,7 +33,6 @@ var SequencePlayer = new Class({
         this.mediaLoader = new MediaLoader(this, {
             parentElementID : this.options.unitTagId
         });
-        // this.mediaLoader.add('drivesmart')
 
         this.addEvent("TIMELINE", this.handleNavigationEvent);
 
@@ -59,7 +58,7 @@ var SequencePlayer = new Class({
         log("Starting SEQUENCE: " + this.moduleInfo.currentSequenceID);
         //log(this.currentSequence);
         this.buttonPosition = {
-            x : 535,
+            x : 480,
             y : 415
         }
 
@@ -174,9 +173,9 @@ var SequencePlayer = new Class({
                     })
                     sequenceTitle.inject($(myContainerID));
 
-                    var button = this._setupButton("Continue", "continue_button", "SequenceIntro.done", this.buttonPosition.x, this.buttonPosition.y);
+                    var button = this._setupButton("Continue", "button next", "SequenceIntro.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
-                    var button = this._setupButton("Main Menu", "main_menu_button", "MainMenuIntro.clicked", this.buttonPosition.x, this.buttonPosition.y - 80);
+                    var button = this._setupButton("Main Menu", "button star", "MainMenuIntro.clicked", this.buttonPosition.x, this.buttonPosition.y - 45);
                     this.buttons.push(button);
                     step.player.options.next = '';
                     step.player.start();
@@ -199,7 +198,7 @@ var SequencePlayer = new Class({
                 case "QuestionUser":
                     this._removeInteractions();
                     this.interactions = this._setupQuestions(step.data);
-                    var button = this._setupButton("Submit answer", "submit_button", "QuestionUser.done", this.buttonPosition.x, this.buttonPosition.y);
+                    var button = this._setupButton("Done", "button save", "QuestionUser.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
                     //TODO: resp="3" - allow multiple choices
                     //TODO: notrack="true"
@@ -220,12 +219,12 @@ var SequencePlayer = new Class({
                     //TODO: hide="box" not used ?
                     break;
                 case "Continue":
-                    // NOTE - this only can be at the end of the sequence !!!!
-                    var button = this._setupButton("Continue", "continue_button", "Continue.clicked", this.buttonPosition.x, this.buttonPosition.y);
+                    // NOTE IMPORTANT - this only can be at the end of the sequence !!!!
+                    var button = this._setupButton("Continue", "button next", "Continue.clicked", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
-                    var button = this._setupButton("Main Menu", "main_menu_button", "MainMenu.clicked", this.buttonPosition.x, this.buttonPosition.y - 80);
+                    var button = this._setupButton("Main Menu", "button star", "MainMenu.clicked", this.buttonPosition.x, this.buttonPosition.y - 45);
                     this.buttons.push(button);
-                    var button = this._setupButton("Repeat", "repeat_button", "Repeat.clicked", this.buttonPosition.x, this.buttonPosition.y - 160);
+                    var button = this._setupButton("Repeat", "button back", "Repeat.clicked", this.buttonPosition.x, this.buttonPosition.y - 90);
                     this.buttons.push(button);
 
                     this._updateUserProgress();
@@ -233,9 +232,9 @@ var SequencePlayer = new Class({
                     break;
                 case "End.Module.Continue":
                     step.player.start();
-                    var button = this._setupButton("Continue", "continue_button", "End.Module.Continue.clicked", this.buttonPosition.x, this.buttonPosition.y);
+                    var button = this._setupButton("Continue", "button next", "End.Module.Continue.clicked", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
-                    var button = this._setupButton("Repeat", "repeat_button", "Repeat.clicked", this.buttonPosition.x, this.buttonPosition.y - 160);
+                    var button = this._setupButton("Repeat", "button back", "Repeat.clicked", this.buttonPosition.x, this.buttonPosition.y - 90);
                     this.buttons.push(button);
 
                     this._updateUserProgress();
@@ -244,7 +243,7 @@ var SequencePlayer = new Class({
                 case "Commentary":
                     log("##### Commentary ######");
                     alert("Commentary - Not implemented");
-                    var button = this._setupButton("Skip", "skip_button", "Skip.done", this.buttonPosition.x, this.buttonPosition.y);
+                    var button = this._setupButton("Skip", "button next", "Skip.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
                     break;
                 case "KeyRisk" :
@@ -256,9 +255,9 @@ var SequencePlayer = new Class({
                 case "KRFeedback":
                     this._removeButtons();
                     step.image.add(this.shape.container.id);
-                    step.image.show();                   
+                    step.image.show();
                     this.currentStep.player.options.next = 'KRFeedback.done';
-                    this.currentStep.player.start();               
+                    this.currentStep.player.start();
 
                     break;
                 case "Cameo":
@@ -279,16 +278,14 @@ var SequencePlayer = new Class({
                 case "DragNDrop":
                     log("##### DragNDrop ######");
                     alert("DragNDrop - Not implemented");
-                    var button = this._setupButton("Skip", "skip_button", "Skip.done", this.buttonPosition.x, this.buttonPosition.y);
+                    var button = this._setupButton("Skip", "button next", "Skip.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
-
                     break;
-
             }
 
         } else {
             // seq finished
-            alert("Sequence finished, select another one");
+            log( '******** ERROR - Missing COntinue STEP in this sequence');
         }
     },
     // ----------------------------------------------------------
@@ -325,7 +322,7 @@ var SequencePlayer = new Class({
                 this.nextStep();
                 break;
             case "Risks.ready":
-                var button = this._setupButton("Done", "don_button", "Risks.done", this.buttonPosition.x, this.buttonPosition.y);
+                var button = this._setupButton("Done", "button save", "Risks.done", this.buttonPosition.x, this.buttonPosition.y);
                 this.buttons.push(button);
                 break;
             case "Risks.done" :
@@ -334,7 +331,7 @@ var SequencePlayer = new Class({
                 break;
             case 'KRFeedback.done':
                 // add continue button
-                var button = this._setupButton("Continue", "krFeedback_done_button", "KRFeedback.continue.done", this.buttonPosition.x, this.buttonPosition.y);
+                var button = this._setupButton("Continue", "button next", "KRFeedback.continue.done", this.buttonPosition.x, this.buttonPosition.y);
                 this.buttons.push(button);
 
                 break;
@@ -421,10 +418,11 @@ var SequencePlayer = new Class({
                 this.risk_image.preload();
 
                 this.risk_image.add(this.options.unitTagId);
-                this.risk_image.show();
-                // TODO: warp all risks to a div and get rid of them whne no needed
+                this.risk_image.display();
+                // TODO: wrap all risks to a div and get rid of them whne no needed
                 // TODO: limit to 5
                 // TODO: blink nicely few times
+                this.risk_image.tween('0', '1', 4, 'opacity', 100);
                 break;
             case "shape.clicked":
                 log("Shape clicked ID: " + params.id)
@@ -450,14 +448,14 @@ var SequencePlayer = new Class({
         return this.sequenceState;
     },
     //------------------------------------------------------------------------
-    _setupButton : function(text, id, nextAction, x, y) {
+    _setupButton : function(text, button_class, nextAction, x, y) {
         var button = new Button(this, {
             style : {
                 left : x + 'px',
                 top : y + 'px'
             },
+            'class' : button_class,
             text : text,
-            id : id,
             next : nextAction
         });
 

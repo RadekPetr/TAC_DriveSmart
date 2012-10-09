@@ -77,6 +77,11 @@ var ImagePlayer = new Class({
         this.image.fade('in');
 
     },
+    display : function() {
+
+        this.image.fade('show');
+
+    },
     // ---------------------------
     hide : function() {
         if (this.image.isVisible() == true) {
