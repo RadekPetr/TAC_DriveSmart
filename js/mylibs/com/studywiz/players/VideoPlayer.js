@@ -173,6 +173,9 @@ var VideoPlayer = new Class({
         this.player.currentTime = time;
         this.player.pause();
     },
+    volume : function(volume) {
+        this.player.volume(volume);
+    },
     remove : function() {
         // see http://help.videojs.com/discussions/problems/861-how-to-destroy-a-video-js-object
         // get the videojs player with id of "video_1"
@@ -221,7 +224,7 @@ var VideoPlayer = new Class({
     // ----------------------------------------------------------
     _reportProgress : function(isReady) {
         var loaderInfo = this.getLoaderInfo()
-        if (isReady==true) {
+        if (isReady == true) {
             loaderInfo[this.options.id].progress = 1;
         }
         this.myParent().mediaLoader.reportProgress(loaderInfo);
@@ -229,20 +232,22 @@ var VideoPlayer = new Class({
     },
     _getVideoData : function() {
         var data = {};
-        var myFilename = this.options.filename;
+        var myFilename = stripFileExtension(this.options.filename);
+        var videoFile = this.options.parent.options.videoFolder + myFilename;
+        var posterFile = this.options.parent.options.imageFolder + myFilename;
         // var rand = "?" + Math.random();
         data.video = [{
             type : "video/mp4",
-            src : myFilename + ".mp4"
+            src : videoFile + ".mp4"
         }, {
             type : "video/webm",
-            src : myFilename + ".webm"
+            src : videoFile + ".webm"
         }, {
             type : "video/ogg",
-            src : myFilename + ".ogv"
+            src : videoFile + ".ogv"
         }];
         data.poster = {
-            src : myFilename + "_first.jpg"
+            src : posterFile + "_first.jpg"
         };
         return data;
     }

@@ -1,5 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
+	<Seq desc="Exercise 17" Ex="200">
+		<Step fmt="SequenceIntro">
+			<Preview>country/country_cst21_start_first.jpg</Preview>
+			<Image>intros/sequence_intro.png</Image>
+			<Audio>extra/extra_vclick</Audio>
+		</Step>
+	<Step fmt="CommentaryIntro">
+			<Image>country/country_cst21_start_first.jpg</Image>			
+			<Audio>extra/extra_vcomi</Audio>
+		</Step>
+		<Step fmt="Commentary" exe="country,extra_vcomi,country_cst21_start,country_vdac7y.wav,slow car,advisory road sign,oncoming car overtaking truck">
+			<Video>country/country_cst21_start</Video>
+		</Step>
+		<Step fmt="Continue"></Step>
+	</Seq>
 	<Seq Ex="100">
 		<Step fmt="SequenceIntro">
 			<Preview>country/country_cst26_start_first.jpg</Preview>

@@ -2,6 +2,17 @@
  * @author Radek
  */
 
+var flashLoaded = false;
+
+function flashLoaded() {
+    flashLoaded = true;
+    console.log("Flash Is ready");
+}
+
+function jsIsReady() {
+    return true;
+}
+
 var SequencePlayer = new Class({
 
     Implements : [Options, Events],
@@ -10,6 +21,7 @@ var SequencePlayer = new Class({
         audioFolder : 'media/sound/',
         videoFolder : 'media/video/',
         imageFolder : 'media/images/',
+        flashFolder : 'media/flash',
         parent : null
 
     },
@@ -181,6 +193,49 @@ var SequencePlayer = new Class({
                     step.player.start();
 
                     break;
+
+                case "CommentaryIntro":
+                    var myContainerID = 'CommentaryIntro.container';
+                    var myDiv = new Element("div", {
+                        id : myContainerID
+                    });
+                    myDiv.inject($(this.options.unitTagId));
+
+                    step.image.add(myContainerID);
+                    step.image.show();
+
+                    var button = this._setupButton("Continue", "button record", "CommentaryIntro.done", this.buttonPosition.x, this.buttonPosition.y);
+                    this.buttons.push(button);
+                    // ----- setup the recorder
+                    // TODO: move to a class
+                    this.commentary = new Swiff(this.options.flashFolder + '/commentary.swf', {
+                        id : 'Commentary',
+                        width : 640,
+                        height : 200,
+                        params : {
+                            allowScriptAccess : 'always',
+                            wmode : 'transparent'
+                        },
+                        callBacks : {
+                            isReady : this.isReady
+                        }
+                    });
+                    var recorderDiv = new Element("div", {
+                        id : 'commDiv',
+                        styles : {
+                           
+                            position : 'absolute'
+                        }
+                    })
+                    this.commentary.inject(recorderDiv);
+                    
+                    recorderDiv.inject($('drivesmart'), 'bottom');
+                    
+                    // -----
+
+                    step.player.options.next = '';
+                    step.player.start();
+                    break;
                 case "PlayVideo":
                     this._cleanUp();
                     this._hideInteractions();
@@ -240,11 +295,16 @@ var SequencePlayer = new Class({
                     this._updateUserProgress();
 
                     break;
+
                 case "Commentary":
-                    log("##### Commentary ######");
-                    alert("Commentary - Not implemented");
-                    var button = this._setupButton("Skip", "button next", "Skip.done", this.buttonPosition.x, this.buttonPosition.y);
-                    this.buttons.push(button);
+                    this._removeButtons();
+                    Swiff.remote($('Commentary'), 'recordStart');
+
+                    this.currentStep.player.options.next = 'Commentary.recording.done';
+                    this.currentStep.player.show();
+                    this.currentStep.player.volume(0.2);
+                    this.currentStep.player.start();
+
                     break;
                 case "KeyRisk" :
                     this._setupRisks();
@@ -398,7 +458,48 @@ var SequencePlayer = new Class({
                 this._cleanUp();
                 this.nextStep();
                 break;
+            case "Commentary.repeat.clicked":
 
+                break;
+            case "CommentaryIntro.done":
+                this._cleanUp();
+                $('commDiv').hide();
+                this.currentStep.player.stop();
+
+                this.nextStep();
+                break;
+            case "Commentary.recording.done":
+                log("Ok recorder stopped");
+                //  log ($('Commentary'));
+                var flash = $('Commentary');
+                flash.recordStop();
+                //  Swiff.remote($('Commentary'), 'end');
+
+                // alert("Commentary - Not implemented");
+                var button = this._setupButton("Replay", "button play", "Commentary.replay.clicked", this.buttonPosition.x, this.buttonPosition.y);
+                this.buttons.push(button);
+
+                break;
+            case "Commentary.replay.clicked":
+                this._removeButtons();
+                Swiff.remote($('Commentary'), 'playBack');
+                this.currentStep.player.show();
+                this.currentStep.player.options.next = 'Commentary.replay.done';
+                this.currentStep.player.volume(0.5);
+                this.currentStep.player.start();
+
+                break;
+            case "Commentary.replay.done":
+                // alert("Commentary - Not implemented");
+                var button = this._setupButton("Continue", "button next", "Continue.clicked", this.buttonPosition.x, this.buttonPosition.y);
+                this.buttons.push(button);
+                var button = this._setupButton("Replay", "button play", "Commentary.replay.clicked", this.buttonPosition.x, this.buttonPosition.y - 90);
+                this.buttons.push(button);
+
+                var button = this._setupButton("Main Menu", "button star", "MainMenu.clicked", this.buttonPosition.x, this.buttonPosition.y - 45);
+                this.buttons.push(button);
+
+                break;
             case "risk.selected":
                 /// the risks need to be inside some div which could be deleted later
                 var el = document.getElementById(this.options.unitTagId);
@@ -493,7 +594,7 @@ var SequencePlayer = new Class({
                 case "Video" :
 
                     if (item.value != '') {
-                        var filename = this.options.videoFolder + stripFileExtension(item.value);
+                        var filename = item.value;
 
                         if (stepType == 'Cameo') {
                             var style = {
@@ -539,7 +640,7 @@ var SequencePlayer = new Class({
                     break;
                 case "Preview" :
                     if (item.value != '') {
-                        var file = this.options.videoFolder + item.value;
+                        var file = this.options.imageFolder + item.value;
                         // Intial scene setup
                         step.previewImage = new ImagePlayer(this, {
                             src : file,
@@ -705,6 +806,13 @@ var SequencePlayer = new Class({
             type : "module.event",
             next : 'sequence.completed'
         });
+    },
+    onLoad : function() {
+        log("Called Loaded");
+    },
+    isReady : function() {
+        log("Is ready ?");
+        return true;
     }
 });
 

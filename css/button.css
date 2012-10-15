@@ -113,3 +113,7 @@
 {
 	content: "\2190";
 }
+.record:before
+{
+	content: "\25cf";
+}
