@@ -21,7 +21,7 @@ var SequencePlayer = new Class({
         audioFolder : 'media/sound/',
         videoFolder : 'media/video/',
         imageFolder : 'media/images/',
-        flashFolder : 'media/flash',
+        flashFolder : 'media/flash/',
         parent : null
 
     },
@@ -208,29 +208,16 @@ var SequencePlayer = new Class({
                     this.buttons.push(button);
                     // ----- setup the recorder
                     // TODO: move to a class
-                    this.commentary = new Swiff(this.options.flashFolder + '/commentary.swf', {
-                        id : 'Commentary',
-                        width : 640,
-                        height : 200,
-                        params : {
-                            allowScriptAccess : 'always',
-                            wmode : 'transparent'
+                    // TODO: cleanup the recorder ? Or keep it ?
+
+                    this.recorder = new Recorder(this, {
+                        swiff : {
+                            id : 'Commentary'
                         },
-                        callBacks : {
-                            isReady : this.isReady
-                        }
+                        src : this.options.flashFolder + "commentary.swf"
                     });
-                    var recorderDiv = new Element("div", {
-                        id : 'commDiv',
-                        styles : {
-                           
-                            position : 'absolute'
-                        }
-                    })
-                    this.commentary.inject(recorderDiv);
-                    
-                    recorderDiv.inject($('drivesmart'), 'bottom');
-                    
+
+                    this.recorder.add(this.options.unitTagId);
                     // -----
 
                     step.player.options.next = '';
@@ -298,12 +285,12 @@ var SequencePlayer = new Class({
 
                 case "Commentary":
                     this._removeButtons();
-                    Swiff.remote($('Commentary'), 'recordStart');
+                    this.recorder.startRecording();
 
-                    this.currentStep.player.options.next = 'Commentary.recording.done';
-                    this.currentStep.player.show();
-                    this.currentStep.player.volume(0.2);
-                    this.currentStep.player.start();
+                    step.player.options.next = 'Commentary.recording.done';
+                    step.player.show();
+                    step.player.volume(0.2);
+                    step.player.start();
 
                     break;
                 case "KeyRisk" :
@@ -316,8 +303,8 @@ var SequencePlayer = new Class({
                     this._removeButtons();
                     step.image.add(this.shape.container.id);
                     step.image.show();
-                    this.currentStep.player.options.next = 'KRFeedback.done';
-                    this.currentStep.player.start();
+                    step.player.options.next = 'KRFeedback.done';
+                    step.player.start();
 
                     break;
                 case "Cameo":
@@ -405,8 +392,10 @@ var SequencePlayer = new Class({
                 break;
 
             case "Continue.clicked":
-                this._removeVideos();
                 this._cleanUp();
+                this._removeVideos();
+                this._removeSwiff()
+
                 this._removeInteractions();
                 this.myParent().fireEvent("SEQUENCE", {
                     type : "sequence.event",
@@ -463,26 +452,22 @@ var SequencePlayer = new Class({
                 break;
             case "CommentaryIntro.done":
                 this._cleanUp();
-                $('commDiv').hide();
+                // this.commentary.hide();
                 this.currentStep.player.stop();
-
                 this.nextStep();
                 break;
             case "Commentary.recording.done":
                 log("Ok recorder stopped");
-                //  log ($('Commentary'));
-                var flash = $('Commentary');
-                flash.recordStop();
-                //  Swiff.remote($('Commentary'), 'end');
 
-                // alert("Commentary - Not implemented");
+                this.recorder.stopRecording();
+
                 var button = this._setupButton("Replay", "button play", "Commentary.replay.clicked", this.buttonPosition.x, this.buttonPosition.y);
                 this.buttons.push(button);
 
                 break;
             case "Commentary.replay.clicked":
                 this._removeButtons();
-                Swiff.remote($('Commentary'), 'playBack');
+                this.recorder.startPlayback();
                 this.currentStep.player.show();
                 this.currentStep.player.options.next = 'Commentary.replay.done';
                 this.currentStep.player.volume(0.5);
@@ -712,9 +697,11 @@ var SequencePlayer = new Class({
     _cleanUp : function() {
         if (this.currentStep != null) {
             if (this.currentStep.player != null) {
+                log (this.currentStep.player);
                 this.currentStep.player.stop();
             }
         }
+
         var imageDiv = document.getElementById('imageContainer');
         if (imageDiv != null) {
             imageDiv.dispose();
@@ -780,6 +767,11 @@ var SequencePlayer = new Class({
             }
             //log("Player " + playerID + " to keep " + excludedId)
         }.bind(this))
+    },
+    _removeSwiff : function() {
+        if (this.recorder != null) {
+            this.recorder.remove();
+        }
     },
     _setupRisks : function() {
         this.shape = new Shape(this, {});

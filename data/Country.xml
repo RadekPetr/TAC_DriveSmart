@@ -19,6 +19,7 @@
 		<Step fmt="SequenceIntro">
 			<Preview>country/country_cst26_start_first.jpg</Preview>
 			<Image>intros/sequence_intro.png</Image>
+			<Audio>country/country_vdcb1a</Audio>
 		</Step>
 		<Step fmt="PlayAudio">
 			<Audio>country/country_vdcb1d</Audio>
