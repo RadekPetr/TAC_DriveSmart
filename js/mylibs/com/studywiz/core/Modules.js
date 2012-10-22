@@ -1,6 +1,7 @@
 /**
  * @author Radek
  */
+var sequencePlayer = null;
 var Modules = new Class({
 
     Implements : [Options, Events],

@@ -1,138 +1,149 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<Seq desc="Kaps Exercise 1" Ex="1">
-		<Step fmt="SequenceIntro">
-			<Preview>shared/shared_uia17_start_first.jpg</Preview>
-			<Image>intros/sequence_intro.png</Image>
-			<Audio>kaps/kaps_vtt1a</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>shared/shared_uia17_start</Video>
-		</Step>
-		<Step fmt="Cameo">
-			<Video>cameo/cameo_ctt1</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>kaps/kaps_vtt1b</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Good</Data>
-				<Data correct="false">Reasonable</Data>
-				<Data correct="true">Poor</Data>
-			</Inter>
-			<Post></Post>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,2">
-			<Audio>kaps/kaps_vtt1c</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>shared/shared_uia17_next</Video>
-		</Step>
-		<Step fmt="Continue">
-			<Audio waitfor="false"></Audio>
-		</Step>
-	</Seq>
-	<Seq desc="Kaps Exercise 2" Ex="2">
-		<Step fmt="SequenceIntro">
-			<Preview>kaps/kaps_uit03_start_first.jpg</Preview>
-			<Image>intros/sequence_intro.png</Image>
-			<Audio>kaps/kaps_vtt2a</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>kaps/kaps_uit03_start</Video>
-		</Step>
-		<Step fmt="Cameo">
-			<Video>cameo/cameo_ctt2</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>kaps/kaps_vtt1b</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Good</Data>
-				<Data correct="false">Reasonable</Data>
-				<Data correct="true">Poor</Data>
-			</Inter>
-			<Post></Post>
-		</Step>
-		<Step FadeQ="1,2" fmt="QuestionFeedback">
-			<Audio>kaps/kaps_vtt2c</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>kaps/kaps_uit03_next</Video>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Kaps Exercise 3" Ex="3">
-		<Step fmt="SequenceIntro">
-			<Preview>kaps/kaps_cst14_start_first.jpg</Preview>
-			<Image>intros/sequence_intro.png</Image>
-			<Audio>kaps/kaps_vtt2a</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>kaps/kaps_cst14_start</Video>
-		</Step>
-		<Step fmt="Cameo">
-			<Video>cameo/cameo_ctt3</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>kaps/kaps_vtt1b</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Good</Data>
-				<Data correct="false">Reasonable</Data>
-				<Data correct="true">Poor</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,2">
-			<Audio>kaps/kaps_vtt3c</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>kaps/kaps_cst14_next</Video>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Kaps Exercise 4" Ex="4">
-		<Step fmt="SequenceIntro">
-			<Preview>kaps/kaps_shops_start_first.jpg</Preview>
-			<Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vopcom.mp3</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>kaps/kaps_vtt2a</Audio>
-		</Step>
-		<Step fmt="Commentary" PlayCommentary="true">
-			kaps,kaps_opdrive,kaps_shops_start,opshops
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Kaps Exercise 5" Ex="5">
-		<Step fmt="SequenceIntro">
-			<Preview>kaps/kaps_indust_start_first.jpg</Preview>
-			<Image>intros/sequence_intro.png</Image>
-			<Audio>extra/kaps_vtt2a</Audio>
-		</Step>
-		<Step fmt="Commentary" PlayCommentary="true">
-			kaps,kaps_opdrive,kaps_Indust_start,opindust
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Kaps Exercise 6" Ex="6">
-		<Step fmt="SequenceIntro">
-			<Preview>kaps/kaps_fway_start_first.jpg</Preview>
-			<Image>intros/sequence_intro.png</Image>
-			<Audio>kaps/kaps_vtt2a</Audio>
-		</Step>
-		<Step fmt="Commentary" PlayCommentary="true">
-			kaps,kaps_opdrive,kaps_fway_start,opfreeway
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="End.Module.Continue">
-			<Audio>extra/extra_end_module</Audio>
-		</Step>
-	</Seq>
+  <Seq desc="Kaps Exercise 1" Ex="1">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>kaps/kaps_vtt1a</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>shared/shared_uia17_start</Video>
+    </Step>
+    <Step fmt="Cameo">
+      <Video>cameo/cameo_ctt1</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>kaps/kaps_vtt1b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Good</Data>
+        <Data correct="false">Reasonable</Data>
+        <Data correct="true">Poor</Data>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2">
+      <Audio>kaps/kaps_vtt1c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>shared/shared_uia17_next</Video>
+    </Step>
+    <Step fmt="Continue">
+      <Audio waitfor="false"></Audio>
+    </Step>
+  </Seq>
+  <Seq desc="Kaps Exercise 2" Ex="2">
+    <Step fmt="SequenceIntro">
+      <Preview>kaps/kaps_uit03_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>kaps/kaps_vtt2a</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>kaps/kaps_uit03_start</Video>
+    </Step>
+    <Step fmt="Cameo">
+      <Video>cameo/cameo_ctt2</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>kaps/kaps_vtt1b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Good</Data>
+        <Data correct="false">Reasonable</Data>
+        <Data correct="true">Poor</Data>
+      </Inter>
+      <Post></Post>
+    </Step>
+    <Step FadeQ="1,2" fmt="QuestionFeedback">
+      <Audio>kaps/kaps_vtt2c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>kaps/kaps_uit03_next</Video>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Kaps Exercise 3" Ex="3">
+    <Step fmt="SequenceIntro">
+      <Preview>kaps/kaps_cst14_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>kaps/kaps_vtt2a</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>kaps/kaps_cst14_start</Video>
+    </Step>
+    <Step fmt="Cameo">
+      <Video>cameo/cameo_ctt3</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>kaps/kaps_vtt1b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Good</Data>
+        <Data correct="false">Reasonable</Data>
+        <Data correct="true">Poor</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2">
+      <Audio>kaps/kaps_vtt3c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>kaps/kaps_cst14_next</Video>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Kaps Exercise 4" Ex="4">
+    <Step fmt="SequenceIntro">
+      <Preview>kaps/kaps_shops_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vopcom.mp3</Audio>
+    </Step>
+   
+    <Step fmt="CommentaryIntro">
+      <Image>kaps/kaps_shops_start_first.jpg</Image>
+      <Audio>kaps/kaps_opdrive</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>kaps/kaps_shops_start</Video>
+      <FeedbackAudio>kaps/kaps_opdrive2</FeedbackAudio>
+      <ExpertAudio>kaps/opshops</ExpertAudio>
+    </Step>
+  </Seq>
+  <Seq desc="Kaps Exercise 5" Ex="5">
+    <Step fmt="SequenceIntro">
+      <Preview>kaps/kaps_indust_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>kaps/kaps_vtt2a</Audio>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>kaps/kaps_Indust_start_first.jpg</Image>
+      <Audio>kaps/kaps_opdrive</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>kaps/kaps_Indust_start</Video>
+      <FeedbackAudio>kaps/kaps_opdrive2</FeedbackAudio>
+      <ExpertAudio>kaps/opindust</ExpertAudio>
+    </Step>
+  </Seq>
+  <Seq desc="Kaps Exercise 6" Ex="6">
+    <Step fmt="SequenceIntro">
+      <Preview>kaps/kaps_fway_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>kaps/kaps_vtt2a</Audio>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>kaps/kaps_fway_start_first.jpg</Image>
+      <Audio>kaps/kaps_opdrive</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>kaps/kaps_fway_start</Video>
+      <FeedbackAudio>kaps/kaps_opdrive2</FeedbackAudio>
+      <ExpertAudio>kaps/opfreeway</ExpertAudio>
+    </Step>
+    <Step fmt="End.Module.Continue">
+      <Audio>extra/extra_end_module</Audio>
+    </Step>
+  </Seq>
 </root>

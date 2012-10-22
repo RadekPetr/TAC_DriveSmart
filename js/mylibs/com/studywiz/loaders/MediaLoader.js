@@ -30,7 +30,7 @@ var MediaLoader = new Class({
             Object.each(loaderInfo, function(value, key) {
                 type = value.type;
             })
-            log("Loader: ", type);
+           // log("Loader: ", type);
             if (type == 'VIDEO') {
 
                 this.videoQueue.push(loaderInfo);
@@ -42,7 +42,7 @@ var MediaLoader = new Class({
     },
     // ----------------------------------------------------------
     reportProgress : function(loaderInfo) {
-        log(loaderInfo);
+       //log(loaderInfo);
 
         if (this.options.next == null) {
             // if next action is not set do not allow reporting progress, not sure ???
@@ -54,7 +54,7 @@ var MediaLoader = new Class({
                     if (this.loadQueue[key].progress < value.progress) {
                         this.loadQueue.set(key, value);
                     }
-                    log(key, value.progress);
+                    //log(key, value.progress);
                 } else {
                     // don't have to add this now as we do not start the preload automatically
                     // this.register(loaderInfo)
@@ -111,7 +111,7 @@ var MediaLoader = new Class({
 
             value.ref.preload();
         })
-        log(this.loadQueue);
+       // log(this.loadQueue);
         
         
          //TODO: Split videos to their own queue and only include the first one in the loader progress so in case next video gets added to the list before the loader is finsihed ...
@@ -145,7 +145,7 @@ var MediaLoader = new Class({
     }.protect(),
     // ----------------------------------------------------------
     _handleFinished : function(progress) {
-        log('progress: ', progress);
+        //log('progress: ', progress);
         if (progress > 99) {
             log("Preload Finished");
             this.loadQueue.empty();
@@ -171,9 +171,9 @@ var MediaLoader = new Class({
 
     },
     _addOneVideoToQueue : function() {
-        log("this.videoQueue: ", this.videoQueue);
+      //  log("this.videoQueue: ", this.videoQueue);
         if (this.videoQueue.length > 0) {
-            log('preloading next video');
+          //  log('preloading next video');
             var currentVideo = this.videoQueue.shift();
             this.loadQueue.extend(currentVideo);
         } else {

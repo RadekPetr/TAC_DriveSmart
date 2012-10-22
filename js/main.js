@@ -6,6 +6,7 @@ var Main = new Class({
     Implements : [Options, Events],
     // ----------------------------------------------------------
     initialize : function(isDev) {
+    	 
         if (isDev) {
             // load external js libraries so they are available to the project
 
@@ -25,6 +26,7 @@ var Main = new Class({
 
         var modules = new Modules({});
         modules.start();
+       
 
         //  myUnit.setupDebug();
     },

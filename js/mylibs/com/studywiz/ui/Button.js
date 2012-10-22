@@ -3,80 +3,77 @@
  */
 var Button = new Class({
 
-    Implements : [Options, Events],
+	Implements : [Options, Events],
 
-    options : {
-        style : {
-            position : 'absolute',
-            top : '0px',
-            left : '0px',
-            'width' : '140px'
+	options : {
+		style : {
+			'position' : 'absolute',
+			'top' : '0px',
+			'left' : '0px',
+			'width' : '140px'
 
-        },
-        'class' : 'button',
-        text : 'button text',
-        id : 'element.id',
-        next : 'next.action',
-        parent : null
-    },
-    initialize : function(myParent, myOptions) {
+		},
+		'class' : 'button',
+		text : 'button text',
+		id : 'element.id',
+		next : 'next.action',
+		parent : null
+	},
+	initialize : function(myParent, myOptions) {
 
-        this.setOptions(myOptions);
-        this.options.parent = myParent;
-        this.buttonElement = new Element("button", {
-            id : this.options.id,
-            text : this.options.text,
-           'class' : this.options['class']
-        });
+		this.setOptions(myOptions);
+		this.options.parent = myParent;
+		this.buttonElement = new Element("button", {
+			id : this.options.id,
+			text : this.options.text,
+			'class' : this.options['class']
+		});
 
-    },
-    myParent : function() {
-        return this.options.parent;
-    }, // ---------------------------
-    add : function(parentTagID) {
+	},
+	myParent : function() {
+		return this.options.parent;
+	}, // ---------------------------
+	add : function(parentTagID) {
 
-        this.containerID = 'container_' + this.options.id;
+		this.containerID = 'container_' + this.options.id;
 
-        this.container = null;
+		this.container = null;
 
-        this.container = new Element("div", {
-            id : this.containerID,
-            'class' : 'buttonContainer'
-        })
+		this.container = new Element("div", {
+			id : this.containerID
+		})
 
-        // this.container.setStyles(this.options.style);
+		this.container.inject($(parentTagID));
+		this.buttonElement.inject(this.container);
+		this.hide();
 
-        this.container.inject($(parentTagID));
-        this.buttonElement.inject(this.container);
-        this.hide();
+		this.buttonElement.setStyles(this.options.style);
 
-        this.buttonElement.setStyles(this.options.style);
+		this.buttonElement.addEvent("click", function() {
+			this.myParent().fireEvent("TIMELINE", {
+				type : "button.clicked",
+				id : this.options.id,
+				next : this.options.next
+			});
+		}.bind(this));
 
-        this.buttonElement.addEvent("click", function() {
-            this.myParent().fireEvent("TIMELINE", {
-                type : "button.clicked",
-                id : this.options.id,
-                next : this.options.next
-            });
-        }.bind(this));
+	},
+	remove : function() {
+		this.hide();
+		var removedElement = this.buttonElement.dispose();
+		this.container.dispose();
 
-    },
-    remove : function() {
-        this.hide();
-        var removedElement = this.buttonElement.dispose();
-        this.container.dispose();
-
-    },
-    // ---------------------------
-    show : function() {
-        // TODO : fade in
-        // this.buttonElement.show();
-        this.buttonElement.fade('hide');
-        this.buttonElement.fade('in');
-    },
-    // ---------------------------
-    hide : function() {
-        this.buttonElement.fade('out');
-        // this.buttonElement.hide();
-    }
+	},
+	// ---------------------------
+	show : function() {
+		// TODO : fade in
+		// this.buttonElement.show();
+		this.buttonElement.fade('hide');
+		this.buttonElement.fade('in');
+	},
+	// ---------------------------
+	hide : function() {
+		this.buttonElement.fade('out');
+		// this.buttonElement.hide();
+	}
 });
