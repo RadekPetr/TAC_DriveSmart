@@ -1,1358 +1,1551 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<Seq desc="Exercise 1" Ex="1">
-		<Step fmt="SequenceIntro">
-			<Preview>shared/shared_uia08_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>urban/urban_vdub1a</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>shared/shared_uia08_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub1b</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Keep going at this speed and stay in our own lane</Data>
-				<Data correct="true">Reduce speed in case we have to stop quickly and stay in our own lane</Data>
-				<Data correct="false">Increase speed and stay in our lane</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,3">
-			<Audio>urban/urban_vdub1c</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub1d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>shared/shared_uia08_next</Video>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub1e</Audio>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub1f</Audio>
-		</Step>
-		<Step notrack="true" fmt="QuestionUser" image="shared/shared_uia08_next_first.jpg">
-			<Inter>
-				<Data correct="true">The pedestrian moving onto the road</Data>
-				<Data correct="false">The car from the left continuing into the intersection</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-			<Audio>urban/urban_vdub1g</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 2" Ex="2">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_uia14_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>urban/urban_vdub2a</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uia14_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub2b</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Turn right immediately</Data>
-				<Data correct="true">Slow down to allow the oncoming car through</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1">
-			<Audio>urban/urban_vdub2c</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub2d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uia14_next</Video>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub2e</Audio>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub1f</Audio>
-		</Step>
-		<Step notrack="true" fmt="QuestionUser" image="urban_uia14_next_first.jpg">
-			<Inter>
-				<Data correct="true">The car close behind assumes we are continuing to turn, and does not slow down or merge left</Data>
-				<Data correct="false">We are worried about the car behind hitting us, and we roll forward into the path of the oncoming car</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-			<Audio>urban/urban_vdub2g</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 3" Ex="3">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_uia09_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>urban/urban_vdub2a</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uia09_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub2b</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Maintain our speed, and make a left turn close behind the car in front</Data>
-				<Data correct="true">Gradually slow down and turn left, watching out for pedestrians</Data>
-				<Data correct="false">Slow down to allow the oncoming car to turn first</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,3">
-			<Audio>urban/urban_vdub3c</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub2d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uia09_next</Video>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub3e</Audio>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub1f</Audio>
-		</Step>
-		<Step fmt="QuestionUser" notrack="true" image="urban_uia09_next_first.jpg">
-			<Inter>
-				<Data correct="true">The car ahead of us braked suddenly to give way to the cyclist</Data>
-				<Data correct="false">The oncoming blue car did not see the cyclist, and kept coming behind us after our driver had breaked</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-			<Audio>urban/urban_vdub3g</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 4" Ex="4">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_uic06_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>urban/urban_vdub2a</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uic06_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub2b</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Maintain our speed and cross the intersection, because the pedestrians on our right are crossing</Data>
-				<Data correct="false">Slow down to cross the intersection</Data>
-				<Data correct="true">Stop and check for traffic</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,2">
-			<Audio>urban/urban_vdub4c</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub4d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uic06_next</Video>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub4e</Audio>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub1f</Audio>
-		</Step>
-		<Step fmt="QuestionUser" notrack="true" image="urban_uic06_next_first.jpg">
-			<Inter>
-				<Data correct="true">The car behind us does not have enough time to stop</Data>
-				<Data correct="false">The car on our left arrives just a few seconds later, and can't stop in time for us</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-			<Audio>urban/urban_vdub4g</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 5" Ex="5">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_uit01_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>urban/urban_vdub5a</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uit01_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub2b</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Turn left into the left lane so we don't crash into the oncoming right-turning car</Data>
-				<Data correct="true">Prepare to stop in case the oncoming car gets in our way, or some pedestrians appear</Data>
-				<Data correct="false">Stop and give way to the oncoming car</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,3">
-			<Audio>urban/urban_vdub5c</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub5d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uit01_next</Video>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub5e</Audio>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub1f</Audio>
-		</Step>
-		<Step fmt="QuestionUser" notrack="true">
-			<Inter>
-				<Data correct="true">The oncoming car swerves to avoid the cyclist and hits our car</Data>
-				<Data correct="false">The cyclist tries to avoid the other car, by swerving in front of us</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-			<Audio>urban/urban_vdub5g</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 6" Ex="6">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_urt07_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>urban/urban_vdub5a</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>shared/shared_urt07_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub6b</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Move out to pass the parked car and accelerate to the speed limit</Data>
-				<Data correct="true">Edge out slowly around the parked white car</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1">
-			<Audio>urban/urban_vdub4d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>shared/shared_urt07_next</Video>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub6d</Audio>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub1f</Audio>
-		</Step>
-		<Step fmt="QuestionUser" notrack="true">
-			<Inter>
-				<Data correct="true">The parked car pulls out as we are passing</Data>
-				<Data correct="false">The ute reverses towards us and hits our car</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-			<Audio>urban/urban_vdub6f</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 7" Ex="7">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_urt08_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>urban/urban_vdub2a</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_urt08_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub2b</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="true">Brake to stop</Data>
-				<Data correct="false">Move to the right, then accelerate to pass the car in front</Data>
-				<Data correct="false">Move to the right and proceed slowly</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="2,3">
-			<Audio>urban/urban_vdub7c</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub7d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_urt08_next</Video>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub7e</Audio>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub1f</Audio>
-		</Step>
-		<Step fmt="QuestionUser" notrack="true">
-			<Inter>
-				<Data correct="true">The reversing car backs out onto the street at the same time that we try to overtake the car in front</Data>
-				<Data correct="false">The car in front accelerates and moves right around the reversing car, just after we move right and accelerate to overtake</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-			<Audio>urban/urban_vdub7g</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 8" Ex="8">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_urt01_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>urban/urban_vdub2a</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_urt01_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub2b</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Keep driving at the same speed</Data>
-				<Data correct="true">Slow Down</Data>
-				<Data correct="false">Stop</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,3">
-			<Audio>urban/urban_vdub8c</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub1d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_urt01_next</Video>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub8e</Audio>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub1f</Audio>
-		</Step>
-		<Step fmt="QuestionUser" notrack="true">
-			<Inter>
-				<Data correct="true">The four wheel drive continues to reverse as we pass</Data>
-				<Data correct="false">The oncoming car moves onto our side of the road, trying to get past the four wheel drive</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-			<Audio>urban/urban_vdub8g</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 9" Ex="9">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_umj01_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>urban/urban_vdub2a</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_umj01_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub2b</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Move up to the intersection and prepare to turn</Data>
-				<Data correct="true">Slow down and prepare to stop</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1">
-			<Audio>urban/urban_vdub9c</Audio>
-			<Post>
-				<Element show="false" />
-			</Post>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub9d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_umj01_next</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub1f</Audio>
-		</Step>
-		<Step fmt="QuestionUser" notrack="true">
-			<Inter>
-				<Data correct="true">The car ahead reverses back from the intersection</Data>
-				<Data correct="false">Another car comes up close behind our car, just as we brake suddenly</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-			<Audio>urban/urban_vdub9f</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 10" Ex="10">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_umt03_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>urban/urban_vdub2a</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_umt03_start</Video>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub10b</Audio>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub2b</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="true">Stay in our own lane until we reach the start of the right turn lane</Data>
-				<Data correct="false">Drive onto the other side of the road to reach the right turn lane</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="2">
-			<Audio>urban/urban_vdub10d</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub5d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_umt03_next</Video>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub10f</Audio>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub1f</Audio>
-		</Step>
-		<Step fmt="QuestionUser" notrack="true">
-			<Inter>
-				<Data correct="true">The white car that was in front of us moved into the right turn lane at the same time as we were overtaking</Data>
-				<Data correct="false">The road is slippery and the oncoming car could not stop in time</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-			<Audio>urban/urban_vdub10h</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 11" Ex="11">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_uia16_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>urban/urban_vdub2a</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uia16_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub11b</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Drive straight across the tram lines and start to turn</Data>
-				<Data correct="false">Slow down, and then cross the tram lines</Data>
-				<Data correct="true">Stay in our own lane till we reach the corner, then wait till the tram has passed</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,2">
-			<Audio>urban/urban_vdub11c</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub11d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uia16_next</Video>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub11e</Audio>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub1f</Audio>
-		</Step>
-		<Step fmt="QuestionUser" notrack="true">
-			<Inter>
-				<Data correct="true">The tram accelerates to get through the intersection without stopping, while we are in its way</Data>
-				<Data correct="false">The oncoming car merges right, in front of the tram</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-			<Audio>urban/urban_vdub11g</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 12" Ex="12">
-		<Step fmt="SequenceIntro">
-			<Preview>shared/shared_uia17_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>urban/urban_vdub2a</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>shared/shared_uia17_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub2b</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Maintain speed and cross the intersection</Data>
-				<Data correct="false">Speed up and cross the intersection</Data>
-				<Data correct="true">Stop at the intersection</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,2">
-			<Audio>urban/urban_vdub12b</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub2d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>shared/shared_uia17_next</Video>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub12d</Audio>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub12f</Audio>
-		</Step>
-		<Step fmt="QuestionUser" notrack="true">
-			<Inter>
-				<Data correct="true">The car behind the oncoming red car travels straight through, hitting the rear end of the red car and pushing it into our path</Data>
-				<Data correct="false">The red car continues to turn</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-			<Audio>urban/urban_vdub12g</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 13" Ex="13">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_umt08_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>urban/urban_vdub2a</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_umt08_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub2b</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Maintain the same speed and go straight ahead</Data>
-				<Data correct="false">Maintain the same speed but move over to the left</Data>
-				<Data correct="true">Slow down and prepare to stop</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,2">
-			<Audio>urban/urban_vdub13c</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub1d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_umt08_next</Video>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub13e</Audio>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub1f</Audio>
-		</Step>
-		<Step fmt="QuestionUser" notrack="true">
-			<Inter>
-				<Data correct="true">An adult on our side of the road runs out in front of us, as we swerve to the left</Data>
-				<Data correct="false">The children panic and run in front of us</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-			<Audio>urban/urban_vdub13g</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 14" Ex="14">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_uic07_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>urban/urban_vdub2a</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uic07_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub2b</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Speed up to get through the intersection quickly</Data>
-				<Data correct="false">Continue through the intersection, at our current speed</Data>
-				<Data correct="true">Stop at the intersection and check for other traffic</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,2">
-			<Audio>urban/urban_uic7_2c</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub2d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uic07_next</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdub1f</Audio>
-		</Step>
-		<Step fmt="QuestionUser" notrack="true">
-			<Inter>
-				<Data correct="true">The second oncoming car turns right, and crashes into our car</Data>
-				<Data correct="false">The first oncoming car stops when the driver see us, but they are right in our path so we crash into them</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
-			<Audio>urban/urban_uic7_2f</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 15" Ex="15">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_umt10_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>urban/urban_vdca2a</Audio>
-		</Step>
-		<Step fmt="DragNDrop">
-			<DD>urban_dragdrop15</DD>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 16" Ex="16">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_umj02_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>urban/urban_vdub2a</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_umj02_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_umj02_1bb</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">One car coming toward us and travelling straight through</Data>
-				<Data correct="false">One car stopped about to turn right and one car coming toward us about to turn</Data>
-				<Data correct="true">One car stopped about to turn right and one car coming toward us and travelling straight through</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,2">
-			<Audio>urban/urban_umj02_1c</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_umj02_next</Video>
-			<Post>
-				<Element element="ContinueButton" />
-			</Post>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 17" Ex="17">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_umt07_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>urban/urban_vdca2a</Audio>
-		</Step>
-		<Step fmt="DragNDrop">
-			<DD>urban_dragdrop17</DD>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 18" Ex="18">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_faj06_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>urban/urban_vdca2a</Audio>
-		</Step>
-		<Step fmt="DragNDrop">
-			<DD>urban_dragdrop18</DD>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 19" Ex="19">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_uic02_start02_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vcomexp</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uic02_start02</Video>
-		</Step>
-		<Step fmt="Cameo">
-			<Video>cameo/cameo_cdbu1a</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdbu1c</Audio>
-		</Step>
-		<Step fmt="Cameo">
-			<Video>cameo/cameo_cdub1b</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdbu1d</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Good</Data>
-				<Data correct="false">Reasonable</Data>
-				<Data correct="true">Poor</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,2">
-			<Audio>urban/urban_vdbu1e</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdbu1f</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uic02_next</Video>
-		</Step>
-		<Step fmt="KeyRisk">
-			<Video Zones="333:159:167:124,73:163:54:77"></Video>
-			<Audio>scanning/scan_vsbkr1b</Audio>
-		</Step>
-		<Step fmt="KRFeedback" >
-			<Image>keyrisks/urban_uic02.jpg</Image>
-			<Audio>urban/urban_vdbu1i</Audio>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdbu1j</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-
-			<Inter>
-				<Data correct="false">Continue to turn</Data>
-				<Data correct="true">Stop</Data>
-			</Inter>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uic02_next_next</Video>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdbu1k</Audio>
-		</Step>
-		<Step fmt="Commentary" exe="urban,extra_vcomi,urban_uic02_start">
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 20" Ex="20">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_uic06_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vclick</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uic06_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdbu2b</Audio>
-		</Step>
-		<Step fmt="Cameo">
-			<Video>cameo/cameo_cdbu2</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdbu1d</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Good</Data>
-				<Data correct="false">Reasonable</Data>
-				<Data correct="true">Poor</Data>
-			</Inter>
-		</Step>
-		<Step hide="box">
-			<Audio>urban/urban_vdbu2d</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdbu2e</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uic06_next</Video>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdbu2f</Audio>
-		</Step>
-		<Step fmt="Commentary" exe="urban,extra_vcomi,urban_uic06_start">
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 21" Ex="21">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_urt10_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vclick</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_urt10_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdbu3b</Audio>
-		</Step>
-		<Step fmt="Cameo">
-			<Video>cameo/cameo_cdbu3</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdbu1d</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Good</Data>
-				<Data correct="false">Reasonable</Data>
-				<Data correct="true">Poor</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,2">
-			<Audio>urban/urban_vdbu3d</Audio>
-		</Step>
-		<Step fmt="KeyRisk">
-			<Video keyrisk="true" Zones="75:172:136:104,253:189:67:50,421:171:44:86"></Video>
-			<Audio>scanning/scan_vsbkr1b</Audio>
-		</Step>
-		<Step fmt="KRFeedback" >
-			<Image>keyrisks/urban_urt10.jpg</Image>
-			<Audio>urban/urban_vdbu3g</Audio>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdbu3h</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="true">Wait for us to get through</Data>
-				<Data correct="false">Keep going, expecting us to give way</Data>
-			</Inter>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_urt10_next</Video>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdbu3i</Audio>
-		</Step>
-		<Step fmt="Commentary" exe="urban,extra_vcomi,urban_urt10_start">
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 22" Ex="22">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_urt04_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vclick</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_urt04_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdbu4b</Audio>
-		</Step>
-		<Step fmt="Cameo">
-			<Video>cameo/cameo_cdbu4</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdbu1d</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Good</Data>
-				<Data correct="false">Reasonable</Data>
-				<Data correct="true">Poor</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,2">
-			<Audio>urban/urban_vdbu4d</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub4d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_urt04_next</Video>
-		</Step>
-		<Step fmt="KeyRisk">
-			<Video keyrisk="true" Zones="0:87:76:234,76:180:60:76,363:157:40:78"></Video>
-			<Audio>scanning/scan_vsbkr1b</Audio>
-		</Step>
-		<Step fmt="KRFeedback">
-			<Image>keyrisks/urban_urt04.jpg</Image>
-			<Audio>urban/urban_vdbu4h</Audio>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdbu4i</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">wait for us to pass</Data>
-				<Data correct="true">continue onto the road</Data>
-			</Inter>
-		</Step>
-		<Step fmt="PlayVideo" FadeQ="1,3">
-			<Video>urban/urban_urt04_next_next</Video>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdbu4j</Audio>
-		</Step>
-		<Step fmt="Commentary" exe="urban,extra_vcomi,urban_urt04_start">
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 23" Ex="23">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_umt01_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vclick</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_umt01_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdbu5b</Audio>
-		</Step>
-		<Step fmt="Cameo">
-			<Video>cameo/cameo_cdbu5</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdbu1d</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Good</Data>
-				<Data correct="false">Reasonable</Data>
-				<Data correct="true">Poor</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,2">
-			<Audio>urban/urban_vdbu5d</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub4d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_umt01_middle</Video>
-		</Step>
-		<Step fmt="KeyRisk">
-			<Video keyrisk="true" Zones="3:227:178:70,178:225:48:41"></Video>
-			<Audio>scanning/scan_vsbkr1b</Audio>
-		</Step>
-		<Step fmt="KRFeedback">
-			<Image>keyrisks/urban_umt01.jpg</Image>
-			<Audio>urban/urban_vdbu5h</Audio>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdbu5i</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="true">Pedestrians walk out onto the road</Data>
-				<Data correct="true">Cars pull out of parking bays</Data>
-			</Inter>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdbu5j</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_umt01_end</Video>
-		</Step>
-		<Step hide="box">
-			<Audio>urban/urban_vdbu5k</Audio>
-		</Step>
-		<Step fmt="Commentary" exe="urban,extra_vcomi,urban_umt01_start">
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 24" Ex="24">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_uia03_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vclick</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uia03_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdau1g</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Continue because it is not safe to slow down when a car is close behind</Data>
-				<Data correct="true">Slow down in case the pedestrian walks onto the road</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1">
-			<Audio>urban/urban_vdau1h</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub4d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uia03_next</Video>
-		</Step>
-		<Step fmt="Commentary" exe="urban,extra_vcomi,urban_uia03_start,urban_vdau1y.wav,speeding,oncoming car turned right,pedestrian,car behind too close">
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-	</Seq>
-	<Seq desc="Exercise 25" Ex="25">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_uia09_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vclick</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uia09_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdau2e</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Continue and turn immediately after the car ahead, the cyclist will give way</Data>
-				<Data correct="true">Prepare to stop in case the cyclist rides out in front of us</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1">
-			<Audio>urban/urban_vdau2f</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uia09_next</Video>
-		</Step>
-		<Step fmt="Commentary" exe="urban,extra_vcomi,urban_uia09_start,urban_vdau2y.wav,car ahead,pedestrian,intersection,cyclist,indicating left,oncoming car">
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 26" Ex="26">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_uia01_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vclick</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uia01_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdau3e</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="true">Slow down because of the car on our right</Data>
-				<Data correct="false">Continue to accelerate, because we've got the right of way</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="2">
-			<Audio>urban/urban_vdau3f</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub4d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uia01_next</Video>
-		</Step>
-		<Step fmt="Commentary" exe="urban,extra_vcomi,urban_uia01_start,urban_vdau3y.wav,cyclist,red car turned right,four wheel drive indicated,traffic lights changed,four wheel drive entered road">
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 27" Ex="27">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_uic01_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vclick</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uic01_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdau4e</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Continue, the pedestrians and turning car will give way</Data>
-				<Data correct="true">Get ready to stop, the pedestrians might step out onto the road and the other car might turn</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1">
-			<Audio>urban/urban_vdau4f</Audio>
-		</Step>
-		<Step fmt="PlayAudio">
-			<Audio>urban/urban_vdub4d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uic01_next</Video>
-		</Step>
-		<Step fmt="Commentary" exe="urban,extra_vcomi,urban_uic01_start,urban_vdau4y.wav,car turned left,cyclist crossed the street,traffic lights changed,pedestrians">
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 28" Ex="28">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_uit03_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vclick</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uit03_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdau5e</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="true">Wait for the oncoming car to go through</Data>
-				<Data correct="false">Quickly turn, the oncoming car should give way</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="2">
-			<Audio>urban/urban_vdau5f</Audio>
-		</Step>
-		<Step desc="Lets watch the rest">
-			<Audio>urban/urban_vdub4d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_uit03_next</Video>
-		</Step>
-		<Step fmt="Commentary" exe="urban,extra_vcomi,urban_uit03_start,urban_vdau5y.wav,motorcyclist,intersection with stop sign,oncoming car approaching">
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 29" Ex="29">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_urt02_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vclick</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_urt02_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdau6e</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Continue but prepare to stop in case the pedestrian does not stop</Data>
-				<Data correct="true">Slow down in case the pedestrian continues to cross the road</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1">
-			<Audio>urban/urban_vdau6f</Audio>
-		</Step>
-		<Step desc="Lets watch the rest">
-			<Audio>urban/urban_vdub4d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_urt02_next</Video>
-		</Step>
-		<Step fmt="Commentary" exe="urban,extra_vcomi,urban_urt02_start,urban_vdau6y.wav,car turned ahead,parked cars,oncoming car turned,hidden pedestrian,pedestrian on road">
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 30" Ex="30">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_umt11_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vclick</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_umt11_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdau7e</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Accelerate to get past the workman before the oncoming car arrives</Data>
-				<Data correct="true">Slow down and give way to the oncoming car</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1">
-			<Audio>urban/urban_vdau7f</Audio>
-		</Step>
-		<Step desc="Lets watch the rest">
-			<Audio>urban/urban_vdub4d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_umt11_next</Video>
-		</Step>
-		<Step fmt="Commentary" exe="urban,extra_vcomi,urban_umt11_start,urban_vdau7y.wav,oncoming car on our side,workman blocked our path,oncoming car near workman">
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 31" Ex="31">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_urt09_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vclick</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_urt09_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdau8e</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Overtake the truck</Data>
-				<Data correct="false">Move closer to the truck and prepare to overtake</Data>
-				<Data correct="true">Slow down and remain well behind the truck</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,2">
-			<Audio>urban/urban_vdau8f</Audio>
-		</Step>
-		<Step desc="Lets watch the rest">
-			<Audio>urban/urban_vdub4d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_urt09_next</Video>
-		</Step>
-		<Step fmt="Commentary" exe="urban,extra_vcomi,urban_urt09_start,urban_vdau8y.wav,truck entered road,cyclist,pedestrian,oncoming car">
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 32" Ex="32">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_umt02_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vclick</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_umt02_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdau10e</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Accelerate to get past the tram while it's still moving.</Data>
-				<Data correct="true">Slow down in case the tram stops and stay behind it.</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1">
-			<Audio>urban/urban_vdau10f</Audio>
-		</Step>
-		<Step desc="Lets watch the rest">
-			<Audio>urban/urban_vdub4d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_umt02_next</Video>
-		</Step>
-		<Step fmt="Commentary" exe="urban,extra_vcomi,urban_umt02_start,urban_vdau10y.wav,we merged left of car,speeding,we merged left of tram,car behind too close">
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 33" Ex="33">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_umt09_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vclick</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_umt09_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>urban/urban_vdau11e</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Continue at the same speed</Data>
-				<Data correct="true">Slow down</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1">
-			<Audio>urban/urban_vdau11f</Audio>
-		</Step>
-		<Step desc="Lets watch the rest">
-			<Audio>urban/urban_vdub4d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_umt09_next</Video>
-		</Step>
-		<Step fmt="Commentary" exe="urban,extra_vcomi,urban_umt09_start,urban_vdau11y.wav,overtaking car,parked car on right,oncoming car,parked car on left">
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 34" Ex="34">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_faj02_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vclick</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_faj02_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>freeway/freeway_vdaf3e</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Merge immediately because we have been indicating and the other cars should make room for us</Data>
-				<Data correct="false">Accelerate to the speed of the traffic and wait for a gap to appear</Data>
-				<Data correct="true">Slow down gradually and wait for a safe gap to merge</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,2">
-			<Audio>freeway/freeway_vdaf3f</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_faj02_next</Video>
-		</Step>
-		<Step fmt="Commentary" exe="urban,extra_vcomi,urban_faj02_start,urban_vdaf3y.wav,cars behind,cars in merge lane,not enough time to merge">
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 35" Ex="35">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_faj05_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vclick</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_faj05_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>freeway/freeway_vdaf4e</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Merge right and overtake the car in front</Data>
-				<Data correct="true">Slow down gradually as car ahead exits</Data>
-				<Data correct="false">Brake heavily to maximize the gap between our car and the car ahead</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1,3">
-			<Audio>freeway/freeway_vdaf4f</Audio>
-		</Step>
-		<Step desc="Lets watch the rest">
-			<Audio>urban/urban_vdub4d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_faj05_next</Video>
-		</Step>
-		<Step fmt="Commentary" exe="urban,extra_vcomi,urban_faj05_start,urban_vdaf4y.wav,overtook car,fast car approaching behind,merged left,car ahead indicating left,slowed down">
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Exercise 36" Ex="36">
-		<Step fmt="SequenceIntro">
-			<Preview>urban/urban_fat06_start_first.jpg</Preview><Image>intros/sequence_intro.png</Image>
-			<Audio>extra/extra_vclick</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_fat06_start</Video>
-		</Step>
-		<Step fmt="Question">
-			<Audio>freeway/freeway_vdaf5e</Audio>
-		</Step>
-		<Step fmt="QuestionUser">
-			<Inter>
-				<Data correct="false">Merge left immediately</Data>
-				<Data correct="true">Slow down</Data>
-			</Inter>
-		</Step>
-		<Step fmt="QuestionFeedback" FadeQ="1">
-			<Audio>freeway/freeway_vdaf5f</Audio>
-		</Step>
-		<Step desc="Lets watch the rest">
-			<Audio FadeQ="1">urban/urban_vdub4d</Audio>
-		</Step>
-		<Step fmt="PlayVideo">
-			<Video>urban/urban_fat06_next</Video>
-		</Step>
-		<Step fmt="Commentary" exe="urban,extra_vcomi,urban_fat06_start,urban_vdaf5y.wav,car ahead indicated left,car passed us on right,our car merged right,car ahead braked,car behind us">
-			<Audio>extra/extra_vcomi</Audio>
-		</Step>
-		<Step fmt="End.Module.Continue">
-			<Audio>extra/extra_end_module</Audio>
-		</Step>
-	</Seq>
+  <Seq desc="Exercise 1" Ex="1">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia08_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vdub1a</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>shared/shared_uia08_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub1b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Keep going at this speed and stay in our own lane</Data>
+        <Data correct="true">Reduce speed in case we have to stop quickly and stay in our own lane</Data>
+        <Data correct="false">Increase speed and stay in our lane</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,3">
+      <Audio>urban/urban_vdub1c</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub1d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>shared/shared_uia08_next</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub1e</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub1f</Audio>
+    </Step>
+    <Step notrack="true" fmt="QuestionUser" image="shared/shared_uia08_next_first.jpg">
+      <Inter>
+        <Data correct="true">The pedestrian moving onto the road</Data>
+        <Data correct="false">The car from the left continuing into the intersection</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Audio>urban/urban_vdub1g</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 2" Ex="2">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_uia14_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vdub2a</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uia14_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub2b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Turn right immediately</Data>
+        <Data correct="true">Slow down to allow the oncoming car through</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1">
+      <Audio>urban/urban_vdub2c</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub2d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uia14_next</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub2e</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub1f</Audio>
+    </Step>
+    <Step notrack="true" fmt="QuestionUser" image="urban_uia14_next_first.jpg">
+      <Inter>
+        <Data correct="true">The car close behind assumes we are continuing to turn, and does not slow down or merge left</Data>
+        <Data correct="false">We are worried about the car behind hitting us, and we roll forward into the path of the oncoming car</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Audio>urban/urban_vdub2g</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 3" Ex="3">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_uia09_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vdub2a</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uia09_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub2b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Maintain our speed, and make a left turn close behind the car in front</Data>
+        <Data correct="true">Gradually slow down and turn left, watching out for pedestrians</Data>
+        <Data correct="false">Slow down to allow the oncoming car to turn first</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,3">
+      <Audio>urban/urban_vdub3c</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub2d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uia09_next</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub3e</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub1f</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true" image="urban_uia09_next_first.jpg">
+      <Inter>
+        <Data correct="true">The car ahead of us braked suddenly to give way to the cyclist</Data>
+        <Data correct="false">The oncoming blue car did not see the cyclist, and kept coming behind us after our driver had breaked</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Audio>urban/urban_vdub3g</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 4" Ex="4">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_uic06_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vdub2a</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uic06_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub2b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Maintain our speed and cross the intersection, because the pedestrians on our right are crossing</Data>
+        <Data correct="false">Slow down to cross the intersection</Data>
+        <Data correct="true">Stop and check for traffic</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2">
+      <Audio>urban/urban_vdub4c</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub4d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uic06_next</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub4e</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub1f</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true" image="urban_uic06_next_first.jpg">
+      <Inter>
+        <Data correct="true">The car behind us does not have enough time to stop</Data>
+        <Data correct="false">The car on our left arrives just a few seconds later, and can't stop in time for us</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Audio>urban/urban_vdub4g</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 5" Ex="5">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_uit01_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vdub5a</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uit01_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub2b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Turn left into the left lane so we don't crash into the oncoming right-turning car</Data>
+        <Data correct="true">Prepare to stop in case the oncoming car gets in our way, or some pedestrians appear</Data>
+        <Data correct="false">Stop and give way to the oncoming car</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,3">
+      <Audio>urban/urban_vdub5c</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub5d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uit01_next</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub5e</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub1f</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true">
+      <Inter>
+        <Data correct="true">The oncoming car swerves to avoid the cyclist and hits our car</Data>
+        <Data correct="false">The cyclist tries to avoid the other car, by swerving in front of us</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Audio>urban/urban_vdub5g</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 6" Ex="6">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_urt07_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vdub5a</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>shared/shared_urt07_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub6b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Move out to pass the parked car and accelerate to the speed limit</Data>
+        <Data correct="true">Edge out slowly around the parked white car</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1">
+      <Audio>urban/urban_vdub4d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>shared/shared_urt07_next</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub6d</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub1f</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true">
+      <Inter>
+        <Data correct="true">The parked car pulls out as we are passing</Data>
+        <Data correct="false">The ute reverses towards us and hits our car</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Audio>urban/urban_vdub6f</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 7" Ex="7">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_urt08_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vdub2a</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_urt08_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub2b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="true">Brake to stop</Data>
+        <Data correct="false">Move to the right, then accelerate to pass the car in front</Data>
+        <Data correct="false">Move to the right and proceed slowly</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2,3">
+      <Audio>urban/urban_vdub7c</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub7d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_urt08_next</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub7e</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub1f</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true">
+      <Inter>
+        <Data correct="true">The reversing car backs out onto the street at the same time that we try to overtake the car in front</Data>
+        <Data correct="false">The car in front accelerates and moves right around the reversing car, just after we move right and accelerate to overtake</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Audio>urban/urban_vdub7g</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 8" Ex="8">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_urt01_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vdub2a</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_urt01_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub2b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Keep driving at the same speed</Data>
+        <Data correct="true">Slow Down</Data>
+        <Data correct="false">Stop</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,3">
+      <Audio>urban/urban_vdub8c</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub1d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_urt01_next</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub8e</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub1f</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true">
+      <Inter>
+        <Data correct="true">The four wheel drive continues to reverse as we pass</Data>
+        <Data correct="false">The oncoming car moves onto our side of the road, trying to get past the four wheel drive</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Audio>urban/urban_vdub8g</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 9" Ex="9">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_umj01_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vdub2a</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_umj01_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub2b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Move up to the intersection and prepare to turn</Data>
+        <Data correct="true">Slow down and prepare to stop</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1">
+      <Audio>urban/urban_vdub9c</Audio>
+      <Post>
+        <Element show="false" />
+      </Post>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub9d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_umj01_next</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub1f</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true">
+      <Inter>
+        <Data correct="true">The car ahead reverses back from the intersection</Data>
+        <Data correct="false">Another car comes up close behind our car, just as we brake suddenly</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Audio>urban/urban_vdub9f</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 10" Ex="10">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_umt03_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vdub2a</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_umt03_start</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub10b</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub2b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="true">Stay in our own lane until we reach the start of the right turn lane</Data>
+        <Data correct="false">Drive onto the other side of the road to reach the right turn lane</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2">
+      <Audio>urban/urban_vdub10d</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub5d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_umt03_next</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub10f</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub1f</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true">
+      <Inter>
+        <Data correct="true">The white car that was in front of us moved into the right turn lane at the same time as we were overtaking</Data>
+        <Data correct="false">The road is slippery and the oncoming car could not stop in time</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Audio>urban/urban_vdub10h</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 11" Ex="11">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_uia16_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vdub2a</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uia16_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub11b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Drive straight across the tram lines and start to turn</Data>
+        <Data correct="false">Slow down, and then cross the tram lines</Data>
+        <Data correct="true">Stay in our own lane till we reach the corner, then wait till the tram has passed</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2">
+      <Audio>urban/urban_vdub11c</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub11d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uia16_next</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub11e</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub1f</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true">
+      <Inter>
+        <Data correct="true">The tram accelerates to get through the intersection without stopping, while we are in its way</Data>
+        <Data correct="false">The oncoming car merges right, in front of the tram</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Audio>urban/urban_vdub11g</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 12" Ex="12">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vdub2a</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>shared/shared_uia17_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub2b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Maintain speed and cross the intersection</Data>
+        <Data correct="false">Speed up and cross the intersection</Data>
+        <Data correct="true">Stop at the intersection</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2">
+      <Audio>urban/urban_vdub12b</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub2d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>shared/shared_uia17_next</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub12d</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub12f</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true">
+      <Inter>
+        <Data correct="true">The car behind the oncoming red car travels straight through, hitting the rear end of the red car and pushing it into our path</Data>
+        <Data correct="false">The red car continues to turn</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Audio>urban/urban_vdub12g</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 13" Ex="13">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_umt08_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vdub2a</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_umt08_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub2b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Maintain the same speed and go straight ahead</Data>
+        <Data correct="false">Maintain the same speed but move over to the left</Data>
+        <Data correct="true">Slow down and prepare to stop</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2">
+      <Audio>urban/urban_vdub13c</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub1d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_umt08_next</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub13e</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub1f</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true">
+      <Inter>
+        <Data correct="true">An adult on our side of the road runs out in front of us, as we swerve to the left</Data>
+        <Data correct="false">The children panic and run in front of us</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Audio>urban/urban_vdub13g</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 14" Ex="14">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_uic07_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vdub2a</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uic07_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub2b</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Speed up to get through the intersection quickly</Data>
+        <Data correct="false">Continue through the intersection, at our current speed</Data>
+        <Data correct="true">Stop at the intersection and check for other traffic</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2">
+      <Audio>urban/urban_uic7_2c</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub2d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uic07_next</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdub1f</Audio>
+    </Step>
+    <Step fmt="QuestionUser" notrack="true">
+      <Inter>
+        <Data correct="true">The second oncoming car turns right, and crashes into our car</Data>
+        <Data correct="false">The first oncoming car stops when the driver see us, but they are right in our path so we crash into them</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
+      <Audio>urban/urban_uic7_2f</Audio>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 15" Ex="15">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_umt10_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vdca2a</Audio>
+    </Step>
+    <Step fmt="DragNDrop">
+      <DD>urban_dragdrop15</DD>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 16" Ex="16">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_umj02_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vdub2a</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_umj02_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_umj02_1bb</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">One car coming toward us and travelling straight through</Data>
+        <Data correct="false">One car stopped about to turn right and one car coming toward us about to turn</Data>
+        <Data correct="true">One car stopped about to turn right and one car coming toward us and travelling straight through</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2">
+      <Audio>urban/urban_umj02_1c</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_umj02_next</Video>
+      <Post>
+        <Element element="ContinueButton" />
+      </Post>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 17" Ex="17">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_umt07_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vdca2a</Audio>
+    </Step>
+    <Step fmt="DragNDrop">
+      <DD>urban_dragdrop17</DD>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 18" Ex="18">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_faj06_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vdca2a</Audio>
+    </Step>
+    <Step fmt="DragNDrop">
+      <DD>urban_dragdrop18</DD>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Exercise 19" Ex="19">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_uic02_start02_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vcomexp</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uic02_start02</Video>
+    </Step>
+    <Step fmt="Cameo">
+      <Video>cameo/cameo_cdbu1a</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdbu1c</Audio>
+    </Step>
+    <Step fmt="Cameo">
+      <Video>cameo/cameo_cdub1b</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdbu1d</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Good</Data>
+        <Data correct="false">Reasonable</Data>
+        <Data correct="true">Poor</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2">
+      <Audio>urban/urban_vdbu1e</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdbu1f</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uic02_next</Video>
+    </Step>
+    <Step fmt="KeyRisk">
+      <Video Zones="333:159:167:124,73:163:54:77"></Video>
+      <Audio>scanning/scan_vsbkr1b</Audio>
+    </Step>
+    <Step fmt="KRFeedback">
+      <Image>keyrisks/urban_uic02.jpg</Image>
+      <Audio>urban/urban_vdbu1i</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdbu1j</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Continue to turn</Data>
+        <Data correct="true">Stop</Data>
+      </Inter>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uic02_next_next</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdbu1k</Audio>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>urban/urban_uic02_start02_first.jpg</Image>
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>urban/urban_uic02_start02</Video>
+      <FeedbackAudio>country/country_vdbc1l</FeedbackAudio>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 20" Ex="20">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_uic06_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vclick</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uic06_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdbu2b</Audio>
+    </Step>
+    <Step fmt="Cameo">
+      <Video>cameo/cameo_cdbu2</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdbu1d</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Good</Data>
+        <Data correct="false">Reasonable</Data>
+        <Data correct="true">Poor</Data>
+      </Inter>
+    </Step>
+    <Step fmt="PlayAudio" hide="box">
+      <Audio>urban/urban_vdbu2d</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdbu2e</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uic06_next</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdbu2f</Audio>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>urban/urban_uic06_start_first.jpg</Image>
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>urban/urban_uic06_start</Video>
+      <FeedbackAudio>country/country_vdbc1l</FeedbackAudio>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 21" Ex="21">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_urt10_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vclick</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_urt10_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdbu3b</Audio>
+    </Step>
+    <Step fmt="Cameo">
+      <Video>cameo/cameo_cdbu3</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdbu1d</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Good</Data>
+        <Data correct="false">Reasonable</Data>
+        <Data correct="true">Poor</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2">
+      <Audio>urban/urban_vdbu3d</Audio>
+    </Step>
+    <Step fmt="KeyRisk">
+      <Video keyrisk="true" Zones="75:172:136:104,253:189:67:50,421:171:44:86"></Video>
+      <Audio>scanning/scan_vsbkr1b</Audio>
+    </Step>
+    <Step fmt="KRFeedback">
+      <Image>keyrisks/urban_urt10.jpg</Image>
+      <Audio>urban/urban_vdbu3g</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdbu3h</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="true">Wait for us to get through</Data>
+        <Data correct="false">Keep going, expecting us to give way</Data>
+      </Inter>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_urt10_next</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdbu3i</Audio>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>urban/urban_urt10_start_first.jpg</Image>
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>urban/urban_urt10_start</Video>
+      <FeedbackAudio>country/country_vdbc1l</FeedbackAudio>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 22" Ex="22">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_urt04_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vclick</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_urt04_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdbu4b</Audio>
+    </Step>
+    <Step fmt="Cameo">
+      <Video>cameo/cameo_cdbu4</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdbu1d</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Good</Data>
+        <Data correct="false">Reasonable</Data>
+        <Data correct="true">Poor</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2">
+      <Audio>urban/urban_vdbu4d</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub4d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_urt04_next</Video>
+    </Step>
+    <Step fmt="KeyRisk">
+      <Video keyrisk="true" Zones="0:87:76:234,76:180:60:76,363:157:40:78"></Video>
+      <Audio>scanning/scan_vsbkr1b</Audio>
+    </Step>
+    <Step fmt="KRFeedback">
+      <Image>keyrisks/urban_urt04.jpg</Image>
+      <Audio>urban/urban_vdbu4h</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdbu4i</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">wait for us to pass</Data>
+        <Data correct="true">continue onto the road</Data>
+      </Inter>
+    </Step>
+    <Step fmt="PlayVideo" FadeQ="1,3">
+      <Video>urban/urban_urt04_next_next</Video>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdbu4j</Audio>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>urban/urban_urt04_start_first.jpg</Image>
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>urban/urban_urt04_start</Video>
+      <FeedbackAudio>country/country_vdbc1l</FeedbackAudio>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 23" Ex="23">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_umt01_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vclick</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_umt01_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdbu5b</Audio>
+    </Step>
+    <Step fmt="Cameo">
+      <Video>cameo/cameo_cdbu5</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdbu1d</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Good</Data>
+        <Data correct="false">Reasonable</Data>
+        <Data correct="true">Poor</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2">
+      <Audio>urban/urban_vdbu5d</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub4d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_umt01_middle</Video>
+    </Step>
+    <Step fmt="KeyRisk">
+      <Video keyrisk="true" Zones="3:227:178:70,178:225:48:41"></Video>
+      <Audio>scanning/scan_vsbkr1b</Audio>
+    </Step>
+    <Step fmt="KRFeedback">
+      <Image>keyrisks/urban_umt01.jpg</Image>
+      <Audio>urban/urban_vdbu5h</Audio>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdbu5i</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="true">Pedestrians walk out onto the road</Data>
+        <Data correct="true">Cars pull out of parking bays</Data>
+      </Inter>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdbu5j</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_umt01_end</Video>
+    </Step>
+    <Step hide="box">
+      <Audio>urban/urban_vdbu5k</Audio>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>urban/urban_umt01_start_first.jpg</Image>
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>urban/urban_umt01_start</Video>
+      <FeedbackAudio>country/country_vdbc1l</FeedbackAudio>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 24" Ex="24">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_uia03_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vclick</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uia03_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdau1g</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Continue because it is not safe to slow down when a car is close behind</Data>
+        <Data correct="true">Slow down in case the pedestrian walks onto the road</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1">
+      <Audio>urban/urban_vdau1h</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub4d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uia03_next</Video>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>urban/urban_uia03_start_first.jpg</Image>
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>urban/urban_uia03_start</Video>
+      <FeedbackAudio>urban/urban_vdau1y</FeedbackAudio>
+      <FeedbackText>
+        <Data>speeding</Data>
+        <Data>oncoming car turned right</Data>
+        <Data>pedestrian</Data>
+        <Data>car behind too close</Data>
+      </FeedbackText>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 25" Ex="25">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_uia09_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vclick</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uia09_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdau2e</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Continue and turn immediately after the car ahead, the cyclist will give way</Data>
+        <Data correct="true">Prepare to stop in case the cyclist rides out in front of us</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1">
+      <Audio>urban/urban_vdau2f</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uia09_next</Video>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>urban/urban_uia09_start_first.jpg</Image>
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>urban/urban_uia09_start</Video>
+      <FeedbackAudio>urban/urban_vdau2y</FeedbackAudio>
+      <FeedbackText>
+        <Data>car ahead</Data>
+        <Data>pedestrian</Data>
+        <Data>intersection</Data>
+        <Data>cyclist</Data>
+        <Data>indicating left</Data>
+        <Data>oncoming car</Data>
+      </FeedbackText>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 26" Ex="26">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_uia01_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vclick</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uia01_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdau3e</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="true">Slow down because of the car on our right</Data>
+        <Data correct="false">Continue to accelerate, because we've got the right of way</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2">
+      <Audio>urban/urban_vdau3f</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub4d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uia01_next</Video>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>urban/urban_uia01_start_first.jpg</Image>
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>urban/urban_uia01_start</Video>
+      <FeedbackAudio>urban/urban_vdau3y</FeedbackAudio>
+      <FeedbackText>
+        <Data>cyclist</Data>
+        <Data>red car turned right</Data>
+        <Data>four wheel drive indicated</Data>
+        <Data>traffic lights changed</Data>
+        <Data>four wheel drive entered road</Data>
+      </FeedbackText>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 27" Ex="27">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_uic01_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vclick</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uic01_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdau4e</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Continue, the pedestrians and turning car will give way</Data>
+        <Data correct="true">Get ready to stop, the pedestrians might step out onto the road and the other car might turn</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1">
+      <Audio>urban/urban_vdau4f</Audio>
+    </Step>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub4d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uic01_next</Video>
+    </Step>
+    <Step fmt="Commentary" exe="urban,extra_vcomi,urban_uic01_start,urban_vdau4y.wav,car turned left,cyclist crossed the street,traffic lights changed,pedestrians">
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>urban/urban_uic01_start_first.jpg</Image>
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>urban/urban_uia01_start</Video>
+      <FeedbackAudio>urban/urban_vdau4y</FeedbackAudio>
+      <FeedbackText>
+        <Data>car turned left</Data>
+        <Data>cyclist crossed the street</Data>
+        <Data>traffic lights changed</Data>
+        <Data>pedestrians</Data>
+      </FeedbackText>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 28" Ex="28">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_uit03_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vclick</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uit03_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdau5e</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="true">Wait for the oncoming car to go through</Data>
+        <Data correct="false">Quickly turn, the oncoming car should give way</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="2">
+      <Audio>urban/urban_vdau5f</Audio>
+    </Step>
+    <Step desc="Lets watch the rest">
+      <Audio>urban/urban_vdub4d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_uit03_next</Video>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>urban/urban_uit03_start_first.jpg</Image>
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>urban/urban_uit03_start</Video>
+      <FeedbackAudio>urban/urban_vdau5y</FeedbackAudio>
+      <FeedbackText>
+        <Data>motorcyclist</Data>
+        <Data>intersection with stop sign</Data>
+        <Data>oncoming car approaching</Data>
+      </FeedbackText>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 29" Ex="29">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_urt02_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vclick</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_urt02_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdau6e</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Continue but prepare to stop in case the pedestrian does not stop</Data>
+        <Data correct="true">Slow down in case the pedestrian continues to cross the road</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1">
+      <Audio>urban/urban_vdau6f</Audio>
+    </Step>
+    <Step desc="Lets watch the rest">
+      <Audio>urban/urban_vdub4d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_urt02_next</Video>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>urban/urban_urt02_start_first.jpg</Image>
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>urban/urban_urt02_start</Video>
+      <FeedbackAudio>urban/urban_vdau6y</FeedbackAudio>
+      <FeedbackText>
+        <Data>car turned ahead</Data>
+        <Data>parked cars</Data>
+        <Data>oncoming car turned</Data>
+        <Data>hidden pedestrian</Data>
+        <Data>pedestrian on road</Data>
+      </FeedbackText>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 30" Ex="30">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_umt11_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vclick</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_umt11_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdau7e</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Accelerate to get past the workman before the oncoming car arrives</Data>
+        <Data correct="true">Slow down and give way to the oncoming car</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1">
+      <Audio>urban/urban_vdau7f</Audio>
+    </Step>
+    <Step desc="Lets watch the rest">
+      <Audio>urban/urban_vdub4d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_umt11_next</Video>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>urban/urban_umt11_start_first.jpg</Image>
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>urban/urban_umt11_start</Video>
+      <FeedbackAudio>urban/urban_vdau7y</FeedbackAudio>
+      <FeedbackText>
+        <Data>oncoming car on our side</Data>
+        <Data>workman blocked our path</Data>
+        <Data>oncoming car near workman</Data>
+      </FeedbackText>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 31" Ex="31">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_urt09_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vclick</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_urt09_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdau8e</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Overtake the truck</Data>
+        <Data correct="false">Move closer to the truck and prepare to overtake</Data>
+        <Data correct="true">Slow down and remain well behind the truck</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2">
+      <Audio>urban/urban_vdau8f</Audio>
+    </Step>
+    <Step desc="Lets watch the rest">
+      <Audio>urban/urban_vdub4d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_urt09_next</Video>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>urban/urban_urt09_start_first.jpg</Image>
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>urban/urban_urt09_start</Video>
+      <FeedbackAudio>urban/urban_vdau8y</FeedbackAudio>
+      <FeedbackText>
+        <Data>truck entered road</Data>
+        <Data>cyclist</Data>
+        <Data>pedestrian</Data>
+        <Data>oncoming car</Data>
+      </FeedbackText>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 32" Ex="32">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_umt02_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vclick</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_umt02_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdau10e</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Accelerate to get past the tram while it's still moving.</Data>
+        <Data correct="true">Slow down in case the tram stops and stay behind it.</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1">
+      <Audio>urban/urban_vdau10f</Audio>
+    </Step>
+    <Step desc="Lets watch the rest">
+      <Audio>urban/urban_vdub4d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_umt02_next</Video>
+    </Step>
+    <Step fmt="Commentary" exe="urban,extra_vcomi,urban_umt02_start,urban_vdau10y.wav,we merged left of car,speeding,we merged left of tram,car behind too close">
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>urban/urban_umt02_start_first.jpg</Image>
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>urban/urban_umt02_start</Video>
+      <FeedbackAudio>urban/urban_vdau10y</FeedbackAudio>
+      <FeedbackText>
+        <Data>we merged left of car</Data>
+        <Data>speeding</Data>
+        <Data>we merged left of tram</Data>
+        <Data>car behind too close</Data>
+      </FeedbackText>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 33" Ex="33">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_umt09_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vclick</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_umt09_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>urban/urban_vdau11e</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Continue at the same speed</Data>
+        <Data correct="true">Slow down</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1">
+      <Audio>urban/urban_vdau11f</Audio>
+    </Step>
+    <Step desc="Lets watch the rest">
+      <Audio>urban/urban_vdub4d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_umt09_next</Video>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>urban/urban_umt09_start_first.jpg</Image>
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>urban/urban_umt09_start</Video>
+      <FeedbackAudio>urban/urban_vdau11y</FeedbackAudio>
+      <FeedbackText>
+        <Data>overtaking car</Data>
+        <Data>parked car on right</Data>
+        <Data>oncoming car</Data>
+        <Data>parked car on left</Data>
+      </FeedbackText>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 34" Ex="34">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_faj02_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vclick</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_faj02_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>freeway/freeway_vdaf3e</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Merge immediately because we have been indicating and the other cars should make room for us</Data>
+        <Data correct="false">Accelerate to the speed of the traffic and wait for a gap to appear</Data>
+        <Data correct="true">Slow down gradually and wait for a safe gap to merge</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,2">
+      <Audio>freeway/freeway_vdaf3f</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_faj02_next</Video>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>urban/urban_faj02_start_first.jpg</Image>
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>urban/urban_faj02_start</Video>
+      <FeedbackAudio>urban/urban_vdaf3y</FeedbackAudio>
+      <FeedbackText>
+        <Data>cars behind</Data>
+        <Data>cars in merge lane</Data>
+        <Data>not enough time to merge</Data>
+      </FeedbackText>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 35" Ex="35">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_faj05_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vclick</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_faj05_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>freeway/freeway_vdaf4e</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Merge right and overtake the car in front</Data>
+        <Data correct="true">Slow down gradually as car ahead exits</Data>
+        <Data correct="false">Brake heavily to maximize the gap between our car and the car ahead</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1,3">
+      <Audio>freeway/freeway_vdaf4f</Audio>
+    </Step>
+    <Step desc="Lets watch the rest">
+      <Audio>urban/urban_vdub4d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_faj05_next</Video>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>urban/urban_faj05_start_first.jpg</Image>
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>urban/urban_faj05_start</Video>
+      <FeedbackAudio>urban/urban_vdaf4y</FeedbackAudio>
+      <FeedbackText>
+        <Data>overtook car</Data>
+        <Data>fast car approaching behind</Data>
+        <Data>merged left</Data>
+        <Data>car ahead indicating left</Data>
+        <Data>slowed down</Data>
+      </FeedbackText>
+    </Step>
+  </Seq>
+  <Seq desc="Exercise 36" Ex="36">
+    <Step fmt="SequenceIntro">
+      <Preview>urban/urban_fat06_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>extra/extra_vclick</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_fat06_start</Video>
+    </Step>
+    <Step fmt="Question">
+      <Audio>freeway/freeway_vdaf5e</Audio>
+    </Step>
+    <Step fmt="QuestionUser">
+      <Inter>
+        <Data correct="false">Merge left immediately</Data>
+        <Data correct="true">Slow down</Data>
+      </Inter>
+    </Step>
+    <Step fmt="QuestionFeedback" FadeQ="1">
+      <Audio>freeway/freeway_vdaf5f</Audio>
+    </Step>
+    <Step desc="Lets watch the rest">
+      <Audio FadeQ="1">urban/urban_vdub4d</Audio>
+    </Step>
+    <Step fmt="PlayVideo">
+      <Video>urban/urban_fat06_next</Video>
+    </Step>
+    <Step fmt="CommentaryIntro">
+      <Image>urban/urban_fat06_start_first.jpg</Image>
+      <Audio>extra/extra_vcomi</Audio>
+    </Step>
+    <Step fmt="Commentary">
+      <Video>urban/urban_fat06_start</Video>
+      <FeedbackAudio>urban/urban_vdaf5y</FeedbackAudio>
+      <FeedbackText>
+        <Data>car ahead indicated left</Data>
+        <Data>car passed us on right</Data>
+        <Data>our car merged right</Data>
+        <Data>car ahead braked</Data>
+        <Data>car behind us</Data>
+      </FeedbackText>
+    </Step>
+  </Seq>
 </root>
