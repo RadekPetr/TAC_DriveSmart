@@ -634,7 +634,7 @@ var SequencePlayer = new Class({
     //------------------------------------------------------------------------
     _setupQuestions : function(options) {
         var questions = new Questions(this, options);
-        questions.add(this.options.unitTagId);
+        questions.add(this.options.unitTagId, "bottom");
         questions.show();
         return questions;
     },

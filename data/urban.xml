@@ -984,7 +984,7 @@
     <Step fmt="PlayVideo">
       <Video>urban/urban_umt01_end</Video>
     </Step>
-    <Step hide="box">
+    <Step  fmt="PlayAudio" hide="box">
       <Audio>urban/urban_vdbu5k</Audio>
     </Step>
     <Step fmt="CommentaryIntro">
@@ -1149,9 +1149,6 @@
     <Step fmt="PlayVideo">
       <Video>urban/urban_uic01_next</Video>
     </Step>
-    <Step fmt="Commentary" exe="urban,extra_vcomi,urban_uic01_start,urban_vdau4y.wav,car turned left,cyclist crossed the street,traffic lights changed,pedestrians">
-      <Audio>extra/extra_vcomi</Audio>
-    </Step>
     <Step fmt="CommentaryIntro">
       <Image>urban/urban_uic01_start_first.jpg</Image>
       <Audio>extra/extra_vcomi</Audio>
@@ -1188,7 +1185,7 @@
     <Step fmt="QuestionFeedback" FadeQ="2">
       <Audio>urban/urban_vdau5f</Audio>
     </Step>
-    <Step desc="Lets watch the rest">
+    <Step fmt="PlayVideo">
       <Audio>urban/urban_vdub4d</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -1229,7 +1226,7 @@
     <Step fmt="QuestionFeedback" FadeQ="1">
       <Audio>urban/urban_vdau6f</Audio>
     </Step>
-    <Step desc="Lets watch the rest">
+    <Step fmt="PlayVideo">
       <Audio>urban/urban_vdub4d</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -1272,7 +1269,7 @@
     <Step fmt="QuestionFeedback" FadeQ="1">
       <Audio>urban/urban_vdau7f</Audio>
     </Step>
-    <Step desc="Lets watch the rest">
+    <Step fmt="PlayVideo">
       <Audio>urban/urban_vdub4d</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -1314,7 +1311,7 @@
     <Step fmt="QuestionFeedback" FadeQ="1,2">
       <Audio>urban/urban_vdau8f</Audio>
     </Step>
-    <Step desc="Lets watch the rest">
+    <Step fmt="PlayVideo">
       <Audio>urban/urban_vdub4d</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -1356,7 +1353,7 @@
     <Step fmt="QuestionFeedback" FadeQ="1">
       <Audio>urban/urban_vdau10f</Audio>
     </Step>
-    <Step desc="Lets watch the rest">
+    <Step fmt="PlayVideo"
       <Audio>urban/urban_vdub4d</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -1401,7 +1398,7 @@
     <Step fmt="QuestionFeedback" FadeQ="1">
       <Audio>urban/urban_vdau11f</Audio>
     </Step>
-    <Step desc="Lets watch the rest">
+    <Step fmt="PlayVideo">
       <Audio>urban/urban_vdub4d</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -1526,7 +1523,7 @@
     <Step fmt="QuestionFeedback" FadeQ="1">
       <Audio>freeway/freeway_vdaf5f</Audio>
     </Step>
-    <Step desc="Lets watch the rest">
+    <Step fmt="PlayVideo">
       <Audio FadeQ="1">urban/urban_vdub4d</Audio>
     </Step>
     <Step fmt="PlayVideo">

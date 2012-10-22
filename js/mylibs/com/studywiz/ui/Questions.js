@@ -98,9 +98,10 @@ var Questions = new Class({
 
     },
     remove : function() {
-        this.hide();
+        this.hide();        
         var removedElement = this.panel.dispose();
-        document.getElementById('panelContainer').dispose();
+        $('panelContainer').dispose();
+        
     },
     // ---------------------------
     show : function() {
