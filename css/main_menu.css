@@ -48,3 +48,32 @@
 	margin-top: 8px;
 }
 
+#feedbackList {
+	font-size: 1em;
+	font-weight: bold;
+	color: #EAC749;
+	font-style: italic;
+	font-size: 1em;
+	text-align: left;
+}
+#feedbackList ul {
+	margin: 0px;
+	padding: 0px;
+}
+#feedbackList li {
+	list-style: none;
+	cursor: default;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	text-decoration: none;
+	list-style-position: outside;
+	list-style-image: url(../media/images/menu/triagle.png);
+	margin-top: 8px;
+}
+
+
+
