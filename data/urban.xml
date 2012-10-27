@@ -780,7 +780,7 @@
         <Data correct="true">Poor</Data>
       </Inter>
     </Step>
-    <Step fmt="PlayAudio" hide="box">
+    <Step fmt="QuestionFeedback" hide="box">
       <Audio>urban/urban_vdbu2d</Audio>
     </Step>
     <Step fmt="PlayAudio">
@@ -984,7 +984,7 @@
     <Step fmt="PlayVideo">
       <Video>urban/urban_umt01_end</Video>
     </Step>
-    <Step  fmt="PlayAudio" hide="box">
+    <Step fmt="PlayAudio" hide="box">
       <Audio>urban/urban_vdbu5k</Audio>
     </Step>
     <Step fmt="CommentaryIntro">
@@ -1185,7 +1185,7 @@
     <Step fmt="QuestionFeedback" FadeQ="2">
       <Audio>urban/urban_vdau5f</Audio>
     </Step>
-    <Step fmt="PlayVideo">
+    <Step fmt="PlayAudio">
       <Audio>urban/urban_vdub4d</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -1226,7 +1226,7 @@
     <Step fmt="QuestionFeedback" FadeQ="1">
       <Audio>urban/urban_vdau6f</Audio>
     </Step>
-    <Step fmt="PlayVideo">
+    <Step fmt="PlayAudio">
       <Audio>urban/urban_vdub4d</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -1269,7 +1269,7 @@
     <Step fmt="QuestionFeedback" FadeQ="1">
       <Audio>urban/urban_vdau7f</Audio>
     </Step>
-    <Step fmt="PlayVideo">
+    <Step fmt="PlayAudio">
       <Audio>urban/urban_vdub4d</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -1311,7 +1311,7 @@
     <Step fmt="QuestionFeedback" FadeQ="1,2">
       <Audio>urban/urban_vdau8f</Audio>
     </Step>
-    <Step fmt="PlayVideo">
+    <Step fmt="PlayAudio">
       <Audio>urban/urban_vdub4d</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -1353,7 +1353,7 @@
     <Step fmt="QuestionFeedback" FadeQ="1">
       <Audio>urban/urban_vdau10f</Audio>
     </Step>
-    <Step fmt="PlayVideo"
+    <Step fmt="PlayAudio">
       <Audio>urban/urban_vdub4d</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -1398,7 +1398,7 @@
     <Step fmt="QuestionFeedback" FadeQ="1">
       <Audio>urban/urban_vdau11f</Audio>
     </Step>
-    <Step fmt="PlayVideo">
+    <Step fmt="PlayAudio">
       <Audio>urban/urban_vdub4d</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -1480,7 +1480,7 @@
     <Step fmt="QuestionFeedback" FadeQ="1,3">
       <Audio>freeway/freeway_vdaf4f</Audio>
     </Step>
-    <Step desc="Lets watch the rest">
+    <Step fmt="PlayAudio">
       <Audio>urban/urban_vdub4d</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -1523,8 +1523,8 @@
     <Step fmt="QuestionFeedback" FadeQ="1">
       <Audio>freeway/freeway_vdaf5f</Audio>
     </Step>
-    <Step fmt="PlayVideo">
-      <Audio FadeQ="1">urban/urban_vdub4d</Audio>
+    <Step fmt="PlayAudio">
+      <Audio>urban/urban_vdub4d</Audio>
     </Step>
     <Step fmt="PlayVideo">
       <Video>urban/urban_fat06_next</Video>

@@ -596,7 +596,7 @@
         <Data>car leaving rest area</Data>
         <Data>oncoming car</Data>
       </FeedbackText>
-      <ExpertAudio>country/country_vdac7y</ExpertAudio>
+      
     </Step>
   </Seq>
   <Seq desc="Exercise 13" Ex="13">
