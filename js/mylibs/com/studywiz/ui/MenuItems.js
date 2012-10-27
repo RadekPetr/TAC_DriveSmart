@@ -3,7 +3,7 @@
  */
 var MenuItems = new Class({
 
-    Implements : [Options, Events],
+    Implements : [Options, Events, Tips],
 
     options : {
         style : {
@@ -18,7 +18,10 @@ var MenuItems = new Class({
         id : 'element.id',
         next : 'next.action',
         correct : null,
-        parent : null
+        parent : null,
+        text : function(element) {
+            return element.get('rel');
+        },
     },
     initialize : function(myParent, myOptions) {
 
@@ -36,13 +39,33 @@ var MenuItems = new Class({
             var item = new Element('li', {
                 'html' : menuItem.text,
                 'id' : elemID,
-                'onselectstart' : 'return false;'
+                'onselectstart' : 'return false;',
+                'rel' : menuItem.description
             });
 
-            this.setupTips(item, menuItem.description);
-         
+            var preview = new ImagePlayer(myParent, {
+                src : myParent.options.imageFolder + menuItem.preview,
+                title : 'Image',
+                id : 'preview_' + index,
+                style : {
+                    'width' : '140px',
+                    'height' : '107px',
+                    top : '20px',
+                    left : '380px'
+
+                }
+            })
+            preview.preload();
+            item.store('preview', preview);
+
+            //   new Tips(item, {
+            //      fixed : true,
+            //      offset: {x: 350, y: 0}
+            // });
+            // this.setupTips(item, menuItem.description);
+
             var selectedModuleID = menuItem.moduleID;
-           // log("Sel menu itemid: " + selectedModuleID);
+            // log("Sel menu itemid: " + selectedModuleID);
             item.addEvent("click", function() {
                 this.myParent().fireEvent("TIMELINE", {
                     type : "item.clicked",
@@ -51,27 +74,51 @@ var MenuItems = new Class({
                 });
             }.bind(this));
 
+            item.addEvent("mouseenter", function() {
+                this.module_description.set('html', this.options.text(item));
+                this.module_description.show();
+                var preview = item.retrieve('preview');
+                var imageDiv = this.container.getElementById('imageContainer');
+                if (imageDiv != null) {
+                    imageDiv.destroy();
+                }
+                preview.add(this.container.id);
+                preview.display();
+
+            }.bind(this));
+            item.addEvent("mouseleave", function() {
+                var preview = item.retrieve('preview')
+                // preview.remove();
+                //this.module_description.set('html', '');
+                // this.module_description.hide();
+
+            }.bind(this));
+
             ul.adopt(item);
 
-        }.bind(this))
+        }.bind(this));
+
         this.container.adopt(ul);
-        
+
+        this.module_description = new Element("div", {
+            id : "module.description",
+            'class' : 'module-description'
+        });
+        this.container.adopt(this.module_description);
+        this.module_description.hide();
+
         // TODO: implement access module logic here - disabling menu items and indicating finished modules
     },
     myParent : function() {
         return this.options.parent;
     }, // ---------------------------
     add : function(parentTagID) {
-
         this.container.inject($(parentTagID));
-
         this.container.setStyles(this.options.style);
-
     },
     remove : function() {
         this.hide();
-        var removedElement = this.container.dispose();
-
+        var removedElement = this.container.destroy();
     },
     // ---------------------------
     show : function() {
@@ -79,7 +126,6 @@ var MenuItems = new Class({
             //this.panel.fade('hide', 0);
             this.container.fade('in');
         }
-
     },
     // ---------------------------
     hide : function() {

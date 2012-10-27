@@ -31,7 +31,7 @@ var SequencePlayer = new Class({
         this.options.parent = myParent;
         this.currentSequence = new Array();
         this.sequenceState = null;
-
+        this.currentStep = null;
         this.mediaLoader = null;
         this.buttons = new Array();
         this.interactions = null;
@@ -54,6 +54,18 @@ var SequencePlayer = new Class({
     },
     // ----------------------------------------------------------
     start : function(sequenceData) {
+
+        // Get rid of any elements possibly left in
+        this.reset();
+
+        // make sure there are no objects left
+        this.buttons.empty();
+        this.interactions = null;
+        this.videos.empty();
+        this.activeVideo = null;
+        this.shape = null;
+        this.currentStep = null;
+        this.cameo_image = null;
 
         this.currentSequence.empty();
         this.currentSequence = Array.clone(sequenceData);
@@ -79,30 +91,13 @@ var SequencePlayer = new Class({
             top : '25%'
         }
 
-        this._removeVideos();
-        this._removeImages();
-        this._removeButtons();
-        this._removeInteractions();
-        this._cleanUp();
-
-        // make sure there are no objects left
-        this.buttons.empty();
-
-        this.interactions = null;
-        this.videos.empty();
-        this.activeVideo = null;
-        this.shape = null;
-
-        this.currentStep = null;
-        this.cameo_image = null;
-
         //
         this.setupMedia();
     },
     // ----------------------------------------------------------
     setupMedia : function() {
         this._setupSequenceMedia(this.currentSequence);
-        this.mediaLoader.options.next = 'media.ready';
+        this.mediaLoader.options.next = 'Media.ready';
         this.mediaLoader.start(true);
     },
     nextStep : function() {
@@ -298,21 +293,19 @@ var SequencePlayer = new Class({
                         if (expertAudio != undefined) {
                             expertAudio.options.next = '';
                             expertAudio.start();
-                            // play the feedback and show text if present
                         }
                         step.playExpert = false;
                     } else {
                         this.recorder.startRecording();
                     }
-
                     step.player.options.next = 'Commentary.recording.done';
                     step.player.show();
                     step.player.volume(0.2);
+                    this._hideOtherVideos(step.player.playerID);
                     step.player.start();
-
                     break;
                 case "KeyRisk" :
-                log ("KR");
+                    log("KR");
                     this._removeInteractions();
                     this._setupRisks();
                     step.player.options.next = 'Risks.ready';
@@ -325,10 +318,9 @@ var SequencePlayer = new Class({
                     step.image.show();
                     step.player.options.next = 'KRFeedback.done';
                     step.player.start();
-
                     break;
                 case "Cameo":
-                    var file = this.options.imageFolder + 'cameos/visor.png';
+                    var file = this.options.imageFolder + 'cameo/visor_bkg.png';
                     this.cameo_image = new ImagePlayer(this, {
                         src : file,
                         next : "Cameo.visor.image.ready",
@@ -339,8 +331,20 @@ var SequencePlayer = new Class({
                             'height' : '0px'
                         }
                     });
-                    this.cameo_image.preload();
 
+                    var file = this.options.imageFolder + 'cameo/visor_mask.png';
+                    this.cameo_image_mask = new ImagePlayer(this, {
+                        src : file,
+                        next : "Cameo.visor.image.ready",
+                        title : 'Visor',
+                        id : 'visor',
+                        style : {
+                            'left' : '170px',
+                            'height' : '0px'
+                        }
+                    });
+                    this.cameo_image.preload();
+                    this.cameo_image_mask.preload();
                     break;
                 case "DragNDrop":
                     log("##### DragNDrop ######");
@@ -360,37 +364,40 @@ var SequencePlayer = new Class({
     handleNavigationEvent : function(params) {
 
         switch (params.next) {
-            case "media.ready":
-                //this.mediaLoader.options.next = null;
-                //this.mediaLoader.hide();
-
+            case "Media.ready":
+            case "PlayVideo.done":
+            case "Question.done":
+            case "QuestionFeedback.done":
+            case "PlayAudio.done":
                 this.nextStep();
                 break;
             case "SequenceIntro.done":
-
                 this._removeImages();
                 this._removeButtons();
                 this._cleanUp();
 
-                //this.currentStep.previewImage.remove();
-                this.currentStep.player.stop();
                 this.nextStep();
                 break;
-            case "PlayVideo.done":
+            case 'KRFeedback.continue.done':
+
+                this.shape.remove();
+                this._removeImages();
+                this._removeButtons();
+                this._cleanUp();
+
                 this.nextStep();
                 break;
-            case "Question.done":
+            case "Skip.done":
+                this._removeImages();
+                this._removeButtons();
+                this._cleanUp();
                 this.nextStep();
                 break;
             case "QuestionUser.done":
+                this._removeButtons();
                 this.nextStep();
                 break;
-            case "QuestionFeedback.done":
-                this.nextStep();
-                break;
-            case "PlayAudio.done":
-                this.nextStep();
-                break;
+
             case "Risks.ready":
                 var button = this._setupButton("Done", "button save", "Risks.done", this.buttonPosition.x, this.buttonPosition.y);
                 this.buttons.push(button);
@@ -403,34 +410,20 @@ var SequencePlayer = new Class({
                 // add continue button
                 var button = this._setupButton("Continue", "button next", "KRFeedback.continue.done", this.buttonPosition.x, this.buttonPosition.y);
                 this.buttons.push(button);
-
                 break;
-            case 'KRFeedback.continue.done':
-
-                this.shape.remove();
-                this._removeImages();
-                this._removeButtons();
-                this._cleanUp();
-                // TODO: remove image if I'll use it
-                this.nextStep();
-                break;
-
             case "Continue.clicked":
                 this.reset();
-
                 this.myParent().fireEvent("SEQUENCE", {
                     type : "sequence.event",
                     next : 'sequence.next'
                 });
                 break;
-
             case "Repeat.clicked":
                 this._removeVideos();
                 this._removeImages();
                 this._removeButtons();
                 this._cleanUp();
                 this._removeInteractions();
-                // this.start();
 
                 this.myParent().fireEvent("SEQUENCE", {
                     type : "sequence.event",
@@ -452,10 +445,16 @@ var SequencePlayer = new Class({
                 break;
 
             case "Cameo.visor.image.ready":
-                //log(this.currentStep.player);
-                this.cameo_image.add(this.currentStep.player.containerID, 'before');
-                this.cameo_image.show();
-                this.cameo_image.tween('203px', '0px', 1, 'height', 300, 'ignore', 'Cameo.visor.tween.done')
+                if (this.cameo_image.options.loaded && this.cameo_image_mask.options.loaded) {
+
+                    this.cameo_image.add(this.currentStep.player.containerID, 'before');
+                    this.cameo_image.show();
+                    this.cameo_image.tween('203px', '0px', 1, 'height', 300, 'ignore', 'Cameo.visor.tween.done');
+
+                    this.cameo_image_mask.add(this.currentStep.player.containerID, 'after');
+                    this.cameo_image_mask.show();
+                    this.cameo_image_mask.tween('203px', '0px', 1, 'height', 300, 'ignore', '')
+                }
                 break;
             case "Cameo.visor.tween.done":
                 this.currentStep.player.options.next = 'Cameo.done';
@@ -464,14 +463,10 @@ var SequencePlayer = new Class({
                 break;
             case "Cameo.done":
                 this.currentStep.player.hide(0);
-                this.cameo_image.tween('0px', '203px', 1, 'height', 300, 'ignore', '')
+                this.cameo_image.tween('0px', '203px', 1, 'height', 300, 'ignore', '');
+                this.cameo_image_mask.remove();
                 this.nextStep();
-                break;
-            case "Skip.done":
-                this._removeImages();
-                this._removeButtons();
-                this._cleanUp();
-                this.nextStep();
+
                 break;
             case "CommentaryIntro.expert.clicked":
                 // set next Commentary to play expert
@@ -481,12 +476,11 @@ var SequencePlayer = new Class({
                 } else {
                     log("ERROR - next step must be Commentary after CommentaryIntro");
                 }
-
             case "CommentaryIntro.done":
                 this._removeInteractions();
                 this._removeButtons();
                 this._cleanUp();
-                this.currentStep.player.stop();
+
                 this.nextStep();
                 break;
             case "Commentary.recording.done":
@@ -503,8 +497,6 @@ var SequencePlayer = new Class({
                 var feedbackText = this.currentStep.data;
 
                 if (feedbackText != undefined) {
-                    // TODO: display the text
-
                     this.currentStep.feedbackPanel = new CommentaryFeedback(this, this.currentStep.data);
                     this.currentStep.feedbackPanel.add(this.options.unitTagId);
                     this.currentStep.feedbackPanel.show();
@@ -525,6 +517,7 @@ var SequencePlayer = new Class({
 
                 button = this._setupButton("Repeat", "button record", "Commentary.repeat.clicked", this.buttonPosition.x, this.buttonPosition.y - 90);
                 this.buttons.push(button);
+
                 button = this._setupButton("Main Menu", "button star", "MainMenu.clicked", this.buttonPosition.x, this.buttonPosition.y - 45);
                 this.buttons.push(button);
 
@@ -540,7 +533,6 @@ var SequencePlayer = new Class({
                 this.currentStep.player.start();
 
                 break;
-
             case "Commentary.expert.clicked":
                 this._removeFeedbackPanel();
                 this._removeButtons();
@@ -549,7 +541,6 @@ var SequencePlayer = new Class({
                 if (expertAudio != undefined) {
                     expertAudio.options.next = '';
                     expertAudio.start();
-                    // play the feedback and show text if present
                 }
                 this.currentStep.player.show();
                 this.currentStep.player.options.next = 'Commentary.recording.done';
@@ -671,8 +662,8 @@ var SequencePlayer = new Class({
                             }
                         } else {
                             style = {
-                                width : '640',
-                                height : '480',
+                               // width : '640',
+                               // height : '480',
                                 left : '0px',
                                 top : '0px'
                             }
@@ -688,9 +679,7 @@ var SequencePlayer = new Class({
                         this.mediaLoader.register(step.player.getLoaderInfo());
                         // we want to store this so all VideoJS player can be removed correctly (see remove() in VideoPlayer)
                         this.videos.push(step.player);
-
                     }
-
                     break;
                 case "Audio" :
                     if (item.value != '') {
@@ -762,19 +751,19 @@ var SequencePlayer = new Class({
                     var menuItems = {
                         data : new Array()
                     }
-
                     Array.each(menuItemsRawData, function(menuItemData, index) {
+
                         var menuItem = {
                             text : menuItemData.value,
                             description : menuItemData.attributes.description,
-                            moduleID : menuItemData.attributes.moduleID
-
+                            moduleID : menuItemData.attributes.moduleID,
+                            preview : menuItemData.attributes.preview
                         }
                         menuItems.data.push(menuItem);
+                        log (menuItem);
                     })
                     step.data = menuItems;
                     break;
-
                 case "FeedbackText":
                     var feedbackItemsRawData = item.childNodes;
                     var feedbackItems = {
@@ -790,7 +779,6 @@ var SequencePlayer = new Class({
                     })
                     step.data = feedbackItems;
                     break;
-
                 case "Inter":
                     var questionsRawData = item.childNodes;
                     var questions = {
@@ -807,14 +795,11 @@ var SequencePlayer = new Class({
                     })
                     step.data = questions;
                     break;
-
                 default:
                 // nothing
             }
         }.bind(this))
-        // now start the preloading for each of the items
-        //log("---------------------------- Step");
-        //log(step)
+
     },
     _cleanUp : function() {
         if (this.currentStep != null) {
@@ -839,23 +824,23 @@ var SequencePlayer = new Class({
         }
         var sequenceIntroTag = $('SequenceIntro.container');
         if (sequenceIntroTag != null) {
-            sequenceIntroTag.dispose();
+            sequenceIntroTag.destroy();
         }
         var sequenceIntroTag = $('CommentaryIntro.container');
         if (sequenceIntroTag != null) {
-            sequenceIntroTag.dispose();
+            sequenceIntroTag.destroy();
         }
 
         var menuTag = $('Menu.container');
         if (menuTag != null) {
-            menuTag.dispose();
+            menuTag.destroy();
         }
 
     },
     _removeImages : function() {
         var imageDiv = document.getElementById('imageContainer');
         if (imageDiv != null) {
-            imageDiv.dispose();
+            imageDiv.destroy();
         }
         //this.currentStep.previewImage.remove();
     },
@@ -868,8 +853,14 @@ var SequencePlayer = new Class({
     _removeInteractions : function() {
         if (this.interactions != null) {
             this.interactions.remove();
+
             this.interactions = null;
         }
+        var interactions = $('panelContainer');
+        if (interactions != null) {
+            interactions.destroy();
+        }
+
     },
     _hideInteractions : function() {
         if (this.interactions != null) {
@@ -885,18 +876,18 @@ var SequencePlayer = new Class({
         this.activeVideo = null;
         Array.each(this.videos, function(item, index) {
             item.remove();
+            item = null;
+            delete item;
         })
         this.videos.empty();
     },
     _hideOtherVideos : function(excludedId) {
-        //var videos = $$('div.videoContainer');
+
         Array.each(this.videos, function(item, index) {
             var playerID = item.playerID;
             if (playerID == excludedId) {
-                //item.show();
                 this.activeVideo = item;
             } else {
-                // item.fade('out', 0);
                 item.hide();
             }
             //log("Player " + playerID + " to keep " + excludedId)
@@ -909,8 +900,10 @@ var SequencePlayer = new Class({
         this.recorder = null;
     },
     _removeFeedbackPanel : function() {
-        if (this.currentStep.feedbackPanel != undefined) {
-            this.currentStep.feedbackPanel.remove();
+        if (this.currentStep != undefined) {
+            if (this.currentStep.feedbackPanel != undefined) {
+                this.currentStep.feedbackPanel.remove();
+            }
         }
 
     },
@@ -950,7 +943,6 @@ var SequencePlayer = new Class({
     reset : function() {
         this._removeFeedbackPanel();
         this.mediaLoader.remove();
-        //this.mediaLoader = null;
         this._removeImages();
         this._removeButtons();
         this._removeSwiff();

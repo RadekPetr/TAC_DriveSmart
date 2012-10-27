@@ -74,6 +74,22 @@
 	list-style-image: url(../media/images/menu/triagle.png);
 	margin-top: 8px;
 }
-
-
+.module-description {
+	color: #EAC749;
+	position: absolute;
+	font-size: 0.85em;
+	text-align: left;
+	line-height: 130%;
+	left: 375px;
+	top: 140px;
+	width: 255px;
+	background-color: #464646;
+	float: left;
+	border-radius: 1em 1em 1em 1em;
+	text-align: left;
+	padding: 8px 8px 8px 8px;
+	font-family: Arial;
+	-moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
+	background: rgba(0, 0, 0, 0.6);
+}
 
