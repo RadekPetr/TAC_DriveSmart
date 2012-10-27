@@ -25,7 +25,7 @@ var ModulePlayer = new Class({
     // ----------------------------------------------------------
     setupData : function() {
         this.dataLoader = new DataLoader(this, {
-            src : 'data/' + this.options.id + '.xml',
+            src : 'media/xml/' + this.options.id + '.xml',
             next : 'data.ready'
         });
         this.dataLoader.start();
