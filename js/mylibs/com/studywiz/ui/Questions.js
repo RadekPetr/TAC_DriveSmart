@@ -71,19 +71,22 @@ var Questions = new Class({
     myParent : function() {
         return this.options.parent;
     }, // ---------------------------
-    add : function(parentTagID) {
+    add : function(parentTagID, where) {
         var myParent = document.getElementById(parentTagID);
         var myDiv = myParent.getElement('div[id=panelContainer]');
         if (myDiv == null) {
             var myDiv = new Element("div", {
                 id : "panelContainer"
             });
-            myDiv.inject($(parentTagID));
+          
+            myDiv.inject($(parentTagID), where);
         }
 
         myDiv.adopt(this.panel);
 
         this.panel.inject(myDiv);
+        
+        
         // this.panel.fade('hide', 0);
 
         this.panel.setStyles(this.options.style);
@@ -99,8 +102,8 @@ var Questions = new Class({
     },
     remove : function() {
         this.hide();        
-        var removedElement = this.panel.dispose();
-        $('panelContainer').dispose();
+        var removedElement = this.panel.destroy();
+        $('panelContainer').destroy();
         
     },
     // ---------------------------

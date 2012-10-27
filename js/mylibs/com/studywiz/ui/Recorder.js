@@ -103,7 +103,7 @@ var Recorder = new Class({
 	remove : function() {
 		this.hide();
 
-		this.container.dispose();
+		this.container.destroy();
 		this.swiff = null;
 		this.container = null;
 	},

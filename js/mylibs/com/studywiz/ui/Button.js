@@ -60,8 +60,8 @@ var Button = new Class({
 	},
 	remove : function() {
 		this.hide();
-		var removedElement = this.buttonElement.dispose();
-		this.container.dispose();
+		var removedElement = this.buttonElement.destroy();
+		this.container.destroy();
 
 	},
 	// ---------------------------

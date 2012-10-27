@@ -81,7 +81,7 @@ var CommentaryFeedback = new Class({
     },
     remove : function() {
 
-        var removedElement = this.container.dispose();
+        var removedElement = this.container.destroy();
 
     },
     // ---------------------------
