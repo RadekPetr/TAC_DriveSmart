@@ -14,17 +14,12 @@ var Modules = new Class({
 
     },
     initialize : function(myOptions) {
-
         this.setOptions(myOptions);
-
         this.modules = new Hash();
-
     },
     start : function() {
-        //
         this.addEvent("MODULE", this.handleNavigationEvent);
         this.setupModules();
-
     },
     // ----------------------------------------------------------
     setupModules : function() {
@@ -89,7 +84,6 @@ var Modules = new Class({
 
         switch (params.next) {
             case "module.ready":
-
                 this.listOfModulesCounter--;
                 //log("Modules count: " + this.listOfModulesCounter);
                 if (this.listOfModulesCounter === 0) {
@@ -98,13 +92,10 @@ var Modules = new Class({
                     this._startMainMenu();
                 }
                 break;
-
             case "module.exit":
                 this._startMainMenu();
-
                 break;
             case "module.finished":
-
                 log("Module Finished");
                 break;
             case "module.start":
@@ -112,21 +103,19 @@ var Modules = new Class({
                 var selectedModule = this.modules.get(this.options.moduleID);
                 var sequenceID = "1";
                 selectedModule.playSequence(sequenceID);
-
                 this.setupDebug();
                 break;
             case "update.user":
-            log ("***** Updating User ***** ")
+                log("***** Updating User ***** ")
                 userTracker.updateSequenceProgress(params.data);
                 break;
-
         }
     },
     _setupUser : function() {
-       userTracker = new User(this, {});
+        userTracker = new User(this, {});
         userTracker.setDefaultUserData(this.modules);
-       userTracker.loadProgress();
-       userTracker.saveProgress();
+        userTracker.loadProgress();
+        userTracker.saveProgress();
     },
     _startMainMenu : function() {
         var selectedModule = this.modules.get("main_menu");
@@ -211,7 +200,6 @@ var Modules = new Class({
             sequenceSelector.inject(myDiv);
             sequenceSelector.value = this.options.sequenceID;
             sequenceSelectorButton.inject(myDiv);
-
         }
 
     },

@@ -27,11 +27,14 @@ var User = new Class({
         // ajax request ?
         //console.log (this.userData);
         var data = JSON.encode(this.userData);
+      // alert("Data :" +  data);
         var output = lzw_encode(data)
         //  alert("Data :" +  output);
         // var output2 = lzw_decode(output)
         //TODO: make an AJAX request and handle errors
+        // TODO: exclude main menu
         //  alert("Data :" +  output2);
+        // TODO: on each execise completion if you can send me module:{score: _, completed_exercises: _, total_exercises: _}
     },
     setDefaultUserData : function(data) {
         data.each( function(moduleObject, key, hash) {
