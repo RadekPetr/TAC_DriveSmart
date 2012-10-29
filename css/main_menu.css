@@ -92,4 +92,7 @@
 	-moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
 	background: rgba(0, 0, 0, 0.6);
 }
+.module-preview img{
+	clip: rect(0px, 140px, 107px, 0px);
+}
 

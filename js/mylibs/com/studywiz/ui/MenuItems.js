@@ -56,6 +56,7 @@ var MenuItems = new Class({
                 }
             })
             preview.preload();
+
             item.store('preview', preview);
 
             //   new Tips(item, {
@@ -83,6 +84,11 @@ var MenuItems = new Class({
                     imageDiv.destroy();
                 }
                 preview.add(this.container.id);
+             //   preview.tween('107px', '240px', 1, 'height', 600, 'ignore', '');
+               // preview.tween('140px', '320px', 1, 'width', 600, 'ignore', '');
+               
+                //transform: rotate(-25deg);
+                preview.container.set('class', 'module-preview');
                 preview.display();
 
             }.bind(this));
