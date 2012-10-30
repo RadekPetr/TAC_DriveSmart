@@ -47,17 +47,14 @@ var SequencePlayer = new Class({
         });
 
         this.addEvent("TIMELINE", this.handleNavigationEvent);
-
     },
     myParent : function() {
         return this.options.parent;
     },
     // ----------------------------------------------------------
     start : function(sequenceData) {
-
         // Get rid of any elements possibly left in
         this.reset();
-
         // make sure there are no objects left
         this.buttons.empty();
         this.interactions = null;
@@ -120,17 +117,9 @@ var SequencePlayer = new Class({
                     step.image.show();
                     var moduleTitle = new Element("h1", {
                         html : this.moduleInfo.moduleTitle,
-                        styles : {
-                            'color' : '#ff9900',
-                            'font-style' : 'italic',
-                            'font-size' : '2.5em',
-                            'font-weight' : 'bold',
-                            'text-align' : 'center'
-                        }
+                        'class' : 'main-title'
                     })
-
                     moduleTitle.inject(myDiv);
-
                     step.data.style = {
                         left : '10px',
                         top : '40px'
@@ -138,9 +127,7 @@ var SequencePlayer = new Class({
                     var menu = new MenuItems(this, step.data);
                     menu.add(myContainerID);
                     menu.show();
-
                     break;
-
                 case "SequenceIntro":
                     var myContainerID = 'SequenceIntro.container';
                     var myDiv = new Element("div", {
@@ -157,14 +144,10 @@ var SequencePlayer = new Class({
                     var moduleTitle = new Element("h1", {
                         html : this.moduleInfo.moduleTitle,
                         styles : {
-                            position : 'absolute',
                             left : '0px',
-                            top : '20%',
-                            'color' : '#ff9900',
-                            'font-style' : 'italic',
-                            'font-size' : '3em',
-                            'font-weight' : 'bold'
-                        }
+                            top : '20%'
+                        },
+                        'class' : 'module-title'
                     })
                     moduleTitle.inject($(myContainerID));
 
@@ -173,14 +156,10 @@ var SequencePlayer = new Class({
                     var sequenceTitle = new Element("h1", {
                         html : sequenceTitleText,
                         styles : {
-                            position : 'absolute',
                             left : '0px',
-                            top : '10%',
-                            'color' : '#EAC749',
-                            'font-size' : '1em',
-                            'font-weight' : 'bold'
-                        }
-
+                            top : '10%'
+                        },
+                        'class' : 'sequence-title'
                     })
                     sequenceTitle.inject($(myContainerID));
 
@@ -221,13 +200,11 @@ var SequencePlayer = new Class({
                     // -----
                     step.player.options.next = '';
                     step.player.start();
-
                     break;
                 case "PlayVideo":
                     this._removeImages();
                     this._removeButtons();
                     this._cleanUp();
-
                     this._hideInteractions();
                     step.player.options.next = 'PlayVideo.done';
                     step.player.show();
@@ -271,9 +248,9 @@ var SequencePlayer = new Class({
                     this.buttons.push(button);
                     button = this._setupButton("Repeat", "button back", "Repeat.clicked", this.buttonPosition.x, this.buttonPosition.y - 90);
                     this.buttons.push(button);
-
+                    
                     this._updateUserProgress();
-
+                    
                     break;
                 case "End.Module.Continue":
                     step.player.start();
@@ -285,7 +262,6 @@ var SequencePlayer = new Class({
                     this._updateUserProgress();
 
                     break;
-
                 case "Commentary":
                     this._removeButtons();
                     if (step.playExpert == true) {
@@ -375,16 +351,13 @@ var SequencePlayer = new Class({
                 this._removeImages();
                 this._removeButtons();
                 this._cleanUp();
-
                 this.nextStep();
                 break;
             case 'KRFeedback.continue.done':
-
                 this.shape.remove();
                 this._removeImages();
                 this._removeButtons();
                 this._cleanUp();
-
                 this.nextStep();
                 break;
             case "Skip.done":
@@ -397,7 +370,6 @@ var SequencePlayer = new Class({
                 this._removeButtons();
                 this.nextStep();
                 break;
-
             case "Risks.ready":
                 var button = this._setupButton("Done", "button save", "Risks.done", this.buttonPosition.x, this.buttonPosition.y);
                 this.buttons.push(button);
@@ -443,7 +415,6 @@ var SequencePlayer = new Class({
                     next : 'sequence.exit'
                 });
                 break;
-
             case "Cameo.visor.image.ready":
                 if (this.cameo_image.options.loaded && this.cameo_image_mask.options.loaded) {
 
@@ -480,7 +451,6 @@ var SequencePlayer = new Class({
                 this._removeInteractions();
                 this._removeButtons();
                 this._cleanUp();
-
                 this.nextStep();
                 break;
             case "Commentary.recording.done":
@@ -520,7 +490,6 @@ var SequencePlayer = new Class({
 
                 button = this._setupButton("Main Menu", "button star", "MainMenu.clicked", this.buttonPosition.x, this.buttonPosition.y - 45);
                 this.buttons.push(button);
-
                 break;
             case "Commentary.replay.clicked":
                 this._removeFeedbackPanel();
@@ -531,7 +500,6 @@ var SequencePlayer = new Class({
                 this.currentStep.player.options.next = 'Commentary.recording.done';
                 this.currentStep.player.volume(0.2);
                 this.currentStep.player.start();
-
                 break;
             case "Commentary.expert.clicked":
                 this._removeFeedbackPanel();
@@ -583,7 +551,6 @@ var SequencePlayer = new Class({
                 log("Shape clicked ID: " + params.id)
                 //TODO: scoring
                 break;
-
             case "Menu.item.clicked":
 
                 log(params.id);
@@ -621,14 +588,13 @@ var SequencePlayer = new Class({
         button.show();
         return button;
     }.protect(),
-
     //------------------------------------------------------------------------
     _setupQuestions : function(options) {
         var questions = new Questions(this, options);
         questions.add(this.options.unitTagId, "bottom");
         questions.show();
         return questions;
-    },
+    }.protect(),
     // ----------------------------------------------------------
     _setupSequenceMedia : function(seq) {
         // get array of media for each step so it can be preloaded
@@ -639,7 +605,7 @@ var SequencePlayer = new Class({
         }.bind(this))
         log("---------------------------- Finished setting up media from xml");
         //log(seq);
-    },
+    }.protect(),
     // ----------------------------------------------------------
     _setupStepMedia : function(step, stepOrder) {
         var stepType = step.attributes.fmt;
@@ -657,13 +623,13 @@ var SequencePlayer = new Class({
                             var style = {
                                 'left' : '315px',
                                 'top' : '20px',
-                                'width' : '240',
-                                'height' : '175'
+                                'width' : '240px',
+                                'height' : '175px'
                             }
                         } else {
                             style = {
-                               // width : '640',
-                               // height : '480',
+                                // width : '640',
+                                // height : '480',
                                 left : '0px',
                                 top : '0px'
                             }
@@ -760,7 +726,7 @@ var SequencePlayer = new Class({
                             preview : menuItemData.attributes.preview
                         }
                         menuItems.data.push(menuItem);
-                        log (menuItem);
+                        log(menuItem);
                     })
                     step.data = menuItems;
                     break;
@@ -800,7 +766,7 @@ var SequencePlayer = new Class({
             }
         }.bind(this))
 
-    },
+    }.protect(),
     _cleanUp : function() {
         if (this.currentStep != null) {
             if (this.currentStep.player != null) {
@@ -836,20 +802,20 @@ var SequencePlayer = new Class({
             menuTag.destroy();
         }
 
-    },
+    }.protect(),
     _removeImages : function() {
         var imageDiv = document.getElementById('imageContainer');
         if (imageDiv != null) {
             imageDiv.destroy();
         }
         //this.currentStep.previewImage.remove();
-    },
+    }.protect(),
     _removeButtons : function() {
         Array.each(this.buttons, function(item, index) {
             item.remove();
         })
         this.buttons.empty();
-    },
+    }.protect(),
     _removeInteractions : function() {
         if (this.interactions != null) {
             this.interactions.remove();
@@ -898,7 +864,7 @@ var SequencePlayer = new Class({
             this.recorder.remove();
         }
         this.recorder = null;
-    },
+    }.protect(),
     _removeFeedbackPanel : function() {
         if (this.currentStep != undefined) {
             if (this.currentStep.feedbackPanel != undefined) {
@@ -906,7 +872,7 @@ var SequencePlayer = new Class({
             }
         }
 
-    },
+    }.protect(),
     _setupRisks : function() {
         this.shape = new Shape(this, {});
         this.shape.add(this.activeVideo.containerID);
@@ -920,7 +886,7 @@ var SequencePlayer = new Class({
             });
 
         }.bind(this));
-    },
+    }.protect(),
     _updateUserProgress : function() {
         // Update state to completed = true;
         this.sequenceState.completed = true;
@@ -932,7 +898,7 @@ var SequencePlayer = new Class({
             type : "module.event",
             next : 'sequence.completed'
         });
-    },
+    }.protect(),
     onLoad : function() {
         log("Called Loaded");
     },

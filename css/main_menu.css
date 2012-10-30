@@ -92,7 +92,26 @@
 	-moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
 	background: rgba(0, 0, 0, 0.6);
 }
-.module-preview img{
+.module-preview img {
 	clip: rect(0px, 140px, 107px, 0px);
 }
-
+.main-title {
+	position: absolute;
+	color: #ff9900;
+	font-style: italic;
+	font-size: 2.5em;
+	font-weight: bold;
+	text-align: center;
+}
+.module-title {
+	position: absolute;
+	color: #ff9900;
+	font-style: italic;
+	font-size: 3em;
+	font-weight: bold
+}
+.sequence-title {
+	position: absolute;
+	color: #EAC749;
+	font-size: 1em;
+	font-weight: bold;}
