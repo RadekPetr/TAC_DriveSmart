@@ -4,8 +4,8 @@ var Recorder = new Class({
 	options : {
 		swiff : {
 			id : 'Recorder',
-			width : 640,
-			height : 200,
+			width : '640px',
+			height : '200px',
 			params : {
 				allowScriptAccess : 'always',
 				wmode : 'transparent'
