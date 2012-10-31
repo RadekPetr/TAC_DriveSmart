@@ -75,6 +75,7 @@ var MenuItems = new Class({
                 });
             }.bind(this));
 
+            
             item.addEvent("mouseenter", function() {
                 this.module_description.set('html', this.options.text(item));
                 this.module_description.show();
@@ -84,9 +85,12 @@ var MenuItems = new Class({
                     imageDiv.destroy();
                 }
                 preview.add(this.container.id);
-             //   preview.tween('107px', '240px', 1, 'height', 600, 'ignore', '');
-               // preview.tween('140px', '320px', 1, 'width', 600, 'ignore', '');
-               
+
+                // TODO: try using http://mootools.net/forge/p/fx_tween_css3 for CSS3 rotation
+
+                //   preview.tween('107px', '240px', 1, 'height', 600, 'ignore', '');
+                // preview.tween('140px', '320px', 1, 'width', 600, 'ignore', '');
+
                 //transform: rotate(-25deg);
                 preview.container.set('class', 'module-preview');
                 preview.display();
