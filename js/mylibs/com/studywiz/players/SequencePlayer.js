@@ -38,9 +38,17 @@ var SequencePlayer = new Class({
         this.videos = new Array();
         this.activeVideo = null;
         this.shape = null;
-
-        this.currentStep = null;
         this.cameo_image = null;
+
+        this.buttonPosition = {
+            x : 480,
+            y : 415
+        }
+
+        this.panelPosition = {
+            left : '5%',
+            top : '25%'
+        }
 
         this.mediaLoader = new MediaLoader(this, {
             parentElementID : this.options.unitTagId
@@ -55,16 +63,7 @@ var SequencePlayer = new Class({
     start : function(sequenceData) {
         // Get rid of any elements possibly left in
         this.reset();
-        // make sure there are no objects left
-        this.buttons.empty();
-        this.interactions = null;
-        this.videos.empty();
-        this.activeVideo = null;
-        this.shape = null;
-        this.currentStep = null;
-        this.cameo_image = null;
 
-        this.currentSequence.empty();
         this.currentSequence = Array.clone(sequenceData);
         this.moduleInfo = this.myParent().getModuleInfo();
 
@@ -78,15 +77,6 @@ var SequencePlayer = new Class({
         // TODO handle mobile platforms: Browser.Platform.android, handle incompatible old browsers
         log("Starting SEQUENCE: " + this.moduleInfo.currentSequenceID);
         //log(this.currentSequence);
-        this.buttonPosition = {
-            x : 480,
-            y : 415
-        }
-
-        this.panelPosition = {
-            left : '5%',
-            top : '25%'
-        }
 
         //
         this.setupMedia();
@@ -127,6 +117,18 @@ var SequencePlayer = new Class({
                     var menu = new MenuItems(this, step.data);
                     menu.add(myContainerID);
                     menu.show();
+
+                    // TODO: TESINTG
+                    var myDrag = new Drag(moduleTitle, {
+                        snap : 0,
+                        onSnap : function(el) {
+                            el.addClass('dragging');
+                        },
+                        onComplete : function(el) {
+                            el.removeClass('dragging');
+                        }
+                    });
+
                     break;
                 case "SequenceIntro":
                     var myContainerID = 'SequenceIntro.container';
@@ -248,9 +250,9 @@ var SequencePlayer = new Class({
                     this.buttons.push(button);
                     button = this._setupButton("Repeat", "button back", "Repeat.clicked", this.buttonPosition.x, this.buttonPosition.y - 90);
                     this.buttons.push(button);
-                    
+
                     this._updateUserProgress();
-                    
+
                     break;
                 case "End.Module.Continue":
                     step.player.start();
@@ -323,10 +325,37 @@ var SequencePlayer = new Class({
                     this.cameo_image_mask.preload();
                     break;
                 case "DragNDrop":
+                    // show empty bkg
+                    step.emptyBkg.add(this.activeVideo.containerID);
+                    step.emptyBkg.show();
+                    // setup draggable items
+                    //Setup done button
+
+                    // play Audio - Intro
+                    step.player.start();
                     log("##### DragNDrop ######");
-                    alert("DragNDrop - Not implemented");
-                    var button = this._setupButton("Skip", "button next", "Skip.done", this.buttonPosition.x, this.buttonPosition.y);
+
+                    var button = this._setupButton("Done", "button next", "DragNDrop.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
+                    break;
+                case "DragNDropFeedback":
+
+                    // Show correct bkg
+                    step.image.add(this.activeVideo.containerID);
+                    step.image.show();
+
+                    // Play audio
+                    step.player.start();
+                    // setup buttons
+                    // TODO: extract the end buttons to separate method - replace in continue and here
+                    var button = this._setupButton("Continue", "button next", "Continue.clicked", this.buttonPosition.x, this.buttonPosition.y);
+                    this.buttons.push(button);
+                    button = this._setupButton("Main Menu", "button star", "MainMenu.clicked", this.buttonPosition.x, this.buttonPosition.y - 45);
+                    this.buttons.push(button);
+                    button = this._setupButton("Repeat", "button back", "Repeat.clicked", this.buttonPosition.x, this.buttonPosition.y - 90);
+                    this.buttons.push(button);
+                    // save progress
+                    this._updateUserProgress();
                     break;
             }
 
@@ -354,7 +383,7 @@ var SequencePlayer = new Class({
                 this.nextStep();
                 break;
             case 'KRFeedback.continue.done':
-                this.shape.remove();
+                this._removeRisks();
                 this._removeImages();
                 this._removeButtons();
                 this._cleanUp();
@@ -481,7 +510,7 @@ var SequencePlayer = new Class({
                     button = this._setupButton("Expert", "button play", "Commentary.expert.clicked", 20, this.buttonPosition.y - 45);
                     this.buttons.push(button);
                 }
-
+                // TODO: offer sequence repeat as well
                 button = this._setupButton("Continue", "button next", "Continue.clicked", this.buttonPosition.x, this.buttonPosition.y);
                 this.buttons.push(button);
 
@@ -521,6 +550,17 @@ var SequencePlayer = new Class({
                 this._cleanUp();
                 this.currentSequence.unshift(this.currentStep);
                 this.nextStep();
+                break;
+            case "DragNDrop.done":
+                this._removeButtons();
+                this._cleanUp();
+                var nextStep = this.currentSequence[0];
+                if (nextStep.attributes.fmt == "DragNDropFeedback") {
+                    this.nextStep();
+                } else {
+                    log("ERROR - next step must be DragNDropFeedback after DragNDrop");
+                    this.nextStep();
+                }
                 break;
             case "risk.selected":
                 /// the risks need to be inside some div which could be deleted later
@@ -609,6 +649,7 @@ var SequencePlayer = new Class({
     // ----------------------------------------------------------
     _setupStepMedia : function(step, stepOrder) {
         var stepType = step.attributes.fmt;
+        log(step);
         Array.each(step.childNodes, function(item, index) {
             if (step.player != undefined) {
                 log("!!!!!!!!!!!!!!!!!!!!! ERROR - Two players in this step !!!!!!!!!!!!!!!!!!!!!!!!!" + stepType);
@@ -683,10 +724,22 @@ var SequencePlayer = new Class({
                         this.mediaLoader.register(step.expertAudio.getLoaderInfo());
                     }
                     break;
+                case "DoneAudio" :
+                    if (item.value != '') {
+                        var file = this.options.audioFolder + stripFileExtension(item.value);
+                        step.doneAudio = new AudioPlayer(this, {
+                            next : 'not.set',
+                            id : "audio_" + index + "_" + stepOrder,
+                            src : file + ".mp3|" + file + ".ogg",
+                            preload : 'false'
+                        });
+                        this.mediaLoader.register(step.doneAudio.getLoaderInfo());
+                    }
+                    break;
                 case "Preview" :
                     if (item.value != '') {
                         var file = this.options.imageFolder + item.value;
-                        // Intial scene setup
+
                         step.previewImage = new ImagePlayer(this, {
                             src : file,
                             title : 'Preview',
@@ -703,13 +756,25 @@ var SequencePlayer = new Class({
                 case "Image" :
                     if (item.value != '') {
                         var file = this.options.imageFolder + item.value;
-                        // Intial scene setup
+
                         step.image = new ImagePlayer(this, {
                             src : file,
                             title : 'Image',
                             id : 'image' + index + "_" + stepOrder,
                         });
                         this.mediaLoader.register(step.image.getLoaderInfo());
+                    }
+                    break;
+                case "EmptyBkg" :
+                    if (item.value != '') {
+                        var file = this.options.imageFolder + item.value;
+
+                        step.emptyBkg = new ImagePlayer(this, {
+                            src : file,
+                            title : 'BkgImage',
+                            id : 'image' + index + "_" + stepOrder,
+                        });
+                        this.mediaLoader.register(step.emptyBkg.getLoaderInfo());
                     }
                     break;
                 case "Items":
@@ -761,6 +826,11 @@ var SequencePlayer = new Class({
                     })
                     step.data = questions;
                     break;
+                case "DropAreas" :
+                    break;
+                case "RotateAreas" :
+                    break;
+
                 default:
                 // nothing
             }
@@ -819,14 +889,12 @@ var SequencePlayer = new Class({
     _removeInteractions : function() {
         if (this.interactions != null) {
             this.interactions.remove();
-
-            this.interactions = null;
         }
         var interactions = $('panelContainer');
         if (interactions != null) {
             interactions.destroy();
         }
-
+        this.interactions = null;
     },
     _hideInteractions : function() {
         if (this.interactions != null) {
@@ -887,6 +955,12 @@ var SequencePlayer = new Class({
 
         }.bind(this));
     }.protect(),
+    _removeRisks : function() {
+        if (this.shape != undefined && this.shape != null) {
+            this.shape.remove();
+        }
+        this.shape = null;
+    }.protect(),
     _updateUserProgress : function() {
         // Update state to completed = true;
         this.sequenceState.completed = true;
@@ -907,14 +981,24 @@ var SequencePlayer = new Class({
         return true;
     },
     reset : function() {
+        this.currentSequence.empty();
+
         this._removeFeedbackPanel();
         this.mediaLoader.remove();
         this._removeImages();
+        this._removeRisks();
         this._removeButtons();
         this._removeSwiff();
         this._removeInteractions();
         this._cleanUp();
         this._removeVideos();
+
+        this.currentStep = null;
+        this.cameo_image_mask = null;
+        this.cameo_image = null;
+        this.emptyBkg = null;
+        this.correctBkg = null;
+
     }
 });
 

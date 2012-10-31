@@ -275,12 +275,28 @@
       <Image>intros/sequence_intro.png</Image>
       <Audio>country/country_vdca2a</Audio>
     </Step>
+    <Step fmt="PlayVideo">
+      <Video>country/country_cst22_start</Video>
+    </Step>
     <Step fmt="DragNDrop">
-      <DD>country_dragdrop6</DD>
+      <Audio>extra/extra_vddinst</Audio>
+      <DoneAudio>extra/extra_vddact</DoneAudio>
+      <EmptyBkg>dragdrop/country_6.png</EmptyBkg>      
+      <DropAreas>
+        <Area correct="item_1" Zones="229:172:37:28"></Area>
+        <Area correct="item_1" Zones="215:200:23:21"></Area>
+      </DropAreas>
+      <RotateAreas>
+        <Area angle="45" Zones="229:172:37:28"></Area>
+        <Area angle="45" Zones="229:172:37:28"></Area>
+      </RotateAreas>
+    </Step>
+    <Step fmt="DragNDropFeedback">
+      <Audio>country/country_vdca2e</Audio>
+      <Image>dragdrop/country_6.png</Image>
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="This exercise is handled by the content def" Ex="6"></Seq>
   <Seq desc="Exercise 7" Ex="7">
     <Step fmt="SequenceIntro">
       <Preview>country/country_fto04_start_first.jpg</Preview>
@@ -596,7 +612,6 @@
         <Data>car leaving rest area</Data>
         <Data>oncoming car</Data>
       </FeedbackText>
-      
     </Step>
   </Seq>
   <Seq desc="Exercise 13" Ex="13">
@@ -638,7 +653,6 @@
         <Data>car entering road</Data>
         <Data>oncoming car</Data>
       </FeedbackText>
-      
     </Step>
   </Seq>
   <Seq desc="Exercise 14" Ex="14">
