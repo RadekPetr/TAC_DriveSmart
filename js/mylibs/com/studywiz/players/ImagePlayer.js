@@ -58,6 +58,9 @@ var ImagePlayer = new Class({
             })
         }.bind(this))
     },
+    obscure :  function (){
+        this.image.set('class', 'blur');
+    },
     add : function(parentTagID, where) {
         //log("###### parentTagID  " + parentTagID);
         var myParent = document.getElementById(parentTagID);
@@ -72,9 +75,12 @@ var ImagePlayer = new Class({
         this.image.inject(this.container);
 
         this.image.setStyles(this.options.style);
+        
+
     },
     show : function() {
         this.image.fade('in');
+
     },
     display : function() {
         this.image.fade('show');

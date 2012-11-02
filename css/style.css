@@ -1,0 +1,5 @@
+.blur {
+	filter: url(filter.svg#blur);
+	-webkit-filter: blur(15px);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius='15', MakeShadow='false')";
+}

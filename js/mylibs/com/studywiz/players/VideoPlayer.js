@@ -160,10 +160,28 @@ var VideoPlayer = new Class({
     // ---------------------------
     show : function(speed) {
         this.container.fade('show');
+
     },
     // ---------------------------
     hide : function(speed) {
         this.container.fade('hide');
+    },
+    obscure : function() {
+        log("Obscure");
+        log(this.container);
+
+        if (Browser.ie9) {
+
+            var myMask = new Mask(this.container, {
+                style : {
+                    'background' : 'rgba(00,00,00,0.98)'
+                }
+            });
+            myMask.show();
+        } else {
+            this.container.set('class', 'blur');
+        }
+
     },
     // ---------------------------
     stop : function() {
@@ -214,7 +232,7 @@ var VideoPlayer = new Class({
         delete this.container.player;
         delete this.container
         delete this.player;
-      
+
     },
     // ----------------------------------------------------------
     getLoaderInfo : function() {
