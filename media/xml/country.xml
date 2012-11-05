@@ -27,11 +27,16 @@
       <Image>intros/sequence_intro.png</Image>
       <Audio>extra/extra_vclick</Audio>
     </Step>
-    <Step fmt="PlayAudio">
-      <Audio>country/country_vdcb1d</Audio>
-    </Step>
     <Step fmt="PlayVideo">
       <Video>country/country_cst26_start</Video>
+    </Step>
+     <Step fmt="KeyRisk">
+      <Zones data="legacy#229:172:37:28,215:200:23:21,192:222:29:21,150:243:57:33"></Zones>
+      <Audio waitfor="true">scanning/scan_vsbkr1b</Audio>
+    </Step>
+    <Step fmt="KRFeedback">
+      <Image>keyrisks/country_cst23_next.jpg</Image>
+      <Audio>country/country_vdbc1h</Audio>
     </Step>
     <Step fmt="End.Module.Continue">
       <Audio>extra/extra_end_module</Audio>
@@ -43,8 +48,24 @@
       <Image>intros/sequence_intro.png</Image>
       <Audio>country/country_vdcb1a</Audio>
     </Step>
-    <Step fmt="PlayAudio">
-      <Audio>country/country_vdcb1d</Audio>
+    <Step fmt="PlayVideo">
+      <Video>country/country_cst26_start</Video>
+    </Step>
+    <Step fmt="DragNDrop">
+      <Audio>extra/extra_vddinst</Audio>
+      <DoneAudio>extra/extra_vddact</DoneAudio>
+      <EmptyBkg>dragdrop/country_6.png</EmptyBkg>      
+      <DropAreas>
+        <Area correct="item_1" data="path#m435,5l177,332l-88,-307l-89,-25z" angle="45"></Area>
+       
+      </DropAreas>
+      <RotateAreas>
+        <Area correct="item_1" data="path#m435,5l177,332l-88,-307l-89,-25z" angle="45"></Area>
+      </RotateAreas>
+    </Step>
+    <Step fmt="DragNDropFeedback">
+      <Audio>country/country_vdca2e</Audio>
+      <Image>dragdrop/country_6.png</Image>
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
@@ -283,12 +304,12 @@
       <DoneAudio>extra/extra_vddact</DoneAudio>
       <EmptyBkg>dragdrop/country_6.png</EmptyBkg>      
       <DropAreas>
-        <Area correct="item_1" Zones="229:172:37:28"></Area>
-        <Area correct="item_1" Zones="215:200:23:21"></Area>
+        <Area id="d1" correct="item_1" data="path#m59,8c1,0 49,168 49,168c0,0 172,-35 172,-34c0,1 -41,-140 -41,-140c0,0 -180,6 -180,6z" angle="45"></Area>       
       </DropAreas>
       <RotateAreas>
-        <Area angle="45" Zones="229:172:37:28"></Area>
-        <Area angle="45" Zones="229:172:37:28"></Area>
+        <Area  id="r1" data="path#m59,8c1,0 49,168 49,168c0,0 172,-35 172,-34c0,1 -41,-140 -41,-140c0,0 -180,6 -180,6z" angle="45"></Area>
+        <Area  id="r2" data="path#m109,178c0,0 172,-26 173,-26c1,0 12,218 12,218c0,0 -184,-9 -184,-9c0,0 -1,-183 -1,-183z" angle="45"></Area>
+        <Area  id="r3" data="path#m117,368c0,0 -11,101 -11,101c0,0 173,-3 173,-3c0,0 14,-95 14,-95c0,0 -176,-3 -176,-3z" angle="45"></Area>
       </RotateAreas>
     </Step>
     <Step fmt="DragNDropFeedback">
@@ -398,7 +419,7 @@
       <Video>country/country_cst23_next</Video>
     </Step>
     <Step fmt="KeyRisk">
-      <Video Zones="229:172:37:28,215:200:23:21,192:222:29:21,150:243:57:33"></Video>
+      <Zones data="legacy#229:172:37:28,215:200:23:21,192:222:29:21,150:243:57:33"></Zones>
       <Audio waitfor="true">scanning/scan_vsbkr1b</Audio>
     </Step>
     <Step fmt="KRFeedback">
@@ -433,7 +454,7 @@
       <Video>cameo/cameo_cdbc1</Video>
     </Step>
     <Step fmt="KeyRisk">
-      <Video Zones="229:172:37:28,215:200:23:21,192:222:29:21,150:243:57:33"></Video>
+      <Zones data="legacy#229:172:37:28,215:200:23:21,192:222:29:21,150:243:57:33"></Zones>
       <Audio waitfor="true">scanning/scan_vsbkr1b</Audio>
     </Step>
     <Step fmt="KRFeedback">
@@ -492,7 +513,7 @@
       <Video>country/country_cst09_next</Video>
     </Step>
     <Step fmt="KeyRisk">
-      <Video Zones="167:131:77:82,267:138:71:74,136:2124:84:34,3:254:168:69,327:214:79:26,390:239:103:47"></Video>
+      <Zones data="legacy#167:131:77:82,267:138:71:74,136:2124:84:34,3:254:168:69,327:214:79:26,390:239:103:47"></Zones>
       <Audio waitfor="true">scanning/scan_vsbkr1b</Audio>
       <Inter />
       <Post />

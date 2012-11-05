@@ -118,17 +118,6 @@ var SequencePlayer = new Class({
                     menu.add(myContainerID);
                     menu.show();
 
-                    // TODO: TESINTG
-                    var myDrag = new Drag(moduleTitle, {
-                        snap : 0,
-                        onSnap : function(el) {
-                            el.addClass('dragging');
-                        },
-                        onComplete : function(el) {
-                            el.removeClass('dragging');
-                        }
-                    });
-
                     break;
                 case "SequenceIntro":
                     var myContainerID = 'SequenceIntro.container';
@@ -215,15 +204,23 @@ var SequencePlayer = new Class({
                     //TODO: noBg1="1"
                     break;
                 case "Question":
+                    // TODO: maybe add attribute to wait or not
                     step.player.options.next = 'Question.done';
                     step.player.start();
-                    //TODO: cmd="hidescreen" - show the mudscreen
+                    if (step.attributes.cmd == "hidescreen") {
+                        //TODO: cmd="hidescreen" - show the mudscreen
+                        log(this.activeVideo);
+                        this.activeVideo.obscure();
+                    }
+                    // this.nextStep();
+
                     break;
                 case "QuestionUser":
                     this._removeInteractions();
                     this.interactions = this._setupQuestions(step.data);
                     var button = this._setupButton("Done", "button save", "QuestionUser.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
+
                     //TODO: resp="3" - allow multiple choices
                     //TODO: notrack="true"
                     //TODO: image="country_cla01_next_first.jpg" - override background image ...
@@ -234,7 +231,11 @@ var SequencePlayer = new Class({
                     this.interactions.showCorrect();
                     step.player.options.next = 'QuestionFeedback.done';
                     step.player.start();
-                    //TODO: show="MudScreen" - show mudscreen during feedback
+                    if (step.attributes.show == "MudScreen") {
+                        //TODO: show="MudScreen" - show mudscreen during feedback
+                        this.activeVideo.obscure();
+                    }
+
                     //TODO:  KeepUserSelection="1"
                     break;
                 case "PlayAudio":
@@ -328,18 +329,21 @@ var SequencePlayer = new Class({
                     // show empty bkg
                     step.emptyBkg.add(this.activeVideo.containerID);
                     step.emptyBkg.show();
-                    // setup draggable items
-                    //Setup done button
 
+                    step.dragNDrop = new DragNDropPlayer(this, {});
+                    // don't want to clone the step data by passing it as option
+                    step.dragNDrop.options.data = {
+                        dropZones : step.dropZones,
+                        rotateZones : step.rotateZones
+                    };
+                    step.dragNDrop.add(this.activeVideo.containerID);
                     // play Audio - Intro
-                    step.player.start();
-                    log("##### DragNDrop ######");
+                    step.player.start();                 
 
                     var button = this._setupButton("Done", "button next", "DragNDrop.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
                     break;
                 case "DragNDropFeedback":
-
                     // Show correct bkg
                     step.image.add(this.activeVideo.containerID);
                     step.image.show();
@@ -510,7 +514,7 @@ var SequencePlayer = new Class({
                     button = this._setupButton("Expert", "button play", "Commentary.expert.clicked", 20, this.buttonPosition.y - 45);
                     this.buttons.push(button);
                 }
-                // TODO: offer sequence repeat as well
+                // TODO: offer sequence repeat as well - may need to show continue screen after all ?
                 button = this._setupButton("Continue", "button next", "Continue.clicked", this.buttonPosition.x, this.buttonPosition.y);
                 this.buttons.push(button);
 
@@ -827,8 +831,36 @@ var SequencePlayer = new Class({
                     step.data = questions;
                     break;
                 case "DropAreas" :
+                    var rawData = item.childNodes;
+                    step.dropZones = new Array();
+                    Array.each(rawData, function(item, index) {
+                        var area = {
+                            id : item.attributes.id,
+                            data : item.attributes.data,
+                            angle : item.attributes.angle,
+                            correct : item.attributes.correct
+                        }
+                        step.dropZones.push(area);
+                    })
                     break;
                 case "RotateAreas" :
+                    var rawData = item.childNodes;
+                    step.rotateZones = new Array();
+                    Array.each(rawData, function(item, index) {
+                        var area = {
+                            id : item.attributes.id,
+                            data : item.attributes.data,
+                            angle : item.attributes.angle
+                        }
+                        step.rotateZones.push(area);
+                    })
+                    break;
+                case "RotateAreas" :
+                    break;
+                case "Zones":
+
+                    //TODO: trim white spaces
+                    step.zones = item.attributes.data;
                     break;
 
                 default:
@@ -942,7 +974,12 @@ var SequencePlayer = new Class({
 
     }.protect(),
     _setupRisks : function() {
-        this.shape = new Shape(this, {});
+        // TODO unify with Add Zones
+        log(this.currentStep.zones);
+        var stepData = this.currentStep.zones;
+        this.shape = new Shape(this, {
+            data : stepData
+        });
         this.shape.add(this.activeVideo.containerID);
         this.activeVideo.container.addEvent('click', function(e) {
             this.fireEvent("TIMELINE", {

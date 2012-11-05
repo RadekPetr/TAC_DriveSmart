@@ -1,0 +1,14 @@
+.draggable {
+	transform-origin: 50% 50%;
+	-ms-transform-origin: 50% 50%; /* IE 9 */
+	-webkit-transform-origin: 250% 50%; /* Safari and Chrome */
+	-moz-transform-origin: 50% 50%; /* Firefox */
+	-o-transform-origin: 50% 50%; /* Opera */
+}
+.rotate45 {
+	transform: rotate(45deg);
+	-ms-transform: rotate(45deg); /* IE 9 */
+	-webkit-transform: rotate(45deg); /* Safari and Chrome */
+	-moz-transform: rotate(45deg); /* Firefox */
+	-o-transform: rotate(45deg); /* Opera */
+}

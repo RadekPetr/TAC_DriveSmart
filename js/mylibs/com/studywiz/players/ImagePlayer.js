@@ -58,25 +58,21 @@ var ImagePlayer = new Class({
             })
         }.bind(this))
     },
-    obscure :  function (){
+    obscure : function() {
         this.image.set('class', 'blur');
     },
     add : function(parentTagID, where) {
-        //log("###### parentTagID  " + parentTagID);
         var myParent = document.getElementById(parentTagID);
         this.container = myParent.getElement('div[id=' + this.containerID + ']');
         if (this.container == null) {
-            //log("Container not found in " + parentTagID + " adding a new one");
             this.container = new Element("div", {
                 id : this.containerID
             });
             this.container.inject($(parentTagID), where);
         }
         this.image.inject(this.container);
-
         this.image.setStyles(this.options.style);
-        
-
+        this._addEvents();
     },
     show : function() {
         this.image.fade('in');
@@ -128,5 +124,8 @@ var ImagePlayer = new Class({
                 })
             }.bind(this)
         });
+    },
+    _addEvents : function() {
+        //. nothing here
     }
 })

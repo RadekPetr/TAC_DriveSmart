@@ -6,11 +6,12 @@ var Shape = new Class({
 
     Implements : [Options, Events],
     options : {
-        data : "167:131:77:82,3:254:168:69,327:214:79:26,390:239:103:47",
+        data : "legacy#167:131:77:82,3:254:168:69,327:214:79:26,390:239:103:47",
+        type : "legacy",
         id : "shape",
         parent : null,
         next : "shape.clicked",
-        polygonStyle : {
+        svgStyle : {
             'fill' : 'lime',
             'opacity' : '0'
         },
@@ -28,33 +29,53 @@ var Shape = new Class({
         this.setOptions(myOptions);
         this.options.parent = myParent;
 
-        var arrayOfShapes = this.options.data.split(",");
-        this.polygons = new Array();
-        this.polygonsArray = new Array();
+        var tempArray = this.options.data.split("#");
+        this.options.type = tempArray[0];
+        if (this.options.type == null) {
+            log("ERROR: no type defined for svg data");
+        }
+
+        this.shapes = new Array();
+        this.shapesArray = new Array();
         this.container = null;
-        this.containerID = 'shapeContainer';
+        this.containerID = 'container_' + this.options.id;
 
-        Array.each(arrayOfShapes, function(shape, index) {
-            var temp = shape.split(":");
-            var left = Number.from(temp[0]);
-            var top = Number.from(temp[1]);
-            var width = Number.from(temp[2]);
-            var height = Number.from(temp[3]);
+        switch (this.options.type) {
+            case "legacy":
+                var arrayOfShapes = tempArray[1].split(",");
+                log(arrayOfShapes);
 
-            var polygon = left + "," + top + " " + left + "," + (top - height) + " " + (left + width) + "," + (top - height) + " " + (left + width) + "," + top + " " + left + "," + top;
-            this.polygons.push(polygon);
-            log("Polygon " + polygon);
-            /*
-             x:y:w:h
-             points =
-             x,y
-             x,y-h
-             x+w,y-h
-             x+w,y
-             x,y
-             */
+                Array.each(arrayOfShapes, function(shape, index) {
+                    var temp = shape.split(":");
+                    var left = Number.from(temp[0]);
+                    var top = Number.from(temp[1]);
+                    var width = Number.from(temp[2]);
+                    var height = Number.from(temp[3]);
 
-        }.bind(this))
+                    var polygon = left + "," + top + " " + left + "," + (top - height) + " " + (left + width) + "," + (top - height) + " " + (left + width) + "," + top + " " + left + "," + top;
+                    this.shapes.push(polygon);
+                    log("Polygon " + polygon);
+                    /*
+                     x:y:w:h
+                     points =
+                     x,y
+                     x,y-h
+                     x+w,y-h
+                     x+w,y
+                     x,y
+                     */
+
+                }.bind(this))
+                break;
+            case "polyline":
+                break;
+            case "path":
+
+                this.shapes.push(tempArray[1]);
+                log(this.shapes);
+                break;
+        }
+
     },
     myParent : function() {
         return this.options.parent;
@@ -78,49 +99,74 @@ var Shape = new Class({
                 id : this.containerID
             });
             this.container = myDiv;
-            // Fix for svg, no ide how it works ....
-            this._svgTags(['svg', 'polygon', 'polyline']);
+            // Fix for svg, no ides how it works ....
+            this._svgTags(['svg', 'polygon', 'polyline', 'rect', 'path']);
 
             this.shapeWrapper = new Element("svg", {
-                id : "holder" + this.options.id,
+                id : this.options.id,
                 xmlns : "http://www.w3.org/2000/svg",
                 version : "1.1",
                 width : '640px',
                 height : '480px'
             });
             this.shapeWrapper.inject(this.container);
+        } else {
+            this.container = myDiv
+            this.shapeWrapper = this.container.getElement('svg[id=' +  this.options.id + ']');
         }
 
-        Array.each(this.polygons, function(item, index) {
+        Array.each(this.shapes, function(item, index) {
             var shapeID = 'shape_' + index;
-            var shapeElement = new Element("polyline", {
-                'id' : shapeID,
-                'points' : item
-            });
-
+            if (this.options.type == "legacy") {
+                var shapeElement = new Element("polyline", {
+                    'id' : shapeID,
+                    'points' : item
+                });
+            } else {
+               
+                var shapeElement = new Element("path", {
+                    'd' : item
+                });
+            }
+            log(shapeElement);
+            log("1.5");
             shapeElement.inject(this.shapeWrapper);
             // this.hide();
-            shapeElement.setStyles(this.options.polygonStyle);
+         
+            shapeElement.setStyles(this.options.svgStyle);
 
             shapeElement.addEvent('click', function(e) {
                 //alert('clicked' + this.options.id);
                 this.myParent().fireEvent("TIMELINE", {
-                    type : "shape.clicked",
+                    type : "shape.event",
                     id : shapeID,
                     next : this.options.next,
                     _x : e.page.x,
                     _y : e.page.y
                 });
             }.bind(this))
+            
+            shapeElement.addEvent('mouseover', function(e) {
+                log ('mouseover' + this.options.id);
+                this.myParent().fireEvent("TIMELINE", {
+                    type : "shape.event",
+                    id : shapeID,
+                    next : this.options.next,
+                    _x : e.page.x,
+                    _y : e.page.y
+                });
+            }.bind(this))
+            
         }.bind(this))
-
+        
         myDiv.setStyles(this.options.shapeStyle);
-
+       
         myDiv.inject($(parentTagID));
+       
     },
     remove : function() {
         //TODO: use the container with other UI things, make suer null is handled
-        this.container.dispose();
+        this.container.destroy();
         this.container = null;
     },
     _svgTags : function(svgtags) {
