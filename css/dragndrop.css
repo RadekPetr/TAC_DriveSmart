@@ -1,9 +1,11 @@
 .draggable {
 	transform-origin: 50% 50%;
 	-ms-transform-origin: 50% 50%; /* IE 9 */
-	-webkit-transform-origin: 250% 50%; /* Safari and Chrome */
+	-webkit-transform-origin: 50% 50%; /* Safari and Chrome */
 	-moz-transform-origin: 50% 50%; /* Firefox */
 	-o-transform-origin: 50% 50%; /* Opera */
+	z-index: 99998;
+	-webkit-transform-origin-z: 99998;
 }
 .rotate45 {
 	transform: rotate(45deg);

@@ -687,6 +687,9 @@
 			<Image>intros/sequence_intro.png</Image>
 			<Audio>urban/urban_vdca2a</Audio>
 		</Step>
+		<Step fmt="PlayVideo">
+			<Video>urban/urban_umt07_start</Video>
+		</Step>
 		<Step fmt="DragNDrop">
 			<Audio>extra/extra_vddinst</Audio>
 			<DoneAudio>extra/extra_vddact</DoneAudio>
@@ -711,6 +714,9 @@
 			<Preview>urban/urban_faj06_start_first.jpg</Preview>
 			<Image>intros/sequence_intro.png</Image>
 			<Audio>urban/urban_vdca2a</Audio>
+		</Step>
+		<Step fmt="PlayVideo">
+			<Video>urban/urban_faj06_start</Video>
 		</Step>
 		<Step fmt="DragNDrop">
 			<Audio>extra/extra_vddinst</Audio>
@@ -769,7 +775,7 @@
 			<Video>urban/urban_uic02_next</Video>
 		</Step>
 		<Step fmt="KeyRisk">
-			<Video Zones="333:159:167:124,73:163:54:77"></Video>
+			<Zones data="legacy#333:159:167:124,73:163:54:77"></Zones>
 			<Audio>scanning/scan_vsbkr1b</Audio>
 		</Step>
 		<Step fmt="KRFeedback">
@@ -875,7 +881,7 @@
 			<Audio>urban/urban_vdbu3d</Audio>
 		</Step>
 		<Step fmt="KeyRisk">
-			<Video keyrisk="true" Zones="75:172:136:104,253:189:67:50,421:171:44:86"></Video>
+			<Zones keyrisk="true" data="75:172:136:104,253:189:67:50,421:171:44:86"></Zones>
 			<Audio>scanning/scan_vsbkr1b</Audio>
 		</Step>
 		<Step fmt="KRFeedback">
@@ -941,7 +947,7 @@
 			<Video>urban/urban_urt04_next</Video>
 		</Step>
 		<Step fmt="KeyRisk">
-			<Video keyrisk="true" Zones="0:87:76:234,76:180:60:76,363:157:40:78"></Video>
+			<Zones keyrisk="true" data="0:87:76:234,76:180:60:76,363:157:40:78"></Zones>
 			<Audio>scanning/scan_vsbkr1b</Audio>
 		</Step>
 		<Step fmt="KRFeedback">
@@ -1007,7 +1013,7 @@
 			<Video>urban/urban_umt01_middle</Video>
 		</Step>
 		<Step fmt="KeyRisk">
-			<Video keyrisk="true" Zones="3:227:178:70,178:225:48:41"></Video>
+			<Zones keyrisk="true" data="3:227:178:70,178:225:48:41"></Zones>
 			<Audio>scanning/scan_vsbkr1b</Audio>
 		</Step>
 		<Step fmt="KRFeedback">

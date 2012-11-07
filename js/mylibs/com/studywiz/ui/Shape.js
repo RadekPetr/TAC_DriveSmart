@@ -13,7 +13,7 @@ var Shape = new Class({
         next : "shape.clicked",
         svgStyle : {
             'fill' : 'lime',
-            'opacity' : '0'
+            'opacity' : '1'
         },
         shapeStyle : {
             'left' : "0px",
@@ -111,9 +111,10 @@ var Shape = new Class({
             });
             this.shapeWrapper.inject(this.container);
         } else {
-            this.container = myDiv
-            this.shapeWrapper = this.container.getElement('svg[id=' +  this.options.id + ']');
+            this.container = myDiv;
+            this.shapeWrapper = this.container.getElement('svg[id=' + this.options.id + ']');
         }
+        this.shape = null;
 
         Array.each(this.shapes, function(item, index) {
             var shapeID = 'shape_' + index;
@@ -123,16 +124,16 @@ var Shape = new Class({
                     'points' : item
                 });
             } else {
-               
+
                 var shapeElement = new Element("path", {
                     'd' : item
                 });
+
             }
-            log(shapeElement);
-            log("1.5");
+
             shapeElement.inject(this.shapeWrapper);
             // this.hide();
-         
+
             shapeElement.setStyles(this.options.svgStyle);
 
             shapeElement.addEvent('click', function(e) {
@@ -145,9 +146,9 @@ var Shape = new Class({
                     _y : e.page.y
                 });
             }.bind(this))
-            
+
             shapeElement.addEvent('mouseover', function(e) {
-                log ('mouseover' + this.options.id);
+                log('mouseover' + this.options.id);
                 this.myParent().fireEvent("TIMELINE", {
                     type : "shape.event",
                     id : shapeID,
@@ -156,13 +157,31 @@ var Shape = new Class({
                     _y : e.page.y
                 });
             }.bind(this))
-            
+
+            shapeElement.addEvent('onOver', function(e) {
+                log('mouseover' + this.options.id);
+                this.myParent().fireEvent("TIMELINE", {
+                    type : "shape.event",
+                    id : shapeID,
+                    next : this.options.next,
+                    _x : e.page.x,
+                    _y : e.page.y
+                });
+            }.bind(this));
+            this.shape = shapeElement;
         }.bind(this))
-        
+
         myDiv.setStyles(this.options.shapeStyle);
-       
+
         myDiv.inject($(parentTagID));
-       
+        var rect = this.shape.getBBox();
+        this.shape.set('width', rect.width);
+        this.shape.set('height', rect.height);
+        this.shape.set('left', rect.x);
+        this.shape.set('top', rect.y);
+        log("RECT: ");
+        log(rect);
+
     },
     remove : function() {
         //TODO: use the container with other UI things, make suer null is handled

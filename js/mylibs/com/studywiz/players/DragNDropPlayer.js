@@ -20,6 +20,7 @@ var DragNDropPlayer = new Class({
 
         this.container = null;
         this.containerID = 'container_' + this.options.id;
+        this.targets = new Array();
 
     },
     myParent : function() {
@@ -78,7 +79,11 @@ var DragNDropPlayer = new Class({
             log(item);
             item.player.add(this.containerID);
             item.player.show();
+            this.targets.push(item.player.shape);
         }.bind(this))
+        log ("Targets: ");
+        log (this.targets);
+        log ("--------------");
     },
     _prepareIcons : function() {
         this.draggables = new Array();
@@ -91,7 +96,7 @@ var DragNDropPlayer = new Class({
             if (isEven(itemIndex)) {
                 var collumn = 1;
             }
-            var draggable = new DraggableImagePlayer(this, {
+            var draggable = new Draggable(this, {
                 src : file,
                 next : "",
                 title : 'item',
@@ -102,7 +107,8 @@ var DragNDropPlayer = new Class({
                     'width' : '120px',
                     'height' : '90px'
 
-                }
+                },
+                droppables : this.targets
             })
             this.draggables.push(draggable);
             log(draggable);

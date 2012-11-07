@@ -10,7 +10,7 @@
 			<Video>scanning/scan_uia06_start</Video>
 		</Step>
 		<Step fmt="KeyRisk">
-			<Video Zones="393:1:230:300"></Video>
+			<Zones data="legacy#393:1:230:300"></Zones>
 			<Audio>scanning/scan_vsbkr1b</Audio>
 		</Step>
 		<Step fmt="KRFeedback">
@@ -32,7 +32,7 @@
 			<Video>scanning/scan_urt10_start</Video>
 		</Step>
 		<Step fmt="KeyRisk">
-			<Video Zones="156:182:73:64,246:189:47:37,336:180:36:61"></Video>
+			<Zones data="legacy#156:182:73:64,246:189:47:37,336:180:36:61"></Zones>
 			<Audio>scanning/scan_vsbkr1b</Audio>
 		</Step>
 		<Step fmt="KRFeedback">
@@ -57,7 +57,7 @@
 			<Video>scanning/scan_cst18_start</Video>
 		</Step>
 		<Step fmt="KeyRisk">
-			<Video image="keyrisks/scanning_cst18.jpg" Zones="519:176:57:44"></Video>
+			<Zones image="keyrisks/scanning_cst18.jpg" data="519:176:57:44"></Zones>
 			<Audio>scanning/scan_vsbkr1b</Audio>
 		</Step>
 		<Step fmt="KRFeedback">
@@ -151,10 +151,9 @@
 			<Inter>
 				<Data correct="true">The car on the left fails to stop</Data>
 				<Data correct="false">The pedestrian on our left steps out onto the road</Data>
-			</Inter>
-			<Post></Post>
+			</Inter>	
 		</Step>
-		<Step hide="box">
+		<Step fmt="PlayAudio" hide="box">
 			<Audio>scanning/scan_vsbp1c</Audio>
 		</Step>
 		<Step fmt="PlayVideo">
@@ -745,7 +744,6 @@
 				<Data correct="false">Two cars, going at a similar speed to us</Data>
 				<Data correct="true">Two cars, going faster than us</Data>
 			</Inter>
-
 		</Step>
 		<Step fmt="QuestionFeedback" FadeQ="1,2" show="MudScreen">
 			<Audio>scanning/scan_vsar18c</Audio>
