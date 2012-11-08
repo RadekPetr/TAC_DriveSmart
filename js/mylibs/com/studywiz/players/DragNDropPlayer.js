@@ -33,27 +33,16 @@ var DragNDropPlayer = new Class({
 
     },
     add : function(parentTagID, where) {
-
         var myParent = document.getElementById(parentTagID);
-
         if (this.container == null) {
-            //log("Container not found in " + parentTagID + " adding a new one");
             this.container = new Element("div", {
                 id : this.containerID,
                 styles : this.options.style
             });
             this.container.inject($(parentTagID), where);
-            // log(this.options.style);
-
         }
-        //  this.options.data.emptyBkg.add(this.containerID);
-        // this.options.data.emptyBkg.show();
-
-        log(this.options.data);
-        this._prepareZones(this.options.data.dropZones, "drop");
-        this._prepareZones(this.options.data.rotateZones, "rotate");
+        this._prepareZones(this.options.data.dropZones);      
         this._prepareIcons();
-
     },
     remove : function() {
         //TODO: use the container with other UI things, make suer null is handled
@@ -65,25 +54,19 @@ var DragNDropPlayer = new Class({
     // ----------------------------------------------------------
     // This handles all timeline events and emulates the timeline
     handleNavigationEvent : function(params) {
-
         switch (params.next) {
         }
     },
-
-    _prepareZones : function(data, id) {
-        log("Zones: " + id);
+    _prepareZones : function(data) { 
         log(data);
         Array.each(data, function(item, index) {
-            //log(item.data);
             item.player = new Shape(this, item);
-            log(item);
             item.player.add(this.containerID);
             item.player.show();
             this.targets.push(item.player.shape);
+            item.player.shape.store('angle', item.angle);
         }.bind(this))
-        log ("Targets: ");
-        log (this.targets);
-        log ("--------------");
+
     },
     _prepareIcons : function() {
         this.draggables = new Array();

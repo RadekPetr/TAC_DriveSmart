@@ -102,6 +102,7 @@ var Shape = new Class({
             // Fix for svg, no ides how it works ....
             this._svgTags(['svg', 'polygon', 'polyline', 'rect', 'path']);
 
+            // TODO: make dimensions dynamic - from some global setting
             this.shapeWrapper = new Element("svg", {
                 id : this.options.id,
                 xmlns : "http://www.w3.org/2000/svg",
@@ -124,11 +125,9 @@ var Shape = new Class({
                     'points' : item
                 });
             } else {
-
                 var shapeElement = new Element("path", {
                     'd' : item
                 });
-
             }
 
             shapeElement.inject(this.shapeWrapper);
@@ -172,16 +171,7 @@ var Shape = new Class({
         }.bind(this))
 
         myDiv.setStyles(this.options.shapeStyle);
-
         myDiv.inject($(parentTagID));
-        var rect = this.shape.getBBox();
-        this.shape.set('width', rect.width);
-        this.shape.set('height', rect.height);
-        this.shape.set('left', rect.x);
-        this.shape.set('top', rect.y);
-        log("RECT: ");
-        log(rect);
-
     },
     remove : function() {
         //TODO: use the container with other UI things, make suer null is handled

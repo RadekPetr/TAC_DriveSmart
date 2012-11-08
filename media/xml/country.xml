@@ -304,13 +304,10 @@
       <DoneAudio>extra/extra_vddact</DoneAudio>
       <EmptyBkg>dragdrop/country_6.png</EmptyBkg>      
       <DropAreas>
-        <Area id="d1" correct="item_1" data="path#m59,8c1,0 49,168 49,168c0,0 172,-35 172,-34c0,1 -41,-140 -41,-140c0,0 -180,6 -180,6z" angle="45"></Area>       
-      </DropAreas>
-      <RotateAreas>
-        <Area  id="r1" data="path#m59,8c1,0 49,168 49,168c0,0 172,-35 172,-34c0,1 -41,-140 -41,-140c0,0 -180,6 -180,6z" angle="45"></Area>
-        <Area  id="r2" data="path#m109,178c0,0 172,-26 173,-26c1,0 12,218 12,218c0,0 -184,-9 -184,-9c0,0 -1,-183 -1,-183z" angle="45"></Area>
-        <Area  id="r3" data="path#m117,368c0,0 -11,101 -11,101c0,0 173,-3 173,-3c0,0 14,-95 14,-95c0,0 -176,-3 -176,-3z" angle="45"></Area>
-      </RotateAreas>
+        <Area  correct = "car" id="r1" data="path#m59,8c1,0 49,168 49,168c0,0 172,-35 172,-34c0,1 -41,-140 -41,-140c0,0 -180,6 -180,6z" angle="25"></Area>
+        <Area  id="r2" data="path#m109,178c0,0 172,-26 173,-26c1,0 12,218 12,218c0,0 -184,-9 -184,-9c0,0 -1,-183 -1,-183z" angle="90"></Area>
+        <Area  id="r3" data="path#m117,368c0,0 -11,101 -11,101c0,0 173,-3 173,-3c0,0 14,-95 14,-95c0,0 -176,-3 -176,-3z" angle="15"></Area>      
+      </DropAreas>      
     </Step>
     <Step fmt="DragNDropFeedback">
       <Audio>country/country_vdca2e</Audio>

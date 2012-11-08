@@ -64,6 +64,16 @@ var Draggable = new Class({
                         this.fireEvent('enter', [this.element, overed]);
                     this.overed = overed;
                 }
+            },
+            _rotate : function(element, rotation) {
+                log("Rotate" + rotation);
+                element.setStyles({
+                    'transform' : 'rotate(' + rotation + 'deg)',
+                    'msTransform' : 'rotate(' + rotation + 'deg)', /* IE 9 */
+                    '-webkit-transform' : 'rotate(' + rotation + 'deg)', /* Safari and Chrome */
+                    '-moz-transform' : 'rotate(' + rotation + 'deg)', /* Firefox */
+                    '-o-transform' : 'rotate(' + rotation + 'deg)' /* Opera */
+                });
             }
         })
 
@@ -73,15 +83,17 @@ var Draggable = new Class({
             droppables : this.options.droppables,
             onStart : function() {
                 log("onStart");
+
             },
             onEnter : function(element, droppable) {
-                console.log(element, 'entered', droppable);
-                element.setStyles({
-                    '-moz-transform' : 'rotate(45deg)'
-                });
+                var rotation = droppable.retrieve('angle');
+                log(element, 'entered', droppable, rotation);
+                this._rotate(element, rotation);
+                log(element.getStyle('-ms-transform'));
             },
             onLeave : function(element, droppable) {
                 console.log(element, 'left', droppable);
+                this._rotate(element, 0);
             },
             onSnap : function(el) {
                 log('on snap');

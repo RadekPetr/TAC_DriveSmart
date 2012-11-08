@@ -6,11 +6,6 @@
 	-o-transform-origin: 50% 50%; /* Opera */
 	z-index: 99998;
 	-webkit-transform-origin-z: 99998;
+	cursor: pointer;
 }
-.rotate45 {
-	transform: rotate(45deg);
-	-ms-transform: rotate(45deg); /* IE 9 */
-	-webkit-transform: rotate(45deg); /* Safari and Chrome */
-	-moz-transform: rotate(45deg); /* Firefox */
-	-o-transform: rotate(45deg); /* Opera */
-}
+
