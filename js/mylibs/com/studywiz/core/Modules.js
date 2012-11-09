@@ -185,6 +185,20 @@ var Modules = new Class({
                 }
             });
 
+            var skipButton = new Element('button', {
+                html : 'Skip',
+                id : 'debug.skip',
+                styles : {
+                },
+                events : {
+                    click : function() {                       
+                        if (sequencePlayer != null && sequencePlayer.activeVideo != null) {
+                            sequencePlayer.activeVideo.skip();
+                        }
+                    }.bind(this)
+                }
+            });
+
             var selectedModuleID = this.options.moduleID;
             //moduleSelector.options[moduleSelector.selectedIndex].value;
             var selectedModule = this.modules.get(selectedModuleID);
@@ -200,6 +214,7 @@ var Modules = new Class({
             sequenceSelector.inject(myDiv);
             sequenceSelector.value = this.options.sequenceID;
             sequenceSelectorButton.inject(myDiv);
+            skipButton.inject(myDiv);
         }
 
     },

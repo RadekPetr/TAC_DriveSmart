@@ -329,12 +329,10 @@ var SequencePlayer = new Class({
                     // show empty bkg
                     step.emptyBkg.add(this.activeVideo.containerID);
                     step.emptyBkg.show();
-
                     step.dragNDrop = new DragNDropPlayer(this, {});
                     // don't want to clone the step data by passing it as option
                     step.dragNDrop.options.data = {
-                        dropZones : step.dropZones,
-                        rotateZones : step.rotateZones
+                        dropZones : step.dropZones
                     };
                     step.dragNDrop.add(this.activeVideo.containerID);
                     // play Audio - Intro
@@ -558,6 +556,8 @@ var SequencePlayer = new Class({
             case "DragNDrop.done":
                 this._removeButtons();
                 this._cleanUp();
+                // disable dragging now
+                this.currentStep.dragNDrop.stopDrag();
                 var nextStep = this.currentSequence[0];
                 if (nextStep.attributes.fmt == "DragNDropFeedback") {
                     this.nextStep();
@@ -1035,6 +1035,7 @@ var SequencePlayer = new Class({
         this.cameo_image = null;
         this.emptyBkg = null;
         this.correctBkg = null;
+       
 
     }
 });

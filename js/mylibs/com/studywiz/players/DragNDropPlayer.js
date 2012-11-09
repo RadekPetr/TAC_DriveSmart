@@ -41,7 +41,7 @@ var DragNDropPlayer = new Class({
             });
             this.container.inject($(parentTagID), where);
         }
-        this._prepareZones(this.options.data.dropZones);      
+        this._prepareZones(this.options.data.dropZones);
         this._prepareIcons();
     },
     remove : function() {
@@ -51,13 +51,18 @@ var DragNDropPlayer = new Class({
         this.container = null;
         this.containerID = null;
     },
+    stopDrag : function() {
+        Array.each(this.draggables, function(item, index) {
+            item.stop();
+        });
+    },
     // ----------------------------------------------------------
     // This handles all timeline events and emulates the timeline
     handleNavigationEvent : function(params) {
         switch (params.next) {
         }
     },
-    _prepareZones : function(data) { 
+    _prepareZones : function(data) {
         log(data);
         Array.each(data, function(item, index) {
             item.player = new Shape(this, item);
@@ -74,6 +79,7 @@ var DragNDropPlayer = new Class({
         var file;
         Array.each(images, function(item, itemIndex) {
             var file = this.myParent().options.imageFolder + 'dragdrop/' + item + '.png';
+            var file_top = this.myParent().options.imageFolder + 'dragdrop/' + item + '_top.png';
             log(file);
             var collumn = 0;
             if (isEven(itemIndex)) {
@@ -81,9 +87,11 @@ var DragNDropPlayer = new Class({
             }
             var draggable = new Draggable(this, {
                 src : file,
+                src_top : file_top,
                 next : "",
-                title : 'item',
-                id : 'item',
+                title : item,
+                id : item,
+                'class' : 'draggable',
                 style : {
                     'left' : (425 + (100 * collumn)) + 'px',
                     'top' : (50 * itemIndex) + 'px',

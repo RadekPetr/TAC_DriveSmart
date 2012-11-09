@@ -192,6 +192,18 @@ var VideoPlayer = new Class({
         }
     },
     // ---------------------------
+    skip : function() {
+        if (this.player != null) {
+            this.seek(this.player.duration());          
+
+            this.myParent().fireEvent("TIMELINE", {
+                type : "video.finished",
+                id : this.options.id,
+                next : this.options.next
+            });
+        }
+    },
+    // ---------------------------
     pause : function() {
         if (this.player != null) {
             this.player.pause();

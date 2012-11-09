@@ -9,6 +9,7 @@ var ImagePlayer = new Class({
             opacity : '0',
             visibility : 'hidden'
         },
+        'class': '',
         src : '',
         id : 'element.id',
         next : 'next.action',
@@ -112,6 +113,7 @@ var ImagePlayer = new Class({
         this.image = new Asset.image(this.options.src, {
             style : this.options.style,
             id : this.options.id,
+            'class' : this.options.class,
             onLoad : function() {
                 this.options.loaded = true;
                 if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {

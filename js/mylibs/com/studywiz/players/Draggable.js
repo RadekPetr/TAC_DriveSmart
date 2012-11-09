@@ -9,22 +9,8 @@ var Draggable = new Class({
         this.containerID = 'draggableImageContainer';
         this.container = null;
         this.clones = new Array();
-    },
-    _addEvents : function() {
-        this.image.addEvent('mousedown', function(event) {
-            var myClone = this.image.clone();
-            this.clones.push(myClone);
-            //TODO: use top version of the image
-            //TODO: handle preloading of the assets
-            this._addDragEvents(myClone);
-            myClone.inject(this.container);
+        this.drags = new Array();
 
-            myClone.fireEvent('mousedown', event);
-
-        }.bind(this));
-    },
-    _addDragEvents : function(target) {
-        log(this.options.targets);
         Drag.Move.implement({
             getDroppableCoordinates : function(element) {
                 var rect = element.getBBox();
@@ -66,7 +52,6 @@ var Draggable = new Class({
                 }
             },
             _rotate : function(element, rotation) {
-                log("Rotate" + rotation);
                 element.setStyles({
                     'transform' : 'rotate(' + rotation + 'deg)',
                     'msTransform' : 'rotate(' + rotation + 'deg)', /* IE 9 */
@@ -74,22 +59,59 @@ var Draggable = new Class({
                     '-moz-transform' : 'rotate(' + rotation + 'deg)', /* Firefox */
                     '-o-transform' : 'rotate(' + rotation + 'deg)' /* Opera */
                 });
+            },
+            detach : function() {
+                this.handles.removeEvent('mousedown', this.bound.start);
+                this.element.set('class', 'non-draggable');
+                this.element.set('onselectstart', 'return false;');
+                return this;
             }
         })
+    },
+    _addEvents : function() {
+        this.image.addEvent('mousedown', function(event) {
+            var styles = {
+                left : this.options.style.left,
+                top : this.options.style.top,
+                position : 'absolute'
+            }
+            this.image.getStyles('left', 'top', 'position');
+            log("Clicked image: ", this.image);
+            //  log("Style: ", this.image.getStyles('left', 'top', 'position'));
+            this.options.src = this.options.src_top;
+            this.preload();
+            var myClone = this.image.clone();
+            myClone.setStyles(styles);
 
+            myClone.removeEvents('mousedown');
+            this.clones.push(myClone);
+          
+            //TODO: handle preloading of the assets
+            
+            this._addDragEvents(myClone);
+            myClone.inject(this.container);
+            myClone.fireEvent('mousedown', event);
+        }.bind(this));
+    },
+    stop : function() {
+        Array.each(this.drags, function(item, index) {
+            item.detach();
+        })
+        this.image.removeEvents('mousedown');
+        this.image.set('class', 'non-draggable');
+    },
+    _addDragEvents : function(target) {      
         var myDrag = new Drag.Move(target, {
             precalculate : false,
             container : "drivesmart",
             droppables : this.options.droppables,
             onStart : function() {
-                log("onStart");
-
+                // nothing
             },
             onEnter : function(element, droppable) {
                 var rotation = droppable.retrieve('angle');
                 log(element, 'entered', droppable, rotation);
                 this._rotate(element, rotation);
-                log(element.getStyle('-ms-transform'));
             },
             onLeave : function(element, droppable) {
                 console.log(element, 'left', droppable);
@@ -100,11 +122,12 @@ var Draggable = new Class({
             },
             onComplete : function(el) {
                 log('Stopped dragging');
-                target.set('class', '');
+                target.set('class', 'draggable');
+
             },
             onBeforeStart : function() {
                 log("beforeStart");
-                target.set('class', 'draggable');
+                target.set('class', 'dragging');
             },
             onDrag : function() {
 
@@ -113,6 +136,7 @@ var Draggable = new Class({
 
             }
         });
+        this.drags.push(myDrag);
 
     }
 })

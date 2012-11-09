@@ -17,8 +17,7 @@ var ModulePlayer = new Class({
         this.addEvent("DATA", this.handleDataEvent);
         this.addEvent("SEQUENCE", this.handleSequenceEvent);
         this.setupData();
-        this.sequencePlayer = null;
-    },
+     },
     myParent : function() {
         return this.options.parent;
     },
