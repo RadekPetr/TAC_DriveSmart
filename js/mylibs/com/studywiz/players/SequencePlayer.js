@@ -330,19 +330,35 @@ var SequencePlayer = new Class({
                     step.emptyBkg.add(this.activeVideo.containerID);
                     step.emptyBkg.show();
                     step.dragNDrop = new DragNDropPlayer(this, {});
+
+                    var panel = new ImagePlayer(this, {
+                        src : this.options.imageFolder + 'dragdrop/panel_bkg.png',
+                        style : {
+                            'left' : '427px',
+                            'top' : '0px',
+                            'position' : 'absolute'
+                        }
+                    });
+
+                    panel.preload();
+                    panel.add(this.activeVideo.containerID);
+                    panel.show();
+
                     // don't want to clone the step data by passing it as option
                     step.dragNDrop.options.data = {
                         dropZones : step.dropZones
                     };
                     step.dragNDrop.add(this.activeVideo.containerID);
                     // play Audio - Intro
-                    step.player.start();                 
+                    step.player.start();
 
                     var button = this._setupButton("Done", "button next", "DragNDrop.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
                     break;
                 case "DragNDropFeedback":
                     // Show correct bkg
+                    // TODO: get height from drivesmart height ?
+                  
                     step.image.add(this.activeVideo.containerID);
                     step.image.show();
 
@@ -776,7 +792,7 @@ var SequencePlayer = new Class({
                         step.emptyBkg = new ImagePlayer(this, {
                             src : file,
                             title : 'BkgImage',
-                            id : 'image' + index + "_" + stepOrder,
+                            id : 'image' + index + "_" + stepOrder
                         });
                         this.mediaLoader.register(step.emptyBkg.getLoaderInfo());
                     }
@@ -1035,7 +1051,6 @@ var SequencePlayer = new Class({
         this.cameo_image = null;
         this.emptyBkg = null;
         this.correctBkg = null;
-       
 
     }
 });

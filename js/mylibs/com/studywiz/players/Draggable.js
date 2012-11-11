@@ -51,6 +51,34 @@ var Draggable = new Class({
                     this.overed = overed;
                 }
             },
+            checkDropped : function() {
+                var mainEl = document.getElementById('drivesmart');
+                var elOffset = getPos(mainEl);
+                var overed = this.droppables.filter(function(el, i) {
+                    el = this.positions ? this.positions[i] : this.getDroppableCoordinates(el);
+                    var now = getPos(this.element);
+                    var now2 = new Object();
+                    now2.x = now.x - elOffset.x + this.element.width / 2;
+                    now2.y = now.y - elOffset.y + this.element.width / 2;
+
+                    return (now2.x > el.left && now2.x < el.right && now2.y < el.bottom && now2.y > el.top);
+                }, this).getLast();
+
+                if (overed) {
+                    log(overed.retrieve('correct'));
+                    log(this.element.id);
+
+                    //this.fireEvent('dropped', [this.element, overed]);
+                    if (this.element.id == overed.retrieve('correct')) {
+                        log("1 Correct");
+                        return true;
+                    } else {
+                        log("1 False");
+                        return false;
+                    }
+                }
+
+            },
             _rotate : function(element, rotation) {
                 element.setStyles({
                     'transform' : 'rotate(' + rotation + 'deg)',
@@ -75,19 +103,17 @@ var Draggable = new Class({
                 top : this.options.style.top,
                 position : 'absolute'
             }
-            this.image.getStyles('left', 'top', 'position');
-            log("Clicked image: ", this.image);
-            //  log("Style: ", this.image.getStyles('left', 'top', 'position'));
-            this.options.src = this.options.src_top;
-            this.preload();
-            var myClone = this.image.clone();
-            myClone.setStyles(styles);
 
-            myClone.removeEvents('mousedown');
+            var myClone = new Asset.image(this.options.src_top, {
+                style : styles,
+                id : this.options.id
+            });
+
+            myClone.setStyles(styles);
             this.clones.push(myClone);
-          
+
             //TODO: handle preloading of the assets
-            
+
             this._addDragEvents(myClone);
             myClone.inject(this.container);
             myClone.fireEvent('mousedown', event);
@@ -97,10 +123,11 @@ var Draggable = new Class({
         Array.each(this.drags, function(item, index) {
             item.detach();
         })
-        this.image.removeEvents('mousedown');
+
+        this.image.removeEvents();
         this.image.set('class', 'non-draggable');
     },
-    _addDragEvents : function(target) {      
+    _addDragEvents : function(target) {
         var myDrag = new Drag.Move(target, {
             precalculate : false,
             container : "drivesmart",
@@ -120,10 +147,10 @@ var Draggable = new Class({
             onSnap : function(el) {
                 log('on snap');
             },
-            onComplete : function(el) {
-                log('Stopped dragging');
+            onComplete : function(el, droppable) {
+                log('Stopped dragging', el, droppable);
                 target.set('class', 'draggable');
-
+                // this.checkDropped();
             },
             onBeforeStart : function() {
                 log("beforeStart");
@@ -134,9 +161,23 @@ var Draggable = new Class({
             },
             onCancel : function() {
 
+            },
+            onDropped : function(element, droppedOn) {
+                log(element, 'dropped', droppedOn);
             }
         });
         this.drags.push(myDrag);
 
+    },
+    getHits : function() {
+        var correct = false;
+        Array.each(this.drags, function(item, index) {
+            if (item.checkDropped() == true) {
+                log("Correct");
+                correct = true;
+            }
+        })
+
+        return correct;
     }
 })

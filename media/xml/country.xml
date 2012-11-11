@@ -302,16 +302,18 @@
     <Step fmt="DragNDrop">
       <Audio>extra/extra_vddinst</Audio>
       <DoneAudio>extra/extra_vddact</DoneAudio>
-      <EmptyBkg>dragdrop/country_6.png</EmptyBkg>      
+      <EmptyBkg>dragdrop/country_6.jpg</EmptyBkg>      
       <DropAreas>
-        <Area  correct = "car" id="r1" data="path#m59,8c1,0 49,168 49,168c0,0 172,-35 172,-34c0,1 -41,-140 -41,-140c0,0 -180,6 -180,6z" angle="25"></Area>
-        <Area  id="r2" data="path#m109,178c0,0 172,-26 173,-26c1,0 12,218 12,218c0,0 -184,-9 -184,-9c0,0 -1,-183 -1,-183z" angle="90"></Area>
-        <Area  id="r3" data="path#m117,368c0,0 -11,101 -11,101c0,0 173,-3 173,-3c0,0 14,-95 14,-95c0,0 -176,-3 -176,-3z" angle="15"></Area>      
+        <Area  correct = "car" id="r1" data="path#m66,5.5l52,216l81.5,-2.81433l-44.5,-213.18567l-89,0z" angle="75"></Area>
+        <Area  correct = "4wd" id="r2" data="path#m113,219.71359l1.5,246.35922l77,2.42719l1.5,-250l-80,1.21359z" angle="95"></Area>
+        <Area  id="r3" data="path#m205,225.23524l5.5,241.09251l66.5,1.17224l7,-245l-79,2.73524z" angle="275"></Area> 
+        <Area  id="r4" data="path#m161.5,7.7602c0.5,0.7534 50.5,219.2398 50.5,219.2398c0,0 75.5,-6.02721 75.5,-6.02721c0,0 -46.5,-215.47279 -46.5,-215.47279c0,0 -79.5,2.2602 -79.5,2.2602z" angle="250"></Area> 
+        <Area  correct = "car" id="r5" data="path#m124.95277,264l81.04723,-3l-1.81111,96l-79.68889,3l0.45277,-96z" angle="95"></Area>      
       </DropAreas>      
     </Step>
     <Step fmt="DragNDropFeedback">
       <Audio>country/country_vdca2e</Audio>
-      <Image>dragdrop/country_6.png</Image>
+      <Image>dragdrop/country_6_correct.jpg</Image>
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>

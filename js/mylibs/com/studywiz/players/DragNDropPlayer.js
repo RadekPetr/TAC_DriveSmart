@@ -7,7 +7,7 @@ var DragNDropPlayer = new Class({
     Implements : [Options, Events],
     options : {
         data : null,
-
+        draggable_IDs : new Array("4wd", "bike", "van", "car", "cyclist", "pedestrian", "pole", "bin"),
         id : "DragNDropPlayer",
         parent : null,
         next : ""
@@ -21,6 +21,7 @@ var DragNDropPlayer = new Class({
         this.container = null;
         this.containerID = 'container_' + this.options.id;
         this.targets = new Array();
+        this.correctZones = 0;
 
     },
     myParent : function() {
@@ -53,8 +54,23 @@ var DragNDropPlayer = new Class({
     },
     stopDrag : function() {
         Array.each(this.draggables, function(item, index) {
+
             item.stop();
+            log(item);
         });
+        this.getScore();
+    },
+    getScore : function() {
+        // 
+        var pointsPerItem = 100 / this.correctZones;
+        var score = 0;
+        Array.each(this.draggables, function(item, index) {
+            if (item.getHits() == true) {
+                score += pointsPerItem;
+            }
+        })
+        log("Score: " + score);
+        return score;
     },
     // ----------------------------------------------------------
     // This handles all timeline events and emulates the timeline
@@ -70,17 +86,19 @@ var DragNDropPlayer = new Class({
             item.player.show();
             this.targets.push(item.player.shape);
             item.player.shape.store('angle', item.angle);
+            if (item.correct != null && item.correct != undefined) {
+                item.player.shape.store('correct', item.correct);
+                this.correctZones++;
+
+            }
         }.bind(this))
 
     },
     _prepareIcons : function() {
         this.draggables = new Array();
-        var images = new Array("4wd", "bike", "van", "car", "cyclist", "pedestrian", "pole", "bin");
-        var file;
-        Array.each(images, function(item, itemIndex) {
+        Array.each(this.options.draggable_IDs, function(item, itemIndex) {
             var file = this.myParent().options.imageFolder + 'dragdrop/' + item + '.png';
             var file_top = this.myParent().options.imageFolder + 'dragdrop/' + item + '_top.png';
-            log(file);
             var collumn = 0;
             if (isEven(itemIndex)) {
                 var collumn = 1;
@@ -94,15 +112,11 @@ var DragNDropPlayer = new Class({
                 'class' : 'draggable',
                 style : {
                     'left' : (425 + (100 * collumn)) + 'px',
-                    'top' : (50 * itemIndex) + 'px',
-                    'width' : '120px',
-                    'height' : '90px'
-
+                    'top' : (50 * itemIndex) + 'px'
                 },
                 droppables : this.targets
             })
             this.draggables.push(draggable);
-            log(draggable);
             draggable.preload();
             draggable.add(this.containerID);
             draggable.show();

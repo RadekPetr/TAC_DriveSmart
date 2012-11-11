@@ -13,7 +13,7 @@ var Shape = new Class({
         next : "shape.clicked",
         svgStyle : {
             'fill' : 'lime',
-            'opacity' : '1'
+            'opacity' : '0'
         },
         shapeStyle : {
             'left' : "0px",
