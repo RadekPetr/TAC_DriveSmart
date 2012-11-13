@@ -126,7 +126,8 @@ var Shape = new Class({
                 });
             } else {
                 var shapeElement = new Element("path", {
-                    'd' : item
+                    'd' : item,
+                    id : this.options.id
                 });
             }
 

@@ -32,16 +32,7 @@ var Draggable = new Class({
                 return position;
             },
             checkDroppables : function() {
-                var mainEl = document.getElementById('drivesmart');
-                var elOffset = getPos(mainEl);
-                var overed = this.droppables.filter(function(el, i) {
-                    el = this.positions ? this.positions[i] : this.getDroppableCoordinates(el);
-                    var now = this.mouse.now;
-                    var now2 = new Object();
-                    now2.x = now.x - elOffset.x;
-                    now2.y = now.y - elOffset.y;
-                    return (now2.x > el.left && now2.x < el.right && now2.y < el.bottom && now2.y > el.top);
-                }, this).getLast();
+                var overed = this.getOvered();
 
                 if (this.overed != overed) {
                     if (this.overed)
@@ -52,18 +43,7 @@ var Draggable = new Class({
                 }
             },
             checkDropped : function() {
-                var mainEl = document.getElementById('drivesmart');
-                var elOffset = getPos(mainEl);
-                var overed = this.droppables.filter(function(el, i) {
-                    el = this.positions ? this.positions[i] : this.getDroppableCoordinates(el);
-                    var now = getPos(this.element);
-                    var now2 = new Object();
-                    now2.x = now.x - elOffset.x + this.element.width / 2;
-                    now2.y = now.y - elOffset.y + this.element.width / 2;
-
-                    return (now2.x > el.left && now2.x < el.right && now2.y < el.bottom && now2.y > el.top);
-                }, this).getLast();
-
+                var overed = this.getOvered();
                 if (overed) {
                     log(overed.retrieve('correct'));
                     log(this.element.id);
@@ -77,7 +57,20 @@ var Draggable = new Class({
                         return false;
                     }
                 }
+            },
+            getOvered : function() {
+                var mainEl = document.getElementById('drivesmart');
+                var elOffset = getPos(mainEl);
+                var overed = this.droppables.filter(function(el, i) {
+                    el = this.positions ? this.positions[i] : this.getDroppableCoordinates(el);
+                    var now = getPos(this.element);
+                    var now2 = new Object();
+                    now2.x = now.x - elOffset.x + this.element.width / 2;
+                    now2.y = now.y - elOffset.y + this.element.width / 2;
 
+                    return (now2.x > el.left && now2.x < el.right && now2.y < el.bottom && now2.y > el.top);
+                }, this).getLast();
+                return overed;
             },
             _rotate : function(element, rotation) {
                 element.setStyles({
@@ -164,7 +157,8 @@ var Draggable = new Class({
             onComplete : function(el, droppable) {
                 log('Stopped dragging', el, droppable);
                 target.set('class', 'draggable');
-                // this.checkDropped();
+                // if ()
+                // TOTO: check if is inside bkg image destrouy otherwise
             },
             onBeforeStart : function() {
                 log("beforeStart");
@@ -176,8 +170,12 @@ var Draggable = new Class({
             onCancel : function() {
 
             },
-            onDropped : function(element, droppedOn) {
-                log(element, 'dropped', droppedOn);
+            onDrop : function(element, droppedOn) {
+               // log(element, 'dropped', droppedOn);
+              //  log(droppedOn.get('id'));
+                if (droppedOn.get('id') == 'trash') {
+                    element.destroy();
+                }
             }
         });
         this.drags.push(myDrag);
@@ -193,5 +191,8 @@ var Draggable = new Class({
         })
 
         return correct;
+    },
+    _canBeDropped : function() {
+
     }
 })

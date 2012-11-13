@@ -14,17 +14,13 @@ var DragNDropPlayer = new Class({
 
     },
     initialize : function(myParent, myOptions) {
-
         this.setOptions(myOptions);
         this.options.parent = myParent;
-
         this.container = null;
         this.containerID = 'container_' + this.options.id;
         this.targets = new Array();
         this.correctZones = 0;
-
         this.addEvent("TIMELINE", this.handleNavigationEvent);
-
     },
     myParent : function() {
         return this.options.parent;
@@ -56,7 +52,6 @@ var DragNDropPlayer = new Class({
     },
     stopDrag : function() {
         Array.each(this.draggables, function(item, index) {
-
             item.stop();
             log(item);
         });
@@ -78,7 +73,6 @@ var DragNDropPlayer = new Class({
     // This handles all timeline events and emulates the timeline
     handleNavigationEvent : function(params) {
         switch (params.next) {
-
             case "Image.Ready":
                 var allLoaded = this.draggables.every(function(item, index) {
                     return item.options.loaded == true;
@@ -88,7 +82,6 @@ var DragNDropPlayer = new Class({
                     this._showDraggables();
                 }
                 break;
-
         }
     },
     _prepareZones : function(data) {
@@ -102,10 +95,8 @@ var DragNDropPlayer = new Class({
             if (item.correct != null && item.correct != undefined) {
                 item.player.shape.store('correct', item.correct);
                 this.correctZones++;
-
             }
         }.bind(this))
-
     },
     _prepareDraggables : function() {
         this.draggables = new Array();
@@ -131,8 +122,6 @@ var DragNDropPlayer = new Class({
             })
             this.draggables.push(draggable);
             draggable.preload();
-            //draggable.add(this.containerID);
-            //draggable.show();
         }.bind(this))
     },
     _showDraggables : function() {
