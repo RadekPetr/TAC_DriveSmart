@@ -796,7 +796,8 @@ var SequencePlayer = new Class({
                         });
                         this.mediaLoader.register(step.emptyBkg.getLoaderInfo());
                     }
-                    break;
+                    break;                   
+                    
                 case "Items":
                     var menuItemsRawData = item.childNodes;
                     var menuItems = {

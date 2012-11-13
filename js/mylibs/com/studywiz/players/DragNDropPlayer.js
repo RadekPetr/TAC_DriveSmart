@@ -23,6 +23,8 @@ var DragNDropPlayer = new Class({
         this.targets = new Array();
         this.correctZones = 0;
 
+        this.addEvent("TIMELINE", this.handleNavigationEvent);
+
     },
     myParent : function() {
         return this.options.parent;
@@ -43,7 +45,7 @@ var DragNDropPlayer = new Class({
             this.container.inject($(parentTagID), where);
         }
         this._prepareZones(this.options.data.dropZones);
-        this._prepareIcons();
+        this._prepareDraggables();
     },
     remove : function() {
         //TODO: use the container with other UI things, make suer null is handled
@@ -61,7 +63,7 @@ var DragNDropPlayer = new Class({
         this.getScore();
     },
     getScore : function() {
-        // 
+        //
         var pointsPerItem = 100 / this.correctZones;
         var score = 0;
         Array.each(this.draggables, function(item, index) {
@@ -76,6 +78,17 @@ var DragNDropPlayer = new Class({
     // This handles all timeline events and emulates the timeline
     handleNavigationEvent : function(params) {
         switch (params.next) {
+
+            case "Image.Ready":
+                var allLoaded = this.draggables.every(function(item, index) {
+                    return item.options.loaded == true;
+                });
+                log("Ready: ", allLoaded);
+                if (allLoaded == true) {
+                    this._showDraggables();
+                }
+                break;
+
         }
     },
     _prepareZones : function(data) {
@@ -94,7 +107,7 @@ var DragNDropPlayer = new Class({
         }.bind(this))
 
     },
-    _prepareIcons : function() {
+    _prepareDraggables : function() {
         this.draggables = new Array();
         Array.each(this.options.draggable_IDs, function(item, itemIndex) {
             var file = this.myParent().options.imageFolder + 'dragdrop/' + item + '.png';
@@ -106,7 +119,7 @@ var DragNDropPlayer = new Class({
             var draggable = new Draggable(this, {
                 src : file,
                 src_top : file_top,
-                next : "",
+                next : "Image.Ready",
                 title : item,
                 id : item,
                 'class' : 'draggable',
@@ -118,6 +131,12 @@ var DragNDropPlayer = new Class({
             })
             this.draggables.push(draggable);
             draggable.preload();
+            //draggable.add(this.containerID);
+            //draggable.show();
+        }.bind(this))
+    },
+    _showDraggables : function() {
+        Array.each(this.draggables, function(draggable, itemIndex) {
             draggable.add(this.containerID);
             draggable.show();
         }.bind(this))

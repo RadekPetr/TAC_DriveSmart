@@ -97,27 +97,41 @@ var Draggable = new Class({
         })
     },
     _addEvents : function() {
-        this.image.addEvent('mousedown', function(event) {
-            var styles = {
-                left : this.options.style.left,
-                top : this.options.style.top,
-                position : 'absolute'
-            }
+        this.topViewImage = new Asset.image(this.options.src_top, {
+            id : this.options.id,
+            onLoad : function() {
+                this.image.addEvent('mousedown', function(event) {
+                    var styles = {
+                        left : this.options.style.left,
+                        top : this.options.style.top,
+                        position : 'absolute'
+                    }
 
-            var myClone = new Asset.image(this.options.src_top, {
-                style : styles,
-                id : this.options.id
-            });
+                    //   var myClone = new Asset.image(this.options.src_top, {
+                    //     style : styles,
+                    //      id : this.options.id
+                    //  });
 
-            myClone.setStyles(styles);
-            this.clones.push(myClone);
+                    var myClone = this.topViewImage.clone();
+                    myClone.set('id', this.options.id);
 
-            //TODO: handle preloading of the assets
+                    myClone.setStyles(styles);
+                    this.clones.push(myClone);
 
-            this._addDragEvents(myClone);
-            myClone.inject(this.container);
-            myClone.fireEvent('mousedown', event);
-        }.bind(this));
+                    //TODO: handle preloading of the assets
+
+                    this._addDragEvents(myClone);
+                    myClone.inject(this.container);
+                    myClone.fireEvent('mousedown', event);
+                }.bind(this));
+            }.bind(this)
+        });
+
+        //var myClone = new Asset.image(this.options.src_top, {
+        //   style : styles,
+        //    id : this.options.id
+        //  });
+
     },
     stop : function() {
         Array.each(this.drags, function(item, index) {
