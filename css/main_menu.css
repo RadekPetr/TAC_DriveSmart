@@ -30,8 +30,8 @@
 	text-align: left;
 }
 #navigation ul {
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 }
 #navigation li {
 	list-style: none;
@@ -57,8 +57,8 @@
 	text-align: left;
 }
 #feedbackList ul {
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 }
 #feedbackList li {
 	list-style: none;
@@ -86,10 +86,10 @@
 	background-color: #464646;
 	float: left;
 	border-radius: 1em 1em 1em 1em;
-	text-align: left;
+	-moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
+	-webkit-border-radius: 0.5em 0.5em 0.5em 0.5em;
 	padding: 8px 8px 8px 8px;
 	font-family: Arial;
-	-moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
 	background: rgba(0, 0, 0, 0.6);
 }
 .module-preview img {
@@ -116,5 +116,4 @@
 	font-size: 1em;
 	font-weight: bold;
 }
-
 

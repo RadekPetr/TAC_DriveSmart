@@ -1,7 +1,6 @@
 var Draggable = new Class({
-
-    Implements : [Options, Events],
     Extends : ImagePlayer,
+    Implements : [Options, Events],
     initialize : function(myParent, myOptions) {
         // Intial scene setup
         this.setOptions(myOptions);
@@ -161,8 +160,10 @@ var Draggable = new Class({
             onDrop : function(element, droppedOn) {
                 // log(element, 'dropped', droppedOn);
                 //  log(droppedOn.get('id'));
-                if (droppedOn.get('id') == 'trash') {
-                    element.destroy();
+                if (droppedOn != null && droppedOn != undefined) {
+                    if (droppedOn.get('id') == 'trash') {
+                        element.destroy();
+                    }
                 }
             }
         });

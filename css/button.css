@@ -1,5 +1,4 @@
-﻿.button
-{        
+﻿.button {
 	cursor: pointer;
 	display: inline-block;
 	white-space: nowrap;
@@ -19,14 +18,11 @@
 	box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
 }
 
-.button:hover
-{
-	background-color: #FF9900;        
-	       
+.button:hover {
+	background-color: #FF9900;
 }
 
-.button:active
-{
+.button:active {
 	-moz-box-shadow: 0 0 4px 2px rgba(0,0,0,.3) inset;
 	-webkit-box-shadow: 0 0 4px 2px rgba(0,0,0,.3) inset;
 	box-shadow: 0 0 4px 2px rgba(0,0,0,.3) inset;
@@ -34,17 +30,15 @@
 	top: 1px;
 }
 
-.button:focus
-{
+.button:focus {
 	outline: 0;
 	background: #fafafa;
-}    
+}
 
-.button:before
-{
+.button:before {
 	background: #ccc;
 	background: rgba(0,0,0,.1);
-	float: left;        
+	float: left;
 	width: 1em;
 	text-align: center;
 	font-size: 1.5em;
@@ -56,65 +50,52 @@
 	-moz-border-radius: .15em 0 0 .15em;
 	-webkit-border-radius: .15em 0 0 .15em;
 	border-radius: .15em 0 0 .15em;
-        pointer-events: none;        
 }
 
 /* Hexadecimal entities for the icons */
 
-.add:before
-{
+.add:before {
 	content: "\271A";
 }
 
-.edit:before
-{
-	content: "\270E";        
+.edit:before {
+	content: "\270E";
 }
 
-.delete:before
-{
-	content: "\2718";        
+.delete:before {
+	content: "\2718";
 }
 
-.save:before
-{
-	content: "\2714";        
+.save:before {
+	content: "\2714";
 }
 
-.email:before
-{
-	content: "\2709";        
+.email:before {
+	content: "\2709";
 }
 
-.like:before
-{
-	content: "\2764";        
+.like:before {
+	content: "\2764";
 }
 
-.next:before
-{
+.next:before {
 	content: "\279C";
 }
 
-.star:before
-{
+.star:before {
 	content: "\2605";
 }
 
-.spark:before
-{
+.spark:before {
 	content: "\2737";
 }
 
-.play:before
-{
+.play:before {
 	content: "\25B6";
-} 
-.back:before
-{
+}
+.back:before {
 	content: "\2190";
 }
-.record:before
-{
+.record:before {
 	content: "\25cf";
 }
