@@ -11,7 +11,9 @@ function getPos(el) {
 }
 
 function stripFileExtension(filename) {
-    filename = filename.replace(/(.*)\.[^.]+$/, "$1");
+    if (filename != undefined && filename != null) {
+        filename = filename.replace(/(.*)\.[^.]+$/, "$1");
+    }
     return filename;
 }
 
@@ -96,8 +98,8 @@ function my_getDroppableCoordinates(element) {
         position.top += scroll.y;
         position.bottom += scroll.y;
     }
-   // log("-----");
-   // log(position);
+    // log("-----");
+    // log(position);
     return position;
 }
 
