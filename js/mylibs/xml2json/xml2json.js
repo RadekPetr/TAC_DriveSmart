@@ -106,7 +106,8 @@
             switch (this.$get_node_type(node)) {
                 case 1:
                     // For Element nodes, IE doesn't support node.textContent property. Instead use node.text
-                    value = Browser.ie ? node.text : node.textContent;
+                    //  value = Browser.ie ? node.text : node.textContent;
+                    value = node.textContent || node.innerText || node.nodeValue || node.text;
                     break;
                 default:
                     value = node.nodeValue;
@@ -330,4 +331,4 @@
         $instance : null
     });
 
-})(document.id); 
+})(document.id);
