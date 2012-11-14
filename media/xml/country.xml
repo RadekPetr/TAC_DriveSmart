@@ -42,33 +42,7 @@
       <Audio>extra/extra_end_module</Audio>
     </Step>
   </Seq>
-  <Seq Ex="101">
-    <Step fmt="SequenceIntro">
-      <Preview>country/country_cst26_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
-      <Audio>country/country_vdcb1a</Audio>
-    </Step>
-    <Step fmt="PlayVideo">
-      <Video>country/country_cst26_start</Video>
-    </Step>
-    <Step fmt="DragNDrop">
-      <Audio>extra/extra_vddinst</Audio>
-      <DoneAudio>extra/extra_vddact</DoneAudio>
-      <EmptyBkg>dragdrop/country_6.png</EmptyBkg>      
-      <DropAreas>
-        <Area correct="item_1" data="path#m435,5l177,332l-88,-307l-89,-25z" angle="45"></Area>
-       
-      </DropAreas>
-      <RotateAreas>
-        <Area correct="item_1" data="path#m435,5l177,332l-88,-307l-89,-25z" angle="45"></Area>
-      </RotateAreas>
-    </Step>
-    <Step fmt="DragNDropFeedback">
-      <Audio>country/country_vdca2e</Audio>
-      <Image>dragdrop/country_6.png</Image>
-    </Step>
-    <Step fmt="Continue"></Step>
-  </Seq>
+  
   <Seq Ex="1">
     <Step fmt="SequenceIntro">
       <Preview>country/country_cst26_start_first.jpg</Preview>
@@ -304,12 +278,15 @@
       <DoneAudio>extra/extra_vddact</DoneAudio>
       <EmptyBkg>dragdrop/country_6.jpg</EmptyBkg>      
       <DropAreas>
+      	<Area correct="car" id="r5" data="path#m157,12.28421c0,0 24.7191,88.71578 25.95506,88.71578c1.23595,0 84.04494,-12.37894 84.04494,-12.37894c0,0 -32.13483,-85.62105 -32.13483,-85.62105c0,0 -77.86517,9.28421 -77.86517,9.28421z" ></Area>   
+        <Area correct="car" id="r6" data="path#m206,208c0,0 86,1 86,1c0,0 -15,-107 -15,-107c0,0 -87,6 -87,6c0,0 16,100 16,100z"></Area>  
+        <Area correct="bike" id="r7" data="path#m128,389c0,0 73,3 73,3c0,0 -10,77 -10,77c0,0 -79,4 -79,4c0,0 16,-84 16,-84z"></Area> 
+        <Area  id="trash" data="path# m432,1l0,478l206,-1l-1,-477l-205,0z"></Area> 
         <Area id="r1" data="path#m66,5.5l52,216l81.5,-2.81433l-44.5,-213.18567l-89,0z" angle="75"></Area>
         <Area id="r2" data="path#m113,219.71359l1.5,246.35922l77,2.42719l1.5,-250l-80,1.21359z" angle="95"></Area>
         <Area id="r3" data="path#m205,225.23524l5.5,241.09251l66.5,1.17224l7,-245l-79,2.73524z" angle="275"></Area> 
         <Area id="r4" data="path#m161.5,7.7602c0.5,0.7534 50.5,219.2398 50.5,219.2398c0,0 75.5,-6.02721 75.5,-6.02721c0,0 -46.5,-215.47279 -46.5,-215.47279c0,0 -79.5,2.2602 -79.5,2.2602z" angle="250"></Area> 
-        <Area correct="car" id="r5" data="path#m124.95277,264l81.04723,-3l-1.81111,96l-79.68889,3l0.45277,-96z" angle="95"></Area>   
-        <Area  id="trash" data="path# m432,1l0,478l206,-1l-1,-477l-205,0z"></Area>           
+                  
       </DropAreas>      
     </Step>
     <Step fmt="DragNDropFeedback">
