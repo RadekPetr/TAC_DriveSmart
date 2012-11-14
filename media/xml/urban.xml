@@ -635,19 +635,20 @@
 		<Step fmt="DragNDrop">
 			<Audio>extra/extra_vddinst</Audio>
 			<DoneAudio>extra/extra_vddact</DoneAudio>
-			<EmptyBkg>dragdrop/urban_15.png</EmptyBkg>
-			<DropAreas>
-				<Area correct="item_1" Zones="229:172:37:28"></Area>
-				<Area correct="item_1" Zones="215:200:23:21"></Area>
-			</DropAreas>
-			<RotateAreas>
-				<Area angle="45" Zones="229:172:37:28"></Area>
-				<Area angle="45" Zones="229:172:37:28"></Area>
-			</RotateAreas>
+			<EmptyBkg>dragdrop/urban_15.jpg</EmptyBkg>
+			      <DropAreas>
+        <Area id="r1" data="path#m66,5.5l52,216l81.5,-2.81433l-44.5,-213.18567l-89,0z" angle="75"></Area>
+        <Area id="r2" data="path#m113,219.71359l1.5,246.35922l77,2.42719l1.5,-250l-80,1.21359z" angle="95"></Area>
+        <Area id="r3" data="path#m205,225.23524l5.5,241.09251l66.5,1.17224l7,-245l-79,2.73524z" angle="275"></Area> 
+        <Area id="r4" data="path#m161.5,7.7602c0.5,0.7534 50.5,219.2398 50.5,219.2398c0,0 75.5,-6.02721 75.5,-6.02721c0,0 -46.5,-215.47279 -46.5,-215.47279c0,0 -79.5,2.2602 -79.5,2.2602z" angle="250"></Area> 
+        <Area correct="car" id="r5" data="path#m124.95277,264l81.04723,-3l-1.81111,96l-79.68889,3l0.45277,-96z" angle="95"></Area>   
+        <Area  id="trash" data="path# m432,1l0,478l206,-1l-1,-477l-205,0z"></Area>           
+      </DropAreas>      
+
 		</Step>
 		<Step fmt="DragNDropFeedback">
 			<Audio>urban/urban_vdua3e</Audio>
-			<Image>dragdrop/urban_15.png</Image>
+			<Image>dragdrop/urban_15_correct.jpg</Image>
 		</Step>
 		<Step fmt="Continue"></Step>
 	</Seq>
