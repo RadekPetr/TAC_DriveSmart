@@ -32,7 +32,7 @@ var Draggable = new Class({
                 return position;
             },
             checkDroppables : function() {
-                var overed = this.getOvered();
+                var overed = this.getOvered().getLast();
 
                 if (this.overed != overed) {
                     if (this.overed)
@@ -44,19 +44,22 @@ var Draggable = new Class({
             },
             checkDropped : function() {
                 var overed = this.getOvered();
+                var correct = false;
                 if (overed) {
-                    log(overed.retrieve('correct'));
-                    log(this.element.id);
-
-                    //this.fireEvent('dropped', [this.element, overed]);
-                    if (this.element.id == overed.retrieve('correct')) {
-                        log("1 Correct");
-                        return true;
-                    } else {
-                        log("1 False");
-                        return false;
-                    }
+                    Array.each(overed, function(item, index) {
+                        log(item.retrieve('correct'));
+                        log(this.element.id);
+                        //this.fireEvent('dropped', [this.element, overed]);
+                        if (this.element.id == item.retrieve('correct')) {
+                            log("1 Correct");
+                            correct = true;
+                        } else {
+                            log("1 False");
+                            //  return false;
+                        }
+                    }.bind(this))
                 }
+                return correct;
             },
             getOvered : function() {
                 var mainEl = document.getElementById('drivesmart');
@@ -69,7 +72,7 @@ var Draggable = new Class({
                     now2.y = now.y - elOffset.y + this.element.width / 2;
 
                     return (now2.x > el.left && now2.x < el.right && now2.y < el.bottom && now2.y > el.top);
-                }, this).getLast();
+                }, this);
                 return overed;
             },
             _rotate : function(element, rotation) {
@@ -100,30 +103,17 @@ var Draggable = new Class({
                         position : 'absolute'
                     }
 
-                    //   var myClone = new Asset.image(this.options.src_top, {
-                    //     style : styles,
-                    //      id : this.options.id
-                    //  });
-
                     var myClone = this.topViewImage.clone();
                     myClone.set('id', this.options.id);
 
                     myClone.setStyles(styles);
                     this.clones.push(myClone);
-
-                    //TODO: handle preloading of the assets
-
                     this._addDragEvents(myClone);
                     myClone.inject(this.container);
                     myClone.fireEvent('mousedown', event);
                 }.bind(this));
             }.bind(this)
         });
-
-        //var myClone = new Asset.image(this.options.src_top, {
-        //   style : styles,
-        //    id : this.options.id
-        //  });
 
     },
     stop : function() {
@@ -157,8 +147,6 @@ var Draggable = new Class({
             onComplete : function(el, droppable) {
                 log('Stopped dragging', el, droppable);
                 target.set('class', 'draggable');
-                // if ()
-                // TOTO: check if is inside bkg image destrouy otherwise
             },
             onBeforeStart : function() {
                 log("beforeStart");
@@ -171,8 +159,8 @@ var Draggable = new Class({
 
             },
             onDrop : function(element, droppedOn) {
-               // log(element, 'dropped', droppedOn);
-              //  log(droppedOn.get('id'));
+                // log(element, 'dropped', droppedOn);
+                //  log(droppedOn.get('id'));
                 if (droppedOn.get('id') == 'trash') {
                     element.destroy();
                 }
@@ -183,6 +171,7 @@ var Draggable = new Class({
     },
     getHits : function() {
         var correct = false;
+        // TODO: calculate score for multiples
         Array.each(this.drags, function(item, index) {
             if (item.checkDropped() == true) {
                 log("Correct");
@@ -191,8 +180,5 @@ var Draggable = new Class({
         })
 
         return correct;
-    },
-    _canBeDropped : function() {
-
     }
 })
