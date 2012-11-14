@@ -9,7 +9,7 @@ var ImagePlayer = new Class({
             opacity : '0',
             visibility : 'hidden'
         },
-        'class': '',
+        'class' : '',
         src : '',
         id : 'element.id',
         next : 'next.action',
@@ -107,14 +107,14 @@ var ImagePlayer = new Class({
             ref : this,
             type : 'IMAGE'
         };
-        return loaderInfo
+        return loaderInfo;
     },
-    preload : function() {
+    preload : function() {        
         this.image = new Asset.image(this.options.src, {
             style : this.options.style,
             id : this.options.id,
-            'class' : this.options.class,
-            onLoad : function() {
+            'class' : this.options['class'],
+            onLoad : function() {                
                 this.options.loaded = true;
                 if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
                     this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
@@ -128,6 +128,6 @@ var ImagePlayer = new Class({
         });
     },
     _addEvents : function() {
-        //. nothing here
+        //nothing here
     }
 })
