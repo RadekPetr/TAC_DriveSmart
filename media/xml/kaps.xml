@@ -30,7 +30,6 @@
       <Video>shared/shared_uia17_next</Video>
     </Step>
     <Step fmt="Continue">
-      <Audio waitfor="false"></Audio>
     </Step>
   </Seq>
   <Seq desc="Kaps Exercise 2" Ex="2">
