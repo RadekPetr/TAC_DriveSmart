@@ -10,9 +10,6 @@
 				<Data moduleID="urban" preview = "country/country_clp02_start_first.jpg" description="The Urban Driving module consists of 36 driving exercises. You need to have completed the Scanning, Keeping Ahead and Playing Safe modules prior to accessing this module.">on the road - urban driving</Data>
 			</Items>
 			<Image>menu/main_menu.png</Image>
-			<Audio>
-				country/country_vdcb1a
-			</Audio>
 		</Step>
 	</Seq>
 </root>
