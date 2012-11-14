@@ -358,7 +358,7 @@ var SequencePlayer = new Class({
                 case "DragNDropFeedback":
                     // Show correct bkg
                     // TODO: get height from drivesmart height ?
-                  
+
                     step.image.add(this.activeVideo.containerID);
                     step.image.show();
 
@@ -680,28 +680,35 @@ var SequencePlayer = new Class({
 
                     if (item.value != '') {
                         var filename = item.value;
+                        var style = null;
 
                         if (stepType == 'Cameo') {
-                            var style = {
+                            style = {
                                 'left' : '315px',
                                 'top' : '20px',
-                                'width' : '240px',
-                                'height' : '175px'
+                                'width' : '240',
+                                'height' : '175'
                             }
+                            var width = '240px';
+                            var height = '175px';
                         } else {
                             style = {
-                                // width : '640',
-                                // height : '480',
-                                left : '0px',
-                                top : '0px'
+                                'width' : '640',
+                                'height' : '480',
+                                'left' : '0',
+                                'top' : '0'
                             }
+                            var width = '240px';
+                            var height = '175px';
 
                         }
                         step.player = new VideoPlayer(this, {
                             id : "video_" + index + "_" + stepOrder,
                             next : 'not.set',
                             'style' : style,
-                            filename : filename
+                            filename : filename,
+                            width : width,
+                            height : height
                         });
 
                         this.mediaLoader.register(step.player.getLoaderInfo());
@@ -710,7 +717,7 @@ var SequencePlayer = new Class({
                     }
                     break;
                 case "Audio" :
-                    if (item.value != '') {                       
+                    if (item.value != '') {
                         var file = this.options.audioFolder + stripFileExtension(item.value);
                         step.player = new AudioPlayer(this, {
                             next : 'not.set',
@@ -774,7 +781,7 @@ var SequencePlayer = new Class({
                         this.mediaLoader.register(step.previewImage.getLoaderInfo());
                     }
                     break;
-                case "Image" :            
+                case "Image" :
                     if (item.value != '') {
                         var file = this.options.imageFolder + item.value;
                         step.image = new ImagePlayer(this, {
@@ -796,8 +803,8 @@ var SequencePlayer = new Class({
                         });
                         this.mediaLoader.register(step.emptyBkg.getLoaderInfo());
                     }
-                    break;                   
-                    
+                    break;
+
                 case "Items":
                     var menuItemsRawData = item.childNodes;
                     var menuItems = {

@@ -11,6 +11,8 @@ var VideoPlayer = new Class({
             opacity : '0',
             visibility : 'hidden'
         },
+        width : '640px',
+        height : '480px',
         'class' : 'video-js',
         poster : '',
         id : 'element.id',
@@ -37,6 +39,7 @@ var VideoPlayer = new Class({
         this.container = new Element("div", {
             id : this.containerID,
             'class' : 'videoContainer'
+
         })
 
         this.container.setStyles(this.options.style);
@@ -47,7 +50,9 @@ var VideoPlayer = new Class({
             'id' : this.playerID,
             'preload' : 'auto',
             'poster' : '',
-            'class' : 'video-js',
+            'class' : this.options['class'],
+            width : this.options.width,
+            height : this.options.height
 
         });
         this.container.player.inject(this.container);
@@ -194,7 +199,7 @@ var VideoPlayer = new Class({
     // ---------------------------
     skip : function() {
         if (this.player != null) {
-            this.seek(this.player.duration());          
+            this.seek(this.player.duration());
 
             this.myParent().fireEvent("TIMELINE", {
                 type : "video.finished",
