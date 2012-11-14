@@ -668,8 +668,9 @@ var SequencePlayer = new Class({
     }.protect(),
     // ----------------------------------------------------------
     _setupStepMedia : function(step, stepOrder) {
+        //log( JSON.encode(step));
         var stepType = step.attributes.fmt;
-        log(step);
+        // log("Step: ", step, stepOrder, stepType);
         Array.each(step.childNodes, function(item, index) {
             if (step.player != undefined) {
                 log("!!!!!!!!!!!!!!!!!!!!! ERROR - Two players in this step !!!!!!!!!!!!!!!!!!!!!!!!!" + stepType);
@@ -709,7 +710,7 @@ var SequencePlayer = new Class({
                     }
                     break;
                 case "Audio" :
-                    if (item.value != '') {
+                    if (item.value != '') {                       
                         var file = this.options.audioFolder + stripFileExtension(item.value);
                         step.player = new AudioPlayer(this, {
                             next : 'not.set',
@@ -773,10 +774,9 @@ var SequencePlayer = new Class({
                         this.mediaLoader.register(step.previewImage.getLoaderInfo());
                     }
                     break;
-                case "Image" :
+                case "Image" :            
                     if (item.value != '') {
                         var file = this.options.imageFolder + item.value;
-
                         step.image = new ImagePlayer(this, {
                             src : file,
                             title : 'Image',
@@ -812,7 +812,6 @@ var SequencePlayer = new Class({
                             preview : menuItemData.attributes.preview
                         }
                         menuItems.data.push(menuItem);
-                        log(menuItem);
                     })
                     step.data = menuItems;
                     break;
