@@ -13,7 +13,6 @@ var MenuItems = new Class({
             'opacity' : '0',
             'visibility' : 'hidden'
         },
-
         data : null,
         id : 'element.id',
         next : 'next.action',
@@ -21,7 +20,7 @@ var MenuItems = new Class({
         parent : null,
         text : function(element) {
             return element.get('rel');
-        },
+        }
     },
     initialize : function(myParent, myOptions) {
 

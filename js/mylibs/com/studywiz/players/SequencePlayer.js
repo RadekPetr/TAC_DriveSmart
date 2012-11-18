@@ -787,7 +787,7 @@ var SequencePlayer = new Class({
                         step.image = new ImagePlayer(this, {
                             src : file,
                             title : 'Image',
-                            id : 'image' + index + "_" + stepOrder,
+                            id : 'image' + index + "_" + stepOrder
                         });
                         this.mediaLoader.register(step.image.getLoaderInfo());
                     }
