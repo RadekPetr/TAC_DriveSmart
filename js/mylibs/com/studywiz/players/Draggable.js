@@ -70,9 +70,25 @@ var Draggable = new Class({
                     now2.x = now.x - elOffset.x + this.element.width / 2;
                     now2.y = now.y - elOffset.y + this.element.width / 2;
 
-                    return (now2.x > el.left && now2.x < el.right && now2.y < el.bottom && now2.y > el.top);
+                    return (now2.x > el.left && now2.x < el.right && now2.y < el.bottom && now2.y > el.top );
                 }, this);
                 return overed;
+            },
+            isCorrect : function(el) {
+                var mainEl = document.getElementById('drivesmart');
+                var elOffset = getPos(mainEl);
+
+                //    el = this.positions ? this.positions[i] : this.getDroppableCoordinates(el);
+                var now = getPos(this.element);
+                var now2 = new Object();
+                now2.x = now.x - elOffset.x + this.element.width / 2;
+                now2.y = now.y - elOffset.y + this.element.width / 2;
+                log ("el:", el, this.element, el.retrieve('correct'));
+                var isOver = now2.x > el.left && now2.x < el.right && now2.y < el.bottom && now2.y > el.top;
+                // TODO: isOver not correct ?
+                var isCorrect = (this.element.id == el.retrieve('correct'));
+                log ("### Iscorrect: ", isCorrect, isOver);
+                return (isCorrect);
             },
             _rotate : function(element, rotation) {
                 element.setStyles({
@@ -171,12 +187,13 @@ var Draggable = new Class({
 
     },
     getHits : function() {
-        var correct = false;
+        var correct = 0;
         // TODO: calculate score for multiples
+
         Array.each(this.drags, function(item, index) {
             if (item.checkDropped() == true) {
                 log("Correct");
-                correct = true;
+                correct++;
             }
         })
 

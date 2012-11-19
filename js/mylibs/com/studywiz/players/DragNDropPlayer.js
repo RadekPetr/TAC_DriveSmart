@@ -19,7 +19,7 @@ var DragNDropPlayer = new Class({
         this.container = null;
         this.containerID = 'container_' + this.options.id;
         this.targets = new Array();
-        this.correctZones = 0;
+        this.correctZones = new Array();
         this.addEvent("TIMELINE", this.handleNavigationEvent);
     },
     myParent : function() {
@@ -40,7 +40,7 @@ var DragNDropPlayer = new Class({
             });
             this.container.inject($(parentTagID), where);
         }
-        this._prepareZones(this.options.data.dropZones);
+        this._prepareZones();
         this._prepareDraggables();
     },
     remove : function() {
@@ -58,16 +58,38 @@ var DragNDropPlayer = new Class({
         this.getScore();
     },
     getScore : function() {
+
+        // check if all this.targets have some draggable with correct id
         //
-        var pointsPerItem = 100 / this.correctZones;
+        var pointsPerItem = 100 / this.correctZones.length;
         var score = 0;
+      //  Array.each(this.draggables, function(item, index) {
+
+       //     score += item.getHits();
+
+     //   })
+      //  log("Score: " + score);
+     //   return score;
+
+        var allDraggables = new Array();
         Array.each(this.draggables, function(item, index) {
-            if (item.getHits() == true) {
-                score += pointsPerItem;
+            allDraggables.append(item.drags);
+        })
+        // all drop areas with correct
+        Array.each(this.correctZones, function(zone, index) {
+
+            var isCorrect = allDraggables.filter(function(item, i) {
+                return item.isCorrect(zone)== true;
+            }, this);
+            log ("is correct: ", isCorrect);
+            if (isCorrect == true) {
+                score++;
             }
         })
-        log("Score: " + score);
+       log("Score: " + score);
         return score;
+        // a
+
     },
     // ----------------------------------------------------------
     // This handles all timeline events and emulates the timeline
@@ -84,17 +106,17 @@ var DragNDropPlayer = new Class({
                 break;
         }
     },
-    _prepareZones : function(data) {
-        log(data);
-        Array.each(data, function(item, index) {
-            item.player = new Shape(this, item);
-            item.player.add(this.containerID);
-            item.player.show();
-            this.targets.push(item.player.shape);
-            item.player.shape.store('angle', item.angle);
-            if (item.correct != null && item.correct != undefined) {
-                item.player.shape.store('correct', item.correct);
-                this.correctZones++;
+    _prepareZones : function() {
+        var data = this.options.data.dropZones;
+        Array.each(data, function(dropZone, index) {
+            dropZone.player = new Shape(this, dropZone);
+            dropZone.player.add(this.containerID);
+            dropZone.player.show();
+            this.targets.push(dropZone.player.shape);
+            dropZone.player.shape.store('angle', dropZone.angle);
+            if (dropZone.correct != null && dropZone.correct != undefined) {
+                dropZone.player.shape.store('correct', dropZone.correct);
+                this.correctZones.push(dropZone.player.shape);
             }
         }.bind(this))
     },
