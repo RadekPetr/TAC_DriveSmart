@@ -174,8 +174,8 @@ var VideoPlayer = new Class({
     obscure : function() {
         log("Obscure");
         log(this.container);
-
-        if (Browser.ie9) {
+        //TODO: finish for IE - use an image for the mask
+        if (Browser.ie) {
 
             var myMask = new Mask(this.container, {
                 style : {
@@ -243,11 +243,13 @@ var VideoPlayer = new Class({
 
         // destroy the player
         player.destroy();
+        if (this.container != null && this.container != undefined) {
+            this.container.destroy();
+            this.container.player.destroy();
+            delete this.container.player;
+            delete this.container
 
-        this.container.destroy();
-        this.container.player.destroy();
-        delete this.container.player;
-        delete this.container
+        }
         delete this.player;
 
     },

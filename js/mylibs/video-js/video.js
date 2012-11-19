@@ -52,6 +52,7 @@ var VideoJS = function(id, addOptions, ready){
 
   // Check for a useable element
   if (!tag || !tag.nodeName) { // re: nodeName, could be a box div also
+      log ("VideoJS error #######", tag, tag.nodeName);
     throw new TypeError("The element or ID supplied is not valid. (VideoJS)"); // Returns
   }
 
