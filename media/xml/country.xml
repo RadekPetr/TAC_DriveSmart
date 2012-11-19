@@ -30,7 +30,7 @@
     <Step fmt="PlayVideo">
       <Video>country/country_cst26_start</Video>
     </Step>
-     <Step fmt="KeyRisk">
+    <Step fmt="KeyRisk">
       <Zones data="legacy#229:172:37:28,215:200:23:21,192:222:29:21,150:243:57:33"></Zones>
       <Audio waitfor="true">scanning/scan_vsbkr1b</Audio>
     </Step>
@@ -42,7 +42,6 @@
       <Audio>extra/extra_end_module</Audio>
     </Step>
   </Seq>
-  
   <Seq Ex="1">
     <Step fmt="SequenceIntro">
       <Preview>country/country_cst26_start_first.jpg</Preview>
@@ -273,21 +272,20 @@
     <Step fmt="PlayVideo">
       <Video>country/country_cst22_start</Video>
     </Step>
-    <Step fmt="DragNDrop">    	    	
+    <Step fmt="DragNDrop">
       <Audio>extra/extra_vddinst</Audio>
       <DoneAudio>extra/extra_vddact</DoneAudio>
-      <EmptyBkg>dragdrop/country_6.jpg</EmptyBkg>      
+      <EmptyBkg>dragdrop/country_6.jpg</EmptyBkg>
       <DropAreas>
-      	<Area correct="car" id="r5" data="path#m157,12.28421c0,0 24.7191,88.71578 25.95506,88.71578c1.23595,0 84.04494,-12.37894 84.04494,-12.37894c0,0 -32.13483,-85.62105 -32.13483,-85.62105c0,0 -77.86517,9.28421 -77.86517,9.28421z" ></Area>   
-        <Area correct="car" id="r6" data="path#m206,208c0,0 86,1 86,1c0,0 -15,-107 -15,-107c0,0 -87,6 -87,6c0,0 16,100 16,100z"></Area>  
-        <Area correct="bike" id="r7" data="path#m128,389c0,0 73,3 73,3c0,0 -10,77 -10,77c0,0 -79,4 -79,4c0,0 16,-84 16,-84z"></Area> 
-        <Area  id="trash" data="path# m432,1l0,478l206,-1l-1,-477l-205,0z"></Area> 
+        <Area correct="car" id="r5" data="path#m157,12.28421c0,0 24.7191,88.71578 25.95506,88.71578c1.23595,0 84.04494,-12.37894 84.04494,-12.37894c0,0 -32.13483,-85.62105 -32.13483,-85.62105c0,0 -77.86517,9.28421 -77.86517,9.28421z"></Area>
+        <Area correct="car" id="r6" data="path#m206,208c0,0 86,1 86,1c0,0 -15,-107 -15,-107c0,0 -87,6 -87,6c0,0 16,100 16,100z"></Area>
+        <Area correct="bike" id="r7" data="path#m128,389c0,0 73,3 73,3c0,0 -10,77 -10,77c0,0 -79,4 -79,4c0,0 16,-84 16,-84z"></Area>
+        <Area id="trash" data="path# m432,1l0,478l206,-1l-1,-477l-205,0z"></Area>
         <Area id="r1" data="path#m66,5.5l52,216l81.5,-2.81433l-44.5,-213.18567l-89,0z" angle="75"></Area>
         <Area id="r2" data="path#m113,219.71359l1.5,246.35922l77,2.42719l1.5,-250l-80,1.21359z" angle="95"></Area>
-        <Area id="r3" data="path#m205,225.23524l5.5,241.09251l66.5,1.17224l7,-245l-79,2.73524z" angle="275"></Area> 
-        <Area id="r4" data="path#m161.5,7.7602c0.5,0.7534 50.5,219.2398 50.5,219.2398c0,0 75.5,-6.02721 75.5,-6.02721c0,0 -46.5,-215.47279 -46.5,-215.47279c0,0 -79.5,2.2602 -79.5,2.2602z" angle="250"></Area> 
-                  
-      </DropAreas>      
+        <Area id="r3" data="path#m205,225.23524l5.5,241.09251l66.5,1.17224l7,-245l-79,2.73524z" angle="275"></Area>
+        <Area id="r4" data="path#m161.5,7.7602c0.5,0.7534 50.5,219.2398 50.5,219.2398c0,0 75.5,-6.02721 75.5,-6.02721c0,0 -46.5,-215.47279 -46.5,-215.47279c0,0 -79.5,2.2602 -79.5,2.2602z" angle="250"></Area>
+      </DropAreas>
     </Step>
     <Step fmt="DragNDropFeedback">
       <Audio>country/country_vdca2e</Audio>

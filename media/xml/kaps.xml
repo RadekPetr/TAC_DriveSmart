@@ -21,7 +21,6 @@
         <Data correct="false">Reasonable</Data>
         <Data correct="true">Poor</Data>
       </Inter>
-      <Post></Post>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="1,2">
       <Audio>kaps/kaps_vtt1c</Audio>
@@ -29,8 +28,7 @@
     <Step fmt="PlayVideo">
       <Video>shared/shared_uia17_next</Video>
     </Step>
-    <Step fmt="Continue">
-    </Step>
+    <Step fmt="Continue"></Step>
   </Seq>
   <Seq desc="Kaps Exercise 2" Ex="2">
     <Step fmt="SequenceIntro">
@@ -53,7 +51,6 @@
         <Data correct="false">Reasonable</Data>
         <Data correct="true">Poor</Data>
       </Inter>
-      <Post></Post>
     </Step>
     <Step FadeQ="1,2" fmt="QuestionFeedback">
       <Audio>kaps/kaps_vtt2c</Audio>
@@ -99,7 +96,6 @@
       <Image>intros/sequence_intro.png</Image>
       <Audio>extra/extra_vopcom.mp3</Audio>
     </Step>
-   
     <Step fmt="CommentaryIntro">
       <Image>kaps/kaps_shops_start_first.jpg</Image>
       <Audio>kaps/kaps_opdrive</Audio>
