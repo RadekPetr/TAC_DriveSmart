@@ -67,8 +67,8 @@ var Draggable = new Class({
                     el = this.positions ? this.positions[i] : this.getDroppableCoordinates(el);
                     var now = getPos(this.element);
                     var now2 = new Object();
-                    now2.x = now.x - elOffset.x + this.element.width / 2;
-                    now2.y = now.y - elOffset.y + this.element.width / 2;
+                    now2.x = now.x - elOffset.x + this.element.get('width') / 2;
+                    now2.y = now.y - elOffset.y + this.element.get('width') / 2;
 
                     return (now2.x > el.left && now2.x < el.right && now2.y < el.bottom && now2.y > el.top );
                 }, this);
@@ -81,8 +81,8 @@ var Draggable = new Class({
                 //    el = this.positions ? this.positions[i] : this.getDroppableCoordinates(el);
                 var now = getPos(this.element);
                 var now2 = new Object();
-                now2.x = now.x - elOffset.x + this.element.width / 2;
-                now2.y = now.y - elOffset.y + this.element.width / 2;
+                now2.x = now.x - elOffset.x + this.element.get('width') / 2;
+                now2.y = now.y - elOffset.y + this.element.get('width') / 2;
                 log("el:", el, this.element, el.retrieve('correct'));
                 var isOver = now2.x > el.left && now2.x < el.right && now2.y < el.bottom && now2.y > el.top;
                 // TODO: isOver not correct ?
@@ -140,8 +140,9 @@ var Draggable = new Class({
         this.image.set('class', 'non-draggable');
     },
     _addDragEvents : function(target) {
-        var leftCorrection = target.width / 2, topCorrection = target.height / 2 
-        
+
+        var leftCorrection = target.get('width') / 2, topCorrection = target.get('height') / 2;
+
         var myDrag = new Drag.Move(target, {
             precalculate : false,
             limit : {

@@ -10,6 +10,11 @@
 }
 
 .draggable {
+	transform-origin: 50% 50%;
+	-ms-transform-origin: 50% 50%; /* IE 9 */
+	-webkit-transform-origin: 50% 50%; /* Safari and Chrome */
+	-moz-transform-origin: 50% 50%; /* Firefox */
+	-o-transform-origin: 50% 50%; /* Opera */
 	cursor: pointer;
 }
 
