@@ -83,11 +83,11 @@ var Draggable = new Class({
                 var now2 = new Object();
                 now2.x = now.x - elOffset.x + this.element.width / 2;
                 now2.y = now.y - elOffset.y + this.element.width / 2;
-                log ("el:", el, this.element, el.retrieve('correct'));
+                log("el:", el, this.element, el.retrieve('correct'));
                 var isOver = now2.x > el.left && now2.x < el.right && now2.y < el.bottom && now2.y > el.top;
                 // TODO: isOver not correct ?
                 var isCorrect = (this.element.id == el.retrieve('correct'));
-                log ("### Iscorrect: ", isCorrect, isOver);
+                log("### Iscorrect: ", isCorrect, isOver);
                 return (isCorrect);
             },
             _rotate : function(element, rotation) {
@@ -140,9 +140,15 @@ var Draggable = new Class({
         this.image.set('class', 'non-draggable');
     },
     _addDragEvents : function(target) {
+        var leftCorrection = target.width / 2, topCorrection = target.height / 2 
+        
         var myDrag = new Drag.Move(target, {
             precalculate : false,
-            container : "drivesmart",
+            limit : {
+                x : [0 - leftCorrection, 640 - leftCorrection],
+                y : [0 - topCorrection, 480 - topCorrection]
+            },
+            includeMargins : false,
             droppables : this.options.droppables,
             onStart : function() {
                 // nothing
