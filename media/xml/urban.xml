@@ -694,14 +694,15 @@
       <Audio>extra/extra_vddinst</Audio>
       <DoneAudio>extra/extra_vddact</DoneAudio>
       <EmptyBkg>dragdrop/urban_17.jpg</EmptyBkg>
-      <DropAreas>
-        <Area correct="item_1" Zones="229:172:37:28"></Area>
-        <Area correct="item_1" Zones="215:200:23:21"></Area>
+      <DropAreas>      	
+        <Area correct="4wd" id="4wd" data="path#m139,286l-3,144l77,2l0,-150l-74,4z"></Area>
+        <Area correct="car" id="car" data="path#m83,118l3,-68l-85,2l-3,71l85,-5z"></Area>
+        <Area id="trash" data="path# m432,1l0,478l206,-1l-1,-477l-205,0z"></Area>
+        <Area id="right" data="path#m215,3l1,473l142,1l-1,-475l-142,1z" angle="270"></Area>
+        <Area id="left" data="path#m70,476l137,-3l2,-469l-142,-2l3,474z" angle="90"></Area>     
+        <Area id="bottom" data="path#m1,119c1,0 68,1 68,1c0,0 -2,65 -2,65c0,0 -69,0 -69,0c0,0 3,-66 3,-66z" angle="0"></Area>     
+        <Area id="top" data="path#m0,51l65,-1l0,60l-64,2l-1,-61z" angle="180"></Area>     
       </DropAreas>
-      <RotateAreas>
-        <Area angle="45" Zones="229:172:37:28"></Area>
-        <Area angle="45" Zones="229:172:37:28"></Area>
-      </RotateAreas>
     </Step>
     <Step fmt="DragNDropFeedback">
       <Audio>urban/urban_vdua4e</Audio>
@@ -722,14 +723,16 @@
       <Audio>extra/extra_vddinst</Audio>
       <DoneAudio>extra/extra_vddact</DoneAudio>
       <EmptyBkg>dragdrop/urban_18.jpg</EmptyBkg>
-      <DropAreas>
-        <Area correct="item_1" Zones="229:172:37:28"></Area>
-        <Area correct="item_1" Zones="215:200:23:21"></Area>
+      <DropAreas>      	
+        <Area correct="car" id="car" data="path#m131,351l99,0l-11,124l-93,1l5,-125z"></Area>
+        <Area correct="car" id="car" data="path#m1,110l60,-2l0,113c0,0 -65,3 -64,3c1,0 4,-114 4,-114z"></Area>
+        <Area correct="car" id="car" data="path#m1,357c0,0 51,-1 52,-1c1,0 1,-118 1,-118c0,0 -53,-6 -53,-6c0,0 0,125 0,125z"></Area>
+        <Area id="trash" data="path# m432,1l0,478l206,-1l-1,-477l-205,0z"></Area>
+        <Area id="right_top" data="path#m222,5l-46,198l251,1c0,0 1,-205 2,-205c1,0 -207,6 -207,6z" angle="120"></Area>
+        <Area id="right_bottom" data="path#m158,205l-24,269l290,1l-1,-268l-265,-2z" angle="100"></Area>     
+        <Area id="middle" data="path#m108,188l65,-1l-9,287l-57,0l1,-286z" angle="90"></Area>     
+        <Area id="left" data="path#m1,2l0,475l105,-2l2,-472l-107,-1z" angle="90"></Area>     
       </DropAreas>
-      <RotateAreas>
-        <Area angle="45" Zones="229:172:37:28"></Area>
-        <Area angle="45" Zones="229:172:37:28"></Area>
-      </RotateAreas>
     </Step>
     <Step fmt="DragNDropFeedback">
       <Audio>freeway/freeway_vdfa4f</Audio>
