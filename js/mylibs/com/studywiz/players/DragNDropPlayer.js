@@ -52,10 +52,9 @@ var DragNDropPlayer = new Class({
     },
     stopDrag : function() {
         Array.each(this.draggables, function(item, index) {
-            item.stop();
-            log(item);
+            item.stop();          
         });
-        this.getScore();
+       // this.getScore();
     },
     getScore : function() {
 
@@ -63,13 +62,6 @@ var DragNDropPlayer = new Class({
         //
         var pointsPerItem = 100 / this.correctZones.length;
         var score = 0;
-      //  Array.each(this.draggables, function(item, index) {
-
-       //     score += item.getHits();
-
-     //   })
-      //  log("Score: " + score);
-     //   return score;
 
         var allDraggables = new Array();
         Array.each(this.draggables, function(item, index) {
@@ -77,18 +69,14 @@ var DragNDropPlayer = new Class({
         })
         // all drop areas with correct
         Array.each(this.correctZones, function(zone, index) {
-
-            var isCorrect = allDraggables.filter(function(item, i) {
-                return item.isCorrect(zone)== true;
-            }, this);
-            log ("is correct: ", isCorrect);
-            if (isCorrect == true) {
-                score++;
-            }
+            Array.each(allDraggables, function(draggableItem) {
+                if (draggableItem.isCorrect(zone) == true) {
+                    score++;
+                }
+            })
         })
-       log("Score: " + score);
-        return score;
-        // a
+        log("Score: " + score, "%", score * pointsPerItem);
+        return score * pointsPerItem;
 
     },
     // ----------------------------------------------------------

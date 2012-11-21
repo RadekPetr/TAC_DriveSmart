@@ -71,7 +71,7 @@ var SequencePlayer = new Class({
             moduleID : this.moduleInfo.moduleID,
             id : this.moduleInfo.currentSequenceID,
             completed : false,
-            score : 0
+            score : new Array()
         }
 
         // TODO handle mobile platforms: Browser.Platform.android, handle incompatible old browsers
@@ -83,12 +83,20 @@ var SequencePlayer = new Class({
     },
     // ----------------------------------------------------------
     setupMedia : function() {
-        this._setupSequenceMedia(this.currentSequence);
+        this._setupSequence(this.currentSequence);
         this.mediaLoader.options.next = 'Media.ready';
         this.mediaLoader.start(true);
     },
     nextStep : function() {
         // take a step and decide what to do with it
+        if (this.currentStep != null) {
+            // TODO: if this.currentStep is not empty, get it;s score and add it to the sequence score
+            var lastStepScore = this.currentStep.score;
+            log("Score:", lastStepScore);
+            if (lastStepScore != null && lastStepScore != undefined) {
+                this.sequenceState.score.push(lastStepScore);
+            }
+        }
         if (this.currentSequence.length > 0) {
 
             var step = this.currentSequence.shift();
@@ -228,14 +236,14 @@ var SequencePlayer = new Class({
                 case "QuestionFeedback":
                     this._removeButtons();
                     this._showInteractions();
-                    this.interactions.showCorrect();
+                    step.score = this.interactions.showCorrect();
                     step.player.options.next = 'QuestionFeedback.done';
                     step.player.start();
                     if (step.attributes.show == "MudScreen") {
                         //TODO: show="MudScreen" - show mudscreen during feedback
                         this.activeVideo.obscure();
                     }
-
+                    //TODO: get score and set it.
                     //TODO:  KeepUserSelection="1"
                     break;
                 case "PlayAudio":
@@ -292,6 +300,8 @@ var SequencePlayer = new Class({
                     //TODO: <Audio waitfor="true">sound/scanning/mp3/scan_vsbkr1b.mp3</Audio>
                     break;
                 case "KRFeedback":
+
+                    //TODO: get score: step.score = ...
                     this._removeButtons();
                     step.image.add(this.shape.container.id);
                     step.image.show();
@@ -574,6 +584,9 @@ var SequencePlayer = new Class({
                 this._cleanUp();
                 // disable dragging now
                 this.currentStep.dragNDrop.stopDrag();
+
+                this.currentStep.score= this.currentStep.dragNDrop.getScore();
+
                 var nextStep = this.currentSequence[0];
                 if (nextStep.attributes.fmt == "DragNDropFeedback") {
                     this.nextStep();
@@ -656,7 +669,7 @@ var SequencePlayer = new Class({
         return questions;
     }.protect(),
     // ----------------------------------------------------------
-    _setupSequenceMedia : function(seq) {
+    _setupSequence : function(seq) {
         // get array of media for each step so it can be preloaded
         var media = new Hash({});
         Array.each(seq, function(step, stepOrder) {
@@ -667,6 +680,11 @@ var SequencePlayer = new Class({
         //log(seq);
     }.protect(),
     // ----------------------------------------------------------
+    _setupStepScoring : function(step, stepOrder) {
+        //log( JSON.encode(step));
+        var stepType = step.attributes.fmt;
+
+    },
     _setupStepMedia : function(step, stepOrder) {
         //log( JSON.encode(step));
         var stepType = step.attributes.fmt;
@@ -1024,7 +1042,7 @@ var SequencePlayer = new Class({
     _updateUserProgress : function() {
         // Update state to completed = true;
         this.sequenceState.completed = true;
-
+        // TODO: give each step maxPoints value and then sum those to get max score per sequence and calculate each sequence score as % of this, give each step a getScore method
         // TODO: remove this whne scoring is implemented
         this.sequenceState.score = 100;
 

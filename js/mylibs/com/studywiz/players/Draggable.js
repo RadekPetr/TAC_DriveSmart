@@ -6,11 +6,11 @@ var Draggable = new Class({
         this.setOptions(myOptions);
         this.options.parent = myParent;
         this.containerID = 'draggableImageContainer';
-        this.container = null;
-        this.clones = new Array();
+        this.container = null;        
         this.drags = new Array();
-
+        
         Drag.Move.implement({
+            // Drag.Move methods override to handle SVG coordinates
             getDroppableCoordinates : function(element) {
                 var rect = element.getBBox();
                 var position = new Object();
@@ -26,13 +26,10 @@ var Draggable = new Class({
                     position.top += scroll.y;
                     position.bottom += scroll.y;
                 }
-                //log("-----");
-                // log(position);
                 return position;
             },
             checkDroppables : function() {
                 var overed = this.getOvered().getLast();
-
                 if (this.overed != overed) {
                     if (this.overed)
                         this.fireEvent('leave', [this.element, this.overed]);
@@ -40,25 +37,6 @@ var Draggable = new Class({
                         this.fireEvent('enter', [this.element, overed]);
                     this.overed = overed;
                 }
-            },
-            checkDropped : function() {
-                var overed = this.getOvered();
-                var correct = false;
-                if (overed) {
-                    Array.each(overed, function(item, index) {
-                        log(item.retrieve('correct'));
-                        log(this.element.id);
-                        //this.fireEvent('dropped', [this.element, overed]);
-                        if (this.element.id == item.retrieve('correct')) {
-                            log("1 Correct");
-                            correct = true;
-                        } else {
-                            log("1 False");
-                            //  return false;
-                        }
-                    }.bind(this))
-                }
-                return correct;
             },
             getOvered : function() {
                 var mainEl = document.getElementById('drivesmart');
@@ -69,27 +47,29 @@ var Draggable = new Class({
                     var now2 = new Object();
                     now2.x = now.x - elOffset.x + this.element.get('width') / 2;
                     now2.y = now.y - elOffset.y + this.element.get('width') / 2;
-
                     return (now2.x > el.left && now2.x < el.right && now2.y < el.bottom && now2.y > el.top );
                 }, this);
                 return overed;
             },
-            isCorrect : function(el) {
+            isCorrect : function(zone) {
                 var mainEl = document.getElementById('drivesmart');
                 var elOffset = getPos(mainEl);
-
-                //    el = this.positions ? this.positions[i] : this.getDroppableCoordinates(el);
+                zoneCoords = this.getDroppableCoordinates(zone);
                 var now = getPos(this.element);
                 var now2 = new Object();
                 now2.x = now.x - elOffset.x + this.element.get('width') / 2;
                 now2.y = now.y - elOffset.y + this.element.get('width') / 2;
-                log("el:", el, this.element, el.retrieve('correct'));
-                var isOver = now2.x > el.left && now2.x < el.right && now2.y < el.bottom && now2.y > el.top;
-                // TODO: isOver not correct ?
-                var isCorrect = (this.element.id == el.retrieve('correct'));
-                log("### Iscorrect: ", isCorrect, isOver);
-                return (isCorrect);
+                log("zone:", zone, this.element, zone.retrieve('correct'));
+                var isOver = now2.x > zoneCoords.left && now2.x < zoneCoords.right && now2.y < zoneCoords.bottom && now2.y > zoneCoords.top;
+                var isCorrect = (this.element.id == zone.retrieve('correct'));
+                // each zone can only have one correct answer
+                var result = (isCorrect == true && isOver == true && zone.retrieve('marked') != true);
+                if (result) {
+                    zone.store('marked', true);
+                }
+                return result;
             },
+            // private to rotate by css
             _rotate : function(element, rotation) {
                 element.setStyles({
                     'transform' : 'rotate(' + rotation + 'deg)',
@@ -99,6 +79,7 @@ var Draggable = new Class({
                     '-o-transform' : 'rotate(' + rotation + 'deg)' /* Opera */
                 });
             },
+            // override to add class changes
             detach : function() {
                 this.handles.removeEvent('mousedown', this.bound.start);
                 this.element.set('class', 'non-draggable');
@@ -117,34 +98,30 @@ var Draggable = new Class({
                         top : this.options.style.top,
                         position : 'absolute'
                     }
-
                     var myClone = this.topViewImage.clone();
                     myClone.set('id', this.options.id);
-
-                    myClone.setStyles(styles);
-                    this.clones.push(myClone);
+                    myClone.setStyles(styles);                    
                     this._addDragEvents(myClone);
                     myClone.inject(this.container);
                     myClone.fireEvent('mousedown', event);
                 }.bind(this));
             }.bind(this)
         });
-
     },
     stop : function() {
         Array.each(this.drags, function(item, index) {
             item.detach();
         })
-
         this.image.removeEvents();
         this.image.set('class', 'non-draggable');
     },
     _addDragEvents : function(target) {
-
+        // we want  to restrict the center of the dragged images to the stage size, so it does not matter how rotated they are
         var leftCorrection = target.get('width') / 2, topCorrection = target.get('height') / 2;
 
         var myDrag = new Drag.Move(target, {
             precalculate : false,
+            // TODO: stage size should come form some globals
             limit : {
                 x : [0 - leftCorrection, 640 - leftCorrection],
                 y : [0 - topCorrection, 480 - topCorrection]
@@ -156,7 +133,6 @@ var Draggable = new Class({
             },
             onEnter : function(element, droppable) {
                 var rotation = droppable.retrieve('angle');
-                log(element, 'entered', droppable, rotation);
                 this._rotate(element, rotation);
             },
             onLeave : function(element, droppable) {
@@ -164,14 +140,14 @@ var Draggable = new Class({
                 this._rotate(element, 0);
             },
             onSnap : function(el) {
-                log('on snap');
+                // log('on snap');
             },
             onComplete : function(el, droppable) {
                 log('Stopped dragging', el, droppable);
                 target.set('class', 'draggable');
             },
             onBeforeStart : function() {
-                log("beforeStart");
+                //log("beforeStart");
                 target.set('class', 'dragging');
             },
             onDrag : function() {
@@ -180,9 +156,7 @@ var Draggable = new Class({
             onCancel : function() {
 
             },
-            onDrop : function(element, droppedOn) {
-                // log(element, 'dropped', droppedOn);
-                //  log(droppedOn.get('id'));
+            onDrop : function(element, droppedOn) {             
                 if (droppedOn != null && droppedOn != undefined) {
                     if (droppedOn.get('id') == 'trash') {
                         element.destroy();
@@ -191,19 +165,5 @@ var Draggable = new Class({
             }
         });
         this.drags.push(myDrag);
-
-    },
-    getHits : function() {
-        var correct = 0;
-        // TODO: calculate score for multiples
-
-        Array.each(this.drags, function(item, index) {
-            if (item.checkDropped() == true) {
-                log("Correct");
-                correct++;
-            }
-        })
-
-        return correct;
     }
 })

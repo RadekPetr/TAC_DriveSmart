@@ -78,15 +78,14 @@ var Questions = new Class({
             var myDiv = new Element("div", {
                 id : "panelContainer"
             });
-          
+
             myDiv.inject($(parentTagID), where);
         }
 
         myDiv.adopt(this.panel);
 
         this.panel.inject(myDiv);
-        
-        
+
         // this.panel.fade('hide', 0);
 
         this.panel.setStyles(this.options.style);
@@ -101,10 +100,10 @@ var Questions = new Class({
 
     },
     remove : function() {
-        this.hide();        
+        this.hide();
         var removedElement = this.panel.destroy();
         $('panelContainer').destroy();
-        
+
     },
     // ---------------------------
     show : function() {
@@ -121,14 +120,13 @@ var Questions = new Class({
         }
     },
     showCorrect : function() {
+        var score = 0;
+        var maxScore = 0;
 
         Array.each(this.options.data, function(question, index) {
-
             var label = document.getElementById("item_label_" + index);
             var radio = document.getElementById("item_" + index);
 
-            log("Disabling");
-            log(radio);
             radio.set('disabled', true);
 
             if (question.correct == false) {
@@ -141,7 +139,15 @@ var Questions = new Class({
                     'font-weight' : 'bold'
                 })
             }
+            if (question.correct == true) {
+                maxScore++;
+                if (radio.checked == true) {
+                    score++;
+                }
+            }
 
         }.bind(this));
+
+        return score / maxScore;
     }
 });

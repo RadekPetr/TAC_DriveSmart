@@ -638,7 +638,7 @@
       <EmptyBkg>dragdrop/urban_15.jpg</EmptyBkg>
       <DropAreas>
       	<Area correct="pedestrian" id="ped" data="path#m84,117l-2,49c0,0 89,1 90,1c1,0 1,-55 1,-55c0,0 -89,5 -89,5z" ></Area>
-        <Area correct="4wd" id="4wd" data="path#m83,177l-4,126l68,-6l1,-114l-65,-6z"></Area>
+        <Area correct="van" id="van" data="path#m83,177l-4,126l68,-6l1,-114l-65,-6z"></Area>
         <Area correct="car" id="car" data="path#m118,300l82,-2l-7,115l-83,-6l8,-107z"></Area>
         <Area id="trash" data="path# m432,1l0,478l206,-1l-1,-477l-205,0z"></Area>
         <Area id="right" data="path#m201,2c1,0 116,-2 116,-2c0,0 0,476 0,476c0,0 -114,-2 -114,-2c0,0 -2,-472 -2,-472z" angle="270"></Area>
