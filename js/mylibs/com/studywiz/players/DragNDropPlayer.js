@@ -50,7 +50,7 @@ var DragNDropPlayer = new Class({
         this.container = null;
         this.containerID = null;
     },
-    stopDrag : function() {
+    stop : function() {
         Array.each(this.draggables, function(item, index) {
             item.stop();          
         });
@@ -96,6 +96,7 @@ var DragNDropPlayer = new Class({
     },
     _prepareZones : function() {
         var data = this.options.data.dropZones;
+        log ("DropZones:",data );
         Array.each(data, function(dropZone, index) {
             dropZone.player = new Shape(this, dropZone);
             dropZone.player.add(this.containerID);
