@@ -10,7 +10,9 @@
       <Video>scanning/scan_uia06_start</Video>
     </Step>
     <Step fmt="KeyRisk">
-      <Zones data="legacy#393:1:230:300"></Zones>
+      <Areas>
+        <Area id="a1" data="path#m398,7c0,0 -11,314 -10,314c1,0 146,158 146,159c0,1 106,-1 106,-1c0,0 -2,-474 -2,-474c0,0 -240,2 -240,2z"></Area>
+      </Areas>
       <Audio>scanning/scan_vsbkr1b</Audio>
     </Step>
     <Step fmt="KRFeedback">
@@ -32,7 +34,11 @@
       <Video>scanning/scan_urt10_start</Video>
     </Step>
     <Step fmt="KeyRisk">
-      <Zones data="legacy#156:182:73:64,246:189:47:37,336:180:36:61"></Zones>
+      <Areas>
+        <Area id="a1" data="path#m150,190c0,0 3,54 3,54c0,0 63,-3 63,-3c0,0 6,-25 6,-24c0,1 -1,-35 -1,-35c0,0 -71,8 -71,8z"></Area>
+        <Area id="a2" data="path#m251,195c0,1 0,32 0,32c0,0 43,2 43,2c0,0 -3,-40 -3,-39c0,1 -40,5 -40,5z"></Area>
+        <Area id="a2" data="path#m346,186c0,0 1,52 1,53c0,1 41,2 41,2c0,0 3,-61 3,-60c0,1 -45,5 -45,5z"></Area>
+      </Areas>
       <Audio>scanning/scan_vsbkr1b</Audio>
     </Step>
     <Step fmt="KRFeedback">
@@ -57,7 +63,9 @@
       <Video>scanning/scan_cst18_start</Video>
     </Step>
     <Step fmt="KeyRisk">
-      <Zones image="keyrisks/scanning_cst18.jpg" data="519:176:57:44"></Zones>
+      <Areas>
+        <Area id="a1" data="path#m576,169c0,0 -1,67 -1,67c0,0 -54,-2 -54,-2c0,0 4,-64 4,-64c0,0 51,-1 51,-1z"></Area>
+      </Areas>
       <Audio>scanning/scan_vsbkr1b</Audio>
     </Step>
     <Step fmt="KRFeedback">

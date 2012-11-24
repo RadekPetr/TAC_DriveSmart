@@ -37,7 +37,7 @@ var SequencePlayer = new Class({
         this.interactions = null;
         this.videos = new Array();
         this.activeVideo = null;
-        this.shape = null;
+        this.shapes = null;
         this.cameo_image = null;
 
         this.buttonPosition = {
@@ -294,16 +294,28 @@ var SequencePlayer = new Class({
                 case "KeyRisk" :
                     log("KR");
                     this._removeInteractions();
-                    this._setupRisks();
+
                     step.player.options.next = 'Risks.ready';
-                    step.player.start();
+
                     //TODO: <Audio waitfor="true">sound/scanning/mp3/scan_vsbkr1b.mp3</Audio>
+
+                    this.shapes = new KeyRiskPlayer(this, {});
+
+                    // don't want to clone the step data by passing it as option
+                    this.shapes.options.data = {
+                        areas : step.areas
+                    };
+                    // TODO: move adding the aqreas until afte rthe audio is done ?
+                    this.shapes.add(this.activeVideo.containerID);
+                    // play Audio - Intro
+                    step.player.start();
+
                     break;
                 case "KRFeedback":
 
                     //TODO: get score: step.score = ...
                     this._removeButtons();
-                    step.image.add(this.shape.container.id);
+                    step.image.add(this.shapes.container.id);
                     step.image.show();
                     step.player.options.next = 'KRFeedback.done';
                     step.player.start();
@@ -356,7 +368,7 @@ var SequencePlayer = new Class({
 
                     // don't want to clone the step data by passing it as option
                     step.dragNDrop.options.data = {
-                        dropZones : step.dropZones
+                        areas : step.areas
                     };
                     step.dragNDrop.add(this.activeVideo.containerID);
                     // play Audio - Intro
@@ -433,6 +445,7 @@ var SequencePlayer = new Class({
                 break;
             case "Risks.done" :
                 this.activeVideo.container.removeEvents('click');
+                this.currentStep.score = this.shapes.getScore();
                 this.nextStep();
                 break;
             case 'KRFeedback.done':
@@ -583,9 +596,9 @@ var SequencePlayer = new Class({
                 this._removeButtons();
                 this._cleanUp();
                 // disable dragging now
-                this.currentStep.dragNDrop.stopDrag();
+                this.currentStep.dragNDrop.stop();
 
-                this.currentStep.score= this.currentStep.dragNDrop.getScore();
+                this.currentStep.score = this.currentStep.dragNDrop.getScore();
 
                 var nextStep = this.currentSequence[0];
                 if (nextStep.attributes.fmt == "DragNDropFeedback") {
@@ -595,35 +608,7 @@ var SequencePlayer = new Class({
                     this.nextStep();
                 }
                 break;
-            case "risk.selected":
-                /// the risks need to be inside some div which could be deleted later
-                var el = document.getElementById(this.options.unitTagId);
 
-                var elOffset = getPos(el);
-                var file = this.options.imageFolder + 'keyrisks/selected_risk.png';
-                this.risk_image = new ImagePlayer(this, {
-                    src : file,
-                    next : "",
-                    title : 'Risk',
-                    id : 'Risk',
-                    style : {
-                        left : params._x - elOffset.x - 30,
-                        top : params._y - elOffset.y - 30
-                    }
-                });
-                this.risk_image.preload();
-
-                this.risk_image.add(this.activeVideo.containerID);
-                this.risk_image.display();
-                // TODO: wrap all risks to a div and get rid of them whne no needed
-                // TODO: limit to 5
-
-                this.risk_image.tween('0', '1', 4, 'opacity', 100);
-                break;
-            case "shape.clicked":
-                log("Shape clicked ID: " + params.id)
-                //TODO: scoring
-                break;
             case "Menu.item.clicked":
 
                 log(params.id);
@@ -872,8 +857,9 @@ var SequencePlayer = new Class({
                     step.data = questions;
                     break;
                 case "DropAreas" :
+                case "Areas" :
                     var rawData = item.childNodes;
-                    step.dropZones = new Array();
+                    step.areas = new Array();
                     Array.each(rawData, function(item, index) {
                         var area = {
                             id : item.attributes.id,
@@ -881,10 +867,12 @@ var SequencePlayer = new Class({
                             angle : item.attributes.angle,
                             correct : item.attributes.correct
                         }
-                        step.dropZones.push(area);
+                        step.areas.push(area);
                     })
                     break;
+
                 case "RotateAreas" :
+                    // TODO: remove if no needed
                     var rawData = item.childNodes;
                     step.rotateZones = new Array();
                     Array.each(rawData, function(item, index) {
@@ -895,8 +883,6 @@ var SequencePlayer = new Class({
                         }
                         step.rotateZones.push(area);
                     })
-                    break;
-                case "RotateAreas" :
                     break;
                 case "Zones":
 
@@ -1014,37 +1000,18 @@ var SequencePlayer = new Class({
         }
 
     }.protect(),
-    _setupRisks : function() {
-        // TODO unify with Add Zones
-        log(this.currentStep.zones);
-        var stepData = this.currentStep.zones;
-        this.shape = new Shape(this, {
-            data : stepData
-        });
-        this.shape.add(this.activeVideo.containerID);
-        this.activeVideo.container.addEvent('click', function(e) {
-            this.fireEvent("TIMELINE", {
-                type : "risk.clicked",
-                id : this.options.id,
-                next : 'risk.selected',
-                _x : e.page.x,
-                _y : e.page.y
-            });
-
-        }.bind(this));
-    }.protect(),
     _removeRisks : function() {
-        if (this.shape != undefined && this.shape != null) {
-            this.shape.remove();
+        if (this.shapes != undefined && this.shapes != null) {
+            this.shapes.remove();
         }
-        this.shape = null;
+        this.shapes = null;
     }.protect(),
     _updateUserProgress : function() {
         // Update state to completed = true;
         this.sequenceState.completed = true;
         // TODO: give each step maxPoints value and then sum those to get max score per sequence and calculate each sequence score as % of this, give each step a getScore method
         // TODO: remove this whne scoring is implemented
-        this.sequenceState.score = 100;
+        //this.sequenceState.score = 100;
 
         this.myParent().fireEvent("SEQUENCE", {
             type : "module.event",

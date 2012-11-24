@@ -47,7 +47,7 @@ var User = new Class({
                 var seqObject = new Object({
                     id : value,
                     completed : false,
-                    score : 0
+                    score : []
                 })
                 sequences.push(seqObject);
             })

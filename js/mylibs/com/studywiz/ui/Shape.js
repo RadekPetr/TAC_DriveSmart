@@ -29,7 +29,9 @@ var Shape = new Class({
         this.setOptions(myOptions);
         this.options.parent = myParent;
 
-        var tempArray = this.options.data.split("#");
+        var data = this.options.data;
+        log("Data:", this.options, myOptions);
+        var tempArray = data.split("#");
         this.options.type = tempArray[0];
         if (this.options.type == null) {
             log("ERROR: no type defined for svg data");
@@ -40,41 +42,8 @@ var Shape = new Class({
         this.container = null;
         this.containerID = 'container_' + this.options.id;
 
-        switch (this.options.type) {
-            case "legacy":
-                var arrayOfShapes = tempArray[1].split(",");
-                log(arrayOfShapes);
-
-                Array.each(arrayOfShapes, function(shape, index) {
-                    var temp = shape.split(":");
-                    var left = Number.from(temp[0]);
-                    var top = Number.from(temp[1]);
-                    var width = Number.from(temp[2]);
-                    var height = Number.from(temp[3]);
-
-                    var polygon = left + "," + top + " " + left + "," + (top - height) + " " + (left + width) + "," + (top - height) + " " + (left + width) + "," + top + " " + left + "," + top;
-                    this.shapes.push(polygon);
-                    log("Polygon " + polygon);
-                    /*
-                     x:y:w:h
-                     points =
-                     x,y
-                     x,y-h
-                     x+w,y-h
-                     x+w,y
-                     x,y
-                     */
-
-                }.bind(this))
-                break;
-            case "polyline":
-                break;
-            case "path":
-
-                this.shapes.push(tempArray[1]);
-                log(this.shapes);
-                break;
-        }
+        this.shapes.push(tempArray[1]);
+        log(this.shapes);
 
     },
     myParent : function() {
@@ -119,55 +88,26 @@ var Shape = new Class({
 
         Array.each(this.shapes, function(item, index) {
             var shapeID = 'shape_' + index;
-            if (this.options.type == "legacy") {
-                var shapeElement = new Element("polyline", {
-                    'id' : shapeID,
-                    'points' : item
-                });
-            } else {
-                var shapeElement = new Element("path", {
-                    'd' : item,
-                    id : this.options.id
-                });
-            }
+            var shapeElement = new Element("path", {
+                'd' : item,
+                id : this.options.id
+            });
 
             shapeElement.inject(this.shapeWrapper);
             // this.hide();
-
             shapeElement.setStyles(this.options.svgStyle);
-
             shapeElement.addEvent('click', function(e) {
                 //alert('clicked' + this.options.id);
                 this.myParent().fireEvent("TIMELINE", {
                     type : "shape.event",
                     id : shapeID,
                     next : this.options.next,
+                    element : shapeElement,
                     _x : e.page.x,
                     _y : e.page.y
                 });
             }.bind(this))
 
-            shapeElement.addEvent('mouseover', function(e) {
-                log('mouseover' + this.options.id);
-                this.myParent().fireEvent("TIMELINE", {
-                    type : "shape.event",
-                    id : shapeID,
-                    next : this.options.next,
-                    _x : e.page.x,
-                    _y : e.page.y
-                });
-            }.bind(this))
-
-            shapeElement.addEvent('onOver', function(e) {
-                log('mouseover' + this.options.id);
-                this.myParent().fireEvent("TIMELINE", {
-                    type : "shape.event",
-                    id : shapeID,
-                    next : this.options.next,
-                    _x : e.page.x,
-                    _y : e.page.y
-                });
-            }.bind(this));
             this.shape = shapeElement;
         }.bind(this))
 
@@ -196,6 +136,8 @@ var Shape = new Class({
             };
         });
     },
+    
+    //TODO: delete ?
     //+ Jonas Raoni Soares Silva
     //@ http://jsfromhell.com/math/is-point-in-poly [v1.0]
     isInside : function(poly, pt) {

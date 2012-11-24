@@ -637,12 +637,12 @@
       <DoneAudio>extra/extra_vddact</DoneAudio>
       <EmptyBkg>dragdrop/urban_15.jpg</EmptyBkg>
       <DropAreas>
-      	<Area correct="pedestrian" id="ped" data="path#m84,117l-2,49c0,0 89,1 90,1c1,0 1,-55 1,-55c0,0 -89,5 -89,5z" ></Area>
+        <Area correct="pedestrian" id="ped" data="path#m84,117l-2,49c0,0 89,1 90,1c1,0 1,-55 1,-55c0,0 -89,5 -89,5z"></Area>
         <Area correct="van" id="van" data="path#m83,177l-4,126l68,-6l1,-114l-65,-6z"></Area>
         <Area correct="car" id="car" data="path#m118,300l82,-2l-7,115l-83,-6l8,-107z"></Area>
         <Area id="trash" data="path# m432,1l0,478l206,-1l-1,-477l-205,0z"></Area>
         <Area id="right" data="path#m201,2c1,0 116,-2 116,-2c0,0 0,476 0,476c0,0 -114,-2 -114,-2c0,0 -2,-472 -2,-472z" angle="270"></Area>
-        <Area id="left" data="path#m78,5l0,473l116,-2c0,0 -2,-475 -2,-474c0,1 -114,3 -114,3z" angle="90"></Area>        
+        <Area id="left" data="path#m78,5l0,473l116,-2c0,0 -2,-475 -2,-474c0,1 -114,3 -114,3z" angle="90"></Area>
       </DropAreas>
     </Step>
     <Step fmt="DragNDropFeedback">
@@ -694,14 +694,14 @@
       <Audio>extra/extra_vddinst</Audio>
       <DoneAudio>extra/extra_vddact</DoneAudio>
       <EmptyBkg>dragdrop/urban_17.jpg</EmptyBkg>
-      <DropAreas>      	
+      <DropAreas>
         <Area correct="4wd" id="4wd" data="path#m139,286l-3,144l77,2l0,-150l-74,4z"></Area>
         <Area correct="car" id="car" data="path#m83,118l3,-68l-85,2l-3,71l85,-5z"></Area>
         <Area id="trash" data="path# m432,1l0,478l206,-1l-1,-477l-205,0z"></Area>
         <Area id="right" data="path#m215,3l1,473l142,1l-1,-475l-142,1z" angle="270"></Area>
-        <Area id="left" data="path#m70,476l137,-3l2,-469l-142,-2l3,474z" angle="90"></Area>     
-        <Area id="bottom" data="path#m1,119c1,0 68,1 68,1c0,0 -2,65 -2,65c0,0 -69,0 -69,0c0,0 3,-66 3,-66z" angle="0"></Area>     
-        <Area id="top" data="path#m0,51l65,-1l0,60l-64,2l-1,-61z" angle="180"></Area>     
+        <Area id="left" data="path#m70,476l137,-3l2,-469l-142,-2l3,474z" angle="90"></Area>
+        <Area id="bottom" data="path#m1,119c1,0 68,1 68,1c0,0 -2,65 -2,65c0,0 -69,0 -69,0c0,0 3,-66 3,-66z" angle="0"></Area>
+        <Area id="top" data="path#m0,51l65,-1l0,60l-64,2l-1,-61z" angle="180"></Area>
       </DropAreas>
     </Step>
     <Step fmt="DragNDropFeedback">
@@ -723,15 +723,15 @@
       <Audio>extra/extra_vddinst</Audio>
       <DoneAudio>extra/extra_vddact</DoneAudio>
       <EmptyBkg>dragdrop/urban_18.jpg</EmptyBkg>
-      <DropAreas>      	
+      <DropAreas>
         <Area correct="car" id="car" data="path#m131,351l99,0l-11,124l-93,1l5,-125z"></Area>
         <Area correct="car" id="car" data="path#m1,110l60,-2l0,113c0,0 -65,3 -64,3c1,0 4,-114 4,-114z"></Area>
         <Area correct="car" id="car" data="path#m1,357c0,0 51,-1 52,-1c1,0 1,-118 1,-118c0,0 -53,-6 -53,-6c0,0 0,125 0,125z"></Area>
         <Area id="trash" data="path# m432,1l0,478l206,-1l-1,-477l-205,0z"></Area>
         <Area id="right_top" data="path#m222,5l-46,198l251,1c0,0 1,-205 2,-205c1,0 -207,6 -207,6z" angle="120"></Area>
-        <Area id="right_bottom" data="path#m158,205l-24,269l290,1l-1,-268l-265,-2z" angle="100"></Area>     
-        <Area id="middle" data="path#m108,188l65,-1l-9,287l-57,0l1,-286z" angle="90"></Area>     
-        <Area id="left" data="path#m1,2l0,475l105,-2l2,-472l-107,-1z" angle="90"></Area>     
+        <Area id="right_bottom" data="path#m158,205l-24,269l290,1l-1,-268l-265,-2z" angle="100"></Area>
+        <Area id="middle" data="path#m108,188l65,-1l-9,287l-57,0l1,-286z" angle="90"></Area>
+        <Area id="left" data="path#m1,2l0,475l105,-2l2,-472l-107,-1z" angle="90"></Area>
       </DropAreas>
     </Step>
     <Step fmt="DragNDropFeedback">
@@ -778,7 +778,10 @@
       <Video>urban/urban_uic02_next</Video>
     </Step>
     <Step fmt="KeyRisk">
-      <Zones data="legacy#333:159:167:124,73:163:54:77"></Zones>
+      <Areas>
+        <Area id="a1" data="path#m75,173c0,0 -2,64 -2,64c0,0 49,-3 49,-2c0,1 -1,-69 -1,-69c0,0 -46,7 -46,7z"></Area>
+        <Area id="a2" data="path#m336,285c0,0 132,-2 132,-2c0,0 22,-94 22,-94c0,0 -14,-43 -14,-43c0,0 -92,1 -92,2c0,1 -65,62 -65,62c0,0 17,75 17,75z"></Area>
+      </Areas>
       <Audio>scanning/scan_vsbkr1b</Audio>
     </Step>
     <Step fmt="KRFeedback">
@@ -884,7 +887,11 @@
       <Audio>urban/urban_vdbu3d</Audio>
     </Step>
     <Step fmt="KeyRisk">
-      <Zones keyrisk="true" data="75:172:136:104,253:189:67:50,421:171:44:86"></Zones>
+      <Areas>
+        <Area id="a1" data="path#m80.38217,186.24207c0,0.63693 9.55414,83.43948 9.42674,83.18469c-0.1274,-0.25479 86.7516,-1.0191 86.7516,-1.0191c0,0 30.57324,-16.5605 30.44585,-16.81529c-0.1274,-0.25479 0.76434,-76.17833 0.76434,-75.54138c0,0.63695 -36.30573,-1.2739 -36.43312,-1.52869c-0.1274,-0.25479 -90.95541,11.71977 -90.95541,11.71977z"></Area>
+        <Area id="a2" data="path#m260,195c0,0 2,39 2,39c0,0 55,0 55,0c0,0 -2,-43 -2,-43c0,0 -55,4 -55,4z"></Area>
+        <Area id="a2" data="path#m420.50958,176.05098c-0.00003,-0.00002 1.9108,84.07643 1.78342,83.82164c-0.12738,-0.25479 42.16562,-1.0191 42.16562,-0.38214c0,0.63696 -1.2739,-87.8981 -1.2739,-87.8981c0,0 -42.67514,4.4586 -42.67514,4.4586z"></Area>
+      </Areas>
       <Audio>scanning/scan_vsbkr1b</Audio>
     </Step>
     <Step fmt="KRFeedback">
@@ -950,7 +957,11 @@
       <Video>urban/urban_urt04_next</Video>
     </Step>
     <Step fmt="KeyRisk">
-      <Zones keyrisk="true" data="0:87:76:234,76:180:60:76,363:157:40:78"></Zones>
+      <Areas>
+        <Area id="a1" data="path#m14,70c0,0 64,111 64,111c0,0 1,91 1,91c0,0 -38,49 -38,49c0,0 -41,7 -41,7c0,0 5,-262 5,-262l9,4z"></Area>
+        <Area id="a2" data="path#m82,172c0,0 3,84 3,84c0,0 60,-3 60,-3c0,0 -2,-79 -2,-79c0,0 -61,-2 -61,-2z"></Area>
+        <Area id="a3" data="path#m359,154c0,1 0,86 0,86c0,0 47,-5 47,-5c0,0 -5,-91 -5,-91c0,0 -42,10 -42,10z"></Area>
+      </Areas>
       <Audio>scanning/scan_vsbkr1b</Audio>
     </Step>
     <Step fmt="KRFeedback">
@@ -1016,7 +1027,10 @@
       <Video>urban/urban_umt01_middle</Video>
     </Step>
     <Step fmt="KeyRisk">
-      <Zones keyrisk="true" data="3:227:178:70,178:225:48:41"></Zones>
+      <Areas>
+        <Area id="a1" data="path#m12,213c0,0 165,44 165,44c0,0 0,13 0,14c0,1 -83,34 -83,35c0,1 -94,-17 -94,-17c0,0 0,-79 0,-79c0,0 12,3 12,3z"></Area>
+        <Area id="a2" data="path#m113,223c0,0 112,2 112,2c0,0 7,20 7,20c0,0 -46,18 -46,18c0,0 -73,-40 -73,-40z"></Area>
+      </Areas>
       <Audio>scanning/scan_vsbkr1b</Audio>
     </Step>
     <Step fmt="KRFeedback">

@@ -19,7 +19,7 @@ var DragNDropPlayer = new Class({
         this.container = null;
         this.containerID = 'container_' + this.options.id;
         this.targets = new Array();
-        this.correctZones = new Array();
+        this.correctAreas = new Array();
         this.addEvent("TIMELINE", this.handleNavigationEvent);
     },
     myParent : function() {
@@ -40,7 +40,7 @@ var DragNDropPlayer = new Class({
             });
             this.container.inject($(parentTagID), where);
         }
-        this._prepareZones();
+        this._prepareAreas();
         this._prepareDraggables();
     },
     remove : function() {
@@ -60,7 +60,7 @@ var DragNDropPlayer = new Class({
 
         // check if all this.targets have some draggable with correct id
         //
-        var pointsPerItem = 100 / this.correctZones.length;
+        var pointsPerItem = 100 / this.correctAreas.length;
         var score = 0;
 
         var allDraggables = new Array();
@@ -68,7 +68,7 @@ var DragNDropPlayer = new Class({
             allDraggables.append(item.drags);
         })
         // all drop areas with correct
-        Array.each(this.correctZones, function(zone, index) {
+        Array.each(this.correctAreas, function(zone, index) {
             Array.each(allDraggables, function(draggableItem) {
                 if (draggableItem.isCorrect(zone) == true) {
                     score++;
@@ -94,8 +94,8 @@ var DragNDropPlayer = new Class({
                 break;
         }
     },
-    _prepareZones : function() {
-        var data = this.options.data.dropZones;
+    _prepareAreas : function() {
+        var data = this.options.data.areas;
         log ("DropZones:",data );
         Array.each(data, function(dropZone, index) {
             dropZone.player = new Shape(this, dropZone);
@@ -105,7 +105,7 @@ var DragNDropPlayer = new Class({
             dropZone.player.shape.store('angle', dropZone.angle);
             if (dropZone.correct != null && dropZone.correct != undefined) {
                 dropZone.player.shape.store('correct', dropZone.correct);
-                this.correctZones.push(dropZone.player.shape);
+                this.correctAreas.push(dropZone.player.shape);
             }
         }.bind(this))
     },
