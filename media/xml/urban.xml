@@ -1052,7 +1052,7 @@
     <Step fmt="PlayVideo">
       <Video>urban/urban_umt01_end</Video>
     </Step>
-    <Step fmt="PlayAudio" hide="box">
+    <Step fmt="QuestionFeedback" hide="box">
       <Audio>urban/urban_vdbu5k</Audio>
     </Step>
     <Step fmt="CommentaryIntro">

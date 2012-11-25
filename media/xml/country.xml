@@ -483,9 +483,6 @@
         <Data correct="true">Brake and stop still on the other side of the road</Data>
         <Data correct="false">Brake and stop, ending up partially on our side of the road</Data>
       </Inter>
-      <Post>
-        <Element />
-      </Post>
     </Step>
     <Step fmt="PlayVideo">
       <Video>country/country_cst09_next_next</Video>
