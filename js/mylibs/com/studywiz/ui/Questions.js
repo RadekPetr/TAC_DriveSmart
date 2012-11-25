@@ -26,6 +26,7 @@ var Questions = new Class({
         data : ["Q1", "Q2", "Q3"],
         id : 'element.id',
         next : 'next.action',
+        responses : 1,
         correct : null,
         parent : null
     },
@@ -33,6 +34,8 @@ var Questions = new Class({
 
         this.setOptions(myOptions);
         this.options.parent = myParent;
+        this.checkBoxes = new Array();
+        this.selectedCheckBoxes = new Array();
 
         this.panel = new Element("div", {
             id : "questionPanel"
@@ -42,12 +45,18 @@ var Questions = new Class({
 
         Array.each(this.options.data, function(question, index) {
 
-            var radio = new Element('input', {
-                'type' : 'radio',
+            var checkbox = new Element('input', {
+                'type' : 'checkbox',
                 'id' : "item_" + index,
                 'group' : 'questionPanel',
                 'name' : 'question_item'
             })
+
+            checkbox.addEvent('click', function() {
+                this._checkMaxSelects(checkbox);
+            }.bind(this))
+
+            this.checkBoxes.push(checkbox);
 
             var label = new Element('label', {
                 'for' : "item_" + index,
@@ -61,7 +70,7 @@ var Questions = new Class({
             })
 
             var paragraph = new Element('p', {});
-            paragraph.adopt(radio);
+            paragraph.adopt(checkbox);
             paragraph.adopt(label);
 
             this.panel.adopt(paragraph);
@@ -149,5 +158,16 @@ var Questions = new Class({
         }.bind(this));
 
         return score / maxScore;
+    },
+    _checkMaxSelects : function(checkBox) {
+        if (checkBox.checked) {
+            this.selectedCheckBoxes.unshift (checkBox);
+            if (this.selectedCheckBoxes.length > this.options.responses){
+                var toDeselect = this.selectedCheckBoxes.pop();
+                toDeselect.checked = false;                
+            }           
+        } else {
+            this.selectedCheckBoxes.erase (checkBox);
+        } 
     }
 });

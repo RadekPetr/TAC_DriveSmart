@@ -225,11 +225,14 @@ var SequencePlayer = new Class({
                     break;
                 case "QuestionUser":
                     this._removeInteractions();
+                    if (step.attributes.resp != null &&  step.attributes.resp != undefined) {
+                        step.data.responses = step.attributes.resp;
+                    }
                     this.interactions = this._setupQuestions(step.data);
                     var button = this._setupButton("Done", "button save", "QuestionUser.done", this.buttonPosition.x, this.buttonPosition.y);
                     this.buttons.push(button);
 
-                    //TODO: resp="3" - allow multiple choices
+                    // resp="3" - allow multiple choices
                     //TODO: notrack="true"
                     //TODO: image="country_cla01_next_first.jpg" - override background image ...
                     break;

@@ -119,7 +119,7 @@
     <Step fmt="Question" cmd="hidescreen">
       <Audio>scanning/scan_vsbre2b</Audio>
     </Step>
-    <Step fmt="QuestionUser">
+    <Step fmt="QuestionUser" resp="3">
       <Inter>
         <Data correct="true">A car entering a driveway</Data>
         <Data correct="true">An oncoming car</Data>
@@ -325,7 +325,7 @@
     <Step fmt="Question" cmd="hidescreen">
       <Audio>scanning/scan_vsar4b</Audio>
     </Step>
-    <Step fmt="QuestionUser">
+    <Step fmt="QuestionUser" resp="3">
       <Inter>
         <Data correct="true">A cyclist on the footpath, going in the same direction as our car</Data>
         <Data correct="false">A cyclist going in the opposite direction to our car</Data>
@@ -415,7 +415,7 @@
     <Step fmt="Question" cmd="hidescreen">
       <Audio>scanning/scan_vsar7b</Audio>
     </Step>
-    <Step fmt="QuestionUser">
+    <Step fmt="QuestionUser" resp="3">
       <Inter>
         <Data correct="false">A car reversing onto the road, from a driveway on the far side of the road</Data>
         <Data correct="true">An oncoming car</Data>
