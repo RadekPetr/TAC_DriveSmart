@@ -890,7 +890,7 @@
       <Areas>
         <Area id="a1" data="path#m80.38217,186.24207c0,0.63693 9.55414,83.43948 9.42674,83.18469c-0.1274,-0.25479 86.7516,-1.0191 86.7516,-1.0191c0,0 30.57324,-16.5605 30.44585,-16.81529c-0.1274,-0.25479 0.76434,-76.17833 0.76434,-75.54138c0,0.63695 -36.30573,-1.2739 -36.43312,-1.52869c-0.1274,-0.25479 -90.95541,11.71977 -90.95541,11.71977z"></Area>
         <Area id="a2" data="path#m260,195c0,0 2,39 2,39c0,0 55,0 55,0c0,0 -2,-43 -2,-43c0,0 -55,4 -55,4z"></Area>
-        <Area id="a2" data="path#m420.50958,176.05098c-0.00003,-0.00002 1.9108,84.07643 1.78342,83.82164c-0.12738,-0.25479 42.16562,-1.0191 42.16562,-0.38214c0,0.63696 -1.2739,-87.8981 -1.2739,-87.8981c0,0 -42.67514,4.4586 -42.67514,4.4586z"></Area>
+        <Area id="a3" data="path#m420.50958,176.05098c-0.00003,-0.00002 1.9108,84.07643 1.78342,83.82164c-0.12738,-0.25479 42.16562,-1.0191 42.16562,-0.38214c0,0.63696 -1.2739,-87.8981 -1.2739,-87.8981c0,0 -42.67514,4.4586 -42.67514,4.4586z"></Area>
       </Areas>
       <Audio>scanning/scan_vsbkr1b</Audio>
     </Step>
@@ -958,9 +958,9 @@
     </Step>
     <Step fmt="KeyRisk">
       <Areas>
-        <Area id="a1" data="path#m14,70c0,0 64,111 64,111c0,0 1,91 1,91c0,0 -38,49 -38,49c0,0 -41,7 -41,7c0,0 5,-262 5,-262l9,4z"></Area>
-        <Area id="a2" data="path#m82,172c0,0 3,84 3,84c0,0 60,-3 60,-3c0,0 -2,-79 -2,-79c0,0 -61,-2 -61,-2z"></Area>
-        <Area id="a3" data="path#m359,154c0,1 0,86 0,86c0,0 47,-5 47,-5c0,0 -5,-91 -5,-91c0,0 -42,10 -42,10z"></Area>
+        <Area id="a" data="path#m14,70c0,0 64,111 64,111c0,0 1,91 1,91c0,0 -38,49 -38,49c0,0 -41,7 -41,7c0,0 5,-262 5,-262l9,4z"></Area>
+        <Area id="a" data="path#m82,172c0,0 3,84 3,84c0,0 60,-3 60,-3c0,0 -2,-79 -2,-79c0,0 -61,-2 -61,-2z"></Area>
+        <Area id="a" data="path#m359,154c0,1 0,86 0,86c0,0 47,-5 47,-5c0,0 -5,-91 -5,-91c0,0 -42,10 -42,10z"></Area>
       </Areas>
       <Audio>scanning/scan_vsbkr1b</Audio>
     </Step>
@@ -1426,9 +1426,6 @@
     </Step>
     <Step fmt="PlayVideo">
       <Video>urban/urban_umt02_next</Video>
-    </Step>
-    <Step fmt="Commentary" exe="urban,extra_vcomi,urban_umt02_start,urban_vdau10y.wav,we merged left of car,speeding,we merged left of tram,car behind too close">
-      <Audio>extra/extra_vcomi</Audio>
     </Step>
     <Step fmt="CommentaryIntro">
       <Image>urban/urban_umt02_start_first.jpg</Image>

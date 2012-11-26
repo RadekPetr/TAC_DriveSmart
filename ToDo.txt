@@ -9,10 +9,12 @@
 - Scoring
 - main menu
 - add browser and version detection IE9 +, ...
-- Commentary Kaps 3-6 - missing videos ? Get copy of the released CD
+
 - each step could be wrapped ina step div for easier disposal
-- Extract data handling to Module class
+
 - handle debug while module is still loading
+- shapes fro KEy risks - fix IDs all inone div
+- add check for previous and next step types ?
 -----------------------------------------------------------------
 DONE:
 - Change radio cross to tick

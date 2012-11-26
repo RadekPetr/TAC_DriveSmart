@@ -345,8 +345,10 @@
     <Step fmt="PlayVideo">
       <Video>country/country_fat08_start</Video>
     </Step>
-    <Step fmt="QuestionUser" cmd="">
+    <Step fmt="Question">
       <Audio>country/country_vdfa2b</Audio>
+    </Step>
+    <Step fmt="QuestionUser" cmd="">      
       <Inter>
         <Data correct="false">Below the speed limit</Data>
         <Data correct="false">At or around the speed limit</Data>

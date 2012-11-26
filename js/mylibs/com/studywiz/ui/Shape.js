@@ -40,7 +40,7 @@ var Shape = new Class({
         this.shapes = new Array();
         this.shapesArray = new Array();
         this.container = null;
-        this.containerID = 'container_' + this.options.id;
+        this.containerID = 'container_shape' + this.options.id;
 
         this.shapes.push(tempArray[1]);
         log(this.shapes);
@@ -85,7 +85,7 @@ var Shape = new Class({
             this.shapeWrapper = this.container.getElement('svg[id=' + this.options.id + ']');
         }
         this.shape = null;
-
+        //TODO: handle kery risks so theya re inside one div
         Array.each(this.shapes, function(item, index) {
             var shapeID = 'shape_' + index;
             var shapeElement = new Element("path", {
@@ -136,7 +136,7 @@ var Shape = new Class({
             };
         });
     },
-    
+
     //TODO: delete ?
     //+ Jonas Raoni Soares Silva
     //@ http://jsfromhell.com/math/is-point-in-poly [v1.0]

@@ -162,10 +162,25 @@ var SequencePlayer = new Class({
                     })
                     sequenceTitle.inject($(myContainerID));
 
-                    var button = this._setupButton("Continue", "button next", "SequenceIntro.done", this.buttonPosition.x, this.buttonPosition.y);
-                    this.buttons.push(button);
-                    button = this._setupButton("Main Menu", "button star", "MainMenuIntro.clicked", this.buttonPosition.x, this.buttonPosition.y - 45);
-                    this.buttons.push(button);
+                    this._setupButton({
+                        text : "Continue",
+                        'class' : "button next",
+                        next : "SequenceIntro.done",
+                        style : {
+                            left : this.buttonPosition.x,
+                            top : this.buttonPosition.y
+                        }
+                    });
+                    this._setupButton({
+                        text : "Main Menu",
+                        'class' : "button star",
+                        next : "MainMenuIntro.clicked",
+                        style : {
+                            left : this.buttonPosition.x,
+                            top : this.buttonPosition.y - 45
+                        }
+                    });
+
                     step.player.options.next = '';
                     step.player.start();
                     break;
@@ -179,13 +194,28 @@ var SequencePlayer = new Class({
                     step.image.add(myContainerID);
                     step.image.show();
 
-                    var button = this._setupButton("Record", "button record", "CommentaryIntro.done", this.buttonPosition.x, this.buttonPosition.y);
-                    this.buttons.push(button);
+                    this._setupButton({
+                        text : "Record",
+                        'class' : "button record",
+                        next : "CommentaryIntro.done",
+                        style : {
+                            left : this.buttonPosition.x,
+                            top : this.buttonPosition.y
+                        }
+                    });
                     // does the next step have expert audio ? Show button if yes
                     var nextStep = this.currentSequence[0];
                     if (nextStep.expertAudio != undefined) {
-                        button = this._setupButton("Expert", "button play", "CommentaryIntro.expert.clicked", 20, this.buttonPosition.y);
-                        this.buttons.push(button);
+                        this._setupButton({
+                            text : "Expert commentary",
+                            'class' : "button play",
+                            next : "CommentaryIntro.expert.clicked",
+                            style : {
+                                left : 20,
+                                top : this.buttonPosition.y,
+                                width : '195px'
+                            }
+                        });
                     }
 
                     this.recorder = new Recorder(this, {
@@ -225,13 +255,19 @@ var SequencePlayer = new Class({
                     break;
                 case "QuestionUser":
                     this._removeInteractions();
-                    if (step.attributes.resp != null &&  step.attributes.resp != undefined) {
+                    if (step.attributes.resp != null && step.attributes.resp != undefined) {
                         step.data.responses = step.attributes.resp;
                     }
                     this.interactions = this._setupQuestions(step.data);
-                    var button = this._setupButton("Done", "button save", "QuestionUser.done", this.buttonPosition.x, this.buttonPosition.y);
-                    this.buttons.push(button);
-
+                    this._setupButton({
+                        text : "Done",
+                        'class' : "button save",
+                        next : "QuestionUser.done",
+                        style : {
+                            left : this.buttonPosition.x,
+                            top : this.buttonPosition.y
+                        }
+                    });
                     // resp="3" - allow multiple choices
                     //TODO: notrack="true"
                     //TODO: image="country_cla01_next_first.jpg" - override background image ...
@@ -256,22 +292,56 @@ var SequencePlayer = new Class({
                     break;
                 case "Continue":
                     // NOTE IMPORTANT - this only can be at the end of the sequence !!!!
-                    var button = this._setupButton("Continue", "button next", "Continue.clicked", this.buttonPosition.x, this.buttonPosition.y);
-                    this.buttons.push(button);
-                    button = this._setupButton("Main Menu", "button star", "MainMenu.clicked", this.buttonPosition.x, this.buttonPosition.y - 45);
-                    this.buttons.push(button);
-                    button = this._setupButton("Repeat", "button back", "Repeat.clicked", this.buttonPosition.x, this.buttonPosition.y - 90);
-                    this.buttons.push(button);
+                    this._setupButton({
+                        text : "Continue",
+                        'class' : "button next",
+                        next : "Continue.clicked",
+                        style : {
+                            left : this.buttonPosition.x,
+                            top : this.buttonPosition.y
+                        }
+                    });
+                    this._setupButton({
+                        text : "Main Menu",
+                        'class' : "button star",
+                        next : "MainMenu.clicked",
+                        style : {
+                            left : this.buttonPosition.x,
+                            top : this.buttonPosition.y - 45
+                        }
+                    });
+                    this._setupButton({
+                        text : "Repeat",
+                        'class' : "button back",
+                        next : "Repeat.clicked",
+                        style : {
+                            left : this.buttonPosition.x,
+                            top : this.buttonPosition.y - 90
+                        }
+                    });
 
                     this._updateUserProgress();
-
                     break;
                 case "End.Module.Continue":
                     step.player.start();
-                    var button = this._setupButton("Continue", "button next", "End.Module.Continue.clicked", this.buttonPosition.x, this.buttonPosition.y);
-                    this.buttons.push(button);
-                    button = this._setupButton("Repeat", "button back", "Repeat.clicked", this.buttonPosition.x, this.buttonPosition.y - 90);
-                    this.buttons.push(button);
+                    this._setupButton({
+                        text : "Continue",
+                        'class' : "button next",
+                        next : "End.Module.Continue.clicked",
+                        style : {
+                            left : this.buttonPosition.x,
+                            top : this.buttonPosition.y
+                        }
+                    });
+                    this._setupButton({
+                        text : "Repeat",
+                        'class' : "button back",
+                        next : "Repeat.clicked",
+                        style : {
+                            left : this.buttonPosition.x,
+                            top : this.buttonPosition.y - 90
+                        }
+                    });
 
                     this._updateUserProgress();
 
@@ -377,8 +447,15 @@ var SequencePlayer = new Class({
                     // play Audio - Intro
                     step.player.start();
 
-                    var button = this._setupButton("Done", "button next", "DragNDrop.done", this.buttonPosition.x, this.buttonPosition.y);
-                    this.buttons.push(button);
+                    this._setupButton({
+                        text : "Done",
+                        'class' : "button next",
+                        next : "DragNDrop.done",
+                        style : {
+                            left : this.buttonPosition.x,
+                            top : this.buttonPosition.y
+                        }
+                    });
                     break;
                 case "DragNDropFeedback":
                     // Show correct bkg
@@ -391,12 +468,34 @@ var SequencePlayer = new Class({
                     step.player.start();
                     // setup buttons
                     // TODO: extract the end buttons to separate method - replace in continue and here
-                    var button = this._setupButton("Continue", "button next", "Continue.clicked", this.buttonPosition.x, this.buttonPosition.y);
-                    this.buttons.push(button);
-                    button = this._setupButton("Main Menu", "button star", "MainMenu.clicked", this.buttonPosition.x, this.buttonPosition.y - 45);
-                    this.buttons.push(button);
-                    button = this._setupButton("Repeat", "button back", "Repeat.clicked", this.buttonPosition.x, this.buttonPosition.y - 90);
-                    this.buttons.push(button);
+
+                    this._setupButton({
+                        text : "Continue",
+                        'class' : "button next",
+                        next : "Continue.clicked",
+                        style : {
+                            left : this.buttonPosition.x,
+                            top : this.buttonPosition.y
+                        }
+                    });
+                    this._setupButton({
+                        text : "Main Menu",
+                        'class' : "button star",
+                        next : "MainMenu.clicked",
+                        style : {
+                            left : this.buttonPosition.x,
+                            top : this.buttonPosition.y - 45
+                        }
+                    });
+                    this._setupButton({
+                        text : "Repeat",
+                        'class' : "button back",
+                        next : "Repeat.clicked",
+                        style : {
+                            left : this.buttonPosition.x,
+                            top : this.buttonPosition.y - 90
+                        }
+                    });
                     // save progress
                     this._updateUserProgress();
                     break;
@@ -443,8 +542,15 @@ var SequencePlayer = new Class({
                 this.nextStep();
                 break;
             case "Risks.ready":
-                var button = this._setupButton("Done", "button save", "Risks.done", this.buttonPosition.x, this.buttonPosition.y);
-                this.buttons.push(button);
+                this._setupButton({
+                    text : "Done",
+                    'class' : "button save",
+                    next : "Risks.done",
+                    style : {
+                        left : this.buttonPosition.x,
+                        top : this.buttonPosition.y
+                    }
+                });
                 break;
             case "Risks.done" :
                 this.activeVideo.container.removeEvents('click');
@@ -453,8 +559,15 @@ var SequencePlayer = new Class({
                 break;
             case 'KRFeedback.done':
                 // add continue button
-                var button = this._setupButton("Continue", "button next", "KRFeedback.continue.done", this.buttonPosition.x, this.buttonPosition.y);
-                this.buttons.push(button);
+                this._setupButton({
+                    text : "Continue",
+                    'class' : "button next",
+                    next : "KRFeedback.continue.done",
+                    style : {
+                        left : this.buttonPosition.x,
+                        top : this.buttonPosition.y
+                    }
+                });
                 break;
             case "Continue.clicked":
                 this.reset();
@@ -544,25 +657,59 @@ var SequencePlayer = new Class({
                     this.currentStep.feedbackPanel.add(this.options.unitTagId);
                     this.currentStep.feedbackPanel.show();
                 }
-
-                var button = this._setupButton("Replay ", "button play", "Commentary.replay.clicked", 20, this.buttonPosition.y);
-                this.buttons.push(button);
+                this._setupButton({
+                    text : "Your commentary",
+                    'class' : "button play",
+                    next : "Commentary.replay.clicked",
+                    style : {
+                        left : 20,
+                        top : this.buttonPosition.y,
+                        width : '195px'
+                    }
+                });
 
                 var ExpertAudio = this.currentStep.expertAudio;
                 if (ExpertAudio != undefined) {
                     // show play expert commentary button
-                    button = this._setupButton("Expert", "button play", "Commentary.expert.clicked", 20, this.buttonPosition.y - 45);
-                    this.buttons.push(button);
+                    this._setupButton({
+                        text : "Expert commentary",
+                        'class' : "button play",
+                        next : "Commentary.expert.clicked",
+                        style : {
+                            left : 20,
+                            top : this.buttonPosition.y - 45,
+                            width : '195px'
+                        }
+                    });
                 }
                 // TODO: offer sequence repeat as well - may need to show continue screen after all ?
-                button = this._setupButton("Continue", "button next", "Continue.clicked", this.buttonPosition.x, this.buttonPosition.y);
-                this.buttons.push(button);
-
-                button = this._setupButton("Repeat", "button record", "Commentary.repeat.clicked", this.buttonPosition.x, this.buttonPosition.y - 90);
-                this.buttons.push(button);
-
-                button = this._setupButton("Main Menu", "button star", "MainMenu.clicked", this.buttonPosition.x, this.buttonPosition.y - 45);
-                this.buttons.push(button);
+                this._setupButton({
+                    text : "Continue",
+                    'class' : "button next",
+                    next : "Continue.clicked",
+                    style : {
+                        left : this.buttonPosition.x,
+                        top : this.buttonPosition.y
+                    }
+                });
+                this._setupButton({
+                    text : "Repeat",
+                    'class' : "button record",
+                    next : "Commentary.repeat.clicked",
+                    style : {
+                        left : this.buttonPosition.x,
+                        top : this.buttonPosition.y - 90
+                    }
+                });
+                this._setupButton({
+                    text : "Main Menu",
+                    'class' : "button star",
+                    next : "MainMenu.clicked",
+                    style : {
+                        left : this.buttonPosition.x,
+                        top : this.buttonPosition.y - 45
+                    }
+                });
                 break;
             case "Commentary.replay.clicked":
                 this._removeFeedbackPanel();
@@ -633,21 +780,12 @@ var SequencePlayer = new Class({
         return this.sequenceState;
     },
     //------------------------------------------------------------------------
-    _setupButton : function(text, button_class, nextAction, x, y) {
-        var button = new Button(this, {
-            style : {
-                left : x + 'px',
-                top : y + 'px'
-            },
-            'class' : button_class,
-            text : text,
-            next : nextAction,
-            id : "button_" + this.buttons.length
-        });
-
+    _setupButton : function(options) {
+        options.id = "button_" + this.buttons.length;
+        var button = new Button(this, options);
         button.add(this.options.unitTagId);
         button.show();
-        return button;
+        this.buttons.push(button);
     }.protect(),
     //------------------------------------------------------------------------
     _setupQuestions : function(options) {
