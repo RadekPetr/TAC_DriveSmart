@@ -15,6 +15,9 @@
 - handle debug while module is still loading
 - shapes fro KEy risks - fix IDs all inone div
 - add check for previous and next step types ?
+- Module progress on Dashboard
+
+
 -----------------------------------------------------------------
 DONE:
 - Change radio cross to tick
@@ -25,5 +28,6 @@ DONE:
 - Recode ogg files - bad quality
 - handle the progress bar between modules
 - Od data files playback engine - XML to json conversion ?
+- rename main manu to Dashboard
 
 

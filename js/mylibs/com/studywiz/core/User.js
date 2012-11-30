@@ -101,5 +101,9 @@ var User = new Class({
         progress.finishedCount = progress.total - unfinishedSequences.length;
 
         return progress;
+    },
+    getTotalScore : function (){
+        //TODO: get averages per sequence and then total average or Average over all ?
     }
+    
 })
