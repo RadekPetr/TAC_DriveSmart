@@ -112,7 +112,8 @@ var SequencePlayer = new Class({
                     });
                     myDiv.inject($(this.options.unitTagId));
                     step.image.add(myContainerID);
-                    step.image.show();
+                    // TODO: adjust style based on TAC 
+                    //step.image.show();
                     var moduleTitle = new Element("h1", {
                         html : this.moduleInfo.moduleTitle,
                         'class' : 'main-title'
@@ -782,6 +783,9 @@ var SequencePlayer = new Class({
     //------------------------------------------------------------------------
     _setupButton : function(options) {
         options.id = "button_" + this.buttons.length;
+        // TODO: Disabled symbol on buttons, to finalize with new style when available
+        options['class'] = 'button';
+        //
         var button = new Button(this, options);
         button.add(this.options.unitTagId);
         button.show();
@@ -1151,8 +1155,6 @@ var SequencePlayer = new Class({
         // Update state to completed = true;
         this.sequenceState.completed = true;
         // TODO: give each step maxPoints value and then sum those to get max score per sequence and calculate each sequence score as % of this, give each step a getScore method
-        // TODO: remove this whne scoring is implemented
-        //this.sequenceState.score = 100;
 
         this.myParent().fireEvent("SEQUENCE", {
             type : "module.event",

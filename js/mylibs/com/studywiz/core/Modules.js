@@ -28,13 +28,13 @@ var Modules = new Class({
         var modules = new Hash({
             main_menu : {
                 score : 0,
-                title : "Main menu",
+                title : "Dashboard",
                 id : 'main_menu',
                 sequenceID : '1'
             },
             kaps : {
                 score : 0,
-                title : "Keeping ahead & play safe",
+                title : "Keep ahead & play safe",
                 id : 'kaps',
                 sequenceID : '1'
             },
