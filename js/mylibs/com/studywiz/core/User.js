@@ -104,6 +104,9 @@ var User = new Class({
     },
     getTotalScore : function (){
         //TODO: get averages per sequence and then total average or Average over all ?
+    },
+    getModuleScore : function (moduleID) {
+        // TODO: get score in module
     }
     
 })
