@@ -97,12 +97,14 @@ var Modules = new Class({
                 break;
             case "module.finished":
                 log("Module Finished");
+                // TODO: finish end module - do allow repeating ? Let user choose which in some Module intro screen ?
                 break;
-            case "module.start":
-                log("Module Exited");
+            case "module.start":                
                 var selectedModule = this.modules.get(this.options.moduleID);
-                var sequenceID = "1";
-                selectedModule.playSequence(sequenceID);
+                selectedModule.fireEvent("SEQUENCE", {
+                    type : "sequence.event",
+                    next : 'sequence.next'
+                });
                 this.setupDebug();
                 break;
             case "update.user":
@@ -191,7 +193,7 @@ var Modules = new Class({
                 styles : {
                 },
                 events : {
-                    click : function() {                       
+                    click : function() {
                         if (sequencePlayer != null && sequencePlayer.activeVideo != null) {
                             sequencePlayer.activeVideo.skip();
                         }

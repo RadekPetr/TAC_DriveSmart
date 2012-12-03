@@ -17,7 +17,7 @@ var ModulePlayer = new Class({
         this.addEvent("DATA", this.handleDataEvent);
         this.addEvent("SEQUENCE", this.handleSequenceEvent);
         this.setupData();
-     },
+    },
     myParent : function() {
         return this.options.parent;
     },
@@ -56,7 +56,7 @@ var ModulePlayer = new Class({
                 // TODO marking sequence as complete and making sure next one is incomplete
                 var moduleSequences = this.getModuleSequenceIDs();
                 var unfinishedSequences = userTracker.getUnfinishedSequences(this.options.id);
-                log("unfinished:", unfinishedSequences);
+                log("******** unfinished:", unfinishedSequences);
                 if (unfinishedSequences.length == 0) {
                     // is last
                     //TODO: handle module end
@@ -66,10 +66,10 @@ var ModulePlayer = new Class({
                 } else {
                     // get the next one
                     this.options.currentSequenceID = unfinishedSequences[0].id;
+                    log("Next unfinished ID:", this.options.currentSequenceID);
+                    this.playSequence(this.options.currentSequenceID);
                 }
 
-                log("Next unfinished ID:", this.options.currentSequenceID);
-                this.playSequence(this.options.currentSequenceID);
                 break;
             case "sequence.exit":
                 this.myParent().fireEvent("MODULE", {
@@ -92,7 +92,7 @@ var ModulePlayer = new Class({
         return IDs;
     },
     playSequence : function(sequenceID) {
-        this.options.currentSequenceID = sequenceID;       
+        this.options.currentSequenceID = sequenceID;
         if (sequencePlayer == null) {
             sequencePlayer = new SequencePlayer(this, {});
         } else {

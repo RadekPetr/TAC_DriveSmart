@@ -99,6 +99,12 @@ var User = new Class({
         var progress = {};
         progress.total = sequencesInModule.length;
         progress.finishedCount = progress.total - unfinishedSequences.length;
+        if (progress.finishedCount == 0){
+          progress.progress = 0;  
+        } else {
+          progress.progress =  (progress.finishedCount/progress.total)*100;
+        }
+        
 
         return progress;
     },

@@ -33,7 +33,7 @@ var MenuItems = new Class({
         });
 
         Array.each(this.options.data, function(menuItem, index) {
-            log (menuItem);
+            log(menuItem);
             var elemID = "menu_item_" + index;
             var item = new Element('div', {
                 'html' : menuItem.text,
@@ -59,6 +59,8 @@ var MenuItems = new Class({
 
             item.store('preview', preview);
             item.store('showProgress', menuItem.showProgress);
+            item.store('moduleID', menuItem.moduleID);
+            
 
             var selectedModuleID = menuItem.moduleID;
             // log("Sel menu itemid: " + selectedModuleID);
@@ -120,21 +122,24 @@ var MenuItems = new Class({
             this.container.fade('in');
         }
         Array.each(this.menuItems, function(menuItem, index) {
-            log (menuItem.retrieve ('showProgress'));
-            if (menuItem.retrieve ('showProgress') == true) {
+            log(menuItem.retrieve('showProgress'));
+            if (menuItem.retrieve('showProgress') == true) {
                 // add progress
                 // / Module progress bar
+
+                var moduleProgress = userTracker.getModuleProgress( menuItem.retrieve('moduleID'));
+
                 var moduleProgressbar = new dwProgressBar({
                     container : menuItem,
-                    startPercentage : 25,
+                    startPercentage : moduleProgress.progress ,
                     speed : 1000,
                     boxID : 'module_progress_box_' + menuItem.id,
-                    boxClass: 'module_progress_box',
-                    percentageID : 'module_progress_perc_'+ menuItem.id,
-                    percentageClass: 'module_progress_perc',
+                    boxClass : 'module_progress_box',
+                    percentageID : 'module_progress_perc_' + menuItem.id,
+                    percentageClass : 'module_progress_perc',
                     displayText : true,
-                    displayID : 'text_'+ menuItem.id,
-                    
+                    displayID : 'text_' + menuItem.id,
+
                 });
             }
         })
