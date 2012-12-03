@@ -20,8 +20,11 @@ var dwProgressBar = new Class({
     options : {
         container : $$('body')[0],
         boxID : '',
+        boxClass: 'box',
         percentageID : '',
+        percentageClass:'perc',
         displayID : '',
+        displayClass: '',
         startPercentage : 0,
         displayText : false,
         speed : 10
@@ -44,17 +47,20 @@ var dwProgressBar = new Class({
         this.container.setStyles(this.options.style);
 
         var box = new Element('div', {
-            id : this.options.boxID
+            id : this.options.boxID,
+            'class' : this.options.boxClass
         });
         var perc = new Element('div', {
             id : this.options.percentageID,
-            'style' : 'width:0px;'
+            'style' : 'width:0px;',
+            'class' : this.options.percentageClass
         });
         perc.inject(box);
         box.inject(this.container);
         if (this.options.displayText) {
             var text = new Element('div', {
-                id : this.options.displayID
+                id : this.options.displayID,
+                'class' : this.options.displayClass
             });
             text.inject(this.container);
         }
