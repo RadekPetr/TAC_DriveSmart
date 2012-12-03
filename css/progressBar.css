@@ -7,3 +7,23 @@
 	background: #ccc;
 	height: 20px;
 }
+
+#media_loader_box {
+	border: 1px solid #ccc;
+	width: 200px;
+	height: 20px;
+}
+#media_loader_perc {
+	background: #ccc;
+	height: 20px;
+}
+
+#module_progress_box {
+	border: 1px solid #ccc;
+	width: 300px;
+	height: 30px;
+}
+#module_progress_perc {
+	background: #aab;
+	height: 30px;
+}

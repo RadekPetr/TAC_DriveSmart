@@ -72,8 +72,8 @@ var MediaLoader = new Class({
             container : $(this.options.parentElementID),
             startPercentage : 0,
             speed : 10,
-            boxID : 'box',
-            percentageID : 'perc',
+            boxID : 'media_loader_box',
+            percentageID : 'media_loader_perc',
             displayID : 'disp',
             displayText : true,
             style : {
