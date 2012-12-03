@@ -30,7 +30,7 @@ var MediaLoader = new Class({
             Object.each(loaderInfo, function(value, key) {
                 type = value.type;
             })
-           // log("Loader: ", type);
+            // log("Loader: ", type);
             if (type == 'VIDEO') {
 
                 this.videoQueue.push(loaderInfo);
@@ -42,7 +42,7 @@ var MediaLoader = new Class({
     },
     // ----------------------------------------------------------
     reportProgress : function(loaderInfo) {
-       //log(loaderInfo);
+        //log(loaderInfo);
 
         if (this.options.next == null) {
             // if next action is not set do not allow reporting progress, not sure ???
@@ -73,8 +73,10 @@ var MediaLoader = new Class({
             startPercentage : 0,
             speed : 10,
             boxID : 'media_loader_box',
+            boxClass : 'media_loader_box',
             percentageID : 'media_loader_perc',
-            displayID : 'disp',
+            percentageClass : 'media_loader_perc',
+            displayID : 'media_loader_disp',
             displayText : true,
             style : {
                 'left' : '220px',
@@ -111,15 +113,14 @@ var MediaLoader = new Class({
 
             value.ref.preload();
         })
-       // log(this.loadQueue);
-        
-        
-         //TODO: Split videos to their own queue and only include the first one in the loader progress so in case next video gets added to the list before the loader is finsihed ...
-         // User interval to chak the progress
-         // Handle canplay vs canplaythrough - use can play only if canplaythrough is not fired in the next 5 seconds, maybe display a warning
-         // Handle removing of the events once the video is considerred preloaded 
-         // handle no canplay event - perhaps a timeframe - then show error
-      
+        // log(this.loadQueue);
+
+        //TODO: Split videos to their own queue and only include the first one in the loader progress so in case next video gets added to the list before the loader is finsihed ...
+        // User interval to chak the progress
+        // Handle canplay vs canplaythrough - use can play only if canplaythrough is not fired in the next 5 seconds, maybe display a warning
+        // Handle removing of the events once the video is considerred preloaded
+        // handle no canplay event - perhaps a timeframe - then show error
+
     },
     // ----------------------------------------------------------
     _calculateProgress : function() {
@@ -171,9 +172,9 @@ var MediaLoader = new Class({
 
     },
     _addOneVideoToQueue : function() {
-      //  log("this.videoQueue: ", this.videoQueue);
+        //  log("this.videoQueue: ", this.videoQueue);
         if (this.videoQueue.length > 0) {
-          //  log('preloading next video');
+            //  log('preloading next video');
             var currentVideo = this.videoQueue.shift();
             this.loadQueue.extend(currentVideo);
         } else {

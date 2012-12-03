@@ -1,79 +1,3 @@
-#navigation li:hover {
-	color: #FFFF99;
-	cursor: pointer;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	text-decoration: none;
-}
-
-#navigation li:active {
-	color: #EAdd77;
-	cursor: pointer;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	text-decoration: none;
-}
-#navigation {
-	font-size: 1em;
-	font-weight: bold;
-	color: #EAC749;
-	font-style: italic;
-	font-size: 1em;
-	text-align: left;
-}
-#navigation ul {
-	margin: 0;
-	padding: 0;
-}
-#navigation li {
-	list-style: none;
-	cursor: pointer;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	text-decoration: none;
-	list-style-position: outside;
-	list-style-image: url(../media/images/menu/triagle.png);
-	margin-top: 8px;
-}
-
-#feedbackList {
-	font-size: 1em;
-	font-weight: bold;
-	color: #EAC749;
-	font-style: italic;
-	font-size: 1em;
-	text-align: left;
-}
-#feedbackList ul {
-	margin: 0;
-	padding: 0;
-}
-#feedbackList li {
-	list-style: none;
-	cursor: default;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	text-decoration: none;
-	list-style-position: outside;
-	list-style-image: url(../media/images/menu/triagle.png);
-	margin-top: 8px;
-}
 .module-description {
 	color: #EAC749;
 	position: absolute;
@@ -115,5 +39,31 @@
 	color: #EAC749;
 	font-size: 1em;
 	font-weight: bold;
+}
+.dashboard_modules {
+	font-size: 1em;
+	font-weight: bold;
+	color: #EAC749;
+	font-style: italic;
+	font-size: 1em;
+	text-align: left;
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.dashboard_modules:hover {
+	color: #FFFF99;
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 

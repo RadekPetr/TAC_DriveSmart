@@ -112,7 +112,7 @@ var SequencePlayer = new Class({
                     });
                     myDiv.inject($(this.options.unitTagId));
                     step.image.add(myContainerID);
-                    // TODO: adjust style based on TAC
+                    // TODO: adjust style based on TAC 
                     //step.image.show();
                     var moduleTitle = new Element("h1", {
                         html : this.moduleInfo.moduleTitle,
@@ -180,16 +180,6 @@ var SequencePlayer = new Class({
                             left : this.buttonPosition.x,
                             top : this.buttonPosition.y - 45
                         }
-                    });
-                    /// Module progress bar
-                    var moduleProgressbar = new dwProgressBar({
-                        container : myDiv,
-                        startPercentage : 25,
-                        speed : 1000,
-                        boxID : 'module_progress_box',
-                        percentageID : 'module_progress_perc',
-                        displayText : true,
-                        displayID: 'text'
                     });
 
                     step.player.options.next = '';
@@ -974,7 +964,8 @@ var SequencePlayer = new Class({
                             text : menuItemData.value,
                             description : menuItemData.attributes.description,
                             moduleID : menuItemData.attributes.moduleID,
-                            preview : menuItemData.attributes.preview
+                            preview : menuItemData.attributes.preview,
+                            showProgress : menuItemData.attributes.showProgress
                         }
                         menuItems.data.push(menuItem);
                     })

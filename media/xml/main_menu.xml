@@ -3,11 +3,11 @@
   <Seq Ex="1">
     <Step fmt="Menu">
       <Items>
-        <Data moduleID="intro" preview="country/country_cst16_start_first.jpg" description="The Introduction Tutorial provides an overview of the basic concepts of safe driving. You will be applying these concepts in the rest of the program. This section must be viewed prior to entering the other modules.">introduction</Data>
-        <Data moduleID="scanning" preview="country/country_cst20_start_first.jpg" description="The Scanning module consists of 25 driving situations. You must complete this module prior to accessing Urban Driving or Country Driving.">key skills training - Scanning</Data>
-        <Data moduleID="kaps" preview="country/country_cst21_start_first.jpg" description="The Keep ahead &amp; play safe module consists of 6 driving exercises. You must complete this module prior to accessing Urban Driving or Country Driving.">key skills training - Keep ahead &amp; play safe</Data>
-        <Data moduleID="country" preview="country/country_cla03_start_first.jpg" description="The Country Driving module consists of 22 driving exercises. You need to have completed     the Scanning, Keeping Ahead and Playing Safe modules prior to accessing this module.">on the road - Country driving</Data>
-        <Data moduleID="urban" preview="country/country_clp02_start_first.jpg" description="The Urban Driving module consists of 36 driving exercises. You need to have completed the Scanning, Keeping Ahead and Playing Safe modules prior to accessing this module.">on the road - Urban driving</Data>
+        <Data showProgress='false' moduleID="intro" preview="country/country_cst16_start_first.jpg" description="The Introduction Tutorial provides an overview of the basic concepts of safe driving. You will be applying these concepts in the rest of the program. This section must be viewed prior to entering the other modules.">introduction</Data>
+        <Data showProgress='true' moduleID="scanning" preview="country/country_cst20_start_first.jpg" description="The Scanning module consists of 25 driving situations. You must complete this module prior to accessing Urban Driving or Country Driving.">key skills training - Scanning</Data>
+        <Data showProgress='true' moduleID="kaps" preview="country/country_cst21_start_first.jpg" description="The Keep ahead &amp; play safe module consists of 6 driving exercises. You must complete this module prior to accessing Urban Driving or Country Driving.">key skills training - Keep ahead &amp; play safe</Data>
+        <Data showProgress='true' moduleID="country" preview="country/country_cla03_start_first.jpg" description="The Country Driving module consists of 22 driving exercises. You need to have completed     the Scanning, Keeping Ahead and Playing Safe modules prior to accessing this module.">on the road - Country driving</Data>
+        <Data showProgress='true' moduleID="urban" preview="country/country_clp02_start_first.jpg" description="The Urban Driving module consists of 36 driving exercises. You need to have completed the Scanning, Keeping Ahead and Playing Safe modules prior to accessing this module.">on the road - Urban driving</Data>
       </Items>
       <Image>menu/main_menu.png</Image>
     </Step>
