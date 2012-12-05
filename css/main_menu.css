@@ -1,4 +1,11 @@
 .module-description {
+	cursor: default;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 	color: #EAC749;
 	position: absolute;
 	font-size: 0.85em;
@@ -20,6 +27,13 @@
 	clip: rect(0px, 140px, 107px, 0px);
 }
 .main-title {
+	cursor: default;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 	position: absolute;
 	color: #ff9900;
 	font-style: italic;
@@ -28,6 +42,13 @@
 	text-align: center;
 }
 .module-title {
+	cursor: default;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 	position: absolute;
 	color: #ff9900;
 	font-style: italic;
@@ -35,6 +56,13 @@
 	font-weight: bold
 }
 .sequence-title {
+	cursor: default;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 	position: absolute;
 	color: #EAC749;
 	font-size: 1em;
@@ -54,6 +82,7 @@
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	padding: 5px;
 }
 
 .dashboard_modules:hover {
