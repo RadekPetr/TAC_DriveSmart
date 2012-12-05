@@ -15,20 +15,38 @@ var User = new Class({
 
         this.defaultData = new Hash({});
         this.userData = null;
+        log("defaultData 1 ", this.defaultData);
     },
     loadProgress : function() {
         // try loading userdata from server
         // if fails, clone defaults
-        this.userData = Object.clone(this.defaultData);
+
+        var myCookie = Cookie.read('userProgress');
+
+        var decompressedData = lzw_decode(myCookie);
+        var myProgress = JSON.decode(decompressedData);
+        log("Read Cookie: ", myCookie, decompressedData, myProgress);
+        if (myProgress == null) {
+            this.userData = new Hash(this.defaultData);
+            log("Default user progress");
+        } else {
+            this.userData = new Hash(myProgress);
+            log("Loaded user progress");
+        }
+
+        log(" this.userData", this.userData);
 
     },
     saveProgress : function() {
         // save progress to server
         // ajax request ?
-        //console.log (this.userData);
+        log("Saving: ", this.userData);
         var data = JSON.encode(this.userData);
-      // alert("Data :" +  data);
+        // alert("Data :" +  data);
         var output = lzw_encode(data)
+        var myCookie = Cookie.write('userProgress', output, {
+            duration : 7
+        });
         //  alert("Data :" +  output);
         // var output2 = lzw_decode(output)
         //TODO: make an AJAX request and handle errors
@@ -51,21 +69,21 @@ var User = new Class({
                 })
                 sequences.push(seqObject);
             })
-            var moduleData = new Object();
+            var moduleData = new Hash();
             sequences.sortOn("id", Array.NUMERIC);
-            moduleData[key] = sequences;
+            moduleData.set(key, sequences);
             this.defaultData.extend(moduleData);
 
         }.bind(this))
 
-        log(this.defaultData);
+        log("default Data", this.defaultData);
     },
     updateSequenceProgress : function(sequenceState) {
         /// get the sequence Object and update it
         var moduleID = sequenceState.moduleID;
         var currentSequenceData = Object.subset(sequenceState, ['id', 'completed', 'score']);
         log(currentSequenceData);
-        var sequencesInModule = this.userData[moduleID];
+        var sequencesInModule = this.userData.get(moduleID);
         var userSequence = sequencesInModule.filter(function(item, index) {
             return item.id == sequenceState.id;
         });
@@ -74,45 +92,62 @@ var User = new Class({
             log("ERROR");
         }
         Object.append(userSequence[0], currentSequenceData);
-        log("*** User data :")
-        log(this.userData);
+
+        log("userSequence[0]: ", userSequence[0], currentSequenceData);
+        log("*** User data :", this.userData);
+        log("Total score: ", this.getTotalScore());
+
+        // and store the progress
+        this.saveProgress();
     },
     getUnfinishedSequences : function(moduleID) {
-
-        var sequencesInModule = this.userData[moduleID];
+        var sequencesInModule = this.userData.get(moduleID);
         var unfinishedSequences = sequencesInModule.filter(function(item, index) {
             return item.completed == false;
         });
         if (unfinishedSequences.length == 0) {
             log("Module is Finished");
         }
-
         return unfinishedSequences;
     },
     getModuleProgress : function(moduleID) {
 
-        var sequencesInModule = this.userData[moduleID];
+        var sequencesInModule = this.userData.get(moduleID);
         var unfinishedSequences = sequencesInModule.filter(function(item, index) {
             return item.completed == false;
         });
 
-        var progress = {};
-        progress.total = sequencesInModule.length;
-        progress.finishedCount = progress.total - unfinishedSequences.length;
-        if (progress.finishedCount == 0){
-          progress.progress = 0;  
+        var progressObj = {};
+        progressObj.total = sequencesInModule.length;
+        progressObj.finishedCount = progressObj.total - unfinishedSequences.length;
+        if (progressObj.finishedCount == 0) {
+            progressObj.progress = 0;
         } else {
-          progress.progress =  (progress.finishedCount/progress.total)*100;
+            progressObj.progress = (progressObj.finishedCount / progressObj.total) * 100;
         }
-        
-
-        return progress;
+        return progressObj;
     },
-    getTotalScore : function (){
-        //TODO: get averages per sequence and then total average or Average over all ?
+    getTotalScore : function() {
+        var moduleIDs = this.userData.getKeys();
+        var totalScore = [];
+        Array.each(moduleIDs, function(moduleID, index) {
+            // do not add empty array
+            var moduleScore = this.getModuleScore(moduleID);
+            if (moduleScore != []) {
+                totalScore.push(this.getModuleScore(moduleID));
+            }
+        }.bind(this))
+        return totalScore.average();
     },
-    getModuleScore : function (moduleID) {
-        // TODO: get score in module
+    getModuleScore : function(moduleID) {
+        var userData = this.userData.get(moduleID);
+        log(moduleID, userData);
+        var allScores = new Array();
+        Array.each(userData, function(sequenceState, index) {
+            allScores = allScores.concat(sequenceState.score);
+        })
+        var totalScore = allScores.average();
+        log("Module " + moduleID + " score: ", totalScore);
+        return totalScore;
     }
-    
 })
