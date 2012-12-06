@@ -10,4 +10,5 @@ media/sound/kaps
 media/video/scanning/Thumbs.db
 media/images/scanning/Thumbs.db
 media/images/keyrisks/Thumbs.db
-media/images/keyrisks/Thumbs.db
+/*.bat
+/*.db
