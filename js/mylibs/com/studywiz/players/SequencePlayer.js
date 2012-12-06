@@ -112,7 +112,7 @@ var SequencePlayer = new Class({
                     });
                     myDiv.inject($(this.options.unitTagId));
                     step.image.add(myContainerID);
-                    // TODO: adjust style based on TAC 
+                    // TODO: adjust style based on TAC
                     //step.image.show();
                     var moduleTitle = new Element("h1", {
                         html : this.moduleInfo.moduleTitle,
@@ -126,6 +126,20 @@ var SequencePlayer = new Class({
                     var menu = new MenuItems(this, step.data);
                     menu.add(myContainerID);
                     menu.show();
+
+                    var score = new Element("h1", {
+                        html : "Overall score: " + (100 * userTracker.getTotalScore()).toInt() + "/100",
+                        // 'class' : 'main-title0',
+
+                    })
+                    score.setStyles({
+                        'position' : 'absolute',
+                        left : '390px',
+                        top : '290px'
+
+                    })
+
+                    score.inject(myDiv);
 
                     break;
                 case "SequenceIntro":

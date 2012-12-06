@@ -60,10 +60,9 @@ var MenuItems = new Class({
             item.store('preview', preview);
             item.store('showProgress', menuItem.showProgress);
             item.store('moduleID', menuItem.moduleID);
-            
 
             var selectedModuleID = menuItem.moduleID;
-            // log("Sel menu itemid: " + selectedModuleID);
+
             item.addEvent("click", function() {
                 this.myParent().fireEvent("TIMELINE", {
                     type : "item.clicked",
@@ -127,11 +126,25 @@ var MenuItems = new Class({
                 // add progress
                 // / Module progress bar
 
-                var moduleProgress = userTracker.getModuleProgress( menuItem.retrieve('moduleID'));
+                var moduleProgress = userTracker.getModuleProgress(menuItem.retrieve('moduleID'));
 
+                /* var score = new Element('div', {
+                 id : "Module_Score_" + menuItem.id,
+                 html : "Module score: " + (100 * userTracker.getModuleScore(menuItem.retrieve('moduleID')) ).toInt() + "/100",
+                 'class' :'module_score_title'
+                 });
+                 menuItem.adopt (score);
+                 */
+
+                var progress = new Element('div', {
+                    id : "Module_progress_" + menuItem.id,
+                    html : "Progress: ",
+                    'class' : 'module_progress_title'
+                });
+                menuItem.adopt(progress);
                 var moduleProgressbar = new dwProgressBar({
                     container : menuItem,
-                    startPercentage : moduleProgress.progress ,
+                    startPercentage : moduleProgress.progress,
                     speed : 1000,
                     boxID : 'module_progress_box_' + menuItem.id,
                     boxClass : 'module_progress_box',
@@ -139,8 +152,9 @@ var MenuItems = new Class({
                     percentageClass : 'module_progress_perc',
                     displayText : true,
                     displayID : 'text_' + menuItem.id,
-
+                    displayClass : 'module_progress_title'
                 });
+
             }
         })
     },
