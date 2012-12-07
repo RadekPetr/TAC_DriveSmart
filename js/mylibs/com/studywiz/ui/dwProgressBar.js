@@ -20,11 +20,11 @@ var dwProgressBar = new Class({
     options : {
         container : $$('body')[0],
         boxID : '',
-        boxClass: 'box',
+        boxClass : 'box',
         percentageID : '',
-        percentageClass:'perc',
+        percentageClass : 'perc',
         displayID : '',
-        displayClass: '',
+        displayClass : '',
         startPercentage : 0,
         displayText : false,
         speed : 10
@@ -34,6 +34,9 @@ var dwProgressBar = new Class({
     initialize : function(options) {
         //set options
         this.setOptions(options);
+        this.box = null;
+        this.perc = null;
+        this.text = null;
         //create elements
         this.createElements();
     },
@@ -46,23 +49,23 @@ var dwProgressBar = new Class({
 
         this.container.setStyles(this.options.style);
 
-        var box = new Element('div', {
+        this.box = new Element('div', {
             id : this.options.boxID,
             'class' : this.options.boxClass
         });
-        var perc = new Element('div', {
+        this.perc = new Element('div', {
             id : this.options.percentageID,
             'style' : 'width:0px;',
             'class' : this.options.percentageClass
         });
-        perc.inject(box);
-        box.inject(this.container);
+        this.perc.inject(this.box);
+        this.box.inject(this.container);
         if (this.options.displayText) {
-            var text = new Element('div', {
+            this.text = new Element('div', {
                 id : this.options.displayID,
                 'class' : this.options.displayClass
             });
-            text.inject(this.container);
+            this.text.inject(this.container);
         }
 
         this.container.inject(this.options.container);
@@ -71,19 +74,19 @@ var dwProgressBar = new Class({
 
     //calculates width in pixels from percentage
     calculate : function(percentage) {
-        return ($(this.options.boxID).getStyle('width').replace('px', '') * (percentage / 100)).toInt();
+        return (this.box.getStyle('width').replace('px', '') * (percentage / 100)).toInt();
     },
 
     //animates the change in percentage
     animate : function(to) {
-        $(this.options.percentageID).set('morph', {
+        this.perc.set('morph', {
             duration : this.options.speed,
             link : 'cancel'
         }).morph({
             width : this.calculate(to.toInt())
         });
         if (this.options.displayText) {
-            $(this.options.displayID).set('text', to.toInt() + '%');
+            this.text.set('text', to.toInt() + '%');
         }
     },
 
