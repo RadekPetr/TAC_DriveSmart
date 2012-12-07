@@ -1,14 +1,12 @@
 /**
  * @author Radek
  */
-var sequencePlayer = null;
+
 var Modules = new Class({
 
     Implements : [Options, Events],
     options : {
-        unitTagId : 'drivesmart',
-        moduleID : "main_menu",
-        moduleTitle : "Main Menu",
+        moduleID : "main_menu",      
         sequenceID : "1",
         id : "Modules"
 
@@ -30,6 +28,12 @@ var Modules = new Class({
                 score : 0,
                 title : "Dashboard",
                 id : 'main_menu',
+                sequenceID : '1'
+            },
+            concentration : {
+                score : 0,
+                title : "Concentration - not implemented yet",
+                id : 'concentration',
                 sequenceID : '1'
             },
             kaps : {
@@ -99,7 +103,7 @@ var Modules = new Class({
                 log("Module Finished");
                 // TODO: finish end module - do allow repeating ? Let user choose which in some Module intro screen ?
                 break;
-            case "module.start":                
+            case "module.start":
                 var selectedModule = this.modules.get(this.options.moduleID);
                 selectedModule.fireEvent("SEQUENCE", {
                     type : "sequence.event",
@@ -131,7 +135,7 @@ var Modules = new Class({
             var myDiv = new Element("div", {
                 id : "debugContainer"
             });
-            myDiv.inject(this.options.unitTagId, 'before');
+            myDiv.inject(driveSmartDivID, 'before');
 
             var moduleSelector = new Element('select', {
                 events : {
@@ -143,7 +147,11 @@ var Modules = new Class({
                     }.bind(this)
                 }
             });
-
+            var option = new Element('option', {
+                value : 'concentration',
+                html : 'Concentration'
+            })
+            option.inject(moduleSelector);
             var option = new Element('option', {
                 value : 'country',
                 html : 'Country driving'

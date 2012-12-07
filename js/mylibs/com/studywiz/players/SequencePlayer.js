@@ -17,7 +17,6 @@ var SequencePlayer = new Class({
 
     Implements : [Options, Events],
     options : {
-        unitTagId : 'drivesmart',
         audioFolder : 'media/sound/',
         videoFolder : 'media/video/',
         imageFolder : 'media/images/',
@@ -51,7 +50,7 @@ var SequencePlayer = new Class({
         }
 
         this.mediaLoader = new MediaLoader(this, {
-            parentElementID : this.options.unitTagId
+            parentElementID : driveSmartDivID
         });
 
         this.addEvent("TIMELINE", this.handleNavigationEvent);
@@ -110,7 +109,7 @@ var SequencePlayer = new Class({
                     var myDiv = new Element("div", {
                         id : myContainerID
                     });
-                    myDiv.inject($(this.options.unitTagId));
+                    myDiv.inject($(driveSmartDivID));
                     step.image.add(myContainerID);
                     // TODO: adjust style based on TAC
                     //step.image.show();
@@ -147,7 +146,7 @@ var SequencePlayer = new Class({
                     var myDiv = new Element("div", {
                         id : myContainerID
                     });
-                    myDiv.inject($(this.options.unitTagId));
+                    myDiv.inject($(driveSmartDivID));
 
                     step.image.add(myContainerID);
                     step.image.show();
@@ -204,7 +203,7 @@ var SequencePlayer = new Class({
                     var myDiv = new Element("div", {
                         id : myContainerID
                     });
-                    myDiv.inject($(this.options.unitTagId));
+                    myDiv.inject($(driveSmartDivID));
 
                     step.image.add(myContainerID);
                     step.image.show();
@@ -240,7 +239,7 @@ var SequencePlayer = new Class({
                         src : this.options.flashFolder + "commentary.swf"
                     });
 
-                    this.recorder.add(this.options.unitTagId);
+                    this.recorder.add(driveSmartDivID);
                     // -----
                     step.player.options.next = '';
                     step.player.start();
@@ -473,9 +472,12 @@ var SequencePlayer = new Class({
                     });
                     break;
                 case "DragNDropFeedback":
-                    // Show correct bkg
-                    // TODO: get height from drivesmart height ?
 
+                    if (this.currentSequence.length > 0) {
+                        log("ERROR - DragNDropFeedback must be last in the sequence");
+                    }
+                 
+                    // Show correct bkg
                     step.image.add(this.activeVideo.containerID);
                     step.image.show();
 
@@ -512,6 +514,7 @@ var SequencePlayer = new Class({
                         }
                     });
                     // save progress
+                    // this is always the last in the sequence ...
                     this._updateUserProgress();
                     break;
             }
@@ -669,7 +672,7 @@ var SequencePlayer = new Class({
 
                 if (feedbackText != undefined) {
                     this.currentStep.feedbackPanel = new CommentaryFeedback(this, this.currentStep.data);
-                    this.currentStep.feedbackPanel.add(this.options.unitTagId);
+                    this.currentStep.feedbackPanel.add(driveSmartDivID);
                     this.currentStep.feedbackPanel.show();
                 }
                 this._setupButton({
@@ -801,14 +804,14 @@ var SequencePlayer = new Class({
         options['class'] = 'button';
         //
         var button = new Button(this, options);
-        button.add(this.options.unitTagId);
+        button.add(driveSmartDivID);
         button.show();
         this.buttons.push(button);
     }.protect(),
     //------------------------------------------------------------------------
     _setupQuestions : function(options) {
         var questions = new Questions(this, options);
-        questions.add(this.options.unitTagId, "bottom");
+        questions.add(driveSmartDivID, "bottom");
         questions.show();
         return questions;
     }.protect(),
@@ -827,7 +830,6 @@ var SequencePlayer = new Class({
     _setupStepScoring : function(step, stepOrder) {
         //log( JSON.encode(step));
         var stepType = step.attributes.fmt;
-
     },
     _setupStepMedia : function(step, stepOrder) {
         //log( JSON.encode(step));
@@ -1169,13 +1171,12 @@ var SequencePlayer = new Class({
     _updateUserProgress : function() {
         // Update state to completed = true;
         this.sequenceState.completed = true;
-        // TODO: give each step maxPoints value and then sum those to get max score per sequence and calculate each sequence score as % of this, give each step a getScore method
-
         this.myParent().fireEvent("SEQUENCE", {
             type : "module.event",
             next : 'sequence.completed'
         });
     }.protect(),
+
     onLoad : function() {
         log("Called Loaded");
     },
@@ -1185,7 +1186,6 @@ var SequencePlayer = new Class({
     },
     reset : function() {
         this.currentSequence.empty();
-
         this._removeFeedbackPanel();
         this.mediaLoader.remove();
         this._removeImages();

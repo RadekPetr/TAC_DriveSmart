@@ -24,7 +24,7 @@ var Recorder = new Class({
 		next : 'next.action',
 		loaded : false,
 		parent : null,
-		parentTag : 'drivesmart'
+		parentTag : driveSmartDivID
 
 	},
 	initialize : function(myParent, myOptions) {

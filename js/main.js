@@ -1,6 +1,12 @@
 /**
  * @author Radek
  */
+// Global objects and variables
+// Defines which Div to use to insert the DriveSmart application to
+var driveSmartDivID = 'drivesmart';
+// Sequence player is shared by all Modules
+var sequencePlayer = null;
+// -----------------------------
 
 var Main = new Class({
     Implements : [Options, Events],
@@ -17,18 +23,11 @@ var Main = new Class({
                 this._loadAsset(item, index);
             }.bind(this));
         }
-
     },
     // ----------------------------------------------------------
     start : function() {
-        // var myUnit = new Unit({});
-        //   myUnit.start();
-
         var modules = new Modules({});
         modules.start();
-       
-
-        //  myUnit.setupDebug();
     },
     // ----------------------------------------------------------
     // PRIVATE - load external js libraries so they are available to the project

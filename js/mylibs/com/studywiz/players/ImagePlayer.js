@@ -15,7 +15,7 @@ var ImagePlayer = new Class({
         next : 'next.action',
         loaded : false,
         parent : null,
-        parentTag : 'drivesmart'
+        parentTag : driveSmartDivID
     },
     initialize : function(myParent, myOptions) {
         // Intial scene setup
