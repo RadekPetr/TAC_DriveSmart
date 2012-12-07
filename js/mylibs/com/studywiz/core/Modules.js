@@ -32,7 +32,7 @@ var Modules = new Class({
             },
             concentration : {
                 score : 0,
-                title : "Concentration - not implemented yet",
+                title : "Concentration - placeholder",
                 id : 'concentration',
                 sequenceID : '1'
             },

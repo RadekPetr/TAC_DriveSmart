@@ -14,7 +14,7 @@ function jsIsReady() {
 }
 
 var SequencePlayer = new Class({
-
+// TODO: move folders to global var  - maybe a global settings object which is global ?
     Implements : [Options, Events],
     options : {
         audioFolder : 'media/sound/',
@@ -22,7 +22,6 @@ var SequencePlayer = new Class({
         imageFolder : 'media/images/',
         flashFolder : 'media/flash/',
         parent : null
-
     },
     initialize : function(myParent, module, myOptions) {
 
@@ -170,7 +169,7 @@ var SequencePlayer = new Class({
                         html : sequenceTitleText,
                         styles : {
                             left : '0px',
-                            top : '10%'
+                            top : '350px'
                         },
                         'class' : 'sequence-title'
                     })
@@ -1168,6 +1167,7 @@ var SequencePlayer = new Class({
         }
         this.shapes = null;
     }.protect(),
+    // TODO maybe allow partial progress update ?
     _updateUserProgress : function() {
         // Update state to completed = true;
         this.sequenceState.completed = true;
