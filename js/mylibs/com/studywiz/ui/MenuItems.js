@@ -58,8 +58,6 @@ var MenuItems = new Class({
             preview.preload();
 
             item.store('preview', preview);
-            // item.store('showProgress', menuItem.showProgress);
-            // item.store('moduleID', menuItem.moduleID);
 
             var selectedModuleID = menuItem.moduleID;
 
@@ -90,7 +88,7 @@ var MenuItems = new Class({
             }.bind(this));
 
             if (menuItem.showProgress == true) {
-                item.adopt(this._setupModuleProgress(menuItem.moduleID));
+                item.adopt(moduleProgressSetup(menuItem.moduleID));
             }
 
             this.container.adopt(item);
@@ -131,40 +129,5 @@ var MenuItems = new Class({
         if (this.container.style.opacity > 0) {
             this.container.fade('out');
         }
-    },
-    _setupModuleProgress : function(moduleID) {
-
-        // / Module progress bar
-
-        var moduleProgress = userTracker.getModuleProgress(moduleID);
-
-        /* var score = new Element('div', {
-         id : "Module_Score_" + menuItem.id,
-         html : "Module score: " + (100 * userTracker.getModuleScore(menuItem.retrieve('moduleID')) ).toInt() + "/100",
-         'class' :'module_score_title'
-         });
-         menuItem.adopt (score);
-         */
-
-        var progress = new Element('div', {
-            id : "Module_progress_" + moduleID,
-            html : "Progress: ",
-            'class' : 'module_progress_title'
-        });
-
-        var moduleProgressbar = new dwProgressBar({
-            container : progress,
-            startPercentage : moduleProgress.progress,
-            speed : 1000,
-            boxID : 'module_progress_box_' + moduleID,
-            boxClass : 'module_progress_box',
-            percentageID : 'module_progress_perc_' + moduleID,
-            percentageClass : 'module_progress_perc',
-            displayText : true,
-            displayID : 'text_' + moduleID,
-            displayClass : 'module_progress_title'
-        });
-        return progress;
-
     }
 });

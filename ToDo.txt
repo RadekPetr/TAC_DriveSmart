@@ -1,5 +1,4 @@
-- Style Submit button 
-- Implement UI calss and make the media classes to implement it it so common methods can be done only once
+
 
 - Style buttons better
 - Review usage of holders - maybe use on central DIV for the whoe thing
@@ -15,11 +14,12 @@
 - handle debug while module is still loading
 - shapes fro KEy risks - fix IDs all inone div
 - add check for previous and next step types ?
-- Module progress on Dashboard
+- allow access to lessons in finished module
 
 
 -----------------------------------------------------------------
 DONE:
+- Module progress on Dashboard
 - Change radio cross to tick
 - DONE Handle video Preloading better - IE issue, use events
 - Loading data dynamically

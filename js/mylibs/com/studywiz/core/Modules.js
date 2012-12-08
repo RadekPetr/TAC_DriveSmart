@@ -102,6 +102,7 @@ var Modules = new Class({
             case "module.finished":
                 log("Module Finished");
                 // TODO: finish end module - do allow repeating ? Let user choose which in some Module intro screen ?
+                 this._startMainMenu();
                 break;
             case "module.start":
                 var selectedModule = this.modules.get(this.options.moduleID);
@@ -111,10 +112,7 @@ var Modules = new Class({
                 });
                 this.setupDebug();
                 break;
-            case "update.user":
-                log("***** Updating User ***** ")
-                userTracker.updateSequenceProgress(params.data);
-                break;
+           
         }
     },
     _setupUser : function() {

@@ -42,13 +42,7 @@ var ModulePlayer = new Class({
     handleSequenceEvent : function(params) {
 
         switch (params.next) {
-            case "sequence.completed":
-                // save the state of the current Sequence
-                this.myParent().fireEvent("MODULE", {
-                    next : "update.user",
-                    data : sequencePlayer.getSequenceState()
-                });
-                break;
+
             case "sequence.repeat":
                 this.playSequence(this.options.currentSequenceID);
                 break;

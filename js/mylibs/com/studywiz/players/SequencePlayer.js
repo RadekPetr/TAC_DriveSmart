@@ -14,7 +14,7 @@ function jsIsReady() {
 }
 
 var SequencePlayer = new Class({
-// TODO: move folders to global var  - maybe a global settings object which is global ?
+    // TODO: move folders to global var  - maybe a global settings object which is global ?
     Implements : [Options, Events],
     options : {
         audioFolder : 'media/sound/',
@@ -88,7 +88,6 @@ var SequencePlayer = new Class({
     nextStep : function() {
         // take a step and decide what to do with it
         if (this.currentStep != null) {
-            // TODO: if this.currentStep is not empty, get it;s score and add it to the sequence score
             var lastStepScore = this.currentStep.score;
             log("Score:", lastStepScore);
             if (lastStepScore != null && lastStepScore != undefined) {
@@ -161,19 +160,25 @@ var SequencePlayer = new Class({
                         },
                         'class' : 'module-title'
                     })
-                    moduleTitle.inject($(myContainerID));
+                    moduleTitle.inject(myDiv);
 
                     var moduleProgress = userTracker.getModuleProgress(this.moduleInfo.moduleID);
                     var sequenceTitleText = "Exercise " + moduleProgress.finishedCount + " of " + moduleProgress.total + " completed";
                     var sequenceTitle = new Element("h1", {
                         html : sequenceTitleText,
                         styles : {
-                            left : '0px',
+                            left : '0',
                             top : '350px'
                         },
                         'class' : 'sequence-title'
                     })
-                    sequenceTitle.inject($(myContainerID));
+                    sequenceTitle.inject(myDiv);
+                    var moduleProgressBar = moduleProgressSetup(this.moduleInfo.moduleID);
+                    moduleProgressBar.setStyles({
+                        left : 0,
+                        top : '380px'
+                    });
+                    moduleProgressBar.inject(myDiv);
 
                     this._setupButton({
                         text : "Continue",
@@ -292,11 +297,9 @@ var SequencePlayer = new Class({
                     step.player.options.next = 'QuestionFeedback.done';
                     step.player.start();
                     if (step.attributes.show == "MudScreen") {
-                        //TODO: show="MudScreen" - show mudscreen during feedback
                         this.activeVideo.obscure();
                     }
-                    //TODO: get score and set it.
-                    //TODO:  KeepUserSelection="1"
+                    //TODO:  KeepUserSelection="1" ?
                     break;
                 case "PlayAudio":
                     step.player.options.next = 'PlayAudio.done';
@@ -398,8 +401,6 @@ var SequencePlayer = new Class({
 
                     break;
                 case "KRFeedback":
-
-                    //TODO: get score: step.score = ...
                     this._removeButtons();
                     step.image.add(this.shapes.container.id);
                     step.image.show();
@@ -475,7 +476,7 @@ var SequencePlayer = new Class({
                     if (this.currentSequence.length > 0) {
                         log("ERROR - DragNDropFeedback must be last in the sequence");
                     }
-                 
+
                     // Show correct bkg
                     step.image.add(this.activeVideo.containerID);
                     step.image.show();
@@ -775,10 +776,7 @@ var SequencePlayer = new Class({
                     this.nextStep();
                 }
                 break;
-
             case "Menu.item.clicked":
-
-                log(params.id);
                 this._removeImages();
                 this._removeButtons();
                 this._cleanUp();
@@ -1171,10 +1169,8 @@ var SequencePlayer = new Class({
     _updateUserProgress : function() {
         // Update state to completed = true;
         this.sequenceState.completed = true;
-        this.myParent().fireEvent("SEQUENCE", {
-            type : "module.event",
-            next : 'sequence.completed'
-        });
+        userTracker.updateSequenceProgress(this.sequenceState);
+
     }.protect(),
 
     onLoad : function() {
