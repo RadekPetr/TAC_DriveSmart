@@ -47,7 +47,6 @@ var ModulePlayer = new Class({
                 this.playSequence(this.options.currentSequenceID);
                 break;
             case "sequence.next":
-                // TODO marking sequence as complete and making sure next one is incomplete
                 var moduleSequences = this.getModuleSequenceIDs();
                 var unfinishedSequences = userTracker.getUnfinishedSequences(this.options.id);
                 log("******** unfinished:", unfinishedSequences);
@@ -63,7 +62,6 @@ var ModulePlayer = new Class({
                     log("Next unfinished ID:", this.options.currentSequenceID);
                     this.playSequence(this.options.currentSequenceID);
                 }
-
                 break;
             case "sequence.exit":
                 this.myParent().fireEvent("MODULE", {

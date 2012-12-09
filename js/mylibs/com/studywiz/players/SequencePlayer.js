@@ -124,16 +124,13 @@ var SequencePlayer = new Class({
                     menu.add(myContainerID);
                     menu.show();
 
-                    var score = new Element("h1", {
+                    var score = new Element("h2", {
                         html : "Overall score: " + (100 * userTracker.getTotalScore()).toInt() + "/100",
-                        // 'class' : 'main-title0',
-
-                    })
-                    score.setStyles({
-                        'position' : 'absolute',
-                        left : '390px',
-                        top : '290px'
-
+                        styles : {
+                            'position' : 'absolute',
+                            left : '390px',
+                            top : '30px'
+                        }
                     })
 
                     score.inject(myDiv);
@@ -163,7 +160,7 @@ var SequencePlayer = new Class({
                     moduleTitle.inject(myDiv);
 
                     var moduleProgress = userTracker.getModuleProgress(this.moduleInfo.moduleID);
-                    var sequenceTitleText = "Exercise " + moduleProgress.finishedCount + " of " + moduleProgress.total + " completed";
+                    var sequenceTitleText = "Exercise " + this.sequenceState.id + " of " + moduleProgress.total;
                     var sequenceTitle = new Element("h1", {
                         html : sequenceTitleText,
                         styles : {
@@ -556,6 +553,7 @@ var SequencePlayer = new Class({
                 this.nextStep();
                 break;
             case "QuestionUser.done":
+                this.interactions.lockAnswer();
                 this._removeButtons();
                 this.nextStep();
                 break;

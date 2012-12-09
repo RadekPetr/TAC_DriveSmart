@@ -128,6 +128,14 @@ var Questions = new Class({
             this.panel.fade('out');
         }
     },
+    lockAnswer : function() {
+        Array.each(this.options.data, function(question, index) {
+            var label = document.getElementById("item_label_" + index);
+            var radio = document.getElementById("item_" + index);
+
+            radio.set('disabled', true);
+        })
+    },
     showCorrect : function() {
         var score = 0;
         var maxScore = 0;
@@ -161,13 +169,13 @@ var Questions = new Class({
     },
     _checkMaxSelects : function(checkBox) {
         if (checkBox.checked) {
-            this.selectedCheckBoxes.unshift (checkBox);
-            if (this.selectedCheckBoxes.length > this.options.responses){
+            this.selectedCheckBoxes.unshift(checkBox);
+            if (this.selectedCheckBoxes.length > this.options.responses) {
                 var toDeselect = this.selectedCheckBoxes.pop();
-                toDeselect.checked = false;                
-            }           
+                toDeselect.checked = false;
+            }
         } else {
-            this.selectedCheckBoxes.erase (checkBox);
-        } 
+            this.selectedCheckBoxes.erase(checkBox);
+        }
     }
 });

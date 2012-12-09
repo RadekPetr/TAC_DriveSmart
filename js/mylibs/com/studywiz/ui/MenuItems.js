@@ -50,7 +50,7 @@ var MenuItems = new Class({
                 style : {
                     'width' : '140px',
                     'height' : '107px',
-                    top : '20px',
+                    top : '60px',
                     left : '380px'
 
                 }
@@ -97,8 +97,13 @@ var MenuItems = new Class({
 
         this.module_description = new Element("div", {
             id : "module.description",
-            'class' : 'module-description'
+            'class' : 'module-description',
+            styles : {
+                left : '375px',
+                top : '190px'
+            }
         });
+
         this.container.adopt(this.module_description);
         this.module_description.hide();
 
