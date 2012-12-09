@@ -260,8 +260,7 @@ var SequencePlayer = new Class({
                     // TODO: maybe add attribute to wait or not
                     step.player.options.next = 'Question.done';
                     step.player.start();
-                    if (step.attributes.cmd == "hidescreen") {
-                        //TODO: cmd="hidescreen" - show the mudscreen
+                    if (step.attributes.cmd == "hidescreen") {                       
                         log(this.activeVideo);
                         this.activeVideo.obscure();
                     }

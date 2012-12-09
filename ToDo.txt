@@ -16,7 +16,7 @@
 - add check for previous and next step types ?
 - allow access to lessons in finished module
 
-
+- module progress bar not working in IE ?
 -----------------------------------------------------------------
 DONE:
 - Module progress on Dashboard
