@@ -27,7 +27,11 @@ var dwProgressBar = new Class({
         displayClass : '',
         startPercentage : 0,
         displayText : false,
-        speed : 10
+        speed : 10,
+        styles : {
+            'width' : '200px',
+            'height' : '20px'
+        }
     },
 
     //initialization
@@ -51,7 +55,8 @@ var dwProgressBar = new Class({
 
         this.box = new Element('div', {
             id : this.options.boxID,
-            'class' : this.options.boxClass
+            'class' : this.options.boxClass,          
+            styles : this.options.styles
         });
         this.perc = new Element('div', {
             id : this.options.percentageID,
@@ -79,12 +84,18 @@ var dwProgressBar = new Class({
 
     //animates the change in percentage
     animate : function(to) {
-        this.perc.set('morph', {
+        log("Animate to ", to, this.box.clientWidth);
+
+        log("this.perc ", this.perc);
+        var myEffect = new Fx.Morph(this.perc, {
             duration : this.options.speed,
-            link : 'cancel'
-        }).morph({
-            width : this.calculate(to.toInt())
+            transition : Fx.Transitions.Sine.easeOut
         });
+
+        myEffect.start({
+            'width' : [0, this.calculate(to.toInt())] // Morphs the 'width' style from 900px to 300px.
+        });
+
         if (this.options.displayText) {
             this.text.set('text', to.toInt() + '%');
         }

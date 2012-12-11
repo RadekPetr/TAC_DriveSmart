@@ -88,9 +88,19 @@ var MenuItems = new Class({
             }.bind(this));
 
             if (menuItem.showProgress == true) {
+                var moduleProgress = userTracker.getModuleProgress(menuItem.moduleID);
+                if (moduleProgress.completed == true) {
+                    var tick = this.showCompleteStatus();
+                    item.adopt(tick);
+                    tick.show();
+                    tick.setStyles({
+                        'width' : '30px',
+                        'float' : 'right',
+                        'padding-left': '15px'
+                    })
+                }
                 item.adopt(moduleProgressSetup(menuItem.moduleID));
             }
-
             this.container.adopt(item);
 
         }.bind(this));
@@ -134,5 +144,18 @@ var MenuItems = new Class({
         if (this.container.style.opacity > 0) {
             this.container.fade('out');
         }
+    },
+    showCompleteStatus : function(left, top) {
+        var file = this.myParent().options.imageFolder + 'menu/tick.png';
+
+        var tickImage = new ImagePlayer(this, {
+            src : file,
+            next : "",
+            title : 'finished',
+            id : 'finished'
+        });
+        tickImage.preload();
+
+        return tickImage.image;
     }
 });

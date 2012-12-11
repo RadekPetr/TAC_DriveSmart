@@ -28,7 +28,11 @@ function moduleProgressSetup(moduleID) {
         percentageClass : 'module_progress_perc',
         displayText : true,
         displayID : 'text_' + moduleID,
-        displayClass : 'module_progress_title'
+        displayClass : 'module_progress_title',
+        styles : {
+            'width' : '300px',
+            'height' : '5px'
+        }
     });
     return progress;
 

@@ -125,6 +125,9 @@ var User = new Class({
         } else {
             progressObj.progress = (progressObj.finishedCount / progressObj.total) * 100;
         }
+        if (progressObj.total == progressObj.finishedCount) {
+            progressObj.completed = true;
+        }
         return progressObj;
     },
     getTotalScore : function() {
