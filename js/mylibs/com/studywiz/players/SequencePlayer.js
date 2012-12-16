@@ -37,6 +37,9 @@ var SequencePlayer = new Class({
         this.activeVideo = null;
         this.shapes = null;
         this.cameo_image = null;
+        this.swiff = null;
+        this.recorder = null;
+        
 
         this.buttonPosition = {
             x : 480,
@@ -256,11 +259,34 @@ var SequencePlayer = new Class({
                     this._hideOtherVideos(step.player.playerID);
                     //TODO: noBg1="1"
                     break;
+                case "ConIntro":
+                    this._removeImages();
+                    this._removeButtons();
+                    this._cleanUp();
+                    this._hideInteractions();
+
+                    step.player.options.next = 'ConIntro.done';
+                    introFinished = function() {
+                        console.log("*********************introDone");
+
+                        this.fireEvent("TIMELINE", {
+                            type : "swiff.done",
+                            id : "intro",
+                            next : step.player.options.next
+                        });
+                    }.bind(this);
+
+                    // step.swiff.add(driveSmartDivID);
+                    this.swiff = step.swiff;
+                    step.swiff.show();
+                    step.swiff.start();
+
+                    break;
                 case "Question":
                     // TODO: maybe add attribute to wait or not
                     step.player.options.next = 'Question.done';
                     step.player.start();
-                    if (step.attributes.cmd == "hidescreen") {                       
+                    if (step.attributes.cmd == "hidescreen") {
                         log(this.activeVideo);
                         this.activeVideo.obscure();
                     }
@@ -786,6 +812,19 @@ var SequencePlayer = new Class({
                     next : 'module.selected'
                 });
                 break;
+            case "ConIntro.done":
+                introFinished = null;
+                this.currentStep.player.start();
+                this._setupButton({
+                    text : "Continue",
+                    'class' : "button next",
+                    next : "",
+                    style : {
+                        left : this.buttonPosition.x,
+                        top : this.buttonPosition.y
+                    }
+                });
+                break;
         };
     },
     getSequenceState : function() {
@@ -1045,6 +1084,17 @@ var SequencePlayer = new Class({
                     //TODO: trim white spaces
                     step.zones = item.attributes.data;
                     break;
+                case "Swiff":
+
+                    log(item.value);
+                    step.swiff = new SwiffPlayer(this, {
+                        swiff : {
+                            id : 'Swiff'
+                        },
+                        src : this.options.flashFolder + item.value
+                    });
+                    this.mediaLoader.register(step.swiff.getLoaderInfo());
+                    break;
 
                 default:
                 // nothing
@@ -1147,6 +1197,10 @@ var SequencePlayer = new Class({
             this.recorder.remove();
         }
         this.recorder = null;
+        if (this.swiff != null) {
+            this.swiff.remove();
+        }
+        this.swiff = null;
     }.protect(),
     _removeFeedbackPanel : function() {
         if (this.currentStep != undefined) {

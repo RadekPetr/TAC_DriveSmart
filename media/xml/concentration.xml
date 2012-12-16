@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <Seq desc="Kaps Exercise 1" Ex="1">
-    <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
-      <Audio>kaps/kaps_vtt1a</Audio>
-    </Step>
-    <Step fmt="PlayVideo">
-      <Video>shared/shared_uia17_start</Video>
-    </Step>
-    <Step fmt="Cameo">
-      <Video>cameo/cameo_ctt1</Video>
-    </Step>
-    <Step fmt="Question">
-      <Audio>kaps/kaps_vtt1b</Audio>
-    </Step>
-    <Step fmt="QuestionUser">
-      <Inter>
-        <Data correct="false">Good</Data>
-        <Data correct="false">Reasonable</Data>
-        <Data correct="true">Poor</Data>
-      </Inter>
-    </Step>
-    <Step fmt="QuestionFeedback" FadeQ="1,2">
-      <Audio>kaps/kaps_vtt1c</Audio>
-    </Step>
-    <Step fmt="PlayVideo">
-      <Video>shared/shared_uia17_next</Video>
-    </Step>
-    <Step fmt="Continue"></Step>
-  </Seq>
-  
+	<Seq desc="Con Ex 1" Ex="1">
+		<Step fmt="SequenceIntro">
+			<Preview>shared/shared_uia17_start_first.jpg</Preview>
+			<Image>intros/sequence_intro.png</Image>
+			<Audio>scanning/scan_vsbkr1a</Audio>
+		</Step>
+		<Step fmt="ConIntro">
+			<Swiff>concentration/concentration_ex1.swf</Swiff>
+			<Audio>concentration/con_goodluck</Audio>
+		</Step>
+		
+		<Step fmt="Continue"></Step>
+	</Seq>
+	<Seq desc="Con Ex 2" Ex="2">
+		<Step fmt="SequenceIntro">
+			<Preview>shared/shared_uia17_start_first.jpg</Preview>
+			<Image>intros/sequence_intro.png</Image>
+			<Audio>scanning/scan_vsbkr1a</Audio>
+		</Step>
+		<Step fmt="ConIntro">
+			<Swiff>concentration/concentration_ex1.swf</Swiff>
+			<Audio>concentration/con_goodluck</Audio>
+		</Step>
+		<Step fmt="ConActivity" >
+			<Swiff Ex="1" format="1" notrack="1">concentration/concentration_ex1.swf</Swiff>
+		</Step>
+		<Step fmt="Continue"></Step>
+	</Seq>
+
 </root>

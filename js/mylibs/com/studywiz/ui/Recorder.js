@@ -28,7 +28,7 @@ var Recorder = new Class({
 
 	},
 	initialize : function(myParent, myOptions) {
-		// Intial scene setup
+		// Initial scene setup
 		this.setOptions(myOptions);
 		this.options.parent = myParent;
 		this.containerID = 'recorderContainer';
