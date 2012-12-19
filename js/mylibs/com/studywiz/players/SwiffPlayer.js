@@ -58,6 +58,7 @@ var SwiffPlayer = new Class({
         if (isFlashSupported() == true) {
             this.options.swiff.container = this.container;
             this.swiff = new Swiff(this.options.src, this.options.swiff);
+            RightClick.init(this.options.swiff.id, this.containerID);
         } else {
             log("********************* No FLASH loading image")
             this.options.swiff.container = this.container;
@@ -96,9 +97,9 @@ var SwiffPlayer = new Class({
         this.container.fade('show');
 
     },
-    start : function() {
-        Swiff.remote(this.swiff.toElement(), 'startIntro');
-        //this.swiff.toElement().startIntro();
+    start : function(params) {
+       //TODO: add option to pass parameters
+        Swiff.remote(this.swiff.toElement(), 'startSwiff');
     },
     // ---------------------------
     hide : function() {
@@ -131,6 +132,7 @@ var SwiffPlayer = new Class({
     preload : function() {
         swiffLoaded = function() {
             this.options.loaded = true;
+            // log ("Loaded flash", this.getLoaderInfo());
             if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
                 this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
             }
