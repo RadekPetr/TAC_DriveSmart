@@ -9,11 +9,18 @@
 		<Step fmt="ConIntro">
 			<Swiff>concentration/concentration_ex1.swf</Swiff>
 			<Audio>concentration/con_goodluck</Audio>
-		</Step>
+		</Step>		
 		
+		<Step fmt="ConActivity" >
+			<Swiff Ex="1" format="1" notrack="1">concentration/conPlayer.swf</Swiff>
+		</Step>
 		<Step fmt="Continue"></Step>
 	</Seq>
 	<Seq desc="Con Ex 2" Ex="2">
+		
+		<Step fmt="ConActivity" >
+			<Swiff Ex="1" format="1" notrack="1">concentration/conPlayer.swf</Swiff>
+		</Step>
 		<Step fmt="SequenceIntro">
 			<Preview>shared/shared_uia17_start_first.jpg</Preview>
 			<Image>intros/sequence_intro.png</Image>
@@ -24,7 +31,7 @@
 			<Audio>concentration/con_goodluck</Audio>
 		</Step>
 		<Step fmt="ConActivity" >
-			<Swiff Ex="1" format="1" notrack="1">concentration/concentration_ex1.swf</Swiff>
+			<Swiff Ex="1" format="1" notrack="1">concentration/conPlayer.swf</Swiff>
 		</Step>
 		<Step fmt="Continue"></Step>
 	</Seq>
