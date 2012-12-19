@@ -31,7 +31,7 @@ var MediaLoader = new Class({
                 type = value.type;
             })
             // log("Loader: ", type);
-            if (type == 'VIDEO') {
+            if (type == 'VIDEO' || type == 'FLASH') {
 
                 this.videoQueue.push(loaderInfo);
             } else {
@@ -60,6 +60,8 @@ var MediaLoader = new Class({
                     // this.register(loaderInfo)
                 }
             }.bind(this))
+
+            log("this.loadQueue ", this.loadQueue);
             var overAllProgress = this._calculateProgress();
             this._updateProgressBar(overAllProgress);
             this._handleFinished(overAllProgress);
@@ -113,7 +115,7 @@ var MediaLoader = new Class({
 
             value.ref.preload();
         })
-        // log(this.loadQueue);
+        log(this.loadQueue);
 
         //TODO: Split videos to their own queue and only include the first one in the loader progress so in case next video gets added to the list before the loader is finsihed ...
         // User interval to chak the progress
@@ -148,7 +150,7 @@ var MediaLoader = new Class({
     _handleFinished : function(progress) {
         //log('progress: ', progress);
         if (progress > 99) {
-            log("Preload Finished");
+            /// log("Preload Finished");
             this.loadQueue.empty();
             this.remove();
             this.myParent().fireEvent("TIMELINE", {
@@ -172,9 +174,9 @@ var MediaLoader = new Class({
 
     },
     _addOneVideoToQueue : function() {
-        //  log("this.videoQueue: ", this.videoQueue);
+        //log("this.videoQueue: ", this.videoQueue);
         if (this.videoQueue.length > 0) {
-            //  log('preloading next video');
+            //log('preloading next video');
             var currentVideo = this.videoQueue.shift();
             this.loadQueue.extend(currentVideo);
         } else {
