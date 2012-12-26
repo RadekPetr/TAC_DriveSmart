@@ -34,7 +34,7 @@ var SwiffPlayer = new Class({
         // Intial scene setup
         this.setOptions(myOptions);
         this.options.parent = myParent;
-        this.containerID = 'swiffContainer';
+        this.containerID = 'swiff_container';//_' + this.options.id;
         this.container = null;
         this.swiff = null;
     },
@@ -98,21 +98,34 @@ var SwiffPlayer = new Class({
 
     },
     start : function(params) {
-       //TODO: add option to pass parameters
-        Swiff.remote(this.swiff.toElement(), 'startSwiff');
+        //TODO: add option to pass parameters
+
+        Swiff.remote(this.swiff.toElement(), 'startSwiff', 1, 1, 1);
+    },
+    startConActivity : function(params) {
+        //TODO: add option to pass parameters
+
+        Swiff.remote(this.swiff.toElement(), 'startSwiff', params.Ex, 1, params.format);
     },
     // ---------------------------
     hide : function() {
-        if (this.container.isVisible() == true) {
-            this.container.fade('out');
+        if (this.container != null) {
+            if (this.container.isVisible() == true) {
+                this.container.fade('out');
+            }
         }
     },
     // ---------------------------
     remove : function() {
-        this.hide();
-        this.container.destroy();
-        this.swiff = null;
-        this.container = null;
+        //this.hide();
+        log("Swiff remove called");
+        if (this.container != null && this.container != undefined) {
+            log("this.container.destroy(); called");
+           
+            this.container.destroy();
+           // this.swiff = null;
+           // this.container = null;
+        }
     },
     // ----------------------------------------------------------
     getLoaderInfo : function() {

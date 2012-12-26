@@ -34,6 +34,7 @@ var SequencePlayer = new Class({
         this.buttons = new Array();
         this.interactions = null;
         this.videos = new Array();
+        this.swiffs = new Array();
         this.activeVideo = null;
         this.shapes = null;
         this.cameo_image = null;
@@ -263,14 +264,14 @@ var SequencePlayer = new Class({
                     this._cleanUp();
                     this._hideInteractions();
 
-                    step.player.options.next = 'ConIntro.done';
+                    step.swiff.options.next = 'ConIntro.done';
                     introFinished = function() {
-                        console.log("*********************introDone");
+                        console.log("*********************  introDone");
 
                         this.fireEvent("TIMELINE", {
                             type : "swiff.done",
                             id : "intro",
-                            next : step.player.options.next
+                            next : step.swiff.options.next
                         });
                     }.bind(this);
 
@@ -286,9 +287,9 @@ var SequencePlayer = new Class({
                     this._removeButtons();
                     this._cleanUp();
                     this._hideInteractions();
-
-                    swiffFinished = function() {
-                        console.log("*********************introDone");
+                    log(step);
+                    swiffFinished = function(score) {
+                        console.log("*********************Con activity done: ", score);
 
                         this.fireEvent("TIMELINE", {
                             type : "swiff.done",
@@ -297,10 +298,8 @@ var SequencePlayer = new Class({
                         });
                     }.bind(this);
 
-                    // step.swiff.add(driveSmartDivID);
-
                     step.swiff.show();
-                    step.swiff.start();
+                    step.swiff.startConActivity(step.swiff.attributes);
 
                     break;
                 case "Question":
@@ -577,6 +576,7 @@ var SequencePlayer = new Class({
             case "Question.done":
             case "QuestionFeedback.done":
             case "PlayAudio.done":
+            case "ConActivity.done":
                 this.nextStep();
                 break;
             case "SequenceIntro.done":
@@ -834,6 +834,7 @@ var SequencePlayer = new Class({
                 });
                 break;
             case "ConIntro.done":
+            log ("ConIntro done", params);
                 introFinished = null;
                 this.currentStep.player.start();
 
@@ -850,7 +851,7 @@ var SequencePlayer = new Class({
                 break;
             case "ConIntro.done.clicked":
                 this._removeButtons();
-                this._removeSwiff();
+                this._removeCurrentSwiff();
                 this._cleanUp();
                 this.nextStep();
                 break;
@@ -1124,6 +1125,10 @@ var SequencePlayer = new Class({
                         src : this.options.flashFolder + item.value,
                         id : 'swiff' + index + "_" + stepOrder
                     });
+
+                    step.swiff.attributes = item.attributes;
+                    this.swiffs.push(step.swiff);
+                    log("step.swiff.attributes", step.swiff.attributes);
                     this.mediaLoader.register(step.swiff.getLoaderInfo());
                     log(step.swiff.getLoaderInfo());
                     break;
@@ -1224,17 +1229,31 @@ var SequencePlayer = new Class({
             //log("Player " + playerID + " to keep " + excludedId)
         }.bind(this))
     },
-    _removeSwiff : function() {
+    _removeSwiffs : function() {
         if (this.recorder != null) {
             this.recorder.remove();
         }
         this.recorder = null;
-        if (this.currentStep != undefined) {
-            if (this.currentStep.swiff != null) {
-                this.currentStep.swiff.remove();
-            }
-            this.currentStep.swiff = null;
+
+        Array.each(this.swiffs, function(item, index) {
+            log ("Removing swiff: ", item);
+            item.remove();
+            item = null;
+            delete item;
+        })
+        this.swiffs.empty();
+        //  this.currentStep.swiff = null;
+
+    }.protect(),
+    _removeCurrentSwiff : function() {
+        if (this.recorder != null) {
+            this.recorder.remove();
         }
+        this.recorder = null;
+
+        this.currentStep.swiff.remove();
+        this.currentStep.swiff = null;
+
     }.protect(),
     _removeFeedbackPanel : function() {
         if (this.currentStep != undefined) {
@@ -1272,7 +1291,7 @@ var SequencePlayer = new Class({
         this._removeImages();
         this._removeRisks();
         this._removeButtons();
-        this._removeSwiff();
+        this._removeSwiffs();
         this._removeInteractions();
         this._cleanUp();
         this._removeVideos();

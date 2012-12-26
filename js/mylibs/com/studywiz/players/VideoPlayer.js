@@ -244,10 +244,11 @@ var VideoPlayer = new Class({
         // destroy the player
         player.destroy();
         if (this.container != null && this.container != undefined) {
-            this.container.destroy();
-            this.container.player.destroy();
+            
+            this.container.player.destroy();            
             delete this.container.player;
-            delete this.container
+            delete this.container;
+            this.container.destroy();
 
         }
         delete this.player;

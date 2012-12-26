@@ -1,39 +1,541 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<Seq desc="Con Ex 1" Ex="1">
-		<Step fmt="SequenceIntro">
-			<Preview>shared/shared_uia17_start_first.jpg</Preview>
-			<Image>intros/sequence_intro.png</Image>
-			<Audio>scanning/scan_vsbkr1a</Audio>
-		</Step>
-		<Step fmt="ConIntro">
-			<Swiff>concentration/concentration_ex1.swf</Swiff>
-			<Audio>concentration/con_goodluck</Audio>
-		</Step>		
-		
-		<Step fmt="ConActivity" >
-			<Swiff Ex="1" format="1" notrack="1">concentration/conPlayer.swf</Swiff>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-	<Seq desc="Con Ex 2" Ex="2">
-		
-		<Step fmt="ConActivity" >
-			<Swiff Ex="1" format="1" notrack="1">concentration/conPlayer.swf</Swiff>
-		</Step>
-		<Step fmt="SequenceIntro">
-			<Preview>shared/shared_uia17_start_first.jpg</Preview>
-			<Image>intros/sequence_intro.png</Image>
-			<Audio>scanning/scan_vsbkr1a</Audio>
-		</Step>
-		<Step fmt="ConIntro">
-			<Swiff>concentration/concentration_ex1.swf</Swiff>
-			<Audio>concentration/con_goodluck</Audio>
-		</Step>
-		<Step fmt="ConActivity" >
-			<Swiff Ex="1" format="1" notrack="1">concentration/conPlayer.swf</Swiff>
-		</Step>
-		<Step fmt="Continue"></Step>
-	</Seq>
-
+  <Seq desc="Con Ex 1-2" Ex="1">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/concentration_ex1.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="1" format="1" notrack="1">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="2" gotostart="true" format="1" notrack="1">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 3" Ex="2">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/concentration_ex3.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="3" gotostart="true" format="2">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  
+  
+  <Seq desc="Con Ex 1-2" Ex="3">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/con_excercise4_5.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="4" notrack="1" format="3">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="5" gotostart="true" format="3" notrack="1">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  
+  
+  <Seq desc="Con Ex 6" Ex="4">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/concentration_ex6.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="6" gotostart="true" format="4">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  
+  
+  <Seq desc="Con Ex 7" Ex="5">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/concentration_ex6.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="7" gotostart="true" format="5" notrack="1">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 8" Ex="6">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/concentration_ex6.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="8" calc="true" gotostart="true" format="6">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 9-10" Ex="7">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/concentration_ex8.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial1.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="9" format="6">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="10" gotostart="true" format="6">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 11-12" Ex="8">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial3.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="9" format="6">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="12" gotostart="true" format="7">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 13-14" Ex="9">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial5.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="13" format="8">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="14" calc="true" gotostart="true" format="8">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 15-16" Ex="10">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial1.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="15" format="6">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="16" format="6">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 17-18" Ex="11">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial3.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="17" format="7">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="18" format="7">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 19-20" Ex="12">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial5.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="19" format="8">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="20" calc="true" format="8">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 21-22" Ex="13">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial1.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="21" format="6">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="22" format="6">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 23-24" Ex="14">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial3.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="23" format="7">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="24" format="7">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 25-26" Ex="15">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial5.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="25" format="8">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="26" calc="true" format="8">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 27-28" Ex="15">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial1.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="27" format="6">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="28" format="6">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 29-30" Ex="17">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial3.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="29" format="7">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="30" format="7">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 31-32" Ex="18">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial5.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="31" format="8">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="32" calc="true" format="8">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 33-34" Ex="33-34">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial1.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="33" format="6">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="34" format="6">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 35-36" Ex="35-36">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial1.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="35" format="7">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="36" format="7">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 37-38" Ex="37-38">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial5.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="37" format="8">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="38" calc="true" format="8">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 39-40" Ex="39-40">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial1.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="39" format="6">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="40" format="6">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 41-42" Ex="41-42">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial3.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="41" format="7">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="42" format="7">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 43-44" Ex="43-44">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial5.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="43" format="8">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="44" calc="true" format="8">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 45-46" Ex="45-46">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial1.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="45" format="6">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="46" format="6">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 47-48" Ex="47-48">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial3.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="47" format="7">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="48" format="7">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 49-50" Ex="49-50">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial5.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="49" format="8">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="50" calc="true" format="8">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 51-52" Ex="51-52">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial1.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="51" format="6">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="52" format="6">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 53-54" Ex="53-54">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial3.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="53" format="7">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="54" format="7">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
+  <Seq desc="Con Ex 55-56" Ex="55-56">
+    <Step fmt="SequenceIntro">
+      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vsbkr1a</Audio>
+    </Step>
+    <Step fmt="ConIntro">
+      <Swiff>concentration/contrial5.swf</Swiff>
+      <Audio>concentration/con_goodluck</Audio>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="55" format="8">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="ConActivity">
+      <Swiff Ex="56" format="8" calc="true">concentration/conPlayer.swf</Swiff>
+    </Step>
+    <Step fmt="Continue"></Step>
+  </Seq>
 </root>
