@@ -84,9 +84,7 @@ var dwProgressBar = new Class({
 
     //animates the change in percentage
     animate : function(to) {
-        log("Animate to ", to, this.box.clientWidth);
-
-        log("this.perc ", this.perc);
+        //log("this.perc ", this.perc);
         var myEffect = new Fx.Morph(this.perc, {
             duration : this.options.speed,
             transition : Fx.Transitions.Sine.easeOut
