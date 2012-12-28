@@ -35,10 +35,13 @@ var SequencePlayer = new Class({
         this.interactions = null;
         this.videos = new Array();
         this.swiffs = new Array();
+        this.activeSwiff = null;
         this.activeVideo = null;
         this.shapes = null;
         this.cameo_image = null;
         this.recorder = null;
+
+        this.repeating = false;
 
         this.buttonPosition = {
             x : 480,
@@ -276,10 +279,21 @@ var SequencePlayer = new Class({
                     }.bind(this);
 
                     // step.swiff.add(driveSmartDivID);
-
+                    this.activeSwiff = step.swiff;
                     step.swiff.show();
                     step.swiff.start();
-
+                    // Allow skip intro if repeating this sequence
+                    if (this.repeating == true) {
+                        this._setupButton({
+                            text : "Skip",
+                            'class' : "button next",
+                            next : "ConIntro.done.clicked",
+                            style : {
+                                left : this.buttonPosition.x,
+                                top : this.buttonPosition.y
+                            }
+                        });
+                    }
                     break;
 
                 case "ConActivity":
@@ -294,13 +308,34 @@ var SequencePlayer = new Class({
                         this.fireEvent("TIMELINE", {
                             type : "swiff.done",
                             id : "ConActivity",
-                            next : 'ConActivity.done'
+                            next : 'ConActivity.done',
+                            'score' : score
                         });
                     }.bind(this);
-
+                    this.activeSwiff = step.swiff;
                     step.swiff.show();
                     step.swiff.startConActivity(step.swiff.attributes);
 
+                    this._setupButton({
+                        text : "Cancel",
+                        'class' : "button next",
+                        next : "ConActivity.cancel.clicked",
+                        style : {
+                            left : this.buttonPosition.x,
+                            top : this.buttonPosition.y
+                        }
+                    });
+                    break;
+                case "Con.Continue":
+                    this._setupButton({
+                        text : "Continue",
+                        'class' : "button next",
+                        next : "Con.Continue.clicked",
+                        style : {
+                            left : this.buttonPosition.x,
+                            top : this.buttonPosition.y
+                        }
+                    });
                     break;
                 case "Question":
                     // TODO: maybe add attribute to wait or not
@@ -576,7 +611,7 @@ var SequencePlayer = new Class({
             case "Question.done":
             case "QuestionFeedback.done":
             case "PlayAudio.done":
-            case "ConActivity.done":
+
                 this.nextStep();
                 break;
             case "SequenceIntro.done":
@@ -619,6 +654,11 @@ var SequencePlayer = new Class({
                 this.currentStep.score = this.shapes.getScore();
                 this.nextStep();
                 break;
+
+            case "ConActivity.done":
+                this.currentStep.score = (params.score) / 100;
+                this.nextStep();
+                break;
             case 'KRFeedback.done':
                 // add continue button
                 this._setupButton({
@@ -633,18 +673,23 @@ var SequencePlayer = new Class({
                 break;
             case "Continue.clicked":
                 this.reset();
+                this.repeating = false;
                 this.myParent().fireEvent("SEQUENCE", {
                     type : "sequence.event",
                     next : 'sequence.next'
                 });
                 break;
+
+            case "ConActivity.cancel.clicked":
+                this.currentStep.score = undefined;
+       
             case "Repeat.clicked":
                 this._removeVideos();
                 this._removeImages();
                 this._removeButtons();
                 this._cleanUp();
                 this._removeInteractions();
-
+                this.repeating = true;
                 this.myParent().fireEvent("SEQUENCE", {
                     type : "sequence.event",
                     next : 'sequence.repeat'
@@ -658,6 +703,9 @@ var SequencePlayer = new Class({
                 this._removeButtons();
                 this._cleanUp();
                 this._removeInteractions();
+
+                this.repeating = false;
+
                 this.myParent().fireEvent("SEQUENCE", {
                     type : "sequence.event",
                     next : 'sequence.exit'
@@ -834,7 +882,8 @@ var SequencePlayer = new Class({
                 });
                 break;
             case "ConIntro.done":
-            log ("ConIntro done", params);
+                this._removeButtons();
+                log("ConIntro done", params);
                 introFinished = null;
                 this.currentStep.player.start();
 
@@ -850,6 +899,7 @@ var SequencePlayer = new Class({
 
                 break;
             case "ConIntro.done.clicked":
+            case "Con.Continue.clicked":
                 this._removeButtons();
                 this._removeCurrentSwiff();
                 this._cleanUp();
@@ -1236,13 +1286,13 @@ var SequencePlayer = new Class({
         this.recorder = null;
 
         Array.each(this.swiffs, function(item, index) {
-            log ("Removing swiff: ", item);
+            log("Removing swiff: ", item);
             item.remove();
             item = null;
             delete item;
         })
         this.swiffs.empty();
-        //  this.currentStep.swiff = null;
+        this.activeSwiff = null;
 
     }.protect(),
     _removeCurrentSwiff : function() {
@@ -1251,8 +1301,8 @@ var SequencePlayer = new Class({
         }
         this.recorder = null;
 
-        this.currentStep.swiff.remove();
-        this.currentStep.swiff = null;
+        this.activeSwiff.remove();
+        this.activeSwiff = null;
 
     }.protect(),
     _removeFeedbackPanel : function() {

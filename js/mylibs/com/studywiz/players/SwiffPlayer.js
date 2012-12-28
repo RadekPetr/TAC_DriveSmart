@@ -34,7 +34,8 @@ var SwiffPlayer = new Class({
         // Intial scene setup
         this.setOptions(myOptions);
         this.options.parent = myParent;
-        this.containerID = 'swiff_container';//_' + this.options.id;
+        this.containerID = 'swiff_container';
+        //_' + this.options.id;
         this.container = null;
         this.swiff = null;
     },
@@ -99,6 +100,7 @@ var SwiffPlayer = new Class({
     },
     start : function(params) {
         //TODO: add option to pass parameters
+        log ("***************************** Calling Start");
 
         Swiff.remote(this.swiff.toElement(), 'startSwiff', 1, 1, 1);
     },
@@ -121,10 +123,10 @@ var SwiffPlayer = new Class({
         log("Swiff remove called");
         if (this.container != null && this.container != undefined) {
             log("this.container.destroy(); called");
-           
+
             this.container.destroy();
-           // this.swiff = null;
-           // this.container = null;
+            // this.swiff = null;
+            // this.container = null;
         }
     },
     // ----------------------------------------------------------
@@ -145,7 +147,7 @@ var SwiffPlayer = new Class({
     preload : function() {
         swiffLoaded = function() {
             this.options.loaded = true;
-            // log ("Loaded flash", this.getLoaderInfo());
+            log("Loaded flash", this.getLoaderInfo());
             if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
                 this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
             }
@@ -154,7 +156,17 @@ var SwiffPlayer = new Class({
                 id : this.options.id,
                 next : this.options.next
             })
-        }.bind(this)
+            // loaded so we hide it again
+            this.container.setStyles({
+                'visibility' : 'hidden'
+            })
+        }.bind(this);
+
         this.add(driveSmartDivID);
+        // This is necessary for  IE as the flash only starts loding whne visible ...
+        this.container.setStyles({
+            'visibility' : 'visible'
+        })
+
     }
 })
