@@ -28,7 +28,7 @@ var User = new Class({
         log("Read Cookie: ", myCookie, decompressedData, myProgress);
         if (myProgress == null) {
             this.userData = new Hash(this.defaultData);
-            log("Default user progress");
+            log("No User Data saved - Default user progress");
         } else {
             this.userData = new Hash(myProgress);
             log("Loaded user progress");
