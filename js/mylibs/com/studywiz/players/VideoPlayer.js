@@ -247,9 +247,8 @@ var VideoPlayer = new Class({
             
             this.container.player.destroy();            
             delete this.container.player;
-            delete this.container;
             this.container.destroy();
-
+            delete this.container;           
         }
         delete this.player;
 
