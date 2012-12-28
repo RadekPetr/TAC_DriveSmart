@@ -13,7 +13,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="1" format="1" notrack="1">concentration/conPlayer.swf</Swiff>
     </Step>
-     <Step fmt="Con.Continue"></Step>
+     <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="2" gotostart="true" format="1" notrack="1">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -51,7 +51,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="4" notrack="1" format="3">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="5" gotostart="true" format="3" notrack="1">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -123,7 +123,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="9" format="6">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="10" gotostart="true" format="6">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -142,7 +142,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="9" format="6">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="12" gotostart="true" format="7">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -161,7 +161,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="13" format="8">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="14" calc="true" gotostart="true" format="8">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -180,7 +180,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="15" format="6">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="16" format="6">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -199,7 +199,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="17" format="7">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="18" format="7">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -218,7 +218,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="19" format="8">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="20" calc="true" format="8">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -237,7 +237,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="21" format="6">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="22" format="6">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -256,7 +256,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="23" format="7">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="24" format="7">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -275,7 +275,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="25" format="8">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="26" calc="true" format="8">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -294,7 +294,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="27" format="6">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="28" format="6">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -313,7 +313,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="29" format="7">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="30" format="7">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -332,7 +332,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="31" format="8">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="32" calc="true" format="8">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -351,7 +351,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="33" format="6">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="34" format="6">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -370,7 +370,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="35" format="7">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="36" format="7">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -389,7 +389,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="37" format="8">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="38" calc="true" format="8">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -408,7 +408,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="39" format="6">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="40" format="6">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -427,7 +427,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="41" format="7">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="42" format="7">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -446,7 +446,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="43" format="8">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="44" calc="true" format="8">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -465,7 +465,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="45" format="6">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="46" format="6">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -484,7 +484,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="47" format="7">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="48" format="7">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -503,7 +503,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="49" format="8">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="50" calc="true" format="8">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -522,7 +522,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="51" format="6">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="52" format="6">concentration/conPlayer.swf</Swiff>
     </Step>
@@ -559,7 +559,7 @@
     <Step fmt="ConActivity">
       <Swiff Ex="55" format="8">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Con.Continue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="56" format="8" calc="true">concentration/conPlayer.swf</Swiff>
     </Step>

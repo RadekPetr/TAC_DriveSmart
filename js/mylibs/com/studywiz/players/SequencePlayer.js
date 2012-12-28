@@ -326,11 +326,11 @@ var SequencePlayer = new Class({
                         }
                     });
                     break;
-                case "Con.Continue":
+                case "ConContinue":
                     this._setupButton({
                         text : "Continue",
                         'class' : "button next",
-                        next : "Con.Continue.clicked",
+                        next : "ConContinue.clicked",
                         style : {
                             left : this.buttonPosition.x,
                             top : this.buttonPosition.y
@@ -899,7 +899,7 @@ var SequencePlayer = new Class({
 
                 break;
             case "ConIntro.done.clicked":
-            case "Con.Continue.clicked":
+            case "ConContinue.clicked":
                 this._removeButtons();
                 this._removeCurrentSwiff();
                 this._cleanUp();
