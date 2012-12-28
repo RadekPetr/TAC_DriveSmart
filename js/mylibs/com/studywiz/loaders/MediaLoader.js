@@ -32,7 +32,6 @@ var MediaLoader = new Class({
             })
             // log("Loader: ", type);
             if (type == 'VIDEO' || type == 'FLASH') {
-
                 this.videoQueue.push(loaderInfo);
             } else {
                 this.loadQueue.extend(loaderInfo);
@@ -61,7 +60,7 @@ var MediaLoader = new Class({
                 }
             }.bind(this))
 
-            log("this.loadQueue ", this.loadQueue);
+            log("this.loadQueue ", this.loadQueue, this.loadQueue.getKeys());
             var overAllProgress = this._calculateProgress();
             this._updateProgressBar(overAllProgress);
             this._handleFinished(overAllProgress);
