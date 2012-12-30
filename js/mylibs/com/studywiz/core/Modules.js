@@ -6,7 +6,7 @@ var Modules = new Class({
 
     Implements : [Options, Events],
     options : {
-        moduleID : "main_menu",      
+        moduleID : "main_menu",
         sequenceID : "1",
         id : "Modules"
 
@@ -32,7 +32,7 @@ var Modules = new Class({
             },
             concentration : {
                 score : 0,
-                title : "Concentration - placeholder",
+                title : "Concentration",
                 id : 'concentration',
                 sequenceID : '1'
             },
@@ -75,8 +75,7 @@ var Modules = new Class({
             module[key] = new ModulePlayer(this, {
                 id : key,
                 score : value.score,
-                title : value.title,
-                id : key,
+                title : value.title,               
                 currentSequenceID : value.sequenceID
             });
             this.modules.extend(module);
@@ -102,7 +101,7 @@ var Modules = new Class({
             case "module.finished":
                 log("Module Finished");
                 // TODO: finish end module - do allow repeating ? Let user choose which in some Module intro screen ?
-                 this._startMainMenu();
+                this._startMainMenu();
                 break;
             case "module.start":
                 var selectedModule = this.modules.get(this.options.moduleID);
@@ -112,7 +111,7 @@ var Modules = new Class({
                 });
                 this.setupDebug();
                 break;
-           
+
         }
     },
     _setupUser : function() {
@@ -200,9 +199,18 @@ var Modules = new Class({
                 },
                 events : {
                     click : function() {
+                        var stepType = sequencePlayer.currentStep.attributes.fmt;
                         if (sequencePlayer != null && sequencePlayer.activeVideo != null) {
                             sequencePlayer.activeVideo.skip();
                         }
+                        if (stepType == "ConIntro") {
+                            sequencePlayer.fireEvent("TIMELINE", {
+                                type : "swiff.done",
+                                id : "intro",
+                                next : "ConIntro.done.clicked"
+                            });
+                        }
+
                     }.bind(this)
                 }
             });
