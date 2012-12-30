@@ -33,7 +33,7 @@ var AudioPlayer = new Class({
 	},
 	// ----------------------------------------------------------
 	start : function() {
-		if (this.preloaded = false) {
+		if (this.preloaded == false) {
 			//log("++ Not preloaded yet - Loading Sound" + this.options.src);
 			this.preloader.loadFile({
 				src : this.options.src,
