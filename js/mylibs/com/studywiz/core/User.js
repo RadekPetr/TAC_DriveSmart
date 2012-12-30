@@ -16,6 +16,7 @@ var User = new Class({
         this.defaultData = new Hash({});
         this.userData = null;
         log("defaultData 1 ", this.defaultData);
+        this.concentrationLevel = 1;
     },
     loadProgress : function() {
         // try loading userdata from server
@@ -63,7 +64,7 @@ var User = new Class({
             var sequences = new Array();
             Array.each(sequenceIds, function(value, index) {
                 var seqObject = new Object({
-                    id : value,
+                    id : parseInt(value),
                     completed : false,
                     score : []
                 })
@@ -152,5 +153,32 @@ var User = new Class({
         var totalScore = allScores.average();
         log("Module " + moduleID + " score: ", totalScore);
         return totalScore;
+    },
+    getConcentrationLevel : function(seq) {
+        var userData = this.userData.get("concentration");
+
+        log("From:", (seq - 6), " To:", (seq + 1));
+        var lastSix = userData.filter(function(item, index) {
+            return (parseInt(item.id) < (seq + 1) && parseInt(item.id) > (seq - 6));
+        });
+        log(userData);
+        log("DEBUG: ", seq, lastSix);
+        var allScores = new Array();
+        Array.each(lastSix, function(sequenceState, index) {
+            allScores = allScores.concat(sequenceState.score);
+        })
+        var scoreAverage = allScores.average();
+        log("Sequence " + seq + " score: ", scoreAverage);
+
+        if (scoreAverage >= 85) {
+            // LEVEL INCREASE
+            log("*********** LEVEL INCREASE ***********:" + scoreAverage)
+            // PlayLevelAudio()                //Play audio
+            this.concentrationLevel++;
+            //Go up a level
+
+        }
+
+        return this.concentrationLevel;
     }
 })

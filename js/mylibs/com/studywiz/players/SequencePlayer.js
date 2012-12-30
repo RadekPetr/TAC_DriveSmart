@@ -3,6 +3,8 @@
  */
 
 var flashLoaded = false;
+var swiffFinished = null;
+var introFinished = null;
 
 function flashLoaded() {
     flashLoaded = true;
@@ -40,7 +42,7 @@ var SequencePlayer = new Class({
         this.shapes = null;
         this.cameo_image = null;
         this.recorder = null;
-
+        this.conLevel = 1;
         this.repeating = false;
 
         this.buttonPosition = {
@@ -314,6 +316,7 @@ var SequencePlayer = new Class({
                     }.bind(this);
                     this.activeSwiff = step.swiff;
                     step.swiff.show();
+                    step.swiff.attributes.level = this.conLevel;
                     step.swiff.startConActivity(step.swiff.attributes);
 
                     this._setupButton({
@@ -682,7 +685,7 @@ var SequencePlayer = new Class({
 
             case "ConActivity.cancel.clicked":
                 this.currentStep.score = undefined;
-       
+
             case "Repeat.clicked":
                 this._removeVideos();
                 this._removeImages();
@@ -888,7 +891,7 @@ var SequencePlayer = new Class({
                 this.currentStep.player.start();
 
                 this._setupButton({
-                    text : "Continue",
+                    text : "Start",
                     'class' : "button next",
                     next : "ConIntro.done.clicked",
                     style : {
@@ -1351,6 +1354,18 @@ var SequencePlayer = new Class({
         this.cameo_image = null;
         this.emptyBkg = null;
         this.correctBkg = null;
+
+        this.swiffs = new Array();
+        this.activeSwiff = null;
+        this.activeVideo = null;
+        this.shapes = null;
+        this.cameo_image = null;
+        this.recorder = null;
+        this.conLevel = 1;
+        this.repeating = false;
+
+        swiffFinished = null;
+        introFinished = null;
 
     }
 });

@@ -1,3 +1,5 @@
+var swiffLoaded  = null;
+
 var SwiffPlayer = new Class({
 
     Implements : [Options, Events],
@@ -38,6 +40,7 @@ var SwiffPlayer = new Class({
         //_' + this.options.id;
         this.container = null;
         this.swiff = null;
+        swiffLoaded = null;
     },
     myParent : function() {
         return this.options.parent;
@@ -100,14 +103,14 @@ var SwiffPlayer = new Class({
     },
     start : function(params) {
         //TODO: add option to pass parameters
-        log ("***************************** Calling Start");
+        log("***************************** Calling Start");
 
         Swiff.remote(this.swiff.toElement(), 'startSwiff', 1, 1, 1);
     },
     startConActivity : function(params) {
         //TODO: add option to pass parameters
 
-        Swiff.remote(this.swiff.toElement(), 'startSwiff', params.Ex, 1, params.format);
+        Swiff.remote(this.swiff.toElement(), 'startSwiff', params.Ex, params.level, params.format);
     },
     // ---------------------------
     hide : function() {
@@ -120,9 +123,9 @@ var SwiffPlayer = new Class({
     // ---------------------------
     remove : function() {
         //this.hide();
-        log("Swiff remove called");
+        //log("Swiff remove called");
         if (this.container != null && this.container != undefined) {
-            log("this.container.destroy(); called");
+          //  log("this.container.destroy(); called");
 
             this.container.destroy();
             // this.swiff = null;
@@ -147,7 +150,7 @@ var SwiffPlayer = new Class({
     preload : function() {
         swiffLoaded = function() {
             this.options.loaded = true;
-            log("Loaded flash", this.getLoaderInfo());
+         //  log("Loaded flash", this.getLoaderInfo());
             if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
                 this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
             }
