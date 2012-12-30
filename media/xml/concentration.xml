@@ -338,7 +338,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Con Ex 33-34" Ex="33-34">
+  <Seq desc="Con Ex 33-34" Ex="19">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_uia17_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -357,7 +357,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Con Ex 35-36" Ex="35-36">
+  <Seq desc="Con Ex 35-36" Ex="20">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_uia17_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -376,7 +376,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Con Ex 37-38" Ex="37-38">
+  <Seq desc="Con Ex 37-38" Ex="21">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_uia17_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -395,7 +395,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Con Ex 39-40" Ex="39-40">
+  <Seq desc="Con Ex 39-40" Ex="22">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_uia17_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -414,7 +414,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Con Ex 41-42" Ex="41-42">
+  <Seq desc="Con Ex 41-42" Ex="23">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_uia17_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -433,7 +433,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Con Ex 43-44" Ex="43-44">
+  <Seq desc="Con Ex 43-44" Ex="24">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_uia17_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -452,7 +452,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Con Ex 45-46" Ex="45-46">
+  <Seq desc="Con Ex 45-46" Ex="25">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_uia17_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -471,7 +471,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Con Ex 47-48" Ex="47-48">
+  <Seq desc="Con Ex 47-48" Ex="26">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_uia17_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -490,7 +490,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Con Ex 49-50" Ex="49-50">
+  <Seq desc="Con Ex 49-50" Ex="27">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_uia17_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -509,7 +509,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Con Ex 51-52" Ex="51-52">
+  <Seq desc="Con Ex 51-52" Ex="28">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_uia17_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -528,7 +528,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Con Ex 53-54" Ex="53-54">
+  <Seq desc="Con Ex 53-54" Ex="29">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_uia17_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -546,7 +546,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Con Ex 55-56" Ex="55-56">
+  <Seq desc="Con Ex 55-56" Ex="30">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_uia17_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
