@@ -60,7 +60,7 @@ var MediaLoader = new Class({
                 }
             }.bind(this))
 
-            log("this.loadQueue ", this.loadQueue, this.loadQueue.getKeys());
+            //log("this.loadQueue ", this.loadQueue, this.loadQueue.getKeys());
             var overAllProgress = this._calculateProgress();
             this._updateProgressBar(overAllProgress);
             this._handleFinished(overAllProgress);
@@ -180,7 +180,7 @@ var MediaLoader = new Class({
             this.loadQueue.extend(currentVideo);
         } else {
             // nothing, all loaded
-            log("all videos done");
+            //log("all videos done");
         }
     }
 })
