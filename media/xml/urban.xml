@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
+  <Seq desc="Module Intro" Ex="0">
+    <Step fmt="ModuleIntro">
+      <Preview>urban/urban_uia14_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>urban/urban_vwud</Audio>
+    </Step>
+  </Seq>
   <Seq desc="Exercise 1" Ex="1">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_uia08_start_first.jpg</Preview>

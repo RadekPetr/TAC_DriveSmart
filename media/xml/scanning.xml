@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
+  <Seq desc="Module Intro" Ex="0">
+    <Step fmt="ModuleIntro">
+      <Preview>scanning/scan_cst18_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>scanning/scan_vwsc2</Audio>
+    </Step>
+  </Seq>
   <Seq desc="Exercise 1" Ex="1">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_uia06_start_first.jpg</Preview>

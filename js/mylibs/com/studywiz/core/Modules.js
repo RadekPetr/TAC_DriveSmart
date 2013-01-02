@@ -75,7 +75,7 @@ var Modules = new Class({
             module[key] = new ModulePlayer(this, {
                 id : key,
                 score : value.score,
-                title : value.title,               
+                title : value.title,
                 currentSequenceID : value.sequenceID
             });
             this.modules.extend(module);
@@ -124,6 +124,7 @@ var Modules = new Class({
         var selectedModule = this.modules.get("main_menu");
         var sequenceID = "1";
         selectedModule.playSequence(sequenceID);
+        sequencePlayer.fromMenu = true;
     },
     setupDebug : function() {
         // add dropdown

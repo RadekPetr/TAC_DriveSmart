@@ -1,10 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
+  <Seq desc="Module Intro" Ex="0">
+    <Step fmt="ModuleIntro">
+      <Preview>concentration/con_mainmenu.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>concentration/con_vwco</Audio>
+    </Step>
+  </Seq>
   <Seq desc="Con Ex 1-2" Ex="1">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/concentration_ex1.swf</Swiff>
@@ -13,19 +20,17 @@
     <Step fmt="ConActivity">
       <Swiff Ex="1" format="1" notrack="1">concentration/conPlayer.swf</Swiff>
     </Step>
-     <Step fmt="ConContinue"></Step>
+    <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
       <Swiff Ex="2" gotostart="true" format="1" notrack="1">concentration/conPlayer.swf</Swiff>
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  
-  
   <Seq desc="Con Ex 3" Ex="2">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/concentration_ex3.swf</Swiff>
@@ -36,13 +41,11 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  
-  
-  <Seq desc="Con Ex 1-2" Ex="3">
+  <Seq desc="Con Ex 4-5" Ex="3">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/con_excercise4_5.swf</Swiff>
@@ -57,13 +60,11 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  
-  
   <Seq desc="Con Ex 6" Ex="4">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/concentration_ex6.swf</Swiff>
@@ -74,16 +75,14 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  
-  
   <Seq desc="Con Ex 7" Ex="5">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
-      <Swiff>concentration/concentration_ex6.swf</Swiff>
+      <Swiff>concentration/concentration_ex7.swf</Swiff>
       <Audio>concentration/con_goodluck</Audio>
     </Step>
     <Step fmt="ConActivity">
@@ -93,13 +92,9 @@
   </Seq>
   <Seq desc="Con Ex 8" Ex="6">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
-    </Step>
-    <Step fmt="ConIntro">
-      <Swiff>concentration/concentration_ex6.swf</Swiff>
-      <Audio>concentration/con_goodluck</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConActivity">
       <Swiff Ex="8" calc="true" gotostart="true" format="6">concentration/conPlayer.swf</Swiff>
@@ -108,9 +103,9 @@
   </Seq>
   <Seq desc="Con Ex 9-10" Ex="7">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/concentration_ex8.swf</Swiff>
@@ -131,9 +126,9 @@
   </Seq>
   <Seq desc="Con Ex 11-12" Ex="8">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial3.swf</Swiff>
@@ -150,9 +145,9 @@
   </Seq>
   <Seq desc="Con Ex 13-14" Ex="9">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial5.swf</Swiff>
@@ -169,9 +164,9 @@
   </Seq>
   <Seq desc="Con Ex 15-16" Ex="10">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial1.swf</Swiff>
@@ -188,9 +183,9 @@
   </Seq>
   <Seq desc="Con Ex 17-18" Ex="11">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial3.swf</Swiff>
@@ -207,9 +202,9 @@
   </Seq>
   <Seq desc="Con Ex 19-20" Ex="12">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial5.swf</Swiff>
@@ -226,9 +221,9 @@
   </Seq>
   <Seq desc="Con Ex 21-22" Ex="13">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial1.swf</Swiff>
@@ -245,9 +240,9 @@
   </Seq>
   <Seq desc="Con Ex 23-24" Ex="14">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial3.swf</Swiff>
@@ -264,9 +259,9 @@
   </Seq>
   <Seq desc="Con Ex 25-26" Ex="15">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial5.swf</Swiff>
@@ -283,9 +278,9 @@
   </Seq>
   <Seq desc="Con Ex 27-28" Ex="15">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial1.swf</Swiff>
@@ -302,9 +297,9 @@
   </Seq>
   <Seq desc="Con Ex 29-30" Ex="17">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial3.swf</Swiff>
@@ -321,9 +316,9 @@
   </Seq>
   <Seq desc="Con Ex 31-32" Ex="18">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial5.swf</Swiff>
@@ -340,9 +335,9 @@
   </Seq>
   <Seq desc="Con Ex 33-34" Ex="19">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial1.swf</Swiff>
@@ -359,9 +354,9 @@
   </Seq>
   <Seq desc="Con Ex 35-36" Ex="20">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial1.swf</Swiff>
@@ -378,9 +373,9 @@
   </Seq>
   <Seq desc="Con Ex 37-38" Ex="21">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial5.swf</Swiff>
@@ -397,9 +392,9 @@
   </Seq>
   <Seq desc="Con Ex 39-40" Ex="22">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial1.swf</Swiff>
@@ -416,9 +411,9 @@
   </Seq>
   <Seq desc="Con Ex 41-42" Ex="23">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial3.swf</Swiff>
@@ -435,9 +430,9 @@
   </Seq>
   <Seq desc="Con Ex 43-44" Ex="24">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial5.swf</Swiff>
@@ -454,9 +449,9 @@
   </Seq>
   <Seq desc="Con Ex 45-46" Ex="25">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial1.swf</Swiff>
@@ -473,9 +468,9 @@
   </Seq>
   <Seq desc="Con Ex 47-48" Ex="26">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial3.swf</Swiff>
@@ -492,9 +487,9 @@
   </Seq>
   <Seq desc="Con Ex 49-50" Ex="27">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial5.swf</Swiff>
@@ -511,9 +506,9 @@
   </Seq>
   <Seq desc="Con Ex 51-52" Ex="28">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial1.swf</Swiff>
@@ -530,9 +525,9 @@
   </Seq>
   <Seq desc="Con Ex 53-54" Ex="29">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial3.swf</Swiff>
@@ -548,9 +543,9 @@
   </Seq>
   <Seq desc="Con Ex 55-56" Ex="30">
     <Step fmt="SequenceIntro">
-      <Preview>shared/shared_uia17_start_first.jpg</Preview>
+      <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>scanning/scan_vsbkr1a</Audio>
+      <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
       <Swiff>concentration/contrial5.swf</Swiff>

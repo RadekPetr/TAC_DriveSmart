@@ -98,7 +98,6 @@ var ModulePlayer = new Class({
             var level = userTracker.getConcentrationLevel(parseInt(sequenceID));
             sequencePlayer.conLevel = level;
         }
-
         sequencePlayer.start(currentSequence);
 
     },

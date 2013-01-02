@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
+  <Seq desc="Module Intro" Ex="0">
+    <Step fmt="ModuleIntro">
+      <Preview>kaps/kaps_uit03_start_first.jpg</Preview>
+      <Image>intros/sequence_intro.png</Image>
+      <Audio>kaps/kaps_vwka</Audio>
+    </Step>
+  </Seq>
   <Seq desc="Kaps Exercise 1" Ex="1">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_uia17_start_first.jpg</Preview>

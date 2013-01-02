@@ -1,47 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <Seq desc="Exercise 200" Ex="200">
-    <Step fmt="SequenceIntro">
-      <Preview>country/country_cst21_start_first.jpg</Preview>
+  <Seq desc="Module Intro" Ex="0" >
+    <Step fmt="ModuleIntro">
+      <Preview>country/country_cst16_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
-      <Audio>extra/extra_vclick</Audio>
-    </Step>
-    <Step fmt="CommentaryIntro">
-      <Image>country/country_cst21_start_first.jpg</Image>
-      <Audio>extra/extra_vcomi</Audio>
-    </Step>
-    <Step fmt="Commentary">
-      <Video>country/country_cst26_start</Video>
-      <FeedbackAudio>country/country_vdac7y</FeedbackAudio>
-      <FeedbackText>
-        <Data>slow car</Data>
-        <Data>advisory road sign</Data>
-        <Data>oncoming car overtaking truck</Data>
-      </FeedbackText>
-      <ExpertAudio>country/country_vdac7y</ExpertAudio>
-    </Step>
-  </Seq>
-  <Seq Ex="100">
-    <Step fmt="SequenceIntro">
-      <Preview>country/country_cst21_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
-      <Audio>extra/extra_vclick</Audio>
-    </Step>
-    <Step fmt="PlayVideo">
-      <Video>country/country_cst26_start</Video>
-    </Step>
-    <Step fmt="KeyRisk">
-      <Areas>
-        <Area id="a1" data="path#m157,12.28421c0,0 24.7191,88.71578 25.95506,88.71578c1.23595,0 84.04494,-12.37894 84.04494,-12.37894c0,0 -32.13483,-85.62105 -32.13483,-85.62105c0,0 -77.86517,9.28421 -77.86517,9.28421z"></Area>
-      </Areas>
-      <Audio waitfor="true">scanning/scan_vsbkr1b</Audio>
-    </Step>
-    <Step fmt="KRFeedback">
-      <Image>keyrisks/country_cst23_next.jpg</Image>
-      <Audio>country/country_vdbc1h</Audio>
-    </Step>
-    <Step fmt="End.Module.Continue">
-      <Audio>extra/extra_end_module</Audio>
+      <Audio>country/country_vwcd</Audio>
     </Step>
   </Seq>
   <Seq Ex="1">
@@ -348,7 +311,7 @@
     <Step fmt="Question">
       <Audio>country/country_vdfa2b</Audio>
     </Step>
-    <Step fmt="QuestionUser" cmd="">      
+    <Step fmt="QuestionUser" cmd="">
       <Inter>
         <Data correct="false">Below the speed limit</Data>
         <Data correct="false">At or around the speed limit</Data>

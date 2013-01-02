@@ -44,6 +44,7 @@ var SequencePlayer = new Class({
         this.recorder = null;
         this.conLevel = 1;
         this.repeating = false;
+        this.fromMenu = false;
 
         this.buttonPosition = {
             x : 480,
@@ -144,6 +145,9 @@ var SequencePlayer = new Class({
 
                     break;
                 case "SequenceIntro":
+                    log("From Menu:", this.fromMenu);
+                    this.fromMenu = false;
+
                     var myContainerID = 'SequenceIntro.container';
                     var myDiv = new Element("div", {
                         id : myContainerID
@@ -205,6 +209,10 @@ var SequencePlayer = new Class({
 
                     step.player.options.next = '';
                     step.player.start();
+                    break;
+
+                case "ModuleIntro":
+                    this.moduleIntroSetup(step);
                     break;
                 case "CommentaryIntro":
                     var myContainerID = 'CommentaryIntro.container';
@@ -1362,11 +1370,101 @@ var SequencePlayer = new Class({
         this.cameo_image = null;
         this.recorder = null;
         this.conLevel = 1;
-        this.repeating = false;
+        //this.repeating = false;
 
         swiffFinished = null;
         introFinished = null;
 
+    },
+    moduleIntroSetup : function(step) {
+        log("From Menu:", this.fromMenu);
+        this.fromMenu = false;
+
+        var myContainerID = 'SequenceIntro.container';
+        var myDiv = new Element("div", {
+            id : myContainerID
+        });
+        myDiv.inject($(driveSmartDivID));
+
+        step.image.add(myContainerID);
+        step.image.show();
+
+        step.previewImage.add(myContainerID);
+        step.previewImage.show();
+
+        var moduleTitle = new Element("h1", {
+            html : this.moduleInfo.moduleTitle,
+            styles : {
+                left : '0px',
+                top : '20%'
+            },
+            'class' : 'module-title'
+        })
+        moduleTitle.inject(myDiv);
+
+        var moduleProgress = userTracker.getModuleProgress(this.moduleInfo.moduleID);
+     
+        var moduleProgressBar = moduleProgressSetup(this.moduleInfo.moduleID);
+        moduleProgressBar.setStyles({
+            left : 0,
+            top : '380px'
+        });
+        moduleProgressBar.inject(myDiv);
+
+        this._setupButton({
+            text : "Continue",
+            'class' : "button next",
+            next : "Continue.clicked",
+            style : {
+                left : this.buttonPosition.x,
+                top : this.buttonPosition.y
+            }
+        });
+        this._setupButton({
+            text : "Main Menu",
+            'class' : "button star",
+            next : "MainMenuIntro.clicked",
+            style : {
+                left : this.buttonPosition.x,
+                top : this.buttonPosition.y - 45
+            }
+        });
+
+        step.player.options.next = '';
+        step.player.start();
+        this._updateUserProgress();
     }
+    //-----------------------------------------------------------
+    /* Frame:   CONCENTRATION MODULE
+     // Description:
+     stop()
+     sCourse="Concentration"
+     SECTION = CONCENTRATION;
+     eTracker = oTracker.concentration
+
+     if(!RtnFromEx){
+     //Came from the Main menu
+     if(eTracker.seq>eTracker.maxex){
+     gotoAndPlay("ModComplete")
+     }else{
+     PlaySound("sound/concentration/mp3/con_vwco.mp3")
+     }
+     }else{
+     if(eTracker.seq>eTracker.maxex){
+     gotoAndPlay("ModComplete")
+     }
+     PlaySound("sound/concentration/mp3/continue.mp3")
+     RtnFromEx=false;
+     }
+
+     if(eTracker.seq==1){
+     drace("Hiding Repeat Button")
+     RepeatButton._visible=0
+     }else{
+     RepeatButton._visible=1
+     }
+
+     */
+
 });
 

@@ -66,8 +66,13 @@ var User = new Class({
                 var seqObject = new Object({
                     id : parseInt(value),
                     completed : false,
-                    score : []
+                    score : [],
+                    noTrack : false
                 })
+                if (seqObject.id == 0) {
+                    seqObject.noTrack = true;
+                }
+
                 sequences.push(seqObject);
             })
             var moduleData = new Hash();
@@ -115,11 +120,19 @@ var User = new Class({
 
         var sequencesInModule = this.userData.get(moduleID);
         var unfinishedSequences = sequencesInModule.filter(function(item, index) {
-            return item.completed == false;
+            return item.completed == false && item.noTrack != true;
         });
 
+        log("unfinishedSequences", unfinishedSequences);
+
+        var introSequences = sequencesInModule.filter(function(item, index) {
+            return item.noTrack == true;
+        });
+
+        log("introSequences", introSequences, introSequences.length);
         var progressObj = {};
-        progressObj.total = sequencesInModule.length;
+        // Minus the ModuleIntro
+        progressObj.total = sequencesInModule.length - introSequences.length;
         progressObj.finishedCount = progressObj.total - unfinishedSequences.length;
         if (progressObj.finishedCount == 0) {
             progressObj.progress = 0;
@@ -148,7 +161,10 @@ var User = new Class({
         log(moduleID, userData);
         var allScores = new Array();
         Array.each(userData, function(sequenceState, index) {
-            allScores = allScores.concat(sequenceState.score);
+            // don't count Module Intros
+            if (sequenceState.id != 0) {
+                allScores = allScores.concat(sequenceState.score);
+            }
         })
         var totalScore = allScores.average();
         log("Module " + moduleID + " score: ", totalScore);
