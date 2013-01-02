@@ -104,6 +104,7 @@ var Modules = new Class({
                 this._startMainMenu();
                 break;
             case "module.start":
+                sequencePlayer.fromMenu = true;
                 var selectedModule = this.modules.get(this.options.moduleID);
                 selectedModule.fireEvent("SEQUENCE", {
                     type : "sequence.event",
@@ -124,7 +125,7 @@ var Modules = new Class({
         var selectedModule = this.modules.get("main_menu");
         var sequenceID = "1";
         selectedModule.playSequence(sequenceID);
-        sequencePlayer.fromMenu = true;
+
     },
     setupDebug : function() {
         // add dropdown

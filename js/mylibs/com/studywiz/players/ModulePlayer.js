@@ -57,8 +57,12 @@ var ModulePlayer = new Class({
                         next : "module.finished"
                     });
                 } else {
-                    // get the next one
-                    this.options.currentSequenceID = unfinishedSequences[0].id;
+                    if (sequencePlayer.fromMenu == true) {
+                        this.options.currentSequenceID = 0;
+                    } else {
+                        // get the next one
+                        this.options.currentSequenceID = unfinishedSequences[0].id;
+                    }
                     log("Next unfinished ID:", this.options.currentSequenceID);
                     this.playSequence(this.options.currentSequenceID);
                 }

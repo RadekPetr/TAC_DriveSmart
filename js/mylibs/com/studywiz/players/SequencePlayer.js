@@ -469,7 +469,7 @@ var SequencePlayer = new Class({
                     step.player.start();
                     break;
                 case "KeyRisk" :
-                    log("KR");
+
                     this._removeInteractions();
 
                     step.player.options.next = 'Risks.ready';
@@ -803,7 +803,7 @@ var SequencePlayer = new Class({
                         }
                     });
                 }
-                // TODO: offer sequence repeat as well - may need to show continue screen after all ?
+                // TODO: offer sequence repeat as well - may need to show continue screen after all ? Maybe use the module Intro ?
                 this._setupButton({
                     text : "Continue",
                     'class' : "button next",
@@ -1159,7 +1159,6 @@ var SequencePlayer = new Class({
                     break;
 
                 case "RotateAreas" :
-                    // TODO: remove if no needed
                     var rawData = item.childNodes;
                     step.rotateZones = new Array();
                     Array.each(rawData, function(item, index) {
@@ -1172,12 +1171,9 @@ var SequencePlayer = new Class({
                     })
                     break;
                 case "Zones":
-
-                    //TODO: trim white spaces
                     step.zones = item.attributes.data;
                     break;
                 case "Swiff":
-
                     log(item.value);
                     step.swiff = new SwiffPlayer(this, {
                         swiff : {
@@ -1189,16 +1185,12 @@ var SequencePlayer = new Class({
 
                     step.swiff.attributes = item.attributes;
                     this.swiffs.push(step.swiff);
-                    log("step.swiff.attributes", step.swiff.attributes);
                     this.mediaLoader.register(step.swiff.getLoaderInfo());
-                    log(step.swiff.getLoaderInfo());
                     break;
-
                 default:
                 // nothing
             }
         }.bind(this))
-
     }.protect(),
     _cleanUp : function() {
         if (this.currentStep != null) {
@@ -1330,7 +1322,6 @@ var SequencePlayer = new Class({
         }
         this.shapes = null;
     }.protect(),
-    // TODO maybe allow partial progress update ?
     _updateUserProgress : function() {
         // Update state to completed = true;
         this.sequenceState.completed = true;
@@ -1377,9 +1368,7 @@ var SequencePlayer = new Class({
 
     },
     moduleIntroSetup : function(step) {
-        log("From Menu:", this.fromMenu);
-        this.fromMenu = false;
-
+        log("From Menu: ", this.fromMenu);
         var myContainerID = 'SequenceIntro.container';
         var myDiv = new Element("div", {
             id : myContainerID
@@ -1403,7 +1392,7 @@ var SequencePlayer = new Class({
         moduleTitle.inject(myDiv);
 
         var moduleProgress = userTracker.getModuleProgress(this.moduleInfo.moduleID);
-     
+
         var moduleProgressBar = moduleProgressSetup(this.moduleInfo.moduleID);
         moduleProgressBar.setStyles({
             left : 0,
@@ -1430,9 +1419,15 @@ var SequencePlayer = new Class({
             }
         });
 
-        step.player.options.next = '';
-        step.player.start();
-        this._updateUserProgress();
+        if (this.fromMenu == true) {
+            this.fromMenu = false;
+            step.player.options.next = '';
+            step.player.start();
+            this._updateUserProgress();
+        } else {
+            // TODO: play different sound if getting to module intro from a sequence ?
+        }
+
     }
     //-----------------------------------------------------------
     /* Frame:   CONCENTRATION MODULE
