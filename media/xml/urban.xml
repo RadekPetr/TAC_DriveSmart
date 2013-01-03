@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <Seq desc="Module Intro" Ex="0">
+  <Seq trackProgress="false" desc="Module Intro" Ex="0">
     <Step fmt="ModuleIntro">
       <Preview>urban/urban_uia14_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
       <Audio>urban/urban_vwud</Audio>
     </Step>
   </Seq>
-  <Seq desc="Exercise 1" Ex="1">
+  <Seq trackProgress="true" desc="Exercise 1" Ex="1">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_uia08_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -52,7 +52,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 2" Ex="2">
+  <Seq trackProgress="true" desc="Exercise 2" Ex="2">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_uia14_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -96,7 +96,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 3" Ex="3">
+  <Seq trackProgress="true" desc="Exercise 3" Ex="3">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_uia09_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -141,7 +141,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 4" Ex="4">
+  <Seq trackProgress="true" desc="Exercise 4" Ex="4">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_uic06_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -186,7 +186,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 5" Ex="5">
+  <Seq trackProgress="true" desc="Exercise 5" Ex="5">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_uit01_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -231,7 +231,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 6" Ex="6">
+  <Seq trackProgress="true" desc="Exercise 6" Ex="6">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_urt07_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -272,7 +272,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 7" Ex="7">
+  <Seq trackProgress="true" desc="Exercise 7" Ex="7">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_urt08_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -317,7 +317,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 8" Ex="8">
+  <Seq trackProgress="true" desc="Exercise 8" Ex="8">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_urt01_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -362,7 +362,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 9" Ex="9">
+  <Seq trackProgress="true" desc="Exercise 9" Ex="9">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_umj01_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -406,7 +406,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 10" Ex="10">
+  <Seq trackProgress="true" desc="Exercise 10" Ex="10">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_umt03_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -453,7 +453,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 11" Ex="11">
+  <Seq trackProgress="true" desc="Exercise 11" Ex="11">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_uia16_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -498,7 +498,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 12" Ex="12">
+  <Seq trackProgress="true" desc="Exercise 12" Ex="12">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_uia17_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -543,7 +543,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 13" Ex="13">
+  <Seq trackProgress="true" desc="Exercise 13" Ex="13">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_umt08_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -588,7 +588,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 14" Ex="14">
+  <Seq trackProgress="true" desc="Exercise 14" Ex="14">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_uic07_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -630,7 +630,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 15" Ex="15">
+  <Seq trackProgress="true" desc="Exercise 15" Ex="15">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_umt10_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -658,7 +658,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 16" Ex="16">
+  <Seq trackProgress="true" desc="Exercise 16" Ex="16">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_umj02_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -688,7 +688,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 17" Ex="17">
+  <Seq trackProgress="true" desc="Exercise 17" Ex="17">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_umt07_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -717,7 +717,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 18" Ex="18">
+  <Seq trackProgress="true" desc="Exercise 18" Ex="18">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_faj06_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -747,7 +747,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 19" Ex="19">
+  <Seq trackProgress="true" desc="Exercise 19" Ex="19">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_uic02_start02_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -819,7 +819,7 @@
       <FeedbackAudio>country/country_vdbc1l</FeedbackAudio>
     </Step>
   </Seq>
-  <Seq desc="Exercise 20" Ex="20">
+  <Seq trackProgress="true" desc="Exercise 20" Ex="20">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_uic06_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -865,7 +865,7 @@
       <FeedbackAudio>country/country_vdbc1l</FeedbackAudio>
     </Step>
   </Seq>
-  <Seq desc="Exercise 21" Ex="21">
+  <Seq trackProgress="true" desc="Exercise 21" Ex="21">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_urt10_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -929,7 +929,7 @@
       <FeedbackAudio>country/country_vdbc1l</FeedbackAudio>
     </Step>
   </Seq>
-  <Seq desc="Exercise 22" Ex="22">
+  <Seq trackProgress="true" desc="Exercise 22" Ex="22">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_urt04_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -999,7 +999,7 @@
       <FeedbackAudio>country/country_vdbc1l</FeedbackAudio>
     </Step>
   </Seq>
-  <Seq desc="Exercise 23" Ex="23">
+  <Seq trackProgress="true" desc="Exercise 23" Ex="23">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_umt01_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -1071,7 +1071,7 @@
       <FeedbackAudio>country/country_vdbc1l</FeedbackAudio>
     </Step>
   </Seq>
-  <Seq desc="Exercise 24" Ex="24">
+  <Seq trackProgress="true" desc="Exercise 24" Ex="24">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_uia03_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -1113,7 +1113,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 25" Ex="25">
+  <Seq trackProgress="true" desc="Exercise 25" Ex="25">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_uia09_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -1154,7 +1154,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 26" Ex="26">
+  <Seq trackProgress="true" desc="Exercise 26" Ex="26">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_uia01_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -1197,7 +1197,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 27" Ex="27">
+  <Seq trackProgress="true" desc="Exercise 27" Ex="27">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_uic01_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -1239,7 +1239,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 28" Ex="28">
+  <Seq trackProgress="true" desc="Exercise 28" Ex="28">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_uit03_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -1280,7 +1280,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 29" Ex="29">
+  <Seq trackProgress="true" desc="Exercise 29" Ex="29">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_urt02_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -1323,7 +1323,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 30" Ex="30">
+  <Seq trackProgress="true" desc="Exercise 30" Ex="30">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_umt11_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -1364,7 +1364,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 31" Ex="31">
+  <Seq trackProgress="true" desc="Exercise 31" Ex="31">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_urt09_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -1407,7 +1407,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 32" Ex="32">
+  <Seq trackProgress="true" desc="Exercise 32" Ex="32">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_umt02_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -1449,7 +1449,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 33" Ex="33">
+  <Seq trackProgress="true" desc="Exercise 33" Ex="33">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_umt09_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -1491,7 +1491,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 34" Ex="34">
+  <Seq trackProgress="true" desc="Exercise 34" Ex="34">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_faj02_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -1530,7 +1530,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 35" Ex="35">
+  <Seq trackProgress="true" desc="Exercise 35" Ex="35">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_faj05_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -1574,7 +1574,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 36" Ex="36">
+  <Seq trackProgress="true" desc="Exercise 36" Ex="36">
     <Step fmt="SequenceIntro">
       <Preview>urban/urban_fat06_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>

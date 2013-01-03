@@ -55,23 +55,25 @@ var User = new Class({
         //  alert("Data :" +  output2);
         // TODO: on each execise completion if you can send me module:{score: _, completed_exercises: _, total_exercises: _}
     },
-    setDefaultUserData : function(data) {
-        data.each( function(moduleObject, key, hash) {
+    setDefaultUserData : function(modules) {
+        modules.each( function(moduleObject, key, hash) {
             var moduleInfo = moduleObject.getModuleInfo();
-
             var sequenceIds = moduleObject.sequences.getKeys();
-
+            log("sequenceIds", sequenceIds)
             var sequences = new Array();
-            Array.each(sequenceIds, function(value, index) {
+
+            Array.each(sequenceIds, function(sequenceID, index) {
+                var sequenceData = moduleObject.sequences.get(sequenceID);
+                log("sequenceData", sequenceData);
                 var seqObject = new Object({
-                    id : parseInt(value),
+                    id : parseInt(sequenceID),
                     completed : false,
                     score : [],
-                    noTrack : false
+                    trackProgress : sequenceData.trackProgress,
+                    trackScore : sequenceData.trackScore
                 })
-                if (seqObject.id == 0) {
-                    seqObject.noTrack = true;
-                }
+
+                log("seqObject", seqObject);
 
                 sequences.push(seqObject);
             })
@@ -120,13 +122,13 @@ var User = new Class({
 
         var sequencesInModule = this.userData.get(moduleID);
         var unfinishedSequences = sequencesInModule.filter(function(item, index) {
-            return item.completed == false && item.noTrack != true;
+            return item.completed == false && item.trackProgress == true;
         });
 
         log("unfinishedSequences", unfinishedSequences);
 
         var introSequences = sequencesInModule.filter(function(item, index) {
-            return item.noTrack == true;
+            return item.trackProgress == false;
         });
 
         log("introSequences", introSequences, introSequences.length);
@@ -171,6 +173,7 @@ var User = new Class({
         return totalScore;
     },
     getConcentrationLevel : function(seq) {
+        // TODO: store level with user data
         var userData = this.userData.get("concentration");
 
         log("From:", (seq - 6), " To:", (seq + 1));
@@ -188,8 +191,36 @@ var User = new Class({
 
         if (scoreAverage >= 85) {
             // LEVEL INCREASE
-            log("*********** LEVEL INCREASE ***********:" + scoreAverage)
-            // PlayLevelAudio()                //Play audio
+            log("*********** LEVEL INCREASE ***********:" + scoreAverage);
+            //TODO:  PlayLevelAudio()                //Play audio
+
+            /*  if (scoreAverage >= 85) {
+             // LEVEL INCREASE
+             log("*********** LEVEL INCREASE ***********:" + scoreAverage);
+             //TODO:  PlayLevelAudio()                //Play audio
+
+             function PlayLevelAudio(){
+             if(eTracker.level=="1"){
+             mySound3 = new Sound();
+             mySound3.loadSound("sound/concentration/mp3/con_overs1.mp3");
+             mySound3.start();
+             drace("PLAY AUDIO: Jump Level 1")
+             }
+             if(eTracker.level=="2"){
+             mySound3 = new Sound();
+             mySound3.loadSound("sound/concentration/mp3/con_overs2.mp3");
+             mySound3.start();
+             drace("PLAY AUDIO: Jump Level 2");
+             }
+             if(eTracker.level=="3"){
+             mySound3 = new Sound();
+             mySound3.loadSound("sound/concentration/mp3/con_overs3.mp3");
+             mySound3.start();
+             drace("PLAY AUDIO: Jump Level 3");
+             }
+             }
+             */
+
             this.concentrationLevel++;
             //Go up a level
 

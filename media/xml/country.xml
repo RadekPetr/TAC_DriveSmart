@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <Seq desc="Module Intro" Ex="0" >
+  <Seq trackProgress="false" desc="Module Intro" Ex="0" >
     <Step fmt="ModuleIntro">
       <Preview>country/country_cst16_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
       <Audio>country/country_vwcd</Audio>
     </Step>
   </Seq>
-  <Seq Ex="1">
+  <Seq trackProgress="true" desc="Exercise 1" Ex="1">
     <Step fmt="SequenceIntro">
       <Preview>country/country_cst26_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -52,7 +52,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq Ex="2">
+  <Seq trackProgress="true" desc="Exercise 2" Ex="2">
     <Step fmt="SequenceIntro">
       <Preview>country/country_cst16_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -97,7 +97,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq Ex="3">
+  <Seq trackProgress="true" desc="Exercise 3" Ex="3">
     <Step fmt="SequenceIntro">
       <Preview>country/country_cst14_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -145,7 +145,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq Ex="4">
+  <Seq trackProgress="true" desc="Exercise 4" Ex="4">
     <Step fmt="SequenceIntro">
       <Preview>country/country_cla01_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -187,7 +187,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 5" Ex="5">
+  <Seq trackProgress="true" desc="Exercise 5" Ex="5">
     <Step fmt="SequenceIntro">
       <Preview>country/country_cst25_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -228,7 +228,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 6" Ex="6">
+  <Seq trackProgress="true" desc="Exercise 6" Ex="6">
     <Step fmt="SequenceIntro">
       <Preview>country/country_cst22_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -258,7 +258,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 7" Ex="7">
+  <Seq trackProgress="true" desc="Exercise 7" Ex="7">
     <Step fmt="SequenceIntro">
       <Preview>country/country_fto04_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -299,7 +299,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 8" Ex="8">
+  <Seq trackProgress="true" desc="Exercise 8" Ex="8">
     <Step fmt="SequenceIntro">
       <Preview>country/country_fat08_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -326,7 +326,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 9" Ex="9">
+  <Seq trackProgress="true" desc="Exercise 9" Ex="9">
     <Step fmt="SequenceIntro">
       <Preview>country/country_cst23_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -391,7 +391,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq desc="Exercise 10" Ex="10">
+  <Seq trackProgress="true" desc="Exercise 10" Ex="10">
     <Step fmt="SequenceIntro">
       <Preview>country/country_cst09_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -464,7 +464,7 @@
       <FeedbackAudio>country/country_vdbc1l</FeedbackAudio>
     </Step>
   </Seq>
-  <Seq desc="Exercise 11" Ex="11">
+  <Seq trackProgress="true" desc="Exercise 11" Ex="11">
     <Step fmt="SequenceIntro">
       <Preview>country/country_cst11_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -507,7 +507,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 12" Ex="12">
+  <Seq trackProgress="true" desc="Exercise 12" Ex="12">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_cst12_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -549,7 +549,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 13" Ex="13">
+  <Seq trackProgress="true" desc="Exercise 13" Ex="13">
     <Step fmt="SequenceIntro">
       <Preview>country/country_cst16_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -590,7 +590,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 14" Ex="14">
+  <Seq trackProgress="true" desc="Exercise 14" Ex="14">
     <Step fmt="SequenceIntro">
       <Preview>country/country_cst13_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -631,7 +631,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 15" Ex="15">
+  <Seq trackProgress="true" desc="Exercise 15" Ex="15">
     <Step fmt="SequenceIntro">
       <Preview>country/country_cst01_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -673,7 +673,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 16" Ex="16">
+  <Seq trackProgress="true" desc="Exercise 16" Ex="16">
     <Step fmt="SequenceIntro">
       <Preview>country/country_cst20_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -713,7 +713,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 17" Ex="17">
+  <Seq trackProgress="true" desc="Exercise 17" Ex="17">
     <Step fmt="SequenceIntro">
       <Preview>country/country_cst21_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -755,7 +755,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 18" Ex="18">
+  <Seq trackProgress="true" desc="Exercise 18" Ex="18">
     <Step fmt="SequenceIntro">
       <Preview>country/country_cla03_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -798,7 +798,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 19" Ex="19">
+  <Seq trackProgress="true" desc="Exercise 19" Ex="19">
     <Step fmt="SequenceIntro">
       <Preview>country/country_clp02_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -840,7 +840,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 20" Ex="20">
+  <Seq trackProgress="true" desc="Exercise 20" Ex="20">
     <Step fmt="SequenceIntro">
       <Preview>country/country_fto01_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -881,7 +881,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 21" Ex="21">
+  <Seq trackProgress="true" desc="Exercise 21" Ex="21">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_faj09_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
@@ -921,7 +921,7 @@
       </FeedbackText>
     </Step>
   </Seq>
-  <Seq desc="Exercise 22" Ex="22">
+  <Seq trackProgress="true" desc="Exercise 22" Ex="22">
     <Step fmt="SequenceIntro">
       <Preview>country/country_fat14_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>

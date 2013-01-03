@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <Seq Ex="1">
+  <Seq trackProgress="false" Ex="1">
     <Step fmt="Menu">
       <Items>
         <Data showProgress="false" moduleID="intro" preview="country/country_cst16_start_first.jpg" description="The Introduction Tutorial provides an overview of the basic concepts of safe driving. You will be applying these concepts in the rest of the program. This section must be viewed prior to entering the other modules.">introduction</Data>

@@ -43,7 +43,6 @@ var DataLoader = new Class({
 
         xml2json.convertFromURL(this.options.src, function(response) {
             this.data = response;
-
             this.setupSequences();
         }.bind(this));
 
@@ -63,13 +62,17 @@ var DataLoader = new Class({
         return IDs;
     },
     // ----------------------------------------------------------
-    setupSequences : function() {       
+    setupSequences : function() {
         var sequencesData = this.data.childNodes;
         this.sequences = new Hash({});
         Array.each(sequencesData, function(item, index) {
             var seq = new Object();
-            seq[ item.attributes.Ex] = item.childNodes;
-            //  console.log(seq);
+            seq[item.attributes.Ex] = item.childNodes;
+            seq[item.attributes.Ex].trackProgress = item.attributes.trackProgress;
+            // || true;
+            seq[item.attributes.Ex].trackScore = item.attributes.trackScore;
+            // || true;
+            console.log("Seq", seq);
             this.sequences.extend(seq);
         }.bind(this))
 
