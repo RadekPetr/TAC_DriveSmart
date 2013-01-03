@@ -1429,37 +1429,7 @@ var SequencePlayer = new Class({
         }
 
     }
-    //-----------------------------------------------------------
-    /* Frame:   CONCENTRATION MODULE
-     // Description:
-     stop()
-     sCourse="Concentration"
-     SECTION = CONCENTRATION;
-     eTracker = oTracker.concentration
 
-     if(!RtnFromEx){
-     //Came from the Main menu
-     if(eTracker.seq>eTracker.maxex){
-     gotoAndPlay("ModComplete")
-     }else{
-     PlaySound("sound/concentration/mp3/con_vwco.mp3")
-     }
-     }else{
-     if(eTracker.seq>eTracker.maxex){
-     gotoAndPlay("ModComplete")
-     }
-     PlaySound("sound/concentration/mp3/continue.mp3")
-     RtnFromEx=false;
-     }
-
-     if(eTracker.seq==1){
-     drace("Hiding Repeat Button")
-     RepeatButton._visible=0
-     }else{
-     RepeatButton._visible=1
-     }
-
-     */
 
 });
 
