@@ -220,8 +220,10 @@ var User = new Class({
              }
              }
              */
-
-            this.concentrationLevel++;
+            // There are max 0-4 levels allowed in flash
+            if (this.concentrationLevel < 4) {
+                this.concentrationLevel++;
+            }
             //Go up a level
 
         }

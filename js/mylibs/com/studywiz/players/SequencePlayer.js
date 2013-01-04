@@ -43,6 +43,7 @@ var SequencePlayer = new Class({
         this.cameo_image = null;
         this.recorder = null;
         this.conLevel = 1;
+        this.playConLevelAudio = false;
         this.repeating = false;
         this.fromMenu = false;
 
@@ -67,9 +68,6 @@ var SequencePlayer = new Class({
     },
     // ----------------------------------------------------------
     start : function(sequenceData) {
-        // Get rid of any elements possibly left in
-        this.reset();
-
         this.currentSequence = Array.clone(sequenceData);
         this.moduleInfo = this.myParent().getModuleInfo();
 
@@ -206,7 +204,7 @@ var SequencePlayer = new Class({
                             top : this.buttonPosition.y - 45
                         }
                     });
-
+                    // TODO: play level chnage audio if  this.playConLevelAudio = false;
                     step.player.options.next = '';
                     step.player.start();
                     break;
@@ -1361,6 +1359,7 @@ var SequencePlayer = new Class({
         this.cameo_image = null;
         this.recorder = null;
         this.conLevel = 1;
+        this.playConLevelAudio = false;
         //this.repeating = false;
 
         swiffFinished = null;
@@ -1429,7 +1428,5 @@ var SequencePlayer = new Class({
         }
 
     }
-
-
 });
 

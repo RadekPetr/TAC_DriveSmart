@@ -93,17 +93,21 @@ var ModulePlayer = new Class({
             sequencePlayer = new SequencePlayer(this, {});
         } else {
             sequencePlayer.reset();
-            sequencePlayer.options.parent = this;
+            sequencePlayer.options.parent = this;            
         }
+        
         var currentSequence = this.sequences[this.options.currentSequenceID];
-        sequencePlayer.reset();
+       
 
         if (this.options.id == "concentration") {
             var level = userTracker.getConcentrationLevel(parseInt(sequenceID));
+            if (sequencePlayer.conLevel < level) {
+                sequencePlayer.playConLevelAudio = true;
+            }
             sequencePlayer.conLevel = level;
         }
+        
         sequencePlayer.start(currentSequence);
-
     },
     getModuleInfo : function() {
         return {
