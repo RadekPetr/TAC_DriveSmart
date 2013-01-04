@@ -16,13 +16,13 @@ var ModulePlayer = new Class({
         this.sequences = null;
         this.addEvent("DATA", this.handleDataEvent);
         this.addEvent("SEQUENCE", this.handleSequenceEvent);
-        this.setupData();
+        this._setupData();
     },
     myParent : function() {
         return this.options.parent;
     },
     // ----------------------------------------------------------
-    setupData : function() {
+    _setupData : function() {
         this.dataLoader = new DataLoader(this, {
             src : 'media/xml/' + this.options.id + '.xml',
             next : 'data.ready'

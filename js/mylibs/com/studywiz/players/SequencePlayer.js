@@ -29,33 +29,11 @@ var SequencePlayer = new Class({
 
         this.setOptions(myOptions);
         this.options.parent = myParent;
-        this.currentSequence = new Array();
-        this.sequenceState = null;
-        this.currentStep = null;
-        this.mediaLoader = null;
-        this.buttons = new Array();
-        this.interactions = null;
-        this.videos = new Array();
-        this.swiffs = new Array();
-        this.activeSwiff = null;
-        this.activeVideo = null;
-        this.shapes = null;
-        this.cameo_image = null;
-        this.recorder = null;
-        this.conLevel = 1;
-        this.playConLevelAudio = false;
+
+        this._resetVariables();
+
         this.repeating = false;
         this.fromMenu = false;
-
-        this.buttonPosition = {
-            x : 480,
-            y : 415
-        }
-
-        this.panelPosition = {
-            left : '5%',
-            top : '25%'
-        }
 
         this.mediaLoader = new MediaLoader(this, {
             parentElementID : driveSmartDivID
@@ -83,15 +61,15 @@ var SequencePlayer = new Class({
         //log(this.currentSequence);
 
         //
-        this.setupMedia();
+        this._setupMedia();
     },
     // ----------------------------------------------------------
-    setupMedia : function() {
+    _setupMedia : function() {
         this._setupSequence(this.currentSequence);
         this.mediaLoader.options.next = 'Media.ready';
         this.mediaLoader.start(true);
     },
-    nextStep : function() {
+    _nextStep : function() {
         // take a step and decide what to do with it
         if (this.currentStep != null) {
             var lastStepScore = this.currentStep.score;
@@ -210,7 +188,7 @@ var SequencePlayer = new Class({
                     break;
 
                 case "ModuleIntro":
-                    this.moduleIntroSetup(step);
+                    this._moduleIntroSetup(step);
                     break;
                 case "CommentaryIntro":
                     var myContainerID = 'CommentaryIntro.container';
@@ -354,7 +332,7 @@ var SequencePlayer = new Class({
                         log(this.activeVideo);
                         this.activeVideo.obscure();
                     }
-                    // this.nextStep();
+                    // this._nextStep();
 
                     break;
                 case "QuestionUser":
@@ -621,31 +599,31 @@ var SequencePlayer = new Class({
             case "QuestionFeedback.done":
             case "PlayAudio.done":
 
-                this.nextStep();
+                this._nextStep();
                 break;
             case "SequenceIntro.done":
                 this._removeImages();
                 this._removeButtons();
                 this._cleanUp();
-                this.nextStep();
+                this._nextStep();
                 break;
             case 'KRFeedback.continue.done':
                 this._removeRisks();
                 this._removeImages();
                 this._removeButtons();
                 this._cleanUp();
-                this.nextStep();
+                this._nextStep();
                 break;
             case "Skip.done":
                 this._removeImages();
                 this._removeButtons();
                 this._cleanUp();
-                this.nextStep();
+                this._nextStep();
                 break;
             case "QuestionUser.done":
                 this.interactions.lockAnswer();
                 this._removeButtons();
-                this.nextStep();
+                this._nextStep();
                 break;
             case "Risks.ready":
                 this._setupButton({
@@ -661,12 +639,12 @@ var SequencePlayer = new Class({
             case "Risks.done" :
                 this.activeVideo.container.removeEvents('click');
                 this.currentStep.score = this.shapes.getScore();
-                this.nextStep();
+                this._nextStep();
                 break;
 
             case "ConActivity.done":
                 this.currentStep.score = (params.score) / 100;
-                this.nextStep();
+                this._nextStep();
                 break;
             case 'KRFeedback.done':
                 // add continue button
@@ -741,7 +719,7 @@ var SequencePlayer = new Class({
                 this.currentStep.player.hide(0);
                 this.cameo_image.tween('0px', '203px', 1, 'height', 300, 'ignore', '');
                 this.cameo_image_mask.remove();
-                this.nextStep();
+                this._nextStep();
 
                 break;
             case "CommentaryIntro.expert.clicked":
@@ -756,7 +734,7 @@ var SequencePlayer = new Class({
                 this._removeInteractions();
                 this._removeButtons();
                 this._cleanUp();
-                this.nextStep();
+                this._nextStep();
                 break;
             case "Commentary.recording.done":
                 log("Ok recorder stopped");
@@ -859,7 +837,7 @@ var SequencePlayer = new Class({
                 this._removeButtons();
                 this._cleanUp();
                 this.currentSequence.unshift(this.currentStep);
-                this.nextStep();
+                this._nextStep();
                 break;
             case "DragNDrop.done":
                 this._removeButtons();
@@ -871,10 +849,10 @@ var SequencePlayer = new Class({
 
                 var nextStep = this.currentSequence[0];
                 if (nextStep.attributes.fmt == "DragNDropFeedback") {
-                    this.nextStep();
+                    this._nextStep();
                 } else {
                     log("ERROR - next step must be DragNDropFeedback after DragNDrop");
-                    this.nextStep();
+                    this._nextStep();
                 }
                 break;
             case "Menu.item.clicked":
@@ -912,7 +890,7 @@ var SequencePlayer = new Class({
                 this._removeButtons();
                 this._removeCurrentSwiff();
                 this._cleanUp();
-                this.nextStep();
+                this._nextStep();
                 break;
 
         };
@@ -1346,9 +1324,18 @@ var SequencePlayer = new Class({
         this._cleanUp();
         this._removeVideos();
 
+        this._resetVariables();
+
+    },
+    _resetVariables : function() {
+        this.currentSequence = new Array();
+        this.sequenceState = null;
         this.currentStep = null;
         this.cameo_image_mask = null;
         this.cameo_image = null;
+        this.buttons = new Array();
+        this.interactions = null;
+        this.videos = new Array();
         this.emptyBkg = null;
         this.correctBkg = null;
 
@@ -1365,8 +1352,17 @@ var SequencePlayer = new Class({
         swiffFinished = null;
         introFinished = null;
 
+        this.buttonPosition = {
+            x : 480,
+            y : 415
+        }
+
+        this.panelPosition = {
+            left : '5%',
+            top : '25%'
+        }
     },
-    moduleIntroSetup : function(step) {
+    _moduleIntroSetup : function(step) {
         log("From Menu: ", this.fromMenu);
         var myContainerID = 'SequenceIntro.container';
         var myDiv = new Element("div", {

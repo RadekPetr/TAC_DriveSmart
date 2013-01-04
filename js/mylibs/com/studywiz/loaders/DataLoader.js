@@ -43,7 +43,7 @@ var DataLoader = new Class({
 
         xml2json.convertFromURL(this.options.src, function(response) {
             this.data = response;
-            this.setupSequences();
+            this._setupSequences();
         }.bind(this));
 
         //  myRequest.send();
@@ -62,7 +62,7 @@ var DataLoader = new Class({
         return IDs;
     },
     // ----------------------------------------------------------
-    setupSequences : function() {
+    _setupSequences : function() {
         var sequencesData = this.data.childNodes;
         this.sequences = new Hash({});
         Array.each(sequencesData, function(item, index) {

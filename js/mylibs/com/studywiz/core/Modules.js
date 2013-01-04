@@ -110,7 +110,7 @@ var Modules = new Class({
                     type : "sequence.event",
                     next : 'sequence.next'
                 });
-                this.setupDebug();
+                this._setupDebug();
                 break;
 
         }
@@ -127,7 +127,7 @@ var Modules = new Class({
         selectedModule.playSequence(sequenceID);
 
     },
-    setupDebug : function() {
+    _setupDebug : function() {
         // add dropdown
         var myDiv = $('debugContainer');
         if (myDiv == null) {
