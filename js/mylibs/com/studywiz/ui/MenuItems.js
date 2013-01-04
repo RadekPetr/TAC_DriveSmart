@@ -33,7 +33,7 @@ var MenuItems = new Class({
         });
 
         Array.each(this.options.data, function(menuItem, index) {
-            log(menuItem);
+           // log(menuItem);
             var elemID = "menu_item_" + index;
             var item = new Element('div', {
                 'html' : menuItem.text,

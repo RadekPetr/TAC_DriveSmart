@@ -287,7 +287,7 @@ var SequencePlayer = new Class({
                     this._removeButtons();
                     this._cleanUp();
                     this._hideInteractions();
-                    log(step);
+                //    log(step);
                     swiffFinished = function(score) {
                         console.log("*********************Con activity done: ", score);
 
@@ -329,7 +329,7 @@ var SequencePlayer = new Class({
                     step.player.options.next = 'Question.done';
                     step.player.start();
                     if (step.attributes.cmd == "hidescreen") {
-                        log(this.activeVideo);
+                        //log(this.activeVideo);
                         this.activeVideo.obscure();
                     }
                     // this._nextStep();
@@ -870,7 +870,7 @@ var SequencePlayer = new Class({
                 break;
             case "ConIntro.done":
                 this._removeButtons();
-                log("ConIntro done", params);
+                // log("ConIntro done", params);
                 introFinished = null;
                 this.currentStep.player.start();
 

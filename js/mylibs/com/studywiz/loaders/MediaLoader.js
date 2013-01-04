@@ -114,7 +114,7 @@ var MediaLoader = new Class({
 
             value.ref.preload();
         })
-        log(this.loadQueue);
+        // log(this.loadQueue);
 
         //TODO: Split videos to their own queue and only include the first one in the loader progress so in case next video gets added to the list before the loader is finsihed ...
         // User interval to chak the progress
