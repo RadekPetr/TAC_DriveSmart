@@ -931,7 +931,7 @@ var SequencePlayer = new Class({
     _setupStepScoring : function(step, stepOrder) {
         //log( JSON.encode(step));
         var stepType = step.attributes.fmt;
-    },
+    }.protect(),
     _setupStepMedia : function(step, stepOrder) {
         //log( JSON.encode(step));
         var stepType = step.attributes.fmt;
@@ -965,8 +965,8 @@ var SequencePlayer = new Class({
                             }
                             var width = '240px';
                             var height = '175px';
-
                         }
+
                         step.player = new VideoPlayer(this, {
                             id : "video_" + index + "_" + stepOrder,
                             next : 'not.set',
@@ -1226,17 +1226,17 @@ var SequencePlayer = new Class({
             interactions.destroy();
         }
         this.interactions = null;
-    },
+    }.protect(),
     _hideInteractions : function() {
         if (this.interactions != null) {
             this.interactions.hide();
         }
-    },
+    }.protect(),
     _showInteractions : function() {
         if (this.interactions != null) {
             this.interactions.show();
         }
-    },
+    }.protect(),
     _removeVideos : function() {
         this.activeVideo = null;
         Array.each(this.videos, function(item, index) {
@@ -1245,7 +1245,7 @@ var SequencePlayer = new Class({
             delete item;
         })
         this.videos.empty();
-    },
+    }.protect(),
     _hideOtherVideos : function(excludedId) {
 
         Array.each(this.videos, function(item, index) {
@@ -1257,7 +1257,7 @@ var SequencePlayer = new Class({
             }
             //log("Player " + playerID + " to keep " + excludedId)
         }.bind(this))
-    },
+    }.protect(),
     _removeSwiffs : function() {
         if (this.recorder != null) {
             this.recorder.remove();
@@ -1304,7 +1304,6 @@ var SequencePlayer = new Class({
         userTracker.updateSequenceProgress(this.sequenceState);
 
     }.protect(),
-
     onLoad : function() {
         log("Called Loaded");
     },
@@ -1361,7 +1360,7 @@ var SequencePlayer = new Class({
             left : '5%',
             top : '25%'
         }
-    },
+    }.protect(),
     _moduleIntroSetup : function(step) {
         log("From Menu: ", this.fromMenu);
         var myContainerID = 'SequenceIntro.container';
@@ -1423,6 +1422,5 @@ var SequencePlayer = new Class({
             // TODO: play different sound if getting to module intro from a sequence ?
         }
 
-    }
-});
-
+    }.protect()
+}); 
