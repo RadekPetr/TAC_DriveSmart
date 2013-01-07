@@ -16,6 +16,7 @@ var Modules = new Class({
         this.modules = new Hash();
     },
     start : function() {
+        log (main.divID);
         this.addEvent("MODULE", this.handleNavigationEvent);
         this.setupModules();
     },
@@ -104,7 +105,7 @@ var Modules = new Class({
                 this._startMainMenu();
                 break;
             case "module.start":
-                sequencePlayer.fromMenu = true;
+                main.sequencePlayer.fromMenu = true;
                 var selectedModule = this.modules.get(this.options.moduleID);
                 selectedModule.fireEvent("SEQUENCE", {
                     type : "sequence.event",
@@ -134,7 +135,7 @@ var Modules = new Class({
             var myDiv = new Element("div", {
                 id : "debugContainer"
             });
-            myDiv.inject(driveSmartDivID, 'before');
+            myDiv.inject(main.divID, 'before');
 
             var moduleSelector = new Element('select', {
                 events : {
@@ -201,12 +202,12 @@ var Modules = new Class({
                 },
                 events : {
                     click : function() {
-                        var stepType = sequencePlayer.currentStep.attributes.fmt;
-                        if (sequencePlayer != null && sequencePlayer.activeVideo != null) {
-                            sequencePlayer.activeVideo.skip();
+                        var stepType = main.sequencePlayer.currentStep.attributes.fmt;
+                        if (main.sequencePlayer != null && main.sequencePlayer.activeVideo != null) {
+                            main.sequencePlayer.activeVideo.skip();
                         }
                         if (stepType == "ConIntro") {
-                            sequencePlayer.fireEvent("TIMELINE", {
+                            main.sequencePlayer.fireEvent("TIMELINE", {
                                 type : "swiff.done",
                                 id : "intro",
                                 next : "ConIntro.done.clicked"

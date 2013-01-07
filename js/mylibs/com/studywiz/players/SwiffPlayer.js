@@ -29,7 +29,7 @@ var SwiffPlayer = new Class({
         next : 'next.action',
         loaded : false,
         parent : null,
-        parentTag : driveSmartDivID
+        parentTag : main.divID
 
     },
     initialize : function(myParent, myOptions) {
@@ -67,7 +67,7 @@ var SwiffPlayer = new Class({
             log("********************* No FLASH loading image")
             this.options.swiff.container = this.container;
             this.swiff = new ImagePlayer(this, {
-                src : this.options.parent.options.imageFolder + "commentary/noflash.png",
+                src : main.paths.imageFolder + "commentary/noflash.png",
                 next : "NoFlash.Ready",
                 title : 'NoFlash',
                 id : 'NoFlash',
@@ -165,7 +165,7 @@ var SwiffPlayer = new Class({
             })
         }.bind(this);
 
-        this.add(driveSmartDivID);
+        this.add(main.divID);
         // This is necessary for  IE as the flash only starts loding whne visible ...
         this.container.setStyles({
             'visibility' : 'visible'

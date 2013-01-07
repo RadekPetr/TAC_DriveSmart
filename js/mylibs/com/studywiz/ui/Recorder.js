@@ -24,7 +24,7 @@ var Recorder = new Class({
 		next : 'next.action',
 		loaded : false,
 		parent : null,
-		parentTag : driveSmartDivID
+		parentTag : main.divID
 
 	},
 	initialize : function(myParent, myOptions) {
@@ -59,7 +59,7 @@ var Recorder = new Class({
 			log("********************* No FLASH loading image")
 			this.options.swiff.container = this.container;
 			this.swiff = new ImagePlayer(this, {
-				src : this.options.parent.options.imageFolder + "commentary/noflash.png",
+				src : main.paths.imageFolder + "commentary/noflash.png",
 				next : "NoFlash.Ready",
 				title : 'NoFlash',
 				id : 'NoFlash',

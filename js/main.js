@@ -3,7 +3,7 @@
  */
 // Global objects and variables
 // Defines which Div to use to insert the DriveSmart application to
-var driveSmartDivID = 'drivesmart';
+
 // Sequence player is shared by all Modules
 var sequencePlayer = null;
 // -----------------------------
@@ -12,6 +12,7 @@ var Main = new Class({
     Implements : [Options, Events],
     // ----------------------------------------------------------
     initialize : function(isDev) {
+        this._setupGlobals();
 
         if (isDev) {
             // load external js libraries so they are available to the project
@@ -26,8 +27,9 @@ var Main = new Class({
     },
     // ----------------------------------------------------------
     start : function() {
-        var modules = new Modules({});
-        modules.start();
+        this.sequencePlayer = new SequencePlayer(this, {});
+        this.modules = new Modules({});
+        this.modules.start();
     },
     // ----------------------------------------------------------
     // PRIVATE - load external js libraries so they are available to the project
@@ -58,5 +60,17 @@ var Main = new Class({
             this.fireEvent('READY');
             //console.log("Fired event READY");
         }
+    },
+    _setupGlobals : function() {
+        this.paths = {
+            audioFolder : 'media/sound/',
+            videoFolder : 'media/video/',
+            imageFolder : 'media/images/',
+            flashFolder : 'media/flash/'
+        }
+        this.divID = 'drivesmart';
+        this.sequencePlayer = null;
+        log("Set app");
+
     }
 });

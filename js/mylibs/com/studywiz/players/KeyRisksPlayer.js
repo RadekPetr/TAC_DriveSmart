@@ -93,10 +93,10 @@ var KeyRiskPlayer = new Class({
 
             case "risk.selected":
                 /// the risks need to be inside some div which could be deleted later
-                var el = document.getElementById(driveSmartDivID);
+                var el = document.getElementById(main.divID);
 
                 var elOffset = getPos(el);
-                var file = this.myParent().options.imageFolder + 'keyrisks/selected_risk.png';
+                var file = main.paths.imageFolder + 'keyrisks/selected_risk.png';
                 this.risk_image = new ImagePlayer(this, {
                     src : file,
                     next : "",
