@@ -15,7 +15,7 @@ var ImagePlayer = new Class({
         next : 'next.action',
         loaded : false,
         parent : null,
-        parentTag : main.divID
+        parentTag : null
     },
     initialize : function(myParent, myOptions) {
         // Intial scene setup

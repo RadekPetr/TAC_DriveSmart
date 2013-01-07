@@ -7,7 +7,7 @@ var MediaLoader = new Class({
         parent : null,
         next : "data.loaded",
         progress : false,
-        parentElementID : main.divID
+        parentElementID : null
     },
     myParent : function() {
         return this.options.parent;

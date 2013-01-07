@@ -484,7 +484,13 @@
 
 		<echo message="Concatenating JS libraries" />
 		<!-- overwrite=no here means not to overwrite if the target is newer than the sources -->
-		<concat destfile="./${dir.intermediate}/${dir.js}/mylibs-concat.js" overwrite="no">
+		<concat destfile="./${dir.intermediate}/${dir.js}/mylibs-concat0.js" overwrite="no">
+					<filelist dir="./${dir.intermediate}/${dir.js.mylibs}/">
+						<file name="Main.js" />
+					</filelist>
+
+				</concat>
+		<concat destfile="./${dir.intermediate}/${dir.js}/mylibs-concat1.js" overwrite="no">
 			<fileset dir="./${dir.intermediate}/${dir.js.mylibs}/" includes="**/*.js" excludes="**/${file.js.bypass}" />
 
 		</concat>
@@ -503,7 +509,8 @@
 		<!-- overwrite=no here means not to overwrite if the target is newer than the sources -->
 		<concat destfile="./${dir.intermediate}/${dir.js}/scripts-concat.min.js" overwrite="no">
 			<fileset dir="./${dir.intermediate}/${dir.js}/">
-				<include name="mylibs-concat.js" />
+				<include name="mylibs-concat0.js" />
+				<include name="mylibs-concat1.js" />
 				<include name="mylibs-concat2.js" />
 				<include name="scripts-concat.js" />
 				
