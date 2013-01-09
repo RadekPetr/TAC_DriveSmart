@@ -3,7 +3,7 @@
  */
 var MenuItems = new Class({
 
-    Implements : [Options, Events, Tips],
+    Implements : [Options, Events],
 
     options : {
         style : {
