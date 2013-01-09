@@ -969,7 +969,8 @@ var SequencePlayer = new Class({
                             'style' : style,
                             filename : filename,
                             width : width,
-                            height : height
+                            height : height,
+                            parentTag : main.divID
                         });
 
                         this.mediaLoader.register(step.player.getLoaderInfo());
