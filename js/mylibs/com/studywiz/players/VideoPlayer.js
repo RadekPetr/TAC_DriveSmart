@@ -21,7 +21,7 @@ var VideoPlayer = new Class({
         preload : 'auto',
         autoplay : false,
         controls : false,
-        parentTag : main.divID,
+        parentTag : null,
         filename : null
     },
     // ----------------------------------------------------------
