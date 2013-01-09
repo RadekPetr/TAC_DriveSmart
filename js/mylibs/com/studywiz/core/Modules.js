@@ -16,7 +16,7 @@ var Modules = new Class({
         this.modules = new Hash();
     },
     start : function() {
-        log (main.divID);
+        log (Main.divID);
         this.addEvent("MODULE", this.handleNavigationEvent);
         this.setupModules();
     },
@@ -105,7 +105,7 @@ var Modules = new Class({
                 this._startMainMenu();
                 break;
             case "module.start":
-                main.sequencePlayer.fromMenu = true;
+                Main.sequencePlayer.fromMenu = true;
                 var selectedModule = this.modules.get(this.options.moduleID);
                 selectedModule.fireEvent("SEQUENCE", {
                     type : "sequence.event",
@@ -135,7 +135,7 @@ var Modules = new Class({
             var myDiv = new Element("div", {
                 id : "debugContainer"
             });
-            myDiv.inject(main.divID, 'before');
+            myDiv.inject(Main.divID, 'before');
 
             var moduleSelector = new Element('select', {
                 events : {
@@ -202,12 +202,12 @@ var Modules = new Class({
                 },
                 events : {
                     click : function() {
-                        var stepType = main.sequencePlayer.currentStep.attributes.fmt;
-                        if (main.sequencePlayer != null && main.sequencePlayer.activeVideo != null) {
-                            main.sequencePlayer.activeVideo.skip();
+                        var stepType = Main.sequencePlayer.currentStep.attributes.fmt;
+                        if (Main.sequencePlayer != null && Main.sequencePlayer.activeVideo != null) {
+                            Main.sequencePlayer.activeVideo.skip();
                         }
                         if (stepType == "ConIntro") {
-                            main.sequencePlayer.fireEvent("TIMELINE", {
+                            Main.sequencePlayer.fireEvent("TIMELINE", {
                                 type : "swiff.done",
                                 id : "intro",
                                 next : "ConIntro.done.clicked"

@@ -41,7 +41,7 @@
 		<script src="js/mylibs/Main.js"></script>
 		<script>
             function init() {
-               main = new Main(true);
+               var main = new Main(true);
                 main.addEvent('READY:once', function() {
                     console.log("got event READY");
                     main.start();

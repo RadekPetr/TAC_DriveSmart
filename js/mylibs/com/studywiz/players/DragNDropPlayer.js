@@ -112,8 +112,8 @@ var DragNDropPlayer = new Class({
     _prepareDraggables : function() {
         this.draggables = new Array();
         Array.each(this.options.draggable_IDs, function(item, itemIndex) {
-            var file = main.paths.imageFolder + 'dragdrop/' + item + '.png';
-            var file_top = main.paths.imageFolder + 'dragdrop/' + item + '_top.png';
+            var file = Main.paths.imageFolder + 'dragdrop/' + item + '.png';
+            var file_top = Main.paths.imageFolder + 'dragdrop/' + item + '_top.png';
             var collumn = 0;
             if (isEven(itemIndex)) {
                 var collumn = 1;

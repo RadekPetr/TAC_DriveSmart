@@ -57,7 +57,7 @@ var ModulePlayer = new Class({
                         next : "module.finished"
                     });
                 } else {
-                    if (main.sequencePlayer.fromMenu == true) {
+                    if (Main.sequencePlayer.fromMenu == true) {
                         this.options.currentSequenceID = 0;
                     } else {
                         // get the next one
@@ -89,11 +89,11 @@ var ModulePlayer = new Class({
     },
     playSequence : function(sequenceID) {
         this.options.currentSequenceID = sequenceID;
-        if (main.sequencePlayer == null) {
+        if (Main.sequencePlayer == null) {
             log ("ERROR - Sequence player does not exist")
         } else {
-            main.sequencePlayer.reset();
-            main.sequencePlayer.options.parent = this;            
+            Main.sequencePlayer.reset();
+            Main.sequencePlayer.options.parent = this;            
         }
         
         var currentSequence = this.sequences[this.options.currentSequenceID];
@@ -101,13 +101,13 @@ var ModulePlayer = new Class({
 
         if (this.options.id == "concentration") {
             var level = userTracker.getConcentrationLevel(parseInt(sequenceID));
-            if (main.sequencePlayer.conLevel < level) {
-                main.sequencePlayer.playConLevelAudio = true;
+            if (Main.sequencePlayer.conLevel < level) {
+                Main.sequencePlayer.playConLevelAudio = true;
             }
-            main.sequencePlayer.conLevel = level;
+            Main.sequencePlayer.conLevel = level;
         }
         
-        main.sequencePlayer.start(currentSequence);
+        Main.sequencePlayer.start(currentSequence);
     },
     getModuleInfo : function() {
         return {

@@ -39,7 +39,7 @@ var Draggable = new Class({
                 }
             },
             getOvered : function() {
-                var mainEl = document.getElementById(main.divID);
+                var mainEl = document.getElementById(Main.divID);
                 var elOffset = getPos(mainEl);
                 var overed = this.droppables.filter(function(el, i) {
                     el = this.positions ? this.positions[i] : this.getDroppableCoordinates(el);
@@ -52,7 +52,7 @@ var Draggable = new Class({
                 return overed;
             },
             isCorrect : function(zone) {
-                var mainEl = document.getElementById(main.divID);
+                var mainEl = document.getElementById(Main.divID);
                 var elOffset = getPos(mainEl);
                 zoneCoords = this.getDroppableCoordinates(zone);
                 var now = getPos(this.element);
