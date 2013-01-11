@@ -48,23 +48,61 @@ var User = new Class({
         var myCookie = Cookie.write('userProgress', output, {
             duration : 7
         });
+        
+        
+        var jsonUserRequest = new Request.JSON({
+            url : 'http://localhost:8080',
+            link : 'chain',
+            onSuccess : function(xhr) {
+                log("JSON request Success", xhr);
+            },
+            onFailure : function(xhr) {
+                log("JSON request Failed", xhr);
+            }
+        }).get({data:output});
+        
+        
+        
         //  alert("Data :" +  output);
         // var output2 = lzw_decode(output)
         //TODO: make an AJAX request and handle errors
         // TODO: exclude main menu
         //  alert("Data :" +  output2);
+        var moduleID = Main.sequencePlayer.sequenceState.moduleID;
+        var moduleScore = this.getModuleScore(moduleID);
+        var moduleProgress = this.getModuleProgress(moduleID);
+
+        var progressData = new Object()
+        progressData[moduleID] = {
+            score : moduleScore,
+            completed_exercises : moduleProgress.finishedCount,
+            total_exercises : moduleProgress.total
+        };
+        log("SaveProgress: ", progressData);
+
+        var jsonRequest = new Request.JSON({
+            url : 'http://localhost:8080',
+            link : 'chain',
+            onSuccess : function(xhr) {
+                log("JSON request Success", xhr);
+            },
+            onFailure : function(xhr) {
+                log("JSON request Failed", xhr);
+            }
+        }).get(progressData);
+
         // TODO: on each execise completion if you can send me module:{score: _, completed_exercises: _, total_exercises: _}
     },
     setDefaultUserData : function(modules) {
         modules.each( function(moduleObject, key, hash) {
             var moduleInfo = moduleObject.getModuleInfo();
             var sequenceIds = moduleObject.sequences.getKeys();
-           // log("sequenceIds", sequenceIds)
+            // log("sequenceIds", sequenceIds)
             var sequences = new Array();
 
             Array.each(sequenceIds, function(sequenceID, index) {
                 var sequenceData = moduleObject.sequences.get(sequenceID);
-               // log("sequenceData", sequenceData);
+                // log("sequenceData", sequenceData);
                 var seqObject = new Object({
                     id : parseInt(sequenceID),
                     completed : false,
@@ -73,7 +111,7 @@ var User = new Class({
                     trackScore : sequenceData.trackScore
                 })
 
-            //    log("seqObject", seqObject);
+                //    log("seqObject", seqObject);
 
                 sequences.push(seqObject);
             })
@@ -84,18 +122,18 @@ var User = new Class({
 
         }.bind(this))
 
-       // log("default Data", this.defaultData);
+        // log("default Data", this.defaultData);
     },
     updateSequenceProgress : function(sequenceState) {
         /// get the sequence Object and update it
         var moduleID = sequenceState.moduleID;
         var currentSequenceData = Object.subset(sequenceState, ['id', 'completed', 'score']);
-       // log(currentSequenceData);
+        // log(currentSequenceData);
         var sequencesInModule = this.userData.get(moduleID);
         var userSequence = sequencesInModule.filter(function(item, index) {
             return item.id == sequenceState.id;
         });
-       // log(userSequence);
+        // log(userSequence);
         if (userSequence.length > 1) {
             log("ERROR");
         }
@@ -125,13 +163,13 @@ var User = new Class({
             return item.completed == false && item.trackProgress == true;
         });
 
-       // log("unfinishedSequences", unfinishedSequences);
+        // log("unfinishedSequences", unfinishedSequences);
 
         var introSequences = sequencesInModule.filter(function(item, index) {
             return item.trackProgress == false;
         });
 
-       // log("introSequences", introSequences, introSequences.length);
+        // log("introSequences", introSequences, introSequences.length);
         var progressObj = {};
         // Minus the ModuleIntro
         progressObj.total = sequencesInModule.length - introSequences.length;
@@ -160,7 +198,7 @@ var User = new Class({
     },
     getModuleScore : function(moduleID) {
         var userData = this.userData.get(moduleID);
-       // log(moduleID, userData);
+        // log(moduleID, userData);
         var allScores = new Array();
         Array.each(userData, function(sequenceState, index) {
             // don't count Module Intros
@@ -181,7 +219,7 @@ var User = new Class({
             return (parseInt(item.id) < (seq + 1) && parseInt(item.id) > (seq - 6));
         });
         log(userData);
-     //   log("DEBUG: ", seq, lastSix);
+        //   log("DEBUG: ", seq, lastSix);
         var allScores = new Array();
         Array.each(lastSix, function(sequenceState, index) {
             allScores = allScores.concat(sequenceState.score);
@@ -195,31 +233,31 @@ var User = new Class({
             //TODO:  PlayLevelAudio()                //Play audio
 
             /*  if (scoreAverage >= 85) {
-             // LEVEL INCREASE
-             log("*********** LEVEL INCREASE ***********:" + scoreAverage);
-             //TODO:  PlayLevelAudio()                //Play audio
+            // LEVEL INCREASE
+            log("*********** LEVEL INCREASE ***********:" + scoreAverage);
+            //TODO:  PlayLevelAudio()                //Play audio
 
-             function PlayLevelAudio(){
-             if(eTracker.level=="1"){
-             mySound3 = new Sound();
-             mySound3.loadSound("sound/concentration/mp3/con_overs1.mp3");
-             mySound3.start();
-             drace("PLAY AUDIO: Jump Level 1")
-             }
-             if(eTracker.level=="2"){
-             mySound3 = new Sound();
-             mySound3.loadSound("sound/concentration/mp3/con_overs2.mp3");
-             mySound3.start();
-             drace("PLAY AUDIO: Jump Level 2");
-             }
-             if(eTracker.level=="3"){
-             mySound3 = new Sound();
-             mySound3.loadSound("sound/concentration/mp3/con_overs3.mp3");
-             mySound3.start();
-             drace("PLAY AUDIO: Jump Level 3");
-             }
-             }
-             */
+            function PlayLevelAudio(){
+            if(eTracker.level=="1"){
+            mySound3 = new Sound();
+            mySound3.loadSound("sound/concentration/mp3/con_overs1.mp3");
+            mySound3.start();
+            drace("PLAY AUDIO: Jump Level 1")
+            }
+            if(eTracker.level=="2"){
+            mySound3 = new Sound();
+            mySound3.loadSound("sound/concentration/mp3/con_overs2.mp3");
+            mySound3.start();
+            drace("PLAY AUDIO: Jump Level 2");
+            }
+            if(eTracker.level=="3"){
+            mySound3 = new Sound();
+            mySound3.loadSound("sound/concentration/mp3/con_overs3.mp3");
+            mySound3.start();
+            drace("PLAY AUDIO: Jump Level 3");
+            }
+            }
+            */
             // There are max 0-4 levels allowed in flash
             if (this.concentrationLevel < 4) {
                 this.concentrationLevel++;
