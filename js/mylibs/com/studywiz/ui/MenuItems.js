@@ -88,7 +88,7 @@ var MenuItems = new Class({
             }.bind(this));
 
             if (menuItem.showProgress == true) {
-                var moduleProgress = userTracker.getModuleProgress(menuItem.moduleID);
+                var moduleProgress = Main.userTracker.getModuleProgress(menuItem.moduleID);
                 if (moduleProgress.completed == true) {
                     var tick = this.showCompleteStatus();
                     item.adopt(tick);

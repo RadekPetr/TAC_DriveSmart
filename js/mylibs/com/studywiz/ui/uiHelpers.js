@@ -2,11 +2,11 @@ function moduleProgressSetup(moduleID) {
 
     // / Module progress bar
 
-    var moduleProgress = userTracker.getModuleProgress(moduleID);
+    var moduleProgress = Main.userTracker.getModuleProgress(moduleID);
 
     /* var score = new Element('div', {
      id : "Module_Score_" + menuItem.id,
-     html : "Module score: " + (100 * userTracker.getModuleScore(menuItem.retrieve('moduleID')) ).toInt() + "/100",
+     html : "Module score: " + (100 * Main.userTracker.getModuleScore(menuItem.retrieve('moduleID')) ).toInt() + "/100",
      'class' :'module_score_title'
      });
      menuItem.adopt (score);

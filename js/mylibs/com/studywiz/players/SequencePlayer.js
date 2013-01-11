@@ -105,7 +105,7 @@ var SequencePlayer = new Class({
                     menu.show();
 
                     var score = new Element("h2", {
-                        html : "Overall score: " + (100 * userTracker.getTotalScore()).toInt() + "/100",
+                        html : "Overall score: " + (100 * Main.userTracker.getTotalScore()).toInt() + "/100",
                         styles : {
                             'position' : 'absolute',
                             left : '390px',
@@ -142,7 +142,7 @@ var SequencePlayer = new Class({
                     })
                     moduleTitle.inject(myDiv);
 
-                    var moduleProgress = userTracker.getModuleProgress(this.moduleInfo.moduleID);
+                    var moduleProgress = Main.userTracker.getModuleProgress(this.moduleInfo.moduleID);
                     var sequenceTitleText = "Exercise " + this.sequenceState.id + " of " + moduleProgress.total;
                     var sequenceTitle = new Element("h1", {
                         html : sequenceTitleText,
@@ -1298,7 +1298,7 @@ var SequencePlayer = new Class({
     _updateUserProgress : function() {
         // Update state to completed = true;
         this.sequenceState.completed = true;
-        userTracker.updateSequenceProgress(this.sequenceState);
+        Main.userTracker.updateSequenceProgress(this.sequenceState);
 
     }.protect(),
     onLoad : function() {
@@ -1382,7 +1382,7 @@ var SequencePlayer = new Class({
         })
         moduleTitle.inject(myDiv);
 
-        var moduleProgress = userTracker.getModuleProgress(this.moduleInfo.moduleID);
+        var moduleProgress = Main.userTracker.getModuleProgress(this.moduleInfo.moduleID);
 
         var moduleProgressBar = moduleProgressSetup(this.moduleInfo.moduleID);
         moduleProgressBar.setStyles({

@@ -48,7 +48,7 @@ var ModulePlayer = new Class({
                 break;
             case "sequence.next":
                 var moduleSequences = this.getModuleSequenceIDs();
-                var unfinishedSequences = userTracker.getUnfinishedSequences(this.options.id);
+                var unfinishedSequences = Main.userTracker.getUnfinishedSequences(this.options.id);
                 log("******** unfinished:", unfinishedSequences);
                 if (unfinishedSequences.length == 0) {
                     // is last
@@ -100,7 +100,7 @@ var ModulePlayer = new Class({
        
 
         if (this.options.id == "concentration") {
-            var level = userTracker.getConcentrationLevel(parseInt(sequenceID));
+            var level = Main.userTracker.getConcentrationLevel(parseInt(sequenceID));
             if (Main.sequencePlayer.conLevel < level) {
                 Main.sequencePlayer.playConLevelAudio = true;
             }

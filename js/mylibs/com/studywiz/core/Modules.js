@@ -117,10 +117,10 @@ var Modules = new Class({
         }
     },
     _setupUser : function() {
-        userTracker = new User(this, {});
-        userTracker.setDefaultUserData(this.modules);
-        userTracker.loadProgress();
-        //userTracker.saveProgress();
+        Main.userTracker = new User(this, {});
+        Main.userTracker.setDefaultUserData(this.modules);
+        Main.userTracker.loadProgress();
+        //Main.userTracker.saveProgress();
     },
     _startMainMenu : function() {
         var selectedModule = this.modules.get("main_menu");
