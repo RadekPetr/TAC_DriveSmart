@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
+<root version="1.0">
   <Seq trackProgress="false" desc="Module Intro" Ex="0">
     <Step fmt="ModuleIntro">
       <Preview>concentration/con_mainmenu.jpg</Preview>
@@ -135,7 +135,7 @@
       <Audio>concentration/con_goodluck</Audio>
     </Step>
     <Step fmt="ConActivity">
-      <Swiff Ex="9" format="6">concentration/conPlayer.swf</Swiff>
+      <Swiff Ex="11" format="7">concentration/conPlayer.swf</Swiff>
     </Step>
     <Step fmt="ConContinue"></Step>
     <Step fmt="ConActivity">
@@ -359,7 +359,7 @@
       <Audio>concentration/continue</Audio>
     </Step>
     <Step fmt="ConIntro">
-      <Swiff>concentration/contrial1.swf</Swiff>
+      <Swiff>concentration/contrial3.swf</Swiff>
       <Audio>concentration/con_goodluck</Audio>
     </Step>
     <Step fmt="ConActivity">
@@ -558,6 +558,8 @@
     <Step fmt="ConActivity">
       <Swiff Ex="56" format="8" calc="true">concentration/conPlayer.swf</Swiff>
     </Step>
-    <Step fmt="Continue"></Step>
+    <Step fmt="End.Module.Continue">
+      <Audio>extra/extra_end_module</Audio>
+    </Step>
   </Seq>
 </root>
