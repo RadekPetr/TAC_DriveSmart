@@ -2,10 +2,10 @@
 
 - Style buttons better
 - Review usage of holders - maybe use on central DIV for the whoe thing
-- use options correctly in all Classes
+
 - Make Media class and extend it to Audio and video maybe ?
 
-- Scoring
+
 - main menu
 - add browser and version detection IE9 +, ...
 
@@ -16,7 +16,14 @@
 - add check for previous and next step types ?
 - allow access to lessons in finished module
 
-- module progress bar not working in IE ?
+- Update styles whne supplied by TAC
+- Menu access logic
+
+- Store achieved concentration level in user data
+
+
+
+
 -----------------------------------------------------------------
 DONE:
 - Module progress on Dashboard
@@ -29,5 +36,6 @@ DONE:
 - handle the progress bar between modules
 - Od data files playback engine - XML to json conversion ?
 - rename main manu to Dashboard
-
-
+- module progress bar not working in IE ?
+- Scoring
+- review Concentration data
