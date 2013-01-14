@@ -31,6 +31,7 @@ var User = new Class({
             this.userData = new Hash(this.defaultData);
             log("No User Data saved - Default user progress");
         } else {
+
             this.userData = new Hash(myProgress);
             log("Loaded user progress");
         }
@@ -48,10 +49,9 @@ var User = new Class({
         var myCookie = Cookie.write('userProgress', output, {
             duration : 7
         });
-        
-        
+
         var jsonUserRequest = new Request.JSON({
-            url : 'http://localhost:8080',
+            url : Main.userDataStoreURL,
             link : 'chain',
             onSuccess : function(xhr) {
                 log("JSON request Success", xhr);
@@ -59,10 +59,10 @@ var User = new Class({
             onFailure : function(xhr) {
                 log("JSON request Failed", xhr);
             }
-        }).get({data:output});
-        
-        
-        
+        }).post({
+            data : output
+        });
+
         //  alert("Data :" +  output);
         // var output2 = lzw_decode(output)
         //TODO: make an AJAX request and handle errors
@@ -81,7 +81,7 @@ var User = new Class({
         log("SaveProgress: ", progressData);
 
         var jsonRequest = new Request.JSON({
-            url : 'http://localhost:8080',
+            url : Main.userDataProgressURL,
             link : 'chain',
             onSuccess : function(xhr) {
                 log("JSON request Success", xhr);
@@ -89,7 +89,7 @@ var User = new Class({
             onFailure : function(xhr) {
                 log("JSON request Failed", xhr);
             }
-        }).get(progressData);
+        }).post(progressData);
 
         // TODO: on each execise completion if you can send me module:{score: _, completed_exercises: _, total_exercises: _}
     },
