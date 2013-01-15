@@ -34,10 +34,12 @@ var User = new Class({
 
             this.userData = new Hash(myProgress);
             log("Loaded user progress");
+            //TODO: Load the user data version too and if different from defaults handle that - merging ?
+
         }
 
         log(" this.userData", this.userData);
-
+        
     },
     saveProgress : function() {
         // save progress to server
@@ -49,15 +51,15 @@ var User = new Class({
         var myCookie = Cookie.write('userProgress', output, {
             duration : 7
         });
-
+        //TODO: save the User data version too
         var jsonUserRequest = new Request.JSON({
             url : Main.userDataStoreURL,
             link : 'chain',
             onSuccess : function(xhr) {
-                log("JSON request Success", xhr);
+                log("jsonUserRequest Success", xhr);
             },
             onFailure : function(xhr) {
-                log("JSON request Failed", xhr);
+                log("jsonUserRequest Failed", xhr);
             }
         }).post({
             data : output
@@ -97,12 +99,12 @@ var User = new Class({
         modules.each( function(moduleObject, key, hash) {
             var moduleInfo = moduleObject.getModuleInfo();
             var sequenceIds = moduleObject.sequences.getKeys();
-            // log("sequenceIds", sequenceIds)
             var sequences = new Array();
 
             Array.each(sequenceIds, function(sequenceID, index) {
                 var sequenceData = moduleObject.sequences.get(sequenceID);
-                // log("sequenceData", sequenceData);
+
+                log("sequenceID", sequenceID);
                 var seqObject = new Object({
                     id : parseInt(sequenceID),
                     completed : false,
@@ -114,6 +116,7 @@ var User = new Class({
                 //    log("seqObject", seqObject);
 
                 sequences.push(seqObject);
+
             })
             var moduleData = new Hash();
             sequences.sortOn("id", Array.NUMERIC);
@@ -186,6 +189,7 @@ var User = new Class({
     },
     getTotalScore : function() {
         var moduleIDs = this.userData.getKeys();
+
         var totalScore = [];
         Array.each(moduleIDs, function(moduleID, index) {
             // do not add empty array

@@ -14,6 +14,7 @@ var ModulePlayer = new Class({
         this.setOptions(myOptions);
         this.options.parent = myParent;
         this.sequences = null;
+        this.data_version = null;
         this.addEvent("DATA", this.handleDataEvent);
         this.addEvent("SEQUENCE", this.handleSequenceEvent);
         this._setupData();
@@ -34,6 +35,7 @@ var ModulePlayer = new Class({
             case "data.ready":
                 //log("Loaded module XML");
                 this.sequences = params.data;
+                this.data_version = params.data_version;
                 this.myParent().fireEvent("MODULE", {
                     next : "module.ready"
                 })
@@ -90,14 +92,13 @@ var ModulePlayer = new Class({
     playSequence : function(sequenceID) {
         this.options.currentSequenceID = sequenceID;
         if (Main.sequencePlayer == null) {
-            log ("ERROR - Sequence player does not exist")
+            log("ERROR - Sequence player does not exist")
         } else {
             Main.sequencePlayer.reset();
-            Main.sequencePlayer.options.parent = this;            
+            Main.sequencePlayer.options.parent = this;
         }
-        
+
         var currentSequence = this.sequences[this.options.currentSequenceID];
-       
 
         if (this.options.id == "concentration") {
             var level = Main.userTracker.getConcentrationLevel(parseInt(sequenceID));
@@ -106,7 +107,7 @@ var ModulePlayer = new Class({
             }
             Main.sequencePlayer.conLevel = level;
         }
-        
+
         Main.sequencePlayer.start(currentSequence);
     },
     getModuleInfo : function() {

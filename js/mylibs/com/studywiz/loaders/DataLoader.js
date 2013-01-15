@@ -24,21 +24,7 @@ var DataLoader = new Class({
     },
     // ----------------------------------------------------------
     start : function() {
-        /*
-         var myRequest = new Request({
-         url : 'data/Country.xml',
-         method : 'get',
-         onProgress : function(event, xhr) {
-         var loaded = event.loaded, total = event.total;
 
-         console.log(parseInt(loaded / total * 100, 10));
-         },
-         onSuccess : function(responseText, responseXML) {
-
-         this.handleXMLLoaded(responseXML);
-         }.bind(this)
-         })
-         */
         var xml2json = new XML2Object();
 
         xml2json.convertFromURL(this.options.src, function(response) {
@@ -46,7 +32,6 @@ var DataLoader = new Class({
             this._setupSequences();
         }.bind(this));
 
-        //  myRequest.send();
     },
     // ----------------------------------------------------------
     getSteps : function(sequenceId) {
@@ -54,6 +39,7 @@ var DataLoader = new Class({
         return steps;
     },
     getSequenceIDs : function() {
+        //TODO: handle version
         if (this.sequences != null) {
             var IDs = this.sequences.getKeys();
         } else {
@@ -63,25 +49,33 @@ var DataLoader = new Class({
     },
     // ----------------------------------------------------------
     _setupSequences : function() {
-        // TODO:  
+        // TODO:  Version handling
         var sequencesData = this.data.childNodes;
         this.sequences = new Hash({});
         Array.each(sequencesData, function(item, index) {
-            var seq = new Object();
-            seq[item.attributes.Ex] = item.childNodes;
-            seq[item.attributes.Ex].trackProgress = item.attributes.trackProgress;
-            // || true;
-            seq[item.attributes.Ex].trackScore = item.attributes.trackScore;
-            // || true;
-            console.log("Seq", seq);
-            this.sequences.extend(seq);
-        }.bind(this))
+            // add the option to delete sequences
+            if (item.attributes.deleted == true) {
+                // ignore
+            } else {
+                var seq = new Object();
+                seq[item.attributes.Ex] = item.childNodes;
+                seq[item.attributes.Ex].trackProgress = item.attributes.trackProgress;
+                // || true;
+                seq[item.attributes.Ex].trackScore = item.attributes.trackScore;
+                // || true;
+                console.log("Seq", seq);
+                this.sequences.extend(seq);
+            }
+        }.bind(this));
+
+        log(this.sequences);
 
         this.myParent().fireEvent("DATA", {
             type : "data.ready",
             id : this.options.id,
             next : this.options.next,
-            data : this.sequences
+            data : this.sequences,
+            data_version : this.data.attributes.version + ""
         })
 
     }
