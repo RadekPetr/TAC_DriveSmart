@@ -72,11 +72,11 @@ Main.paths = {
 
 Main.divID = 'drivesmart';
 Main.version = '1.0';
-Main.build = '2013/01/14';
+Main.build = '2013/01/18';
 
 Main.sequencePlayer = null;
 Main.userTracker = null;
 
 Main.userDataStoreURL = '/user_progress';
-Main.userDataProgressURL = '/user_progress';
+Main.userDataProgressURL = '/user_data_progress';
 

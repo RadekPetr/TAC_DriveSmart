@@ -5,11 +5,8 @@
       <Preview>kaps/kaps_uit03_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
       <Audio>kaps/kaps_vwka</Audio>
-      
-    </Step>
-    <Step fmt="PlayVideo">
-     <Video>module_intros/Video 1</Video>
-    </Step>
+      <ModuleIntroVideo>module_intros/kaps_intro</ModuleIntroVideo>
+    </Step>   
   </Seq>
   <Seq trackProgress="true" desc="Kaps Exercise 1" Ex="1" >
     <Step fmt="SequenceIntro">

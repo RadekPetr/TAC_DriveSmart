@@ -5,6 +5,7 @@
       <Preview>concentration/con_mainmenu.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
       <Audio>concentration/con_vwco</Audio>
+      <ModuleIntroVideo>module_intros/kaps_intro</ModuleIntroVideo>
     </Step>
   </Seq>
   <Seq trackProgress="true" desc="Con Ex 1-2" Ex="1">

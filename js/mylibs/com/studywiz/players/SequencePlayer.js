@@ -982,7 +982,36 @@ var SequencePlayer = new Class({
                         this.videos.push(step.player);
                     }
                     break;
+                case "ModuleIntroVideo" :
 
+                    if (item.value != '') {
+                        var filename = item.value;
+                        var style = null;
+
+                        style = {
+                            'width' : '640',
+                            'height' : '480',
+                            'left' : '0',
+                            'top' : '0'
+                        }
+                        var width = '240px';
+                        var height = '175px';
+
+                        step.moduleIntroVideo = new VideoPlayer(this, {
+                            id : "video_" + index + "_" + stepOrder,
+                            next : 'not.set',
+                            'style' : style,
+                            filename : filename,
+                            width : width,
+                            height : height,
+                            parentTag : Main.divID
+                        });
+
+                        this.mediaLoader.register(step.moduleIntroVideo.getLoaderInfo());
+                        // we want to store this so all VideoJS player can be removed correctly (see remove() in VideoPlayer)
+                        this.videos.push(step.moduleIntroVideo);
+                    }
+                    break;
                 case "Audio" :
                     if (item.value != '') {
                         var file = Main.paths.audioFolder + stripFileExtension(item.value);
@@ -1324,7 +1353,6 @@ var SequencePlayer = new Class({
         this._removeInteractions();
         this._cleanUp();
         this._removeVideos();
-
         this._resetVariables();
 
     },
@@ -1398,6 +1426,7 @@ var SequencePlayer = new Class({
             moduleProgressBar.inject(myDiv);
 
             // Already played the intro video so this time just play welcome sound
+
             this._setupButton({
                 text : "Continue",
                 'class' : "button next",
@@ -1429,6 +1458,16 @@ var SequencePlayer = new Class({
         } else {
             // Play the Module Intro video
             // allow skip ?
+            //this._removeImages();
+            this._removeButtons();
+            this._cleanUp();
+            this._hideInteractions();
+            step.moduleIntroVideo.options.next = '';
+            step.moduleIntroVideo.show();
+            step.moduleIntroVideo.start();
+            this._hideOtherVideos(step.moduleIntroVideo.playerID);
+            step.moduleIntroVideo.start();
+
             // Already played the intro video so this time just play welcome sound
             this._setupButton({
                 text : "Continue",
@@ -1449,12 +1488,12 @@ var SequencePlayer = new Class({
                     top : this.buttonPosition.y - 45
                 }
             });
-
+            this._updateUserProgress();
+            
+            
+            // TODO: is this needed ?
             if (this.fromMenu == true) {
-                this.fromMenu = false;
-                step.player.options.next = '';
-                step.player.start();
-                this._updateUserProgress();
+                this.fromMenu = false;               
             } else {
                 // TODO: play different sound if getting to module intro from a sequence ?
             }
