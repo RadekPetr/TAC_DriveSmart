@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root version="1.0">
-  <Seq trackProgress="false" desc="Module Intro" Ex="0">
+  <Seq trackProgress="false" trackScore="false" desc="Module Intro" Ex="0">
     <Step fmt="ModuleIntro">
       <Preview>scanning/scan_cst18_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>

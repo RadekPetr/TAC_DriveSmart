@@ -45,12 +45,16 @@ var SequencePlayer = new Class({
         this.currentSequence = Array.clone(sequenceData);
         this.moduleInfo = this.myParent().getModuleInfo();
 
-        this.sequenceState = {
-            moduleID : this.moduleInfo.moduleID,
-            id : this.moduleInfo.currentSequenceID,
-            completed : false,
-            score : new Array()
-        }
+        this.sequenceState = Main.userTracker.getUserSequenceState(this.moduleInfo.currentSequenceID, this.moduleInfo.moduleID);
+        log("User Sequence State SAVED :", this.sequenceState)
+        // this.sequenceState = {
+        //    moduleID : this.moduleInfo.moduleID,
+        //    id : this.moduleInfo.currentSequenceID,
+        //     completed : false,
+        //    score : new Array()
+        // }
+
+        // TODO: update the Sequence state from UserTracker - mainly thge score and Completed status ? Useful if we allow repeating already saved
 
         // TODO handle mobile platforms: Browser.Platform.android, handle incompatible old browsers
         log("Starting SEQUENCE: " + this.moduleInfo.currentSequenceID);
@@ -978,6 +982,7 @@ var SequencePlayer = new Class({
                         this.videos.push(step.player);
                     }
                     break;
+
                 case "Audio" :
                     if (item.value != '') {
                         var file = Main.paths.audioFolder + stripFileExtension(item.value);
@@ -1369,9 +1374,6 @@ var SequencePlayer = new Class({
         step.image.add(myContainerID);
         step.image.show();
 
-        step.previewImage.add(myContainerID);
-        step.previewImage.show();
-
         var moduleTitle = new Element("h1", {
             html : this.moduleInfo.moduleTitle,
             styles : {
@@ -1382,41 +1384,81 @@ var SequencePlayer = new Class({
         })
         moduleTitle.inject(myDiv);
 
-        var moduleProgress = Main.userTracker.getModuleProgress(this.moduleInfo.moduleID);
+        if (this.sequenceState.completed == true) {
+            step.previewImage.add(myContainerID);
+            step.previewImage.show();
 
-        var moduleProgressBar = moduleProgressSetup(this.moduleInfo.moduleID);
-        moduleProgressBar.setStyles({
-            left : 0,
-            top : '380px'
-        });
-        moduleProgressBar.inject(myDiv);
+            var moduleProgress = Main.userTracker.getModuleProgress(this.moduleInfo.moduleID);
 
-        this._setupButton({
-            text : "Continue",
-            'class' : "button next",
-            next : "Continue.clicked",
-            style : {
-                left : this.buttonPosition.x,
-                top : this.buttonPosition.y
+            var moduleProgressBar = moduleProgressSetup(this.moduleInfo.moduleID);
+            moduleProgressBar.setStyles({
+                left : 0,
+                top : '380px'
+            });
+            moduleProgressBar.inject(myDiv);
+
+            // Already played the intro video so this time just play welcome sound
+            this._setupButton({
+                text : "Continue",
+                'class' : "button next",
+                next : "Continue.clicked",
+                style : {
+                    left : this.buttonPosition.x,
+                    top : this.buttonPosition.y
+                }
+            });
+
+            this._setupButton({
+                text : "Main Menu",
+                'class' : "button star",
+                next : "MainMenuIntro.clicked",
+                style : {
+                    left : this.buttonPosition.x,
+                    top : this.buttonPosition.y - 45
+                }
+            });
+
+            if (this.fromMenu == true) {
+                this.fromMenu = false;
+                step.player.options.next = '';
+                step.player.start();
+                this._updateUserProgress();
+            } else {
+                // TODO: play different sound if getting to module intro from a sequence ?
             }
-        });
-        this._setupButton({
-            text : "Main Menu",
-            'class' : "button star",
-            next : "MainMenuIntro.clicked",
-            style : {
-                left : this.buttonPosition.x,
-                top : this.buttonPosition.y - 45
-            }
-        });
-
-        if (this.fromMenu == true) {
-            this.fromMenu = false;
-            step.player.options.next = '';
-            step.player.start();
-            this._updateUserProgress();
         } else {
-            // TODO: play different sound if getting to module intro from a sequence ?
+            // Play the Module Intro video
+            // allow skip ?
+            // Already played the intro video so this time just play welcome sound
+            this._setupButton({
+                text : "Continue",
+                'class' : "button next",
+                next : "Continue.clicked",
+                style : {
+                    left : this.buttonPosition.x,
+                    top : this.buttonPosition.y
+                }
+            });
+
+            this._setupButton({
+                text : "Main Menu",
+                'class' : "button star",
+                next : "MainMenuIntro.clicked",
+                style : {
+                    left : this.buttonPosition.x,
+                    top : this.buttonPosition.y - 45
+                }
+            });
+
+            if (this.fromMenu == true) {
+                this.fromMenu = false;
+                step.player.options.next = '';
+                step.player.start();
+                this._updateUserProgress();
+            } else {
+                // TODO: play different sound if getting to module intro from a sequence ?
+            }
+            // TODO: if first time go to next step
         }
 
     }.protect()

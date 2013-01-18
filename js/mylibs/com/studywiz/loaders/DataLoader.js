@@ -55,15 +55,18 @@ var DataLoader = new Class({
         Array.each(sequencesData, function(item, index) {
             // add the option to delete sequences
             if (item.attributes.deleted == true) {
-                // ignore
+                // ignore as deleted
             } else {
                 var seq = new Object();
                 seq[item.attributes.Ex] = item.childNodes;
                 seq[item.attributes.Ex].trackProgress = item.attributes.trackProgress;
-                // || true;
-                seq[item.attributes.Ex].trackScore = item.attributes.trackScore;
-                // || true;
-                console.log("Seq", seq);
+
+                // used for skipping intros for score calculations: true unless false
+                var trackScore = item.attributes.trackScore;
+                if (trackScore != false) {
+                    trackScore = true;
+                }
+                seq[item.attributes.Ex].trackScore = trackScore;
                 this.sequences.extend(seq);
             }
         }.bind(this));

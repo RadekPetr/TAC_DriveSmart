@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root version="1.0">
-  <Seq trackProgress="false" desc="Module Intro" Ex="0">
+  <Seq trackProgress="false" trackScore="false" desc="Module Intro" Ex="0">
     <Step fmt="ModuleIntro">
       <Preview>kaps/kaps_uit03_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
       <Audio>kaps/kaps_vwka</Audio>
+      
+    </Step>
+    <Step fmt="PlayVideo">
+     <Video>module_intros/Video 1</Video>
     </Step>
   </Seq>
   <Seq trackProgress="true" desc="Kaps Exercise 1" Ex="1" >

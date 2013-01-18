@@ -39,7 +39,7 @@ var User = new Class({
         }
 
         log(" this.userData", this.userData);
-        
+
     },
     saveProgress : function() {
         // save progress to server
@@ -105,7 +105,7 @@ var User = new Class({
                 var sequenceData = moduleObject.sequences.get(sequenceID);
 
                 log("sequenceID", sequenceID);
-                var seqObject = new Object({
+                var sequenceState = new Object({
                     id : parseInt(sequenceID),
                     completed : false,
                     score : [],
@@ -115,7 +115,7 @@ var User = new Class({
 
                 //    log("seqObject", seqObject);
 
-                sequences.push(seqObject);
+                sequences.push(sequenceState);
 
             })
             var moduleData = new Hash();
@@ -131,13 +131,11 @@ var User = new Class({
         /// get the sequence Object and update it
         var moduleID = sequenceState.moduleID;
         var currentSequenceData = Object.subset(sequenceState, ['id', 'completed', 'score']);
-        // log(currentSequenceData);
-        var sequencesInModule = this.userData.get(moduleID);
-        var userSequence = sequencesInModule.filter(function(item, index) {
-            return item.id == sequenceState.id;
-        });
-        // log(userSequence);
-        if (userSequence.length > 1) {
+       
+       var userSequence = this.getUserSequenceData(sequenceState.id, moduleID); 
+
+       
+        if (userSequence.length > 1 || userSequence.length == 0) {
             log("ERROR");
         }
         Object.append(userSequence[0], currentSequenceData);
@@ -206,7 +204,7 @@ var User = new Class({
         var allScores = new Array();
         Array.each(userData, function(sequenceState, index) {
             // don't count Module Intros
-            if (sequenceState.id != 0) {
+            if (sequenceState.trackScore != "false") {
                 allScores = allScores.concat(sequenceState.score);
             }
         })
@@ -271,5 +269,28 @@ var User = new Class({
         }
 
         return this.concentrationLevel;
-    }
+    },
+    getUserSequenceState : function(sequenceID, moduleID) {
+        var userSequence = this.getUserSequenceData(sequenceID, moduleID)[0];
+        log("userSequenceState ", this.getUserSequenceData("1", "kaps"));
+        var sequenceState = {
+            moduleID : moduleID,
+            id : sequenceID,
+            completed : userSequence.completed,
+            score : userSequence.score
+        }
+        return sequenceState;
+
+    },
+    getUserSequenceData : function(sequenceID, moduleID) {
+
+        var moduleSequences = this.userData.get(moduleID);
+        log(sequenceID, moduleID, moduleSequences);
+        var result = moduleSequences.filter(function(item, index) {
+            return item.id == sequenceID;
+        });
+        
+        return result;
+
+    }.protect()
 })
