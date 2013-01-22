@@ -1488,8 +1488,7 @@ var SequencePlayer = new Class({
                     top : this.buttonPosition.y - 45
                 }
             });
-            this._updateUserProgress();
-            
+            this._updateUserProgress();            
             
             // TODO: is this needed ?
             if (this.fromMenu == true) {
@@ -1499,6 +1498,5 @@ var SequencePlayer = new Class({
             }
             // TODO: if first time go to next step
         }
-
     }.protect()
 });
