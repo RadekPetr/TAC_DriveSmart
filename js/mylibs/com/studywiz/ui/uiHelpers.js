@@ -1,6 +1,24 @@
-function moduleProgressSetup(moduleID) {
+/**
+ * @author Radek
+ */
+var UIHelpers = new Class({
+    Implements : [Options, Events],
+    options : {
+        parent : null
+    },
+    myParent : function() {
+        return this.options.parent;
+    },
+    // ----------------------------------------------------------
+    initialize : function(myParent, myOptions) {
+        this.setOptions(myOptions);
+        this.options.parent = myParent;
+    }
+})
 
-    // / Module progress bar
+// Static methods
+UIHelpers.moduleProgressSetup = function (moduleID) {
+    // Module progress bar
 
     var moduleProgress = Main.userTracker.getModuleProgress(moduleID);
 
@@ -35,5 +53,4 @@ function moduleProgressSetup(moduleID) {
         }
     });
     return progress;
-
 }

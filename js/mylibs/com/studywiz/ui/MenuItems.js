@@ -99,7 +99,7 @@ var MenuItems = new Class({
                         'padding-left': '15px'
                     })
                 }
-                item.adopt(moduleProgressSetup(menuItem.moduleID));
+                item.adopt(UIHelpers.moduleProgressSetup(menuItem.moduleID));
             }
             this.container.adopt(item);
 

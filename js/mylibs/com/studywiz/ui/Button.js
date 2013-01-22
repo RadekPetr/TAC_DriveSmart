@@ -34,11 +34,9 @@ var Button = new Class({
 		return this.options.parent;
 	}, // ---------------------------
 	add : function(parentTagID) {
-
 		this.containerID = 'container_' + this.options.id;
-
 		this.container = null;
-
+		
 		this.container = new Element("div", {
 			id : this.containerID
 		})
@@ -56,13 +54,11 @@ var Button = new Class({
 				next : this.options.next
 			});
 		}.bind(this));
-
 	},
 	remove : function() {
 		this.hide();
 		var removedElement = this.buttonElement.destroy();
 		this.container.destroy();
-
 	},
 	// ---------------------------
 	show : function() {

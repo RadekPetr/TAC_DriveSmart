@@ -157,7 +157,7 @@ var SequencePlayer = new Class({
                         'class' : 'sequence-title'
                     })
                     sequenceTitle.inject(myDiv);
-                    var moduleProgressBar = moduleProgressSetup(this.moduleInfo.moduleID);
+                    var moduleProgressBar = UIHelpers.moduleProgressSetup(this.moduleInfo.moduleID);
                     moduleProgressBar.setStyles({
                         left : 0,
                         top : '380px'
@@ -928,10 +928,6 @@ var SequencePlayer = new Class({
         //log(seq);
     }.protect(),
     // ----------------------------------------------------------
-    _setupStepScoring : function(step, stepOrder) {
-        //log( JSON.encode(step));
-        var stepType = step.attributes.fmt;
-    }.protect(),
     _setupStepMedia : function(step, stepOrder) {
         //log( JSON.encode(step));
         var stepType = step.attributes.fmt;
@@ -1418,7 +1414,7 @@ var SequencePlayer = new Class({
 
             var moduleProgress = Main.userTracker.getModuleProgress(this.moduleInfo.moduleID);
 
-            var moduleProgressBar = moduleProgressSetup(this.moduleInfo.moduleID);
+            var moduleProgressBar = UIHelpers.moduleProgressSetup(this.moduleInfo.moduleID);
             moduleProgressBar.setStyles({
                 left : 0,
                 top : '380px'
