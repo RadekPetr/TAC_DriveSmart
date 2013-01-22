@@ -92,9 +92,9 @@ var SequencePlayer = new Class({
                         id : myContainerID
                     });
                     myDiv.inject($(Main.divID));
-                    step.image.add(myContainerID);
+                    step.media.image.add(myContainerID);
                     // TODO: adjust style based on TAC
-                    //step.image.show();
+                    //step.media.image.show();
                     var moduleTitle = new Element("h1", {
                         html : this.moduleInfo.moduleTitle,
                         'class' : 'main-title'
@@ -130,11 +130,11 @@ var SequencePlayer = new Class({
                     });
                     myDiv.inject($(Main.divID));
 
-                    step.image.add(myContainerID);
-                    step.image.show();
+                    step.media.image.add(myContainerID);
+                    step.media.image.show();
 
-                    step.previewImage.add(myContainerID);
-                    step.previewImage.show();
+                    step.media.previewImage.add(myContainerID);
+                    step.media.previewImage.show();
 
                     var moduleTitle = new Element("h1", {
                         html : this.moduleInfo.moduleTitle,
@@ -183,8 +183,8 @@ var SequencePlayer = new Class({
                         }
                     });
                     // TODO: play level chnage audio if  this.playConLevelAudio = false;
-                    step.player.options.next = '';
-                    step.player.start();
+                    step.media.audio.options.next = '';
+                    step.media.audio.start();
                     break;
 
                 case "ModuleIntro":
@@ -197,8 +197,8 @@ var SequencePlayer = new Class({
                     });
                     myDiv.inject($(Main.divID));
 
-                    step.image.add(myContainerID);
-                    step.image.show();
+                    step.media.image.add(myContainerID);
+                    step.media.image.show();
 
                     this._setupButton({
                         text : "Record",
@@ -233,18 +233,18 @@ var SequencePlayer = new Class({
 
                     this.recorder.add(Main.divID);
                     // -----
-                    step.player.options.next = '';
-                    step.player.start();
+                    step.media.audio.options.next = '';
+                    step.media.audio.start();
                     break;
                 case "PlayVideo":
                     this._removeImages();
                     this._removeButtons();
                     this._cleanUp();
                     this._hideInteractions();
-                    step.player.options.next = 'PlayVideo.done';
-                    step.player.show();
-                    step.player.start();
-                    this._hideOtherVideos(step.player.playerID);
+                    step.media.video.options.next = 'PlayVideo.done';
+                    step.media.video.show();
+                    step.media.video.start();
+                    this._hideOtherVideos(step.media.video.playerID);
                     //TODO: noBg1="1"
                     break;
                 case "ConIntro":
@@ -253,21 +253,21 @@ var SequencePlayer = new Class({
                     this._cleanUp();
                     this._hideInteractions();
 
-                    step.swiff.options.next = 'ConIntro.done';
+                    step.media.swiff.options.next = 'ConIntro.done';
                     introFinished = function() {
                         console.log("*********************  introDone");
 
                         this.fireEvent("TIMELINE", {
                             type : "swiff.done",
                             id : "intro",
-                            next : step.swiff.options.next
+                            next : step.media.swiff.options.next
                         });
                     }.bind(this);
 
-                    // step.swiff.add(Main.divID);
-                    this.activeSwiff = step.swiff;
-                    step.swiff.show();
-                    step.swiff.start();
+                    // step.media.swiff.add(Main.divID);
+                    this.activeSwiff = step.media.swiff;
+                    step.media.swiff.show();
+                    step.media.swiff.start();
                     // Allow skip intro if repeating this sequence
                     if (this.repeating == true) {
                         this._setupButton({
@@ -298,10 +298,10 @@ var SequencePlayer = new Class({
                             'score' : score
                         });
                     }.bind(this);
-                    this.activeSwiff = step.swiff;
-                    step.swiff.show();
-                    step.swiff.attributes.level = this.conLevel;
-                    step.swiff.startConActivity(step.swiff.attributes);
+                    this.activeSwiff = step.media.swiff;
+                    step.media.swiff.show();
+                    step.media.swiff.attributes.level = this.conLevel;
+                    step.media.swiff.startConActivity(step.media.swiff.attributes);
 
                     this._setupButton({
                         text : "Cancel",
@@ -326,8 +326,8 @@ var SequencePlayer = new Class({
                     break;
                 case "Question":
                     // TODO: maybe add attribute to wait or not
-                    step.player.options.next = 'Question.done';
-                    step.player.start();
+                    step.media.audio.options.next = 'Question.done';
+                    step.media.audio.start();
                     if (step.attributes.cmd == "hidescreen") {
                         //log(this.activeVideo);
                         this.activeVideo.obscure();
@@ -358,16 +358,16 @@ var SequencePlayer = new Class({
                     this._removeButtons();
                     this._showInteractions();
                     step.score = this.interactions.showCorrect();
-                    step.player.options.next = 'QuestionFeedback.done';
-                    step.player.start();
+                    step.media.audio.options.next = 'QuestionFeedback.done';
+                    step.media.audio.start();
                     if (step.attributes.show == "MudScreen") {
                         this.activeVideo.obscure();
                     }
                     //TODO:  KeepUserSelection="1" ?
                     break;
                 case "PlayAudio":
-                    step.player.options.next = 'PlayAudio.done';
-                    step.player.start();
+                    step.media.audio.options.next = 'PlayAudio.done';
+                    step.media.audio.start();
                     //TODO: hide="box" not used ?
                     break;
                 case "Continue":
@@ -403,7 +403,7 @@ var SequencePlayer = new Class({
                     this._updateUserProgress();
                     break;
                 case "End.Module.Continue":
-                    step.player.start();
+                    step.media.audio.start();
                     this._setupButton({
                         text : "Continue",
                         'class' : "button next",
@@ -438,17 +438,17 @@ var SequencePlayer = new Class({
                     } else {
                         this.recorder.startRecording();
                     }
-                    step.player.options.next = 'Commentary.recording.done';
-                    step.player.show();
-                    step.player.volume(0.2);
-                    this._hideOtherVideos(step.player.playerID);
-                    step.player.start();
+                    step.media.video.options.next = 'Commentary.recording.done';
+                    step.media.video.show();
+                    step.media.video.volume(0.2);
+                    this._hideOtherVideos(step.media.video.playerID);
+                    step.media.video.start();
                     break;
                 case "KeyRisk" :
 
                     this._removeInteractions();
 
-                    step.player.options.next = 'Risks.ready';
+                    step.media.audio.options.next = 'Risks.ready';
 
                     //TODO: <Audio waitfor="true">sound/scanning/mp3/scan_vsbkr1b.mp3</Audio>
 
@@ -461,15 +461,15 @@ var SequencePlayer = new Class({
                     // TODO: move adding the aqreas until afte rthe audio is done ?
                     this.shapes.add(this.activeVideo.containerID);
                     // play Audio - Intro
-                    step.player.start();
+                    step.media.audio.start();
 
                     break;
                 case "KRFeedback":
                     this._removeButtons();
-                    step.image.add(this.shapes.container.id);
-                    step.image.show();
-                    step.player.options.next = 'KRFeedback.done';
-                    step.player.start();
+                    step.media.image.add(this.shapes.container.id);
+                    step.media.image.show();
+                    step.media.audio.options.next = 'KRFeedback.done';
+                    step.media.audio.start();
                     break;
                 case "Cameo":
                     var file = Main.paths.imageFolder + 'cameo/visor_bkg.png';
@@ -523,7 +523,7 @@ var SequencePlayer = new Class({
                     };
                     step.dragNDrop.add(this.activeVideo.containerID);
                     // play Audio - Intro
-                    step.player.start();
+                    step.media.audio.start();
 
                     this._setupButton({
                         text : "Done",
@@ -542,11 +542,11 @@ var SequencePlayer = new Class({
                     }
 
                     // Show correct bkg
-                    step.image.add(this.activeVideo.containerID);
-                    step.image.show();
+                    step.media.image.add(this.activeVideo.containerID);
+                    step.media.image.show();
 
                     // Play audio
-                    step.player.start();
+                    step.media.audio.start();
                     // setup buttons
                     // TODO: extract the end buttons to separate method - replace in continue and here
 
@@ -701,22 +701,22 @@ var SequencePlayer = new Class({
             case "Cameo.visor.image.ready":
                 if (this.cameo_image.options.loaded && this.cameo_image_mask.options.loaded) {
 
-                    this.cameo_image.add(this.currentStep.player.containerID, 'before');
+                    this.cameo_image.add(this.currentStep.media.video.containerID, 'before');
                     this.cameo_image.show();
                     this.cameo_image.tween('203px', '0px', 1, 'height', 300, 'ignore', 'Cameo.visor.tween.done');
 
-                    this.cameo_image_mask.add(this.currentStep.player.containerID, 'after');
+                    this.cameo_image_mask.add(this.currentStep.media.video.containerID, 'after');
                     this.cameo_image_mask.show();
                     this.cameo_image_mask.tween('203px', '0px', 1, 'height', 300, 'ignore', '')
                 }
                 break;
             case "Cameo.visor.tween.done":
-                this.currentStep.player.options.next = 'Cameo.done';
-                this.currentStep.player.show();
-                this.currentStep.player.start();
+                this.currentStep.media.video.options.next = 'Cameo.done';
+                this.currentStep.media.video.show();
+                this.currentStep.media.video.start();
                 break;
             case "Cameo.done":
-                this.currentStep.player.hide(0);
+                this.currentStep.media.video.hide(0);
                 this.cameo_image.tween('0px', '203px', 1, 'height', 300, 'ignore', '');
                 this.cameo_image_mask.remove();
                 this._nextStep();
@@ -741,7 +741,7 @@ var SequencePlayer = new Class({
                 this._updateUserProgress();
                 this.recorder.stopRecording();
 
-                var feedbackAudio = this.currentStep.feedbackAudio;
+                var feedbackAudio = this.currentStep.media.feedbackAudio;
                 if (feedbackAudio != undefined) {
                     feedbackAudio.options.next = '';
                     feedbackAudio.start();
@@ -813,10 +813,10 @@ var SequencePlayer = new Class({
                 this._removeButtons();
                 this._cleanUp();
                 this.recorder.startPlayback();
-                this.currentStep.player.show();
-                this.currentStep.player.options.next = 'Commentary.recording.done';
-                this.currentStep.player.volume(0.2);
-                this.currentStep.player.start();
+                this.currentStep.media.video.show();
+                this.currentStep.media.video.options.next = 'Commentary.recording.done';
+                this.currentStep.media.video.volume(0.2);
+                this.currentStep.media.video.start();
                 break;
             case "Commentary.expert.clicked":
                 this._removeFeedbackPanel();
@@ -827,10 +827,10 @@ var SequencePlayer = new Class({
                     expertAudio.options.next = '';
                     expertAudio.start();
                 }
-                this.currentStep.player.show();
-                this.currentStep.player.options.next = 'Commentary.recording.done';
-                this.currentStep.player.volume(0.2);
-                this.currentStep.player.start();
+                this.currentStep.media.video.show();
+                this.currentStep.media.video.options.next = 'Commentary.recording.done';
+                this.currentStep.media.video.volume(0.2);
+                this.currentStep.media.video.start();
                 break;
             case "Commentary.repeat.clicked":
                 this._removeFeedbackPanel();
@@ -872,7 +872,7 @@ var SequencePlayer = new Class({
                 this._removeButtons();
                 // log("ConIntro done", params);
                 introFinished = null;
-                this.currentStep.player.start();
+                this.currentStep.media.audio.start();
 
                 this._setupButton({
                     text : "Start",
@@ -922,6 +922,17 @@ var SequencePlayer = new Class({
         var media = new Hash({});
         Array.each(seq, function(step, stepOrder) {
             //var stepItems = step.childNodes;
+            step.media = new Hash({
+                audio : null,
+                feedbackAudio : null,
+                expertAudio : null,
+                doneAudio : null,
+                video : null,
+                cameoVideo : null,
+                moduleIntroVideo : null,
+                image : null,
+                previewImage : null
+            })
             this._setupStepMedia(step, stepOrder);
         }.bind(this))
         log("---------------------------- Finished setting up media from xml");
@@ -933,9 +944,7 @@ var SequencePlayer = new Class({
         var stepType = step.attributes.fmt;
         // log("Step: ", step, stepOrder, stepType);
         Array.each(step.childNodes, function(item, index) {
-            if (step.player != undefined) {
-                log("!!!!!!!!!!!!!!!!!!!!! ERROR - Two players in this step !!!!!!!!!!!!!!!!!!!!!!!!!" + stepType);
-            }
+
             switch (item.name) {
                 case "Video" :
 
@@ -963,7 +972,7 @@ var SequencePlayer = new Class({
                             var height = '175px';
                         }
 
-                        step.player = new VideoPlayer(this, {
+                        step.media.video = new VideoPlayer(this, {
                             id : "video_" + index + "_" + stepOrder,
                             next : 'not.set',
                             'style' : style,
@@ -973,9 +982,9 @@ var SequencePlayer = new Class({
                             parentTag : Main.divID
                         });
 
-                        this.mediaLoader.register(step.player.getLoaderInfo());
+                        this.mediaLoader.register(step.media.video.getLoaderInfo());
                         // we want to store this so all VideoJS player can be removed correctly (see remove() in VideoPlayer)
-                        this.videos.push(step.player);
+                        this.videos.push(step.media.video);
                     }
                     break;
                 case "ModuleIntroVideo" :
@@ -993,7 +1002,7 @@ var SequencePlayer = new Class({
                         var width = '240px';
                         var height = '175px';
 
-                        step.moduleIntroVideo = new VideoPlayer(this, {
+                        step.media.moduleIntroVideo = new VideoPlayer(this, {
                             id : "video_" + index + "_" + stepOrder,
                             next : 'not.set',
                             'style' : style,
@@ -1003,33 +1012,33 @@ var SequencePlayer = new Class({
                             parentTag : Main.divID
                         });
 
-                        this.mediaLoader.register(step.moduleIntroVideo.getLoaderInfo());
+                        this.mediaLoader.register(step.media.moduleIntroVideo.getLoaderInfo());
                         // we want to store this so all VideoJS player can be removed correctly (see remove() in VideoPlayer)
-                        this.videos.push(step.moduleIntroVideo);
+                        this.videos.push(step.media.moduleIntroVideo);
                     }
                     break;
                 case "Audio" :
                     if (item.value != '') {
                         var file = Main.paths.audioFolder + stripFileExtension(item.value);
-                        step.player = new AudioPlayer(this, {
+                        step.media.audio = new AudioPlayer(this, {
                             next : 'not.set',
                             id : "audio_" + index + "_" + stepOrder,
                             src : file + ".mp3|" + file + ".ogg",
                             preload : 'false'
                         });
-                        this.mediaLoader.register(step.player.getLoaderInfo());
+                        this.mediaLoader.register(step.media.audio.getLoaderInfo());
                     }
                     break;
                 case "FeedbackAudio" :
                     if (item.value != '') {
                         var file = Main.paths.audioFolder + stripFileExtension(item.value);
-                        step.feedbackAudio = new AudioPlayer(this, {
+                        step.media.feedbackAudio = new AudioPlayer(this, {
                             next : 'not.set',
                             id : "audio_" + index + "_" + stepOrder,
                             src : file + ".mp3|" + file + ".ogg",
                             preload : 'false'
                         });
-                        this.mediaLoader.register(step.feedbackAudio.getLoaderInfo());
+                        this.mediaLoader.register(step.media.feedbackAudio.getLoaderInfo());
                     }
                     break;
                 case "ExpertAudio" :
@@ -1041,26 +1050,26 @@ var SequencePlayer = new Class({
                             src : file + ".mp3|" + file + ".ogg",
                             preload : 'false'
                         });
-                        this.mediaLoader.register(step.expertAudio.getLoaderInfo());
+                        this.mediaLoader.register(step.media.expertAudio.getLoaderInfo());
                     }
                     break;
                 case "DoneAudio" :
                     if (item.value != '') {
                         var file = Main.paths.audioFolder + stripFileExtension(item.value);
-                        step.doneAudio = new AudioPlayer(this, {
+                        step.media.doneAudio = new AudioPlayer(this, {
                             next : 'not.set',
                             id : "audio_" + index + "_" + stepOrder,
                             src : file + ".mp3|" + file + ".ogg",
                             preload : 'false'
                         });
-                        this.mediaLoader.register(step.doneAudio.getLoaderInfo());
+                        this.mediaLoader.register(step.media.doneAudio.getLoaderInfo());
                     }
                     break;
                 case "Preview" :
                     if (item.value != '') {
                         var file = Main.paths.imageFolder + item.value;
 
-                        step.previewImage = new ImagePlayer(this, {
+                        step.media.previewImage = new ImagePlayer(this, {
                             src : file,
                             title : 'Preview',
                             id : 'preview_image',
@@ -1070,18 +1079,18 @@ var SequencePlayer = new Class({
                                 top : '148px'
                             }
                         });
-                        this.mediaLoader.register(step.previewImage.getLoaderInfo());
+                        this.mediaLoader.register(step.media.previewImage.getLoaderInfo());
                     }
                     break;
                 case "Image" :
                     if (item.value != '') {
                         var file = Main.paths.imageFolder + item.value;
-                        step.image = new ImagePlayer(this, {
+                        step.media.image = new ImagePlayer(this, {
                             src : file,
                             title : 'Image',
                             id : 'image' + index + "_" + stepOrder
                         });
-                        this.mediaLoader.register(step.image.getLoaderInfo());
+                        this.mediaLoader.register(step.media.image.getLoaderInfo());
                     }
                     break;
                 case "EmptyBkg" :
@@ -1178,7 +1187,7 @@ var SequencePlayer = new Class({
                     break;
                 case "Swiff":
                     log(item.value);
-                    step.swiff = new SwiffPlayer(this, {
+                    step.media.swiff = new SwiffPlayer(this, {
                         swiff : {
                             id : 'swiff.id.' + index + "_" + stepOrder
                         },
@@ -1186,9 +1195,9 @@ var SequencePlayer = new Class({
                         id : 'swiff' + index + "_" + stepOrder
                     });
 
-                    step.swiff.attributes = item.attributes;
-                    this.swiffs.push(step.swiff);
-                    this.mediaLoader.register(step.swiff.getLoaderInfo());
+                    step.media.swiff.attributes = item.attributes;
+                    this.swiffs.push(step.media.swiff);
+                    this.mediaLoader.register(step.media.swiff.getLoaderInfo());
                     break;
                 default:
                 // nothing
@@ -1196,21 +1205,35 @@ var SequencePlayer = new Class({
         }.bind(this))
     }.protect(),
     _cleanUp : function() {
+
+        // TODO: loop in .media and if not null call stop
+        // TODO: loop in .media and if not null call stop
+
         if (this.currentStep != null) {
-            if (this.currentStep.player != null) {
-                //log(this.currentStep.player);
-                this.currentStep.player.stop();
-            }
-            if (this.currentStep.feedbackAudio != undefined) {
-                //log(this.currentStep.player);
-                this.currentStep.feedbackAudio.stop();
-            }
-            if (this.currentStep.expertAudio != undefined) {
-                //log(this.currentStep.player);
-                this.currentStep.expertAudio.stop();
-            }
+            this.currentStep.media.each(function(player, mediaKey) {
+
+                if (player != null) {
+                    log (player, mediaKey);
+                    player.stop();
+                }
+            })
         }
 
+        /* if (this.currentStep != null) {
+         if (this.currentStep.player != null) {
+         //log(this.currentStep.player);
+         this.currentStep.player.stop();
+         }
+         if (this.currentStep.media.feedbackAudio != undefined) {
+         //log(this.currentStep.player);
+         this.currentStep.media.feedbackAudio.stop();
+         }
+         if (this.currentStep.expertAudio != undefined) {
+         //log(this.currentStep.player);
+         this.currentStep.expertAudio.stop();
+         }
+         }
+         */
         var debugPanel = $('debugContainer');
 
         if (debugPanel != null) {
@@ -1395,8 +1418,8 @@ var SequencePlayer = new Class({
         });
         myDiv.inject($(Main.divID));
 
-        step.image.add(myContainerID);
-        step.image.show();
+        step.media.image.add(myContainerID);
+        step.media.image.show();
 
         var moduleTitle = new Element("h1", {
             html : this.moduleInfo.moduleTitle,
@@ -1409,8 +1432,8 @@ var SequencePlayer = new Class({
         moduleTitle.inject(myDiv);
 
         if (this.sequenceState.completed == true) {
-            step.previewImage.add(myContainerID);
-            step.previewImage.show();
+            step.media.previewImage.add(myContainerID);
+            step.media.previewImage.show();
 
             var moduleProgress = Main.userTracker.getModuleProgress(this.moduleInfo.moduleID);
 
@@ -1445,8 +1468,8 @@ var SequencePlayer = new Class({
 
             if (this.fromMenu == true) {
                 this.fromMenu = false;
-                step.player.options.next = '';
-                step.player.start();
+                step.media.audio.options.next = '';
+                step.media.audio.start();
                 this._updateUserProgress();
             } else {
                 // TODO: play different sound if getting to module intro from a sequence ?
@@ -1458,11 +1481,11 @@ var SequencePlayer = new Class({
             this._removeButtons();
             this._cleanUp();
             this._hideInteractions();
-            step.moduleIntroVideo.options.next = '';
-            step.moduleIntroVideo.show();
-            step.moduleIntroVideo.start();
-            this._hideOtherVideos(step.moduleIntroVideo.playerID);
-            step.moduleIntroVideo.start();
+            step.media.moduleIntroVideo.options.next = '';
+            step.media.moduleIntroVideo.show();
+            step.media.moduleIntroVideo.start();
+            this._hideOtherVideos(step.media.moduleIntroVideo.playerID);
+            step.media.moduleIntroVideo.start();
 
             // Already played the intro video so this time just play welcome sound
             this._setupButton({
@@ -1484,11 +1507,11 @@ var SequencePlayer = new Class({
                     top : this.buttonPosition.y - 45
                 }
             });
-            this._updateUserProgress();            
-            
+            this._updateUserProgress();
+
             // TODO: is this needed ?
             if (this.fromMenu == true) {
-                this.fromMenu = false;               
+                this.fromMenu = false;
             } else {
                 // TODO: play different sound if getting to module intro from a sequence ?
             }

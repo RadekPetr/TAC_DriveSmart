@@ -79,6 +79,9 @@ var ImagePlayer = new Class({
         this.image.fade('in');
 
     },
+    stop : function() {
+        
+    },
     display : function() {
         this.image.fade('show');
     },
