@@ -883,7 +883,6 @@ var SequencePlayer = new Class({
                         top : this.buttonPosition.y
                     }
                 });
-
                 break;
             case "ConIntro.done.clicked":
             case "ConContinue.clicked":
@@ -892,7 +891,6 @@ var SequencePlayer = new Class({
                 this._cleanUp();
                 this._nextStep();
                 break;
-
         };
     },
     getSequenceState : function() {
@@ -1205,35 +1203,15 @@ var SequencePlayer = new Class({
         }.bind(this))
     }.protect(),
     _cleanUp : function() {
-
-        // TODO: loop in .media and if not null call stop
-        // TODO: loop in .media and if not null call stop
-
         if (this.currentStep != null) {
             this.currentStep.media.each(function(player, mediaKey) {
-
                 if (player != null) {
-                    log (player, mediaKey);
+                    log(player, mediaKey);
                     player.stop();
                 }
             })
         }
 
-        /* if (this.currentStep != null) {
-         if (this.currentStep.player != null) {
-         //log(this.currentStep.player);
-         this.currentStep.player.stop();
-         }
-         if (this.currentStep.media.feedbackAudio != undefined) {
-         //log(this.currentStep.player);
-         this.currentStep.media.feedbackAudio.stop();
-         }
-         if (this.currentStep.expertAudio != undefined) {
-         //log(this.currentStep.player);
-         this.currentStep.expertAudio.stop();
-         }
-         }
-         */
         var debugPanel = $('debugContainer');
 
         if (debugPanel != null) {
@@ -1252,7 +1230,6 @@ var SequencePlayer = new Class({
         if (menuTag != null) {
             menuTag.destroy();
         }
-
     }.protect(),
     _removeImages : function() {
         var imageDiv = document.getElementById('imageContainer');
@@ -1297,7 +1274,6 @@ var SequencePlayer = new Class({
         this.videos.empty();
     }.protect(),
     _hideOtherVideos : function(excludedId) {
-
         Array.each(this.videos, function(item, index) {
             var playerID = item.playerID;
             if (playerID == excludedId) {
@@ -1373,7 +1349,6 @@ var SequencePlayer = new Class({
         this._cleanUp();
         this._removeVideos();
         this._resetVariables();
-
     },
     _resetVariables : function() {
         this.currentSequence = new Array();
