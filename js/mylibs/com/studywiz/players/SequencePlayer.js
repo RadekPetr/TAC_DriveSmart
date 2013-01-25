@@ -1043,7 +1043,7 @@ var SequencePlayer = new Class({
                 case "ExpertAudio" :
                     if (item.value != '') {
                         var file = Main.paths.audioFolder + stripFileExtension(item.value);
-                        step.expertAudio = new AudioPlayer(this, {
+                        step.media.expertAudio = new AudioPlayer(this, {
                             next : 'not.set',
                             id : "audio_" + index + "_" + stepOrder,
                             src : file + ".mp3|" + file + ".ogg",
