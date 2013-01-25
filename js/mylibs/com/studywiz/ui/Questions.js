@@ -55,7 +55,8 @@ var Questions = new Class({
                 'for' : "item_" + index,
                 'html' : question.text,
                 'id' : "item_label_" + index,
-                'class' : 'questions_label_unlocked'
+                'class' : 'questions_label_unlocked',
+                'onselectstart' : 'return false;'
             });
 
             var paragraph = new Element('p', {});
