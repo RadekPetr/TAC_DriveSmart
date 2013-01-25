@@ -357,6 +357,7 @@ var SequencePlayer = new Class({
                 case "QuestionFeedback":
                     this._removeButtons();
                     this._showInteractions();
+                    this.interactions.lockAnswer();
                     step.score = this.interactions.showCorrect();
                     step.media.audio.options.next = 'QuestionFeedback.done';
                     step.media.audio.start();

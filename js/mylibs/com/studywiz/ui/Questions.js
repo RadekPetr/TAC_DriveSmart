@@ -10,15 +10,7 @@ var Questions = new Class({
             position : 'absolute',
             top : '0px',
             left : '0px',
-            'background-color' : '#464646',
-            'float' : 'left',
-            'border-radius' : '1em 1em 1em 1em',
-            'text-align' : 'left',
-            'padding' : '8px 8px 8px 8px',
-            'font-family' : 'Arial',
-            '-moz-border-radius' : '0.5em 0.5em 0.5em 0.5em',
-            'background' : 'rgba(0, 0, 0, 0.6)',
-            'width' : '550px',
+            width : '550px',
             'opacity' : '0',
             'visibility' : 'hidden'
         },
@@ -38,7 +30,8 @@ var Questions = new Class({
         this.selectedCheckBoxes = new Array();
 
         this.panel = new Element("div", {
-            id : "questionPanel"
+            id : "questionPanel",
+            'class' : 'questions_panel'
         });
 
         //this.options.data.each( function(item, index) {
@@ -61,13 +54,9 @@ var Questions = new Class({
             var label = new Element('label', {
                 'for' : "item_" + index,
                 'html' : question.text,
-                'id' : "item_label_" + index
+                'id' : "item_label_" + index,
+                'class' : 'questions_label_unlocked'
             });
-            label.setStyles({
-                'color' : '#FFFFFF',
-                'display' : 'block',
-                'margin-left' : '18px'
-            })
 
             var paragraph = new Element('p', {});
             paragraph.adopt(checkbox);
@@ -134,6 +123,13 @@ var Questions = new Class({
             var radio = document.getElementById("item_" + index);
 
             radio.set('disabled', true);
+
+            label.setStyles({
+                'cursor' : 'default'
+            })
+            radio.setStyles({
+                'cursor' : 'default'
+            })
         })
     },
     showCorrect : function() {
@@ -143,18 +139,11 @@ var Questions = new Class({
         Array.each(this.options.data, function(question, index) {
             var label = document.getElementById("item_label_" + index);
             var radio = document.getElementById("item_" + index);
-
-            radio.set('disabled', true);
-
             if (question.correct == false) {
-                label.setStyles({
-                    'color' : '#CCCCCC'
-                })
+                label.set('class', 'questions_label_locked_incorrect');
+
             } else {
-                label.setStyles({
-                    'color' : '#00FF00',
-                    'font-weight' : 'bold'
-                })
+                label.set('class', 'questions_label_locked_correct');
             }
             if (question.correct == true) {
                 maxScore++;
@@ -162,7 +151,6 @@ var Questions = new Class({
                     score++;
                 }
             }
-
         }.bind(this));
 
         return score / maxScore;

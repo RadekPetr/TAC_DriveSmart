@@ -20,7 +20,7 @@
 - Menu access logic
 
 - Store achieved concentration level in user data
-
+- MSQ - cursor and select prevent
 
 
 
