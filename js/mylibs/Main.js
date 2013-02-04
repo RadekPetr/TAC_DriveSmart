@@ -78,5 +78,5 @@ Main.sequencePlayer = null;
 Main.userTracker = null;
 
 Main.userDataStoreURL = '/user_progress';
-Main.userDataProgressURL = '/user_data_progress';
+Main.userDataProgressURL = '/user_progress/module_progress/';
 

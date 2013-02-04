@@ -75,15 +75,14 @@ var User = new Class({
         var moduleProgress = this.getModuleProgress(moduleID);
 
         var progressData = new Object()
-        progressData[moduleID] = {
-            score : moduleScore,
-            completed_exercises : moduleProgress.finishedCount,
-            total_exercises : moduleProgress.total
+        progressData = {
+            score : (moduleScore * 100).toInt(),
+            completed_exercises : moduleProgress.finishedCount
         };
         log("SaveProgress: ", progressData);
 
         var jsonRequest = new Request.JSON({
-            url : Main.userDataProgressURL,
+            url : Main.userDataProgressURL + moduleID,
             link : 'chain',
             onSuccess : function(xhr) {
                 log("JSON request Success", xhr);
@@ -93,7 +92,10 @@ var User = new Class({
             }
         }).post(progressData);
 
-        // TODO: on each execise completion if you can send me module:{score: _, completed_exercises: _, total_exercises: _}
+        // TODO: On completion of each exercise you would need to POST to /user_progress/module_progress/<module_code>
+        //payload need to contain two parameters - "score" and "completed_exercises". Both integers.
+        //There are two possible responses - OK (200) and "Can't find module" (422). Latter case means that module is not defined in admin section.
+
     },
     setDefaultUserData : function(modules) {
         modules.each( function(moduleObject, key, hash) {
@@ -131,10 +133,9 @@ var User = new Class({
         /// get the sequence Object and update it
         var moduleID = sequenceState.moduleID;
         var currentSequenceData = Object.subset(sequenceState, ['id', 'completed', 'score']);
-       
-       var userSequence = this.getUserSequenceData(sequenceState.id, moduleID); 
 
-       
+        var userSequence = this.getUserSequenceData(sequenceState.id, moduleID);
+
         if (userSequence.length > 1 || userSequence.length == 0) {
             log("ERROR");
         }
@@ -289,7 +290,7 @@ var User = new Class({
         var result = moduleSequences.filter(function(item, index) {
             return item.id == sequenceID;
         });
-        
+
         return result;
 
     }.protect()
