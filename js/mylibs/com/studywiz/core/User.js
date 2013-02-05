@@ -103,7 +103,8 @@ var User = new Class({
             'concentration' : 'cc',
             'country' : 'co',
             'urban' : 'ur',
-            'kaps' : 'ka'
+            'kaps' : 'ka',
+            'scanning' : 'sc'
         })
         return map.get(key);
     },
