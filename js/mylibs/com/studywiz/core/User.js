@@ -80,9 +80,9 @@ var User = new Class({
             completed_exercises : moduleProgress.finishedCount
         };
         log("SaveProgress: ", progressData);
-
+        var externalModuleID = this._moduleIdMapping(moduleID);
         var jsonRequest = new Request.JSON({
-            url : Main.userDataProgressURL + moduleID,
+            url : Main.userDataProgressURL + externalModuleID,
             link : 'chain',
             onSuccess : function(xhr) {
                 log("JSON request Success", xhr);
@@ -96,6 +96,16 @@ var User = new Class({
         //payload need to contain two parameters - "score" and "completed_exercises". Both integers.
         //There are two possible responses - OK (200) and "Can't find module" (422). Latter case means that module is not defined in admin section.
 
+    },
+    _moduleIdMapping : function(key) {
+        var map = new Hash({
+            'main_menu' : 'mm',
+            'concentration' : 'cc',
+            'country' : 'co',
+            'urban' : 'ur',
+            'kaps' : 'ka'
+        })
+        return map.get(key);
     },
     setDefaultUserData : function(modules) {
         modules.each( function(moduleObject, key, hash) {
@@ -273,7 +283,7 @@ var User = new Class({
     },
     getUserSequenceState : function(sequenceID, moduleID) {
         var userSequence = this.getUserSequenceData(sequenceID, moduleID)[0];
-        log("userSequenceState ", this.getUserSequenceData("1", "kaps"));
+        //log("userSequenceState ", this.getUserSequenceData("1", "kaps"));
         var sequenceState = {
             moduleID : moduleID,
             id : sequenceID,
