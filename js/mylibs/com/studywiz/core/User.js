@@ -23,6 +23,17 @@ var User = new Class({
         // if fails, clone defaults
 
         var myCookie = Cookie.read('userProgress');
+        //TODO: finish loading from server
+        var jsonUserRequest = new Request.JSON({
+            url : Main.userDataStoreURL,
+            link : 'chain',
+            onSuccess : function(xhr) {
+                log("jsonUserRequest Success", xhr);
+            },
+            onFailure : function(xhr) {
+                log("jsonUserRequest Failed", xhr);
+            }
+        }).get();
 
         var decompressedData = lzw_decode(myCookie);
         var myProgress = JSON.decode(decompressedData);
