@@ -37,7 +37,7 @@ var KeyRiskPlayer = new Class({
                 id : this.containerID,
                 styles : this.options.style
             });
-            this.container.inject($(parentTagID), where);
+            this.container.inject($m(parentTagID), where);
         }
         this._prepareAreas();
 

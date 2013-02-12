@@ -70,7 +70,7 @@ var MediaLoader = new Class({
     _addProgressBar : function() {
 
         this.progressBar = new dwProgressBar({
-            container : $(this.options.parentElementID),
+            container : $m(this.options.parentElementID),
             startPercentage : 0,
             speed : 10,
             boxID : 'media_loader_box',

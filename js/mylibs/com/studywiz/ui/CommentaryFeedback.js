@@ -68,7 +68,7 @@ var CommentaryFeedback = new Class({
             var myDiv = new Element("div", {
                 id : "panelContainer"
             });
-            myDiv.inject($(parentTagID));
+            myDiv.inject($m(parentTagID));
         }
 
         myDiv.adopt(this.panel);

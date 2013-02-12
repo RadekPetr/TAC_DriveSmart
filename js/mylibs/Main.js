@@ -20,7 +20,7 @@ var Main = new Class({
                 this._loadAsset(item, index);
             }.bind(this));
         } else {
-            this.start();
+            //this.start();
         }
     },
     // ----------------------------------------------------------
@@ -62,6 +62,8 @@ var Main = new Class({
 });
 
 // Add static variables
+var $m = document.id;
+//http://mootools.net/blog/2009/06/22/the-dollar-safe-mode/
 
 Main.paths = {
     audioFolder : 'media/sound/',
@@ -72,7 +74,7 @@ Main.paths = {
 
 Main.divID = 'drivesmart';
 Main.version = '1.0';
-Main.build = '2013/01/22';
+Main.build = '2013/02/11';
 
 Main.sequencePlayer = null;
 Main.userTracker = null;

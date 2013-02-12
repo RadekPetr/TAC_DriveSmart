@@ -24,6 +24,8 @@ input[type='radio'] + label, [type='checkbox'] + label {
 	/* Make look clickable because they are */
 	cursor: pointer;
 	background: url('../img/off.png') left center no-repeat;
+	float: none;
+	width: 100%;
 }
 
 /*
@@ -31,7 +33,11 @@ input[type='radio'] + label, [type='checkbox'] + label {
  */
 input[type='radio']:checked + label {
 	background-image: url('../img/radio.png');
+	float: none;
+	width: 100%;
 }
 input[type='checkbox']:checked + label {
 	background-image: url('../img/check.png');
+	float: none;
+	width: 100%;
 }

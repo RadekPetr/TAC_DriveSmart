@@ -124,7 +124,7 @@ var MenuItems = new Class({
         return this.options.parent;
     }, // ---------------------------
     add : function(parentTagID) {
-        this.container.inject($(parentTagID));
+        this.container.inject($m(parentTagID));
         this.container.setStyles(this.options.style);
     },
     remove : function() {

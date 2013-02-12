@@ -55,7 +55,7 @@ var SwiffPlayer = new Class({
                 id : this.containerID,
                 styles : this.options.style
             });
-            this.container.inject($(parentTagID), where);
+            this.container.inject($m(parentTagID), where);
             // log(this.options.style);
 
         }

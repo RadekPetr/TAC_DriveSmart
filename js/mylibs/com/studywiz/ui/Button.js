@@ -41,7 +41,7 @@ var Button = new Class({
 			id : this.containerID
 		})
 
-		this.container.inject($(parentTagID));
+		this.container.inject($m(parentTagID));
 		this.buttonElement.inject(this.container);
 		this.hide();
 

@@ -44,7 +44,7 @@ var VideoPlayer = new Class({
 
         this.container.setStyles(this.options.style);
 
-        this.container.inject($(this.options.parentTag));
+        this.container.inject($m(this.options.parentTag));
 
         this.container.player = new Element("video", {
             'id' : this.playerID,

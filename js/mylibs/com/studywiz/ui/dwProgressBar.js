@@ -18,7 +18,7 @@ var dwProgressBar = new Class({
 
     //options
     options : {
-        container : $$('body')[0],
+        container : '$m('drivesmart')',
         boxID : '',
         boxClass : 'box',
         percentageID : '',
@@ -121,7 +121,7 @@ var dwProgressBar = new Class({
 
  //create the progress bar for example 1
  pb = new dwProgressBar({
- container: $('put-bar-here'),
+ container: $m('put-bar-here'),
  startPercentage: 25,
  speed:1000,
  boxID: 'box',

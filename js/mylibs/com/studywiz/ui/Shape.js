@@ -112,7 +112,7 @@ var Shape = new Class({
         }.bind(this))
 
         myDiv.setStyles(this.options.shapeStyle);
-        myDiv.inject($(parentTagID));
+        myDiv.inject($m(parentTagID));
     },
     remove : function() {
         //TODO: use the container with other UI things, make suer null is handled

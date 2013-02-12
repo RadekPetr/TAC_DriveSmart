@@ -69,7 +69,7 @@ var ImagePlayer = new Class({
             this.container = new Element("div", {
                 id : this.containerID
             });
-            this.container.inject($(parentTagID), where);
+            this.container.inject($m(parentTagID), where);
         }
         this.image.inject(this.container);
         this.image.setStyles(this.options.style);
