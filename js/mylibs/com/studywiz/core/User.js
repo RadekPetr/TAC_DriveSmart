@@ -24,16 +24,17 @@ var User = new Class({
 
         var myCookie = Cookie.read('userProgress');
         //TODO: finish loading from server
-        var jsonUserRequest = new Request.JSON({
-            url : Main.userDataStoreURL,
-            link : 'chain',
-            onSuccess : function(xhr) {
-                log("jsonUserRequest Success", xhr);
-            },
-            onFailure : function(xhr) {
-                log("jsonUserRequest Failed", xhr);
-            }
-        }).get();
+       // var jsonUserRequest = new Request({
+         //   url : Main.userDataStoreURL,
+        //    link : 'chain',
+        //    method : 'get',
+         //   onSuccess : function(responseText) {
+         //       log("jsonUserRequest Success");
+         //   },
+         //   onFailure : function(xhr) {
+          //      log("jsonUserRequest Failed", xhr);
+         //   }
+       // }).send();
 
         var decompressedData = lzw_decode(myCookie);
         var myProgress = JSON.decode(decompressedData);
@@ -56,21 +57,23 @@ var User = new Class({
         // save progress to server
         // ajax request ?
         log("Saving: ", this.userData);
-        var data = JSON.encode(this.userData);
-        // alert("Data :" +  data);
-        var output = lzw_encode(data)
+        var json_data = JSON.encode(this.userData);
+        // alert("Data :" +  json_data);
+        var output = lzw_encode(json_data)
         var myCookie = Cookie.write('userProgress', output, {
             duration : 7
         });
         //TODO: save the User data version too
-        var jsonUserRequest = new Request.JSON({
+        var jsonUserRequest = new Request({
             url : Main.userDataStoreURL,
             link : 'chain',
             onSuccess : function(xhr) {
                 log("jsonUserRequest Success", xhr);
+                //TODO: check the response if not 'OK' handle issues
             },
             onFailure : function(xhr) {
                 log("jsonUserRequest Failed", xhr);
+                // TODO: handle the failed
             }
         }).post({
             data : output
@@ -97,9 +100,11 @@ var User = new Class({
             link : 'chain',
             onSuccess : function(xhr) {
                 log("JSON request Success", xhr);
+                 //TODO: check the response if not 'OK' handle issues
             },
             onFailure : function(xhr) {
                 log("JSON request Failed", xhr);
+                // TODO: handle the failed
             }
         }).post(progressData);
 

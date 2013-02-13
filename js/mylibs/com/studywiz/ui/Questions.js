@@ -78,7 +78,7 @@ var Questions = new Class({
                 id : "panelContainer"
             });
 
-            myDiv.inject($(parentTagID), where);
+            myDiv.inject($m(parentTagID), where);
         }
 
         myDiv.adopt(this.panel);
@@ -101,7 +101,7 @@ var Questions = new Class({
     remove : function() {
         this.hide();
         var removedElement = this.panel.destroy();
-        $('panelContainer').destroy();
+        $m('panelContainer').destroy();
 
     },
     // ---------------------------

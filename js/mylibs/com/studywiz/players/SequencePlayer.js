@@ -42,6 +42,7 @@ var SequencePlayer = new Class({
     },
     // ----------------------------------------------------------
     start : function(sequenceData) {
+        log ('seq.player.start');
         this.currentSequence = Array.clone(sequenceData);
         this.moduleInfo = this.myParent().getModuleInfo();
 
@@ -91,7 +92,7 @@ var SequencePlayer = new Class({
                     var myDiv = new Element("div", {
                         id : myContainerID
                     });
-                    myDiv.inject($(Main.divID));
+                    myDiv.inject($m(Main.divID));
                     step.media.image.add(myContainerID);
                     // TODO: adjust style based on TAC
                     //step.media.image.show();
@@ -128,7 +129,7 @@ var SequencePlayer = new Class({
                     var myDiv = new Element("div", {
                         id : myContainerID
                     });
-                    myDiv.inject($(Main.divID));
+                    myDiv.inject($m(Main.divID));
 
                     step.media.image.add(myContainerID);
                     step.media.image.show();
@@ -195,7 +196,7 @@ var SequencePlayer = new Class({
                     var myDiv = new Element("div", {
                         id : myContainerID
                     });
-                    myDiv.inject($(Main.divID));
+                    myDiv.inject($m(Main.divID));
 
                     step.media.image.add(myContainerID);
                     step.media.image.show();
@@ -1213,21 +1214,21 @@ var SequencePlayer = new Class({
             })
         }
 
-        var debugPanel = $('debugContainer');
+        var debugPanel = $m('debugContainer');
 
         if (debugPanel != null) {
             //debugPanel.dispose();
         }
-        var sequenceIntroTag = $('SequenceIntro.container');
+        var sequenceIntroTag = $m('SequenceIntro.container');
         if (sequenceIntroTag != null) {
             sequenceIntroTag.destroy();
         }
-        var sequenceIntroTag = $('CommentaryIntro.container');
+        var sequenceIntroTag = $m('CommentaryIntro.container');
         if (sequenceIntroTag != null) {
             sequenceIntroTag.destroy();
         }
 
-        var menuTag = $('Menu.container');
+        var menuTag = $m('Menu.container');
         if (menuTag != null) {
             menuTag.destroy();
         }
@@ -1246,14 +1247,21 @@ var SequencePlayer = new Class({
         this.buttons.empty();
     }.protect(),
     _removeInteractions : function() {
+        log ("20");
         if (this.interactions != null) {
+              log ("21");
             this.interactions.remove();
+              log ("22");
         }
-        var interactions = $('panelContainer');
+        var interactions = $m('panelContainer');
+          log ("23");
         if (interactions != null) {
+              log ("24",interactions );
             interactions.destroy();
+            log ("25" );
         }
         this.interactions = null;
+        log ("26" );
     }.protect(),
     _hideInteractions : function() {
         if (this.interactions != null) {
@@ -1340,16 +1348,27 @@ var SequencePlayer = new Class({
     },
     reset : function() {
         this.currentSequence.empty();
+        log ('1');
         this._removeFeedbackPanel();
+        log ('2');
         this.mediaLoader.remove();
+        log ('3');
         this._removeImages();
+        log ('4');
         this._removeRisks();
+        log ('5');
         this._removeButtons();
+        log ('6');
         this._removeSwiffs();
+        log ('7');
         this._removeInteractions();
+        log ('8');
         this._cleanUp();
+        log ('9');
         this._removeVideos();
+        log ('10');
         this._resetVariables();
+        log ('11');
     },
     _resetVariables : function() {
         this.currentSequence = new Array();
@@ -1392,7 +1411,7 @@ var SequencePlayer = new Class({
         var myDiv = new Element("div", {
             id : myContainerID
         });
-        myDiv.inject($(Main.divID));
+        myDiv.inject($m(Main.divID));
 
         step.media.image.add(myContainerID);
         step.media.image.show();

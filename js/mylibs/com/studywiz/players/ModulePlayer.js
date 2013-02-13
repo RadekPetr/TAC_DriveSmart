@@ -90,16 +90,17 @@ var ModulePlayer = new Class({
         return IDs;
     },
     playSequence : function(sequenceID) {
+       
         this.options.currentSequenceID = sequenceID;
         if (Main.sequencePlayer == null) {
             log("ERROR - Sequence player does not exist")
         } else {
-            Main.sequencePlayer.reset();
+                       Main.sequencePlayer.reset();
             Main.sequencePlayer.options.parent = this;
         }
 
         var currentSequence = this.sequences[this.options.currentSequenceID];
-
+      
         if (this.options.id == "concentration") {
             var level = Main.userTracker.getConcentrationLevel(parseInt(sequenceID));
             if (Main.sequencePlayer.conLevel < level) {

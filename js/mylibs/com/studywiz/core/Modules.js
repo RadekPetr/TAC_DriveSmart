@@ -124,13 +124,14 @@ var Modules = new Class({
     },
     _startMainMenu : function() {
         var selectedModule = this.modules.get("main_menu");
+        log (selectedModule);
         var sequenceID = "1";
         selectedModule.playSequence(sequenceID);
 
     },
     _setupDebug : function() {
         // add dropdown
-        var myDiv = $('debugContainer');
+        var myDiv = $m('debugContainer');
         if (myDiv == null) {
             var myDiv = new Element("div", {
                 id : "debugContainer"
