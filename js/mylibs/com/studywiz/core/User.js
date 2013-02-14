@@ -24,17 +24,17 @@ var User = new Class({
 
         var myCookie = Cookie.read('userProgress');
         //TODO: finish loading from server
-       // var jsonUserRequest = new Request({
-         //   url : Main.userDataStoreURL,
+        // var jsonUserRequest = new Request({
+        //   url : Main.userDataStoreURL,
         //    link : 'chain',
         //    method : 'get',
-         //   onSuccess : function(responseText) {
-         //       log("jsonUserRequest Success");
-         //   },
-         //   onFailure : function(xhr) {
-          //      log("jsonUserRequest Failed", xhr);
-         //   }
-       // }).send();
+        //   onSuccess : function(responseText) {
+        //       log("jsonUserRequest Success");
+        //   },
+        //   onFailure : function(xhr) {
+        //      log("jsonUserRequest Failed", xhr);
+        //   }
+        // }).send();
 
         var decompressedData = lzw_decode(myCookie);
         var myProgress = JSON.decode(decompressedData);
@@ -54,19 +54,24 @@ var User = new Class({
 
     },
     saveProgress : function() {
-        // save progress to server
-        // ajax request ?
-        log("Saving: ", this.userData);
+        // save complete progress to server
+        // log("Saving: ", this.userData);
+        this._saveCompleteUserData();
+        // Save module progress
+        this._saveModuleProgress();
+    },
+    _saveCompleteUserData : function() {
         var json_data = JSON.encode(this.userData);
-        // alert("Data :" +  json_data);
-        var output = lzw_encode(json_data)
-        var myCookie = Cookie.write('userProgress', output, {
-            duration : 7
-        });
+        var compressedData = lzw_encode(json_data);
+        var requestPayload = {
+            data : compressedData
+        };
+
         //TODO: save the User data version too
-        var jsonUserRequest = new Request({
+        var jsonRequest = new Request.JSON({
             url : Main.userDataStoreURL,
             link : 'chain',
+            method : 'post',
             onSuccess : function(xhr) {
                 log("jsonUserRequest Success", xhr);
                 //TODO: check the response if not 'OK' handle issues
@@ -74,44 +79,83 @@ var User = new Class({
             onFailure : function(xhr) {
                 log("jsonUserRequest Failed", xhr);
                 // TODO: handle the failed
+            },
+            onRequest : function() {
+                log("Save the User data version too  .... posting");
+            },
+            onLoadstart : function(event, xhr) {
+                log('onLoadstart Progress data saving');
+            },
+            onComplete : function(event, xhr) {
+                log('onComplete Progress data saving');
+            },
+            onCancel : function(event, xhr) {
+                log('onCancel Progress data saving');
+            },
+            onException : function(event, xhr) {
+                log('onException Progress data saving');
+            },
+            onTimeout : function(event, xhr) {
+                log('onTimeout Progress data saving');
+            },
+            onError : function(text, error) {
+                log('onError SaveProgress', text, error);
             }
-        }).post({
-            data : output
-        });
+        })
 
-        //  alert("Data :" +  output);
-        // var output2 = lzw_decode(output)
-        //TODO: make an AJAX request and handle errors
-        // TODO: exclude main menu
-        //  alert("Data :" +  output2);
+        jsonRequest.send(requestPayload);
+    },
+    _saveModuleProgress : function() {
         var moduleID = Main.sequencePlayer.sequenceState.moduleID;
         var moduleScore = this.getModuleScore(moduleID);
         var moduleProgress = this.getModuleProgress(moduleID);
 
-        var progressData = new Object()
-        progressData = {
+        var requestPayload = {
             score : (moduleScore * 100).toInt(),
             completed_exercises : moduleProgress.finishedCount
         };
-        log("SaveProgress: ", progressData);
+
         var externalModuleID = this._moduleIdMapping(moduleID);
         var jsonRequest = new Request.JSON({
             url : Main.userDataProgressURL + externalModuleID,
             link : 'chain',
+            method : 'post',
             onSuccess : function(xhr) {
-                log("JSON request Success", xhr);
-                 //TODO: check the response if not 'OK' handle issues
+                log("_saveModuleProgress request Success", xhr);
+                //TODO: check the response if not 'OK' handle issues
             },
             onFailure : function(xhr) {
-                log("JSON request Failed", xhr);
+                log("_saveModuleProgress request Failed", xhr);
                 // TODO: handle the failed
+            },
+            onRequest : function() {
+                log("_saveModuleProgress  .... posting");
+            },
+            onLoadstart : function(event, xhr) {
+                log('onLoadstart _saveModuleProgress');
+            },
+            onComplete : function(event, xhr) {
+                log('onComplete _saveModuleProgress');
+            },
+            onCancel : function(event, xhr) {
+                log('onCancel _saveModuleProgress');
+            },
+            onException : function(event, xhr) {
+                log('onException _saveModuleProgress');
+            },
+            onTimeout : function(event, xhr) {
+                log('onTimeout _saveModuleProgress');
+            },
+            onError : function(text, error) {
+                log('onError _saveModuleProgress', text, error);
             }
-        }).post(progressData);
+        });
 
-        // TODO: On completion of each exercise you would need to POST to /user_progress/module_progress/<module_code>
-        //payload need to contain two parameters - "score" and "completed_exercises". Both integers.
-        //There are two possible responses - OK (200) and "Can't find module" (422). Latter case means that module is not defined in admin section.
+        jsonRequest.send(requestPayload);
 
+        // On completion of each exercise you would need to POST to /user_progress/module_progress/<module_code>
+        // payload need to contain two parameters - "score" and "completed_exercises". Both integers.
+        // There are two possible responses - OK (200) and "Can't find module" (422). Latter case means that module is not defined in admin section.
     },
     _moduleIdMapping : function(key) {
         var map = new Hash({
@@ -141,19 +185,13 @@ var User = new Class({
                     trackProgress : sequenceData.trackProgress,
                     trackScore : sequenceData.trackScore
                 })
-
-                //    log("seqObject", seqObject);
-
                 sequences.push(sequenceState);
-
             })
             var moduleData = new Hash();
             sequences.sortOn("id", Array.NUMERIC);
             moduleData.set(key, sequences);
             this.defaultData.extend(moduleData);
-
         }.bind(this))
-
         // log("default Data", this.defaultData);
     },
     updateSequenceProgress : function(sequenceState) {
@@ -172,7 +210,7 @@ var User = new Class({
         log("*** User data :", this.userData);
         log("Total score: ", this.getTotalScore());
 
-        // and store the progress
+        // and store the progress on server
         this.saveProgress();
     },
     getUnfinishedSequences : function(moduleID) {

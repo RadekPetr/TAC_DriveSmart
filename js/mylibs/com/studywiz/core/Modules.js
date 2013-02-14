@@ -120,14 +120,12 @@ var Modules = new Class({
         Main.userTracker = new User(this, {});
         Main.userTracker.setDefaultUserData(this.modules);
         Main.userTracker.loadProgress();
-        //Main.userTracker.saveProgress();
     },
     _startMainMenu : function() {
         var selectedModule = this.modules.get("main_menu");
         log (selectedModule);
         var sequenceID = "1";
         selectedModule.playSequence(sequenceID);
-
     },
     _setupDebug : function() {
         // add dropdown

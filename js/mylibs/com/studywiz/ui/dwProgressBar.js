@@ -18,7 +18,7 @@ var dwProgressBar = new Class({
 
     //options
     options : {
-        container : '$m('drivesmart')',
+        container : '$m(drivesmart)',
         boxID : '',
         boxClass : 'box',
         percentageID : '',
@@ -55,7 +55,7 @@ var dwProgressBar = new Class({
 
         this.box = new Element('div', {
             id : this.options.boxID,
-            'class' : this.options.boxClass,          
+            'class' : this.options.boxClass,
             styles : this.options.styles
         });
         this.perc = new Element('div', {
