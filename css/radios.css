@@ -25,7 +25,7 @@ input[type='radio'] + label, [type='checkbox'] + label {
 	cursor: pointer;
 	background: url('../img/off.png') left center no-repeat;
 	float: none;
-	width: 100%;
+	width: 95%;
 }
 
 /*
@@ -34,10 +34,10 @@ input[type='radio'] + label, [type='checkbox'] + label {
 input[type='radio']:checked + label {
 	background-image: url('../img/radio.png');
 	float: none;
-	width: 100%;
+	width: 95%;
 }
 input[type='checkbox']:checked + label {
 	background-image: url('../img/check.png');
 	float: none;
-	width: 100%;
+	width: 95%;
 }
