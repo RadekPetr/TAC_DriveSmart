@@ -37,7 +37,7 @@ var ModulePlayer = new Class({
                 this.sequences = params.data;
                 this.data_version = params.data_version;
                 this.myParent().fireEvent("MODULE", {
-                    next : "module.ready"
+                    next : "module.data.ready"
                 })
         }
     },

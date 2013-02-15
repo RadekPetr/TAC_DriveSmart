@@ -16,7 +16,7 @@ var Modules = new Class({
         this.modules = new Hash();
     },
     start : function() {
-        log (Main.divID);
+        log(Main.divID);
         this.addEvent("MODULE", this.handleNavigationEvent);
         this.setupModules();
     },
@@ -87,15 +87,15 @@ var Modules = new Class({
     handleNavigationEvent : function(params) {
 
         switch (params.next) {
-            case "module.ready":
+            case "module.data.ready":
                 this.listOfModulesCounter--;
                 //log("Modules count: " + this.listOfModulesCounter);
                 if (this.listOfModulesCounter === 0) {
-                    this._setupUser();
-                    log("Modules READY");
-                    this._startMainMenu();
+                    log("Modules READY, setting up user now ... ");
+                    this._setupUser();                  
                 }
                 break;
+            case "main.menu.start":
             case "module.exit":
                 this._startMainMenu();
                 break;
@@ -123,7 +123,7 @@ var Modules = new Class({
     },
     _startMainMenu : function() {
         var selectedModule = this.modules.get("main_menu");
-        log (selectedModule);
+        log(selectedModule);
         var sequenceID = "1";
         selectedModule.playSequence(sequenceID);
     },
