@@ -528,6 +528,7 @@
 			</else>
 		</if>
 		<copy file="${dir.intermediate}/${dir.js}/scripts-concat.min.js" tofile="${dir.publish}/${dir.js}/${scripts.sha}.js" />
+		<copy file="${dir.intermediate}/${dir.js}/scripts-concat.min.js" tofile="${dir.publish}/${dir.js}/drivesmart.js" />
 	</target>
 
 
