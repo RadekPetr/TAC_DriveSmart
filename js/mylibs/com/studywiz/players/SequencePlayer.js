@@ -42,26 +42,14 @@ var SequencePlayer = new Class({
     },
     // ----------------------------------------------------------
     start : function(sequenceData) {
-        log ('seq.player.start');
+        log('seq.player.start');
         this.currentSequence = Array.clone(sequenceData);
         this.moduleInfo = this.myParent().getModuleInfo();
 
         this.sequenceState = Main.userTracker.getUserSequenceState(this.moduleInfo.currentSequenceID, this.moduleInfo.moduleID);
-        log("User Sequence State SAVED :", this.sequenceState)
-        // this.sequenceState = {
-        //    moduleID : this.moduleInfo.moduleID,
-        //    id : this.moduleInfo.currentSequenceID,
-        //     completed : false,
-        //    score : new Array()
-        // }
-
-        // TODO: update the Sequence state from UserTracker - mainly thge score and Completed status ? Useful if we allow repeating already saved
-
         // TODO handle mobile platforms: Browser.Platform.android, handle incompatible old browsers
         log("Starting SEQUENCE: " + this.moduleInfo.currentSequenceID);
-        //log(this.currentSequence);
 
-        //
         this._setupMedia();
     },
     // ----------------------------------------------------------
@@ -1247,21 +1235,21 @@ var SequencePlayer = new Class({
         this.buttons.empty();
     }.protect(),
     _removeInteractions : function() {
-        log ("20");
+        log("20");
         if (this.interactions != null) {
-              log ("21");
+            log("21");
             this.interactions.remove();
-              log ("22");
+            log("22");
         }
         var interactions = $m('panelContainer');
-          log ("23");
+        log("23");
         if (interactions != null) {
-              log ("24",interactions );
+            log("24", interactions);
             interactions.destroy();
-            log ("25" );
+            log("25");
         }
         this.interactions = null;
-        log ("26" );
+        log("26");
     }.protect(),
     _hideInteractions : function() {
         if (this.interactions != null) {
@@ -1348,27 +1336,27 @@ var SequencePlayer = new Class({
     },
     reset : function() {
         this.currentSequence.empty();
-        log ('1');
+        log('1');
         this._removeFeedbackPanel();
-        log ('2');
+        log('2');
         this.mediaLoader.remove();
-        log ('3');
+        log('3');
         this._removeImages();
-        log ('4');
+        log('4');
         this._removeRisks();
-        log ('5');
+        log('5');
         this._removeButtons();
-        log ('6');
+        log('6');
         this._removeSwiffs();
-        log ('7');
+        log('7');
         this._removeInteractions();
-        log ('8');
+        log('8');
         this._cleanUp();
-        log ('9');
+        log('9');
         this._removeVideos();
-        log ('10');
+        log('10');
         this._resetVariables();
-        log ('11');
+        log('11');
     },
     _resetVariables : function() {
         this.currentSequence = new Array();
