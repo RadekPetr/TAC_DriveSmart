@@ -182,5 +182,9 @@ var MediaLoader = new Class({
             // nothing, all loaded
             //log("all videos done");
         }
+    },
+    reset : function() {
+        this.videoQueue = new Array();
+        this.loadQueue = new Hash({});
     }
 })

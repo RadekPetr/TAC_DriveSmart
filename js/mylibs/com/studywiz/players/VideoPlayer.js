@@ -228,6 +228,7 @@ var VideoPlayer = new Class({
         log('Removing player: ' + this.playerID);
         // see http://help.videojs.com/discussions/problems/861-how-to-destroy-a-video-js-object
         // get the videojs player with id of "video_1"
+
         var player = _V_(this.playerID);
 
         // for html5 - clear out the src which solves a browser memory leak
@@ -236,22 +237,21 @@ var VideoPlayer = new Class({
             player.tag.src = "";
             player.tech.removeTriggers();
             player.load();
-        }
 
+        }
         // destroy the parts of the player which are specific to html5 or flash
         player.tech.destroy();
 
         // destroy the player
         player.destroy();
+
         if (this.container != null && this.container != undefined) {
-            
-            this.container.player.destroy();            
+            this.container.player.destroy();
             delete this.container.player;
             this.container.destroy();
-            delete this.container;           
+            delete this.container;
         }
         delete this.player;
-
     },
     // ----------------------------------------------------------
     getLoaderInfo : function() {

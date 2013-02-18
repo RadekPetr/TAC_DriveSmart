@@ -1336,27 +1336,17 @@ var SequencePlayer = new Class({
     },
     reset : function() {
         this.currentSequence.empty();
-        log('1');
         this._removeFeedbackPanel();
-        log('2');
         this.mediaLoader.remove();
-        log('3');
+        this.mediaLoader.reset();
         this._removeImages();
-        log('4');
         this._removeRisks();
-        log('5');
         this._removeButtons();
-        log('6');
         this._removeSwiffs();
-        log('7');
         this._removeInteractions();
-        log('8');
         this._cleanUp();
-        log('9');
         this._removeVideos();
-        log('10');
         this._resetVariables();
-        log('11');
     },
     _resetVariables : function() {
         this.currentSequence = new Array();
