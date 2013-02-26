@@ -67,61 +67,7 @@ var User = new Class({
             completed_exercises : moduleProgress.finishedCount
         };
 
-        var externalModuleID = this._moduleIdMapping(moduleID);
-        var jsonRequest = new Request({
-            url : Main.userDataProgressURL + externalModuleID,
-            link : 'chain',
-            method : 'post',
-            onSuccess : function(xhr) {
-                log("_saveModuleProgress request Success", xhr);
-                //TODO: check the response if not 'OK' handle issues
-            },
-            onFailure : function(xhr) {
-                log("_saveModuleProgress request Failed", xhr);
-                // TODO: handle the failed
-            },
-            onRequest : function() {
-                //log("_saveModuleProgress  .... posting");
-            },
-            onLoadstart : function(event, xhr) {
-                //log('onLoadstart _saveModuleProgress');
-            },
-            onComplete : function(event, xhr) {
-                //log('onComplete _saveModuleProgress');
-            },
-            onCancel : function(event, xhr) {
-                //log('onCancel _saveModuleProgress');
-            },
-            onException : function(event, xhr) {
-                log('onException _saveModuleProgress');
-                // TODO: log error to server for analyses ?
-            },
-            onTimeout : function(event, xhr) {
-                log('onTimeout _saveModuleProgress');
-                // Try again then alert user
-            },
-            onError : function(text, error) {
-                log('onError _saveModuleProgress', text, error);
-                // TODO: log error to server for analyses ?
-            }
-        })
-
-        jsonRequest.send("score=" + requestPayload.score + "&completed_exercises=" + requestPayload.completed_exercises);
-
-        // On completion of each exercise you would need to POST to /user_progress/module_progress/<module_code>
-        // payload need to contain two parameters - "score" and "completed_exercises". Both integers.
-        // There are two possible responses - OK (200) and "Can't find module" (422). Latter case means that module is not defined in admin section.
-    },
-    _moduleIdMapping : function(key) {
-        var map = new Hash({
-            'main_menu' : 'mm',
-            'concentration' : 'cc',
-            'country' : 'co',
-            'urban' : 'ur',
-            'kaps' : 'ka',
-            'scanning' : 'sc'
-        })
-        return map.get(key);
+        Api.saveModuleProgress(this, requestPayload);
     },
     setDefaultUserData : function(modules) {
         modules.each( function(moduleObject, key, hash) {
