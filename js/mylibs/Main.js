@@ -81,4 +81,5 @@ Main.userTracker = null;
 
 Main.userDataStoreURL = '/user_progress';
 Main.userDataProgressURL = '/user_progress/module_progress/';
+Main.logStoreURL = '/logs';
 
