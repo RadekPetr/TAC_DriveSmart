@@ -602,7 +602,7 @@
 			<fileset dir="./${dir.intermediate}" includes="${page-files}" />
 		</replaceregexp>
 
-		<!-- switch from a regular mootools-core to minified -->
+		<!-- switch from a regular mootools-more to minified -->
 		<replaceregexp match="mootools-more-(\d|\d(\.\d)+)\.js" replace="mootools-more-\1.min.js" flags="g">
 			<fileset dir="./${dir.intermediate}" includes="${page-files}" />
 		</replaceregexp>
