@@ -17,14 +17,12 @@ var Api = new Class({
 })
 
 Api.loadUserProgress = function() {
-
-    // TODO: finish loading from server
-    // TODO: wait for user data, then continue.
     var jsonUserRequest = new Request({
         url : Main.userDataStoreURL,
         link : 'chain',
         method : 'get',
         secure : false,
+        noCache : true,
         format : 'data',
         onSuccess : function(responseText) {
             try {
