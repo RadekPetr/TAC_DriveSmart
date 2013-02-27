@@ -25,6 +25,7 @@ Api.loadUserProgress = function() {
         noCache : true,
         format : 'data',
         onSuccess : function(responseText) {
+            // TODO: handle empty data with new user
             try {
                 log("loadProgress Success 0", responseText);
                 var decompressedData = lzw_decode(responseText);
@@ -36,19 +37,22 @@ Api.loadUserProgress = function() {
             } catch (e) {
                 log('Error ', e);
                 // TODO: log error to server for analyses ?
+                Api.saveLog("error", "onError loadProgress onSuccess" + e);
             }
         }.bind(this),
         onComplete : function(event, xhr) {
-            //log('onComplete loadProgress data reading', event, xhr);
+            log('onComplete loadProgress data reading', event, xhr);
         },
         onFailure : function(xhr) {
             log("jsonUserRequest loadProgress Failed", xhr);
             // TODO: log error to server for analyses ?
-
+            Api.saveLog("error", "onFailure loadUserProgress" + xhr);
         },
         onError : function(text, error) {
             log('onError loadProgress', text, error);
             // TODO: log error to server for analyses ?
+            Api.saveLog("error", "onError loadProgress" + text + " " + error);
+
         }
     }).send()
 }, Api.saveUserProgress = function(callback, requestPayload) {

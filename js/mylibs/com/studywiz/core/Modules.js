@@ -92,7 +92,7 @@ var Modules = new Class({
                 //log("Modules count: " + this.listOfModulesCounter);
                 if (this.listOfModulesCounter === 0) {
                     log("Modules READY, setting up user now ... ");
-                    this._setupUser();                  
+                    this._setupUser();
                 }
                 break;
             case "main.menu.start":
@@ -119,8 +119,8 @@ var Modules = new Class({
     _setupUser : function() {
         Main.userTracker = new User(this, {});
         Main.userTracker.setDefaultUserData(this.modules);
-       // Main.userTracker.loadProgress();
-        Api.loadUserProgress(Main.userTracker.testLoadedUserProgress());
+        Main.userTracker.loadProgress();
+        // Api.loadUserProgress(Main.userTracker.testLoadedUserProgress());
     },
     _startMainMenu : function() {
         var selectedModule = this.modules.get("main_menu");
