@@ -74,7 +74,7 @@ Main.paths = {
 
 Main.divID = 'drivesmart';
 Main.version = '1.0';
-Main.build = '2013/02/15';
+Main.build = '2013/02/26';
 
 Main.sequencePlayer = null;
 Main.userTracker = null;
