@@ -20,12 +20,15 @@
 - Menu access logic
 
 - Store achieved concentration level in user data
-- MSQ - cursor and select prevent
+
+
+// TODO: Handle repeats ??? Overwrite the scores ?
 
 
 
 -----------------------------------------------------------------
 DONE:
+- MSQ - cursor and select prevent
 - Module progress on Dashboard
 - Change radio cross to tick
 - DONE Handle video Preloading better - IE issue, use events
