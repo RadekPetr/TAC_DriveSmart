@@ -120,7 +120,8 @@ var Modules = new Class({
         Main.userTracker = new User(this, {});
         Main.userTracker.setDefaultUserData(this.modules);
         Main.userTracker.loadProgress();
-        // Api.loadUserProgress(Main.userTracker.testLoadedUserProgress());
+        // local only
+        Api.loadUserProgress(Main.userTracker.testLoadedUserProgress());
     },
     _startMainMenu : function() {
         var selectedModule = this.modules.get("main_menu");
@@ -218,6 +219,19 @@ var Modules = new Class({
                 }
             });
 
+            var resetUserDataButton = new Element('button', {
+                html : 'Empty User Data',
+                id : 'debug.empty.user',
+                styles : {
+                },
+                events : {
+                    click : function() {
+                        Main.userTracker.saveCompleteUserData_Empty();
+
+                    }.bind(this)
+                }
+            });
+
             var selectedModuleID = this.options.moduleID;
             //moduleSelector.options[moduleSelector.selectedIndex].value;
             var selectedModule = this.modules.get(selectedModuleID);
@@ -234,6 +248,8 @@ var Modules = new Class({
             sequenceSelector.value = this.options.sequenceID;
             sequenceSelectorButton.inject(myDiv);
             skipButton.inject(myDiv);
+            resetUserDataButton.inject(myDiv);
+
         }
 
     },

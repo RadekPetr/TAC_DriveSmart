@@ -17,8 +17,10 @@ var User = new Class({
         this.userData = null;
         log("defaultData 1 ", this.defaultData);
         this.concentrationLevel = 1;
+        //this.saveCompleteUserData_Empty();
     },
     loadProgress : function() {
+
         Api.loadUserProgress();
     },
     testLoadedUserProgress : function(userProgressData) {
@@ -26,7 +28,7 @@ var User = new Class({
         // TODO: handle "no data" for just created user and error whne no data is loaded
 
         log("_testLoadedUserProgress", userProgressData);
-        if (userProgressData == null || userProgressData == undefined) {
+        if (userProgressData == null || userProgressData == undefined || userProgressData == {}) {
             this.userData = new Hash(this.defaultData);
             log("No User Data saved - Default user progress");
         } else {
@@ -52,6 +54,14 @@ var User = new Class({
         var compressedData = lzw_encode(json_data);
         var requestPayload = {
             data : compressedData
+        };
+
+        Api.saveUserProgress(this, requestPayload);
+    },
+    saveCompleteUserData_Empty : function() {
+        
+        var requestPayload = {
+            data : "no data"
         };
 
         Api.saveUserProgress(this, requestPayload);
@@ -96,6 +106,8 @@ var User = new Class({
         // log("default Data", this.defaultData);
     },
     updateSequenceProgress : function(sequenceState) {
+        // TODO: Handle repeats ??? Overwrite the scores ?
+
         /// get the sequence Object and update it
         var moduleID = sequenceState.moduleID;
         var currentSequenceData = Object.subset(sequenceState, ['id', 'completed', 'score']);
@@ -160,7 +172,7 @@ var User = new Class({
             // do not add empty array
             var moduleScore = this.getModuleScore(moduleID);
             if (moduleScore != []) {
-                totalScore.push(this.getModuleScore(moduleID));
+                totalScore.push(moduleScore);
             }
         }.bind(this))
         return totalScore.average();

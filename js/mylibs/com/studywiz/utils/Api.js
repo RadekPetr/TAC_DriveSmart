@@ -25,19 +25,24 @@ Api.loadUserProgress = function() {
         noCache : true,
         format : 'data',
         onSuccess : function(responseText) {
-            // TODO: handle empty data with new user
-            try {
-                log("loadProgress Success 0", responseText);
-                var decompressedData = lzw_decode(responseText);
-                log(decompressedData);
-                var myProgress = JSON.decode(decompressedData);
+            if (responseText == 'no data') {
+                Main.userTracker.testLoadedUserProgress(undefined);
+            } else {
+                // TODO: handle empty data with new user
+                try {
+                    log("loadProgress Success 0", responseText);
 
-                log('callback', Main.userTracker);
-                Main.userTracker.testLoadedUserProgress(myProgress);
-            } catch (e) {
-                log('Error ', e);
-                // TODO: log error to server for analyses ?
-                Api.saveLog("error", "onError loadProgress onSuccess" + e);
+                    var decompressedData = lzw_decode(responseText);
+                    log(decompressedData);
+                    var myProgress = JSON.decode(decompressedData);
+
+                    log('callback', Main.userTracker);
+                    Main.userTracker.testLoadedUserProgress(myProgress);
+                } catch (e) {
+                    log('Error ', e);
+                    // TODO: log error to server for analyses ?
+                    Api.saveLog("error", "onError loadProgress onSuccess" + e);
+                }
             }
         }.bind(this),
         onComplete : function(event, xhr) {
