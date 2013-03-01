@@ -76,7 +76,7 @@ var DragNDropPlayer = new Class({
             })
         })
         log("Score: " + score, "%", score * pointsPerItem);
-        return score * pointsPerItem;
+        return (score * pointsPerItem)/100;
 
     },
     // ----------------------------------------------------------
