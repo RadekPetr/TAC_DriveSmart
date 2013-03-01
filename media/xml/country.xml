@@ -257,7 +257,7 @@
       <Audio>country/country_vdca2e</Audio>
       <Image>dragdrop/country_6_correct.jpg</Image>
     </Step>
-    <Step fmt="Continue"></Step>
+    
   </Seq>
   <Seq trackProgress="true" desc="Exercise 7" Ex="7">
     <Step fmt="SequenceIntro">

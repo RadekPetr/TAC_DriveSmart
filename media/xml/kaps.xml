@@ -121,11 +121,11 @@
       <Audio>kaps/kaps_vtt2a</Audio>
     </Step>
     <Step fmt="CommentaryIntro">
-      <Image>kaps/kaps_Indust_start_first.jpg</Image>
+      <Image>kaps/kaps_indust_start_first.jpg</Image>
       <Audio>kaps/kaps_opdrive</Audio>
     </Step>
     <Step fmt="Commentary">
-      <Video>kaps/kaps_Indust_start</Video>
+      <Video>kaps/kaps_indust_start</Video>
       <FeedbackAudio>kaps/kaps_opdrive2</FeedbackAudio>
       <ExpertAudio>kaps/opindust</ExpertAudio>
     </Step>
