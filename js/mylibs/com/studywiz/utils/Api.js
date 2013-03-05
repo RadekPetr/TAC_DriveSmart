@@ -17,6 +17,7 @@ var Api = new Class({
 })
 
 Api.loadUserProgress = function() {
+    log("loadUserProgress called");
     var jsonUserRequest = new Request({
         url : Main.userDataStoreURL,
         link : 'chain',
@@ -25,14 +26,18 @@ Api.loadUserProgress = function() {
         noCache : true,
         format : 'data',
         onSuccess : function(responseText) {
+            log("responseText 1", responseText);
             if (responseText == 'no data') {
+                log("responseText 2", responseText);
                 Main.userTracker.testLoadedUserProgress(undefined);
             } else {
                 // TODO: handle empty data with new user
                 try {
                     log("loadProgress Success 0", responseText);
 
-                    var decompressedData = lzw_decode(responseText);
+                   // var decompressedData = lzw_decode(responseText);
+                    var decompressedData = Api.decode(responseText); 
+                    
                     log(decompressedData);
                     var myProgress = JSON.decode(decompressedData);
 
@@ -210,3 +215,16 @@ Api.moduleIdMapping = function(key) {
     })
     return map.get(key);
 }
+
+Api.encode = function(input) {
+    var compressedString = Iuppiter.compress(input);
+    var output = Iuppiter.Base64.encode(compressedString, true);
+    return output;
+}
+
+Api.decode = function(input) {
+    var byteArray = Iuppiter.toByteArray(input);
+    var output = Iuppiter.decompress(Iuppiter.Base64.decode(byteArray, true));
+    return output;
+}
+

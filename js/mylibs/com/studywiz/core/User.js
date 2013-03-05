@@ -28,7 +28,7 @@ var User = new Class({
         // TODO: handle "no data" for just created user and error whne no data is loaded
 
         log("_testLoadedUserProgress", userProgressData);
-        if (userProgressData == null || userProgressData == undefined || userProgressData == {}) {
+        if (userProgressData == null || userProgressData == undefined || userProgressData == "no data") {
             this.userData = new Hash(this.defaultData);
             log("No User Data saved - Default user progress");
         } else {
@@ -51,7 +51,8 @@ var User = new Class({
     },
     _saveCompleteUserData : function() {
         var json_data = JSON.encode(this.userData);
-        var compressedData = lzw_encode(json_data);
+        //var compressedData = lzw_encode(json_data);
+        var compressedData = Api.encode(json_data);
         var requestPayload = {
             data : compressedData
         };
@@ -59,7 +60,7 @@ var User = new Class({
         Api.saveUserProgress(this, requestPayload);
     },
     saveCompleteUserData_Empty : function() {
-        
+
         var requestPayload = {
             data : "no data"
         };
