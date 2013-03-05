@@ -95,6 +95,7 @@ var MenuItems = new Class({
                     tick.show();
                     tick.setStyles({
                         'width' : '30px',
+                        'height' : '34px',
                         'float' : 'right',
                         'padding-left': '15px'
                     })
