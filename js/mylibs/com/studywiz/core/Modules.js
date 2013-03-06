@@ -120,8 +120,9 @@ var Modules = new Class({
         Main.userTracker = new User(this, {});
         Main.userTracker.setDefaultUserData(this.modules);
         Main.userTracker.loadProgress();
-        // local only
-        Api.loadUserProgress(Main.userTracker.testLoadedUserProgress());
+        // DEBUG: local only
+        //
+        //Api.loadUserProgress(Main.userTracker.testLoadedUserProgress());
     },
     _startMainMenu : function() {
         var selectedModule = this.modules.get("main_menu");
