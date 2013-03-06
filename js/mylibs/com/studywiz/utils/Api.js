@@ -227,11 +227,13 @@ Api.encode = function(input) {
     return encodedBase64;
 }
 Api.decode = function(input) {
-    log("To Decompress:", input);
+    /*log("To Decompress:", input);
     var decodedBase64String = Base64.decode(input);
     var decompressedString = Lzw.decode(decodedBase64String);
     log("decodedBase64String:", decodedBase64String);
     log("decompressedString:", decompressedString);
     return decompressedString;
+    */
+    return null
 }
 
