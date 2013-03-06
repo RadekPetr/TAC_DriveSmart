@@ -35,10 +35,10 @@ Api.loadUserProgress = function() {
                 try {
                     log("loadProgress Success 0", responseText);
 
-                   // var decompressedData = lzw_decode(responseText);
-                    var decompressedData = Api.decode(responseText); 
-                    
-                    log(decompressedData);
+                    // var decompressedData = lzw_decode(responseText);
+                    var decompressedData = Api.decode(responseText);
+
+                    log("decompressedData", decompressedData);
                     var myProgress = JSON.decode(decompressedData);
 
                     log('callback', Main.userTracker);
@@ -217,14 +217,21 @@ Api.moduleIdMapping = function(key) {
 }
 
 Api.encode = function(input) {
-    var compressedString = Iuppiter.compress(input);
-    var output = Iuppiter.Base64.encode(compressedString, true);
-    return output;
-}
+    log("To Compress:", input);
+    var compressedString = Lzw.encode(input);
+    log("compressedString:", compressedString);
+    var encodedBase64 = Base64.encode(compressedString);
+    log("encodedBase64:", encodedBase64);
 
+    log(Api.decode(encodedBase64));
+    return encodedBase64;
+}
 Api.decode = function(input) {
-    var byteArray = Iuppiter.toByteArray(input);
-    var output = Iuppiter.decompress(Iuppiter.Base64.decode(byteArray, true));
-    return output;
+    log("To Decompress:", input);
+    var decodedBase64String = Base64.decode(input);
+    var decompressedString = Lzw.decode(decodedBase64String);
+    log("decodedBase64String:", decodedBase64String);
+    log("decompressedString:", decompressedString);
+    return decompressedString;
 }
 
