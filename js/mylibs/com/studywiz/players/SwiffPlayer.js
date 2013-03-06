@@ -62,7 +62,7 @@ var SwiffPlayer = new Class({
         if (isFlashSupported() == true) {
             this.options.swiff.container = this.container;
             this.swiff = new Swiff(this.options.src, this.options.swiff);
-            RightClick.init(this.options.swiff.id, this.containerID);
+            
         } else {
             log("********************* No FLASH loading image")
             this.options.swiff.container = this.container;
@@ -94,11 +94,13 @@ var SwiffPlayer = new Class({
     show : function() {
 
         this.container.fade('in');
+        RightClick.init(this.options.swiff.id, this.containerID);
 
     },
     display : function() {
 
         this.container.fade('show');
+        RightClick.init(this.options.swiff.id, this.containerID);
 
     },
     start : function(params) {

@@ -16,67 +16,89 @@
  *
  * --
  * RightClick for Flash Player.
- * Version 0.7.0
+ * Version 0.7.0 MOD
  */
 
 var RightClick = {
- 
+
     /**
      *  Constructor
      */
-    init:function (object, container) {
+    init : function(object, container) {
         this.FlashObjectID = object;
         this.FlashContainerID = container;
         this.Cache = this.FlashObjectID;
         if (window.addEventListener) {
-            document.oncontextmenu = function (ev) {
+            document.oncontextmenu = function(ev) {
                 RightClick.killEvents(ev);
             };
             window.addEventListener("mousedown", this.onGeckoMouse, true);
+            window.addEventListener("mouseup", this.onGeckoMouseUp, true);
         } else {
-            document.oncontextmenu = function () {
+            document.oncontextmenu = function() {
                 if (window.event.srcElement.id == RightClick.FlashObjectID)
                     return false;
                 RightClick.Cache = "nan";
             };
-            document.getElementById(this.FlashContainerID).onmouseup = function () {
-                document.getElementById(RightClick.FlashContainerID).releaseCapture();
+            document.getElementById(this.FlashContainerID).onmouseup = function() {
+                document.getElementById(RightClick.FlashContainerID).rightClickUp();
             };
             document.getElementById(this.FlashContainerID).onmousedown = RightClick.onIEMouse;
         }
     },
- 
+
     /**
      * GECKO / WEBKIT event overkill
      * @param {Object} eventObject
      */
-    killEvents:function (eventObject) {
+    killEvents : function(eventObject) {
         if (eventObject) {
-            if (eventObject.stopPropagation) eventObject.stopPropagation();
-            if (eventObject.preventDefault)  eventObject.preventDefault();
-            if (eventObject.preventCapture)  eventObject.preventCapture();
-            if (eventObject.preventBubble)   eventObject.preventBubble();
+            if (eventObject.stopPropagation)
+                eventObject.stopPropagation();
+            if (eventObject.preventDefault)
+                eventObject.preventDefault();
+            if (eventObject.preventCapture)
+                eventObject.preventCapture();
+            if (eventObject.preventBubble)
+                eventObject.preventBubble();
         }
     },
- 
+
     /**
      * GECKO / WEBKIT call right click
      * @param {Object} ev
      */
-    onGeckoMouse:function (ev) {
+    onGeckoMouse : function(ev) {
         if (ev.button != 0) {
             RightClick.killEvents(ev);
+
             if (ev.target.id == RightClick.FlashObjectID && RightClick.Cache == RightClick.FlashObjectID) {
                 RightClick.call();
             }
             RightClick.Cache = ev.target.id;
         }
     },
- 
+    /**
+     * GECKO / WEBKIT call right click up on release
+     * @param {Object} ev
+     */
+    onGeckoMouseUp : function(ev) {
+        if (ev.button != 0) {
+
+            RightClick.killEvents(ev);
+
+            if (ev.target.id == RightClick.FlashObjectID && RightClick.Cache == RightClick.FlashObjectID) {
+
+                RightClick.callUp();
+            }
+            RightClick.Cache = ev.target.id;
+        }
+    },
+
     /**
      * IE call right click
      */
-    onIEMouse:function () {
+    onIEMouse : function() {
         if (event.button > 1) {
             if (window.event.srcElement.id == RightClick.FlashObjectID && RightClick.Cache == RightClick.FlashObjectID) {
                 RightClick.call();
@@ -86,12 +108,19 @@ var RightClick = {
                 RightClick.Cache = window.event.srcElement.id;
         }
     },
- 
+
     /**
      * Main call to Flash External Interface
      */
-    call:function () {
-        if(document.getElementById(this.FlashObjectID).rightClick)
-        document.getElementById(this.FlashObjectID).rightClick();
+    call : function() {
+        if (document.getElementById(this.FlashObjectID).rightClick)
+            document.getElementById(this.FlashObjectID).rightClick();
+    },
+    /**
+     * Main call to Flash External Interface
+     */
+    callUp : function() {
+        if (document.getElementById(this.FlashObjectID).rightClickUp)
+            document.getElementById(this.FlashObjectID).rightClickUp();
     }
 }
