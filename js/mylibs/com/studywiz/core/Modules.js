@@ -121,8 +121,10 @@ var Modules = new Class({
         Main.userTracker.setDefaultUserData(this.modules);
         Main.userTracker.loadProgress();
         // DEBUG: local only
-        //
-        //Api.loadUserProgress(Main.userTracker.testLoadedUserProgress());
+        //if (Main.isLocal == true) {
+         //   Api.loadUserProgress(Main.userTracker.testLoadedUserProgress());
+       // }
+
     },
     _startMainMenu : function() {
         var selectedModule = this.modules.get("main_menu");

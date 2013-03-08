@@ -27,8 +27,8 @@ Api.loadUserProgress = function() {
         format : 'data',
         onSuccess : function(responseText) {
             log("responseText 1", responseText);
-            if (responseText == 'no data') {
-                log("responseText 2", responseText);
+            if (responseText == 'no data' || responseText == '"no data"') {
+                log("response - no data", responseText);
                 Main.userTracker.testLoadedUserProgress(undefined);
             } else {
                 // TODO: handle empty data with new user
@@ -227,13 +227,18 @@ Api.encode = function(input) {
     return encodedBase64;
 }
 Api.decode = function(input) {
-    /*log("To Decompress:", input);
+
+    // if (Main.isLocal == true) {
+    //     return null;
+    // } else {
+    log("To Decompress:", input);
     var decodedBase64String = Base64.decode(input);
     var decompressedString = Lzw.decode(decodedBase64String);
     log("decodedBase64String:", decodedBase64String);
     log("decompressedString:", decompressedString);
     return decompressedString;
-    */
-    return null
+
+    //}
+
 }
 
