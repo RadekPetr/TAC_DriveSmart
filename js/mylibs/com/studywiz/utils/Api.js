@@ -12,12 +12,20 @@ var Api = new Class({
     // ----------------------------------------------------------
     initialize : function(myParent, myOptions) {
         this.setOptions(myOptions);
-        this.options.parent = myParent;        
+        this.options.parent = myParent;
     }
 })
 
 Api.loadUserProgress = function() {
     log("loadUserProgress called");
+
+    var authenticity_token = Api.getToken();
+    if (authenticity_token) {
+        //
+    } else {
+        log("NO authenticity_token found !!!")
+    }
+
     var jsonUserRequest = new Request({
         url : Main.userDataStoreURL,
         link : 'chain',
@@ -64,7 +72,7 @@ Api.loadUserProgress = function() {
             Api.saveLog("error", "onError loadProgress" + text + " " + error);
 
         }
-    }).send()
+    }).send('authenticity_token=' + authenticity_token);
 }, Api.saveUserProgress = function(callback, requestPayload) {
     //TODO: save the User data version too
     var jsonRequest = new Request.JSON({
@@ -109,8 +117,14 @@ Api.loadUserProgress = function() {
             Api.saveLog("error", "onError saveUserProgress" + text + " " + error);
         }
     })
+    var authenticity_token = Api.getToken();
+    if (authenticity_token) {
+       //jsonRequest.send("data=" + requestPayload.data + "&authenticity_token=" + authenticity_token);
+        jsonRequest.send(requestPayload);
+    } else {
+        log("NO authenticity_token found !!!")
+    }
 
-    jsonRequest.send(requestPayload);
 }, Api.saveLog = function(level, content) {
     var requestPayload = level + "=" + content;
 
@@ -200,7 +214,12 @@ Api.loadUserProgress = function() {
         }
     })
 
-    jsonRequest.send("score=" + requestPayload.score + "&completed_exercises=" + requestPayload.completed_exercises);
+    var authenticity_token = Api.getToken();
+    if (authenticity_token) {
+        jsonRequest.send("score=" + requestPayload.score + "&completed_exercises=" + requestPayload.completed_exercises + "&authenticity_token=" + authenticity_token);
+    } else {
+        log("NO authenticity_token found !!!")
+    }
 
     // On completion of each exercise you would need to POST to /user_progress/module_progress/<module_code>
     // payload need to contain two parameters - "score" and "completed_exercises". Both integers.

@@ -9,6 +9,7 @@ var Main = new Class({
     // ----------------------------------------------------------
     initialize : function(isDev) {
         log("****** Version: " + Main.version + " Build: " + Main.build + " ******");
+        Api.saveLog('info', "****** Version: " + Main.version + " Build: " + Main.build + " ******");
 
         if (isDev == true) {
             // load external js libraries so they are available to the project
@@ -75,7 +76,7 @@ Main.paths = {
 
 Main.divID = 'drivesmart';
 Main.version = '1.0';
-Main.build = '2013/03/07';
+Main.build = '2013/03/12';
 
 // Whne  running on localhost
 Main.isLocal = false;
