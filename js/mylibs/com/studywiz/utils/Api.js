@@ -119,7 +119,7 @@ Api.loadUserProgress = function() {
     })
     var authenticity_token = Api.getToken();
     if (authenticity_token) {
-       //jsonRequest.send("data=" + requestPayload.data + "&authenticity_token=" + authenticity_token);
+        //jsonRequest.send("data=" + requestPayload.data + "&authenticity_token=" + authenticity_token);
         jsonRequest.send(requestPayload);
     } else {
         log("NO authenticity_token found !!!")
@@ -160,7 +160,6 @@ Api.loadUserProgress = function() {
             log('onTimeout saveLog data saving');
         },
         onError : function(text, error) {
-
             log('onError saveLog', text, error);
         }
     })
@@ -240,7 +239,6 @@ Api.moduleIdMapping = function(key) {
     })
     return map.get(key);
 }
-
 Api.encode = function(input) {
     log("To Compress:", input);
     var compressedString = Lzw.encode(input);
@@ -252,26 +250,17 @@ Api.encode = function(input) {
     return encodedBase64;
 }
 Api.decode = function(input) {
-
-    // if (Main.isLocal == true) {
-    //     return null;
-    // } else {
     log("To Decompress:", input);
     var decodedBase64String = Base64.decode(input);
     var decompressedString = Lzw.decode(decodedBase64String);
     log("decodedBase64String:", decodedBase64String);
     log("decompressedString:", decompressedString);
     return decompressedString;
-
-    //}
-
 }
+//  I've done the change. There is a form on the page (only on dashboard where JS application runs) with id=api_form. You need to grab value from hidden field 'authenticity_token' and post it as authenticity_token parameter along with your parameters with each POST request.
+//$("#api_form input[name=authenticity_token]")
+//Currently token required only for /logs and if everything works fine I will make the change to other controllers.
 Api.getToken = function() {
-    var token;
-    token = $m('api_form').getElement('input[name=authenticity_token]').value;
-
-    //  I've done the change. There is a form on the page (only on dashboard where JS application runs) with id=api_form. You need to grab value from hidden field 'authenticity_token' and post it as authenticity_token parameter along with your parameters with each POST request.
-    //$("#api_form input[name=authenticity_token]")
-    //Currently token required only for /logs and if everything works fine I will make the change to other controllers.
+    var token = $m('api_form').getElement('input[name=authenticity_token]').value;
     return token;
 }
