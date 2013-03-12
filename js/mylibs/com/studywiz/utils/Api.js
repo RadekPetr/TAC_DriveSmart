@@ -12,7 +12,7 @@ var Api = new Class({
     // ----------------------------------------------------------
     initialize : function(myParent, myOptions) {
         this.setOptions(myOptions);
-        this.options.parent = myParent;
+        this.options.parent = myParent;        
     }
 })
 
@@ -151,7 +151,13 @@ Api.loadUserProgress = function() {
         }
     })
 
-    jsonRequest.send(requestPayload);
+    var authenticity_token = Api.getToken();
+
+    if (authenticity_token) {
+        jsonRequest.send(requestPayload + "&authenticity_token=" + authenticity_token);
+    } else {
+        log("NO authenticity_token found !!!")
+    }
 }, Api.saveModuleProgress = function(callback, requestPayload) {
 
     var externalModuleID = Api.moduleIdMapping(Main.sequencePlayer.sequenceState.moduleID);
@@ -241,4 +247,12 @@ Api.decode = function(input) {
     //}
 
 }
+Api.getToken = function() {
+    var token;
+    token = $m('api_form').getElement('input[name=authenticity_token]').value;
 
+    //  I've done the change. There is a form on the page (only on dashboard where JS application runs) with id=api_form. You need to grab value from hidden field 'authenticity_token' and post it as authenticity_token parameter along with your parameters with each POST request.
+    //$("#api_form input[name=authenticity_token]")
+    //Currently token required only for /logs and if everything works fine I will make the change to other controllers.
+    return token;
+}

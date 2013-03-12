@@ -57,6 +57,7 @@ var Main = new Class({
         if (this.listOfLibrariesCounter === 0) {
             this.fireEvent('READY');
             //console.log("Fired event READY");
+            log('Token: ' + Api.getToken());
         }
     },
 });

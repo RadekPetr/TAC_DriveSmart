@@ -34,14 +34,13 @@
 		Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
 		For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
 		<!-- <script src="js/libs/modernizr-2.0.6.min.js"></script>-->
-		
 
 		<script src="js/libs/mootools-core-1.4.5.1.js"></script>
 		<script src="js/libs/mootools-more-1.4.0.1.js"></script>
 		<script src="js/mylibs/Main.js"></script>
 		<script>
             function init() {
-               var main = new Main(true);
+                var main = new Main(true);
                 main.addEvent('READY:once', function() {
                     console.log("got event READY");
                     main.start();
@@ -49,7 +48,7 @@
 
             }
 		</script>
-		
+
 	</head>
 	<body onload = "init();" style="background-color:#000000">
 		<div id="allcontents" class="homepage">
@@ -65,29 +64,37 @@
 				<div class="footer" >
 					<a href="#" class="footer-link">PRIVACY POLICY</a><a href="#" class="footer-link">CONTACT</a><a href="#" class="footer-link">DISCLAIMER</a><a href="#" class="footer-link">TERMS AND CONDITIONS</a><a href="http://www.tac.vic.gov.au/" class="logo-link tac-logo">TAC</a>
 				</div>
+				<form id="api_form" method="post" action="" accept-charset="UTF-8">
+					<div style="margin:0;padding:0;display:inline">
+						<input type="hidden" value="✓" name="utf8">
+						<input type="hidden" value="BZyv/eX3729jtLOHcJlBPjhaPY+sWJSdLErNDuwnIKw=" name="authenticity_token">
+					</div>
+					<div id="drivesmart" style="left: 20px;top: 0; position: relative;height:480px;width:640px" role="main"></div>
+					<div class="my_details">
+				</form>
 
 				<!-- AddThis Button BEGIN -->
 
 				<!-- AddThis Button END -->
 
 			</div>
-			</div>
-			
-			<!--! end of #container -->
+		</div>
 
-			<!-- JavaScript at the bottom for fast page loading -->
+		<!--! end of #container -->
 
-			<!-- scripts concatenated and minified via ant build script-->
-			<script defer src="js/plugins.js"></script>
-			<script defer src="js/script.js"></script>
-			<!-- end scripts-->
+		<!-- JavaScript at the bottom for fast page loading -->
 
-			<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
-			chromium.org/developers/how-tos/chrome-frame-getting-started -->
-			<!--[if lt IE 7 ]>
-			<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-			<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
-			<![endif]-->
+		<!-- scripts concatenated and minified via ant build script-->
+		<script defer src="js/plugins.js"></script>
+		<script defer src="js/script.js"></script>
+		<!-- end scripts-->
+
+		<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+		chromium.org/developers/how-tos/chrome-frame-getting-started -->
+		<!--[if lt IE 7 ]>
+		<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+		<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+		<![endif]-->
 
 	</body>
 </html>
