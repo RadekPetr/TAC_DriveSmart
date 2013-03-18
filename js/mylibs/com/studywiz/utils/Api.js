@@ -19,14 +19,7 @@ var Api = new Class({
 Api.loadUserProgress = function() {
     log("loadUserProgress called");
 
-    var authenticity_token = Api.getToken();
-    if (authenticity_token) {
-        //
-    } else {
-        log("NO authenticity_token found !!!")
-    }
-
-    var jsonUserRequest = new Request({
+    var jsonRequest = new Request({
         url : Main.userDataStoreURL,
         link : 'chain',
         method : 'get',
@@ -72,8 +65,12 @@ Api.loadUserProgress = function() {
             Api.saveLog("error", "onError loadProgress" + text + " " + error);
 
         }
-    }).send('authenticity_token=' + authenticity_token);
-}, Api.saveUserProgress = function(callback, requestPayload) {
+    })
+
+    Api.sendRequest(jsonRequest, new Object(), false);
+}
+
+Api.saveUserProgress = function(callback, requestPayload) {
     //TODO: save the User data version too
     var jsonRequest = new Request.JSON({
         url : Main.userDataStoreURL,
@@ -117,16 +114,13 @@ Api.loadUserProgress = function() {
             Api.saveLog("error", "onError saveUserProgress" + text + " " + error);
         }
     })
-    var authenticity_token = Api.getToken();
-    if (authenticity_token) {
-        //jsonRequest.send("data=" + requestPayload.data + "&authenticity_token=" + authenticity_token);
-        jsonRequest.send(requestPayload);
-    } else {
-        log("NO authenticity_token found !!!")
-    }
 
-}, Api.saveLog = function(level, content) {
-    var requestPayload = level + "=" + content;
+    Api.sendRequest(jsonRequest, requestPayload, false);
+}
+
+Api.saveLog = function(level, content) {
+    var requestPayload = new Object();
+    requestPayload[level] = content;
 
     var jsonRequest = new Request.JSON({
         url : Main.logStoreURL,
@@ -162,16 +156,13 @@ Api.loadUserProgress = function() {
         onError : function(text, error) {
             log('onError saveLog', text, error);
         }
-    })
+    });
 
-    var authenticity_token = Api.getToken();
+    Api.sendRequest(jsonRequest, requestPayload, true);
 
-    if (authenticity_token) {
-        jsonRequest.send(requestPayload + "&authenticity_token=" + authenticity_token);
-    } else {
-        log("NO authenticity_token found !!!")
-    }
-}, Api.saveModuleProgress = function(callback, requestPayload) {
+}
+
+Api.saveModuleProgress = function(callback, requestPayload) {
 
     var externalModuleID = Api.moduleIdMapping(Main.sequencePlayer.sequenceState.moduleID);
 
@@ -212,18 +203,12 @@ Api.loadUserProgress = function() {
             // TODO: log error to server for analyses ?
         }
     })
-
-    var authenticity_token = Api.getToken();
-    if (authenticity_token) {
-        jsonRequest.send("score=" + requestPayload.score + "&completed_exercises=" + requestPayload.completed_exercises + "&authenticity_token=" + authenticity_token);
-    } else {
-        log("NO authenticity_token found !!!")
-    }
+    Api.sendRequest(jsonRequest, requestPayload, true);
 
     // On completion of each exercise you would need to POST to /user_progress/module_progress/<module_code>
     // payload need to contain two parameters - "score" and "completed_exercises". Both integers.
     // There are two possible responses - OK (200) and "Can't find module" (422). Latter case means that module is not defined in admin section.
-},
+}
 /*I also have created a very simple API for you to report errors. It just stores them in log file. Do you need them to be accessible by admin? Is it any valuable? If so, I can easily change them to be persisted.
  To use it just POST to /logs with parameter named error, warn, info or debug and parameter value your message,
  i.e error="Blah" and it will be saved in log file with the corresponding level (if it is on).
@@ -239,6 +224,7 @@ Api.moduleIdMapping = function(key) {
     })
     return map.get(key);
 }
+
 Api.encode = function(input) {
     log("To Compress:", input);
     var compressedString = Lzw.encode(input);
@@ -249,6 +235,7 @@ Api.encode = function(input) {
     log(Api.decode(encodedBase64));
     return encodedBase64;
 }
+
 Api.decode = function(input) {
     log("To Decompress:", input);
     var decodedBase64String = Base64.decode(input);
@@ -263,4 +250,18 @@ Api.decode = function(input) {
 Api.getToken = function() {
     var token = $m('api_form').getElement('input[name=authenticity_token]').value;
     return token;
+}
+
+Api.sendRequest = function(request, requestPayload, isSecured) {
+    if (isSecured == true) {
+        var authenticity_token = Api.getToken();
+        if (authenticity_token) {
+            requestPayload.authenticity_token = authenticity_token;
+            request.send(Object.toQueryString(requestPayload));
+        } else {
+            log("NO authenticity_token found !!!")
+        }
+    } else {
+        request.send(requestPayload);
+    }
 }

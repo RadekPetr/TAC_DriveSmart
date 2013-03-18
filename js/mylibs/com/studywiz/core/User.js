@@ -18,7 +18,9 @@ var User = new Class({
         log("defaultData 1 ", this.defaultData);
         this.concentrationLevel = 1;
         // DEBUG: To Empty on start
-        //this.saveCompleteUserData_Empty();
+        if (Main.resetUser == true) {
+            this.saveCompleteUserData_Empty();
+        }
     },
     loadProgress : function() {
 

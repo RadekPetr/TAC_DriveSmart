@@ -9,7 +9,7 @@ var Main = new Class({
     // ----------------------------------------------------------
     initialize : function(isDev) {
         log("****** Version: " + Main.version + " Build: " + Main.build + " ******");
-        Api.saveLog('info', "****** Version: " + Main.version + " Build: " + Main.build + " ******");
+        
 
         if (isDev == true) {
             // load external js libraries so they are available to the project
@@ -26,6 +26,7 @@ var Main = new Class({
     },
     // ----------------------------------------------------------
     start : function() {
+        Api.saveLog('info', "****** Version: " + Main.version + " Build: " + Main.build + " ******");
         Main.sequencePlayer = new SequencePlayer(this, {});
         this.modules = new Modules({});
         this.modules.start();
@@ -76,10 +77,12 @@ Main.paths = {
 
 Main.divID = 'drivesmart';
 Main.version = '1.0';
-Main.build = '2013/03/12';
+Main.build = '2013/03/18';
 
 // Whne  running on localhost
 Main.isLocal = false;
+// Saves empty progress data if true
+Main.resetUser = false;
 
 Main.sequencePlayer = null;
 Main.userTracker = null;
