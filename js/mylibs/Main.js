@@ -88,13 +88,15 @@ Main.userTracker = null;
 
 if (Main.isLocal == true) {
     Main.user_progress_GET_URL = '/user_progress_data';
-    Main.user_progress_POST_URL = '/user_progress_data_';
+    Main.user_progress_POST_URL = '/user_progress_data';
+    Main.user_module_progress_POST_URL = '/user_progress/module_progress/';
+    //Main.user_module_progress_GET_URL = '/user_progress/module_progress/';
+    Main.log_POST_URL = '/logs';
 } else {
     Main.user_progress_GET_URL = '/user_progress';
     Main.user_progress_POST_URL = '/user_progress';
+    Main.user_module_progress_POST_URL = '/user_progress/module_progress/';
+    //Main.user_module_progress_GET_URL = '/user_progress/module_progress/';
+    Main.log_POST_URL = '/logs';
 }
-
-//Main.user_module_progress_GET_URL = '/user_progress/module_progress/';
-Main.user_module_progress_POST_URL = '/user_progress/module_progress/';
-Main.log_POST_URL = '/logs';
 

@@ -16,6 +16,7 @@ var Api = new Class({
         this.options.parent = myParent;
     },
     loadUserProgress : function() {
+        var retries = 0;
         var jsonRequest = new Request({
             url : Main.user_progress_GET_URL,
             link : 'chain',
@@ -43,8 +44,18 @@ var Api = new Class({
                 log('onComplete loadProgress data reading', event, xhr);
             }.bind(this),
             onFailure : function(xhr) {
-                log("ERROR: loadUserProgress failure: ", xhr);
-                this.saveLog("error", "onFailure loadUserProgress" + xhr);
+                if (retries >= this.options.retries) {
+                    log("ERROR: loadUserProgress Failed", xhr);
+                    this.saveLog("error", "onFailure loadUserProgress, no retry left " + xhr);
+                    // TODO: try again if fails then show Alert to user with error code and try reloading page ?
+                    alert("SDE01: Error loading user data. \n\nPlease reload the page to try again or contact support.");
+
+                } else {
+                    log("WARN: loadUserProgress Failed, retry:" + retries, xhr);
+                    this.saveLog("warn", "loadUserProgress failed, retry:" + retries + "/" + this.options.retries + " " + xhr);
+                    retries += 1;
+                    this._sendRequest(jsonRequest, new Object(), false);
+                }
             }.bind(this),
             onError : function(text, error) {
                 log('ERROR: loadUserProgress error: ', text, error);
@@ -72,11 +83,12 @@ var Api = new Class({
                 }
             }.bind(this),
             onFailure : function(xhr) {
-                   
+
                 if (retries >= this.options.retries) {
                     log("ERROR: saveUserProgress Failed", xhr);
                     this.saveLog("error", "onFailure saveUserProgress, no retry left " + xhr);
-                      // TODO: try again if fails then show Alert to user with error code and try reloading page ?
+                    // TODO: try again if fails then show Alert to user with error code and try reloading page ?
+                    alert("SDE02: Error saving user data. \n\nPlease continue to the next activity and we will attempt to save the progress again later on.");
                 } else {
                     log("WARN: saveUserProgress Failed, retry:" + retries, xhr);
                     this.saveLog("warn", "saveUserProgress failed, retry:" + retries + "/" + this.options.retries + " " + xhr);
@@ -117,7 +129,7 @@ var Api = new Class({
         this._sendRequest(jsonRequest, requestPayload, false);
     },
     saveModuleProgress : function(requestPayload) {
-
+        var retries = 0;
         var externalModuleID = this._moduleIdMapping(Main.sequencePlayer.sequenceState.moduleID);
 
         var jsonRequest = new Request({
@@ -129,9 +141,16 @@ var Api = new Class({
                 //TODO: check the response if not 'OK' handle issues
             }.bind(this),
             onFailure : function(xhr) {
-                log("_saveModuleProgress request Failed", xhr);
-                // TODO: handle the failed
-                this.saveLog("error", "onFailure saveModuleProgress" + xhr);
+                if (retries >= this.options.retries) {
+                    log("ERROR: saveUserProgress Failed", xhr);
+                    this.saveLog("error", "onFailure saveModuleProgress, no retry left " + xhr);
+                    alert("SDE03: Error saving module score. \n\nPlease continue to the next activity and we will attempt to save the score again later on.");
+                } else {
+                    log("WARN: saveModuleProgress Failed, retry:" + retries, xhr);
+                    this.saveLog("warn", "saveModuleProgress failed, retry:" + retries + "/" + this.options.retries + " " + xhr);
+                    retries += 1;
+                    this._sendRequest(jsonRequest, requestPayload, true);
+                }
 
             }.bind(this),
             onRequest : function() {
