@@ -15,6 +15,7 @@ var User = new Class({
 
         this.defaultData = new Hash({});
         this.userData = null;
+        this.api = new Api(this);
         log("defaultData 1 ", this.defaultData);
         this.concentrationLevel = 1;
         // DEBUG: To Empty on start
@@ -24,7 +25,7 @@ var User = new Class({
     },
     loadProgress : function() {
 
-        Api.loadUserProgress();
+        this.api.loadUserProgress();
     },
     testLoadedUserProgress : function(userProgressData) {
 
@@ -50,17 +51,17 @@ var User = new Class({
         // log("Saving: ", this.userData);
         this._saveCompleteUserData();
         // Save module progress
-        this._saveModuleProgress();
+        this._saveModuleProgressData();
     },
     _saveCompleteUserData : function() {
         var json_data = JSON.encode(this.userData);
         //var compressedData = lzw_encode(json_data);
-        var compressedData = Api.encode(json_data);
+        var compressedData = this.api.encode(json_data);
         var requestPayload = {
             data : compressedData
         };
 
-        Api.saveUserProgress(this, requestPayload);
+        this.api.saveUserProgress(requestPayload);
     },
     saveCompleteUserData_Empty : function() {
 
@@ -68,9 +69,9 @@ var User = new Class({
             data : "no data"
         };
 
-        Api.saveUserProgress(this, requestPayload);
+        this.api.saveUserProgress(requestPayload);
     },
-    _saveModuleProgress : function() {
+    _saveModuleProgressData : function() {
         var moduleID = Main.sequencePlayer.sequenceState.moduleID;
         var moduleScore = this.getModuleScore(moduleID);
         var moduleProgress = this.getModuleProgress(moduleID);
@@ -81,7 +82,7 @@ var User = new Class({
             completed_exercises : moduleProgress.finishedCount
         };
 
-        Api.saveModuleProgress(this, requestPayload);
+        this.api.saveModuleProgress(requestPayload);
     },
     setDefaultUserData : function(modules) {
         modules.each( function(moduleObject, key, hash) {
@@ -147,13 +148,10 @@ var User = new Class({
             return item.completed == false && item.trackProgress == true;
         });
 
-        // log("unfinishedSequences", unfinishedSequences);
-
         var introSequences = sequencesInModule.filter(function(item, index) {
             return item.trackProgress == false;
         });
 
-        // log("introSequences", introSequences, introSequences.length);
         var progressObj = {};
         // Minus the ModuleIntro
         progressObj.total = sequencesInModule.length - introSequences.length;

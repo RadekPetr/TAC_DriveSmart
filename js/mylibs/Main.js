@@ -9,7 +9,6 @@ var Main = new Class({
     // ----------------------------------------------------------
     initialize : function(isDev) {
         log("****** Version: " + Main.version + " Build: " + Main.build + " ******");
-        
 
         if (isDev == true) {
             // load external js libraries so they are available to the project
@@ -26,7 +25,8 @@ var Main = new Class({
     },
     // ----------------------------------------------------------
     start : function() {
-        Api.saveLog('info', "****** Version: " + Main.version + " Build: " + Main.build + " ******");
+        new Api(this).saveLog('info', "****** Version: " + Main.version + " Build: " + Main.build + " ******");
+
         Main.sequencePlayer = new SequencePlayer(this, {});
         this.modules = new Modules({});
         this.modules.start();
@@ -59,7 +59,6 @@ var Main = new Class({
         if (this.listOfLibrariesCounter === 0) {
             this.fireEvent('READY');
             //console.log("Fired event READY");
-            log('Token: ' + Api.getToken());
         }
     },
 });
@@ -88,11 +87,14 @@ Main.sequencePlayer = null;
 Main.userTracker = null;
 
 if (Main.isLocal == true) {
-    Main.userDataStoreURL = '/user_progress_data';
+    Main.user_progress_GET_URL = '/user_progress_data';
+    Main.user_progress_POST_URL = '/user_progress_data_';
 } else {
-    Main.userDataStoreURL = '/user_progress';
+    Main.user_progress_GET_URL = '/user_progress';
+    Main.user_progress_POST_URL = '/user_progress';
 }
 
-Main.userDataProgressURL = '/user_progress/module_progress/';
-Main.logStoreURL = '/logs';
+//Main.user_module_progress_GET_URL = '/user_progress/module_progress/';
+Main.user_module_progress_POST_URL = '/user_progress/module_progress/';
+Main.log_POST_URL = '/logs';
 
