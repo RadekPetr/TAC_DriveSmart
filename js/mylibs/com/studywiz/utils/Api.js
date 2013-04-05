@@ -4,7 +4,8 @@
 var Api = new Class({
     Implements : [Options, Events],
     options : {
-        parent : null
+        parent : null,
+        retries : 3
     },
     myParent : function() {
         return this.options.parent;
@@ -17,7 +18,9 @@ var Api = new Class({
 })
 
 Api.loadUserProgress = function() {
-    log("loadUserProgress called");
+  //  console.info("info: loadUserProgress called");
+   // console.error('error', "loadUserProgress called");
+    //console.debug('debug', "loadUserProgress called");
 
     var jsonRequest = new Request({
         url : Main.userDataStoreURL,
@@ -27,27 +30,18 @@ Api.loadUserProgress = function() {
         noCache : true,
         format : 'data',
         onSuccess : function(responseText) {
-            log("responseText 1", responseText);
             if (responseText == 'no data' || responseText == '"no data"') {
-                log("response - no data", responseText);
+                log('info', "Empty User progress data loaded - new user ? Launching with a default data set.");
                 Main.userTracker.testLoadedUserProgress(undefined);
             } else {
-                // TODO: handle empty data with new user
                 try {
-                    log("loadProgress Success 0", responseText);
-
-                    // var decompressedData = lzw_decode(responseText);
+                    log("User progress data loaded OK");
                     var decompressedData = Api.decode(responseText);
-
-                    log("decompressedData", decompressedData);
                     var myProgress = JSON.decode(decompressedData);
-
-                    log('callback', Main.userTracker);
                     Main.userTracker.testLoadedUserProgress(myProgress);
                 } catch (e) {
-                    log('Error ', e);
-                    // TODO: log error to server for analyses ?
-                    Api.saveLog("error", "onError loadProgress onSuccess" + e);
+                    log('ERROR: processing loaded user progress data ', e);
+                    Api.saveLog("error", "processing loaded user progress data onSuccess: " + e);
                 }
             }
         }.bind(this),
@@ -55,13 +49,11 @@ Api.loadUserProgress = function() {
             log('onComplete loadProgress data reading', event, xhr);
         },
         onFailure : function(xhr) {
-            log("jsonUserRequest loadProgress Failed", xhr);
-            // TODO: log error to server for analyses ?
+            log("ERROR: loadUserProgress failure: ", xhr);
             Api.saveLog("error", "onFailure loadUserProgress" + xhr);
         },
         onError : function(text, error) {
-            log('onError loadProgress', text, error);
-            // TODO: log error to server for analyses ?
+            log('ERROR: loadUserProgress error: ', text, error);
             Api.saveLog("error", "onError loadProgress" + text + " " + error);
 
         }
@@ -79,12 +71,23 @@ Api.saveUserProgress = function(callback, requestPayload) {
         onSuccess : function(xhr) {
             log("jsonUserRequest Success", xhr);
             //TODO: check the response if not 'OK' handle issues
+            if (xhr== "OK") {
+                log ("OK")
+            } else {
+                log ("OK")
+                log (xhr);
+            }
         },
         onFailure : function(xhr) {
             log("jsonUserRequest Failed", xhr);
             // TODO: handle the failed
             // TODO: try again if fails then show Alert to user with error code and try reloading page ?
-            Api.saveLog("error", "onFailure saveUserProgress" + xhr);
+            Api.saveLog("error", "onFailure saveUserProgress" + xhr);      
+            
+         
+            
+            
+            
         },
         onRequest : function() {
             // log("Save the User data version too  .... posting");
@@ -128,11 +131,9 @@ Api.saveLog = function(level, content) {
         method : 'post',
         onSuccess : function(xhr) {
             log("saveLog Success", xhr);
-
         },
         onFailure : function(xhr) {
             log("jsonUserRequest Failed", xhr);
-
         },
         onRequest : function() {
             // log("SaveLog  .... posting");
@@ -147,11 +148,10 @@ Api.saveLog = function(level, content) {
             // log('onCancel saveLog data saving');
         },
         onException : function(event, xhr) {
-
+            log('onException saveLog');
         },
         onTimeout : function(event, xhr) {
-
-            log('onTimeout saveLog data saving');
+            log('onTimeout saveLog');
         },
         onError : function(text, error) {
             log('onError saveLog', text, error);
@@ -177,6 +177,8 @@ Api.saveModuleProgress = function(callback, requestPayload) {
         onFailure : function(xhr) {
             log("_saveModuleProgress request Failed", xhr);
             // TODO: handle the failed
+            Api.saveLog("error", "onFailure saveModuleProgress" + xhr);
+
         },
         onRequest : function() {
             //log("_saveModuleProgress  .... posting");
@@ -193,14 +195,17 @@ Api.saveModuleProgress = function(callback, requestPayload) {
         onException : function(event, xhr) {
             log('onException _saveModuleProgress');
             // TODO: log error to server for analyses ?
+            Api.saveLog("error", "onException saveModuleProgress" + xhr);
         },
         onTimeout : function(event, xhr) {
             log('onTimeout _saveModuleProgress');
             // Try again then alert user
+            Api.saveLog("error", "onTimeout saveModuleProgress" + xhr);
+
         },
         onError : function(text, error) {
             log('onError _saveModuleProgress', text, error);
-            // TODO: log error to server for analyses ?
+            Api.saveLog("error", "onError saveModuleProgress" + xhr);
         }
     })
     Api.sendRequest(jsonRequest, requestPayload, true);
@@ -226,22 +231,21 @@ Api.moduleIdMapping = function(key) {
 }
 
 Api.encode = function(input) {
-    log("To Compress:", input);
+    //log("To Compress:", input);
     var compressedString = Lzw.encode(input);
-    log("compressedString:", compressedString);
+    //log("compressedString:", compressedString);
     var encodedBase64 = Base64.encode(compressedString);
-    log("encodedBase64:", encodedBase64);
-
+    // log("encodedBase64:", encodedBase64);
     log(Api.decode(encodedBase64));
     return encodedBase64;
 }
 
 Api.decode = function(input) {
-    log("To Decompress:", input);
+    //log("To Decompress:", input);
     var decodedBase64String = Base64.decode(input);
     var decompressedString = Lzw.decode(decodedBase64String);
-    log("decodedBase64String:", decodedBase64String);
-    log("decompressedString:", decompressedString);
+    //log("decodedBase64String:", decodedBase64String);
+    //log("decompressedString:", decompressedString);
     return decompressedString;
 }
 //  I've done the change. There is a form on the page (only on dashboard where JS application runs) with id=api_form. You need to grab value from hidden field 'authenticity_token' and post it as authenticity_token parameter along with your parameters with each POST request.
@@ -259,7 +263,7 @@ Api.sendRequest = function(request, requestPayload, isSecured) {
             requestPayload.authenticity_token = authenticity_token;
             request.send(Object.toQueryString(requestPayload));
         } else {
-            log("NO authenticity_token found !!!")
+            log("ERROR: NO authenticity_token found !!!")
         }
     } else {
         request.send(requestPayload);

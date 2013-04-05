@@ -77,10 +77,10 @@ Main.paths = {
 
 Main.divID = 'drivesmart';
 Main.version = '1.0';
-Main.build = '2013/04/02';
+Main.build = '2013/04/05';
 
 // Whne  running on localhost
-Main.isLocal = false;
+Main.isLocal = true;
 // Saves empty progress data if true
 Main.resetUser = false;
 
