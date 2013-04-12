@@ -122,8 +122,9 @@ var User = new Class({
         if (userSequence.length > 1 || userSequence.length == 0) {
             log("ERROR");
         }
-        Object.append(userSequence[0], currentSequenceData);
 
+        Object.append(userSequence[0], currentSequenceData);
+ 
         log("userSequence[0]: ", userSequence[0], currentSequenceData);
         log("*** User data :", this.userData);
         log("Total score: ", this.getTotalScore());

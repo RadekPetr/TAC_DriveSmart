@@ -47,6 +47,8 @@ var SequencePlayer = new Class({
         this.moduleInfo = this.myParent().getModuleInfo();
 
         this.sequenceState = Main.userTracker.getUserSequenceState(this.moduleInfo.currentSequenceID, this.moduleInfo.moduleID);
+        // reset scoring, so whne it repeats the scores are replaced not appended (Unless this will be requested ?)
+        this.sequenceState.score = new Array ();
         // TODO handle mobile platforms: Browser.Platform.android, handle incompatible old browsers
         log("Starting SEQUENCE: " + this.moduleInfo.currentSequenceID);
 
