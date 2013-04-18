@@ -21,7 +21,7 @@ var VideoPlayer = new Class({
         preload : 'auto',
         autoplay : false,
         controls : false,
-        parentTag : Main.divID,
+        parentTag : Main.DIV_ID,
         filename : null
     },
     // ----------------------------------------------------------
@@ -287,8 +287,8 @@ var VideoPlayer = new Class({
     _getVideoData : function() {
         var data = {};
         var myFilename = stripFileExtension(this.options.filename);
-        var videoFile = Main.paths.videoFolder + myFilename;
-        var posterFile = Main.paths.imageFolder + myFilename;
+        var videoFile = Main.PATHS.videoFolder + myFilename;
+        var posterFile = Main.PATHS.imageFolder + myFilename;
         // var rand = "?" + Math.random();
         data.video = [{
             type : "video/mp4",

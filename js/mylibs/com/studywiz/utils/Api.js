@@ -18,7 +18,7 @@ var Api = new Class({
     loadUserProgress : function() {
         var retries = 0;
         var jsonRequest = new Request({
-            url : Main.user_progress_GET_URL,
+            url : Main.USER_PROGRESS_GET_URL,
             link : 'chain',
             method : 'get',
             secure : false,
@@ -47,9 +47,7 @@ var Api = new Class({
                 if (retries >= this.options.retries) {
                     log("ERROR: loadUserProgress Failed", xhr);
                     this.saveLog("error", "onFailure loadUserProgress, no retry left " + xhr);
-                    // TODO: try again if fails then show Alert to user with error code and try reloading page ?
                     alert("SDE01: Error loading user data. \n\nPlease reload the page to try again or contact support.");
-
                 } else {
                     log("WARN: loadUserProgress Failed, retry:" + retries, xhr);
                     this.saveLog("warn", "loadUserProgress failed, retry:" + retries + "/" + this.options.retries + " " + xhr);
@@ -69,7 +67,7 @@ var Api = new Class({
         var retries = 0;
         //TODO: save the User data version too
         var jsonRequest = new Request.JSON({
-            url : Main.user_progress_POST_URL,
+            url : Main.USER_PROGRESS_POST_URL,
             link : 'chain',
             method : 'post',
             onSuccess : function(xhr) {
@@ -78,7 +76,7 @@ var Api = new Class({
                 if (xhr == "OK") {
                     log("OK")
                 } else {
-                    log("OK")
+                    log("ERROR: NOT OK")
                     log(xhr);
                 }
             }.bind(this),
@@ -87,7 +85,6 @@ var Api = new Class({
                 if (retries >= this.options.retries) {
                     log("ERROR: saveUserProgress Failed", xhr);
                     this.saveLog("error", "onFailure saveUserProgress, no retry left " + xhr);
-                    // TODO: try again if fails then show Alert to user with error code and try reloading page ?
                     alert("SDE02: Error saving user data. \n\nPlease continue to the next activity and we will attempt to save the progress again later on.");
                 } else {
                     log("WARN: saveUserProgress Failed, retry:" + retries, xhr);
@@ -110,7 +107,6 @@ var Api = new Class({
                 // log('onCancel Progress data saving');
             }.bind(this),
             onException : function(event, xhr) {
-                // TODO: Handle exception
                 log('onException Progress data saving');
                 this.saveLog("error", xhr);
             }.bind(this),
@@ -120,7 +116,6 @@ var Api = new Class({
                 this.saveLog("error", "Timeout saveUserProgress");
             }.bind(this),
             onError : function(text, error) {
-                // TODO: log error to server for analyses ?
                 log('onError SaveProgress', text, error);
                 this.saveLog("error", "onError saveUserProgress" + text + " " + error);
             }.bind(this)
@@ -133,7 +128,7 @@ var Api = new Class({
         var externalModuleID = this._moduleIdMapping(Main.sequencePlayer.sequenceState.moduleID);
 
         var jsonRequest = new Request({
-            url : Main.user_module_progress_POST_URL + externalModuleID,
+            url : Main.USER_MODULE_PROGRESS_POST_URL + externalModuleID,
             link : 'chain',
             method : 'post',
             onSuccess : function(xhr) {
@@ -167,7 +162,6 @@ var Api = new Class({
             }.bind(this),
             onException : function(event, xhr) {
                 log('onException _saveModuleProgress');
-                // TODO: log error to server for analyses ?
                 this.saveLog("error", "onException saveModuleProgress" + xhr);
             }.bind(this),
             onTimeout : function(event, xhr) {
@@ -228,7 +222,7 @@ var Api = new Class({
         requestPayload[level] = content;
 
         var jsonRequest = new Request.JSON({
-            url : Main.log_POST_URL,
+            url : Main.LOG_POST_URL,
             link : 'chain',
             method : 'post',
             onSuccess : function(xhr) {

@@ -8,7 +8,7 @@ var Main = new Class({
     Implements : [Options, Events],
     // ----------------------------------------------------------
     initialize : function(isDev) {
-        log("****** Version: " + Main.version + " Build: " + Main.build + " ******");
+        log("****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
 
         if (isDev == true) {
             // load external js libraries so they are available to the project
@@ -25,7 +25,7 @@ var Main = new Class({
     },
     // ----------------------------------------------------------
     start : function() {
-        new Api(this).saveLog('info', "****** Version: " + Main.version + " Build: " + Main.build + " ******");
+        new Api(this).saveLog('info', "****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
 
         Main.sequencePlayer = new SequencePlayer(this, {});
         this.modules = new Modules({});
@@ -67,36 +67,74 @@ var Main = new Class({
 var $m = document.id;
 //http://mootools.net/blog/2009/06/22/the-dollar-safe-mode/
 
-Main.paths = {
+Main.PATHS = {
     audioFolder : 'media/sound/',
     videoFolder : 'media/video/',
     imageFolder : 'media/images/',
     flashFolder : 'media/flash/'
 }
 
-Main.divID = 'drivesmart';
-Main.version = '1.0';
-Main.build = '2013/04/05';
+Main.DIV_ID = 'drivesmart';
+Main.VERSION = '1.0';
+Main.BUILD = '2013/04/11';
 
 // Whne  running on localhost
-Main.isLocal = true;
+Main.IS_LOCAL = true;
 // Saves empty progress data if true
-Main.resetUser = false;
+Main.RESET_USER_DATA = false;
 
 Main.sequencePlayer = null;
 Main.userTracker = null;
 
-if (Main.isLocal == true) {
-    Main.user_progress_GET_URL = '/user_progress_data';
-    Main.user_progress_POST_URL = '/user_progress_data';
-    Main.user_module_progress_POST_URL = '/user_progress/module_progress/';
-    //Main.user_module_progress_GET_URL = '/user_progress/module_progress/';
-    Main.log_POST_URL = '/logs';
+if (Main.IS_LOCAL == true) {
+    Main.USER_PROGRESS_GET_URL = '/user_progress_data';
+    Main.USER_PROGRESS_POST_URL = '/user_progress_data';
+    Main.USER_MODULE_PROGRESS_POST_URL = '/user_progress/module_progress/';
+    //Main.USER_MODULE_PROGRESS_GET_URL = '/user_progress/module_progress/';
+    Main.LOG_POST_URL = '/logs';
 } else {
-    Main.user_progress_GET_URL = '/user_progress';
-    Main.user_progress_POST_URL = '/user_progress';
-    Main.user_module_progress_POST_URL = '/user_progress/module_progress/';
-    //Main.user_module_progress_GET_URL = '/user_progress/module_progress/';
-    Main.log_POST_URL = '/logs';
+    Main.USER_PROGRESS_GET_URL = '/user_progress';
+    Main.USER_PROGRESS_POST_URL = '/user_progress';
+    Main.USER_MODULE_PROGRESS_POST_URL = '/user_progress/module_progress/';
+    //Main.USER_MODULE_PROGRESS_GET_URL = '/user_progress/module_progress/';
+    Main.LOG_POST_URL = '/logs';
 }
 
+Main.MODULES = new Hash({
+    main_menu : {
+        score : 0,
+        title : "Dashboard",
+        id : 'main_menu',
+        sequenceID : '1'
+    },
+    concentration : {
+        score : 0,
+        title : "Concentration",
+        id : 'concentration',
+        sequenceID : '1'
+    },
+    kaps : {
+        score : 0,
+        title : "Keep ahead & play safe",
+        id : 'kaps',
+        sequenceID : '1'
+    },
+    scanning : {
+        score : 0,
+        title : "Scanning",
+        id : 'scanning',
+        sequenceID : '1'
+    },
+    country : {
+        score : 0,
+        title : "Country driving",
+        id : 'country',
+        sequenceID : '1'
+    },
+    urban : {
+        score : 0,
+        title : "Urban driving",
+        id : 'urban',
+        sequenceID : '1'
+    }
+});

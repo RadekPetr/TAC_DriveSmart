@@ -16,7 +16,7 @@ var Modules = new Class({
         this.modules = new Hash();
     },
     start : function() {
-        log(Main.divID);
+        log(Main.DIV_ID);
         this.addEvent("MODULE", this.handleNavigationEvent);
         this.setupModules();
     },
@@ -24,47 +24,8 @@ var Modules = new Class({
     setupModules : function() {
         this.listOfModulesCounter = 0;
 
-        var modules = new Hash({
-            main_menu : {
-                score : 0,
-                title : "Dashboard",
-                id : 'main_menu',
-                sequenceID : '1'
-            },
-            concentration : {
-                score : 0,
-                title : "Concentration",
-                id : 'concentration',
-                sequenceID : '1'
-            },
-            kaps : {
-                score : 0,
-                title : "Keep ahead & play safe",
-                id : 'kaps',
-                sequenceID : '1'
-            },
-            scanning : {
-
-                score : 0,
-                title : "Scanning",
-                id : 'scanning',
-                sequenceID : '1'
-            },
-            country : {
-
-                score : 0,
-                title : "Country driving",
-                id : 'country',
-                sequenceID : '1'
-            },
-            urban : {
-
-                score : 0,
-                title : "Urban driving",
-                id : 'urban',
-                sequenceID : '1'
-            }
-        });
+        // clone default list
+        var modules = new Hash (Main.MODULES);
 
         modules.each( function(value, key) {
 
@@ -77,7 +38,8 @@ var Modules = new Class({
                 id : key,
                 score : value.score,
                 title : value.title,
-                currentSequenceID : value.sequenceID
+                currentSequenceID : value.sequenceID,
+                version: value.version
             });
             this.modules.extend(module);
         }.bind(this))
@@ -139,7 +101,7 @@ var Modules = new Class({
             var myDiv = new Element("div", {
                 id : "debugContainer"
             });
-            myDiv.inject(Main.divID, 'before');
+            myDiv.inject(Main.DIV_ID, 'before');
 
             var moduleSelector = new Element('select', {
                 events : {

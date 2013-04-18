@@ -19,7 +19,7 @@ var User = new Class({
         log("defaultData 1 ", this.defaultData);
         this.concentrationLevel = 1;
         // DEBUG: To Empty on start
-        if (Main.resetUser == true) {
+        if (Main.RESET_USER_DATA == true) {
             this.saveCompleteUserData_Empty();
         }
     },
@@ -106,13 +106,13 @@ var User = new Class({
             var moduleData = new Hash();
             sequences.sortOn("id", Array.NUMERIC);
             moduleData.set(key, sequences);
+            // Store version
+            moduleData.set('version', Main.VERSION);
             this.defaultData.extend(moduleData);
         }.bind(this))
         // log("default Data", this.defaultData);
     },
     updateSequenceProgress : function(sequenceState) {
-        // TODO: Handle repeats ??? Overwrite the scores ?
-
         /// get the sequence Object and update it
         var moduleID = sequenceState.moduleID;
         var currentSequenceData = Object.subset(sequenceState, ['id', 'completed', 'score']);
@@ -124,7 +124,7 @@ var User = new Class({
         }
 
         Object.append(userSequence[0], currentSequenceData);
- 
+
         log("userSequence[0]: ", userSequence[0], currentSequenceData);
         log("*** User data :", this.userData);
         log("Total score: ", this.getTotalScore());

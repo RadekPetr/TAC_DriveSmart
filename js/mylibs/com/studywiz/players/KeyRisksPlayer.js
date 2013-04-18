@@ -93,10 +93,10 @@ var KeyRiskPlayer = new Class({
 
             case "risk.selected":
                 /// the risks need to be inside some div which could be deleted later
-                var el = document.getElementById(Main.divID);
+                var el = document.getElementById(Main.DIV_ID);
 
                 var elOffset = getPos(el);
-                var file = Main.paths.imageFolder + 'keyrisks/selected_risk.png';
+                var file = Main.PATHS.imageFolder + 'keyrisks/selected_risk.png';
                 this.risk_image = new ImagePlayer(this, {
                     src : file,
                     next : "",

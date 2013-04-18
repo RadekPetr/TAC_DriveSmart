@@ -32,7 +32,7 @@ var SequencePlayer = new Class({
         this.fromMenu = false;
 
         this.mediaLoader = new MediaLoader(this, {
-            parentElementID : Main.divID
+            parentElementID : Main.DIV_ID
         });
 
         this.addEvent("TIMELINE", this.handleNavigationEvent);
@@ -82,7 +82,7 @@ var SequencePlayer = new Class({
                     var myDiv = new Element("div", {
                         id : myContainerID
                     });
-                    myDiv.inject($m(Main.divID));
+                    myDiv.inject($m(Main.DIV_ID));
                     step.media.image.add(myContainerID);
                     // TODO: adjust style based on TAC
                     //step.media.image.show();
@@ -119,7 +119,7 @@ var SequencePlayer = new Class({
                     var myDiv = new Element("div", {
                         id : myContainerID
                     });
-                    myDiv.inject($m(Main.divID));
+                    myDiv.inject($m(Main.DIV_ID));
 
                     step.media.image.add(myContainerID);
                     step.media.image.show();
@@ -186,7 +186,7 @@ var SequencePlayer = new Class({
                     var myDiv = new Element("div", {
                         id : myContainerID
                     });
-                    myDiv.inject($m(Main.divID));
+                    myDiv.inject($m(Main.DIV_ID));
 
                     step.media.image.add(myContainerID);
                     step.media.image.show();
@@ -219,10 +219,10 @@ var SequencePlayer = new Class({
                         swiff : {
                             id : 'Commentary'
                         },
-                        src : Main.paths.flashFolder + "commentary.swf"
+                        src : Main.PATHS.flashFolder + "commentary.swf"
                     });
 
-                    this.recorder.add(Main.divID);
+                    this.recorder.add(Main.DIV_ID);
                     // -----
                     step.media.audio.options.next = '';
                     step.media.audio.start();
@@ -255,7 +255,7 @@ var SequencePlayer = new Class({
                         });
                     }.bind(this);
 
-                    // step.media.swiff.add(Main.divID);
+                    // step.media.swiff.add(Main.DIV_ID);
                     this.activeSwiff = step.media.swiff;
                     step.media.swiff.show();
                     step.media.swiff.start();
@@ -464,7 +464,7 @@ var SequencePlayer = new Class({
                     step.media.audio.start();
                     break;
                 case "Cameo":
-                    var file = Main.paths.imageFolder + 'cameo/visor_bkg.png';
+                    var file = Main.PATHS.imageFolder + 'cameo/visor_bkg.png';
                     this.cameo_image = new ImagePlayer(this, {
                         src : file,
                         next : "Cameo.visor.image.ready",
@@ -476,7 +476,7 @@ var SequencePlayer = new Class({
                         }
                     });
 
-                    var file = Main.paths.imageFolder + 'cameo/visor_mask.png';
+                    var file = Main.PATHS.imageFolder + 'cameo/visor_mask.png';
                     this.cameo_image_mask = new ImagePlayer(this, {
                         src : file,
                         next : "Cameo.visor.image.ready",
@@ -497,7 +497,7 @@ var SequencePlayer = new Class({
                     step.dragNDrop = new DragNDropPlayer(this, {});
 
                     var panel = new ImagePlayer(this, {
-                        src : Main.paths.imageFolder + 'dragdrop/panel_bkg.png',
+                        src : Main.PATHS.imageFolder + 'dragdrop/panel_bkg.png',
                         style : {
                             'left' : '427px',
                             'top' : '0px',
@@ -743,7 +743,7 @@ var SequencePlayer = new Class({
 
                 if (feedbackText != undefined) {
                     this.currentStep.feedbackPanel = new CommentaryFeedback(this, this.currentStep.data);
-                    this.currentStep.feedbackPanel.add(Main.divID);
+                    this.currentStep.feedbackPanel.add(Main.DIV_ID);
                     this.currentStep.feedbackPanel.show();
                 }
                 this._setupButton({
@@ -895,14 +895,14 @@ var SequencePlayer = new Class({
         options['class'] = 'button';
         //
         var button = new Button(this, options);
-        button.add(Main.divID);
+        button.add(Main.DIV_ID);
         button.show();
         this.buttons.push(button);
     }.protect(),
     //------------------------------------------------------------------------
     _setupQuestions : function(options) {
         var questions = new Questions(this, options);
-        questions.add(Main.divID, "bottom");
+        questions.add(Main.DIV_ID, "bottom");
         questions.show();
         return questions;
     }.protect(),
@@ -969,7 +969,7 @@ var SequencePlayer = new Class({
                             filename : filename,
                             width : width,
                             height : height,
-                            parentTag : Main.divID
+                            parentTag : Main.DIV_ID
                         });
 
                         this.mediaLoader.register(step.media.video.getLoaderInfo());
@@ -999,7 +999,7 @@ var SequencePlayer = new Class({
                             filename : filename,
                             width : width,
                             height : height,
-                            parentTag : Main.divID
+                            parentTag : Main.DIV_ID
                         });
 
                         this.mediaLoader.register(step.media.moduleIntroVideo.getLoaderInfo());
@@ -1009,7 +1009,7 @@ var SequencePlayer = new Class({
                     break;
                 case "Audio" :
                     if (item.value != '') {
-                        var file = Main.paths.audioFolder + stripFileExtension(item.value);
+                        var file = Main.PATHS.audioFolder + stripFileExtension(item.value);
                         step.media.audio = new AudioPlayer(this, {
                             next : 'not.set',
                             id : "audio_" + index + "_" + stepOrder,
@@ -1021,7 +1021,7 @@ var SequencePlayer = new Class({
                     break;
                 case "FeedbackAudio" :
                     if (item.value != '') {
-                        var file = Main.paths.audioFolder + stripFileExtension(item.value);
+                        var file = Main.PATHS.audioFolder + stripFileExtension(item.value);
                         step.media.feedbackAudio = new AudioPlayer(this, {
                             next : 'not.set',
                             id : "audio_" + index + "_" + stepOrder,
@@ -1033,7 +1033,7 @@ var SequencePlayer = new Class({
                     break;
                 case "ExpertAudio" :
                     if (item.value != '') {
-                        var file = Main.paths.audioFolder + stripFileExtension(item.value);
+                        var file = Main.PATHS.audioFolder + stripFileExtension(item.value);
                         step.media.expertAudio = new AudioPlayer(this, {
                             next : 'not.set',
                             id : "audio_" + index + "_" + stepOrder,
@@ -1045,7 +1045,7 @@ var SequencePlayer = new Class({
                     break;
                 case "DoneAudio" :
                     if (item.value != '') {
-                        var file = Main.paths.audioFolder + stripFileExtension(item.value);
+                        var file = Main.PATHS.audioFolder + stripFileExtension(item.value);
                         step.media.doneAudio = new AudioPlayer(this, {
                             next : 'not.set',
                             id : "audio_" + index + "_" + stepOrder,
@@ -1057,7 +1057,7 @@ var SequencePlayer = new Class({
                     break;
                 case "Preview" :
                     if (item.value != '') {
-                        var file = Main.paths.imageFolder + item.value;
+                        var file = Main.PATHS.imageFolder + item.value;
 
                         step.media.previewImage = new ImagePlayer(this, {
                             src : file,
@@ -1074,7 +1074,7 @@ var SequencePlayer = new Class({
                     break;
                 case "Image" :
                     if (item.value != '') {
-                        var file = Main.paths.imageFolder + item.value;
+                        var file = Main.PATHS.imageFolder + item.value;
                         step.media.image = new ImagePlayer(this, {
                             src : file,
                             title : 'Image',
@@ -1085,7 +1085,7 @@ var SequencePlayer = new Class({
                     break;
                 case "EmptyBkg" :
                     if (item.value != '') {
-                        var file = Main.paths.imageFolder + item.value;
+                        var file = Main.PATHS.imageFolder + item.value;
 
                         step.emptyBkg = new ImagePlayer(this, {
                             src : file,
@@ -1181,7 +1181,7 @@ var SequencePlayer = new Class({
                         swiff : {
                             id : 'swiff.id.' + index + "_" + stepOrder
                         },
-                        src : Main.paths.flashFolder + item.value,
+                        src : Main.PATHS.flashFolder + item.value,
                         id : 'swiff' + index + "_" + stepOrder
                     });
 
@@ -1391,7 +1391,7 @@ var SequencePlayer = new Class({
         var myDiv = new Element("div", {
             id : myContainerID
         });
-        myDiv.inject($m(Main.divID));
+        myDiv.inject($m(Main.DIV_ID));
 
         step.media.image.add(myContainerID);
         step.media.image.show();

@@ -44,7 +44,7 @@ var MenuItems = new Class({
             });
             this.menuItems.push(item);
             var preview = new ImagePlayer(myParent, {
-                src : Main.paths.imageFolder+ menuItem.preview,
+                src : Main.PATHS.imageFolder+ menuItem.preview,
                 title : 'Image',
                 id : 'preview_' + index,
                 style : {
@@ -147,7 +147,7 @@ var MenuItems = new Class({
         }
     },
     showCompleteStatus : function(left, top) {
-        var file = Main.paths.imageFolder + 'menu/tick.png';
+        var file = Main.PATHS.imageFolder + 'menu/tick.png';
 
         var tickImage = new ImagePlayer(this, {
             src : file,

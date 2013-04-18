@@ -60,7 +60,7 @@ var Recorder = new Class({
             log("********************* No FLASH loading image")
             this.options.swiff.container = this.container;
             this.swiff = new ImagePlayer(this, {
-                src : Main.paths.imageFolder + "commentary/noflash.png",
+                src : Main.PATHS.imageFolder + "commentary/noflash.png",
                 next : "NoFlash.Ready",
                 title : 'NoFlash',
                 id : 'NoFlash',
