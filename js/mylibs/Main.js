@@ -76,7 +76,7 @@ Main.PATHS = {
 
 Main.DIV_ID = 'drivesmart';
 Main.VERSION = '1.0';
-Main.BUILD = '2013/04/11';
+Main.BUILD = '2013/04/25';
 
 // Whne  running on localhost
 Main.IS_LOCAL = true;

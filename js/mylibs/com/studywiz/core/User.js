@@ -28,7 +28,6 @@ var User = new Class({
         }
     },
     loadProgress : function() {
-
         this.api.loadUserProgress();
     },
     testLoadedUserProgress : function(userProgressData) {
@@ -38,17 +37,25 @@ var User = new Class({
         log("_testLoadedUserProgress", userProgressData);
         if (userProgressData == null || userProgressData == undefined || userProgressData == "no data") {
             this.userData = new Hash(this.defaultData);
-            log("No User Data saved - Default user progress");
+            this._getUserData("concentration").info.extend({
+                level : this.concentrationLevel
+            });
+            log("No User Data saved - will create new user data from Default");
+            var userSavedVersion = this.userData.info.get("app_version");
+            log("The user app_version (using default): ", userSavedVersion);
         } else {
             this.userData = new Hash(userProgressData);
-            log("Loaded user progress");
-            //TODO: Load the user data version too and if different from defaults handle that - merging ?
+            log("Loaded user progress from server");
+            this.concentrationLevel = this._getUserData("concentration").info.get("level");
+            var userSavedVersion = this.userData.info.get("app_version");
+            log("The user saved app_version: ", userSavedVersion);
+            //TODO: Check user data version too and if different from defaults handle that - merging ?
         }
-        log('starting now');
+        log("Progress data of current user: ", this.userData);
+        log('All done .... starting now');
         this.myParent().fireEvent("MODULE", {
             next : "main.menu.start"
-        });
-        log(" this.userData", this.userData);
+        });        
     },
     saveProgress : function() {
         // save complete progress to server
@@ -92,10 +99,10 @@ var User = new Class({
         // storing the version of the data structure at the time of creation as data_version for each module and
         // also the app_version for the whole data structure
         // {
-        //    modules : 
+        //    modules :
         //     {<module id>:
         //       {
-        //          data:[], 
+        //          data:[],
         //          info:
         //               {
         //                 data_version:x
@@ -106,16 +113,12 @@ var User = new Class({
         // }
         //
         modules.each( function(moduleObject, key, hash) {
-            log("--------------------------------------");
-            log("bla", moduleObject, key, hash);
             var moduleInfo = moduleObject.getModuleInfo();
             var sequenceIds = moduleObject.sequences.getKeys();
             var sequences = new Array();
 
             Array.each(sequenceIds, function(sequenceID, index) {
                 var sequenceData = moduleObject.sequences.get(sequenceID);
-
-                log("sequenceID", sequenceID);
                 var sequenceState = new Object({
                     id : parseInt(sequenceID),
                     completed : false,
@@ -141,7 +144,7 @@ var User = new Class({
             app_version : Main.VERSION
         });
 
-        log("default Data", this.defaultData);
+        log("** Finished generating default user data", this.defaultData);
     },
     updateSequenceProgress : function(sequenceState) {
         /// get the sequence Object and update it
@@ -229,6 +232,7 @@ var User = new Class({
     },
     getConcentrationLevel : function(seq) {
         // TODO: store level with user data
+
         var userData = this._getUserData("concentration").data;
 
         log("From:", (seq - 6), " To:", (seq + 1));
@@ -278,6 +282,12 @@ var User = new Class({
             // There are max 0-4 levels allowed in flash
             if (this.concentrationLevel < 4) {
                 this.concentrationLevel++;
+
+                // Store the current level
+                this._getUserData("concentration").info.extend({
+                    level : this.concentrationLevel
+                });
+
             }
             //Go up a level
 
