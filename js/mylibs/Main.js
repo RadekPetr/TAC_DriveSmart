@@ -3,7 +3,6 @@
  */
 
 // -----------------------------
-
 var Main = new Class({
     Implements : [Options, Events],
     // ----------------------------------------------------------
@@ -33,6 +32,7 @@ var Main = new Class({
     },
     // ----------------------------------------------------------
     // PRIVATE - load external js libraries so they are available to the project
+    // only used during development, the libs are otherwise minimised and merged
     _loadAsset : function(item, index) {
         var newAsset = null;
         var fileType = item.split('.').pop();
@@ -63,29 +63,42 @@ var Main = new Class({
     },
 });
 
+
+
+// ---------------------
 // Add static variables
+// ---------------------
+Main.sequencePlayer = null;
+Main.userTracker = null;
+
+// Mootools safe mode
 var $m = document.id;
 //http://mootools.net/blog/2009/06/22/the-dollar-safe-mode/
 
+// ---------------------
+// Define CONSTANTS
+// ---------------------
+
+// the tag which will contain the app
+Main.DIV_ID = 'drivesmart';
+
+// Version stuff
+Main.VERSION = '1.0';
+Main.BUILD = '2013/04/25';
+
+// When running on localhost (So I can use different paths when testing)
+Main.IS_LOCAL = true;
+
+// Saves empty progress data on startup if true
+Main.RESET_USER_DATA = false;
+
+// Paths definitions
 Main.PATHS = {
     audioFolder : 'media/sound/',
     videoFolder : 'media/video/',
     imageFolder : 'media/images/',
     flashFolder : 'media/flash/'
 }
-
-Main.DIV_ID = 'drivesmart';
-Main.VERSION = '1.0';
-Main.BUILD = '2013/04/25';
-
-// Whne  running on localhost
-Main.IS_LOCAL = true;
-// Saves empty progress data if true
-Main.RESET_USER_DATA = false;
-
-Main.sequencePlayer = null;
-Main.userTracker = null;
-
 if (Main.IS_LOCAL == true) {
     Main.USER_PROGRESS_GET_URL = '/user_progress_data';
     Main.USER_PROGRESS_POST_URL = '/user_progress_data';
@@ -100,6 +113,7 @@ if (Main.IS_LOCAL == true) {
     Main.LOG_POST_URL = '/logs';
 }
 
+// Defines modules
 Main.MODULES = new Hash({
     main_menu : {
         score : 0,
