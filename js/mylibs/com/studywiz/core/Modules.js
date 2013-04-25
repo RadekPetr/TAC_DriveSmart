@@ -25,9 +25,9 @@ var Modules = new Class({
         this.listOfModulesCounter = 0;
 
         // clone default list
-        var modules = new Hash (Main.MODULES);
+       // var modules = new Hash (Main.MODULES);
 
-        modules.each( function(value, key) {
+        Main.MODULES.each( function(value, key) {
 
             this.listOfModulesCounter++;
             //log("++++" + this.listOfModulesCounter);
