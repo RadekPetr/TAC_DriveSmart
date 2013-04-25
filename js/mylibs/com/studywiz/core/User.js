@@ -13,7 +13,11 @@ var User = new Class({
         this.setOptions(myOptions);
         this.options.parent = myParent;
 
-        this.defaultData = new Hash({});
+        this.defaultData = new Hash({
+            info : new Hash(),
+            modules : new Hash()
+        });
+
         this.userData = null;
         this.api = new Api(this);
         log("defaultData 1 ", this.defaultData);
@@ -85,7 +89,10 @@ var User = new Class({
         this.api.saveModuleProgress(requestPayload);
     },
     setDefaultUserData : function(modules) {
+        log("MODULES:", modules);
         modules.each( function(moduleObject, key, hash) {
+            log("--------------------------------------");
+            log("bla", moduleObject, key, hash);
             var moduleInfo = moduleObject.getModuleInfo();
             var sequenceIds = moduleObject.sequences.getKeys();
             var sequences = new Array();
@@ -104,13 +111,20 @@ var User = new Class({
                 sequences.push(sequenceState);
             })
             var moduleData = new Hash();
+
             sequences.sortOn("id", Array.NUMERIC);
-            moduleData.set(key, sequences);
-            // Store version
-            moduleData.set('version', Main.VERSION);
-            this.defaultData.extend(moduleData);
+            moduleData.set(key, new Hash({
+                info : new Hash({
+                    version : Main.VERSION
+                }),
+                data : sequences
+            }));
+
+            this.defaultData.modules.extend(moduleData);
+
         }.bind(this))
         log("default Data", this.defaultData);
+
     },
     updateSequenceProgress : function(sequenceState) {
         /// get the sequence Object and update it
@@ -133,7 +147,7 @@ var User = new Class({
         this.saveProgress();
     },
     getUnfinishedSequences : function(moduleID) {
-        var sequencesInModule = this.userData.get(moduleID);
+        var sequencesInModule = this._getUserData(moduleID).data;
         var unfinishedSequences = sequencesInModule.filter(function(item, index) {
             return item.completed == false;
         });
@@ -144,7 +158,7 @@ var User = new Class({
     },
     getModuleProgress : function(moduleID) {
 
-        var sequencesInModule = this.userData.get(moduleID);
+        var sequencesInModule = this._getUserData(moduleID).data;
         var unfinishedSequences = sequencesInModule.filter(function(item, index) {
             return item.completed == false && item.trackProgress == true;
         });
@@ -170,7 +184,7 @@ var User = new Class({
     getTotalScore : function() {
         // Currently the score is calculated from the list of modules in the actual user data
         // exclude "version"
-        var moduleIDs = this.userData.getKeys().erase("version");
+        var moduleIDs = this.userData.modules.getKeys();
 
         var totalScore = [];
         Array.each(moduleIDs, function(moduleID, index) {
@@ -183,7 +197,7 @@ var User = new Class({
         return totalScore.average();
     },
     getModuleScore : function(moduleID) {
-        var userData = this.userData.get(moduleID);
+        var userData = this._getUserData(moduleID).data;
         // log(moduleID, userData);
         var allScores = new Array();
         Array.each(userData, function(sequenceState, index) {
@@ -198,7 +212,7 @@ var User = new Class({
     },
     getConcentrationLevel : function(seq) {
         // TODO: store level with user data
-        var userData = this.userData.get("concentration");
+        var userData = this._getUserData("concentration").data;
 
         log("From:", (seq - 6), " To:", (seq + 1));
         var lastSix = userData.filter(function(item, index) {
@@ -268,7 +282,7 @@ var User = new Class({
     },
     getUserSequenceData : function(sequenceID, moduleID) {
 
-        var moduleSequences = this.userData.get(moduleID);
+        var moduleSequences = this._getUserData(moduleID).data;
         log(sequenceID, moduleID, moduleSequences);
         var result = moduleSequences.filter(function(item, index) {
             return item.id == sequenceID;
@@ -279,5 +293,8 @@ var User = new Class({
     }.protect(),
     myParent : function() {
         return this.options.parent;
+    },
+    _getUserData : function(moduleID) {
+        return this.userData.modules.get(moduleID);
     }
 })
