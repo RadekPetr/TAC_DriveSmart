@@ -110,7 +110,7 @@ var User = new Class({
             moduleData.set('version', Main.VERSION);
             this.defaultData.extend(moduleData);
         }.bind(this))
-        // log("default Data", this.defaultData);
+        log("default Data", this.defaultData);
     },
     updateSequenceProgress : function(sequenceState) {
         /// get the sequence Object and update it
@@ -168,7 +168,9 @@ var User = new Class({
         return progressObj;
     },
     getTotalScore : function() {
-        var moduleIDs = this.userData.getKeys();
+        // Currently the score is calculated from the list of modules in the actual user data
+        // exclude "version"
+        var moduleIDs = this.userData.getKeys().erase("version");
 
         var totalScore = [];
         Array.each(moduleIDs, function(moduleID, index) {

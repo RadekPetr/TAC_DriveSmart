@@ -78,7 +78,7 @@ var DataLoader = new Class({
             id : this.options.id,
             next : this.options.next,
             data : this.sequences,
-            data_version : this.data.attributes.version + ""
+            loaded_module_structure_version : this.data.attributes.version + ""
         })
 
     }

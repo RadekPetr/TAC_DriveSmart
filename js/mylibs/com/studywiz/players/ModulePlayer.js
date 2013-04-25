@@ -14,7 +14,7 @@ var ModulePlayer = new Class({
         this.setOptions(myOptions);
         this.options.parent = myParent;
         this.sequences = null;
-        this.data_version = null;
+        this.module_structure_version = null;
         this.addEvent("DATA", this.handleDataEvent);
         this.addEvent("SEQUENCE", this.handleSequenceEvent);
         this._setupData();
@@ -35,7 +35,7 @@ var ModulePlayer = new Class({
             case "data.ready":
                 //log("Loaded module XML");
                 this.sequences = params.data;
-                this.data_version = params.data_version;
+                this.module_structure_version = params.loaded_module_structure_version;
                 this.myParent().fireEvent("MODULE", {
                     next : "module.data.ready"
                 })
