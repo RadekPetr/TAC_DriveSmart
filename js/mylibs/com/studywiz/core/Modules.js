@@ -38,8 +38,7 @@ var Modules = new Class({
                 id : key,
                 score : value.score,
                 title : value.title,
-                currentSequenceID : value.sequenceID,
-                version: value.version
+                currentSequenceID : value.sequenceID
             });
             this.modules.extend(module);
         }.bind(this))

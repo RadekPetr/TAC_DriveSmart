@@ -89,7 +89,22 @@ var User = new Class({
         this.api.saveModuleProgress(requestPayload);
     },
     setDefaultUserData : function(modules) {
-        log("MODULES:", modules);
+        // storing the version of the data structure at the time of creation as data_version for each module and
+        // also the app_version for the whole data structure
+        // {
+        //    modules : 
+        //     {<module id>:
+        //       {
+        //          data:[], 
+        //          info:
+        //               {
+        //                 data_version:x
+        //               }
+        //        }
+        //     },
+        //    info: {app_version:x}
+        // }
+        //
         modules.each( function(moduleObject, key, hash) {
             log("--------------------------------------");
             log("bla", moduleObject, key, hash);
@@ -115,16 +130,18 @@ var User = new Class({
             sequences.sortOn("id", Array.NUMERIC);
             moduleData.set(key, new Hash({
                 info : new Hash({
-                    version : Main.VERSION
+                    data_version : moduleObject.options.module_structure_version
                 }),
                 data : sequences
             }));
-
             this.defaultData.modules.extend(moduleData);
+        }.bind(this));
 
-        }.bind(this))
+        this.defaultData.info.extend({
+            app_version : Main.VERSION
+        });
+
         log("default Data", this.defaultData);
-
     },
     updateSequenceProgress : function(sequenceState) {
         /// get the sequence Object and update it
