@@ -65,19 +65,18 @@ var Api = new Class({
     },
     saveUserProgress : function(requestPayload) {
         var retries = 0;
-        //TODO: save the User data version too
         var jsonRequest = new Request.JSON({
             url : Main.USER_PROGRESS_POST_URL,
             link : 'chain',
             method : 'post',
             onSuccess : function(xhr) {
                 log("jsonUserRequest Success", xhr);
-                //TODO: check the response if not 'OK' handle issues
-                if (xhr == "OK") {
-                    log("OK")
+                if (xhr == "OK" || xhr == "ok") {
+                    log("INFO: User progress data saved OK");
                 } else {
-                    log("ERROR: NOT OK")
+                    log("ERROR: User progress wrong reply NOT OK")
                     log(xhr);
+                    // TODO : handle error ?
                 }
             }.bind(this),
             onFailure : function(xhr) {
@@ -111,7 +110,6 @@ var Api = new Class({
                 this.saveLog("error", xhr);
             }.bind(this),
             onTimeout : function(event, xhr) {
-                // TODO: Handle timeout - try again if fails then show Alert to user with error code and try reloading page ?
                 log('onTimeout Progress data saving');
                 this.saveLog("error", "Timeout saveUserProgress");
             }.bind(this),
@@ -132,8 +130,14 @@ var Api = new Class({
             link : 'chain',
             method : 'post',
             onSuccess : function(xhr) {
-                log("_saveModuleProgress request Success", xhr);
-                //TODO: check the response if not 'OK' handle issues
+                log("saveModuleProgress request Success", xhr);
+                if (xhr == "OK" || xhr == "ok") {
+                    log("INFO: Module progress data saved OK");
+                } else {
+                    log("ERROR: Save Module progress wrong reply NOT OK")
+                    log(xhr);
+                    // TODO : handle error ?
+                }
             }.bind(this),
             onFailure : function(xhr) {
                 if (retries >= this.options.retries) {

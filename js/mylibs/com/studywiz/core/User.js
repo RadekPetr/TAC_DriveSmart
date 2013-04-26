@@ -55,7 +55,7 @@ var User = new Class({
         log('All done .... starting now');
         this.myParent().fireEvent("MODULE", {
             next : "main.menu.start"
-        });        
+        });
     },
     saveProgress : function() {
         // save complete progress to server
@@ -231,15 +231,13 @@ var User = new Class({
         return totalScore;
     },
     getConcentrationLevel : function(seq) {
-        // TODO: store level with user data
 
         var userData = this._getUserData("concentration").data;
-
         log("From:", (seq - 6), " To:", (seq + 1));
         var lastSix = userData.filter(function(item, index) {
             return (parseInt(item.id) < (seq + 1) && parseInt(item.id) > (seq - 6));
         });
-        log(userData);
+
         //   log("DEBUG: ", seq, lastSix);
         var allScores = new Array();
         Array.each(lastSix, function(sequenceState, index) {
@@ -251,7 +249,7 @@ var User = new Class({
         if (scoreAverage >= 85) {
             // LEVEL INCREASE
             log("*********** LEVEL INCREASE ***********:" + scoreAverage);
-            //TODO:  PlayLevelAudio()                //Play audio
+
 
             /*  if (scoreAverage >= 85) {
             // LEVEL INCREASE
@@ -282,12 +280,11 @@ var User = new Class({
             // There are max 0-4 levels allowed in flash
             if (this.concentrationLevel < 4) {
                 this.concentrationLevel++;
-
+                log("Increasing the concentration level to: ", this.concentrationLevel);
                 // Store the current level
                 this._getUserData("concentration").info.extend({
                     level : this.concentrationLevel
                 });
-
             }
             //Go up a level
 
