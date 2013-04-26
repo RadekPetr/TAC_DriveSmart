@@ -9,7 +9,7 @@ var ModulePlayer = new Class({
         title : "",
         score : 0,
         currentSequenceID : "1",
-        module_structure_version:"1.0"
+        module_structure_version : "1.0"
     },
     initialize : function(myParent, myOptions) {
         this.setOptions(myOptions);
@@ -51,10 +51,8 @@ var ModulePlayer = new Class({
             case "sequence.next":
                 var moduleSequences = this.getModuleSequenceIDs();
                 var unfinishedSequences = Main.userTracker.getUnfinishedSequences(this.options.id);
-                log("******** unfinished:", unfinishedSequences);
                 if (unfinishedSequences.length == 0) {
                     // is last
-                    //TODO: handle module end
                     this.myParent().fireEvent("MODULE", {
                         next : "module.finished"
                     });
@@ -65,7 +63,6 @@ var ModulePlayer = new Class({
                         // get the next one
                         this.options.currentSequenceID = unfinishedSequences[0].id;
                     }
-                    log("Next unfinished ID:", this.options.currentSequenceID);
                     this.playSequence(this.options.currentSequenceID);
                 }
                 break;
@@ -90,17 +87,17 @@ var ModulePlayer = new Class({
         return IDs;
     },
     playSequence : function(sequenceID) {
-       
+
         this.options.currentSequenceID = sequenceID;
         if (Main.sequencePlayer == null) {
             log("ERROR - Sequence player does not exist")
         } else {
-                       Main.sequencePlayer.reset();
+            Main.sequencePlayer.reset();
             Main.sequencePlayer.options.parent = this;
         }
 
         var currentSequence = this.sequences[this.options.currentSequenceID];
-      
+
         if (this.options.id == "concentration") {
             var level = Main.userTracker.getConcentrationLevel(parseInt(sequenceID));
             if (Main.sequencePlayer.conLevel < level) {

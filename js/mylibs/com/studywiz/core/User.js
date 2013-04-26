@@ -33,21 +33,30 @@ var User = new Class({
     testLoadedUserProgress : function(userProgressData) {
 
         // TODO: handle "no data" for just created user and error whne no data is loaded
+        // TODO: hadle version conversions - copy data from old structure to a new one if necessary
 
-        log("_testLoadedUserProgress", userProgressData);
+        log("testLoadedUserProgress", userProgressData);
         if (userProgressData == null || userProgressData == undefined || userProgressData == "no data") {
             this.userData = new Hash(this.defaultData);
             this._getUserData("concentration").info.extend({
                 level : this.concentrationLevel
             });
             log("No User Data saved - will create new user data from Default");
-            var userSavedVersion = this.userData.info.get("app_version");
+            var userSavedVersion = this.userData.info["app_version"];
             log("The user app_version (using default): ", userSavedVersion);
         } else {
+            // TODO : convert all objects to hashes so I can get keys using the getKeys methods
+            
+            
+            
+            
             this.userData = new Hash(userProgressData);
-            log("Loaded user progress from server");
-            this.concentrationLevel = this._getUserData("concentration").info.get("level");
-            var userSavedVersion = this.userData.info.get("app_version");
+            log("Loaded user progress from server", this.userData);
+            log ("1");
+            this.concentrationLevel = this._getUserData("concentration").info["level"];
+            log ("2");
+            var userSavedVersion = this.userData.info["app_version"];
+            log ("3");
             log("The user saved app_version: ", userSavedVersion);
             //TODO: Check user data version too and if different from defaults handle that - merging ?
         }
@@ -204,7 +213,7 @@ var User = new Class({
     getTotalScore : function() {
         // Currently the score is calculated from the list of modules in the actual user data
         // exclude "version"
-        var moduleIDs = this.userData.modules.getKeys();
+        var moduleIDs = new Hash (this.userData.modules).getKeys();
 
         var totalScore = [];
         Array.each(moduleIDs, function(moduleID, index) {
@@ -319,6 +328,7 @@ var User = new Class({
         return this.options.parent;
     },
     _getUserData : function(moduleID) {
-        return this.userData.modules.get(moduleID);
+        
+        return this.userData.modules[moduleID];
     }
 })

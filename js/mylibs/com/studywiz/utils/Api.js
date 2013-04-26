@@ -37,6 +37,7 @@ var Api = new Class({
                     } catch (e) {
                         log('ERROR: processing loaded user progress data ', e);
                         this.saveLog("error", "processing loaded user progress data onSuccess: " + e);
+                        // TDOD: handle errors in data - due to versions ?
                     }
                 }
             }.bind(this),
@@ -71,7 +72,7 @@ var Api = new Class({
             method : 'post',
             onSuccess : function(xhr) {
                 log("jsonUserRequest Success", xhr);
-                if (xhr == "OK" || xhr == "ok") {
+                if (xhr == '"OK"' || xhr == '"ok"' || xhr == "ok" || xhr == "OK") {
                     log("INFO: User progress data saved OK");
                 } else {
                     log("ERROR: User progress wrong reply NOT OK")
@@ -131,7 +132,7 @@ var Api = new Class({
             method : 'post',
             onSuccess : function(xhr) {
                 log("saveModuleProgress request Success", xhr);
-                if (xhr == "OK" || xhr == "ok") {
+                if (xhr == '"OK"' || xhr == '"ok"' || xhr == "ok" || xhr == "OK") {
                     log("INFO: Module progress data saved OK");
                 } else {
                     log("ERROR: Save Module progress wrong reply NOT OK")

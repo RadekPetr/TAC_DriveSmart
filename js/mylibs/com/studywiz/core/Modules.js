@@ -24,15 +24,9 @@ var Modules = new Class({
     setupModules : function() {
         this.listOfModulesCounter = 0;
 
-        // clone default list
-       // var modules = new Hash (Main.MODULES);
-
         Main.MODULES.each( function(value, key) {
-
             this.listOfModulesCounter++;
-            //log("++++" + this.listOfModulesCounter);
             var module = new Object();
-            //log(value);
 
             module[key] = new ModulePlayer(this, {
                 id : key,
@@ -42,7 +36,6 @@ var Modules = new Class({
             });
             this.modules.extend(module);
         }.bind(this))
-
     },
     // This handles all timeline events and emulates the timeline
     handleNavigationEvent : function(params) {
@@ -74,7 +67,6 @@ var Modules = new Class({
                 });
                 this._setupDebug();
                 break;
-
         }
     },
     _setupUser : function() {
@@ -83,9 +75,8 @@ var Modules = new Class({
         Main.userTracker.loadProgress();
         // DEBUG: local only
         //if (Main.isLocal == true) {
-         //   Api.loadUserProgress(Main.userTracker.testLoadedUserProgress());
-       // }
-
+        //   Api.loadUserProgress(Main.userTracker.testLoadedUserProgress());
+        // }
     },
     _startMainMenu : function() {
         var selectedModule = this.modules.get("main_menu");
@@ -178,7 +169,6 @@ var Modules = new Class({
                                 next : "ConIntro.done.clicked"
                             });
                         }
-
                     }.bind(this)
                 }
             });
@@ -197,25 +187,17 @@ var Modules = new Class({
             });
 
             var selectedModuleID = this.options.moduleID;
-            //moduleSelector.options[moduleSelector.selectedIndex].value;
             var selectedModule = this.modules.get(selectedModuleID);
-            // log(selectedModule);
-
             moduleSelector.inject(myDiv);
-
             moduleSelector.value = this.options.moduleID;
             var sequenceSelector = new Element('select', {});
-
             this._populateSequenceSelector(sequenceSelector, selectedModule);
-
             sequenceSelector.inject(myDiv);
             sequenceSelector.value = this.options.sequenceID;
             sequenceSelectorButton.inject(myDiv);
             skipButton.inject(myDiv);
             resetUserDataButton.inject(myDiv);
-
         }
-
     },
     _populateSequenceSelector : function(el, selectedModule) {
         el.empty();
@@ -226,7 +208,6 @@ var Modules = new Class({
                 html : item
             })
             option.inject(el);
-
         })
     }
 })

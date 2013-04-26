@@ -84,7 +84,7 @@ Main.DIV_ID = 'drivesmart';
 
 // Version stuff
 Main.VERSION = '1.0';
-Main.BUILD = '2013/04/25';
+Main.BUILD = '2013/04/26';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;

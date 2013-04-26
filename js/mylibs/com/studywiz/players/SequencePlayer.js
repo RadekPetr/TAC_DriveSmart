@@ -16,7 +16,6 @@ function jsIsReady() {
 }
 
 var SequencePlayer = new Class({
-    // TODO: move folders to global var  - maybe a global settings object which is global ?
     Implements : [Options, Events],
     options : {
         parent : null
@@ -42,13 +41,12 @@ var SequencePlayer = new Class({
     },
     // ----------------------------------------------------------
     start : function(sequenceData) {
-        log('seq.player.start');
         this.currentSequence = Array.clone(sequenceData);
         this.moduleInfo = this.myParent().getModuleInfo();
 
         this.sequenceState = Main.userTracker.getUserSequenceState(this.moduleInfo.currentSequenceID, this.moduleInfo.moduleID);
-        // reset scoring, so whne it repeats the scores are replaced not appended (Unless this will be requested ?)
-        this.sequenceState.score = new Array ();
+        // reset scoring, so when it repeats the scores are replaced not appended (Unless this will be requested ?)
+        this.sequenceState.score = new Array();
         // TODO handle mobile platforms: Browser.Platform.android, handle incompatible old browsers
         log("Starting SEQUENCE: " + this.moduleInfo.currentSequenceID);
 
@@ -89,12 +87,12 @@ var SequencePlayer = new Class({
                     var moduleTitle = new Element("h1", {
                         html : this.moduleInfo.moduleTitle,
                         'class' : 'main-title'
-                    })
+                    });
                     moduleTitle.inject(myDiv);
                     step.data.style = {
                         left : '10px',
                         top : '40px'
-                    }
+                    };
                     var menu = new MenuItems(this, step.data);
                     menu.add(myContainerID);
                     menu.show();
@@ -106,10 +104,8 @@ var SequencePlayer = new Class({
                             left : '390px',
                             top : '30px'
                         }
-                    })
-
+                    });
                     score.inject(myDiv);
-
                     break;
                 case "SequenceIntro":
                     log("From Menu:", this.fromMenu);
@@ -134,7 +130,7 @@ var SequencePlayer = new Class({
                             top : '20%'
                         },
                         'class' : 'module-title'
-                    })
+                    });
                     moduleTitle.inject(myDiv);
 
                     var moduleProgress = Main.userTracker.getModuleProgress(this.moduleInfo.moduleID);
@@ -146,7 +142,7 @@ var SequencePlayer = new Class({
                             top : '350px'
                         },
                         'class' : 'sequence-title'
-                    })
+                    });
                     sequenceTitle.inject(myDiv);
                     var moduleProgressBar = UIHelpers.moduleProgressSetup(this.moduleInfo.moduleID);
                     moduleProgressBar.setStyles({
@@ -177,7 +173,6 @@ var SequencePlayer = new Class({
                     step.media.audio.options.next = '';
                     step.media.audio.start();
                     break;
-
                 case "ModuleIntro":
                     this._moduleIntroSetup(step);
                     break;
@@ -213,7 +208,7 @@ var SequencePlayer = new Class({
                                 width : '195px'
                             }
                         });
-                    }
+                    };
 
                     this.recorder = new Recorder(this, {
                         swiff : {
@@ -272,13 +267,11 @@ var SequencePlayer = new Class({
                         });
                     }
                     break;
-
                 case "ConActivity":
                     this._removeImages();
                     this._removeButtons();
                     this._cleanUp();
                     this._hideInteractions();
-                    //    log(step);
                     swiffFinished = function(score) {
                         console.log("*********************Con activity done: ", score);
 
@@ -320,11 +313,8 @@ var SequencePlayer = new Class({
                     step.media.audio.options.next = 'Question.done';
                     step.media.audio.start();
                     if (step.attributes.cmd == "hidescreen") {
-                        //log(this.activeVideo);
                         this.activeVideo.obscure();
-                    }
-                    // this._nextStep();
-
+                    };
                     break;
                 case "QuestionUser":
                     this._removeInteractions();
@@ -414,9 +404,7 @@ var SequencePlayer = new Class({
                             top : this.buttonPosition.y - 90
                         }
                     });
-
                     this._updateUserProgress();
-
                     break;
                 case "Commentary":
                     this._removeButtons();
@@ -436,8 +424,7 @@ var SequencePlayer = new Class({
                     this._hideOtherVideos(step.media.video.playerID);
                     step.media.video.start();
                     break;
-                case "KeyRisk" :
-
+                case "KeyRisk":
                     this._removeInteractions();
 
                     step.media.audio.options.next = 'Risks.ready';
@@ -633,7 +620,6 @@ var SequencePlayer = new Class({
                 this.currentStep.score = this.shapes.getScore();
                 this._nextStep();
                 break;
-
             case "ConActivity.done":
                 this.currentStep.score = (params.score) / 100;
                 this._nextStep();
@@ -658,10 +644,8 @@ var SequencePlayer = new Class({
                     next : 'sequence.next'
                 });
                 break;
-
             case "ConActivity.cancel.clicked":
                 this.currentStep.score = undefined;
-
             case "Repeat.clicked":
                 this._removeVideos();
                 this._removeImages();
@@ -700,7 +684,7 @@ var SequencePlayer = new Class({
                     this.cameo_image_mask.add(this.currentStep.media.video.containerID, 'after');
                     this.cameo_image_mask.show();
                     this.cameo_image_mask.tween('203px', '0px', 1, 'height', 300, 'ignore', '')
-                }
+                };
                 break;
             case "Cameo.visor.tween.done":
                 this.currentStep.media.video.options.next = 'Cameo.done';
@@ -712,7 +696,6 @@ var SequencePlayer = new Class({
                 this.cameo_image.tween('0px', '203px', 1, 'height', 300, 'ignore', '');
                 this.cameo_image_mask.remove();
                 this._nextStep();
-
                 break;
             case "CommentaryIntro.expert.clicked":
                 // set next Commentary to play expert
@@ -862,7 +845,6 @@ var SequencePlayer = new Class({
                 break;
             case "ConIntro.done":
                 this._removeButtons();
-                // log("ConIntro done", params);
                 introFinished = null;
                 this.currentStep.media.audio.start();
 
@@ -911,7 +893,7 @@ var SequencePlayer = new Class({
         // get array of media for each step so it can be preloaded
         var media = new Hash({});
         Array.each(seq, function(step, stepOrder) {
-            //var stepItems = step.childNodes;
+
             step.media = new Hash({
                 audio : null,
                 feedbackAudio : null,
@@ -926,13 +908,10 @@ var SequencePlayer = new Class({
             this._setupStepMedia(step, stepOrder);
         }.bind(this))
         log("---------------------------- Finished setting up media from xml");
-        //log(seq);
     }.protect(),
     // ----------------------------------------------------------
     _setupStepMedia : function(step, stepOrder) {
-        //log( JSON.encode(step));
         var stepType = step.attributes.fmt;
-        // log("Step: ", step, stepOrder, stepType);
         Array.each(step.childNodes, function(item, index) {
 
             switch (item.name) {
@@ -960,7 +939,7 @@ var SequencePlayer = new Class({
                             }
                             var width = '240px';
                             var height = '175px';
-                        }
+                        };
 
                         step.media.video = new VideoPlayer(this, {
                             id : "video_" + index + "_" + stepOrder,
@@ -1095,7 +1074,6 @@ var SequencePlayer = new Class({
                         this.mediaLoader.register(step.emptyBkg.getLoaderInfo());
                     }
                     break;
-
                 case "Items":
                     var menuItemsRawData = item.childNodes;
                     var menuItems = {
@@ -1237,21 +1215,14 @@ var SequencePlayer = new Class({
         this.buttons.empty();
     }.protect(),
     _removeInteractions : function() {
-        log("20");
         if (this.interactions != null) {
-            log("21");
             this.interactions.remove();
-            log("22");
-        }
+        };
         var interactions = $m('panelContainer');
-        log("23");
         if (interactions != null) {
-            log("24", interactions);
             interactions.destroy();
-            log("25");
-        }
+        };
         this.interactions = null;
-        log("26");
     }.protect(),
     _hideInteractions : function() {
         if (this.interactions != null) {
@@ -1280,7 +1251,6 @@ var SequencePlayer = new Class({
             } else {
                 item.hide();
             }
-            //log("Player " + playerID + " to keep " + excludedId)
         }.bind(this))
     }.protect(),
     _removeSwiffs : function() {
@@ -1307,7 +1277,6 @@ var SequencePlayer = new Class({
 
         this.activeSwiff.remove();
         this.activeSwiff = null;
-
     }.protect(),
     _removeFeedbackPanel : function() {
         if (this.currentStep != undefined) {
@@ -1315,7 +1284,6 @@ var SequencePlayer = new Class({
                 this.currentStep.feedbackPanel.remove();
             }
         }
-
     }.protect(),
     _removeRisks : function() {
         if (this.shapes != undefined && this.shapes != null) {
@@ -1327,7 +1295,6 @@ var SequencePlayer = new Class({
         // Update state to completed = true;
         this.sequenceState.completed = true;
         Main.userTracker.updateSequenceProgress(this.sequenceState);
-
     }.protect(),
     onLoad : function() {
         log("Called Loaded");
