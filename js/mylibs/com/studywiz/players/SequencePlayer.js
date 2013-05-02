@@ -185,7 +185,7 @@ var SequencePlayer = new Class({
 
                     step.media.image.add(myContainerID);
                     step.media.image.show();
-
+                    // TODO: hide the record button until the flash recorder is ready
                     this._setupButton({
                         text : "Record",
                         'class' : "button record",
