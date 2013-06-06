@@ -62,7 +62,6 @@ var Button = new Class({
 	},
 	// ---------------------------
 	show : function() {
-		// TODO : fade in
 		// this.buttonElement.show();
 		this.buttonElement.fade('hide');
 		this.buttonElement.fade('in');
