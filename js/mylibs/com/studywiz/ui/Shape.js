@@ -68,24 +68,24 @@ var Shape = new Class({
                 id : this.containerID
             });
             this.container = myDiv;
-            // Fix for svg, no ides how it works ....
+            // Fix for svg, no idea how it works ....
             this._svgTags(['svg', 'polygon', 'polyline', 'rect', 'path']);
 
-            // TODO: make dimensions dynamic - from some global setting
             this.shapeWrapper = new Element("svg", {
                 id : this.options.id,
                 xmlns : "http://www.w3.org/2000/svg",
                 version : "1.1",
-                width : '640px',
-                height : '480px'
+                width : Main.WIDTH + 'px',
+                height : Main.HEIGHT + 'px'
             });
+                        
             this.shapeWrapper.inject(this.container);
         } else {
             this.container = myDiv;
             this.shapeWrapper = this.container.getElement('svg[id=' + this.options.id + ']');
         }
         this.shape = null;
-        //TODO: handle kery risks so theya re inside one div
+
         Array.each(this.shapes, function(item, index) {
             var shapeID = 'shape_' + index;
             var shapeElement = new Element("path", {
@@ -115,7 +115,6 @@ var Shape = new Class({
         myDiv.inject($m(parentTagID));
     },
     remove : function() {
-        //TODO: use the container with other UI things, make suer null is handled
         this.container.destroy();
         this.container = null;
     },
