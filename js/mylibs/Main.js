@@ -97,7 +97,7 @@ Main.IS_LOCAL = true;
 Main.RESET_USER_DATA = false;
 
 // maximum risk selectors
-Main.Main.MAX_KEY_RISK_TRIES = 5;
+Main.MAX_KEY_RISK_TRIES = 5;
 
 // Paths definitions
 Main.PATHS = {
