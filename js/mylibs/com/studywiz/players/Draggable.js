@@ -121,10 +121,10 @@ var Draggable = new Class({
 
         var myDrag = new Drag.Move(target, {
             precalculate : false,
-            // TODO: stage size should come form some globals
+            
             limit : {
-                x : [0 - leftCorrection, 640 - leftCorrection],
-                y : [0 - topCorrection, 480 - topCorrection]
+                x : [0 - leftCorrection, Main.WIDTH - leftCorrection],
+                y : [0 - topCorrection, Main.HEIGHT - topCorrection]
             },
             includeMargins : false,
             droppables : this.options.droppables,
