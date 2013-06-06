@@ -20,6 +20,7 @@ var KeyRiskPlayer = new Class({
         this.targets = new Array();
         this.addEvent("TIMELINE", this.handleNavigationEvent);
         this.score = 0;
+        this.risk_selector_count = 0;
     },
     myParent : function() {
         return this.options.parent;
@@ -64,7 +65,7 @@ var KeyRiskPlayer = new Class({
     },
     getScore : function() {
 
-        var totalScore = this.score / this.options.data.areas.length;       
+        var totalScore = this.score / this.options.data.areas.length;
         return totalScore;
 
     },
@@ -83,38 +84,40 @@ var KeyRiskPlayer = new Class({
                 break;
             case "shape.clicked":
                 log("Shape clicked ID: " + params.id, params);
-                
+
                 if (params.element.retrieve("selected") == false) {
                     this.score++;
                     params.element.store("selected", true);
                 }
-                //TODO: scoring
                 break;
 
             case "risk.selected":
-                /// the risks need to be inside some div which could be deleted later
-                var el = document.getElementById(Main.DIV_ID);
+                if (this.risk_selector_count < Main.MAX_KEY_RISK_TRIES) {
+                    /// the risks need to be inside some div which could be deleted later
+                    var el = document.getElementById(Main.DIV_ID);
 
-                var elOffset = getPos(el);
-                var file = Main.PATHS.imageFolder + 'keyrisks/selected_risk.png';
-                this.risk_image = new ImagePlayer(this, {
-                    src : file,
-                    next : "",
-                    title : 'Risk',
-                    id : 'Risk',
-                    style : {
-                        left : params._x - elOffset.x - 30,
-                        top : params._y - elOffset.y - 30
-                    }
-                });
-                this.risk_image.preload();
+                    var elOffset = getPos(el);
+                    var file = Main.PATHS.imageFolder + 'keyrisks/selected_risk.png';
+                    this.risk_image = new ImagePlayer(this, {
+                        src : file,
+                        next : "",
+                        title : 'Risk',
+                        id : 'Risk',
+                        style : {
+                            left : params._x - elOffset.x - 30,
+                            top : params._y - elOffset.y - 30
+                        }
+                    });
+                    this.risk_image.preload();
 
-                this.risk_image.add(this.myParent().activeVideo.containerID);
-                this.risk_image.display();
-                // TODO: wrap all risks to a div and get rid of them whne no needed
-                // TODO: limit to 5
+                    this.risk_image.add(this.myParent().activeVideo.containerID);
+                    this.risk_image.display();
+                    // TODO: wrap all risks to a div and get rid of them whne no needed
+ 
+                    this.risk_image.tween('0', '1', 4, 'opacity', 100);
+                    this.risk_selector_count++;
+                }
 
-                this.risk_image.tween('0', '1', 4, 'opacity', 100);
                 break;
 
         }
@@ -127,7 +130,7 @@ var KeyRiskPlayer = new Class({
             area.player.add(this.containerID);
             area.player.show();
             this.targets.push(area.player.shape);
-            area.player.shape.store ("selected", false);
+            area.player.shape.store("selected", false);
         }.bind(this))
     }
 })

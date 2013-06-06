@@ -82,6 +82,10 @@ var $m = document.id;
 // the tag which will contain the app
 Main.DIV_ID = 'drivesmart';
 
+// the stage size
+Main.WIDTH = 640;
+Main.HEIGHT = 480;
+
 // Version stuff
 Main.VERSION = '1.0';
 Main.BUILD = '2013/04/26';
@@ -92,6 +96,9 @@ Main.IS_LOCAL = true;
 // Saves empty progress data on startup if true
 Main.RESET_USER_DATA = false;
 
+// maximum risk selectors
+Main.Main.MAX_KEY_RISK_TRIES = 5;
+
 // Paths definitions
 Main.PATHS = {
     audioFolder : 'media/sound/',
@@ -99,6 +106,7 @@ Main.PATHS = {
     imageFolder : 'media/images/',
     flashFolder : 'media/flash/'
 }
+
 if (Main.IS_LOCAL == true) {
     Main.USER_PROGRESS_GET_URL = '/user_progress_data';
     Main.USER_PROGRESS_POST_URL = '/user_progress_data';
