@@ -113,8 +113,6 @@ var SwiffPlayer = new Class({
         
     },
     startConActivity : function(params) {
-        //TODO: add option to pass parameters
-
         Swiff.remote(this.swiff.toElement(), 'startSwiff', params.Ex, params.level, params.format);
     },
     // ---------------------------
