@@ -928,8 +928,8 @@ var SequencePlayer = new Class({
                                 'width' : '240',
                                 'height' : '175'
                             }
-                            var width = '240px';
-                            var height = '175px';
+                            var width = '240';
+                            var height = '175';
                         } else {
                             style = {
                                 'width' : '640',
@@ -937,9 +937,10 @@ var SequencePlayer = new Class({
                                 'left' : '0',
                                 'top' : '0'
                             }
-                            var width = '240px';
-                            var height = '175px';
+                            var width = '640';
+                            var height = '480';
                         };
+
 
                         step.media.video = new VideoPlayer(this, {
                             id : "video_" + index + "_" + stepOrder,
@@ -968,8 +969,8 @@ var SequencePlayer = new Class({
                             'left' : '0',
                             'top' : '0'
                         }
-                        var width = '240px';
-                        var height = '175px';
+                        var width = '640';
+                        var height = '480';
 
                         step.media.moduleIntroVideo = new VideoPlayer(this, {
                             id : "video_" + index + "_" + stepOrder,
