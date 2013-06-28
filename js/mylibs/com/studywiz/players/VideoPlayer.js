@@ -11,8 +11,8 @@ var VideoPlayer = new Class({
             opacity : '0',
             visibility : 'hidden'
         },
-        width : '640',
-        height : '480',
+        width : '640px',
+        height : '480px',
         'class' : 'video-js',
         poster : '',
         id : 'element.id',
@@ -48,10 +48,19 @@ var VideoPlayer = new Class({
 
         this.container.player = new Element("video", {
             'id' : this.playerID,
-            'class' : this.options['class']
+            'preload' : 'auto',
+            'poster' : '',
+            'class' : this.options['class'],
+            width : this.options.width,
+            height : this.options.height
 
         });
         this.container.player.inject(this.container);
+        this.player = _V_('player_' + this.options.id, {
+            "controls" : this.options.controls,
+            "autoplay" : this.options.autoplay,
+            "preload" : this.options.preload
+        });
 
     },
     myParent : function() {
@@ -63,91 +72,78 @@ var VideoPlayer = new Class({
         // TODO: handle sitiation player is undefined
         // TODO: use timer to check on the progress
         if (this.player == undefined) {
-            //    log('Undefined player ERRROR');
-            //     log(this);
-            //      this.remove();
-            //  } else {
-            this.player = videojs('player_' + this.options.id, {
-                "controls" : this.options.controls,
-                "autoplay" : this.options.autoplay,
-                "preload" : this.options.preload,
-                "width" : this.options.width,
-                "height" : this.options.height
-            });
-
+            log('Undefined player ERRROR');
+            log(this);
+            this.remove();
+        } else {
             this.player.ready(( function() {
-                    this.player.options['children'] = false;
-                    // this.player.TextTrack.disable();
                     log('Player ready');
                     var data = this._getVideoData();
-                    //this.container.player.setProperty("poster", data.poster.src);
-
-                    this.player.dimensions(this.options.width, this.options.height);
-
-                    this.player.poster(data.poster.src);
+                    this.container.player.setProperty("poster", data.poster.src);
                     this.player.src(data.video);
                     //log("BLA" + this.options.style.width);
-                    // this.player.size(this.options.style.width, this.options.style.height);
+                    this.player.size(this.options.style.width, this.options.style.height);
                     this.player.pause();
 
-                    this.player.on("loadstart", function() {
+                    this.player.addEvent("loadstart", function() {
                         //log("EVENT: loadstart");
                         this._reportProgress();
                     }.bind(this));
 
-                    this.player.on("loadedmetadata", function() {
+                    this.player.addEvent("loadedmetadata", function() {
                         //log("EVENT: loadedmetadata");
                         this._reportProgress();
                     }.bind(this));
-                    this.player.on("loadeddata", function() {
+                    this.player.addEvent("loadeddata", function() {
                         // log("EVENT: loadeddata");
                         this._reportProgress();
                     }.bind(this));
-                    this.player.on("play", function() {
+                    this.player.addEvent("play", function() {
                         //log("EVENT: play");
                         this._reportProgress();
                     }.bind(this));
 
-                    this.player.on("progress", function() {
+                    this.player.addEvent("ended", function() {
+                        //log("EVENT: ended");
+                        this._reportProgress();
+                    }.bind(this));
+                    this.player.addEvent("progress", function() {
                         // log("EVENT: progress");
                         this._reportProgress();
                     }.bind(this));
 
-                    this.player.on("loadedalldata", function() {
+                    this.player.addEvent("loadedalldata", function() {
                         // log("EVENT: loadedalldata");
                         this._reportProgress();
                     }.bind(this));
 
-                    this.player.on("timeupdate", function() {
+                    this.player.addEvent("timeupdate", function() {
                         //log("EVENT: timeupdate");
                         this._reportProgress();
                     }.bind(this));
 
-                    this.player.on("suspend", function() {
+                    this.player.addEvent("suspend", function() {
                         // log("EVENT: suspend");
                         this._reportProgress();
                     }.bind(this));
 
-                    this.player.on("waiting", function() {
+                    this.player.addEvent("waiting", function() {
                         // log("EVENT: **********************   waiting");
                         this._reportProgress();
                     }.bind(this));
 
-                    this.player.on("canplay", function() {
+                    this.player.addEvent("canplay", function() {
                         // log("EVENT: **********************   canplay");
                         this._reportProgress();
                     }.bind(this));
-                    this.player.on("canplaythrough", function() {
+                    this.player.addEvent("canplaythrough", function() {
                         // log("EVENT: **********************   canplaythrough");
                         this._reportProgress(true);
                     }.bind(this));
 
                     // this.player.removeEvents();
                     //log("Adding ended listener");
-                    this.player.on("ended", function() {
-                        // remove all events
-                        this.player.off();
-
+                    this.player.addEvent("ended", function() {
                         this.myParent().fireEvent("TIMELINE", {
                             type : "video.finished",
                             id : this.options.id,
@@ -203,9 +199,6 @@ var VideoPlayer = new Class({
     // ---------------------------
     skip : function() {
         if (this.player != null) {
-            // so the end event does not fire again
-            this.player.off();
-            
             this.seek(this.player.duration());
 
             this.myParent().fireEvent("TIMELINE", {
@@ -223,7 +216,7 @@ var VideoPlayer = new Class({
     },
     seek : function(time) {
         this.player.pause();
-        this.player.currentTime(time);
+        this.player.currentTime = time;
         this.player.pause();
     },
     volume : function(volume) {
@@ -232,19 +225,28 @@ var VideoPlayer = new Class({
         }
     },
     remove : function() {
-
         log('Removing player: ' + this.playerID);
         // see http://help.videojs.com/discussions/problems/861-how-to-destroy-a-video-js-object
         // get the videojs player with id of "video_1"
 
-        var player = videojs(this.playerID);
-        // remove all events
-        player.off();
-        // get rid of it
-        player.dispose();       
+        var player = _V_(this.playerID);
+
+        // for html5 - clear out the src which solves a browser memory leak
+        //  this workaround was found here: http://stackoverflow.com/questions/5170398/ios-safari-memory-leak-when-loading-unloading-html5-video
+        if (player.techName == "html5") {
+            player.tag.src = "";
+            player.tech.removeTriggers();
+            player.load();
+
+        }
+        // destroy the parts of the player which are specific to html5 or flash
+        player.tech.destroy();
+
+        // destroy the player
+        player.destroy();
 
         if (this.container != null && this.container != undefined) {
-            this.container.player.dispose();
+            this.container.player.destroy();
             delete this.container.player;
             this.container.destroy();
             delete this.container;
