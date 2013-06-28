@@ -73,6 +73,7 @@ Main.userTracker = null;
 
 // Mootools safe mode
 var $m = document.id;
+console.log ($m);
 //http://mootools.net/blog/2009/06/22/the-dollar-safe-mode/
 
 // ---------------------
