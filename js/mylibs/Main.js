@@ -91,7 +91,7 @@ Main.VERSION = '1.0';
 Main.BUILD = '2013/06/28';
 
 // When running on localhost (So I can use different paths when testing)
-Main.IS_LOCAL = false;
+Main.IS_LOCAL = true;
 
 // Saves empty progress data on startup if true
 Main.RESET_USER_DATA = false;
