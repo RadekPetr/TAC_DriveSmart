@@ -25,6 +25,9 @@
 // TODO: Handle repeats ??? Overwrite the scores ?
 
 
+UD5 - hangs while loading
+UB6 "NetworkError: 416 Requested Range Not Satisfiable - http://drivesmart.studywiz.com/media/sound/urban/urban_vdub6f.mp3"
+
 
 -----------------------------------------------------------------
 DONE:

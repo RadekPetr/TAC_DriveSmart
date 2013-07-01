@@ -59,7 +59,7 @@ var VideoPlayer = new Class({
     },
     // ---------------------------
     preload : function() {
-        //log("++ Video Preload started: " + this.options.id);
+        log("++ Video Preload started: " + this.options.id);
         // TODO: handle sitiation player is undefined
         // TODO: use timer to check on the progress
         if (this.player == undefined) {
@@ -91,12 +91,12 @@ var VideoPlayer = new Class({
                     this.player.pause();
 
                     this.player.on("loadstart", function() {
-                        //log("EVENT: loadstart");
+                       log("EVENT: loadstart");
                         this._reportProgress();
                     }.bind(this));
 
                     this.player.on("loadedmetadata", function() {
-                        //log("EVENT: loadedmetadata");
+                        log("EVENT: loadedmetadata");
                         this._reportProgress();
                     }.bind(this));
                     this.player.on("loadeddata", function() {
@@ -109,42 +109,43 @@ var VideoPlayer = new Class({
                     }.bind(this));
 
                     this.player.on("progress", function() {
-                        // log("EVENT: progress");
+                       log("EVENT: progress");
                         this._reportProgress();
                     }.bind(this));
 
                     this.player.on("loadedalldata", function() {
-                        // log("EVENT: loadedalldata");
+                        log("EVENT: loadedalldata");
                         this._reportProgress();
                     }.bind(this));
 
                     this.player.on("timeupdate", function() {
-                        //log("EVENT: timeupdate");
+                       log("EVENT: timeupdate");
                         this._reportProgress();
                     }.bind(this));
 
                     this.player.on("suspend", function() {
-                        // log("EVENT: suspend");
+                         log("EVENT: suspend");
                         this._reportProgress();
                     }.bind(this));
 
                     this.player.on("waiting", function() {
-                        // log("EVENT: **********************   waiting");
+                       log("EVENT: **********************   waiting");
                         this._reportProgress();
                     }.bind(this));
 
                     this.player.on("canplay", function() {
-                        // log("EVENT: **********************   canplay");
+                         log("EVENT: **********************   canplay");
                         this._reportProgress();
                     }.bind(this));
                     this.player.on("canplaythrough", function() {
-                        // log("EVENT: **********************   canplaythrough");
+                         log("EVENT: **********************   canplaythrough");
                         this._reportProgress(true);
                     }.bind(this));
 
                     // this.player.removeEvents();
                     //log("Adding ended listener");
                     this.player.on("ended", function() {
+                        log("Video ended");
                         // remove all events
                         this.player.off();
 
