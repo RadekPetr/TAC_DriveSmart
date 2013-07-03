@@ -53,7 +53,7 @@ var MediaLoader = new Class({
                     if (this.loadQueue[key].progress < value.progress) {
                         this.loadQueue.set(key, value);
                     }
-                    //log(key, value.progress);
+                    log("Reported progress: ", key, value.progress);
                 } else {
                     // don't have to add this now as we do not start the preload automatically
                     // this.register(loaderInfo)

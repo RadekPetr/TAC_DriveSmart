@@ -91,7 +91,7 @@ var VideoPlayer = new Class({
                     this.player.pause();
 
                     this.player.on("loadstart", function() {
-                       log("EVENT: loadstart");
+                        log("EVENT: loadstart");
                         this._reportProgress();
                     }.bind(this));
 
@@ -109,36 +109,48 @@ var VideoPlayer = new Class({
                     }.bind(this));
 
                     this.player.on("progress", function() {
-                       log("EVENT: progress");
+                        log("EVENT: progress");
                         this._reportProgress();
                     }.bind(this));
 
                     this.player.on("loadedalldata", function() {
                         log("EVENT: loadedalldata");
-                        this._reportProgress();
+                        this.player.off("loadedalldata");
+                        this.player.off("progress");
+                        this.player.off("timeupdate");
+                        this.player.off("canplaythrough");
+                        this.player.off("canplay");
+                        this.player.off("suspend");
+                        this.player.off("waiting");
+                        this.player.off("loadedmetadata");
+                        this._reportProgress(true);
                     }.bind(this));
 
                     this.player.on("timeupdate", function() {
-                       log("EVENT: timeupdate");
+                        log("EVENT: timeupdate");
                         this._reportProgress();
                     }.bind(this));
 
                     this.player.on("suspend", function() {
-                         log("EVENT: suspend");
+                        log("EVENT: suspend");
                         this._reportProgress();
                     }.bind(this));
 
                     this.player.on("waiting", function() {
-                       log("EVENT: **********************   waiting");
+                        log("EVENT: **********************   waiting");
                         this._reportProgress();
                     }.bind(this));
 
                     this.player.on("canplay", function() {
-                         log("EVENT: **********************   canplay");
+                        log("EVENT: **********************   canplay");
                         this._reportProgress();
                     }.bind(this));
                     this.player.on("canplaythrough", function() {
-                         log("EVENT: **********************   canplaythrough");
+                        log("EVENT: **********************   canplaythrough");
+                        this.player.off("canplaythrough");
+                        this.player.off("progress");
+                        this.player.off("timeupdate");
+                        this.player.off("loadedmetadata");
                         this._reportProgress(true);
                     }.bind(this));
 
@@ -164,7 +176,6 @@ var VideoPlayer = new Class({
         if (this.player != null) {
             //log(this.player.bufferedPercent());
             this.player.play();
-            // Fire event to whotever object is my parent
         }
     },
     // ---------------------------
@@ -206,7 +217,7 @@ var VideoPlayer = new Class({
         if (this.player != null) {
             // so the end event does not fire again
             this.player.off();
-            
+
             this.seek(this.player.duration());
 
             this.myParent().fireEvent("TIMELINE", {
@@ -242,7 +253,7 @@ var VideoPlayer = new Class({
         // remove all events
         player.off();
         // get rid of it
-        player.dispose();       
+        player.dispose();
 
         if (this.container != null && this.container != undefined) {
             this.container.player.dispose();
@@ -259,9 +270,9 @@ var VideoPlayer = new Class({
         if (this.player != null) {
             progress = this.player.bufferedPercent();
 
-            //log(this.playerID + " **** Video Load progress: " + (this.player.bufferedPercent() * 100.00));
-            // log(this.playerID + " **** Video Load progress buffered: " + this.player.buffered());
-            //log(this.playerID + " **** Video duration: " + this.player.duration());
+            log(this.playerID + " **** Video Load progress: " + (this.player.bufferedPercent() * 100.00));
+            log(this.playerID + " **** Video Load progress buffered: ", this.player.buffered());
+            log(this.playerID + " **** Video duration: " + this.player.duration());
 
         }
         loaderInfo[this.options.id] = {
