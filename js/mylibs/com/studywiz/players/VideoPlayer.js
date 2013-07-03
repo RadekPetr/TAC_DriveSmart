@@ -33,7 +33,7 @@ var VideoPlayer = new Class({
         this.source = new Array();
         this.containerID = 'container_' + this.options.id;
         this.playerID = 'player_' + this.options.id;
-
+        this.isReady = false;
         this.container = null;
 
         this.container = new Element("div", {
@@ -67,6 +67,7 @@ var VideoPlayer = new Class({
             //     log(this);
             //      this.remove();
             //  } else {
+            this.isReady = false;
             this.player = videojs('player_' + this.options.id, {
                 "controls" : this.options.controls,
                 "autoplay" : this.options.autoplay,
@@ -78,83 +79,31 @@ var VideoPlayer = new Class({
             this.player.ready(( function() {
                     this.player.options['children'] = false;
                     // this.player.TextTrack.disable();
-                    log('Player ready');
+                    log('Player component ready ... preloading');
                     var data = this._getVideoData();
-                    //this.container.player.setProperty("poster", data.poster.src);
-
                     this.player.dimensions(this.options.width, this.options.height);
-
                     this.player.poster(data.poster.src);
                     this.player.src(data.video);
-                    //log("BLA" + this.options.style.width);
-                    // this.player.size(this.options.style.width, this.options.style.height);
                     this.player.pause();
-
-                    this.player.on("loadstart", function() {
-                        log("EVENT: loadstart");
-                        this._reportProgress();
-                    }.bind(this));
-
-                    this.player.on("loadedmetadata", function() {
-                        log("EVENT: loadedmetadata");
-                        this._reportProgress();
-                    }.bind(this));
-                    this.player.on("loadeddata", function() {
-                        // log("EVENT: loadeddata");
-                        this._reportProgress();
-                    }.bind(this));
-                    this.player.on("play", function() {
-                        //log("EVENT: play");
-                        this._reportProgress();
-                    }.bind(this));
-
-                    this.player.on("progress", function() {
-                        log("EVENT: progress");
-                        this._reportProgress();
-                    }.bind(this));
-
-                    this.player.on("loadedalldata", function() {
-                        log("EVENT: loadedalldata");
-                        this.player.off("loadedalldata");
-                        this.player.off("progress");
-                        this.player.off("timeupdate");
-                        this.player.off("canplaythrough");
-                        this.player.off("canplay");
-                        this.player.off("suspend");
-                        this.player.off("waiting");
-                        this.player.off("loadedmetadata");
-                        this._reportProgress(true);
-                    }.bind(this));
-
-                    this.player.on("timeupdate", function() {
-                        log("EVENT: timeupdate");
-                        this._reportProgress();
-                    }.bind(this));
 
                     this.player.on("suspend", function() {
                         log("EVENT: suspend");
-                        this._reportProgress();
                     }.bind(this));
 
                     this.player.on("waiting", function() {
                         log("EVENT: **********************   waiting");
-                        this._reportProgress();
                     }.bind(this));
 
-                    this.player.on("canplay", function() {
-                        log("EVENT: **********************   canplay");
-                        this._reportProgress();
-                    }.bind(this));
                     this.player.on("canplaythrough", function() {
                         log("EVENT: **********************   canplaythrough");
-                        this.player.off("canplaythrough");
-                        this.player.off("progress");
-                        this.player.off("timeupdate");
-                        this.player.off("loadedmetadata");
-                        this._reportProgress(true);
+                        this.isReady = true;
                     }.bind(this));
 
-                    // this.player.removeEvents();
+                    this.player.on("loadedalldata", function() {
+                        log("EVENT: loadedalldata");
+                        this.isReady = true;
+                    }.bind(this));
+
                     //log("Adding ended listener");
                     this.player.on("ended", function() {
                         log("Video ended");
@@ -281,6 +230,10 @@ var VideoPlayer = new Class({
             ref : this,
             type : 'VIDEO'
         };
+
+        if (this.isReady == true) {
+            loaderInfo[this.options.id].progress = 1;
+        }
         return loaderInfo
     },
     // ----------------------------------------------------------
@@ -289,9 +242,9 @@ var VideoPlayer = new Class({
         if (isReady == true) {
             loaderInfo[this.options.id].progress = 1;
         }
-        if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
-            this.myParent().mediaLoader.reportProgress(loaderInfo);
-        }
+        //  if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
+        //     this.myParent().mediaLoader.reportProgress(loaderInfo);
+        //   }
 
     },
     _getVideoData : function() {

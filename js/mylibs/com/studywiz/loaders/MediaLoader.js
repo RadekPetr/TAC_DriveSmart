@@ -18,7 +18,7 @@ var MediaLoader = new Class({
         this.options.parent = myParent;
         this.loadQueue = new Hash({});
         this.progressBar = null;
-
+        this.preloadTimer = null;
         this.videoQueue = new Array();
     },
     // ----------------------------------------------------------
@@ -66,6 +66,11 @@ var MediaLoader = new Class({
             this._handleFinished(overAllProgress);
         }
     },
+    updateProgress : function() {
+        this.loadQueue.each( function(value, key) {
+            this.reportProgress(value.ref.getLoaderInfo());
+        }.bind(this))
+    },
     // ----------------------------------------------------------
     _addProgressBar : function() {
 
@@ -111,11 +116,17 @@ var MediaLoader = new Class({
 
         this._addOneVideoToQueue();
         this.loadQueue.each(function(value, key) {
-
             value.ref.preload();
         })
         // log(this.loadQueue);
+        if (this.loadQueue.getLength() > 0) {
+            var timerFunction = function() {
+                log("***************************************   timer function called");
+                this.updateProgress();
+            }.bind(this)
+            this.preloadTimer = timerFunction.periodical(400);
 
+        }
         //TODO: Split videos to their own queue and only include the first one in the loader progress so in case next video gets added to the list before the loader is finsihed ...
         // User interval to chak the progress
         // Handle canplay vs canplaythrough - use can play only if canplaythrough is not fired in the next 5 seconds, maybe display a warning
@@ -149,15 +160,19 @@ var MediaLoader = new Class({
     _handleFinished : function(progress) {
         //log('progress: ', progress);
         if (progress > 99) {
-            /// log("Preload Finished");
+            log("Preload Finished");
+            log(this.preloadTimer);
+            clearInterval(this.preloadTimer);
             this.loadQueue.empty();
             this.remove();
+
             this.myParent().fireEvent("TIMELINE", {
                 type : "preload.finished",
                 id : this.options.id,
                 next : this.options.next
             })
             this.options.next = "next.video.preloaded";
+
             this.start(false);
         }
         if (progress > 30) {
@@ -186,5 +201,6 @@ var MediaLoader = new Class({
     reset : function() {
         this.videoQueue = new Array();
         this.loadQueue = new Hash({});
+
     }
 })

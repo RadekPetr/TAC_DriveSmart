@@ -18,11 +18,12 @@ var AudioPlayer = new Class({
         this.preloader.installPlugin(createjs.SoundJS);
         // TODO: handle these events handleFileError, handleProgress
         //this.preloader.onFileError = this.handleFileError();
-        this.preloader.onProgress = function() {
+      /*  this.preloader.onProgress = function() {
             if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
                 this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
             }
         }.bind(this)
+        */
     },
     myParent : function() {
         return this.options.parent;

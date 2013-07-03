@@ -119,9 +119,9 @@ var ImagePlayer = new Class({
             'class' : this.options['class'],
             onLoad : function() {                
                 this.options.loaded = true;
-                if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
-                    this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
-                }
+              //  if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
+                   // this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
+               // }
                 this.myParent().fireEvent("TIMELINE", {
                     type : "image.ready",
                     id : this.options.id,

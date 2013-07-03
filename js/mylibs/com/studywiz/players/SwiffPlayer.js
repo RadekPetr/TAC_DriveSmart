@@ -154,9 +154,9 @@ var SwiffPlayer = new Class({
         swiffLoaded = function() {
             this.options.loaded = true;
          //  log("Loaded flash", this.getLoaderInfo());
-            if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
-                this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
-            }
+           // if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
+           //     this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
+           // }
             this.myParent().fireEvent("TIMELINE", {
                 type : "swiff.ready",
                 id : this.options.id,
