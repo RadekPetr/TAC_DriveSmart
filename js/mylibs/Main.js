@@ -87,11 +87,11 @@ Main.WIDTH = 640;
 Main.HEIGHT = 480;
 
 // Version stuff
-Main.VERSION = '1.0';
-Main.BUILD = '2013/06/28';
+Main.VERSION = '1.0_master';
+Main.BUILD = '2013/07/03';
 
 // When running on localhost (So I can use different paths when testing)
-Main.IS_LOCAL = true;
+Main.IS_LOCAL = false;
 
 // Saves empty progress data on startup if true
 Main.RESET_USER_DATA = false;
