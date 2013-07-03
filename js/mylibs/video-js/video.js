@@ -442,7 +442,6 @@ vjs.trigger = function(elem, event) {
   var parent = elem.parentNode || elem.ownerDocument;
       // type = event.type || event,
       // handler;
-console.log (event);
   // If an event name was passed as a string, creates an event out of it
   if (typeof event === 'string') {
     event = { type:event, target:elem };
