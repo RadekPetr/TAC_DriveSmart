@@ -86,27 +86,27 @@ var VideoPlayer = new Class({
                     this.player.src(data.video);
                     this.player.pause();
                     this.player.load();
-                    
-                     this.player.on("progress", function() {
-                        log("EVENT: progress",this.player.currentSrc);
-                         
+
+                    this.player.on("progress", function() {
+                        log("EVENT: progress", this.options.id);
+
                     }.bind(this));
 
                     this.player.on("suspend", function() {
-                        log("EVENT: suspend", this.player.currentSrc);
+                        log("EVENT: suspend", this.options.id);
                     }.bind(this));
 
                     this.player.on("waiting", function() {
-                        log("EVENT: **********************   waiting", this.player.currentSrc);
+                        log("EVENT: **********************   waiting", this.options.id);
                     }.bind(this));
 
                     this.player.on("canplaythrough", function() {
-                        log("EVENT: **********************   canplaythrough",this.player.currentSrc);
+                        log("EVENT: **********************   canplaythrough", this.options.idc);
                         this.isReady = true;
                     }.bind(this));
 
                     this.player.on("loadedalldata", function() {
-                        log("EVENT: loadedalldata",this.player.currentSrc);
+                        log("EVENT: loadedalldata", this.options.id);
                         this.isReady = true;
                     }.bind(this));
 
