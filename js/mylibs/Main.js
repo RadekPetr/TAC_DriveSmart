@@ -88,7 +88,7 @@ Main.HEIGHT = 480;
 
 // Version stuff
 Main.VERSION = '1.0_newProgress';
-Main.BUILD = '2013/07/03-1';
+Main.BUILD = '2013/07/04';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = false;
