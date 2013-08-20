@@ -91,7 +91,7 @@ Main.VERSION = '1.0_newProgress';
 Main.BUILD = '2013/07/04-3';
 
 // When running on localhost (So I can use different paths when testing)
-Main.IS_LOCAL = false;
+Main.IS_LOCAL = true;
 
 // Saves empty progress data on startup if true
 Main.RESET_USER_DATA = false;
@@ -105,7 +105,7 @@ Main.PATHS = {
     videoFolder : 'media/video/',
     imageFolder : 'media/images/',
     flashFolder : 'media/flash/'
-}
+};
 
 if (Main.IS_LOCAL == true) {
     Main.USER_PROGRESS_GET_URL = '/user_progress_data';
