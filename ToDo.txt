@@ -27,8 +27,10 @@
 
 UD5 - hangs while loading
 UB6 "NetworkError: 416 Requested Range Not Satisfiable - http://drivesmart.studywiz.com/media/sound/urban/urban_vdub6f.mp3"
-
-
+Coutry 20 - stops after palyback ?
+Country 21  - click on vide whne detecting risk - how does it work ?
+Country 21/21  click repla y/ Playback button discrepancy - allow naming buttons for steps ?
+Do not preaload videos for intro modules if returning
 -----------------------------------------------------------------
 DONE:
 - MSQ - cursor and select prevent
