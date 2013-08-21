@@ -43,11 +43,11 @@ var Questions = new Class({
                 'id' : "item_" + index,
                 'group' : 'questionPanel',
                 'name' : 'question_item'
-            })
+            });
 
             checkbox.addEvent('click', function() {
                 this._checkMaxSelects(checkbox);
-            }.bind(this))
+            }.bind(this));
 
             this.checkBoxes.push(checkbox);
 
@@ -65,7 +65,7 @@ var Questions = new Class({
 
             this.panel.adopt(paragraph);
 
-        }.bind(this))
+        }.bind(this));
     },
     myParent : function() {
         return this.options.parent;
@@ -127,11 +127,11 @@ var Questions = new Class({
 
             label.setStyles({
                 'cursor' : 'default'
-            })
+            });
             radio.setStyles({
                 'cursor' : 'default'
-            })
-        })
+            });
+        });
     },
     showCorrect : function() {
         var score = 0;

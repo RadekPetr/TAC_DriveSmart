@@ -31,7 +31,7 @@ var MediaLoader = new Class({
             var type = '';
             Object.each(loaderInfo, function(value, key) {
                 type = value.type;
-            })
+            });
             // log("Loader: ", type);
             if (type == 'VIDEO' || type == 'FLASH') {
                 this.videoQueue.push(loaderInfo);
@@ -41,7 +41,7 @@ var MediaLoader = new Class({
 
         }
     },
-     // ----------------------------------------------------------
+    // ----------------------------------------------------------
     start : function(showProgressBar) {
 
         // show the progress bar if requested
@@ -56,14 +56,14 @@ var MediaLoader = new Class({
         // start the preload for each object
         this.loadQueue.each(function(value, key) {
             value.ref.preload();
-        })
+        });
         // log(this.loadQueue);
         // if the queue is not empty start the time to poll the progress
         if (this.loadQueue.getLength() > 0) {
             var timerFunction = function() {
                 log("***************************************   timer function called");
                 this.updateProgress();
-            }.bind(this)
+            }.bind(this);
             this.preloadTimer = timerFunction.periodical(1000);
         } else {
             // kill the timer, not needed anymore
@@ -92,7 +92,7 @@ var MediaLoader = new Class({
                     // don't have to add this now as we do not start the preload automatically
                     // this.register(loaderInfo)
                 }
-            }.bind(this))
+            }.bind(this));
 
             //log("this.loadQueue ", this.loadQueue, this.loadQueue.getKeys());
             var overAllProgress = this._calculateProgress();
@@ -103,7 +103,7 @@ var MediaLoader = new Class({
     updateProgress : function() {
         this.loadQueue.each( function(value, key) {
             this.reportProgress(value.ref.getLoaderInfo());
-        }.bind(this))
+        }.bind(this));
     },
     // ----------------------------------------------------------
     _addProgressBar : function() {
@@ -140,7 +140,7 @@ var MediaLoader = new Class({
             this.progressBar = null;
         }
     },
-       // ----------------------------------------------------------
+    // ----------------------------------------------------------
     _handleFinished : function(progress) {
         //log('progress: ', progress);
         if (progress > 99) {
@@ -157,7 +157,7 @@ var MediaLoader = new Class({
                 type : "preload.finished",
                 id : this.options.id,
                 next : this.options.next
-            })
+            });
             this.options.next = "next.video.preloaded";
             // continue preloading remaining videos if any or some other non mandatory items
             this.start(false);
@@ -177,9 +177,9 @@ var MediaLoader = new Class({
     _removeCompletedFromQueue : function() {
         this.loadQueue.each( function(value, key) {
             if (value.progress == 1) {
-                this.loadQueue.erase(key)
+                this.loadQueue.erase(key);
             }
-        }.bind(this))
+        }.bind(this));
     },
     _addOneVideoToQueue : function() {
         //log("this.videoQueue: ", this.videoQueue);
@@ -199,11 +199,11 @@ var MediaLoader = new Class({
         var sum2 = 0;
         this.loadQueue.each( function(value, key) {
             if (value.progress == undefined) {
-                value.progress = 0
+                value.progress = 0;
             }
             sum += (value.progress * value.weight);
             sum2 += value.weight;
-        }.bind(this))
+        }.bind(this));
 
         overAllProgress = (sum / sum2) * 100.00;
         return overAllProgress;
@@ -218,4 +218,4 @@ var MediaLoader = new Class({
         this.videoQueue = new Array();
         this.loadQueue = new Hash({});
     }
-})
+}); 

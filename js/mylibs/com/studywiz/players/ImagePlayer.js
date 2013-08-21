@@ -46,7 +46,7 @@ var ImagePlayer = new Class({
         var effect = new Fx.Tween(this.image, {
             duration : dur,
             link : link
-        })
+        });
         //do it!
         for ( x = 1; x <= reps; x++) {
             effect.start(prop, from, to).start(prop, to, from);
@@ -56,8 +56,8 @@ var ImagePlayer = new Class({
                 type : "tween.done",
                 id : this.options.id,
                 next : next
-            })
-        }.bind(this))
+            });
+        }.bind(this));
     },
     obscure : function() {
         this.image.set('class', 'blur');
@@ -80,7 +80,7 @@ var ImagePlayer = new Class({
 
     },
     stop : function() {
-        
+
     },
     display : function() {
         this.image.fade('show');
@@ -112,25 +112,25 @@ var ImagePlayer = new Class({
         };
         return loaderInfo;
     },
-    preload : function() {        
+    preload : function() {
         this.image = new Asset.image(this.options.src, {
             style : this.options.style,
             id : this.options.id,
             'class' : this.options['class'],
-            onLoad : function() {                
+            onLoad : function() {
                 this.options.loaded = true;
-              //  if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
-                   // this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
-               // }
+                //  if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
+                // this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
+                // }
                 this.myParent().fireEvent("TIMELINE", {
                     type : "image.ready",
                     id : this.options.id,
                     next : this.options.next
-                })
+                });
             }.bind(this)
         });
     },
     _addEvents : function() {
         //nothing here
     }
-})
+});

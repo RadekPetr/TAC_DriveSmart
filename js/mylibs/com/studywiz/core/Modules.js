@@ -35,7 +35,7 @@ var Modules = new Class({
                 currentSequenceID : value.sequenceID
             });
             this.modules.extend(module);
-        }.bind(this))
+        }.bind(this));
     },
     // This handles all timeline events and emulates the timeline
     handleNavigationEvent : function(params) {
@@ -106,33 +106,33 @@ var Modules = new Class({
             var option = new Element('option', {
                 value : 'concentration',
                 html : 'Concentration'
-            })
+            });
             option.inject(moduleSelector);
             var option = new Element('option', {
                 value : 'country',
                 html : 'Country driving'
-            })
+            });
             option.inject(moduleSelector);
             var option = new Element('option', {
                 value : 'urban',
                 html : 'Urban driving'
-            })
+            });
             option.inject(moduleSelector);
             var option = new Element('option', {
                 value : 'scanning',
                 html : 'Scanning'
-            })
+            });
             option.inject(moduleSelector);
             var option = new Element('option', {
                 value : 'kaps',
                 html : 'Keeping ahead & play safe'
-            })
+            });
             option.inject(moduleSelector);
 
             var option = new Element('option', {
                 value : 'main_menu',
                 html : 'Main menu'
-            })
+            });
             option.inject(moduleSelector);
 
             var sequenceSelectorButton = new Element('button', {
@@ -206,9 +206,9 @@ var Modules = new Class({
             var option = new Element('option', {
                 value : item,
                 html : item
-            })
+            });
             option.inject(el);
-        })
+        });
     }
-})
+});
 

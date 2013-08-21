@@ -18,12 +18,12 @@ var AudioPlayer = new Class({
         this.preloader.installPlugin(createjs.SoundJS);
         // TODO: handle these events handleFileError, handleProgress
         //this.preloader.onFileError = this.handleFileError();
-      /*  this.preloader.onProgress = function() {
-            if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
-                this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
-            }
-        }.bind(this)
-        */
+        /*  this.preloader.onProgress = function() {
+         if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
+         this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
+         }
+         }.bind(this)
+         */
     },
     myParent : function() {
         return this.options.parent;
@@ -43,7 +43,7 @@ var AudioPlayer = new Class({
             this.preloader.load();
             this.preloader.onComplete = this._playSound();
         } else {
-            this._playSound()
+            this._playSound();
         }
     },
 
@@ -80,7 +80,7 @@ var AudioPlayer = new Class({
 
             this.soundInstance = createjs.SoundJS.play(this.options.id);
             log(this.soundInstance);
-            
+
             this.soundInstance.onComplete = function() {
                 this.myParent().fireEvent("TIMELINE", {
                     type : "audio.finished",
@@ -92,7 +92,7 @@ var AudioPlayer = new Class({
     }.protect(),
     // ----------------------------------------------------------
     _preloadComplete : function() {
-        log("++ Audio Preloaded: " + this.options.id)
+        log("++ Audio Preloaded: " + this.options.id);
         this.preloaded = true;
     }.protect(),
     // ----------------------------------------------------------
@@ -105,7 +105,7 @@ var AudioPlayer = new Class({
             ref : this,
             type : 'AUDIO'
         };
-        return loaderInfo
+        return loaderInfo;
     }
-})
+});
 

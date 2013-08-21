@@ -683,7 +683,7 @@ var SequencePlayer = new Class({
 
                     this.cameo_image_mask.add(this.currentStep.media.video.containerID, 'after');
                     this.cameo_image_mask.show();
-                    this.cameo_image_mask.tween('203px', '0px', 1, 'height', 300, 'ignore', '')
+                    this.cameo_image_mask.tween('203px', '0px', 1, 'height', 300, 'ignore', '');
                 };
                 break;
             case "Cameo.visor.tween.done":
@@ -904,9 +904,9 @@ var SequencePlayer = new Class({
                 moduleIntroVideo : null,
                 image : null,
                 previewImage : null
-            })
+            });
             this._setupStepMedia(step, stepOrder);
-        }.bind(this))
+        }.bind(this));
         log("---------------------------- Finished setting up media from xml");
     }.protect(),
     // ----------------------------------------------------------
@@ -927,7 +927,7 @@ var SequencePlayer = new Class({
                                 'top' : '20px',
                                 'width' : '240',
                                 'height' : '175'
-                            }
+                            };
                             var width = '240';
                             var height = '175';
                         } else {
@@ -936,11 +936,10 @@ var SequencePlayer = new Class({
                                 'height' : '480',
                                 'left' : '0',
                                 'top' : '0'
-                            }
+                            };
                             var width = '640';
                             var height = '480';
                         };
-
 
                         step.media.video = new VideoPlayer(this, {
                             id : "video_" + index + "_" + stepOrder,
@@ -968,7 +967,7 @@ var SequencePlayer = new Class({
                             'height' : '480',
                             'left' : '0',
                             'top' : '0'
-                        }
+                        };
                         var width = '640';
                         var height = '480';
 
@@ -1079,7 +1078,7 @@ var SequencePlayer = new Class({
                     var menuItemsRawData = item.childNodes;
                     var menuItems = {
                         data : new Array()
-                    }
+                    };
                     Array.each(menuItemsRawData, function(menuItemData, index) {
 
                         var menuItem = {
@@ -1088,24 +1087,24 @@ var SequencePlayer = new Class({
                             moduleID : menuItemData.attributes.moduleID,
                             preview : menuItemData.attributes.preview,
                             showProgress : menuItemData.attributes.showProgress
-                        }
+                        };
                         menuItems.data.push(menuItem);
-                    })
+                    });
                     step.data = menuItems;
                     break;
                 case "FeedbackText":
                     var feedbackItemsRawData = item.childNodes;
                     var feedbackItems = {
                         data : new Array()
-                    }
+                    };
 
                     Array.each(feedbackItemsRawData, function(feedbackItemData, index) {
                         var feedbackItem = {
                             text : feedbackItemData.value
 
-                        }
+                        };
                         feedbackItems.data.push(feedbackItem);
-                    })
+                    });
                     step.data = feedbackItems;
                     break;
                 case "Inter":
@@ -1113,15 +1112,15 @@ var SequencePlayer = new Class({
                     var questions = {
                         data : new Array(),
                         style : this.panelPosition
-                    }
+                    };
 
                     Array.each(questionsRawData, function(questionData, index) {
                         var question = {
                             text : questionData.value,
                             correct : questionData.attributes.correct
-                        }
+                        };
                         questions.data.push(question);
-                    })
+                    });
                     step.data = questions;
                     break;
                 case "DropAreas" :
@@ -1134,9 +1133,9 @@ var SequencePlayer = new Class({
                             data : item.attributes.data,
                             angle : item.attributes.angle,
                             correct : item.attributes.correct
-                        }
+                        };
                         step.areas.push(area);
-                    })
+                    });
                     break;
 
                 case "RotateAreas" :
@@ -1147,9 +1146,9 @@ var SequencePlayer = new Class({
                             id : item.attributes.id,
                             data : item.attributes.data,
                             angle : item.attributes.angle
-                        }
+                        };
                         step.rotateZones.push(area);
-                    })
+                    });
                     break;
                 case "Zones":
                     step.zones = item.attributes.data;
@@ -1171,7 +1170,7 @@ var SequencePlayer = new Class({
                 default:
                 // nothing
             }
-        }.bind(this))
+        }.bind(this));
     }.protect(),
     _cleanUp : function() {
         if (this.currentStep != null) {
@@ -1180,7 +1179,7 @@ var SequencePlayer = new Class({
                     log(player, mediaKey);
                     player.stop();
                 }
-            })
+            });
         }
 
         var debugPanel = $m('debugContainer');
@@ -1212,7 +1211,7 @@ var SequencePlayer = new Class({
     _removeButtons : function() {
         Array.each(this.buttons, function(item, index) {
             item.remove();
-        })
+        });
         this.buttons.empty();
     }.protect(),
     _removeInteractions : function() {
@@ -1241,7 +1240,7 @@ var SequencePlayer = new Class({
             item.remove();
             item = null;
             delete item;
-        })
+        });
         this.videos.empty();
     }.protect(),
     _hideOtherVideos : function(excludedId) {
@@ -1252,7 +1251,7 @@ var SequencePlayer = new Class({
             } else {
                 item.hide();
             }
-        }.bind(this))
+        }.bind(this));
     }.protect(),
     _removeSwiffs : function() {
         if (this.recorder != null) {
@@ -1265,7 +1264,7 @@ var SequencePlayer = new Class({
             item.remove();
             item = null;
             delete item;
-        })
+        });
         this.swiffs.empty();
         this.activeSwiff = null;
 
@@ -1346,12 +1345,12 @@ var SequencePlayer = new Class({
         this.buttonPosition = {
             x : 480,
             y : 415
-        }
+        };
 
         this.panelPosition = {
             left : '5%',
             top : '25%'
-        }
+        };
     }.protect(),
     _moduleIntroSetup : function(step) {
         log("From Menu: ", this.fromMenu);
@@ -1371,7 +1370,7 @@ var SequencePlayer = new Class({
                 top : '20%'
             },
             'class' : 'module-title'
-        })
+        });
         moduleTitle.inject(myDiv);
 
         if (this.sequenceState.completed == true) {

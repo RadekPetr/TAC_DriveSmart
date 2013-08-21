@@ -38,7 +38,7 @@ var ModulePlayer = new Class({
                 this.options.module_structure_version = params.loaded_module_structure_version;
                 this.myParent().fireEvent("MODULE", {
                     next : "module.data.ready"
-                })
+                });
         }
     },
     handleSequenceEvent : function(params) {
@@ -90,7 +90,7 @@ var ModulePlayer = new Class({
 
         this.options.currentSequenceID = sequenceID;
         if (Main.sequencePlayer == null) {
-            log("ERROR - Sequence player does not exist")
+            log("ERROR - Sequence player does not exist");
         } else {
             Main.sequencePlayer.reset();
             Main.sequencePlayer.options.parent = this;
@@ -114,6 +114,6 @@ var ModulePlayer = new Class({
             moduleTitle : this.options.title,
             currentSequenceID : this.options.currentSequenceID,
             sequences : this.sequences
-        }
+        };
     }
-})
+}); 

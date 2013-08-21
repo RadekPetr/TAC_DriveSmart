@@ -78,7 +78,7 @@ var Shape = new Class({
                 width : Main.WIDTH + 'px',
                 height : Main.HEIGHT + 'px'
             });
-                        
+
             this.shapeWrapper.inject(this.container);
         } else {
             this.container = myDiv;
@@ -106,10 +106,10 @@ var Shape = new Class({
                     _x : e.page.x,
                     _y : e.page.y
                 });
-            }.bind(this))
+            }.bind(this));
 
             this.shape = shapeElement;
-        }.bind(this))
+        }.bind(this));
 
         myDiv.setStyles(this.options.shapeStyle);
         myDiv.inject($m(parentTagID));
@@ -145,5 +145,5 @@ var Shape = new Class({
             ((poly[i].y <= pt.y && pt.y < poly[j].y) || (poly[j].y <= pt.y && pt.y < poly[i].y)) && (pt.x < (poly[j].x - poly[i].x) * (pt.y - poly[i].y) / (poly[j].y - poly[i].y) + poly[i].x) && ( c = !c);
         return c;
     }
-})
+});
 

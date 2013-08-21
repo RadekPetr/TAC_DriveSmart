@@ -48,5 +48,5 @@ var Lzw = {
         }
         return out.join("");
     }
-}
+};
 

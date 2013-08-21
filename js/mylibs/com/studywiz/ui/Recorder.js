@@ -57,7 +57,7 @@ var Recorder = new Class({
             this.options.swiff.container = this.container;
             this.swiff = new Swiff(this.options.src, this.options.swiff);
         } else {
-            log("********************* No FLASH loading image")
+            log("********************* No FLASH loading image");
             this.options.swiff.container = this.container;
             this.swiff = new ImagePlayer(this, {
                 src : Main.PATHS.imageFolder + "commentary/noflash.png",
@@ -121,7 +121,7 @@ var Recorder = new Class({
             ref : this,
             type : 'FLASH'
         };
-        return loaderInfo
+        return loaderInfo;
     },
     preload : function() {
         //TODO preloading
@@ -138,7 +138,7 @@ var Recorder = new Class({
                     type : "image.ready",
                     id : this.options.id,
                     next : this.options.next
-                })
+                });
             }.bind(this)
         });
     },
@@ -157,4 +157,4 @@ var Recorder = new Class({
             Swiff.remote(this.swiff.toElement(), 'playBack');
         }
     }
-})
+});

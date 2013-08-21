@@ -40,7 +40,7 @@ var VideoPlayer = new Class({
             id : this.containerID,
             'class' : 'videoContainer'
 
-        })
+        });
 
         this.container.setStyles(this.options.style);
 
@@ -240,11 +240,11 @@ var VideoPlayer = new Class({
         if (this.isReady == true) {
             loaderInfo[this.options.id].progress = 1;
         }
-        return loaderInfo
+        return loaderInfo;
     },
     // ----------------------------------------------------------
     _reportProgress : function(isReady) {
-        var loaderInfo = this.getLoaderInfo()
+        var loaderInfo = this.getLoaderInfo();
         if (isReady == true) {
             loaderInfo[this.options.id].progress = 1;
         }
@@ -274,5 +274,5 @@ var VideoPlayer = new Class({
         };
         return data;
     }
-})
+});
 

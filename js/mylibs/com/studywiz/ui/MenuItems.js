@@ -33,7 +33,7 @@ var MenuItems = new Class({
         });
 
         Array.each(this.options.data, function(menuItem, index) {
-           // log(menuItem);
+            // log(menuItem);
             var elemID = "menu_item_" + index;
             var item = new Element('div', {
                 'html' : menuItem.text,
@@ -44,7 +44,7 @@ var MenuItems = new Class({
             });
             this.menuItems.push(item);
             var preview = new ImagePlayer(myParent, {
-                src : Main.PATHS.imageFolder+ menuItem.preview,
+                src : Main.PATHS.imageFolder + menuItem.preview,
                 title : 'Image',
                 id : 'preview_' + index,
                 style : {
@@ -54,7 +54,8 @@ var MenuItems = new Class({
                     left : '380px'
 
                 }
-            })
+            });
+
             preview.preload();
 
             item.store('preview', preview);
@@ -97,8 +98,8 @@ var MenuItems = new Class({
                         'width' : '30px',
                         'height' : '34px',
                         'float' : 'right',
-                        'padding-left': '15px'
-                    })
+                        'padding-left' : '15px'
+                    });
                 }
                 item.adopt(UIHelpers.moduleProgressSetup(menuItem.moduleID));
             }

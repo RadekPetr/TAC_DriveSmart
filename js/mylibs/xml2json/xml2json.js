@@ -44,7 +44,7 @@
              * which holds instance of this class, or assign it if not set yet.
              **/
             if (instanceOf($global.XML2Object.$instance, $global.XML2Object)) {
-                return $global.XML2Object.$instance
+                return $global.XML2Object.$instance;
             } else {
                 $global.XML2Object.$instance = this;
             }

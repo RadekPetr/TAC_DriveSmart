@@ -35,7 +35,7 @@ var DataLoader = new Class({
     },
     // ----------------------------------------------------------
     getSteps : function(sequenceId) {
-        var steps = Array.clone(this.sequences.get(sequenceId))
+        var steps = Array.clone(this.sequences.get(sequenceId));
         return steps;
     },
     getSequenceIDs : function() {
@@ -79,7 +79,7 @@ var DataLoader = new Class({
             next : this.options.next,
             data : this.sequences,
             loaded_module_structure_version : this.data.attributes.version + ""
-        })
+        });
 
     }
-})
+});

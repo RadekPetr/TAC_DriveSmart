@@ -6,9 +6,9 @@ var Draggable = new Class({
         this.setOptions(myOptions);
         this.options.parent = myParent;
         this.containerID = 'draggableImageContainer';
-        this.container = null;        
+        this.container = null;
         this.drags = new Array();
-        
+
         Drag.Move.implement({
             // Drag.Move methods override to handle SVG coordinates
             getDroppableCoordinates : function(element) {
@@ -86,7 +86,7 @@ var Draggable = new Class({
                 this.element.set('onselectstart', 'return false;');
                 return this;
             }
-        })
+        });
     },
     _addEvents : function() {
         this.topViewImage = new Asset.image(this.options.src_top, {
@@ -97,10 +97,10 @@ var Draggable = new Class({
                         left : this.options.style.left,
                         top : this.options.style.top,
                         position : 'absolute'
-                    }
+                    };
                     var myClone = this.topViewImage.clone();
                     myClone.set('id', this.options.id);
-                    myClone.setStyles(styles);                    
+                    myClone.setStyles(styles);
                     this._addDragEvents(myClone);
                     myClone.inject(this.container);
                     myClone.fireEvent('mousedown', event);
@@ -111,7 +111,7 @@ var Draggable = new Class({
     stop : function() {
         Array.each(this.drags, function(item, index) {
             item.detach();
-        })
+        });
         this.image.removeEvents();
         this.image.set('class', 'non-draggable');
     },
@@ -121,7 +121,7 @@ var Draggable = new Class({
 
         var myDrag = new Drag.Move(target, {
             precalculate : false,
-            
+
             limit : {
                 x : [0 - leftCorrection, Main.WIDTH - leftCorrection],
                 y : [0 - topCorrection, Main.HEIGHT - topCorrection]
@@ -156,7 +156,7 @@ var Draggable = new Class({
             onCancel : function() {
 
             },
-            onDrop : function(element, droppedOn) {             
+            onDrop : function(element, droppedOn) {
                 if (droppedOn != null && droppedOn != undefined) {
                     if (droppedOn.get('id') == 'trash') {
                         element.destroy();
@@ -166,4 +166,4 @@ var Draggable = new Class({
         });
         this.drags.push(myDrag);
     }
-})
+});

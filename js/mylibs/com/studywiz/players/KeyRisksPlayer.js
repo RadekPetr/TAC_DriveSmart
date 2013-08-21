@@ -113,7 +113,7 @@ var KeyRiskPlayer = new Class({
                     this.risk_image.add(this.myParent().activeVideo.containerID);
                     this.risk_image.display();
                     // TODO: wrap all risks to a div and get rid of them whne no needed
- 
+
                     this.risk_image.tween('0', '1', 4, 'opacity', 100);
                     this.risk_selector_count++;
                 }
@@ -131,7 +131,7 @@ var KeyRiskPlayer = new Class({
             area.player.show();
             this.targets.push(area.player.shape);
             area.player.shape.store("selected", false);
-        }.bind(this))
+        }.bind(this));
     }
-})
+});
 

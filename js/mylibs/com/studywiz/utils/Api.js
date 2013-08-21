@@ -61,7 +61,7 @@ var Api = new Class({
                 this.saveLog("error", "onError loadProgress" + text + " " + error);
 
             }.bind(this)
-        })
+        });
         this._sendRequest(jsonRequest, new Object(), false);
     },
     saveUserProgress : function(requestPayload) {
@@ -75,7 +75,7 @@ var Api = new Class({
                 if (xhr == '"OK"' || xhr == '"ok"' || xhr == "ok" || xhr == "OK") {
                     log("INFO: User progress data saved OK");
                 } else {
-                    log("ERROR: User progress wrong reply NOT OK")
+                    log("ERROR: User progress wrong reply NOT OK");
                     log(xhr);
                     // TODO : handle error ?
                 }
@@ -118,7 +118,7 @@ var Api = new Class({
                 log('onError SaveProgress', text, error);
                 this.saveLog("error", "onError saveUserProgress" + text + " " + error);
             }.bind(this)
-        })
+        });
 
         this._sendRequest(jsonRequest, requestPayload, false);
     },
@@ -135,7 +135,7 @@ var Api = new Class({
                 if (xhr == '"OK"' || xhr == '"ok"' || xhr == "ok" || xhr == "OK") {
                     log("INFO: Module progress data saved OK");
                 } else {
-                    log("ERROR: Save Module progress wrong reply NOT OK")
+                    log("ERROR: Save Module progress wrong reply NOT OK");
                     log(xhr);
                     // TODO : handle error ?
                 }
@@ -179,7 +179,7 @@ var Api = new Class({
                 log('onError _saveModuleProgress', text, error);
                 this.saveLog("error", "onError saveModuleProgress" + xhr);
             }.bind(this)
-        })
+        });
         this._sendRequest(jsonRequest, requestPayload, true);
 
         // On completion of each exercise you would need to POST to /user_progress/module_progress/<module_code>
@@ -201,7 +201,7 @@ var Api = new Class({
                 requestPayload.authenticity_token = authenticity_token;
                 request.send(Object.toQueryString(requestPayload));
             } else {
-                log("ERROR: NO authenticity_token found !!!")
+                log("ERROR: NO authenticity_token found !!!");
             }
         } else {
             request.send(requestPayload);
@@ -219,7 +219,7 @@ var Api = new Class({
             'urban' : 'ur',
             'kaps' : 'ka',
             'scanning' : 'sc'
-        })
+        });
         return map.get(key);
     },
     saveLog : function(level, content) {
@@ -281,5 +281,5 @@ var Api = new Class({
         //log("decompressedString:", decompressedString);
         return decompressedString;
     }
-})
+});
 

@@ -26,7 +26,7 @@ var CommentaryFeedback = new Class({
 
         data : ["Q1", "Q2", "Q3"],
         id : 'feedbackPanel',
-        next : 'next.action',       
+        next : 'next.action',
         parent : null
     },
     initialize : function(myParent, myOptions) {
@@ -41,12 +41,11 @@ var CommentaryFeedback = new Class({
         var ul = new Element('ul', {
             id : 'feedbackList'
         });
-        log ("Data:");
-        log (this.options.data);
-        
-        
+        log("Data:");
+        log(this.options.data);
+
         Array.each(this.options.data, function(feedbackItem, index) {
-            log (feedbackItem);
+            log(feedbackItem);
             var elemID = "feedbackItem_" + index;
             var item = new Element('li', {
                 'html' : feedbackItem.text,
@@ -55,7 +54,7 @@ var CommentaryFeedback = new Class({
 
             ul.adopt(item);
 
-        }.bind(this))
+        }.bind(this));
         this.container.adopt(ul);
     },
     myParent : function() {

@@ -52,9 +52,9 @@ var DragNDropPlayer = new Class({
     },
     stop : function() {
         Array.each(this.draggables, function(item, index) {
-            item.stop();          
+            item.stop();
         });
-       // this.getScore();
+        // this.getScore();
     },
     getScore : function() {
 
@@ -66,17 +66,17 @@ var DragNDropPlayer = new Class({
         var allDraggables = new Array();
         Array.each(this.draggables, function(item, index) {
             allDraggables.append(item.drags);
-        })
+        });
         // all drop areas with correct
         Array.each(this.correctAreas, function(zone, index) {
             Array.each(allDraggables, function(draggableItem) {
                 if (draggableItem.isCorrect(zone) == true) {
                     score++;
                 }
-            })
-        })
+            });
+        });
         log("Score: " + score, "%", score * pointsPerItem);
-        return (score * pointsPerItem)/100;
+        return (score * pointsPerItem) / 100;
 
     },
     // ----------------------------------------------------------
@@ -96,7 +96,7 @@ var DragNDropPlayer = new Class({
     },
     _prepareAreas : function() {
         var data = this.options.data.areas;
-        log ("DropZones:",data );
+        log("DropZones:", data);
         Array.each(data, function(dropZone, index) {
             dropZone.player = new Shape(this, dropZone);
             dropZone.player.add(this.containerID);
@@ -107,7 +107,7 @@ var DragNDropPlayer = new Class({
                 dropZone.player.shape.store('correct', dropZone.correct);
                 this.correctAreas.push(dropZone.player.shape);
             }
-        }.bind(this))
+        }.bind(this));
     },
     _prepareDraggables : function() {
         this.draggables = new Array();
@@ -130,16 +130,16 @@ var DragNDropPlayer = new Class({
                     'top' : (50 * itemIndex) + 'px'
                 },
                 droppables : this.targets
-            })
+            });
             this.draggables.push(draggable);
             draggable.preload();
-        }.bind(this))
+        }.bind(this));
     },
     _showDraggables : function() {
         Array.each(this.draggables, function(draggable, itemIndex) {
             draggable.add(this.containerID);
             draggable.show();
-        }.bind(this))
+        }.bind(this));
     }
-})
+});
 

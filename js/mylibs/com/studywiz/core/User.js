@@ -46,17 +46,14 @@ var User = new Class({
             log("The user app_version (using default): ", userSavedVersion);
         } else {
             // TODO : convert all objects to hashes so I can get keys using the getKeys methods
-            
-            
-            
-            
+
             this.userData = new Hash(userProgressData);
             log("Loaded user progress from server", this.userData);
-            log ("1");
+            log("1");
             this.concentrationLevel = this._getUserData("concentration").info["level"];
-            log ("2");
+            log("2");
             var userSavedVersion = this.userData.info["app_version"];
-            log ("3");
+            log("3");
             log("The user saved app_version: ", userSavedVersion);
             //TODO: Check user data version too and if different from defaults handle that - merging ?
         }
@@ -134,9 +131,9 @@ var User = new Class({
                     score : [],
                     trackProgress : sequenceData.trackProgress,
                     trackScore : sequenceData.trackScore
-                })
+                });
                 sequences.push(sequenceState);
-            })
+            });
             var moduleData = new Hash();
 
             sequences.sortOn("id", Array.NUMERIC);
@@ -213,7 +210,7 @@ var User = new Class({
     getTotalScore : function() {
         // Currently the score is calculated from the list of modules in the actual user data
         // exclude "version"
-        var moduleIDs = new Hash (this.userData.modules).getKeys();
+        var moduleIDs = new Hash(this.userData.modules).getKeys();
 
         var totalScore = [];
         Array.each(moduleIDs, function(moduleID, index) {
@@ -222,7 +219,7 @@ var User = new Class({
             if (moduleScore != []) {
                 totalScore.push(moduleScore);
             }
-        }.bind(this))
+        }.bind(this));
         return totalScore.average();
     },
     getModuleScore : function(moduleID) {
@@ -234,7 +231,7 @@ var User = new Class({
             if (sequenceState.trackScore != "false") {
                 allScores = allScores.concat(sequenceState.score);
             }
-        })
+        });
         var totalScore = allScores.average();
         log("Module " + moduleID + " score: ", totalScore);
         return totalScore;
@@ -251,14 +248,13 @@ var User = new Class({
         var allScores = new Array();
         Array.each(lastSix, function(sequenceState, index) {
             allScores = allScores.concat(sequenceState.score);
-        })
+        });
         var scoreAverage = allScores.average();
         log("Sequence " + seq + " score: ", scoreAverage);
 
         if (scoreAverage >= 85) {
             // LEVEL INCREASE
             log("*********** LEVEL INCREASE ***********:" + scoreAverage);
-
 
             /*  if (scoreAverage >= 85) {
             // LEVEL INCREASE
@@ -309,7 +305,7 @@ var User = new Class({
             id : sequenceID,
             completed : userSequence.completed,
             score : userSequence.score
-        }
+        };
         return sequenceState;
 
     },
@@ -328,7 +324,7 @@ var User = new Class({
         return this.options.parent;
     },
     _getUserData : function(moduleID) {
-        
+
         return this.userData.modules[moduleID];
     }
-})
+}); 
