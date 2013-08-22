@@ -106,6 +106,11 @@ var Modules = new Class({
                 }
             });
             var option = new Element('option', {
+                value : 'intro',
+                html : 'Introduction'
+            });
+            option.inject(moduleSelector);
+            var option = new Element('option', {
                 value : 'concentration',
                 html : 'Concentration'
             });
