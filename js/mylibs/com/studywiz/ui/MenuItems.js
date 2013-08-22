@@ -69,15 +69,9 @@ var MenuItems = new Class({
             item.store('preview', preview);
 
             if (lockedItem == true) {
-                var tick = this._showLockedStatus();
-                item.adopt(tick);
-                tick.show();
-                tick.setStyles({
-                    'width' : '30px',
-                    'height' : '34px',
-                    'float' : 'right',
-                    'padding-left' : '15px'
-                });
+                var symbol = this._getLockedStatusSymbol();
+                item.adopt(symbol);
+                symbol.show();
             }
 
             if (lockedItem != true || Main.DEBUG == true) {
@@ -111,15 +105,9 @@ var MenuItems = new Class({
             if (menuItem.showProgress == true) {
                 var moduleProgress = Main.userTracker.getModuleProgress(menuItem.moduleID);
                 if (moduleProgress.completed == true) {
-                    var tick = this._showCompleteStatus();
-                    item.adopt(tick);
-                    tick.show();
-                    tick.setStyles({
-                        'width' : '30px',
-                        'height' : '34px',
-                        'float' : 'right',
-                        'padding-left' : '15px'
-                    });
+                    var symbol = this._getCompleteStatusSymbol();
+                    item.adopt(symbol);
+                    symbol.show();
                 }
                 item.adopt(UIHelpers.moduleProgressSetup(menuItem.moduleID));
             }
@@ -164,31 +152,42 @@ var MenuItems = new Class({
             this.container.fade('out');
         }
     },
-    _showCompleteStatus : function(left, top) {
+    _getCompleteStatusSymbol : function(left, top) {
         var file = Main.PATHS.imageFolder + 'menu/tick.png';
 
-        var tickImage = new ImagePlayer(this, {
+        var symbolImage = new ImagePlayer(this, {
             src : file,
             next : "",
             title : 'finished',
             id : 'finished'
         });
-        tickImage.preload();
+        symbolImage.preload();
+        symbolImage.image.setStyles({
+            'width' : '30px',
+            'height' : '34px',
+            'float' : 'right',
+            'padding-left' : '15px'
+        });
 
-        return tickImage.image;
+        return symbolImage.image;
     },
-    _showLockedStatus : function(left, top) {
+    _getLockedStatusSymbol : function(left, top) {
         var file = Main.PATHS.imageFolder + 'menu/tick.png';
 
-        var tickImage = new ImagePlayer(this, {
+        var symbolImage = new ImagePlayer(this, {
             src : file,
             next : "",
             title : 'finished',
             id : 'finished'
         });
-        tickImage.preload();
-
-        return tickImage.image;
+        symbolImage.preload();
+        symbolImage.image.setStyles({
+            'width' : '30px',
+            'height' : '34px',
+            'float' : 'right',
+            'padding-left' : '15px'
+        });
+        return symbolImage.image;
     },
     _isItemLocked : function(menuItem) {
         var itemPreconditions = menuItem.preconditions;
