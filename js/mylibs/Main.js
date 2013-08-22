@@ -93,6 +93,9 @@ Main.BUILD = '2013/07/04-3';
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;
 
+// Show hide debug panel and ignore lock status
+Main.DEBUG = true;
+
 // Saves empty progress data on startup if true
 Main.RESET_USER_DATA = false;
 
@@ -127,6 +130,12 @@ Main.MODULES = new Hash({
         score : 0,
         title : "Dashboard",
         id : 'main_menu',
+        sequenceID : '1'
+    },
+    intro : {
+        score : 0,
+        title : "Introduction",
+        id : 'intro',
         sequenceID : '1'
     },
     concentration : {

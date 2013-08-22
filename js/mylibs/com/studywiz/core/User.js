@@ -324,7 +324,6 @@ var User = new Class({
         return this.options.parent;
     },
     _getUserData : function(moduleID) {
-
         return this.userData.modules[moduleID];
     }
-}); 
+});

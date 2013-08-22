@@ -65,7 +65,9 @@ var Modules = new Class({
                     type : "sequence.event",
                     next : 'sequence.next'
                 });
-                this._setupDebug();
+                if (Main.DEBUG == true) {
+                    this._setupDebug();
+                }
                 break;
         }
     },

@@ -1080,13 +1080,19 @@ var SequencePlayer = new Class({
                         data : new Array()
                     };
                     Array.each(menuItemsRawData, function(menuItemData, index) {
+                        var preconditionsArr = new Array();
+
+                        if (menuItemData.attributes.preconditions != undefined) {
+                            preconditionsArr = menuItemData.attributes.preconditions.split(',');
+                        }
 
                         var menuItem = {
                             text : menuItemData.value,
                             description : menuItemData.attributes.description,
                             moduleID : menuItemData.attributes.moduleID,
                             preview : menuItemData.attributes.preview,
-                            showProgress : menuItemData.attributes.showProgress
+                            showProgress : menuItemData.attributes.showProgress,
+                            preconditions : preconditionsArr
                         };
                         menuItems.data.push(menuItem);
                     });

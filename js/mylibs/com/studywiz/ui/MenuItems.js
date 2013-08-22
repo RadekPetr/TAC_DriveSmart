@@ -33,6 +33,7 @@ var MenuItems = new Class({
         });
 
         Array.each(this.options.data, function(menuItem, index) {
+
             // log(menuItem);
             var elemID = "menu_item_" + index;
             var item = new Element('div', {
@@ -62,13 +63,29 @@ var MenuItems = new Class({
 
             var selectedModuleID = menuItem.moduleID;
 
-            item.addEvent("click", function() {
-                this.myParent().fireEvent("TIMELINE", {
-                    type : "item.clicked",
-                    id : selectedModuleID,
-                    next : "Menu.item.clicked"
+            var lockedItem = this._isItemLocked(menuItem);
+            if (lockedItem == true) {
+                var tick = this._showLockedStatus();
+                item.adopt(tick);
+                tick.show();
+                tick.setStyles({
+                    'width' : '30px',
+                    'height' : '34px',
+                    'float' : 'right',
+                    'padding-left' : '15px'
                 });
-            }.bind(this));
+            }
+
+            log("Menu Item locked: ", menuItem.moduleID, this._isItemLocked(menuItem));
+            if (lockedItem != true || Main.DEBUG == true) {
+                item.addEvent("click", function() {
+                    this.myParent().fireEvent("TIMELINE", {
+                        type : "item.clicked",
+                        id : selectedModuleID,
+                        next : "Menu.item.clicked"
+                    });
+                }.bind(this));
+            }
 
             item.addEvent("mouseenter", function() {
                 this.module_description.set('html', this.options.text(item));
@@ -91,7 +108,7 @@ var MenuItems = new Class({
             if (menuItem.showProgress == true) {
                 var moduleProgress = Main.userTracker.getModuleProgress(menuItem.moduleID);
                 if (moduleProgress.completed == true) {
-                    var tick = this.showCompleteStatus();
+                    var tick = this._showCompleteStatus();
                     item.adopt(tick);
                     tick.show();
                     tick.setStyles({
@@ -147,7 +164,7 @@ var MenuItems = new Class({
             this.container.fade('out');
         }
     },
-    showCompleteStatus : function(left, top) {
+    _showCompleteStatus : function(left, top) {
         var file = Main.PATHS.imageFolder + 'menu/tick.png';
 
         var tickImage = new ImagePlayer(this, {
@@ -159,5 +176,34 @@ var MenuItems = new Class({
         tickImage.preload();
 
         return tickImage.image;
+    },
+    _showLockedStatus : function(left, top) {
+        var file = Main.PATHS.imageFolder + 'menu/tick.png';
+
+        var tickImage = new ImagePlayer(this, {
+            src : file,
+            next : "",
+            title : 'finished',
+            id : 'finished'
+        });
+        tickImage.preload();
+
+        return tickImage.image;
+    },
+    _isItemLocked : function(menuItem) {
+        var itemPreconditions = menuItem.preconditions;
+        if (itemPreconditions.length == 0) {
+            var isLocked = false;
+        } else {
+            var isLocked = true;
+            Array.each(itemPreconditions, function(moduleID, index) {
+                var moduleProgress = Main.userTracker.getModuleProgress(moduleID);
+                var isModuleCompleted = moduleProgress.completed;
+                if (isModuleCompleted == true) {
+                    isLocked = false;
+                }
+            });
+            return isLocked;
+        }
     }
 });
