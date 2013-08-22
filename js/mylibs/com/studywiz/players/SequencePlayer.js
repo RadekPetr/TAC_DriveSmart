@@ -957,8 +957,9 @@ var SequencePlayer = new Class({
                     }
                     break;
                 case "ModuleIntroVideo" :
-
-                    if (item.value != '') {
+                    // only setup the video in case it was not played yet .... curretnly no way to replay it anyway
+                    log ("Loading intro video: ", this.sequenceState.completed=false);
+                    if (item.value != '' && this.sequenceState.completed != true) {
                         var filename = item.value;
                         var style = null;
 
