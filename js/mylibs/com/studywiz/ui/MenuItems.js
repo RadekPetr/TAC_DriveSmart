@@ -16,7 +16,6 @@ var MenuItems = new Class({
         data : null,
         id : 'element.id',
         next : 'next.action',
-        correct : null,
         parent : null,
         text : function(element) {
             return element.get('rel');
@@ -34,6 +33,16 @@ var MenuItems = new Class({
 
         Array.each(this.options.data, function(menuItem, index) {
 
+            var selectedModuleID = menuItem.moduleID;
+            var lockedItem = this._isItemLocked(menuItem);
+            log("Menu Item locked: ", menuItem.moduleID, this._isItemLocked(menuItem));
+
+            if (lockedItem == true) {
+                var menuItemCSS = 'dashboard_modules_locked';
+            } else {
+                var menuItemCSS = 'dashboard_modules';
+            }
+
             // log(menuItem);
             var elemID = "menu_item_" + index;
             var item = new Element('div', {
@@ -41,7 +50,7 @@ var MenuItems = new Class({
                 'id' : elemID,
                 'onselectstart' : 'return false;',
                 'rel' : menuItem.description,
-                'class' : 'dashboard_modules'
+                'class' : menuItemCSS
             });
             this.menuItems.push(item);
             var preview = new ImagePlayer(myParent, {
@@ -53,17 +62,12 @@ var MenuItems = new Class({
                     'height' : '107px',
                     top : '60px',
                     left : '380px'
-
                 }
             });
 
             preview.preload();
-
             item.store('preview', preview);
 
-            var selectedModuleID = menuItem.moduleID;
-
-            var lockedItem = this._isItemLocked(menuItem);
             if (lockedItem == true) {
                 var tick = this._showLockedStatus();
                 item.adopt(tick);
@@ -76,7 +80,6 @@ var MenuItems = new Class({
                 });
             }
 
-            log("Menu Item locked: ", menuItem.moduleID, this._isItemLocked(menuItem));
             if (lockedItem != true || Main.DEBUG == true) {
                 item.addEvent("click", function() {
                     this.myParent().fireEvent("TIMELINE", {
@@ -100,9 +103,9 @@ var MenuItems = new Class({
                 preview.display();
 
             }.bind(this));
+
             item.addEvent("mouseleave", function() {
                 var preview = item.retrieve('preview');
-
             }.bind(this));
 
             if (menuItem.showProgress == true) {
@@ -135,9 +138,6 @@ var MenuItems = new Class({
 
         this.container.adopt(this.module_description);
         this.module_description.hide();
-
-        // TODO: implement access module logic here - disabling menu items and
-        // indicating finished modules
     },
     myParent : function() {
         return this.options.parent;
