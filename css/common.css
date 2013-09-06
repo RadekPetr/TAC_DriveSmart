@@ -8,7 +8,7 @@
 	user-select: none;
 }
 #drivesmart {
-	font-family: 'BodyFont';
+	font-family: 'BodyFont', Candara;
 }
 
 h1 {
@@ -19,13 +19,14 @@ h2 {
 	font-family: 'HeadingFont';
 }
 
-@font-face {
 
-	font-family: 'BodyFont';
-	src: url('fonts/CANDARA.TTF');
-}
 
 @font-face {
 	font-family: 'HeadingFont';
 	src: url('fonts/Museo700-Regular.ttf');
+}
+@font-face {
+
+	font-family: 'BodyFont';
+	src: url('fonts/candara.ttf');
 }
