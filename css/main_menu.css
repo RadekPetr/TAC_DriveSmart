@@ -1,11 +1,4 @@
 .module-description {
-	cursor: default;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
 	color: #EAC749;
 	position: absolute;
 	font-size: 0.85em;
@@ -25,28 +18,15 @@
 	clip: rect(0px, 140px, 107px, 0px);
 }
 .main-title {
-	cursor: default;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
 	position: absolute;
 	color: #ff9900;
+	font-family: 'Museo700';
 	font-style: italic;
 	font-size: 2.5em;
 	font-weight: bold;
 	text-align: center;
 }
 .module-title {
-	cursor: default;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
 	position: absolute;
 	color: #ff9900;
 	font-style: italic;
@@ -54,13 +34,6 @@
 	font-weight: bold
 }
 .sequence-title {
-	cursor: default;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
 	position: absolute;
 	color: #EAC749;
 	font-size: 1em;
@@ -73,25 +46,11 @@
 	font-style: italic;
 	font-size: 1em;
 	text-align: left;
-	cursor: pointer;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
 	padding: 5px;
 }
 
 .dashboard_modules:hover {
 	color: #FFFF99;
-	cursor: pointer;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
 }
 .dashboard_modules_locked {
 	font-size: 1em;
@@ -100,34 +59,13 @@
 	font-style: italic;
 	font-size: 1em;
 	text-align: left;
-	cursor: pointer;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
 	padding: 5px;
 }
 
 .dashboard_modules_locked:hover {
 	color: #EAC749;
-	cursor: default;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
 }
 .module_progress_title {
-	cursor: default;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
 	position: relative;
 	color: #ff9900;
 	font-style: italic;

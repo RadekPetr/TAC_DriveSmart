@@ -10,41 +10,20 @@
 	color: #FFFF99;
 }
 
-.questions_label_unlocked {
-	cursor: pointer;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+.questions_label_unlocked {	
 	color: #FFFFFF;
 	display: block;
 	margin-left: 18px;
 }
 
-.questions_label_locked_correct {
-	cursor: default;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+.questions_label_locked_correct {	
 	color: #00FF00;
 	display: block;
 	margin-left: 18px;
 	font-weight: bold;
 }
 
-.questions_label_locked_incorrect {
-	cursor: default;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+.questions_label_locked_incorrect {	
 	color: #CCCCCC;
 	display: block;
 	margin-left: 18px;

@@ -38,9 +38,9 @@ var MenuItems = new Class({
             log("Menu Item locked: ", menuItem.moduleID, this._isItemLocked(menuItem));
 
             if (lockedItem == true) {
-                var menuItemCSS = 'dashboard_modules_locked';
+                var menuItemCSS = 'dashboard_modules_locked no-select';
             } else {
-                var menuItemCSS = 'dashboard_modules';
+                var menuItemCSS = 'dashboard_modules no-select';
             }
 
             // log(menuItem);
@@ -117,7 +117,7 @@ var MenuItems = new Class({
 
         this.module_description = new Element("div", {
             id : "module.description",
-            'class' : 'module-description',
+            'class' : 'module-description no-select',
             styles : {
                 left : '375px',
                 top : '190px'

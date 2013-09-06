@@ -86,7 +86,7 @@ var SequencePlayer = new Class({
                     //step.media.image.show();
                     var moduleTitle = new Element("h1", {
                         html : this.moduleInfo.moduleTitle,
-                        'class' : 'main-title'
+                        'class' : 'main-title no-select'
                     });
                     moduleTitle.inject(myDiv);
                     step.data.style = {
@@ -129,7 +129,7 @@ var SequencePlayer = new Class({
                             left : '0px',
                             top : '20%'
                         },
-                        'class' : 'module-title'
+                        'class' : 'module-title no-select'
                     });
                     moduleTitle.inject(myDiv);
 
@@ -141,7 +141,7 @@ var SequencePlayer = new Class({
                             left : '0',
                             top : '350px'
                         },
-                        'class' : 'sequence-title'
+                        'class' : 'sequence-title no-select'
                     });
                     sequenceTitle.inject(myDiv);
                     var moduleProgressBar = UIHelpers.moduleProgressSetup(this.moduleInfo.moduleID);
@@ -1376,7 +1376,7 @@ var SequencePlayer = new Class({
                 left : '0px',
                 top : '20%'
             },
-            'class' : 'module-title'
+            'class' : 'module-title no-select'
         });
         moduleTitle.inject(myDiv);
 

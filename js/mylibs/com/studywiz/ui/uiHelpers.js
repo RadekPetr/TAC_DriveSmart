@@ -14,10 +14,10 @@ var UIHelpers = new Class({
         this.setOptions(myOptions);
         this.options.parent = myParent;
     }
-})
+});
 
 // Static methods
-UIHelpers.moduleProgressSetup = function (moduleID) {
+UIHelpers.moduleProgressSetup = function(moduleID) {
     // Module progress bar
 
     var moduleProgress = Main.userTracker.getModuleProgress(moduleID);
@@ -33,7 +33,7 @@ UIHelpers.moduleProgressSetup = function (moduleID) {
     var progress = new Element('div', {
         id : "Module_progress_" + moduleID,
         html : "Progress: ",
-        'class' : 'module_progress_title'
+        'class' : 'module_progress_title no-select'
     });
 
     var moduleProgressbar = new dwProgressBar({
@@ -46,11 +46,11 @@ UIHelpers.moduleProgressSetup = function (moduleID) {
         percentageClass : 'module_progress_perc',
         displayText : true,
         displayID : 'text_' + moduleID,
-        displayClass : 'module_progress_title',
+        displayClass : 'module_progress_title no-select',
         styles : {
             'width' : '300px',
             'height' : '5px'
         }
     });
     return progress;
-}
+};

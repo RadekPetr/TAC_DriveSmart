@@ -55,7 +55,7 @@ var Questions = new Class({
                 'for' : "item_" + index,
                 'html' : question.text,
                 'id' : "item_label_" + index,
-                'class' : 'questions_label_unlocked',
+                'class' : 'questions_label_unlocked no-select',
                 'onselectstart' : 'return false;'
             });
 
@@ -141,10 +141,10 @@ var Questions = new Class({
             var label = document.getElementById("item_label_" + index);
             var radio = document.getElementById("item_" + index);
             if (question.correct == false) {
-                label.set('class', 'questions_label_locked_incorrect');
+                label.set('class', 'questions_label_locked_incorrect no-select');
 
             } else {
-                label.set('class', 'questions_label_locked_correct');
+                label.set('class', 'questions_label_locked_correct no-select');
             }
             if (question.correct == true) {
                 maxScore++;

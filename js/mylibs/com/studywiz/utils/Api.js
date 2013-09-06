@@ -212,8 +212,10 @@ var Api = new Class({
      i.e error="Blah" and it will be saved in log file with the corresponding level (if it is on).
      */
     _moduleIdMapping : function(key) {
+        //TODO: intro ??
         var map = new Hash({
             'main_menu' : 'mm',
+            'intro' : 'mm',
             'concentration' : 'cc',
             'country' : 'co',
             'urban' : 'ur',
