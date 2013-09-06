@@ -7,12 +7,25 @@
 	-ms-user-select: none;
 	user-select: none;
 }
+#drivesmart {
+	font-family: 'BodyFont';
+}
 
+h1 {
+	font-family: 'HeadingFont';
+}
 
+h2 {
+	font-family: 'HeadingFont';
+}
+
+@font-face {
+
+	font-family: 'BodyFont';
+	src: url('fonts/CANDARA.TTF');
+}
 
 @font-face {
 	font-family: 'HeadingFont';
 	src: url('fonts/Museo700-Regular.ttf');
-	font-family: 'BodyFont';
-	src: url('fonts/CANDARA.TTF');
 }

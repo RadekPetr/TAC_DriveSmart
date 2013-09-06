@@ -11,7 +11,6 @@
 	-moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
 	-webkit-border-radius: 0.5em 0.5em 0.5em 0.5em;
 	padding: 8px 8px 8px 8px;
-	font-family: Arial;
 	background: rgba(0, 0, 0, 0.6);
 }
 .module-preview img {
@@ -20,30 +19,23 @@
 .main-title {
 	position: absolute;
 	color: #ff9900;
-	font-family: 'Museo700';
-	font-style: italic;
 	font-size: 2.5em;
-	font-weight: bold;
 	text-align: center;
 }
 .module-title {
 	position: absolute;
 	color: #ff9900;
-	font-style: italic;
 	font-size: 3em;
-	font-weight: bold
 }
 .sequence-title {
 	position: absolute;
 	color: #EAC749;
 	font-size: 1em;
-	font-weight: bold;
 }
 .dashboard_modules {
 	font-size: 1em;
-	font-weight: bold;
+
 	color: #EAC749;
-	font-style: italic;
 	font-size: 1em;
 	text-align: left;
 	padding: 5px;
@@ -54,9 +46,7 @@
 }
 .dashboard_modules_locked {
 	font-size: 1em;
-	font-weight: bold;
 	color: #EAC749;
-	font-style: italic;
 	font-size: 1em;
 	text-align: left;
 	padding: 5px;
@@ -68,7 +58,6 @@
 .module_progress_title {
 	position: relative;
 	color: #ff9900;
-	font-style: italic;
 	font-size: .8em;
 	font-weight: normal;
 	text-align: left;

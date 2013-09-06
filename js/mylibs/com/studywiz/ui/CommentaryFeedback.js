@@ -15,7 +15,6 @@ var CommentaryFeedback = new Class({
             'border-radius' : '1em 1em 1em 1em',
             'text-align' : 'left',
             'padding' : '8px 8px 8px 8px',
-            'font-family' : 'Arial',
             '-moz-border-radius' : '0.5em 0.5em 0.5em 0.5em',
             'background' : 'rgba(0, 0, 0, 0.6)',
             'width' : '300px',
