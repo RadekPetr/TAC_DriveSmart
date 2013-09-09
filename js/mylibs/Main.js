@@ -87,8 +87,8 @@ Main.WIDTH = 640;
 Main.HEIGHT = 480;
 
 // Version stuff
-Main.VERSION = '1.0_newVideoJS';
-Main.BUILD = '2013/09/06-1';
+Main.VERSION = '1.0_newVideoJS_fonts';
+Main.BUILD = '2013/09/06-5';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;

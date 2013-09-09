@@ -45,6 +45,7 @@ var SequencePlayer = new Class({
         this.moduleInfo = this.myParent().getModuleInfo();
 
         this.sequenceState = Main.userTracker.getUserSequenceState(this.moduleInfo.currentSequenceID, this.moduleInfo.moduleID);
+       
         // reset scoring, so when it repeats the scores are replaced not appended (Unless this will be requested ?)
         this.sequenceState.score = new Array();
         // TODO handle mobile platforms: Browser.Platform.android, handle incompatible old browsers
@@ -958,7 +959,7 @@ var SequencePlayer = new Class({
                     break;
                 case "ModuleIntroVideo" :
                     // only setup the video in case it was not played yet .... curretnly no way to replay it anyway
-                    log ("Loading intro video: ", this.sequenceState.completed=false);
+                  
                     if (item.value != '' && this.sequenceState.completed != true) {
                         var filename = item.value;
                         var style = null;
@@ -1414,6 +1415,7 @@ var SequencePlayer = new Class({
                     top : this.buttonPosition.y - 45
                 }
             });
+this._updateUserProgress();
 
             if (this.fromMenu == true) {
                 this.fromMenu = false;
@@ -1455,12 +1457,12 @@ var SequencePlayer = new Class({
                     left : this.buttonPosition.x,
                     top : this.buttonPosition.y - 45
                 }
-            });
-            this._updateUserProgress();
+            });            
 
             // TODO: is this needed ?
             if (this.fromMenu == true) {
                 this.fromMenu = false;
+                this._updateUserProgress();
             } else {
                 // TODO: play different sound if getting to module intro from a sequence ?
             }
