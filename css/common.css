@@ -12,21 +12,9 @@
 }
 
 h1 {
-	font-family: 'HeadingFont';
+	font-family: 'Museo700Regular';
 }
 
 h2 {
-	font-family: 'HeadingFont';
-}
-
-
-
-@font-face {
-	font-family: 'HeadingFont';
-	src: url('fonts/Museo700-Regular.ttf');
-}
-@font-face {
-
-	font-family: 'BodyFont';
-	src: url('fonts/candara.ttf');
+	font-family: 'Museo700Regular';
 }
