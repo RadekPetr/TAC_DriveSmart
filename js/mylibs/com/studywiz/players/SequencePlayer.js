@@ -104,7 +104,8 @@ var SequencePlayer = new Class({
                             'position' : 'absolute',
                             left : '390px',
                             top : '30px'
-                        }
+                        },
+                        'class' : 'no-select'
                     });
                     score.inject(myDiv);
                     break;
