@@ -292,14 +292,11 @@ var User = new Class({
                 });
             }
             //Go up a level
-
         }
-
         return this.concentrationLevel;
     },
     getUserSequenceState : function(sequenceID, moduleID) {
         var userSequence = this.getUserSequenceData(sequenceID, moduleID)[0];
-        //log("userSequenceState ", this.getUserSequenceData("1", "kaps"));
         var sequenceState = {
             moduleID : moduleID,
             id : sequenceID,

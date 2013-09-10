@@ -123,4 +123,4 @@ var RightClick = {
         if (document.getElementById(this.FlashObjectID).rightClickUp)
             document.getElementById(this.FlashObjectID).rightClickUp();
     }
-}; 
+};

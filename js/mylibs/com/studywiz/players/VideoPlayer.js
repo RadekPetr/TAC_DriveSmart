@@ -61,7 +61,6 @@ var VideoPlayer = new Class({
     preload : function() {
         log("++ Video Preload started: " + this.options.id);
         // TODO: handle sitiation player is undefined
-        // TODO: use timer to check on the progress
         if (this.player == undefined) {
             //    log('Undefined player ERRROR');
             //     log(this);
