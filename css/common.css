@@ -9,12 +9,18 @@
 }
 #drivesmart {
 	font-family: 'BodyFont', Candara;
+	line-height: 1.6em;
 }
 
 h1 {
 	font-family: 'Museo700Regular';
+	font-weight: normal;
+	margin: 0 0 0.2em;
 }
 
 h2 {
 	font-family: 'Museo700Regular';
+	color: #EAC749;
+	font-weight: normal;
+	margin: 0;
 }

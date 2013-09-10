@@ -10,14 +10,7 @@ var CommentaryFeedback = new Class({
             position : 'absolute',
             top : '100px',
             left : '150px',
-            'background-color' : '#464646',
-            'float' : 'left',
-            'border-radius' : '1em 1em 1em 1em',
-            'text-align' : 'left',
-            'padding' : '8px 8px 8px 8px',
-            '-moz-border-radius' : '0.5em 0.5em 0.5em 0.5em',
-            'background' : 'rgba(0, 0, 0, 0.6)',
-            'width' : '300px',
+            width : '300px',
             'height' : '200px',
             'opacity' : '0',
             'visibility' : 'hidden'
@@ -34,7 +27,8 @@ var CommentaryFeedback = new Class({
         this.options.parent = myParent;
 
         this.container = new Element("div", {
-            id : this.options.id
+            id : this.options.id,
+            'class' : 'commentary_feedback no-select'
         });
 
         var ul = new Element('ul', {
