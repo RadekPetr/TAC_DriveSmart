@@ -7,12 +7,9 @@
 	padding: 0 1.5em;
 	margin: 0.5em;
 	font-weight: bold;
-	font-family: 'BodyFont';
-	font-size: 1em;
+	font-family: 'Candara', Candara;
 	line-height: 2em;
 	text-decoration: none;
-	color: #333;
-	text-shadow: 0 1px 0 rgba(255,255,255,.8);
 	-moz-border-radius: .3em;
 	-webkit-border-radius: .3em;
 	border-radius: .3em;

@@ -8,8 +8,9 @@
 	user-select: none;
 }
 #drivesmart {
-	font-family: 'BodyFont', Candara;
+	font-family: 'Candara', Candara;
 	line-height: 1.6em;
+	font-weight: normal;
 }
 
 h1 {
