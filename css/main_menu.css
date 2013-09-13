@@ -56,8 +56,14 @@
 }
 .module_progress_title {
 	position: relative;
-	color: #FFFFFF;	
+	color: #FFFFFF;
 	font-weight: normal;
 	text-align: left;
 }
 
+.title_panel {
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-origin: content-box;
+	background-attachment: scroll;
+}

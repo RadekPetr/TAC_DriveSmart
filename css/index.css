@@ -40,11 +40,7 @@ a:hover {
 #vertical {
 }
 #content {
-	min-height: 480px;
-	background: url('../img/contents-body.png') repeat-y scroll left center rgb(0, 0, 0);
-	padding: 10px 10px 20px;
-	line-height: 1.6em;
-	border-radius: 0px 0px 20px 20px;
+
 }
 #header {
 	height: 85px;
