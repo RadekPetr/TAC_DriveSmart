@@ -21,6 +21,12 @@ var SequencePlayer = new Class({
         parent : null
     },
     initialize : function(myParent, module, myOptions) {
+        var style = {
+            width : Main.WIDTH + 'px',
+            height : Main.HEIGHT + 'px'
+        };
+
+        $m(Main.DIV_ID).setStyles(style);
 
         this.setOptions(myOptions);
         this.options.parent = myParent;
@@ -90,6 +96,11 @@ var SequencePlayer = new Class({
                         'class' : 'main-title no-select'
                     });
                     moduleTitle.inject(myDiv);
+
+                    //TODO: extract to separate method
+                    $m(Main.DIV_ID).removeAttribute('class');
+                    $m(Main.DIV_ID).addClass("title_panel");
+
                     step.data.style = {
                         left : '10px',
                         top : '40px'
@@ -110,6 +121,11 @@ var SequencePlayer = new Class({
                     score.inject(myDiv);
                     break;
                 case "SequenceIntro":
+
+                    //TODO: extract to separate method
+                    $m(Main.DIV_ID).removeAttribute('class');
+                    $m(Main.DIV_ID).addClass("title_panel_kaps");
+
                     log("From Menu:", this.fromMenu);
                     this.fromMenu = false;
 
@@ -1363,6 +1379,10 @@ var SequencePlayer = new Class({
         };
     }.protect(),
     _moduleIntroSetup : function(step) {
+        //TODO: extract to separate method
+        $m(Main.DIV_ID).removeAttribute('class');
+        $m(Main.DIV_ID).addClass("title_panel_kaps");
+
         log("From Menu: ", this.fromMenu);
         var myContainerID = 'SequenceIntro.container';
         var myDiv = new Element("div", {
