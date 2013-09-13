@@ -6,11 +6,10 @@ html, body {
 	padding: 0px;
 	font-size: 14px;
 	font-weight: normal;
-	background: url('../img/bg.jpg') no-repeat scroll center top rgb(0, 0, 0);
+	background: url("/TAC_DriveSmart/css/images/bkg_1.jpg") no-repeat fixed center center / 100% auto transparent;
 	color: rgb(255, 255, 255);
 }
-body {
-}
+
 h2, h3, h4, h5 {
 	font-weight: normal;
 	margin: 0px;

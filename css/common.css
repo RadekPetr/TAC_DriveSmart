@@ -11,6 +11,11 @@
 	font-family: 'Candara', Candara;
 	line-height: 1.6em;
 	font-weight: normal;
+	background: url("images/dashboard_bkg.png");
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-origin: content-box;
+    background-attachment: scroll;
 }
 
 h1 {

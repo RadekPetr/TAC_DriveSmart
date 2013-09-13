@@ -45,7 +45,7 @@ var SequencePlayer = new Class({
         this.moduleInfo = this.myParent().getModuleInfo();
 
         this.sequenceState = Main.userTracker.getUserSequenceState(this.moduleInfo.currentSequenceID, this.moduleInfo.moduleID);
-       
+
         // reset scoring, so when it repeats the scores are replaced not appended (Unless this will be requested ?)
         this.sequenceState.score = new Array();
         // TODO handle mobile platforms: Browser.Platform.android, handle incompatible old browsers
@@ -933,14 +933,15 @@ var SequencePlayer = new Class({
                             var width = '240';
                             var height = '175';
                         } else {
+                            //TODO: use stage size
                             style = {
-                                'width' : '640',
-                                'height' : '480',
+                                'width' : Main.WIDTH + '',
+                                'height' : Main.HEIGHT + '',
                                 'left' : '0',
                                 'top' : '0'
                             };
-                            var width = '640';
-                            var height = '480';
+                            var width = Main.WIDTH + '';
+                            var height = Main.HEIGHT + '';
                         };
 
                         step.media.video = new VideoPlayer(this, {
@@ -960,19 +961,19 @@ var SequencePlayer = new Class({
                     break;
                 case "ModuleIntroVideo" :
                     // only setup the video in case it was not played yet .... curretnly no way to replay it anyway
-                  
+
                     if (item.value != '' && this.sequenceState.completed != true) {
                         var filename = item.value;
                         var style = null;
 
                         style = {
-                            'width' : '640',
-                            'height' : '480',
+                            'width' : Main.WIDTH + '',
+                            'height' : Main.HEIGHT + '',
                             'left' : '0',
                             'top' : '0'
                         };
-                        var width = '640';
-                        var height = '480';
+                        var width = Main.WIDTH + '';
+                        var height = Main.HEIGHT + '';
 
                         step.media.moduleIntroVideo = new VideoPlayer(this, {
                             id : "video_" + index + "_" + stepOrder,
@@ -1416,7 +1417,7 @@ var SequencePlayer = new Class({
                     top : this.buttonPosition.y - 45
                 }
             });
-this._updateUserProgress();
+            this._updateUserProgress();
 
             if (this.fromMenu == true) {
                 this.fromMenu = false;
@@ -1458,7 +1459,7 @@ this._updateUserProgress();
                     left : this.buttonPosition.x,
                     top : this.buttonPosition.y - 45
                 }
-            });            
+            });
 
             // TODO: is this needed ?
             if (this.fromMenu == true) {

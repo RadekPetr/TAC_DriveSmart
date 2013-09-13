@@ -81,8 +81,8 @@ var $m = document.id;
 Main.DIV_ID = 'drivesmart';
 
 // the stage size
-Main.WIDTH = 640;
-Main.HEIGHT = 480;
+Main.WIDTH = 800;
+Main.HEIGHT = 550;
 
 // Version stuff
 Main.VERSION = '1.0_newVideoJS_fonts';

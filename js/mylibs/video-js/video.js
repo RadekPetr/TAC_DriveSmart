@@ -1720,7 +1720,7 @@ vjs.Component.prototype.fadeOut = function(){
  * @return {vjs.Component}
  */
 vjs.Component.prototype.lockShowing = function(){
-  this.addClass('vjs-lock-showing');
+ // this.addClass('vjs-lock-showing');
   return this;
 };
 

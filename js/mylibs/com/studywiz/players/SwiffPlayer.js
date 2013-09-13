@@ -1,4 +1,4 @@
-var swiffLoaded  = null;
+var swiffLoaded = null;
 
 var SwiffPlayer = new Class({
 
@@ -6,8 +6,8 @@ var SwiffPlayer = new Class({
     options : {
         swiff : {
             id : 'Swiff',
-            width : '640px',
-            height : '480px',
+            width : Main.WIDTH + 'px',
+            height : Main.HEIGHT + 'px',
             params : {
                 allowScriptAccess : 'always',
                 wmode : 'transparent'
@@ -62,9 +62,9 @@ var SwiffPlayer = new Class({
         if (isFlashSupported() == true) {
             this.options.swiff.container = this.container;
             this.swiff = new Swiff(this.options.src, this.options.swiff);
-            
+
         } else {
-            log("********************* No FLASH loading image")
+            log("********************* No FLASH loading image");
             this.options.swiff.container = this.container;
             this.swiff = new ImagePlayer(this, {
                 src : Main.PATHS.imageFolder + "commentary/noflash.png",
@@ -110,7 +110,7 @@ var SwiffPlayer = new Class({
         Swiff.remote(this.swiff.toElement(), 'startSwiff', 1, 1, 1);
     },
     stop : function() {
-        
+
     },
     startConActivity : function(params) {
         Swiff.remote(this.swiff.toElement(), 'startSwiff', params.Ex, params.level, params.format);
@@ -128,7 +128,7 @@ var SwiffPlayer = new Class({
         //this.hide();
         //log("Swiff remove called");
         if (this.container != null && this.container != undefined) {
-          //  log("this.container.destroy(); called");
+            //  log("this.container.destroy(); called");
 
             this.container.destroy();
             // this.swiff = null;
@@ -153,26 +153,26 @@ var SwiffPlayer = new Class({
     preload : function() {
         swiffLoaded = function() {
             this.options.loaded = true;
-         //  log("Loaded flash", this.getLoaderInfo());
-           // if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
-           //     this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
-           // }
+            //  log("Loaded flash", this.getLoaderInfo());
+            // if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
+            //     this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
+            // }
             this.myParent().fireEvent("TIMELINE", {
                 type : "swiff.ready",
                 id : this.options.id,
                 next : this.options.next
-            })
+            });
             // loaded so we hide it again
             this.container.setStyles({
                 'visibility' : 'hidden'
-            })
+            });
         }.bind(this);
 
         this.add(Main.DIV_ID);
         // This is necessary for  IE as the flash only starts loding whne visible ...
         this.container.setStyles({
             'visibility' : 'visible'
-        })
+        });
 
     }
-})
+});

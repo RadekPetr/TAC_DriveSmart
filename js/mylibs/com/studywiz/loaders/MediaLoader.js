@@ -118,8 +118,8 @@ var MediaLoader = new Class({
             displayID : 'media_loader_disp',
             displayText : true,
             style : {
-                'left' : '220px',
-                'top' : '240px',
+                'left' : (Main.WIDTH / 3) + 'px',
+                'top' : (Main.HEIGHT / 2) + 'px',
                 'position' : 'absolute',
                 'z-index' : '99999'
             }
@@ -218,4 +218,4 @@ var MediaLoader = new Class({
         this.videoQueue = new Array();
         this.loadQueue = new Hash({});
     }
-}); 
+});
