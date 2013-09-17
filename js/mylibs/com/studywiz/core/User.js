@@ -91,12 +91,12 @@ var User = new Class({
     _saveModuleProgressData : function() {
         var moduleID = Main.sequencePlayer.sequenceState.moduleID;
         var moduleScore = this.getModuleScore(moduleID);
-        var moduleProgress = this.getModuleProgress(moduleID);
+        var moduleState = this.getModuleState(moduleID);
 
         var requestPayload = new Object();
         requestPayload = {
             score : (moduleScore * 100).toInt(),
-            completed_exercises : moduleProgress.finishedCount
+            completed_exercises : moduleState.finishedCount
         };
 
         this.api.saveModuleProgress(requestPayload);
@@ -182,7 +182,7 @@ var User = new Class({
         }
         return unfinishedSequences;
     },
-    getModuleProgress : function(moduleID) {
+    getModuleState : function(moduleID) {
 
         var sequencesInModule = this._getUserData(moduleID).data;
         var unfinishedSequences = sequencesInModule.filter(function(item, index) {

@@ -17,11 +17,8 @@ var UIHelpers = new Class({
 });
 
 // Static methods
-UIHelpers.moduleProgressSetup = function(moduleID) {
-    // Module progress bar
-
-    var moduleProgress = Main.userTracker.getModuleProgress(moduleID);
-
+UIHelpers.progressBarSetup = function(progress, id) {
+   
     /* var score = new Element('div', {
      id : "Module_Score_" + menuItem.id,
      html : "Module score: " + (100 * Main.userTracker.getModuleScore(menuItem.retrieve('moduleID')) ).toInt() + "/100",
@@ -30,30 +27,32 @@ UIHelpers.moduleProgressSetup = function(moduleID) {
      menuItem.adopt (score);
      */
 
-    var progress = new Element('div', {
-        id : "Module_progress_" + moduleID,
+    var progressBarComponent = new Element('div', {
+        id : "Module_progress_" + id,
         html : "Progress: ",
         'class' : 'module_progress_title no-select'
     });
 
-    var moduleProgressbar = new dwProgressBar({
-        container : progress,
-        startPercentage : moduleProgress.progress,
+    var progressBar = new dwProgressBar({
+        container : progressBarComponent,
+        startPercentage : progress,
         speed : 1000,
-        boxID : 'module_progress_box_' + moduleID,
+        boxID : 'module_progress_box_' + id,
         boxClass : 'module_progress_box',
-        percentageID : 'module_progress_perc_' + moduleID,
+        percentageID : 'module_progress_perc_' + id,
         percentageClass : 'module_progress_perc',
         displayText : true,
-        displayID : 'text_' + moduleID,
+        displayID : 'text_' + id,
         displayClass : 'module_progress_title no-select',
         styles : {
             'width' : '300px',
             'height' : '5px'
         }
     });
-    return progress;
+    return progressBarComponent;
 };
+
+
 
 UIHelpers.setMainPanel = function(cssClassName) {
     $m(Main.DIV_ID).removeAttribute('class');

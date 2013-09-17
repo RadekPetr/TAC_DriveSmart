@@ -21,7 +21,7 @@ var SequencePlayer = new Class({
         parent : null
     },
     initialize : function(myParent, module, myOptions) {
-        
+
         this.setOptions(myOptions);
         this.options.parent = myParent;
 
@@ -43,28 +43,23 @@ var SequencePlayer = new Class({
     start : function(sequenceData) {
         this.currentSequence = Array.clone(sequenceData);
         this.moduleInfo = this.myParent().getModuleInfo();
-
         this.sequenceState = Main.userTracker.getUserSequenceState(this.moduleInfo.currentSequenceID, this.moduleInfo.moduleID);
-
         // reset scoring, so when it repeats the scores are replaced not appended (Unless this will be requested ?)
         this.sequenceState.score = new Array();
         // TODO handle mobile platforms: Browser.Platform.android, handle incompatible old browsers
         log("Starting SEQUENCE: " + this.moduleInfo.currentSequenceID);
-
-        this._setupMedia();
+        this._setupSequenceMedia();
     },
     // ----------------------------------------------------------
-    _setupMedia : function() {
-
-        UIHelpers.setMainPanel("panel_loader");
-
-        this._setupSequence(this.currentSequence);
+    _setupSequenceMedia : function() {
+        this._prepareSequenceMedia(this.currentSequence);
         this.mediaLoader.options.next = 'Media.ready';
-        if (this.mediaLoader.getQueuLength() > 0) {
+
+        if (this.mediaLoader.getQueueLength() > 0) {
+            UIHelpers.setMainPanel("panel_loader");
             this.mediaLoader.start(true);
         } else {
-            
-             // TODO:Fix
+            // no media to preload so we can continue
             this.fireEvent("TIMELINE", {
                 type : "preload.finished",
                 id : "no_media",
@@ -121,12 +116,21 @@ var SequencePlayer = new Class({
 
                             'position' : 'absolute',
                             left : '45%',
-                            top : '90%'
+                            top : '85%'
                         },
                         'id' : 'overall_score',
                         'class' : 'no-select'
                     });
                     score.inject(myDiv);
+
+                    var overallProgressBar = UIHelpers.progressBarSetup(Main.userTracker.getTotalScore(), "overall");
+                    overallProgressBar.setStyles({
+                        'position' : 'absolute',
+                        left : '45%',
+                        top : '90%'
+                    });
+                    overallProgressBar.inject(myDiv);
+
                     break;
                 case "SequenceIntro":
 
@@ -157,8 +161,8 @@ var SequencePlayer = new Class({
                     });
                     moduleTitle.inject(myDiv);
 
-                    var moduleProgress = Main.userTracker.getModuleProgress(this.moduleInfo.moduleID);
-                    var sequenceTitleText = "Exercise " + this.sequenceState.id + " of " + moduleProgress.total;
+                    var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
+                    var sequenceTitleText = "Exercise " + this.sequenceState.id + " of " + moduleState.total;
                     var sequenceTitle = new Element("h1", {
                         html : sequenceTitleText,
                         styles : {
@@ -168,7 +172,10 @@ var SequencePlayer = new Class({
                         'class' : 'sequence-title no-select'
                     });
                     sequenceTitle.inject(myDiv);
-                    var moduleProgressBar = UIHelpers.moduleProgressSetup(this.moduleInfo.moduleID);
+
+                    var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
+                    var moduleProgressBar = UIHelpers.progressBarSetup(moduleState.progress, this.moduleInfo.moduleID);
+
                     moduleProgressBar.setStyles({
                         left : 0,
                         top : '380px'
@@ -915,7 +922,7 @@ var SequencePlayer = new Class({
         return questions;
     }.protect(),
     // ----------------------------------------------------------
-    _setupSequence : function(seq) {
+    _prepareSequenceMedia : function(seq) {
         // get array of media for each step so it can be preloaded
         var media = new Hash({});
         Array.each(seq, function(step, stepOrder) {
@@ -931,12 +938,12 @@ var SequencePlayer = new Class({
                 image : null,
                 previewImage : null
             });
-            this._setupStepMedia(step, stepOrder);
+            this._prepareStepMedia(step, stepOrder);
         }.bind(this));
         log("---------------------------- Finished setting up media from xml");
     }.protect(),
     // ----------------------------------------------------------
-    _setupStepMedia : function(step, stepOrder) {
+    _prepareStepMedia : function(step, stepOrder) {
         var stepType = step.attributes.fmt;
         Array.each(step.childNodes, function(item, index) {
 
@@ -1412,9 +1419,9 @@ var SequencePlayer = new Class({
             step.media.previewImage.add(myContainerID);
             step.media.previewImage.show();
 
-            var moduleProgress = Main.userTracker.getModuleProgress(this.moduleInfo.moduleID);
+            var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
 
-            var moduleProgressBar = UIHelpers.moduleProgressSetup(this.moduleInfo.moduleID);
+            var moduleProgressBar = UIHelpers.progressBarSetup(moduleState, this.moduleInfo.moduleID);
             moduleProgressBar.setStyles({
                 left : 0,
                 top : '380px'

@@ -103,13 +103,13 @@ var MenuItems = new Class({
             }.bind(this));
 
             if (menuItem.showProgress == true) {
-                var moduleProgress = Main.userTracker.getModuleProgress(menuItem.moduleID);
-                if (moduleProgress.completed == true) {
+                var moduleState = Main.userTracker.getModuleState(menuItem.moduleID);
+                if (moduleState.completed == true) {
                     var symbol = this._getCompleteStatusSymbol();
                     item.adopt(symbol);
                     symbol.show();
                 }
-                item.adopt(UIHelpers.moduleProgressSetup(menuItem.moduleID));
+                item.adopt(UIHelpers.progressBarSetup(moduleState.progress, menuItem.moduleID));
             }
             this.container.adopt(item);
 
@@ -196,8 +196,8 @@ var MenuItems = new Class({
         } else {
             var isLocked = true;
             Array.each(itemPreconditions, function(moduleID, index) {
-                var moduleProgress = Main.userTracker.getModuleProgress(moduleID);
-                var isModuleCompleted = moduleProgress.completed;
+                var moduleState = Main.userTracker.getModuleState(moduleID);
+                var isModuleCompleted = moduleState.completed;
                 if (isModuleCompleted == true) {
                     isLocked = false;
                 }

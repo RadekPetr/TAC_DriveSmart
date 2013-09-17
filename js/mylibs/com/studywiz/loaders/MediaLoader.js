@@ -214,7 +214,7 @@ var MediaLoader = new Class({
             this.progressBar.set(progress);
         }
     }.protect(),
-    getQueuLength : function() {
+    getQueueLength : function() {
         return this.loadQueue.getLength();
     },
     reset : function() {
