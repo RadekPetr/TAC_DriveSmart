@@ -29,3 +29,25 @@ h2 {
 	font-weight: normal;
 	margin: 0;
 }
+.panel_loader {
+	background: url('images/loader_bkg.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-origin: content-box;
+	background-attachment: scroll;
+}
+.panel_dashboard {
+	background: url('images/dashboard_bkg.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-origin: content-box;
+	background-attachment: scroll;
+}
+
+.panel_kaps {
+	background: url('images/kaps_bkg.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-origin: content-box;
+	background-attachment: scroll;
+}

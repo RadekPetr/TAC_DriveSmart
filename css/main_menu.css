@@ -61,19 +61,4 @@
 	text-align: left;
 }
 
-.title_panel {
-	background: url('images/dashboard_bkg.png');
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
-	background-origin: content-box;
-	background-attachment: scroll;
-}
-
-.title_panel_kaps {
-	background: url('images/kaps_bkg.png');
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
-	background-origin: content-box;
-	background-attachment: scroll;
-}
 

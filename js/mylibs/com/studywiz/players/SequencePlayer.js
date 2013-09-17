@@ -61,6 +61,8 @@ var SequencePlayer = new Class({
     },
     // ----------------------------------------------------------
     _setupMedia : function() {
+        UIHelpers.setMainPanel("panel_loader");
+
         this._setupSequence(this.currentSequence);
         this.mediaLoader.options.next = 'Media.ready';
         this.mediaLoader.start(true);
@@ -91,15 +93,14 @@ var SequencePlayer = new Class({
                     step.media.image.add(myContainerID);
                     // TODO: adjust style based on TAC
                     //step.media.image.show();
-                    var moduleTitle = new Element("h1", {
+                   /* var moduleTitle = new Element("h1", {
                         html : this.moduleInfo.moduleTitle,
                         'class' : 'main-title no-select'
                     });
                     moduleTitle.inject(myDiv);
+                    */
 
-                    //TODO: extract to separate method
-                    $m(Main.DIV_ID).removeAttribute('class');
-                    $m(Main.DIV_ID).addClass("title_panel");
+                    UIHelpers.setMainPanel("panel_dashboard");
 
                     step.data.style = {
                         left : '10px',
@@ -112,19 +113,19 @@ var SequencePlayer = new Class({
                     var score = new Element("h2", {
                         html : "Overall score: " + (100 * Main.userTracker.getTotalScore()).toInt() + "/100",
                         styles : {
+                            
                             'position' : 'absolute',
-                            left : '390px',
-                            top : '30px'
+                            left : '45%',
+                            top : '90%'
                         },
+                        'id' : 'overall_score',
                         'class' : 'no-select'
                     });
                     score.inject(myDiv);
                     break;
                 case "SequenceIntro":
 
-                    //TODO: extract to separate method
-                    $m(Main.DIV_ID).removeAttribute('class');
-                    $m(Main.DIV_ID).addClass("title_panel_kaps");
+                    UIHelpers.setMainPanel("panel_kaps");
 
                     log("From Menu:", this.fromMenu);
                     this.fromMenu = false;
@@ -141,7 +142,7 @@ var SequencePlayer = new Class({
                     step.media.previewImage.add(myContainerID);
                     step.media.previewImage.show();
 
-                    var moduleTitle = new Element("h1", {
+                   var moduleTitle = new Element("h1", {
                         html : this.moduleInfo.moduleTitle,
                         styles : {
                             left : '0px',
@@ -150,6 +151,7 @@ var SequencePlayer = new Class({
                         'class' : 'module-title no-select'
                     });
                     moduleTitle.inject(myDiv);
+                   
 
                     var moduleProgress = Main.userTracker.getModuleProgress(this.moduleInfo.moduleID);
                     var sequenceTitleText = "Exercise " + this.sequenceState.id + " of " + moduleProgress.total;
@@ -192,6 +194,8 @@ var SequencePlayer = new Class({
                     step.media.audio.start();
                     break;
                 case "ModuleIntro":
+                    // TODO: cssID from module
+                    UIHelpers.setMainPanel("panel_kaps");
                     this._moduleIntroSetup(step);
                     break;
                 case "CommentaryIntro":
@@ -1379,9 +1383,6 @@ var SequencePlayer = new Class({
         };
     }.protect(),
     _moduleIntroSetup : function(step) {
-        //TODO: extract to separate method
-        $m(Main.DIV_ID).removeAttribute('class');
-        $m(Main.DIV_ID).addClass("title_panel_kaps");
 
         log("From Menu: ", this.fromMenu);
         var myContainerID = 'SequenceIntro.container';

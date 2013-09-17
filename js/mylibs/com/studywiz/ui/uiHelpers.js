@@ -54,3 +54,8 @@ UIHelpers.moduleProgressSetup = function(moduleID) {
     });
     return progress;
 };
+
+UIHelpers.setMainPanel = function(cssClassName) {
+    $m(Main.DIV_ID).removeAttribute('class');
+    $m(Main.DIV_ID).addClass(cssClassName);
+};
