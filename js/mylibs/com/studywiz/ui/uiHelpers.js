@@ -28,26 +28,23 @@ UIHelpers.progressBarSetup = function(progress, id) {
      */
 
     var progressBarComponent = new Element('div', {
-        id : "Module_progress_" + id,
+        id : "Progress_" + id,
         html : "Progress: ",
-        'class' : 'module_progress_title no-select'
+        'class' : 'progress_title no-select'
     });
 
     var progressBar = new dwProgressBar({
         container : progressBarComponent,
         startPercentage : progress,
         speed : 1000,
-        boxID : 'module_progress_box_' + id,
-        boxClass : 'module_progress_box',
-        percentageID : 'module_progress_perc_' + id,
-        percentageClass : 'module_progress_perc',
+        boxID : 'progress_box_' + id,
+        boxClass : 'progress_box',
+        percentageID : 'progress_perc_' + id,
+        percentageClass : 'progress_perc',
         displayText : true,
         displayID : 'text_' + id,
-        displayClass : 'module_progress_title no-select',
-        styles : {
-            'width' : '300px',
-            'height' : '5px'
-        }
+        displayClass : 'progress_title no-select',
+        
     });
     return progressBarComponent;
 };

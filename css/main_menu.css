@@ -54,7 +54,7 @@
 .dashboard_modules_locked:hover {
 	color: #EAC749;
 }
-.module_progress_title {
+.progress_title {
 	position: relative;
 	color: #FFFFFF;
 	font-weight: normal;
