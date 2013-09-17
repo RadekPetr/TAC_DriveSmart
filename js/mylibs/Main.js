@@ -24,6 +24,13 @@ var Main = new Class({
     },
     // ----------------------------------------------------------
     start : function() {
+        UIHelpers.setMainPanel("panel_loader");
+        var style = {
+            width : Main.WIDTH + 'px',
+            height : Main.HEIGHT + 'px'
+        };
+        $m(Main.DIV_ID).setStyles(style);
+
         new Api(this).saveLog('info', "****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
 
         Main.sequencePlayer = new SequencePlayer(this, {});

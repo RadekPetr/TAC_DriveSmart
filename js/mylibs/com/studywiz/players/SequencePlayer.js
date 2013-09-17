@@ -21,13 +21,7 @@ var SequencePlayer = new Class({
         parent : null
     },
     initialize : function(myParent, module, myOptions) {
-        var style = {
-            width : Main.WIDTH + 'px',
-            height : Main.HEIGHT + 'px'
-        };
-
-        $m(Main.DIV_ID).setStyles(style);
-
+        
         this.setOptions(myOptions);
         this.options.parent = myParent;
 
@@ -61,11 +55,22 @@ var SequencePlayer = new Class({
     },
     // ----------------------------------------------------------
     _setupMedia : function() {
+
         UIHelpers.setMainPanel("panel_loader");
 
         this._setupSequence(this.currentSequence);
         this.mediaLoader.options.next = 'Media.ready';
-        this.mediaLoader.start(true);
+        if (this.mediaLoader.getQueuLength() > 0) {
+            this.mediaLoader.start(true);
+        } else {
+            
+             // TODO:Fix
+            this.fireEvent("TIMELINE", {
+                type : "preload.finished",
+                id : "no_media",
+                next : this.mediaLoader.options.next
+            });
+        }
     },
     _nextStep : function() {
         // take a step and decide what to do with it
@@ -90,15 +95,15 @@ var SequencePlayer = new Class({
                         id : myContainerID
                     });
                     myDiv.inject($m(Main.DIV_ID));
-                    step.media.image.add(myContainerID);
+                    // step.media.image.add(myContainerID);
                     // TODO: adjust style based on TAC
                     //step.media.image.show();
-                   /* var moduleTitle = new Element("h1", {
-                        html : this.moduleInfo.moduleTitle,
-                        'class' : 'main-title no-select'
-                    });
-                    moduleTitle.inject(myDiv);
-                    */
+                    /* var moduleTitle = new Element("h1", {
+                     html : this.moduleInfo.moduleTitle,
+                     'class' : 'main-title no-select'
+                     });
+                     moduleTitle.inject(myDiv);
+                     */
 
                     UIHelpers.setMainPanel("panel_dashboard");
 
@@ -113,7 +118,7 @@ var SequencePlayer = new Class({
                     var score = new Element("h2", {
                         html : "Overall score: " + (100 * Main.userTracker.getTotalScore()).toInt() + "/100",
                         styles : {
-                            
+
                             'position' : 'absolute',
                             left : '45%',
                             top : '90%'
@@ -142,7 +147,7 @@ var SequencePlayer = new Class({
                     step.media.previewImage.add(myContainerID);
                     step.media.previewImage.show();
 
-                   var moduleTitle = new Element("h1", {
+                    var moduleTitle = new Element("h1", {
                         html : this.moduleInfo.moduleTitle,
                         styles : {
                             left : '0px',
@@ -151,7 +156,6 @@ var SequencePlayer = new Class({
                         'class' : 'module-title no-select'
                     });
                     moduleTitle.inject(myDiv);
-                   
 
                     var moduleProgress = Main.userTracker.getModuleProgress(this.moduleInfo.moduleID);
                     var sequenceTitleText = "Exercise " + this.sequenceState.id + " of " + moduleProgress.total;

@@ -10,7 +10,7 @@
         <Data showProgress="true" preconditions= "concentration" moduleID="country" preview="country/country_cla03_start_first.jpg" description="The Country Driving module consists of 22 driving exercises. You need to have completed     the Scanning, Keeping Ahead and Playing Safe modules prior to accessing this module.">on the road - Country driving</Data>
         <Data showProgress="true" preconditions= "concentration" moduleID="urban" preview="urban/urban_umt02_next_last.jpg" description="The Urban Driving module consists of 36 driving exercises. You need to have completed the Scanning, Keeping Ahead and Playing Safe modules prior to accessing this module.">on the road - Urban driving</Data>
       </Items>
-      <Image>menu/main_menu.png</Image>
+
     </Step>
   </Seq>
 </root>
