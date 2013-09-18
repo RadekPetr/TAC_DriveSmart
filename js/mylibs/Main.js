@@ -26,8 +26,8 @@ var Main = new Class({
     start : function() {
         UIHelpers.setMainPanel("panel_loader");
         var style = {
-            width : Main.WIDTH + 'px',
-            height : Main.HEIGHT + 'px'
+            width : (Main.WIDTH + Main.WIDTH * 0.2) + 'px',
+            height : (Main.HEIGHT + Main.HEIGHT * 0.2) + 'px'
         };
         $m(Main.DIV_ID).setStyles(style);
 
@@ -88,12 +88,12 @@ var $m = document.id;
 Main.DIV_ID = 'drivesmart';
 
 // the stage size
-Main.WIDTH = 800;
-Main.HEIGHT = 550;
+Main.WIDTH = 640;
+Main.HEIGHT = 480;
 
 // Version stuff
-Main.VERSION = '1.0_newVideoJS_fonts';
-Main.BUILD = '2013/09/06-5';
+Main.VERSION = '1.0_new styles';
+Main.BUILD = '2013/09/18';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;
