@@ -53,5 +53,6 @@ UIHelpers.progressBarSetup = function(progress, id) {
 
 UIHelpers.setMainPanel = function(cssClassName) {
     $m(Main.DIV_ID).removeAttribute('class');
+    $m(Main.DIV_ID).addClass("panel");
     $m(Main.DIV_ID).addClass(cssClassName);
 };

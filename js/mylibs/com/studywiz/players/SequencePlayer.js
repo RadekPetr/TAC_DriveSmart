@@ -134,7 +134,7 @@ var SequencePlayer = new Class({
                     break;
                 case "SequenceIntro":
 
-                    UIHelpers.setMainPanel("panel_kaps");
+                    UIHelpers.setMainPanel("panel_" + this.moduleInfo.moduleID);
 
                     log("From Menu:", this.fromMenu);
                     this.fromMenu = false;
@@ -1420,8 +1420,7 @@ var SequencePlayer = new Class({
             step.media.previewImage.show();
 
             var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
-
-            var moduleProgressBar = UIHelpers.progressBarSetup(moduleState, this.moduleInfo.moduleID);
+            var moduleProgressBar = UIHelpers.progressBarSetup(moduleState.progress, this.moduleInfo.moduleID);
             moduleProgressBar.setStyles({
                 left : 0,
                 top : '380px'

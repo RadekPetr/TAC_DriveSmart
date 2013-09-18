@@ -11,7 +11,6 @@
 	font-family: 'Candara', Candara;
 	line-height: 1.6em;
 	font-weight: normal;
-	
 	left: 0;
 	top: 0;
 	position: relative;
@@ -29,25 +28,33 @@ h2 {
 	font-weight: normal;
 	margin: 0;
 }
-.panel_loader {
-	background: url('images/loader_bkg.png');
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
-	background-origin: content-box;
-	background-attachment: scroll;
-}
-.panel_dashboard {
-	background: url('images/dashboard_bkg.png');
+
+.panel {
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	background-origin: content-box;
 	background-attachment: scroll;
 }
 
+.panel_loader {
+	background: url('images/loader_bkg.png');
+}
+.panel_dashboard {
+	background: url('images/dashboard_bkg.png');
+}
 .panel_kaps {
 	background: url('images/kaps_bkg.png');
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
-	background-origin: content-box;
-	background-attachment: scroll;
 }
+.panel_scanning {
+	background: url('images/scanning_bkg.png');
+}
+.panel_concentration {
+	background: url('images/concentration_bkg.png');
+}
+.panel_country {
+	background: url('images/country_bkg.png');
+}
+.panel_urban {
+	background: url('images/urban_bkg.png');
+}
+
