@@ -470,7 +470,7 @@ var SequencePlayer = new Class({
                     this.shapes.options.data = {
                         areas : step.areas
                     };
-                    // TODO: move adding the aqreas until afte rthe audio is done ?
+                    // TODO: move adding the areas until after the audio is done ?
                     this.shapes.add(this.activeVideo.containerID);
                     // play Audio - Intro
                     step.media.audio.start();
@@ -478,6 +478,7 @@ var SequencePlayer = new Class({
                     break;
                 case "KRFeedback":
                     this._removeButtons();
+                    // TODO: use video size for the image
                     step.media.image.add(this.shapes.container.id);
                     step.media.image.show();
                     step.media.audio.options.next = 'KRFeedback.done';
