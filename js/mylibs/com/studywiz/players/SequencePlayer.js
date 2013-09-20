@@ -152,8 +152,8 @@ var SequencePlayer = new Class({
                         top : '380px'
                     });
                     moduleProgressBar.inject(myDiv);
-                    UIHelpers.setupButton2("Continue", this, "SequenceIntro.done");
-                    UIHelpers.setupButton2("Main Menu", this, "MainMenuIntro.clicked");
+                    UIHelpers.setupButton("Continue", this, "SequenceIntro.done");
+                    UIHelpers.setupButton("Main Menu", this, "MainMenuIntro.clicked");
                     // TODO: play level chnage audio if  this.playConLevelAudio = false;
                     step.media.audio.options.next = '';
                     step.media.audio.start();
@@ -172,11 +172,11 @@ var SequencePlayer = new Class({
                     step.media.image.show();
                     // TODO: hide the record button until the flash recorder is ready
 
-                    UIHelpers.setupButton2("Record", this, "CommentaryIntro.done");
+                    UIHelpers.setupButton("Record", this, "CommentaryIntro.done");
                     // does the next step have expert audio ? Show button if yes
                     var nextStep = this.currentSequence[0];
                     if (nextStep.expertAudio != undefined) {
-                        UIHelpers.setupButton2("Expert commentary", this, "CommentaryIntro.expert.clicked");
+                        UIHelpers.setupButton("Expert commentary", this, "CommentaryIntro.expert.clicked");
                     };
 
                     this.recorder = new Recorder(this, {
@@ -225,7 +225,7 @@ var SequencePlayer = new Class({
                     step.media.swiff.start();
                     // Allow skip intro if repeating this sequence
                     if (this.repeating == true) {
-                        UIHelpers.setupButton2("Skip", this, "ConIntro.done.clicked");
+                        UIHelpers.setupButton("Skip", this, "ConIntro.done.clicked");
                     }
                     break;
                 case "ConActivity":
