@@ -64,7 +64,7 @@ UIHelpers.setMainPanel = function(cssClassName) {
     $m(Main.DIV_ID).addClass(cssClassName);
 };
 
-UIHelpers.setupButton2 = function(buttonType, parent, next) {
+UIHelpers.setupButton = function(buttonType, parent, next) {
     // TODO: position by class - predefine positions in css and give the buttons ids according to the position
     var buttonPosition = {
         x : 480,
