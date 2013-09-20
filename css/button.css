@@ -16,6 +16,8 @@
 	-moz-box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
 	-webkit-box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
 	box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
+	position: absolute;
+	min-width: 140px
 }
 
 .button:hover {
@@ -26,8 +28,6 @@
 	-moz-box-shadow: 0 0 4px 2px rgba(0,0,0,.3) inset;
 	-webkit-box-shadow: 0 0 4px 2px rgba(0,0,0,.3) inset;
 	box-shadow: 0 0 4px 2px rgba(0,0,0,.3) inset;
-	position: relative;
-	top: 1px;
 }
 
 .button:focus {
@@ -50,6 +50,26 @@
 	-moz-border-radius: .15em 0 0 .15em;
 	-webkit-border-radius: .15em 0 0 .15em;
 	border-radius: .15em 0 0 .15em;
+}
+
+.position_1 {
+	left: 480px;
+	top: 415px
+}
+
+.position_2 {
+	left: 480px;
+	top: 370px
+}
+
+.position_3 {
+	left: 480px;
+	top: 325px
+}
+
+.position_4 {
+	left: 20px;
+	top: 415px;
 }
 
 /* Hexadecimal entities for the icons */
