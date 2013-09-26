@@ -181,8 +181,16 @@ var SequencePlayer = new Class({
                         top : '380px'
                     });
                     moduleProgressBar.inject(myDiv);
-                    UIHelpers.setupButton("Continue", this, "SequenceIntro.done");
-                    UIHelpers.setupButton("Main Menu", this, "MainMenuIntro.clicked");
+
+                    this._addButton({
+                        type : "Continue",
+                        next : "SequenceIntro.done"
+                    });
+                    this._addButton({
+                        type : "Main Menu",
+                        next : "MainMenuIntro.clicked"
+                    });
+
                     // TODO: play level chnage audio if  this.playConLevelAudio = false;
                     step.media.audio.options.next = '';
                     step.media.audio.start();
@@ -202,21 +210,25 @@ var SequencePlayer = new Class({
                     step.media.image.add(myContainerID);
                     step.media.image.show();
                     // TODO: hide the record button until the flash recorder is ready
+                    this._addButton({
+                        type : "Record",
+                        next : "CommentaryIntro.done"
+                    });
 
-                    UIHelpers.setupButton("Record", this, "CommentaryIntro.done");
                     // does the next step have expert audio ? Show button if yes
                     var nextStep = this.currentSequence[0];
                     if (nextStep.expertAudio != undefined) {
-                        UIHelpers.setupButton("Expert commentary", this, "CommentaryIntro.expert.clicked");
+                        this._addButton({
+                            type : "Expert commentary",
+                            next : "CommentaryIntro.expert.clicked"
+                        });
                     };
-
                     this.recorder = new Recorder(this, {
                         swiff : {
                             id : 'Commentary'
                         },
                         src : Main.PATHS.flashFolder + "commentary.swf"
                     });
-
                     this.recorder.add(Main.DIV_ID);
                     // -----
                     step.media.audio.options.next = '';
@@ -256,7 +268,10 @@ var SequencePlayer = new Class({
                     step.media.swiff.start();
                     // Allow skip intro if repeating this sequence
                     if (this.repeating == true) {
-                        UIHelpers.setupButton("Skip", this, "ConIntro.done.clicked");
+                        this._addButton({
+                            type : "Skip",
+                            next : "ConIntro.done.clicked"
+                        });
                     }
                     break;
                 case "ConActivity":
@@ -278,11 +293,17 @@ var SequencePlayer = new Class({
                     step.media.swiff.show();
                     step.media.swiff.attributes.level = this.conLevel;
                     step.media.swiff.startConActivity(step.media.swiff.attributes);
+                    this._addButton({
+                        type : "Cancel",
+                        next : "ConActivity.cancel.clicked"
+                    });
 
-                    UIHelpers.setupButton("Cancel", this, "ConActivity.cancel.clicked");
                     break;
                 case "ConContinue":
-                    UIHelpers.setupButton("Continue", this, "ConContinue.clicked");
+                    this._addButton({
+                        type : "Continue",
+                        next : "ConContinue.clicked"
+                    });
                     break;
                 case "Question":
                     // TODO: maybe add attribute to wait or not
@@ -298,8 +319,10 @@ var SequencePlayer = new Class({
                         step.data.responses = step.attributes.resp;
                     }
                     this.interactions = this._setupQuestions(step.data);
-
-                    UIHelpers.setupButton("Done", this, "QuestionUser.done");
+                    this._addButton({
+                        type : "Done",
+                        next : "QuestionUser.done"
+                    });
                     // resp="3" - allow multiple choices
                     //TODO: notrack="true"
                     //TODO: image="country_cla01_next_first.jpg" - override background image ...
@@ -323,16 +346,31 @@ var SequencePlayer = new Class({
                     break;
                 case "Continue":
                     // NOTE IMPORTANT - this only can be at the end of the sequence !!!!
-                    UIHelpers.setupButton("Continue", this, "Continue.clicked");
-                    UIHelpers.setupButton("Main Menu", this, "MainMenu.clicked");
-                    UIHelpers.setupButton("Repeat", this, "Repeat.clicked");
+                    this._addButton({
+                        type : "Continue",
+                        next : "Continue.clicked"
+                    });
+                    this._addButton({
+                        type : "Main Menu",
+                        next : "MainMenu.clicked"
+                    });
+                    this._addButton({
+                        type : "Repeat",
+                        next : "Repeat.clicked"
+                    });
 
                     this._updateUserProgress();
                     break;
                 case "End.Module.Continue":
                     step.media.audio.start();
-                    UIHelpers.setupButton("Continue", this, "End.Module.Continue.clicked");
-                    UIHelpers.setupButton("Repeat", this, "Repeat.clicked");
+                    this._addButton({
+                        type : "Continue",
+                        next : "End.Module.Continue.clicked"
+                    });
+                    this._addButton({
+                        type : "Repeat",
+                        next : "Repeat.clicked"
+                    });
                     this._updateUserProgress();
                     break;
                 case "Commentary":
@@ -433,8 +471,10 @@ var SequencePlayer = new Class({
                     step.dragNDrop.add(this.activeVideo.containerID);
                     // play Audio - Intro
                     step.media.audio.start();
-
-                    UIHelpers.setupButton("Done", this, "DragNDrop.done");
+                    this._addButton({
+                        type : "Done",
+                        next : "DragNDrop.done"
+                    });
                     break;
                 case "DragNDropFeedback":
 
@@ -451,9 +491,18 @@ var SequencePlayer = new Class({
                     // setup buttons
                     // TODO: extract the end buttons to separate method - replace in continue and here
 
-                    UIHelpers.setupButton("Continue", this, "Continue.clicked");
-                    UIHelpers.setupButton("Main Menu", this, "MainMenu.clicked");
-                    UIHelpers.setupButton("Repeat", this, "Repeat.clicked");
+                    this._addButton({
+                        type : "Continue",
+                        next : "Continue.clicked"
+                    });
+                    this._addButton({
+                        type : "Main Menu",
+                        next : "MainMenu.clicked"
+                    });
+                    this._addButton({
+                        type : "Repeat",
+                        next : "Repeat.clicked"
+                    });
                     // save progress
                     // this is always the last in the sequence ...
                     this._updateUserProgress();
@@ -503,7 +552,10 @@ var SequencePlayer = new Class({
                 this._nextStep();
                 break;
             case "Risks.ready":
-                UIHelpers.setupButton("Done", this, "Risks.done");
+                this._addButton({
+                    type : "Done",
+                    next : "Risks.done"
+                });
                 break;
             case "Risks.done" :
                 this.activeVideo.container.removeEvents('click');
@@ -516,7 +568,10 @@ var SequencePlayer = new Class({
                 break;
             case 'KRFeedback.done':
                 // add continue button
-                UIHelpers.setupButton("Continue", this, "KRFeedback.continue.done");
+                this._addButton({
+                    type : "Continue",
+                    next : "KRFeedback.continue.done"
+                });
                 break;
             case "Continue.clicked":
                 this.reset();
@@ -611,17 +666,33 @@ var SequencePlayer = new Class({
                     this.currentStep.feedbackPanel.add(Main.DIV_ID);
                     this.currentStep.feedbackPanel.show();
                 }
-                UIHelpers.setupButton("Your commentary", this, "Commentary.replay.clicked");
+                this._addButton({
+                    type : "Your commentary",
+                    next : "Commentary.replay.clicked"
+                });
+
                 var ExpertAudio = this.currentStep.expertAudio;
                 if (ExpertAudio != undefined) {
                     // show play expert commentary button
-                    UIHelpers.setupButton("Expert commentary 2", this, "Commentary.expert.clicked");
+                    this._addButton({
+                        type : "Expert commentary 2",
+                        next : "Commentary.expert.clicked"
+                    });
                 }
                 // TODO: offer sequence repeat as well - may need to show continue screen after all ? Maybe use the module Intro ?
 
-                UIHelpers.setupButton("Continue", this, "Continue.clicked");
-                UIHelpers.setupButton("Repeat", this, "Commentary.repeat.clicked");
-                UIHelpers.setupButton("Main Menu", this, "MainMenu.clicked");
+                this._addButton({
+                    type : "Continue",
+                    next : "Continue.clicked"
+                });
+                this._addButton({
+                    type : "Repeat",
+                    next : "Commentary.repeat.clicked"
+                });
+                this._addButton({
+                    type : "Main Menu",
+                    next : "MainMenu.clicked"
+                });
                 break;
             case "Commentary.replay.clicked":
                 this._removeFeedbackPanel();
@@ -687,7 +758,10 @@ var SequencePlayer = new Class({
                 this._removeButtons();
                 introFinished = null;
                 this.currentStep.media.audio.start();
-                UIHelpers.setupButton("Start", this, "ConIntro.done.clicked");
+                this._addButton({
+                    type : "Start",
+                    next : "ConIntro.done.clicked"
+                });
                 break;
             case "ConIntro.done.clicked":
             case "ConContinue.clicked":
@@ -1216,9 +1290,14 @@ var SequencePlayer = new Class({
 
             // Already played the intro video so this time just play welcome sound
 
-            UIHelpers.setupButton("Continue", this, "Continue.clicked");
-            UIHelpers.setupButton("Main Menu", this, "MainMenuIntro.clicked");
-
+            this._addButton({
+                type : "Continue",
+                next : "Continue.clicked"
+            });
+            this._addButton({
+                type : "Main Menu",
+                next : "MainMenuIntro.clicked"
+            });
             this._updateUserProgress();
 
             if (this.fromMenu == true) {
@@ -1243,8 +1322,14 @@ var SequencePlayer = new Class({
             step.media.moduleIntroVideo.start();
 
             // Already played the intro video so this time just play welcome sound
-            UIHelpers.setupButton("Continue", this, "Continue.clicked");
-            UIHelpers.setupButton("Main Menu", this, "MainMenuIntro.clicked");
+            this._addButton({
+                type : "Continue",
+                next : "Continue.clicked"
+            });
+            this._addButton({
+                type : "Main Menu",
+                next : "MainMenuIntro.clicked"
+            });
 
             // TODO: is this needed ?
             if (this.fromMenu == true) {
@@ -1255,5 +1340,17 @@ var SequencePlayer = new Class({
             }
             // TODO: if first time go to next step
         }
-    }.protect()
+    }.protect(),
+    _addButton : function(buttonData) {
+        log(buttonData);
+        var buttonOptions = UIHelpers.getButtonOptions(buttonData['type']);
+        if (buttonData['next']) {
+            buttonOptions['next'] = buttonData['next'];
+        }
+        var button = new Button(null, buttonOptions);
+        button.registerEvent(this);
+        button.add(Main.DIV_ID);
+        button.show();
+        this.buttons.push(button);
+    }
 });

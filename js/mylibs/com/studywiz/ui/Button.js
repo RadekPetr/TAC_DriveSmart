@@ -43,13 +43,14 @@ var Button = new Class({
 
         this.buttonElement.setStyles(this.options.style);
 
-        this.buttonElement.addEvent("click", function() {
+       /* this.buttonElement.addEvent("click", function() {
             this.myParent().fireEvent("TIMELINE", {
                 type : "button.clicked",
                 id : this.options.id,
                 next : this.options.next
             });
         }.bind(this));
+        */
     },
     remove : function() {
         this.hide();
@@ -66,5 +67,15 @@ var Button = new Class({
     hide : function() {
         this.buttonElement.fade('out');
         // this.buttonElement.hide();
+    },
+    registerEvent : function(sendEventTo) {
+        this.options.parent = sendEventTo;
+        this.buttonElement.addEvent("click", function() {
+            sendEventTo.fireEvent("TIMELINE", {
+                type : "button.clicked",
+                id : this.options.id,
+                next : this.options.next
+            });
+        }.bind(this));
     }
 });
