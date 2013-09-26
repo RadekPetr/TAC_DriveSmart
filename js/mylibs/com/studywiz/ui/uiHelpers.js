@@ -72,71 +72,52 @@ UIHelpers.setupButton = function(buttonType, parent, next) {
     };
     var presets = new Hash({
         "Main Menu" : {
-            id : "button_" + parent.buttons.length,
+            id : "button_" + buttonType,
             text : "Main Menu",
             next : "MainMenu.clicked",
-            style : {
-                left : buttonPosition.x,
-                top : buttonPosition.y - 45
-            }
+           'class': "button position_2"
         },
         "Continue" : {
-            id : "button_" + parent.buttons.length,
+            id : "button_" + buttonType,
             text : "Continue",
             next : "Continue.clicked",
-            style : {
-                left : buttonPosition.x,
-                top : buttonPosition.y
-            }
+            'class': "button position_1"
         },
         "Repeat" : {
-            id : "button_" + parent.buttons.length,
+            id : "button_" + buttonType,
             text : "Repeat",
             next : "Repeat.clicked",
-            style : {
-                left : buttonPosition.x,
-                top : buttonPosition.y - 90
-            }
+            'class': "button position_3"
         },
         "Done" : {
-            id : "button_" + parent.buttons.length,
+            id : "button_" + buttonType,
             text : "Done",
             next : "Risks.done",
-            style : {
-                left : buttonPosition.x,
-                top : buttonPosition.y
-            }
+            'class': "button position_1"
         },
         "Cancel" : {
-            id : "button_" + parent.buttons.length,
+            id : "button_" + buttonType,
             text : "Cancel",
             next : "ConActivity.cancel.clicked",
-            style : {
-                left : buttonPosition.x,
-                top : buttonPosition.y
-            }
+            'class': "button position_1"
         },
         "Record" : {
-            id : "button_" + parent.buttons.length,
+            id : "button_" + buttonType,
             text : "Record",
             next : "CommentaryIntro.done",
-            style : {
-                left : buttonPosition.x,
-                top : buttonPosition.y
-            }
+            'class': "button position_1"
         },
         "Expert commentary" : {
-            id : "button_" + parent.buttons.length,
+            id : "button_" + buttonType,
             text : "Expert commentary",
             next : "CommentaryIntro.expert.clicked",
-            style : {
-                left : 20,
-                top : buttonPosition.y,
+            'class': "button position_4",
+            style : {               
                 width : '195px'
             }
         },
         "Expert commentary 2" : {
-            id : "button_" + parent.buttons.length,
+            id : "button_" + buttonType,
             text : "Expert commentary",
             next : "Commentary.expert.clicked",
             style : {
@@ -146,30 +127,23 @@ UIHelpers.setupButton = function(buttonType, parent, next) {
             }
         },
         "Skip" : {
-            id : "button_" + parent.buttons.length,
+            id : "button_" + buttonType,
             text : "Skip",
             next : "ConIntro.done.clicked",
-            style : {
-                left : buttonPosition.x,
-                top : buttonPosition.y
-            }
+            'class': "button position_1"
         },
         "Start" : {
-            id : "button_" + parent.buttons.length,
+            id : "button_" + buttonType,
             text : "Start",
             next : "ConIntro.done.clicked",
-            style : {
-                left : buttonPosition.x,
-                top : buttonPosition.y
-            }
+            'class': "button position_1"
         },
         "Your commentary" : {
-            id : "button_" + parent.buttons.length,
+            id : "button_" + buttonType,
             text : "Your commentary",
             next : "Commentary.replay.clicked",
-            style : {
-                left : 20,
-                top : buttonPosition.y,
+            'class': "button position_4",
+            style : {               
                 width : '195px'
             }
 
@@ -179,7 +153,7 @@ UIHelpers.setupButton = function(buttonType, parent, next) {
 
     var options = presets.get(buttonType);
     // TODO: Disabled symbol on buttons, to finalize with new style when available
-    options['class'] = 'button';
+   // options['class'] = 'button';
     if (next) {
         options['next'] = next;
     }

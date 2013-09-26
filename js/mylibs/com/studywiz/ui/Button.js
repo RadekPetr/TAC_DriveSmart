@@ -7,10 +7,6 @@ var Button = new Class({
 
     options : {
         style : {
-            'position' : 'absolute',
-            'top' : '0px',
-            'left' : '0px',
-            'width' : '140px'
 
         },
         'class' : 'button',
