@@ -19,14 +19,6 @@ var UIHelpers = new Class({
 // Static methods
 UIHelpers.progressBarSetup = function(progress, id) {
 
-    /* var score = new Element('div', {
-     id : "Module_Score_" + menuItem.id,
-     html : "Module score: " + (100 * Main.userTracker.getModuleScore(menuItem.retrieve('moduleID')) ).toInt() + "/100",
-     'class' :'module_score_title'
-     });
-     menuItem.adopt (score);
-     */
-
     var progressBarComponent = new Element('div', {
         id : "Progress_" + id,
         html : "Progress: ",

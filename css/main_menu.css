@@ -32,7 +32,7 @@
 	color: #EAC749;
 	font-size: 1em;
 }
-.dashboard_modules {
+.menu_item {
 	font-size: 1em;
 	color: #EAC749;
 	font-size: 1em;
@@ -40,10 +40,10 @@
 	padding: 5px;
 }
 
-.dashboard_modules:hover {
+.menu_item:hover {
 	color: #FFFF99;
 }
-.dashboard_modules_locked {
+.menu_item_locked {
 	font-size: 1em;
 	color: #EAC749;
 	font-size: 1em;
@@ -51,7 +51,7 @@
 	padding: 5px;
 }
 
-.dashboard_modules_locked:hover {
+.menu_item_locked:hover {
 	color: #EAC749;
 }
 .progress_title {

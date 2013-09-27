@@ -1,0 +1,156 @@
+/**
+ * @author Radek
+ */
+
+var MenuItem = new Class({
+    Implements : [Options, Events],
+    options : {
+        style : {
+            'opacity' : '0',
+            'visibility' : 'hidden'
+        },
+        'class' : 'menu_item no-select',
+        data : null,
+        id : 'element.id',
+        next : 'next.action',
+        parent : null,
+        preview : null
+    },
+    initialize : function(myParent, myOptions) {
+        this.setOptions(myOptions);
+        this.options.parent = myParent;
+        this.selectedModuleID = this.options.data.moduleID;
+        this.isLocked = false;
+
+        // log(menuItem);
+        var elemID = "menu_item_" + this.selectedModuleID;
+        this.container = new Element('div', {
+            'html' : this.options.data.text,
+            'id' : elemID,
+            'onselectstart' : 'return false;',
+            'class' : this.options['class']
+        });
+
+        this.options.preview = new ImagePlayer(myParent, {
+            src : Main.PATHS.imageFolder + this.options.data.preview,
+            title : 'Image',
+            id : 'preview_' + this.selectedModuleID,
+            style : {
+                'width' : '140px',
+                'height' : '107px',
+                top : '60px',
+                left : '380px'
+            }
+        });
+        this.options.preview.preload();
+    },
+    lock : function() {
+        this.isLocked = true;
+        var lockedCSS = 'menu_item_locked no-select';
+        this.container.removeAttribute('class');
+        this.container.addClass(lockedCSS);
+        var symbol = this._getLockedStatusSymbol();
+        // TODO: will probably just chnage the calss instead ?
+        this.container.grab(symbol, 'top');
+        // this.container.adopt(symbol);
+        symbol.show();
+    },
+    showProgress : function() {
+        if (this.options.data.showProgress == true) {
+            var moduleState = Main.userTracker.getModuleState(this.selectedModuleID);
+            if (moduleState.completed == true) {
+                var symbol = this._getCompleteStatusSymbol();
+                this.container.adopt(symbol);
+                symbol.show();
+            }
+            this.container.adopt(UIHelpers.progressBarSetup(moduleState.progress, this.selectedModuleID));
+        }
+    },
+    myParent : function() {
+        return this.options.parent;
+    }, // ---------------------------
+    add : function(parentTagID) {
+        this.container.inject($m(parentTagID));
+        this.container.setStyles(this.options.style);
+        this.showProgress();
+    },
+    remove : function() {
+        this.hide();
+        var removedElement = this.container.destroy();
+    },
+    // ---------------------------
+    show : function() {
+        if (this.container.style.opacity == 0) {
+            // this.panel.fade('hide', 0);
+            this.container.fade('in');
+        }
+    },
+    // ---------------------------
+    hide : function() {
+        if (this.container.style.opacity > 0) {
+            this.container.fade('out');
+        }
+    },
+    _getCompleteStatusSymbol : function(left, top) {
+        var file = Main.PATHS.imageFolder + 'menu/tick.png';
+
+        var symbolImage = new ImagePlayer(this, {
+            src : file,
+            next : "",
+            id : 'finished.' + this.selectedModuleID
+        });
+        symbolImage.preload();
+        symbolImage.image.setStyles({
+            'width' : '30px',
+            'height' : '34px',
+            'float' : 'right',
+            'padding-left' : '15px'
+        });
+
+        return symbolImage.image;
+    },
+    _getLockedStatusSymbol : function(left, top) {
+        var file = Main.PATHS.imageFolder + 'menu/tick.png';
+
+        var symbolImage = new ImagePlayer(this, {
+            src : file,
+            next : "",
+            id : 'lock.' + this.selectedModuleID
+        });
+        symbolImage.preload();
+        symbolImage.image.setStyles({
+            'width' : '30px',
+            'height' : '34px',
+            'float' : 'right',
+            'padding-left' : '15px'
+        });
+        return symbolImage.image;
+    },
+    registerClickEvent : function(sendEventTo) {
+        this.container.addEvent("click", function() {
+            sendEventTo.fireEvent("TIMELINE", {
+                type : "item.clicked",
+                id : this.selectedModuleID,
+                next : "Menu.item.clicked"
+            });
+        }.bind(this));
+
+    },
+
+    registerMouseLeaveEvent : function(sendEventTo) {
+        this.container.addEvent("mouseenter", function() {
+            sendEventTo.fireEvent("MODULE_INFO", {
+                type : "item.over",
+                id : this.selectedModuleID,
+                data : {
+                    description : this.options.data.description,
+                    preview : this.options.preview
+                }
+            });
+        }.bind(this));
+
+    },
+    getSelectedModuleID : function() {
+        return this.selectedModuleID;
+    }
+});
