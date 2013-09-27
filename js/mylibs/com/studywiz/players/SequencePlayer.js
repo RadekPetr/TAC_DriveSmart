@@ -235,9 +235,10 @@ var SequencePlayer = new Class({
                     step.media.audio.start();
                     break;
                 case "PlayVideo":
+                    this._stopPlayers();
                     this._removeImages();
                     this._removeButtons();
-                    this._cleanUp();
+                    this._removeIntroContainers();
                     this._hideInteractions();
                     step.media.video.options.next = 'PlayVideo.done';
                     step.media.video.show();
@@ -246,9 +247,10 @@ var SequencePlayer = new Class({
                     //TODO: noBg1="1"
                     break;
                 case "ConIntro":
+                    this._stopPlayers();
                     this._removeImages();
                     this._removeButtons();
-                    this._cleanUp();
+                    this._removeIntroContainers();
                     this._hideInteractions();
 
                     step.media.swiff.options.next = 'ConIntro.done';
@@ -262,7 +264,6 @@ var SequencePlayer = new Class({
                         });
                     }.bind(this);
 
-                    // step.media.swiff.add(Main.DIV_ID);
                     this.activeSwiff = step.media.swiff;
                     step.media.swiff.show();
                     step.media.swiff.start();
@@ -275,9 +276,10 @@ var SequencePlayer = new Class({
                     }
                     break;
                 case "ConActivity":
+                    this._stopPlayers();
                     this._removeImages();
                     this._removeButtons();
-                    this._cleanUp();
+                    this._removeIntroContainers();
                     this._hideInteractions();
                     swiffFinished = function(score) {
                         console.log("*********************Con activity done: ", score);
@@ -315,6 +317,7 @@ var SequencePlayer = new Class({
                     break;
                 case "QuestionUser":
                     this._removeInteractions();
+                    // check if we allow multiple responses
                     if (step.attributes.resp != null && step.attributes.resp != undefined) {
                         step.data.responses = step.attributes.resp;
                     }
@@ -322,8 +325,7 @@ var SequencePlayer = new Class({
                     this._addButton({
                         type : "Done",
                         next : "QuestionUser.done"
-                    });
-                    // resp="3" - allow multiple choices
+                    });                    
                     //TODO: notrack="true"
                     //TODO: image="country_cla01_next_first.jpg" - override background image ...
                     break;
@@ -528,22 +530,25 @@ var SequencePlayer = new Class({
                 this._nextStep();
                 break;
             case "SequenceIntro.done":
+                this._stopPlayers();
                 this._removeImages();
                 this._removeButtons();
-                this._cleanUp();
+                this._removeIntroContainers();
                 this._nextStep();
                 break;
             case 'KRFeedback.continue.done':
+                this._stopPlayers();
                 this._removeRisks();
                 this._removeImages();
                 this._removeButtons();
-                this._cleanUp();
+                this._removeIntroContainers();
                 this._nextStep();
                 break;
             case "Skip.done":
+                this._stopPlayers();
                 this._removeImages();
                 this._removeButtons();
-                this._cleanUp();
+                this._removeIntroContainers();
                 this._nextStep();
                 break;
             case "QuestionUser.done":
@@ -584,10 +589,11 @@ var SequencePlayer = new Class({
             case "ConActivity.cancel.clicked":
                 this.currentStep.score = undefined;
             case "Repeat.clicked":
+                this._stopPlayers();
                 this._removeVideos();
                 this._removeImages();
                 this._removeButtons();
-                this._cleanUp();
+                this._removeIntroContainers();
                 this._removeInteractions();
                 this.repeating = true;
                 this.myParent().fireEvent("SEQUENCE", {
@@ -598,10 +604,11 @@ var SequencePlayer = new Class({
             case "End.Module.Continue.clicked":
             case "MainMenu.clicked":
             case "MainMenuIntro.clicked":
+                this._stopPlayers();
                 this._removeVideos();
                 this._removeImages();
                 this._removeButtons();
-                this._cleanUp();
+                this._removeIntroContainers();
                 this._removeInteractions();
 
                 this.repeating = false;
@@ -643,9 +650,10 @@ var SequencePlayer = new Class({
                     log("ERROR - next step must be Commentary after CommentaryIntro");
                 }
             case "CommentaryIntro.done":
+                this._stopPlayers();
                 this._removeInteractions();
                 this._removeButtons();
-                this._cleanUp();
+                this._removeIntroContainers();
                 this._nextStep();
                 break;
             case "Commentary.recording.done":
@@ -695,9 +703,10 @@ var SequencePlayer = new Class({
                 });
                 break;
             case "Commentary.replay.clicked":
+                this._stopPlayers();
                 this._removeFeedbackPanel();
                 this._removeButtons();
-                this._cleanUp();
+                this._removeIntroContainers();
                 this.recorder.startPlayback();
                 this.currentStep.media.video.show();
                 this.currentStep.media.video.options.next = 'Commentary.recording.done';
@@ -705,9 +714,10 @@ var SequencePlayer = new Class({
                 this.currentStep.media.video.start();
                 break;
             case "Commentary.expert.clicked":
+                this._stopPlayers();
                 this._removeFeedbackPanel();
                 this._removeButtons();
-                this._cleanUp();
+                this._removeIntroContainers();
                 var expertAudio = this.currentStep.expertAudio;
                 if (expertAudio != undefined) {
                     expertAudio.options.next = '';
@@ -719,15 +729,17 @@ var SequencePlayer = new Class({
                 this.currentStep.media.video.start();
                 break;
             case "Commentary.repeat.clicked":
+                this._stopPlayers();
                 this._removeFeedbackPanel();
                 this._removeButtons();
-                this._cleanUp();
+                this._removeIntroContainers();
                 this.currentSequence.unshift(this.currentStep);
                 this._nextStep();
                 break;
             case "DragNDrop.done":
+                this._stopPlayers();
                 this._removeButtons();
-                this._cleanUp();
+                this._removeIntroContainers();
                 // disable dragging now
                 this.currentStep.dragNDrop.stop();
 
@@ -742,9 +754,10 @@ var SequencePlayer = new Class({
                 }
                 break;
             case "Menu.item.clicked":
+                this._stopPlayers();
                 this._removeImages();
                 this._removeButtons();
-                this._cleanUp();
+                this._removeIntroContainers();
 
                 this.myParent().myParent().setOptions({
                     moduleID : params.id
@@ -765,9 +778,10 @@ var SequencePlayer = new Class({
                 break;
             case "ConIntro.done.clicked":
             case "ConContinue.clicked":
+                this._stopPlayers();
                 this._removeButtons();
                 this._removeCurrentSwiff();
-                this._cleanUp();
+                this._removeIntroContainers();
                 this._nextStep();
                 break;
         };
@@ -1074,21 +1088,8 @@ var SequencePlayer = new Class({
             }
         }.bind(this));
     }.protect(),
-    _cleanUp : function() {
-        if (this.currentStep != null) {
-            this.currentStep.media.each(function(player, mediaKey) {
-                if (player != null) {
-                    log(player, mediaKey);
-                    player.stop();
-                }
-            });
-        }
+    _removeIntroContainers : function() {
 
-        var debugPanel = $m('debugContainer');
-
-        if (debugPanel != null) {
-            //debugPanel.dispose();
-        }
         var sequenceIntroTag = $m('SequenceIntro.container');
         if (sequenceIntroTag != null) {
             sequenceIntroTag.destroy();
@@ -1101,6 +1102,15 @@ var SequencePlayer = new Class({
         var menuTag = $m('Menu.container');
         if (menuTag != null) {
             menuTag.destroy();
+        }
+    }.protect(),
+    _stopPlayers : function() {
+        if (this.currentStep != null) {
+            this.currentStep.media.each(function(player, mediaKey) {
+                if (player != null) {
+                    player.stop();
+                }
+            });
         }
     }.protect(),
     _removeImages : function() {
@@ -1206,6 +1216,7 @@ var SequencePlayer = new Class({
         return true;
     },
     reset : function() {
+        this._stopPlayers();
         this.currentSequence.empty();
         this._removeFeedbackPanel();
         this.mediaLoader.remove();
@@ -1215,7 +1226,7 @@ var SequencePlayer = new Class({
         this._removeButtons();
         this._removeSwiffs();
         this._removeInteractions();
-        this._cleanUp();
+        this._removeIntroContainers();
         this._removeVideos();
         this._resetVariables();
     },
@@ -1312,8 +1323,9 @@ var SequencePlayer = new Class({
             // Play the Module Intro video
             // allow skip ?
             //this._removeImages();
+            this._stopPlayers();
             this._removeButtons();
-            this._cleanUp();
+            this._removeIntroContainers();
             this._hideInteractions();
             step.media.moduleIntroVideo.options.next = '';
             step.media.moduleIntroVideo.show();
