@@ -14,43 +14,33 @@ var MenuItem = new Class({
             'opacity' : '0',
             'visibility' : 'hidden'
         },
+        'class' : 'dashboard_modules no-select',
         data : null,
         id : 'element.id',
         next : 'next.action',
         parent : null,
-        description : function(element) {
-            return element.get('rel');
-        }
+        preview : null
     },
     initialize : function(myParent, myOptions) {
-
         this.setOptions(myOptions);
         this.options.parent = myParent;
-      
-        var selectedModuleID = this.options.data.moduleID;
-        var lockedItem = this._isItemLocked(this.options.data);
-
-        if (lockedItem == true) {
-            var menuItemCSS = 'dashboard_modules_locked no-select';
-        } else {
-            var menuItemCSS = 'dashboard_modules no-select';
-        }
+        this.selectedModuleID = this.options.data.moduleID;
+        this.isLocked = false;
 
         // log(menuItem);
-        var elemID = "menu_item_" + selectedModuleID;
+        var elemID = "menu_item_" + this.selectedModuleID;
         var item = new Element('div', {
             'html' : this.options.data.text,
             'id' : elemID,
             'onselectstart' : 'return false;',
-            'rel' : this.options.data.description,
-            'class' : menuItemCSS
+            'class' : this.options['class']
         });
         this.container = item;
 
         var preview = new ImagePlayer(myParent, {
             src : Main.PATHS.imageFolder + this.options.data.preview,
             title : 'Image',
-            id : 'preview_' + selectedModuleID,
+            id : 'preview_' + this.selectedModuleID,
             style : {
                 'width' : '140px',
                 'height' : '107px',
@@ -60,36 +50,30 @@ var MenuItem = new Class({
         });
 
         preview.preload();
-        item.store('preview', preview);
+        this.options.preview = preview;
 
-        if (lockedItem == true) {
-            var symbol = this._getLockedStatusSymbol();
-            item.adopt(symbol);
-            symbol.show();
-        }
-
-        if (lockedItem != true || Main.DEBUG == true) {
-            item.addEvent("click", function() {
-                this.myParent().fireEvent("TIMELINE", {
-                    type : "item.clicked",
-                    id : selectedModuleID,
-                    next : "Menu.item.clicked"
-                });
-            }.bind(this));
-        }
-
-      
         if (this.options.data.showProgress == true) {
-            var moduleState = Main.userTracker.getModuleState(this.options.data.moduleID);
+            var moduleState = Main.userTracker.getModuleState(this.selectedModuleID);
             if (moduleState.completed == true) {
                 var symbol = this._getCompleteStatusSymbol();
                 item.adopt(symbol);
                 symbol.show();
             }
-            item.adopt(UIHelpers.progressBarSetup(moduleState.progress, this.options.data.moduleID));
+            item.adopt(UIHelpers.progressBarSetup(moduleState.progress, this.selectedModuleID));
         }
-        
-       
+    },
+    lock : function() {
+        this.isLocked = true;
+
+        var lockedCSS = 'dashboard_modules_locked no-select';
+        this.container.removeAttribute('class');
+        this.container.addClass(lockedCSS);
+
+        var symbol = this._getLockedStatusSymbol();
+        // TODO: will probably just chnage the calss instead ?
+        this.container.grab(symbol, 'top');
+        // this.container.adopt(symbol);
+        symbol.show();
     },
     myParent : function() {
         return this.options.parent;
@@ -122,8 +106,7 @@ var MenuItem = new Class({
         var symbolImage = new ImagePlayer(this, {
             src : file,
             next : "",
-            title : 'finished',
-            id : 'finished'
+            id : 'finished.' + this.selectedModuleID
         });
         symbolImage.preload();
         symbolImage.image.setStyles({
@@ -141,8 +124,7 @@ var MenuItem = new Class({
         var symbolImage = new ImagePlayer(this, {
             src : file,
             next : "",
-            title : 'finished',
-            id : 'finished'
+            id : 'lock.' + this.selectedModuleID
         });
         symbolImage.preload();
         symbolImage.image.setStyles({
@@ -153,20 +135,17 @@ var MenuItem = new Class({
         });
         return symbolImage.image;
     },
-    _isItemLocked : function(menuItem) {
-        var itemPreconditions = menuItem.preconditions;
-        if (itemPreconditions.length == 0) {
-            var isLocked = false;
-        } else {
-            var isLocked = true;
-            Array.each(itemPreconditions, function(moduleID, index) {
-                var moduleState = Main.userTracker.getModuleState(moduleID);
-                var isModuleCompleted = moduleState.completed;
-                if (isModuleCompleted == true) {
-                    isLocked = false;
-                }
+    registerEvent : function(sendEventTo) {
+        this.container.addEvent("click", function() {
+            sendEventTo.fireEvent("TIMELINE", {
+                type : "item.clicked",
+                id : this.selectedModuleID,
+                next : "Menu.item.clicked"
             });
-            return isLocked;
-        }
+        }.bind(this));
+
+    },
+    getSelectedModuleID : function() {
+        return this.selectedModuleID;
     }
 });
