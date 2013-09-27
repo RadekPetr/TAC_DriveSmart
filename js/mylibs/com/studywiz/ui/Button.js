@@ -16,7 +16,6 @@ var Button = new Class({
         parent : null
     },
     initialize : function(myParent, myOptions) {
-
         this.setOptions(myOptions);
         this.options.parent = myParent;
         this.buttonElement = new Element("button", {
@@ -24,7 +23,6 @@ var Button = new Class({
             text : this.options.text,
             'class' : this.options['class']
         });
-
     },
     myParent : function() {
         return this.options.parent;
@@ -42,15 +40,6 @@ var Button = new Class({
         this.hide();
 
         this.buttonElement.setStyles(this.options.style);
-
-       /* this.buttonElement.addEvent("click", function() {
-            this.myParent().fireEvent("TIMELINE", {
-                type : "button.clicked",
-                id : this.options.id,
-                next : this.options.next
-            });
-        }.bind(this));
-        */
     },
     remove : function() {
         this.hide();
