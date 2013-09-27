@@ -3,7 +3,7 @@
  */
 
 // TODO: rename to Menu and create class MeanuItem to populate it
-var MenuItems = new Class({
+var MenuPlayer = new Class({
 
     Implements : [Options, Events],
 
