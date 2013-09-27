@@ -3,18 +3,13 @@
  */
 
 var MenuItem = new Class({
-
     Implements : [Options, Events],
-
     options : {
         style : {
-            position : 'absolute',
-            top : '0px',
-            left : '0px',
             'opacity' : '0',
             'visibility' : 'hidden'
         },
-        'class' : 'dashboard_modules no-select',
+        'class' : 'menu_item no-select',
         data : null,
         id : 'element.id',
         next : 'next.action',
@@ -29,15 +24,14 @@ var MenuItem = new Class({
 
         // log(menuItem);
         var elemID = "menu_item_" + this.selectedModuleID;
-        var item = new Element('div', {
+        this.container = new Element('div', {
             'html' : this.options.data.text,
             'id' : elemID,
             'onselectstart' : 'return false;',
             'class' : this.options['class']
         });
-        this.container = item;
 
-        var preview = new ImagePlayer(myParent, {
+        this.options.preview = new ImagePlayer(myParent, {
             src : Main.PATHS.imageFolder + this.options.data.preview,
             title : 'Image',
             id : 'preview_' + this.selectedModuleID,
@@ -48,32 +42,29 @@ var MenuItem = new Class({
                 left : '380px'
             }
         });
-
-        preview.preload();
-        this.options.preview = preview;
-
-        if (this.options.data.showProgress == true) {
-            var moduleState = Main.userTracker.getModuleState(this.selectedModuleID);
-            if (moduleState.completed == true) {
-                var symbol = this._getCompleteStatusSymbol();
-                item.adopt(symbol);
-                symbol.show();
-            }
-            item.adopt(UIHelpers.progressBarSetup(moduleState.progress, this.selectedModuleID));
-        }
+        this.options.preview.preload();
     },
     lock : function() {
         this.isLocked = true;
-
-        var lockedCSS = 'dashboard_modules_locked no-select';
+        var lockedCSS = 'menu_item_locked no-select';
         this.container.removeAttribute('class');
         this.container.addClass(lockedCSS);
-
         var symbol = this._getLockedStatusSymbol();
         // TODO: will probably just chnage the calss instead ?
         this.container.grab(symbol, 'top');
         // this.container.adopt(symbol);
         symbol.show();
+    },
+    showProgress : function() {
+        if (this.options.data.showProgress == true) {
+            var moduleState = Main.userTracker.getModuleState(this.selectedModuleID);
+            if (moduleState.completed == true) {
+                var symbol = this._getCompleteStatusSymbol();
+                this.container.adopt(symbol);
+                symbol.show();
+            }
+            this.container.adopt(UIHelpers.progressBarSetup(moduleState.progress, this.selectedModuleID));
+        }
     },
     myParent : function() {
         return this.options.parent;
@@ -81,6 +72,7 @@ var MenuItem = new Class({
     add : function(parentTagID) {
         this.container.inject($m(parentTagID));
         this.container.setStyles(this.options.style);
+        this.showProgress();
     },
     remove : function() {
         this.hide();
@@ -92,7 +84,6 @@ var MenuItem = new Class({
             // this.panel.fade('hide', 0);
             this.container.fade('in');
         }
-
     },
     // ---------------------------
     hide : function() {
@@ -135,12 +126,26 @@ var MenuItem = new Class({
         });
         return symbolImage.image;
     },
-    registerEvent : function(sendEventTo) {
+    registerClickEvent : function(sendEventTo) {
         this.container.addEvent("click", function() {
             sendEventTo.fireEvent("TIMELINE", {
                 type : "item.clicked",
                 id : this.selectedModuleID,
                 next : "Menu.item.clicked"
+            });
+        }.bind(this));
+
+    },
+
+    registerMouseLeaveEvent : function(sendEventTo) {
+        this.container.addEvent("mouseenter", function() {
+            sendEventTo.fireEvent("MODULE_INFO", {
+                type : "item.over",
+                id : this.selectedModuleID,
+                data : {
+                    description : this.options.data.description,
+                    preview : this.options.preview
+                }
             });
         }.bind(this));
 

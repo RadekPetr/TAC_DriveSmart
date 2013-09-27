@@ -2,11 +2,8 @@
  * @author Radek
  */
 
-// TODO: rename to Menu and create class MeanuItem to populate it
 var MenuPlayer = new Class({
-
     Implements : [Options, Events],
-
     options : {
         style : {
             position : 'absolute',
@@ -16,67 +13,17 @@ var MenuPlayer = new Class({
             'visibility' : 'hidden'
         },
         data : null,
-        id : 'element.id',
+        id : 'MenuPlayer',
         next : 'next.action',
-        parent : null,
-        text : function(element) {
-            return element.get('rel');
-        }
+        parent : null
     },
     initialize : function(myParent, myOptions) {
-
         this.setOptions(myOptions);
         this.options.parent = myParent;
         this.menuItems = new Array();
-
         this.container = new Element("div", {
             id : "navigation.container"
         });
-
-        Array.each(this.options.data, function(menuItemData, index) {
-            var menuItem = new MenuItem(this, {
-                data : menuItemData
-            });
-            this.menuItems.push(menuItem);
-
-            menuItem.container.addEvent("mouseenter", function() {
-                this.module_description.set('html', menuItem.options.data.description);
-                this.module_description.show();
-                var preview = menuItem.options.preview;
-                var imageDiv = this.container.getElementById('imageContainer');
-                if (imageDiv != null) {
-                    imageDiv.destroy();
-                }
-                preview.add(this.container.id);
-                preview.container.set('class', 'module-preview');
-                preview.display();
-
-            }.bind(this));
-
-            //TODO: replace with .add, .show calls
-            this.container.adopt(menuItem.container);
-            var isLocked = this._isItemLocked(menuItemData);
-            if (isLocked) {
-                menuItem.lock();
-            }
-
-            if (isLocked != true || Main.DEBUG == true) {
-                menuItem.registerEvent(this.myParent());
-            }
-
-        }.bind(this));
-
-        this.module_description = new Element("div", {
-            id : "module.description",
-            'class' : 'module-description no-select',
-            styles : {
-                left : '375px',
-                top : '190px'
-            }
-        });
-
-        this.container.adopt(this.module_description);
-        this.module_description.hide();
     },
     myParent : function() {
         return this.options.parent;
@@ -84,6 +31,7 @@ var MenuPlayer = new Class({
     add : function(parentTagID) {
         this.container.inject($m(parentTagID));
         this.container.setStyles(this.options.style);
+        this._renderMenu();
     },
     remove : function() {
         this.hide();
@@ -95,7 +43,6 @@ var MenuPlayer = new Class({
             // this.panel.fade('hide', 0);
             this.container.fade('in');
         }
-
     },
     // ---------------------------
     hide : function() {
@@ -103,24 +50,58 @@ var MenuPlayer = new Class({
             this.container.fade('out');
         }
     },
-    _getCompleteStatusSymbol : function(left, top) {
-        var file = Main.PATHS.imageFolder + 'menu/tick.png';
+    _renderMenu : function() {
+        this._addModuleDescription();
+        this._addMenuItems();
+    },
+    _addMenuItems : function() {
+        Array.each(this.options.data, function(menuItemData, index) {
+            var menuItem = new MenuItem(this, {
+                data : menuItemData
+            });
+            this.menuItems.push(menuItem);           
 
-        var symbolImage = new ImagePlayer(this, {
-            src : file,
-            next : "",
-            title : 'finished',
-            id : 'finished'
-        });
-        symbolImage.preload();
-        symbolImage.image.setStyles({
-            'width' : '30px',
-            'height' : '34px',
-            'float' : 'right',
-            'padding-left' : '15px'
-        });
+            menuItem.add(this.container.id);
+            menuItem.show();
 
-        return symbolImage.image;
+            var isLocked = this._isItemLocked(menuItemData);
+            if (isLocked) {
+                menuItem.lock();
+            }
+
+            if (isLocked != true || Main.DEBUG == true) {
+                menuItem.registerClickEvent(this.myParent());
+            }
+            menuItem.registerMouseLeaveEvent(this);            
+        }.bind(this));
+        
+        this.addEvent("MODULE_INFO", this.showModuleInformation);
+    },
+    showModuleInformation : function(params) {
+        var moduleInfoData = params.data;
+        this.module_description.set('html', moduleInfoData.description);
+        this.module_description.show();
+
+        var previewImage = moduleInfoData.preview;
+        var imageDiv = this.container.getElementById('imageContainer');
+        if (imageDiv != null) {
+            imageDiv.destroy();
+        }
+        previewImage.add(this.container.id);
+        previewImage.container.set('class', 'module-preview');
+        previewImage.display();
+    },
+    _addModuleDescription : function() {
+        this.module_description = new Element("div", {
+            id : "module.description",
+            'class' : 'module-description no-select',
+            styles : {
+                left : '375px',
+                top : '190px'
+            }
+        });
+        this.container.adopt(this.module_description);
+        this.module_description.hide();
     },
     _isItemLocked : function(menuItem) {
         var itemPreconditions = menuItem.preconditions;
