@@ -1,6 +1,8 @@
 /**
  * @author Radek
  */
+
+// TODO: rename to Menu and create class MeanuItem to populate it
 var MenuItems = new Class({
 
     Implements : [Options, Events],
