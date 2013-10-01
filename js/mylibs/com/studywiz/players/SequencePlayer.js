@@ -196,8 +196,7 @@ var SequencePlayer = new Class({
                     step.media.audio.start();
                     break;
                 case "ModuleIntro":
-                    // TODO: cssID from module
-                    UIHelpers.setMainPanel("panel_kaps");
+                    UIHelpers.setMainPanel("panel_" + this.moduleInfo.moduleID);
                     this._moduleIntroSetup(step);
                     break;
                 case "CommentaryIntro":
@@ -325,7 +324,7 @@ var SequencePlayer = new Class({
                     this._addButton({
                         type : "Done",
                         next : "QuestionUser.done"
-                    });                    
+                    });
                     //TODO: notrack="true"
                     //TODO: image="country_cla01_next_first.jpg" - override background image ...
                     break;
@@ -487,12 +486,9 @@ var SequencePlayer = new Class({
                     // Show correct bkg
                     step.media.image.add(this.activeVideo.containerID);
                     step.media.image.show();
-
                     // Play audio
                     step.media.audio.start();
                     // setup buttons
-                    // TODO: extract the end buttons to separate method - replace in continue and here
-
                     this._addButton({
                         type : "Continue",
                         next : "Continue.clicked"
@@ -839,7 +835,6 @@ var SequencePlayer = new Class({
                             var width = '240';
                             var height = '175';
                         } else {
-                            //TODO: use stage size
                             style = {
                                 'width' : Main.WIDTH + '',
                                 'height' : Main.HEIGHT + '',
@@ -1364,5 +1359,5 @@ var SequencePlayer = new Class({
         button.add(Main.DIV_ID);
         button.show();
         this.buttons.push(button);
-    }
+    }.protect()
 });
