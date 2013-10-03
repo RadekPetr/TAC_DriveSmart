@@ -222,6 +222,18 @@ var User = new Class({
         }.bind(this));
         return totalScore.average();
     },
+    getTotalProgress : function() {
+        var moduleIDs = new Hash(this.userData.modules).getKeys();
+        var totalFinishedCount = 0;
+        var totalCount = 0;
+        Array.each(moduleIDs, function(moduleID, index) {
+            var progressObj = this.getModuleState(moduleID);           
+            totalCount += progressObj.total;
+            totalFinishedCount += progressObj.finishedCount;
+        }.bind(this));
+        log ("Overall progress: ", totalFinishedCount / totalCount);
+        return (totalFinishedCount / totalCount);
+    },
     getModuleScore : function(moduleID) {
         var userData = this._getUserData(moduleID).data;
         // log(moduleID, userData);
@@ -322,11 +334,11 @@ var User = new Class({
     },
     _getUserData : function(moduleID) {
         try {
-          return this.userData.modules[moduleID]; 
-        } catch (err){
-            log ("NULLLLLLLL");
+            return this.userData.modules[moduleID];
+        } catch (err) {
+            log("NULLLLLLLL");
             return null;
         }
-        
+
     }
 });

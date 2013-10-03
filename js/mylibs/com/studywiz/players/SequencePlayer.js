@@ -123,7 +123,7 @@ var SequencePlayer = new Class({
                     });
                     score.inject(myDiv);
 
-                    var overallProgressBar = UIHelpers.progressBarSetup(Main.userTracker.getTotalScore(), "overall");
+                    var overallProgressBar = UIHelpers.progressBarSetup(Main.userTracker.getTotalProgress()*100.0, "overall");
                     overallProgressBar.setStyles({
                         'position' : 'absolute',
                         left : '45%',
