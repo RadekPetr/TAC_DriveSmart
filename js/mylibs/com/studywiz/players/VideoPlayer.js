@@ -128,7 +128,6 @@ var VideoPlayer = new Class({
     // ---------------------------
     start : function() {
         if (this.player != null) {
-            //log(this.player.bufferedPercent());
             this.player.play();
         }
     },
@@ -198,14 +197,9 @@ var VideoPlayer = new Class({
         }
     },
     remove : function() {
-
-        log('Removing player: ' + this.playerID);
-        // see http://help.videojs.com/discussions/problems/861-how-to-destroy-a-video-js-object
-        // get the videojs player with id of "video_1"
-
-        var player = videojs(this.playerID);
-        // remove all events
-        player.off();
+        log('Removing player: ' + this.playerID);   
+        // get the videojs player with id 
+        var player = videojs.players[this.playerID];
         // get rid of it
         player.dispose();
 
