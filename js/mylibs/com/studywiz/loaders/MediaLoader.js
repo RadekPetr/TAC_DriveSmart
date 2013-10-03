@@ -219,6 +219,7 @@ var MediaLoader = new Class({
         return this.loadQueue.getLength();
     },
     reset : function() {
+        clearInterval(this.preloadTimer);
         this.videoQueue = new Array();
         this.loadQueue = new Hash({});
     }
