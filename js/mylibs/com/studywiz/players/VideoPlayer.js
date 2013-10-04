@@ -13,7 +13,7 @@ var VideoPlayer = new Class({
         },
         width : Main.WIDTH + 'px',
         height : Main.HEIGHT + 'px',
-        'class' : 'video-js',
+        'class' : 'video-js vjs-default-skin',
         poster : '',
         id : 'element.id',
         next : 'next.action',
@@ -21,6 +21,7 @@ var VideoPlayer = new Class({
         preload : 'auto',
         autoplay : false,
         controls : false,
+        captions : null,
         parentTag : Main.DIV_ID,
         filename : null
     },
@@ -52,7 +53,6 @@ var VideoPlayer = new Class({
 
         });
         this.container.player.inject(this.container);
-
     },
     myParent : function() {
         return this.options.parent;
@@ -129,16 +129,30 @@ var VideoPlayer = new Class({
     start : function() {
         if (this.player != null) {
             this.player.play();
+
         }
     },
     // ---------------------------
-    show : function(speed) {
+    show : function() {
         this.container.fade('show');
-
+        this.showCaptions();
     },
     // ---------------------------
     hide : function(speed) {
         this.container.fade('hide');
+    },
+    showCaptions : function(subtitleSrc) {
+        // TODO: pass src to the player
+       subtitleSrc =  "/demo.captions.vtt";        
+        var data = {
+            'kind' : "subtitles",
+            'label' : "English",
+            'language' : "en",
+            'src' : subtitleSrc,
+            id : "subs"
+        };
+        this.player.addTextTrack(data['kind'], data['label'], data['language'], data);
+        this.player.showTextTrack("subs");
     },
     obscure : function() {
         log("Obscure");
@@ -197,8 +211,8 @@ var VideoPlayer = new Class({
         }
     },
     remove : function() {
-        log('Removing player: ' + this.playerID);   
-        // get the videojs player with id 
+        log('Removing player: ' + this.playerID);
+        // get the videojs player with id
         var player = videojs.players[this.playerID];
         // get rid of it
         player.dispose();

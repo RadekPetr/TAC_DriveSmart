@@ -5369,7 +5369,6 @@ vjs.Player.prototype.addTextTrack = function(kind, label, language, options){
   // if (track.dflt()) {
   //   this.ready(vjs.bind(track, track.show));
   // }
-
   return track;
 };
 
