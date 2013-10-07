@@ -92,8 +92,8 @@ Main.WIDTH = 640;
 Main.HEIGHT = 480;
 
 // Version stuff
-Main.VERSION = '1.0_new styles';
-Main.BUILD = '2013/09/18';
+Main.VERSION = '1.0.1';
+Main.BUILD = '2013/10/07';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;
