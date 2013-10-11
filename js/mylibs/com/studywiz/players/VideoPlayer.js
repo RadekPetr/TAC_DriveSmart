@@ -143,7 +143,7 @@ var VideoPlayer = new Class({
     },
     showCaptions : function(subtitleSrc) {
         // TODO: pass src to the player
-       subtitleSrc =  "/demo.captions.vtt";        
+     /*  subtitleSrc =  "/demo.captions.vtt";        
         var data = {
             'kind' : "subtitles",
             'label' : "English",
@@ -153,6 +153,7 @@ var VideoPlayer = new Class({
         };
         this.player.addTextTrack(data['kind'], data['label'], data['language'], data);
         this.player.showTextTrack("subs");
+        */
     },
     obscure : function() {
         log("Obscure");

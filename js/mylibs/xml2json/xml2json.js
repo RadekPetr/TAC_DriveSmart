@@ -1,4 +1,4 @@
-﻿/*
+/*
  ---
  name: XML2Js
  description: Provides an easy way to read XML files while converting it's content to an Object.
