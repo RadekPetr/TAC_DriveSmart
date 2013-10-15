@@ -56,7 +56,7 @@ var SequencePlayer = new Class({
         this.mediaLoader.options.next = 'Media.ready';
 
         if (this.mediaLoader.getQueueLength() > 0) {
-            UIHelpers.setMainPanel("panel_loader");
+            UIHelpers.setMainPanel("panel panel_loader");
             this.mediaLoader.start(true);
         } else {
             // no media to preload so we can continue
@@ -100,7 +100,7 @@ var SequencePlayer = new Class({
                      moduleTitle.inject(myDiv);
                      */
 
-                    UIHelpers.setMainPanel("panel_dashboard");
+                    UIHelpers.setMainPanel("panel panel_dashboard");
 
                     step.data.style = {
                         left : '10px',
@@ -134,7 +134,7 @@ var SequencePlayer = new Class({
                     break;
                 case "SequenceIntro":
 
-                    UIHelpers.setMainPanel("panel_" + this.moduleInfo.moduleID);
+                    UIHelpers.setMainPanel("panel panel_" + this.moduleInfo.moduleID);
 
                     log("From Menu:", this.fromMenu);
                     this.fromMenu = false;
@@ -196,7 +196,7 @@ var SequencePlayer = new Class({
                     step.media.audio.start();
                     break;
                 case "ModuleIntro":
-                    UIHelpers.setMainPanel("panel_" + this.moduleInfo.moduleID);
+                    UIHelpers.setMainPanel("panel panel_" + this.moduleInfo.moduleID);
                     this._moduleIntroSetup(step);
                     break;
                 case "CommentaryIntro":

@@ -11,15 +11,15 @@
 	font-family: 'Quattrocento Sans', sans-serif;
 	line-height: 1.6em;
 	font-weight: normal;
-	left: 0;
+	left: 1px;
 	top: 0;
 	position: relative;
-	
-	
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	background-origin: content-box;
 	background-attachment: scroll;
+	height: 600px;
+	width: 940px;
 }
 
 h1 {
@@ -36,7 +36,7 @@ h2 {
 }
 
 .panel {
-
+	box-shadow: 0 0 10px #404040;
 }
 
 .panel_loader {

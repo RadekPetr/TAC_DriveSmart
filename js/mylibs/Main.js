@@ -25,11 +25,11 @@ var Main = new Class({
     // ----------------------------------------------------------
     start : function() {
         UIHelpers.setMainPanel("panel_loader");
-        var style = {
-            width : (Main.WIDTH + Main.WIDTH * 0.2) + 'px',
-            height : (Main.HEIGHT + Main.HEIGHT * 0.2) + 'px'
-        };
-        $m(Main.DIV_ID).setStyles(style);
+        //var style = {
+       //     width : (Main.WIDTH + Main.WIDTH * 0.2) + 'px',
+       //     height : (Main.HEIGHT + Main.HEIGHT * 0.2) + 'px'
+      //  };
+       // $m(Main.DIV_ID).setStyles(style);
 
         new Api(this).saveLog('info', "****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
 
@@ -93,7 +93,7 @@ Main.HEIGHT = 480;
 
 // Version stuff
 Main.VERSION = '1.0.1';
-Main.BUILD = '2013/10/15';
+Main.BUILD = '2013/10/15_1';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = false;
