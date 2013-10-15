@@ -751,6 +751,7 @@
 			<fileset dir="./${dir.intermediate}/css/">
 				<include name="/**/*.css" />
 				<exclude name="style-concat.css" />
+				<exclude name="style-concat.min.css" />
 				<exclude name="index.css" />
 			</fileset>
 		</concat>
