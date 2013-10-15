@@ -88,8 +88,8 @@ var $m = document.id;
 Main.DIV_ID = 'drivesmart';
 
 // the stage size
-Main.WIDTH = 640;
-Main.HEIGHT = 480;
+Main.WIDTH = 940;
+Main.HEIGHT = 600;
 
 // Version stuff
 Main.VERSION = '1.0.1';

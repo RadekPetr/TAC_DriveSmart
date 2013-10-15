@@ -123,3 +123,32 @@ a:hover {
 	font-size: 0px;
 }
 
+.pane {
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 0 10px #404040;
+    color: #000000;
+    margin: 20px 0;
+    padding: 10px;
+}
+.pane.blue {
+    background-image: -moz-linear-gradient(center top , #99D6DD, #00B5D6);
+}
+
+.pane.green {
+    background-image: -moz-linear-gradient(center top , #CED649, #AABA0A);
+}
+
+.pane.orange {
+    background-image: -moz-linear-gradient(center top , #F28411, #BF5B00);
+}
+
+
+.pane.gray {
+    background-image: -moz-linear-gradient(center top , #666666, #404040);
+    color: #FFFFFF;
+}
+
+.pane.yellow {
+    background-image: -moz-linear-gradient(center top , #E4D100, #D7B000);
+}
+
