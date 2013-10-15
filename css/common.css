@@ -39,25 +39,25 @@ h2 {
 	box-shadow: 0 0 10px #404040;
 }
 
-.panel_loader {
+.panel.loader {
 	background: url('images/loader_bkg.png');
 }
-.panel_dashboard {
+.panel.dashboard {
 	background: url('images/dashboard_bkg.png');
 }
-.panel_kaps {
+.panel.kaps {
 	background: url('images/kaps_bkg.png');
 }
-.panel_scanning {
+.panel.scanning {
 	background: url('images/scanning_bkg.png');
 }
-.panel_concentration {
+.panel.concentration {
 	background: url('images/concentration_bkg.png');
 }
-.panel_country {
+.panel.country {
 	background: url('images/country_bkg.png');
 }
-.panel_urban {
+.panel.urban {
 	background: url('images/urban_bkg.png');
 }
 
