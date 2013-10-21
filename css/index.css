@@ -130,13 +130,7 @@ textarea {
 		page-break-after: avoid
 	}
 }
-body {
-	margin: 0;
-	font-size: 14px;
-	line-height: 20px;
-	color: #333;
-	background-color: #fff
-}
+
 a {
 	color: #08c;
 	text-decoration: none
@@ -4539,7 +4533,7 @@ to {
 	box-sizing: border-box
 }
 @font-face {
-	font-family: "Museo";
+	font-family: "Museo700";
 	src: url('fonts/Museo700-Regular-webfont.eot');
 	src: url('fonts/Museo700-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/Museo700-Regular-webfont.woff') format('woff'), url('fonts/Museo700-Regular-webfont.ttf') format('truetype'), url('/fontsMuseo700-Regular-webfont.svg#Museo700Regular') format('svg');
 	font-weight: normal;
@@ -4547,16 +4541,20 @@ to {
 }
 body {
 	background-color: #000;
-	font-family: Museo;
+	font-family: 'Quattrocento Sans', sans-serif;
+	font-weight: 500;
 	line-height: 1.3em
 }
+body h1, body h2, body h3, body h4, body h5, body h6 {
+	font-family: Museo700
+}
 .bg1 {
-	background: #000 fixed no-repeat top url("/TAC_DriveSmart/img/bkg_1.jpg")
+	background: #000 fixed no-repeat top url(/TAC_DriveSmart/img/bkg_1.jpg)
 }
 .drivesmart_icon {
-	background: no-repeat url("/TAC_DriveSmart/img/logo70.png");
-	width: 160px;
-	height: 163px;
+	background: no-repeat url(/TAC_DriveSmart/img/logo70_80.png);
+	width: 128px;
+	height: 130px;
 	display: inline-block;
 	font-size: 0
 }
@@ -4636,12 +4634,12 @@ body {
 	background: url(seatbelt.png) center no-repeat;
 	background-size: 35%
 }
-.pane .pplate {
-	background: url(pplate.png) center no-repeat;
+.pane .p_plate {
+	background: url(p_plate.png) center no-repeat;
 	background-size: 35%
 }
-.pane .prize {
-	background: url(prize.png) center no-repeat;
+.pane .gift {
+	background: url(gift.png) center no-repeat;
 	background-size: 55%
 }
 .pane ._120_hours {
