@@ -1,10 +1,10 @@
 .module-description {
 	color: #EAC749;
 	position: absolute;
-	font-size: 0.85em;
+	font-size: 0.80em;
 	text-align: left;
-	line-height: 130%;
-	width: 255px;
+	line-height: 125%;
+	width: 500px;
 	background-color: #464646;
 	float: left;
 	border-radius: 1em 1em 1em 1em;
@@ -14,7 +14,7 @@
 	background: rgba(0, 0, 0, 0.6);
 }
 .module-preview img {
-	clip: rect(0px, 140px, 107px, 0px);
+
 }
 .main-title {
 	position: absolute;

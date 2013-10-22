@@ -35,11 +35,9 @@ var MenuItem = new Class({
             src : Main.PATHS.imageFolder + this.options.data.preview,
             title : 'Image',
             id : 'preview_' + this.selectedModuleID,
-            style : {
-                'width' : '140px',
-                'height' : '107px',
-                top : '60px',
-                left : '380px'
+            style : {               
+                top : '140px',
+                left : '400px'
             }
         });
         this.options.preview.preload();

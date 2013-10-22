@@ -104,8 +104,8 @@ var MenuPlayer = new Class({
             id : "module.description",
             'class' : 'module-description no-select',
             styles : {
-                left : '375px',
-                top : '190px'
+                left : '400px',
+                top : '410px'
             }
         });
         this.container.adopt(this.module_description);
