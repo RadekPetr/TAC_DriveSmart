@@ -46,14 +46,11 @@ var MenuItem = new Class({
     },
     lock : function() {
         this.isLocked = true;
-        var lockedCSS = 'menu_item_locked no-select';
-        this.container.removeAttribute('class');
-        this.container.addClass(lockedCSS);
-        var symbol = this._getLockedStatusSymbol();
-        // TODO: will probably just chnage the calss instead ?
-        this.container.grab(symbol, 'top');
-        // this.container.adopt(symbol);
-        symbol.show();
+        // TODO: locked pane css
+        //var lockedCSS = 'menu_item locked no-select pane blue';
+      //  this.container.removeAttribute('class');
+       // this.container.addClass(lockedCSS);
+       this.container.fade ("0.7");
     },
     showProgress : function() {
         if (this.options.data.showProgress == true) {
@@ -81,8 +78,8 @@ var MenuItem = new Class({
     // ---------------------------
     show : function() {
         if (this.container.style.opacity == 0) {
-            // this.panel.fade('hide', 0);
-            this.container.fade('in');
+                this.container.fade('show');         
+            
         }
     },
     // ---------------------------
@@ -107,23 +104,6 @@ var MenuItem = new Class({
             'padding-left' : '15px'
         });
 
-        return symbolImage.image;
-    },
-    _getLockedStatusSymbol : function(left, top) {
-        var file = Main.PATHS.imageFolder + 'menu/tick.png';
-
-        var symbolImage = new ImagePlayer(this, {
-            src : file,
-            next : "",
-            id : 'lock.' + this.selectedModuleID
-        });
-        symbolImage.preload();
-        symbolImage.image.setStyles({
-            'width' : '30px',
-            'height' : '34px',
-            'float' : 'right',
-            'padding-left' : '15px'
-        });
         return symbolImage.image;
     },
     registerClickEvent : function(sendEventTo) {

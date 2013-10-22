@@ -104,7 +104,7 @@ var SequencePlayer = new Class({
 
                     step.data.style = {
                         left : '10px',
-                        top : '40px'
+                        top : '0px'
                     };
                     var menu = new MenuPlayer(this, step.data);
                     menu.add(myContainerID);

@@ -56,10 +56,17 @@ var MenuPlayer = new Class({
     },
     _addMenuItems : function() {
         Array.each(this.options.data, function(menuItemData, index) {
+            if (index <= Main.COLORS.length-1) {
+                var itemColor = Main.COLORS[index];
+            } else {
+                var itemColor = Main.COLORS[index - Main.COLORS.length ];
+            }
+
             var menuItem = new MenuItem(this, {
-                data : menuItemData
+                data : menuItemData,
+                'class' : 'menu_item no-select pane ' + itemColor
             });
-            this.menuItems.push(menuItem);           
+            this.menuItems.push(menuItem);
 
             menuItem.add(this.container.id);
             menuItem.show();
@@ -72,9 +79,10 @@ var MenuPlayer = new Class({
             if (isLocked != true || Main.DEBUG == true) {
                 menuItem.registerClickEvent(this.myParent());
             }
-            menuItem.registerMouseLeaveEvent(this);            
+
+            menuItem.registerMouseLeaveEvent(this);
         }.bind(this));
-        
+
         this.addEvent("MODULE_INFO", this.showModuleInformation);
     },
     showModuleInformation : function(params) {

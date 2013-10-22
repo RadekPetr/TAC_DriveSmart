@@ -21,7 +21,7 @@ UIHelpers.progressBarSetup = function(progress, id) {
 
     var progressBarComponent = new Element('div', {
         id : "Progress_" + id,
-        html : "Progress: ",
+        html : "",
         'class' : 'progress_title no-select'
     });
 

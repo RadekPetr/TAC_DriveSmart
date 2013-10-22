@@ -26,10 +26,10 @@ var Main = new Class({
     start : function() {
         UIHelpers.setMainPanel("panel_loader");
         //var style = {
-       //     width : (Main.WIDTH + Main.WIDTH * 0.2) + 'px',
-       //     height : (Main.HEIGHT + Main.HEIGHT * 0.2) + 'px'
-      //  };
-       // $m(Main.DIV_ID).setStyles(style);
+        //     width : (Main.WIDTH + Main.WIDTH * 0.2) + 'px',
+        //     height : (Main.HEIGHT + Main.HEIGHT * 0.2) + 'px'
+        //  };
+        // $m(Main.DIV_ID).setStyles(style);
 
         new Api(this).saveLog('info', "****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
 
@@ -174,3 +174,5 @@ Main.MODULES = new Hash({
         sequenceID : '1'
     }
 });
+
+Main.COLORS = ['blue', 'green', 'orange'];

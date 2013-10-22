@@ -95,7 +95,7 @@ var dwProgressBar = new Class({
         });
 
         if (this.options.displayText) {
-            this.text.set('text', to.toInt() + '%');
+            this.text.set('text', "Progress: "+ to.toInt() + '%');
         }
     },
 
