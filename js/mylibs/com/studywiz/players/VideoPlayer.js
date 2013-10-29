@@ -3,16 +3,16 @@ var VideoPlayer = new Class({
     // ---------------------------
     options : {
         style : {
-            width : Main.WIDTH + '',
-            height : Main.HEIGHT + 'px',
+            width : Main.VIDEO_WIDTH + 'px',
+            height : Main.VIDEO_HEIGHT + 'px',
             position : 'absolute',
             left : '0px',
             top : '0px',
             opacity : '0',
             visibility : 'hidden'
         },
-        width : Main.WIDTH + 'px',
-        height : Main.HEIGHT + 'px',
+        width : Main.VIDEO_WIDTH + 'px',
+        height : Main.VIDEO_HEIGHT + 'px',
         'class' : 'video-js vjs-default-skin',
         poster : '',
         id : 'element.id',
