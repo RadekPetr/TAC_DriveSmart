@@ -91,9 +91,13 @@ Main.DIV_ID = 'drivesmart';
 Main.WIDTH = 940;
 Main.HEIGHT = 600;
 
+// the main Video size
+Main.VIDEO_WIDTH = 2.3 * 320;
+Main.VIDEO_HEIGHT = 2.3 * 240;
+
 // Version stuff
 Main.VERSION = '1.0.1';
-Main.BUILD = '2013/10/15_1';
+Main.BUILD = '2013/10/22';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;

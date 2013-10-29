@@ -18,7 +18,6 @@ var ImagePlayer = new Class({
         parentTag : null
     },
     initialize : function(myParent, myOptions) {
-        // Intial scene setup
         this.setOptions(myOptions);
         this.options.parent = myParent;
         this.containerID = 'imageContainer';

@@ -75,8 +75,8 @@ var Shape = new Class({
                 id : this.options.id,
                 xmlns : "http://www.w3.org/2000/svg",
                 version : "1.1",
-                width : Main.WIDTH + 'px',
-                height : Main.HEIGHT + 'px'
+                width : Main.VIDEO_WIDTH + 'px',
+                height : Main.VIDEO_HEIGHT+ 'px'
             });
 
             this.shapeWrapper.inject(this.container);
