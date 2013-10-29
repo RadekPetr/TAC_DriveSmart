@@ -123,7 +123,7 @@ var SequencePlayer = new Class({
                     });
                     score.inject(myDiv);
 
-                    var overallProgressBar = UIHelpers.progressBarSetup(Main.userTracker.getTotalProgress()*100.0, "overall");
+                    var overallProgressBar = UIHelpers.progressBarSetup(Main.userTracker.getTotalProgress() * 100.0, "overall");
                     overallProgressBar.setStyles({
                         'position' : 'absolute',
                         left : '45%',
@@ -409,12 +409,14 @@ var SequencePlayer = new Class({
                     this.shapes.add(this.activeVideo.containerID);
                     // play Audio - Intro
                     step.media.audio.start();
-
                     break;
                 case "KRFeedback":
                     this._removeButtons();
-                    // TODO: use video size for the image
+                    // TODO: use video size for the image - maybe use css class for this
+                    step.media.image.options.style.width = Main.VIDEO_WIDTH + "px";
+                    step.media.image.options.style.height = Main.VIDEO_HEIGHT + "px";
                     step.media.image.add(this.shapes.container.id);
+
                     step.media.image.show();
                     step.media.audio.options.next = 'KRFeedback.done';
                     step.media.audio.start();
@@ -836,13 +838,13 @@ var SequencePlayer = new Class({
                             var height = '175';
                         } else {
                             style = {
-                                'width' : Main.WIDTH + '',
-                                'height' : Main.HEIGHT + '',
+                                'width' : Main.VIDEO_WIDTH + '',
+                                'height' : Main.VIDEO_HEIGHT + '',
                                 'left' : '0',
                                 'top' : '0'
                             };
-                            var width = Main.WIDTH + '';
-                            var height = Main.HEIGHT + '';
+                            var width = Main.VIDEO_WIDTH + '';
+                            var height = Main.VIDEO_HEIGHT + '';
                         };
 
                         step.media.video = new VideoPlayer(this, {
@@ -868,13 +870,13 @@ var SequencePlayer = new Class({
                         var style = null;
 
                         style = {
-                            'width' : Main.WIDTH + '',
-                            'height' : Main.HEIGHT + '',
+                            'width' : Main.VIDEO_WIDTH + '',
+                            'height' : Main.VIDEO_HEIGHT + '',
                             'left' : '0',
                             'top' : '0'
                         };
-                        var width = Main.WIDTH + '';
-                        var height = Main.HEIGHT + '';
+                        var width = Main.VIDEO_WIDTH + '';
+                        var height = Main.VIDEO_HEIGHT + '';
 
                         step.media.moduleIntroVideo = new VideoPlayer(this, {
                             id : "video_" + index + "_" + stepOrder,
