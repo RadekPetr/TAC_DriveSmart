@@ -85,50 +85,70 @@ var VideoPlayer = new Class({
                     this.player.src(data.video);
                     this.player.pause();
                     this.player.load();
-
-                    this.player.on("progress", function() {
-                        log("EVENT: progress", this.options.id);
-
-                    }.bind(this));
-
-                    this.player.on("suspend", function() {
-                        log("EVENT: suspend", this.options.id);
-                    }.bind(this));
-
-                    this.player.on("waiting", function() {
-                        log("EVENT: **********************   waiting", this.options.id);
-                    }.bind(this));
-
-                    this.player.on("canplaythrough", function() {
-                        log("EVENT: **********************   canplaythrough", this.options.idc);
-                        this.isReady = true;
-                    }.bind(this));
-
-                    this.player.on("loadedalldata", function() {
-                        log("EVENT: loadedalldata", this.options.id);
-                        this.isReady = true;
-                    }.bind(this));
-
-                    //log("Adding ended listener");
-                    this.player.on("ended", function() {
-                        log("Video ended");
-                        // remove all events
-                        this.player.off();
-
-                        this.myParent().fireEvent("TIMELINE", {
-                            type : "video.finished",
-                            id : this.options.id,
-                            next : this.options.next
-                        });
-                    }.bind(this));
+                    this.registerLoadEvents();
+                    
                 }.bind(this)));
         }
 
+    },
+    registerLoadEvents : function() {
+        if (this.player != undefined) {
+            // clear any lefover events
+            this.player.off();
+            // add them again
+            this.player.on("progress", function() {
+                log("EVENT: progress", this.options.id );
+
+            }.bind(this));
+
+            this.player.on("suspend", function() {
+                log("EVENT: suspend", this.options.id);
+            }.bind(this));
+
+            this.player.on("waiting", function() {
+                log("EVENT: **********************   waiting", this.options.id);
+            }.bind(this));
+
+            this.player.on("canplaythrough", function() {
+                log("EVENT: **********************   canplaythrough", this.options.idc);
+                this.isReady = true;
+            }.bind(this));
+
+            this.player.on("loadedalldata", function() {
+                log("EVENT: loadedalldata", this.options.id);
+                this.isReady = true;
+            }.bind(this));
+
+           
+
+        }
+    },
+    registerPlaybackEvents : function() {
+        if (this.player != undefined) {
+            // clear any lefover events
+            this.player.off();
+           
+
+            //log("Adding ended listener");
+            this.player.on("ended", function() {
+                log("Video ended");
+                // remove all events
+                this.player.off();
+
+                this.myParent().fireEvent("TIMELINE", {
+                    type : "video.finished",
+                    id : this.options.id,
+                    next : this.options.next
+                });
+            }.bind(this));
+
+        }
     },
     // ---------------------------
     start : function() {
         if (this.player != null) {
             this.player.play();
+            this.registerPlaybackEvents();
 
         }
     },
@@ -143,17 +163,17 @@ var VideoPlayer = new Class({
     },
     showCaptions : function(subtitleSrc) {
         // TODO: pass src to the player
-     /*  subtitleSrc =  "/demo.captions.vtt";        
-        var data = {
-            'kind' : "subtitles",
-            'label' : "English",
-            'language' : "en",
-            'src' : subtitleSrc,
-            id : "subs"
-        };
-        this.player.addTextTrack(data['kind'], data['label'], data['language'], data);
-        this.player.showTextTrack("subs");
-        */
+        /*  subtitleSrc =  "/demo.captions.vtt";
+         var data = {
+         'kind' : "subtitles",
+         'label' : "English",
+         'language' : "en",
+         'src' : subtitleSrc,
+         id : "subs"
+         };
+         this.player.addTextTrack(data['kind'], data['label'], data['language'], data);
+         this.player.showTextTrack("subs");
+         */
     },
     obscure : function() {
         log("Obscure");
