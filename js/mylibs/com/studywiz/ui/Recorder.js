@@ -17,7 +17,9 @@ var Recorder = new Class({
         },
         style : {
             position : 'absolute',
-            'z-index' : '99999'
+            'z-index' : '99999',
+             top : Main.VIDEO_TOP +  'px',
+            left : Main.VIDEO_LEFT + 'px'
 
         },
         src : 'media/flash/commentary.swf',

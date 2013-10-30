@@ -154,7 +154,7 @@ var SequencePlayer = new Class({
                     step.media.previewImage.add(myContainerID);
                     step.media.previewImage.show();
 
-                    var moduleTitle = new Element("h1", {
+                    /*var moduleTitle = new Element("h1", {
                         html : this.moduleInfo.moduleTitle,
                         styles : {
                             left : '0px',
@@ -163,6 +163,7 @@ var SequencePlayer = new Class({
                         'class' : 'module-title no-select'
                     });
                     moduleTitle.inject(myDiv);
+                    */
 
                     var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
                     var sequenceTitleText = "Exercise " + this.sequenceState.id + " of " + moduleState.total;
@@ -211,6 +212,8 @@ var SequencePlayer = new Class({
 
                     step.media.image.options.style.width = Main.VIDEO_WIDTH + "px";
                     step.media.image.options.style.height = Main.VIDEO_HEIGHT + "px";
+                    step.media.image.options.style.left = Main.VIDEO_LEFT + "px";
+                    step.media.image.options.style.top = Main.VIDEO_TOP + "px";
 
                     step.media.image.add(myContainerID);
                     step.media.image.show();
@@ -493,8 +496,8 @@ var SequencePlayer = new Class({
                     if (this.currentSequence.length > 0) {
                         log("ERROR - DragNDropFeedback must be last in the sequence");
                     }
-                   // step.media.image.options.style.width = Main.VIDEO_WIDTH + "px";
-                   // step.media.image.options.style.height = Main.VIDEO_HEIGHT + "px";
+                    // step.media.image.options.style.width = Main.VIDEO_WIDTH + "px";
+                    // step.media.image.options.style.height = Main.VIDEO_HEIGHT + "px";
                     // Show correct bkg
                     step.media.image.add(this.activeVideo.containerID);
                     step.media.image.show();

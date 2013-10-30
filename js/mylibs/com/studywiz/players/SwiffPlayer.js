@@ -18,9 +18,7 @@ var SwiffPlayer = new Class({
             container : null
         },
         style : {
-            position : 'absolute',
-            top : Main.VIDEO_TOP +  'px',
-            left : Main.VIDEO_LEFT + 'px',
+            position : 'absolute',           
             opacity : '0',
             visibility : 'hidden'
         },
