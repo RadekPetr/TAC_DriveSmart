@@ -92,8 +92,10 @@ Main.WIDTH = 940;
 Main.HEIGHT = 600;
 
 // the main Video size
-Main.VIDEO_WIDTH = 2.3 * 320;
-Main.VIDEO_HEIGHT = 2.3 * 240;
+Main.VIDEO_WIDTH = 600;
+Main.VIDEO_HEIGHT = 440;
+Main.VIDEO_TOP = 110;
+Main.VIDEO_LEFT = 90;
 
 // Version stuff
 Main.VERSION = '1.0.1';

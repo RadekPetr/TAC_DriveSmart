@@ -6,8 +6,8 @@ var SwiffPlayer = new Class({
     options : {
         swiff : {
             id : 'Swiff',
-            width : Main.WIDTH + 'px',
-            height : Main.HEIGHT + 'px',
+            width : Main.VIDEO_WIDTH + 'px',
+            height : Main.VIDEO_HEIGHT + 'px',
             params : {
                 allowScriptAccess : 'always',
                 wmode : 'transparent'
@@ -19,8 +19,8 @@ var SwiffPlayer = new Class({
         },
         style : {
             position : 'absolute',
-            top : '0px',
-            left : '0px',
+            top : Main.VIDEO_TOP +  'px',
+            left : Main.VIDEO_LEFT + 'px',
             opacity : '0',
             visibility : 'hidden'
         },

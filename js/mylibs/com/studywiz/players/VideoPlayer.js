@@ -3,16 +3,16 @@ var VideoPlayer = new Class({
     // ---------------------------
     options : {
         style : {
-            width : Main.VIDEO_WIDTH + 'px',
-            height : Main.VIDEO_HEIGHT + 'px',
             position : 'absolute',
-            left : '0px',
-            top : '0px',
             opacity : '0',
-            visibility : 'hidden'
+            visibility : 'hidden',
+            'left' : Main.VIDEO_LEFT + 'px',
+            'top' : Main.VIDEO_TOP + 'px',
+            'width' : Main.VIDEO_WIDTH + 'px',
+            'height' : Main.VIDEO_HEIGHT + 'px'
         },
-        width : Main.VIDEO_WIDTH + 'px',
-        height : Main.VIDEO_HEIGHT + 'px',
+        width : '100%',
+        height : '100%',
         'class' : 'video-js vjs-default-skin',
         poster : '',
         id : 'element.id',
@@ -37,10 +37,10 @@ var VideoPlayer = new Class({
         this.isReady = false;
         this.container = null;
 
+
         this.container = new Element("div", {
             id : this.containerID,
-            'class' : 'videoContainer'
-
+            'class' : 'videoContainer'           
         });
 
         this.container.setStyles(this.options.style);
@@ -50,7 +50,6 @@ var VideoPlayer = new Class({
         this.container.player = new Element("video", {
             'id' : this.playerID,
             'class' : this.options['class']
-
         });
         this.container.player.inject(this.container);
     },
@@ -86,7 +85,7 @@ var VideoPlayer = new Class({
                     this.player.pause();
                     this.player.load();
                     this.registerLoadEvents();
-                    
+
                 }.bind(this)));
         }
 
@@ -97,7 +96,7 @@ var VideoPlayer = new Class({
             this.player.off();
             // add them again
             this.player.on("progress", function() {
-                log("EVENT: progress", this.options.id );
+                log("EVENT: progress", this.options.id);
 
             }.bind(this));
 
@@ -119,15 +118,12 @@ var VideoPlayer = new Class({
                 this.isReady = true;
             }.bind(this));
 
-           
-
         }
     },
     registerPlaybackEvents : function() {
         if (this.player != undefined) {
             // clear any lefover events
             this.player.off();
-           
 
             //log("Adding ended listener");
             this.player.on("ended", function() {

@@ -145,6 +145,9 @@ var SequencePlayer = new Class({
                     });
                     myDiv.inject($m(Main.DIV_ID));
 
+                    step.media.image.options.style.width = Main.WIDTH + "px";
+                    step.media.image.options.style.height = Main.HEIGHT + "px";
+
                     step.media.image.add(myContainerID);
                     step.media.image.show();
 
@@ -205,6 +208,9 @@ var SequencePlayer = new Class({
                         id : myContainerID
                     });
                     myDiv.inject($m(Main.DIV_ID));
+
+                    step.media.image.options.style.width = Main.VIDEO_WIDTH + "px";
+                    step.media.image.options.style.height = Main.VIDEO_HEIGHT + "px";
 
                     step.media.image.add(myContainerID);
                     step.media.image.show();
@@ -430,7 +436,9 @@ var SequencePlayer = new Class({
                         id : 'visor',
                         style : {
                             'left' : '170px',
-                            'height' : '0px'
+                            'height' : '0px',
+                            'top' : (Main.VIDEO_TOP) + 'px'
+
                         }
                     });
 
@@ -442,7 +450,8 @@ var SequencePlayer = new Class({
                         id : 'visor',
                         style : {
                             'left' : '170px',
-                            'height' : '0px'
+                            'height' : '0px',
+                            'top' : (Main.VIDEO_TOP) + 'px'
                         }
                     });
                     this.cameo_image.preload();
@@ -484,7 +493,8 @@ var SequencePlayer = new Class({
                     if (this.currentSequence.length > 0) {
                         log("ERROR - DragNDropFeedback must be last in the sequence");
                     }
-
+                   // step.media.image.options.style.width = Main.VIDEO_WIDTH + "px";
+                   // step.media.image.options.style.height = Main.VIDEO_HEIGHT + "px";
                     // Show correct bkg
                     step.media.image.add(this.activeVideo.containerID);
                     step.media.image.show();
@@ -829,8 +839,8 @@ var SequencePlayer = new Class({
 
                         if (stepType == 'Cameo') {
                             style = {
-                                'left' : '315px',
-                                'top' : '20px',
+                                'left' : (Main.VIDEO_WIDTH - 240 - 50) + 'px',
+                                'top' : (Main.VIDEO_TOP + 20) + 'px',
                                 'width' : '240',
                                 'height' : '175'
                             };
@@ -838,13 +848,9 @@ var SequencePlayer = new Class({
                             var height = '175';
                         } else {
                             style = {
-                                'width' : Main.VIDEO_WIDTH + '',
-                                'height' : Main.VIDEO_HEIGHT + '',
-                                'left' : '0',
-                                'top' : '0'
                             };
-                            var width = Main.VIDEO_WIDTH + '';
-                            var height = Main.VIDEO_HEIGHT + '';
+                            var width = '100%';
+                            var height = '100%';
                         };
 
                         step.media.video = new VideoPlayer(this, {
@@ -868,20 +874,12 @@ var SequencePlayer = new Class({
                     if (item.value != '' && this.sequenceState.completed != true) {
                         var filename = item.value;
                         var style = null;
-
-                        style = {
-                            'width' : Main.VIDEO_WIDTH + '',
-                            'height' : Main.VIDEO_HEIGHT + '',
-                            'left' : '0',
-                            'top' : '0'
-                        };
-                        var width = Main.VIDEO_WIDTH + '';
-                        var height = Main.VIDEO_HEIGHT + '';
+                        var width = '100%';
+                        var height = '100%';
 
                         step.media.moduleIntroVideo = new VideoPlayer(this, {
                             id : "video_" + index + "_" + stepOrder,
                             next : 'not.set',
-                            'style' : style,
                             filename : filename,
                             width : width,
                             height : height,
@@ -1270,6 +1268,9 @@ var SequencePlayer = new Class({
             id : myContainerID
         });
         myDiv.inject($m(Main.DIV_ID));
+
+        step.media.image.options.style.width = Main.WIDTH + "px";
+        step.media.image.options.style.height = Main.HEIGHT + "px";
 
         step.media.image.add(myContainerID);
         step.media.image.show();
