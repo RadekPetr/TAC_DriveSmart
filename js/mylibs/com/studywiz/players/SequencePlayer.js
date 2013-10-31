@@ -815,7 +815,7 @@ var SequencePlayer = new Class({
 
         options.style = {
             'top' : '60%',
-            'left' : (Main.VIDEO_LEFT +  padding) + 'px',
+            'left' : (Main.VIDEO_LEFT + padding) + 'px',
             'width' : (Main.VIDEO_WIDTH - 4 * padding) + 'px',
             'padding' : padding + 'px ' + padding + 'px ' + padding + 'px ' + padding + 'px'
         };
@@ -1289,21 +1289,25 @@ var SequencePlayer = new Class({
         });
         myDiv.inject($m(Main.DIV_ID));
 
-        step.media.image.options.style.width = Main.WIDTH + "px";
-        step.media.image.options.style.height = Main.HEIGHT + "px";
+        /* step.media.image.options.style.width = Main.VIDEO_WIDTH + "px";
+         step.media.image.options.style.height = Main.VIDEO_HEIGHT + "px";
+         step.media.image.options.style.left = Main.VIDEO_LEFT + "px";
+         step.media.image.options.style.top = Main.VIDEO_TOP + "px";
 
+         */
         step.media.image.add(myContainerID);
         step.media.image.show();
 
-        var moduleTitle = new Element("h1", {
-            html : this.moduleInfo.moduleTitle,
-            styles : {
-                left : '0px',
-                top : '20%'
-            },
-            'class' : 'module-title no-select'
-        });
-        moduleTitle.inject(myDiv);
+        /* var moduleTitle = new Element("h1", {
+         html : this.moduleInfo.moduleTitle,
+         styles : {
+         left : '0px',
+         top : '20%'
+         },
+         'class' : 'module-title no-select'
+         });
+         moduleTitle.inject(myDiv);
+         */
 
         if (this.sequenceState.completed == true) {
             step.media.previewImage.add(myContainerID);
