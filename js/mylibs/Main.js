@@ -89,13 +89,13 @@ Main.DIV_ID = 'drivesmart';
 
 // the stage size
 Main.WIDTH = 940;
-Main.HEIGHT = 600;
+Main.HEIGHT = 560;
 
 // the main Video size
-Main.VIDEO_WIDTH = 600;
-Main.VIDEO_HEIGHT = 440;
-Main.VIDEO_TOP = 110;
-Main.VIDEO_LEFT = 90;
+Main.VIDEO_WIDTH = 700;
+Main.VIDEO_HEIGHT = 525;
+Main.VIDEO_TOP = 20;
+Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '1.0.1';

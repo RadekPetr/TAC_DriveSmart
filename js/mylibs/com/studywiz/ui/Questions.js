@@ -10,7 +10,7 @@ var Questions = new Class({
             position : 'absolute',
             top : '0px',
             left : '0px',
-            width : '550px',
+            width : '589px',
             'opacity' : '0',
             'visibility' : 'hidden'
         },

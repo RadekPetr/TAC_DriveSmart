@@ -141,12 +141,21 @@ var SequencePlayer = new Class({
 
                     var myContainerID = 'SequenceIntro.container';
                     var myDiv = new Element("div", {
-                        id : myContainerID
+                        id : myContainerID,
+                        styles : {
+                            position : 'absolute',
+                            'left' : Main.VIDEO_LEFT + 'px',
+                            'top' : Main.VIDEO_TOP + 'px',
+                            'width' : Main.VIDEO_WIDTH + 'px',
+                            'height' : Main.VIDEO_HEIGHT + 'px'
+                        }
                     });
                     myDiv.inject($m(Main.DIV_ID));
 
-                    step.media.image.options.style.width = Main.WIDTH + "px";
-                    step.media.image.options.style.height = Main.HEIGHT + "px";
+                    //step.media.image.options.style.width = Main.VIDEO_WIDTH + "px";
+                    // step.media.image.options.style.height = Main.VIDEO_HEIGHT + "px";
+                    // step.media.image.options.style.left = Main.VIDEO_LEFT + "px";
+                    //  step.media.image.options.style.top = Main.VIDEO_TOP + "px";
 
                     step.media.image.add(myContainerID);
                     step.media.image.show();
@@ -155,15 +164,15 @@ var SequencePlayer = new Class({
                     step.media.previewImage.show();
 
                     /*var moduleTitle = new Element("h1", {
-                        html : this.moduleInfo.moduleTitle,
-                        styles : {
-                            left : '0px',
-                            top : '20%'
-                        },
-                        'class' : 'module-title no-select'
-                    });
-                    moduleTitle.inject(myDiv);
-                    */
+                     html : this.moduleInfo.moduleTitle,
+                     styles : {
+                     left : '0px',
+                     top : '20%'
+                     },
+                     'class' : 'module-title no-select'
+                     });
+                     moduleTitle.inject(myDiv);
+                     */
 
                     var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
                     var sequenceTitleText = "Exercise " + this.sequenceState.id + " of " + moduleState.total;
@@ -802,6 +811,14 @@ var SequencePlayer = new Class({
     },
     //------------------------------------------------------------------------
     _setupQuestions : function(options) {
+        var padding = 20;
+
+        options.style = {
+            'top' : '60%',
+            'left' : (Main.VIDEO_LEFT +  padding) + 'px',
+            'width' : (Main.VIDEO_WIDTH - 4 * padding) + 'px',
+            'padding' : padding + 'px ' + padding + 'px ' + padding + 'px ' + padding + 'px'
+        };
         var questions = new Questions(this, options);
         questions.add(Main.DIV_ID, "bottom");
         questions.show();
@@ -842,7 +859,7 @@ var SequencePlayer = new Class({
 
                         if (stepType == 'Cameo') {
                             style = {
-                                'left' : (Main.VIDEO_WIDTH - 240 - 50) + 'px',
+                                'left' : (Main.VIDEO_WIDTH - 240 - 120) + 'px',
                                 'top' : (Main.VIDEO_TOP + 20) + 'px',
                                 'width' : '240',
                                 'height' : '175'

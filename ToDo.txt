@@ -32,6 +32,9 @@ Country 21  - click on vide whne detecting risk - how does it work ?
 Country 21/21  click repla y/ Playback button discrepancy - allow naming buttons for steps ?
 
 Adjust Key Risk areas  to match the images exactly
+Cameo position is wrong
+Button styles
+
 
 -----------------------------------------------------------------
 DONE:
