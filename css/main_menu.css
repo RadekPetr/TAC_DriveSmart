@@ -1,5 +1,5 @@
 .module-description {
-	color: #EAC749;
+	color: #D7B000;
 	font-size: 0.80em;
 	text-align: left;
 	line-height: 125%;
@@ -54,6 +54,12 @@
 	left: 0;
 	position: absolute;
 	top: 400px;
+}
+
+.load_progress {
+	left: 300px;
+	position: absolute;
+	top: 250px;
 }
 
 .menu_item {
