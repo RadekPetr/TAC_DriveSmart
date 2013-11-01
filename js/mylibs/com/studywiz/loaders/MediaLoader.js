@@ -102,29 +102,16 @@ var MediaLoader = new Class({
     },
     updateProgress : function() {
         this.loadQueue.each( function(value, key) {
-            log ("DEBUG ++++", value, key );
+            log("DEBUG ++++", value, key);
             this.reportProgress(value.ref.getLoaderInfo());
         }.bind(this));
     },
     // ----------------------------------------------------------
     _addProgressBar : function() {
-        this.progressBar = new dwProgressBar({
-            container : $m(this.options.parentElementID),
-            startPercentage : 0,
-            speed : 10,
-            boxID : 'media_loader_box',
-            boxClass : 'media_loader_box',
-            percentageID : 'media_loader_perc',
-            percentageClass : 'media_loader_perc',
-            displayID : 'media_loader_disp',
-            displayText : true,
-            style : {
-                'left' : (Main.WIDTH / 3) + 'px',
-                'top' : (Main.HEIGHT / 2) + 'px',
-                'position' : 'absolute',
-                'z-index' : '99999'
-            }
-        });
+        var loaderProgressBar = UIHelpers.progressBarSetup(0, "media_loader_disp");        
+        UIHelpers.setClasses(loaderProgressBar['holder'], "no-select load_progress");
+        loaderProgressBar['holder'].inject($m(this.options.parentElementID));
+        this.progressBar = loaderProgressBar['object'];
     },
     // ----------------------------------------------------------
     _show : function() {

@@ -37,7 +37,10 @@ UIHelpers.progressBarSetup = function(progress, id) {
         displayID : 'text_' + id,
         displayClass : 'progress_title no-select'
     });
-    return progressBarComponent;
+    return {
+        holder : progressBarComponent,
+        object : progressBar
+    };
 };
 
 UIHelpers.setMainPanel = function(cssClassName) {

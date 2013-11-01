@@ -119,8 +119,8 @@ var SequencePlayer = new Class({
 
                     var overallProgressBar = UIHelpers.progressBarSetup(Main.userTracker.getTotalProgress() * 100.0, "overall");
 
-                    UIHelpers.setClasses(overallProgressBar, "no-select overall_progress");
-                    overallProgressBar.inject(myDiv);
+                    UIHelpers.setClasses(overallProgressBar['holder'], "no-select overall_progress");
+                    overallProgressBar['holder'].inject(myDiv);
 
                     break;
                 case "SequenceIntro":
@@ -176,8 +176,8 @@ var SequencePlayer = new Class({
                     var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
                     var moduleProgressBar = UIHelpers.progressBarSetup(moduleState.progress, this.moduleInfo.moduleID);
 
-                    UIHelpers.setClasses(moduleProgressBar, "no-select module_progress_intro");
-                    moduleProgressBar.inject(myDiv);
+                    UIHelpers.setClasses(moduleProgressBar['holder'], "no-select module_progress_intro");
+                    moduleProgressBar['holder'].inject(myDiv);
 
                     this._addButton({
                         type : "Continue",
@@ -417,6 +417,9 @@ var SequencePlayer = new Class({
                     // TODO: use video size for the image - maybe use css class for this
                     step.media.image.options.style.width = Main.VIDEO_WIDTH + "px";
                     step.media.image.options.style.height = Main.VIDEO_HEIGHT + "px";
+                    step.media.image.options.style.left = 0;
+                    step.media.image.options.style.top = 0;
+                    
                     step.media.image.add(this.shapes.container.id);
 
                     step.media.image.show();
@@ -489,6 +492,9 @@ var SequencePlayer = new Class({
                     if (this.currentSequence.length > 0) {
                         log("ERROR - DragNDropFeedback must be last in the sequence");
                     }
+                    step.media.image.options.style.left = 0;
+                    step.media.image.options.style.top = 0;
+                    
                     // step.media.image.options.style.width = Main.VIDEO_WIDTH + "px";
                     // step.media.image.options.style.height = Main.VIDEO_HEIGHT + "px";
                     // Show correct bkg
@@ -1299,8 +1305,8 @@ var SequencePlayer = new Class({
 
             var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
             var moduleProgressBar = UIHelpers.progressBarSetup(moduleState.progress, this.moduleInfo.moduleID);
-            UIHelpers.setClasses(moduleProgressBar, "no-select module_progress_intro");
-            moduleProgressBar.inject(myDiv);
+            UIHelpers.setClasses(moduleProgressBar['holder'], "no-select module_progress_intro");
+            moduleProgressBar['holder'].inject(myDiv);
 
             // Already played the intro video so this time just play welcome sound
 

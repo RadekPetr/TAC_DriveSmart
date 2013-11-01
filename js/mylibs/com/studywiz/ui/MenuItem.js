@@ -57,7 +57,7 @@ var MenuItem = new Class({
                 this.container.adopt(symbol);
                 symbol.show();
             }
-            this.container.adopt(UIHelpers.progressBarSetup(moduleState.progress, this.selectedModuleID));
+            this.container.adopt(UIHelpers.progressBarSetup(moduleState.progress, this.selectedModuleID)['holder']);
         }
     },
     myParent : function() {
