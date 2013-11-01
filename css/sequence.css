@@ -1,0 +1,12 @@
+.module_progress_intro {
+	left: 0;
+	position: absolute;
+	top: 400px;
+}
+
+.sequence-title {
+	position: absolute;
+	font-size: 1em;
+	left: 0;
+	top: 350px;
+}
