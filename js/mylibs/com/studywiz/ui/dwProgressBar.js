@@ -29,8 +29,7 @@ var dwProgressBar = new Class({
         displayText : false,
         speed : 10,
         styles : {
-            'width' : '200px'
-            //,            'height' : '20px'
+            
         }
     },
 

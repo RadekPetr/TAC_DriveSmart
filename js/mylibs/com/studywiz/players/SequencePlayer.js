@@ -168,7 +168,7 @@ var SequencePlayer = new Class({
                     var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
                     var sequenceTitleText = "Exercise " + this.sequenceState.id + " of " + moduleState.total;
                     var sequenceTitle = new Element("h1", {
-                        html : sequenceTitleText,                        
+                        html : sequenceTitleText,
                         'class' : 'sequence-title no-select'
                     });
                     sequenceTitle.inject(myDiv);
@@ -1299,7 +1299,7 @@ var SequencePlayer = new Class({
 
             var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
             var moduleProgressBar = UIHelpers.progressBarSetup(moduleState.progress, this.moduleInfo.moduleID);
-          UIHelpers.setClasses(moduleProgressBar, "no-select module_progress_intro");
+            UIHelpers.setClasses(moduleProgressBar, "no-select module_progress_intro");
             moduleProgressBar.inject(myDiv);
 
             // Already played the intro video so this time just play welcome sound
