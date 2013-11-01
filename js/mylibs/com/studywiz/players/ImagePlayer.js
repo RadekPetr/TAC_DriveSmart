@@ -3,9 +3,7 @@ var ImagePlayer = new Class({
     Implements : [Options, Events],
     options : {
         style : {
-            position : 'absolute',
-            top : '0px',
-            left : '0px',
+            position : 'absolute',           
             opacity : '0',
             visibility : 'hidden'
         },

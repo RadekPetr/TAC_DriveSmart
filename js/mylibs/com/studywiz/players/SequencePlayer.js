@@ -112,23 +112,14 @@ var SequencePlayer = new Class({
 
                     var score = new Element("h2", {
                         html : "Overall score: " + (100 * Main.userTracker.getTotalScore()).toInt() + "/100",
-                        styles : {
-
-                            'position' : 'absolute',
-                            left : '45%',
-                            top : '85%'
-                        },
                         'id' : 'overall_score',
-                        'class' : 'no-select'
+                        'class' : 'no-select overall_score'
                     });
                     score.inject(myDiv);
 
                     var overallProgressBar = UIHelpers.progressBarSetup(Main.userTracker.getTotalProgress() * 100.0, "overall");
-                    overallProgressBar.setStyles({
-                        'position' : 'absolute',
-                        left : '45%',
-                        top : '90%'
-                    });
+
+                    UIHelpers.setClasses(overallProgressBar, "no-select overall_progress");
                     overallProgressBar.inject(myDiv);
 
                     break;
@@ -177,11 +168,7 @@ var SequencePlayer = new Class({
                     var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
                     var sequenceTitleText = "Exercise " + this.sequenceState.id + " of " + moduleState.total;
                     var sequenceTitle = new Element("h1", {
-                        html : sequenceTitleText,
-                        styles : {
-                            left : '0',
-                            top : '350px'
-                        },
+                        html : sequenceTitleText,                        
                         'class' : 'sequence-title no-select'
                     });
                     sequenceTitle.inject(myDiv);
@@ -189,10 +176,7 @@ var SequencePlayer = new Class({
                     var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
                     var moduleProgressBar = UIHelpers.progressBarSetup(moduleState.progress, this.moduleInfo.moduleID);
 
-                    moduleProgressBar.setStyles({
-                        left : 0,
-                        top : '380px'
-                    });
+                    UIHelpers.setClasses(moduleProgressBar, "no-select module_progress_intro");
                     moduleProgressBar.inject(myDiv);
 
                     this._addButton({
@@ -1315,10 +1299,7 @@ var SequencePlayer = new Class({
 
             var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
             var moduleProgressBar = UIHelpers.progressBarSetup(moduleState.progress, this.moduleInfo.moduleID);
-            moduleProgressBar.setStyles({
-                left : 0,
-                top : '380px'
-            });
+          UIHelpers.setClasses(moduleProgressBar, "no-select module_progress_intro");
             moduleProgressBar.inject(myDiv);
 
             // Already played the intro video so this time just play welcome sound

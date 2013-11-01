@@ -22,7 +22,7 @@ UIHelpers.progressBarSetup = function(progress, id) {
     var progressBarComponent = new Element('div', {
         id : "Progress_" + id,
         html : "",
-        'class' : 'progress_title no-select'
+        'class' : 'no-select'
     });
 
     var progressBar = new dwProgressBar({
@@ -35,21 +35,24 @@ UIHelpers.progressBarSetup = function(progress, id) {
         percentageClass : 'progress_perc',
         displayText : true,
         displayID : 'text_' + id,
-        displayClass : 'progress_title no-select',
-
+        displayClass : 'progress_title no-select'
     });
     return progressBarComponent;
 };
 
 UIHelpers.setMainPanel = function(cssClassName) {
-    $m(Main.DIV_ID).removeAttribute('class');
-    $m(Main.DIV_ID).addClass(cssClassName);
+    UIHelpers.setClasses($m(Main.DIV_ID), cssClassName);
+};
+
+UIHelpers.setClasses = function(el, cssClasses) {
+    el.removeAttribute('class');
+    el.addClass(cssClasses);
 };
 
 UIHelpers.getButtonOptions = function(buttonType) {
 
     var buttonPosition = {
-        x : 70 + Main.WIDTH - (Main.WIDTH - Main.VIDEO_WIDTH + Main.VIDEO_LEFT)/2,
+        x : 70 + Main.WIDTH - (Main.WIDTH - Main.VIDEO_WIDTH + Main.VIDEO_LEFT) / 2,
         y : 415
     };
     var presets = new Hash({

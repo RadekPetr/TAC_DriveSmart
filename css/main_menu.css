@@ -1,10 +1,8 @@
 .module-description {
 	color: #EAC749;
-	position: absolute;
 	font-size: 0.80em;
 	text-align: left;
 	line-height: 125%;
-	width: 500px;
 	background-color: #464646;
 	float: left;
 	border-radius: 1em 1em 1em 1em;
@@ -12,9 +10,17 @@
 	-webkit-border-radius: 0.5em 0.5em 0.5em 0.5em;
 	padding: 8px 8px 8px 8px;
 	background: rgba(0, 0, 0, 0.6);
+	position: absolute;
+	left: 400px;
+	top: 350px;
+	width: 390px;
+	min-height: 70px;
 }
-.module-preview img {
-
+.module-preview {
+	left: 440px;
+	position: absolute;
+	top: 110px;
+	width: 310px;
 }
 .main-title {
 	position: absolute;
@@ -28,7 +34,28 @@
 .sequence-title {
 	position: absolute;
 	font-size: 1em;
+	left: 0;
+	top: 350px;
 }
+
+.overall_score {
+	left: 400px;
+	position: absolute;
+	top: 450px;
+}
+
+.overall_progress {
+	left: 400px;
+	position: absolute;
+	top: 490px;
+}
+
+.module_progress_intro {
+	left: 0;
+	position: absolute;
+	top: 400px;
+}
+
 .menu_item {
 	font-size: 1em;
 	font-family: Museo700;
@@ -45,7 +72,7 @@
 	color: #FFFF99;
 }
 .menu_item.locked {
-	
+
 }
 
 .menu_item_locked:hover {
@@ -59,7 +86,6 @@
 }
 
 .pane {
-	
 	margin: 20px 0;
 	-webkit-box-shadow: #404040 0px 0px 10px;
 	-moz-box-shadow: #404040 0px 0px 10px;
@@ -70,6 +96,10 @@
 	-o-border-radius: 5px;
 	border-radius: 5px;
 	color: #000
+}
+
+.pane.menu {
+	margin: 10px 0;
 }
 
 .pane.orange {

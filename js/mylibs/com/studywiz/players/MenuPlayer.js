@@ -64,7 +64,7 @@ var MenuPlayer = new Class({
 
             var menuItem = new MenuItem(this, {
                 data : menuItemData,
-                'class' : 'menu_item no-select pane ' + itemColor
+                'class' : 'menu_item no-select pane menu ' + itemColor
             });
             this.menuItems.push(menuItem);
 
@@ -104,8 +104,7 @@ var MenuPlayer = new Class({
             id : "module.description",
             'class' : 'module-description no-select',
             styles : {
-                left : '400px',
-                top : '410px'
+               
             }
         });
         this.container.adopt(this.module_description);

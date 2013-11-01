@@ -36,8 +36,7 @@ var MenuItem = new Class({
             title : 'Image',
             id : 'preview_' + this.selectedModuleID,
             style : {               
-                top : '140px',
-                left : '400px'
+                
             }
         });
         this.options.preview.preload();
