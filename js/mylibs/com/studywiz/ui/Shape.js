@@ -40,11 +40,8 @@ var Shape = new Class({
         this.shapes = new Array();
         this.shapesArray = new Array();
         this.container = null;
-        this.containerID = 'container_shape' + this.options.id;
-
         this.shapes.push(tempArray[1]);
         log(this.shapes);
-
     },
     myParent : function() {
         return this.options.parent;
@@ -59,20 +56,23 @@ var Shape = new Class({
 
     },
     add : function(parentTagID) {
-
         var myParent = document.getElementById(parentTagID);
-        log(myParent);
-        var myDiv = myParent.getElement('div[id=' + this.containerID + ']');
-        if (myDiv == null) {
-            var myDiv = new Element("div", {
-                id : this.containerID
+        log(myParent);        
+        
+        var divID = 'container_shape';
+        var svgID = 'svg_wrapper';
+        var myDiv = myParent.getElement('div[id=' + divID + ']');
+        
+        if (myDiv == null) {        
+             var myDiv = new Element("div", {
+                id : divID
             });
             this.container = myDiv;
             // Fix for svg, no idea how it works ....
             this._svgTags(['svg', 'polygon', 'polyline', 'rect', 'path']);
 
             this.shapeWrapper = new Element("svg", {
-                id : this.options.id,
+                id : svgID,
                 xmlns : "http://www.w3.org/2000/svg",
                 version : "1.1",
                 width : Main.VIDEO_WIDTH + 'px',
@@ -81,8 +81,9 @@ var Shape = new Class({
 
             this.shapeWrapper.inject(this.container);
         } else {
-            this.container = myDiv;
-            this.shapeWrapper = this.container.getElement('svg[id=' + this.options.id + ']');
+            this.container = myDiv;            
+            tempID = 'container_shape';         
+            this.shapeWrapper = this.container.getElement('svg[id=' + svgID + ']');
         }
         this.shape = null;
 
@@ -97,7 +98,7 @@ var Shape = new Class({
             // this.hide();
             shapeElement.setStyles(this.options.svgStyle);
             shapeElement.addEvent('click', function(e) {
-                //alert('clicked' + this.options.id);
+                log('clicked' + this.options.id);
                 this.myParent().fireEvent("TIMELINE", {
                     type : "shape.event",
                     id : shapeID,
