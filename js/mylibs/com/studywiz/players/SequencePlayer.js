@@ -984,7 +984,12 @@ var SequencePlayer = new Class({
                         step.emptyBkg = new ImagePlayer(this, {
                             src : file,
                             title : 'BkgImage',
-                            id : 'image' + index + "_" + stepOrder
+                            id : 'image' + index + "_" + stepOrder,
+                          
+                            style : {                               
+                                top : '0',
+                                'position' : 'absolute'
+                            }
                         });
                         this.mediaLoader.register(step.emptyBkg.getLoaderInfo());
                     }
