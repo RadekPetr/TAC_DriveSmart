@@ -20,7 +20,9 @@ var SwiffPlayer = new Class({
         style : {
             position : 'absolute',           
             opacity : '0',
-            visibility : 'hidden'
+            visibility : 'hidden',
+            left: Main.VIDEO_LEFT  + 'px',
+            top: Main.VIDEO_TOP  + 'px'
         },
         src : '',
         id : 'element.id',

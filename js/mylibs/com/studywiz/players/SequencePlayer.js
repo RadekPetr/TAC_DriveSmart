@@ -852,7 +852,7 @@ var SequencePlayer = new Class({
 
                         if (stepType == 'Cameo') {
                             style = {
-                                'left' : (Main.VIDEO_WIDTH - 240 - 120) + 'px',
+                                'left' : (Main.VIDEO_WIDTH - 240 - 150) + 'px',
                                 'top' : (Main.VIDEO_TOP + 20) + 'px',
                                 'width' : '240',
                                 'height' : '175'

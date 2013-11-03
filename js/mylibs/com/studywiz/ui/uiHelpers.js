@@ -93,7 +93,7 @@ UIHelpers.getButtonOptions = function(buttonType) {
             id : "button_" + buttonType,
             text : "Record",
             next : "CommentaryIntro.done",
-            'class' : "button position_1 pane red"
+            'class' : "button position_1 pane orange"
         },
         "Expert commentary" : {
             id : "button_" + buttonType,
@@ -107,7 +107,8 @@ UIHelpers.getButtonOptions = function(buttonType) {
         "Expert commentary 2" : {
             id : "button_" + buttonType,
             text : "Expert commentary",
-            next : "Commentary.expert.clicked pane orange",
+            next : "Commentary.expert.clicked",
+            'class' : "button position_4 pane green",
             style : {
                 left : 20,
                 top : buttonPosition.y - 45,
@@ -117,20 +118,20 @@ UIHelpers.getButtonOptions = function(buttonType) {
         "Skip" : {
             id : "button_" + buttonType,
             text : "Skip",
-            next : "ConIntro.done.clicked pane orange",
-            'class' : "button position_1"
+            next : "ConIntro.done.clicked ",
+            'class' : "button position_1 pane orange"
         },
         "Start" : {
             id : "button_" + buttonType,
             text : "Start",
-            next : "ConIntro.done.clicked pane green",
-            'class' : "button position_1"
+            next : "ConIntro.done.clicked",
+            'class' : "button position_1 pane green"
         },
         "Your commentary" : {
             id : "button_" + buttonType,
             text : "Your commentary",
-            next : "Commentary.replay.clicked pane blue",
-            'class' : "button position_4",
+            next : "Commentary.replay.clicked",
+            'class' : "button position_4 pane green",
             style : {
                 width : '195px'
             }

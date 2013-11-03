@@ -8,7 +8,7 @@ var DragNDropPlayer = new Class({
     options : {
         data : null,
         draggable_IDs : new Array("4wd", "bike", "van", "car", "cyclist", "pedestrian", "pole", "bin"),
-        id : "DragNDropPlayer",
+        id : "drag_n_drop",
         parent : null,
         next : "",
         style : {

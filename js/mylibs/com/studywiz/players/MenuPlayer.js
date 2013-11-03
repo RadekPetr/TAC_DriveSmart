@@ -10,7 +10,8 @@ var MenuPlayer = new Class({
             top : '0px',
             left : '0px',
             'opacity' : '0',
-            'visibility' : 'hidden'
+            'visibility' : 'hidden',
+            'width' : '360px'
         },
         data : null,
         id : 'MenuPlayer',
@@ -56,10 +57,10 @@ var MenuPlayer = new Class({
     },
     _addMenuItems : function() {
         Array.each(this.options.data, function(menuItemData, index) {
-            if (index <= Main.COLORS.length-1) {
+            if (index <= Main.COLORS.length - 1) {
                 var itemColor = Main.COLORS[index];
             } else {
-                var itemColor = Main.COLORS[index - Main.COLORS.length ];
+                var itemColor = Main.COLORS[index - Main.COLORS.length];
             }
 
             var menuItem = new MenuItem(this, {
@@ -104,7 +105,7 @@ var MenuPlayer = new Class({
             id : "module.description",
             'class' : 'module-description no-select',
             styles : {
-               
+
             }
         });
         this.container.adopt(this.module_description);
