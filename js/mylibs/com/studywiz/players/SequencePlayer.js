@@ -263,7 +263,8 @@ var SequencePlayer = new Class({
                             id : "intro",
                             next : step.media.swiff.options.next
                         });
-                    }.bind(this);
+                    }.bind(this);                   
+                
 
                     this.activeSwiff = step.media.swiff;
                     step.media.swiff.show();
