@@ -419,7 +419,7 @@ var SequencePlayer = new Class({
                     step.media.image.options.style.height = Main.VIDEO_HEIGHT + "px";
                     step.media.image.options.style.left = 0;
                     step.media.image.options.style.top = 0;
-                    
+
                     step.media.image.add(this.shapes.container.id);
 
                     step.media.image.show();
@@ -458,8 +458,7 @@ var SequencePlayer = new Class({
                     break;
                 case "DragNDrop":
                     // show empty bkg
-                    step.emptyBkg.add(this.activeVideo.containerID);
-                    step.emptyBkg.show();
+
                     step.dragNDrop = new DragNDropPlayer(this, {});
 
                     var panel = new ImagePlayer(this, {
@@ -471,15 +470,19 @@ var SequencePlayer = new Class({
                         }
                     });
 
-                    panel.preload();
-                    panel.add(this.activeVideo.containerID);
-                    panel.show();
-
                     // don't want to clone the step data by passing it as option
                     step.dragNDrop.options.data = {
                         areas : step.areas
                     };
                     step.dragNDrop.add(this.activeVideo.containerID);
+
+                    step.emptyBkg.add(step.dragNDrop.containerID);
+                    step.emptyBkg.show();
+
+                    panel.preload();
+                    panel.add(step.dragNDrop.containerID);
+                    panel.show();
+
                     // play Audio - Intro
                     step.media.audio.start();
                     this._addButton({
@@ -494,7 +497,7 @@ var SequencePlayer = new Class({
                     }
                     step.media.image.options.style.left = 0;
                     step.media.image.options.style.top = 0;
-                    
+
                     // step.media.image.options.style.width = Main.VIDEO_WIDTH + "px";
                     // step.media.image.options.style.height = Main.VIDEO_HEIGHT + "px";
                     // Show correct bkg
@@ -985,8 +988,8 @@ var SequencePlayer = new Class({
                             src : file,
                             title : 'BkgImage',
                             id : 'image' + index + "_" + stepOrder,
-                          
-                            style : {                               
+
+                            style : {
                                 top : '0',
                                 'position' : 'absolute'
                             }

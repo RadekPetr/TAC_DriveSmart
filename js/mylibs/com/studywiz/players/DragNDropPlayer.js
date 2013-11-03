@@ -10,7 +10,14 @@ var DragNDropPlayer = new Class({
         draggable_IDs : new Array("4wd", "bike", "van", "car", "cyclist", "pedestrian", "pole", "bin"),
         id : "DragNDropPlayer",
         parent : null,
-        next : ""
+        next : "",
+        style : {
+            left : '30px',
+            top : '25px',
+            position : 'absolute',
+            width : '100%',
+            height : '100%'
+        }
 
     },
     initialize : function(myParent, myOptions) {
