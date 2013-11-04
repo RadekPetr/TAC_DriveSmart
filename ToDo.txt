@@ -33,11 +33,14 @@ Country 21/21  click repla y/ Playback button discrepancy - allow naming buttons
 
 Adjust Key Risk areas  to match the images exactly
 Cameo position is wrong
-Button styles
 
+randomize questions ?
+
+Sequence and module introls artworks ???
 
 -----------------------------------------------------------------
 DONE:
+Button styles
 - Coutry 20 - stops after palyback ?
 - Do not preaload videos for intro modules if returning
 - Menu access logic
