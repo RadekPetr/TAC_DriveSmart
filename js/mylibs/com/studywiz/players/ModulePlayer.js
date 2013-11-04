@@ -116,4 +116,4 @@ var ModulePlayer = new Class({
             sequences : this.sequences
         };
     }
-}); 
+});
