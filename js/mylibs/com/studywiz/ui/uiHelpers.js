@@ -18,6 +18,7 @@ var UIHelpers = new Class({
 
 // Static methods
 UIHelpers.progressBarSetup = function(progress, id) {
+    log ("Progress sent: " ,progress );
 
     var progressBarComponent = new Element('div', {
         id : "Progress_" + id,
@@ -28,7 +29,7 @@ UIHelpers.progressBarSetup = function(progress, id) {
     var progressBar = new dwProgressBar({
         container : progressBarComponent,
         startPercentage : progress,
-        speed : 1000,
+        speed : 10,
         boxID : 'progress_box_' + id,
         boxClass : 'progress_box',
         percentageID : 'progress_perc_' + id,
