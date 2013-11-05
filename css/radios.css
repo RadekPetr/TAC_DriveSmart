@@ -23,7 +23,7 @@ input[type='radio'] + label, [type='checkbox'] + label {
 	padding: 5px 0 4px 24px;
 	/* Make look clickable because they are */
 	cursor: pointer;
-	background: url('../img/off.png') left center no-repeat;
+	background: url('images/off.png') left center no-repeat;
 	float: none;
 	width: 95%;
 }
@@ -32,12 +32,12 @@ input[type='radio'] + label, [type='checkbox'] + label {
  Change from unchecked to checked graphic
  */
 input[type='radio']:checked + label {
-	background-image: url('../img/radio.png');
+	background-image: url('images/radio.png');
 	float: none;
 	width: 95%;
 }
 input[type='checkbox']:checked + label {
-	background-image: url('../img/check.png');
+	background-image: url('images/check.png');
 	float: none;
 	width: 95%;
 }
