@@ -37,6 +37,11 @@ Cameo position is wrong
 randomize questions ?
 
 Sequence and module introls artworks ???
+Default text in main menu ?
+Intro ?
+iPad testing
+Progress bars style
+Completed style - Text "Completed"
 
 -----------------------------------------------------------------
 DONE:

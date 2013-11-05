@@ -263,8 +263,7 @@ var SequencePlayer = new Class({
                             id : "intro",
                             next : step.media.swiff.options.next
                         });
-                    }.bind(this);                   
-                
+                    }.bind(this);
 
                     this.activeSwiff = step.media.swiff;
                     step.media.swiff.show();
@@ -853,7 +852,7 @@ var SequencePlayer = new Class({
 
                         if (stepType == 'Cameo') {
                             style = {
-                                'left' : (Main.VIDEO_WIDTH - 240 - 150) + 'px',
+                                'left' : (Main.VIDEO_WIDTH - 240 - 148) + 'px',
                                 'top' : (Main.VIDEO_TOP + 20) + 'px',
                                 'width' : '240',
                                 'height' : '175'
@@ -1284,7 +1283,14 @@ var SequencePlayer = new Class({
         log("From Menu: ", this.fromMenu);
         var myContainerID = 'SequenceIntro.container';
         var myDiv = new Element("div", {
-            id : myContainerID
+            id : myContainerID,
+            styles : {
+                position : 'absolute',
+                'left' : Main.VIDEO_LEFT + 'px',
+                'top' : Main.VIDEO_TOP + 'px',
+                'width' : Main.VIDEO_WIDTH + 'px',
+                'height' : Main.VIDEO_HEIGHT + 'px'
+            }
         });
         myDiv.inject($m(Main.DIV_ID));
 

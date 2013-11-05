@@ -1,12 +1,12 @@
 .module_progress_intro {
-	left: 0;
 	position: absolute;
-	top: 400px;
+	top: 440px;
+	color: #FFFFFF;
 }
 
 .sequence-title {
 	position: absolute;
 	font-size: 1em;
-	left: 0;
-	top: 350px;
+	top: 400px;
+	color: #FFFFFF;
 }
