@@ -2489,7 +2489,7 @@ vjs.Player = vjs.Component.extend({
       }, this);
     }
 
-    this.listenForUserActivity();
+    //this.listenForUserActivity();
   }
 });
 
