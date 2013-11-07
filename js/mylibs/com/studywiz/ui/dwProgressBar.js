@@ -93,7 +93,14 @@ var dwProgressBar = new Class({
         });
 
         if (this.options.displayText) {
-            this.text.set('text', "Progress: " + to.toInt() + '%');
+            var progressValue;
+            if (to >= 100) {
+                progressValue = "Progress: " + "COMPLETED";
+            } else {
+                progressValue = "Progress: " + to.toInt() + '%';
+            }
+
+            this.text.set('text', progressValue);
         }
     },
 
