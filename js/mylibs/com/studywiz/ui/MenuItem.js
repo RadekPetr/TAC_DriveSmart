@@ -35,8 +35,8 @@ var MenuItem = new Class({
             src : Main.PATHS.imageFolder + this.options.data.preview,
             title : 'Image',
             id : 'preview_' + this.selectedModuleID,
-            style : {               
-                
+            style : {
+
             }
         });
         this.options.preview.preload();
@@ -45,18 +45,19 @@ var MenuItem = new Class({
         this.isLocked = true;
         // TODO: locked pane css
         //var lockedCSS = 'menu_item locked no-select pane blue';
-      //  this.container.removeAttribute('class');
-       // this.container.addClass(lockedCSS);
-       this.container.fade ("0.7");
+        //  this.container.removeAttribute('class');
+        // this.container.addClass(lockedCSS);
+        this.container.fade("0.7");
     },
     showProgress : function() {
         if (this.options.data.showProgress == true) {
             var moduleState = Main.userTracker.getModuleState(this.selectedModuleID);
             if (moduleState.completed == true) {
-                var symbol = this._getCompleteStatusSymbol();
-                this.container.adopt(symbol);
-                symbol.show();
+                //   var symbol = this._getCompleteStatusSymbol();
+                //  this.container.adopt(symbol);
+                //  symbol.show();
             }
+            //this.container.adopt(UIHelpers.progressBarSetup(100, this.selectedModuleID)['holder']);
             this.container.adopt(UIHelpers.progressBarSetup(moduleState.progress, this.selectedModuleID)['holder']);
         }
     },
@@ -75,8 +76,7 @@ var MenuItem = new Class({
     // ---------------------------
     show : function() {
         if (this.container.style.opacity == 0) {
-                this.container.fade('show');         
-            
+            this.container.fade('show');
         }
     },
     // ---------------------------
