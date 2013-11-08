@@ -38,6 +38,8 @@ Intro ?
 iPad testing
 Progress bars style
 
+iPdat: http://stackoverflow.com/questions/11633929/readystate-issue-with-html5-video-elements-on-ios-safari 
+https://gist.github.com/millermedeiros/891886
 
 -----------------------------------------------------------------
 DONE:

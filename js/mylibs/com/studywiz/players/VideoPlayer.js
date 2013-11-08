@@ -37,10 +37,9 @@ var VideoPlayer = new Class({
         this.isReady = false;
         this.container = null;
 
-
         this.container = new Element("div", {
             id : this.containerID,
-            'class' : 'videoContainer'           
+            'class' : 'videoContainer'
         });
 
         this.container.setStyles(this.options.style);
@@ -244,6 +243,13 @@ var VideoPlayer = new Class({
     },
     // ----------------------------------------------------------
     getLoaderInfo : function() {
+
+        // in iOS buffering does not start until play is clicked, so skip preloading
+        // http://stackoverflow.com/questions/11633929/readystate-issue-with-html5-video-elements-on-ios-safari
+        if (Browser.Platform.ios == true) {
+            this.isReady == true;
+        }
+
         var loaderInfo = new Object();
         var progress = 0;
         if (this.player != null) {
