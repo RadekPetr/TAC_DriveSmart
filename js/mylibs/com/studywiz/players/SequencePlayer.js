@@ -1309,11 +1309,11 @@ var SequencePlayer = new Class({
          step.media.image.options.style.left = Main.VIDEO_LEFT + "px";
          step.media.image.options.style.top = Main.VIDEO_TOP + "px";
 
-         */
-        step.media.image.add(myContainerID);
-        step.media.image.show();
+         step.media.image.add(myContainerID);
+         step.media.image.show();
+         /*
 
-        /* var moduleTitle = new Element("h1", {
+         /* var moduleTitle = new Element("h1", {
          html : this.moduleInfo.moduleTitle,
          styles : {
          left : '0px',
@@ -1325,13 +1325,42 @@ var SequencePlayer = new Class({
          */
 
         if (this.sequenceState.completed == true) {
+            step.media.previewImage.options.style.width = '100%';
+            step.media.previewImage.options.style.height = '100%';
+            step.media.previewImage.options.style.left = 0;
+            step.media.previewImage.options.style.top = 0;
+
             step.media.previewImage.add(myContainerID);
             step.media.previewImage.show();
+
+            var titleDiv = new Element("div", {
+                id : 'titles',
+                styles : {
+                    position : 'absolute',
+                    'left' : '10px',
+                    'top' : '370px',
+                    'width' : '660px',
+                    'height' : '100px'
+                },
+                'class' : 'pane gray'
+            });
+            titleDiv.inject(myDiv);
+
+            var moduleTitle = new Element("h1", {
+                html : 'Module Progress:',
+                styles : {
+                    left : '0',
+                    top : '0',
+                    'position' : 'relative',
+                },
+                'class' : 'sequence-title no-select'
+            });
+            moduleTitle.inject(titleDiv);
 
             var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
             var moduleProgressBar = UIHelpers.progressBarSetup(moduleState.progress, this.moduleInfo.moduleID);
             UIHelpers.setClasses(moduleProgressBar['holder'], "no-select module_progress_intro");
-            moduleProgressBar['holder'].inject(myDiv);
+            moduleProgressBar['holder'].inject(titleDiv);
 
             // Already played the intro video so this time just play welcome sound
 
