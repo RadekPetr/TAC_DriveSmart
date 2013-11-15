@@ -143,27 +143,37 @@ var SequencePlayer = new Class({
                     });
                     myDiv.inject($m(Main.DIV_ID));
 
-                    //step.media.image.options.style.width = Main.VIDEO_WIDTH + "px";
-                    // step.media.image.options.style.height = Main.VIDEO_HEIGHT + "px";
-                    // step.media.image.options.style.left = Main.VIDEO_LEFT + "px";
-                    //  step.media.image.options.style.top = Main.VIDEO_TOP + "px";
-
-                    step.media.image.add(myContainerID);
-                    step.media.image.show();
+                    step.media.previewImage.options.style.width = '100%';
+                    step.media.previewImage.options.style.height = '100%';
+                    step.media.previewImage.options.style.left = 0;
+                    step.media.previewImage.options.style.top = 0;
 
                     step.media.previewImage.add(myContainerID);
                     step.media.previewImage.show();
 
-                    /*var moduleTitle = new Element("h1", {
+                    /* var moduleTitle = new Element("h1", {
                      html : this.moduleInfo.moduleTitle,
                      styles : {
                      left : '0px',
                      top : '20%'
                      },
-                     'class' : 'module-title no-select'
+                     'class' : 'module-title no-select rotate90'
                      });
                      moduleTitle.inject(myDiv);
+
                      */
+                    var titleDiv = new Element("div", {
+                        id : 'titles',
+                        styles : {
+                            position : 'absolute',
+                            'left' : '10px',
+                            'top' : '370px',
+                            'width' : '660px',
+                            'height' : '100px'
+                        },
+                        'class' : 'pane gray'
+                    });
+                    titleDiv.inject(myDiv);
 
                     var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
                     var sequenceTitleText = "Exercise " + this.sequenceState.id + " of " + moduleState.total;
@@ -171,13 +181,13 @@ var SequencePlayer = new Class({
                         html : sequenceTitleText,
                         'class' : 'sequence-title no-select'
                     });
-                    sequenceTitle.inject(myDiv);
+                    sequenceTitle.inject(titleDiv);
 
                     var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
                     var moduleProgressBar = UIHelpers.progressBarSetup(moduleState.progress, this.moduleInfo.moduleID);
 
                     UIHelpers.setClasses(moduleProgressBar['holder'], "no-select module_progress_intro");
-                    moduleProgressBar['holder'].inject(myDiv);
+                    moduleProgressBar['holder'].inject(titleDiv);
 
                     this._addButton({
                         type : "Continue",

@@ -30,6 +30,7 @@
 .module-title {
 	position: absolute;
 	font-size: 3em;
+	left: 700px;
 }
 
 .overall_score {
@@ -71,5 +72,13 @@
 	color: #FFFFFF;
 	font-weight: normal;
 	text-align: left;
+}
+
+.rotate90 {
+	transform: rotate(90deg);
+	-msTransform: rotate(90deg); /* IE 9 */
+	-webkit-transform: rotate(90deg); /* Safari and Chrome */
+	-moz-transform: rotate(90deg); /* Firefox */
+	-o-transform: rotate(90deg); /* Opera */
 }
 
