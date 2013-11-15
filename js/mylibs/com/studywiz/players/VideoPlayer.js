@@ -95,7 +95,7 @@ var VideoPlayer = new Class({
             this.player.off();
             // add them again
             this.player.on("progress", function() {
-                log("EVENT: progress", this.options.id);
+                //log("EVENT: progress", this.options.id);
 
             }.bind(this));
 
@@ -108,13 +108,14 @@ var VideoPlayer = new Class({
             }.bind(this));
 
             this.player.on("canplaythrough", function() {
-                log("EVENT: **********************   canplaythrough", this.options.idc);
-                this.isReady = true;
+                log("EVENT: **********************   canplaythrough", this.options.id);
+                this.isReady = true;               
             }.bind(this));
 
             this.player.on("loadedalldata", function() {
                 log("EVENT: loadedalldata", this.options.id);
                 this.isReady = true;
+                this.player.off();
             }.bind(this));
 
         }
@@ -231,7 +232,11 @@ var VideoPlayer = new Class({
         // get the videojs player with id
         var player = videojs.players[this.playerID];
         // get rid of it
-        player.dispose();
+        if (player == null) {
+            log("Video player is null");
+        } else {
+            player.dispose();
+        }
 
         if (this.container != null && this.container != undefined) {
             this.container.player.dispose();
@@ -260,19 +265,19 @@ var VideoPlayer = new Class({
             ref : this,
             type : 'VIDEO'
         };
-        
+
         // in iOS buffering does not start until play is clicked, so skip preloading
         // http://stackoverflow.com/questions/11633929/readystate-issue-with-html5-video-elements-on-ios-safari
         if (Browser.Platform.ios == true) {
             this.isReady == true;
-           // this.player.off();
-            log (" iOS device - ready");
+            // this.player.off();
+            log(" iOS device - ready");
         }
 
         if (this.isReady == true) {
             loaderInfo[this.options.id].progress = 1;
         }
-        log (loaderInfo[this.options.id].progress);
+        log(loaderInfo[this.options.id].progress);
         return loaderInfo;
     },
     _getVideoData : function() {

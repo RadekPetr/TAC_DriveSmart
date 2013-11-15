@@ -627,12 +627,14 @@ var SequencePlayer = new Class({
             case "End.Module.Continue.clicked":
             case "MainMenu.clicked":
             case "MainMenuIntro.clicked":
-                this._stopPlayers();
-                this._removeVideos();
-                this._removeImages();
-                this._removeButtons();
-                this._removeIntroContainers();
-                this._removeInteractions();
+                /* this._stopPlayers();
+                 this._removeVideos();
+                 this._removeImages();
+                 this._removeButtons();
+                 this._removeIntroContainers();
+                 this._removeInteractions();
+                 */
+                this.reset();
 
                 this.repeating = false;
 
@@ -1239,11 +1241,11 @@ var SequencePlayer = new Class({
         return true;
     },
     reset : function() {
+        this.mediaLoader.remove();
+        this.mediaLoader.reset();
         this._stopPlayers();
         this.currentSequence.empty();
         this._removeFeedbackPanel();
-        this.mediaLoader.remove();
-        this.mediaLoader.reset();
         this._removeImages();
         this._removeRisks();
         this._removeButtons();
