@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root version="2">
+<root version="3">
   <Seq trackProgress="false" trackScore="false" Ex="1">
     <Step fmt="Menu">
       <Items>
         <Data showProgress="true" moduleID="intro" preview="country/country_cst16_start_first.jpg" description="The Introduction Tutorial provides an overview of the basic concepts of safe driving. You will be applying these concepts in the rest of the program. This section must be viewed prior to entering the other modules.">introduction</Data>
         <Data showProgress="true" preconditions= "intro" moduleID="scanning" preview="scanning/scan_umt06_next_last.jpg" description="The Scanning module consists of 25 driving situations. You must complete this module prior to accessing Urban Driving or Country Driving.">key skills training - Scanning</Data>
-        <Data showProgress="true" preconditions= "intro,scanning" moduleID="kaps" preview="kaps/kaps_shops_start_first.jpg" description="The Keep ahead &amp; play safe module consists of 6 driving exercises. You must complete this module prior to accessing Urban Driving or Country Driving.">key skills training - Keep ahead &amp; play safe</Data>
-        <Data showProgress="true" preconditions= "kaps,scanning" moduleID="concentration" preview="concentration/con_mainmenu.jpg" description="The Concentration exercises utilise a 3D driving simulator in which you are required to perform multiple tasks at the same time. It is not recommended that you go through this module in one sitting but rather complete it over several sessions.">Concentration</Data>
-        <Data showProgress="true" preconditions= "concentration" moduleID="country" preview="country/country_cla03_start_first.jpg" description="The Country Driving module consists of 22 driving exercises. You need to have completed     the Scanning, Keeping Ahead and Playing Safe modules prior to accessing this module.">on the road - Country driving</Data>
-        <Data showProgress="true" preconditions= "concentration" moduleID="urban" preview="urban/urban_umt02_next_last.jpg" description="The Urban Driving module consists of 36 driving exercises. You need to have completed the Scanning, Keeping Ahead and Playing Safe modules prior to accessing this module.">on the road - Urban driving</Data>
+        <Data showProgress="true" preconditions= "intro" moduleID="kaps" preview="kaps/kaps_shops_start_first.jpg" description="The Keep ahead &amp; play safe module consists of 6 driving exercises. You must complete this module prior to accessing Urban Driving or Country Driving.">key skills training - Keep ahead &amp; play safe</Data>
+        <Data showProgress="true" preconditions= "intro" moduleID="concentration" preview="concentration/con_mainmenu.jpg" description="The Concentration exercises utilise a 3D driving simulator in which you are required to perform multiple tasks at the same time. It is not recommended that you go through this module in one sitting but rather complete it over several sessions.">Concentration</Data>
+        <Data showProgress="true" preconditions= "concentration,kaps,scanning" moduleID="country" preview="country/country_cla03_start_first.jpg" description="The Country Driving module consists of 22 driving exercises. You need to have completed     the Scanning, Keeping Ahead and Playing Safe modules prior to accessing this module.">on the road - Country driving</Data>
+        <Data showProgress="true" preconditions= "concentration,kaps,scanning" moduleID="urban" preview="urban/urban_umt02_next_last.jpg" description="The Urban Driving module consists of 36 driving exercises. You need to have completed the Scanning, Keeping Ahead and Playing Safe modules prior to accessing this module.">on the road - Urban driving</Data>
       </Items>
 
     </Step>
