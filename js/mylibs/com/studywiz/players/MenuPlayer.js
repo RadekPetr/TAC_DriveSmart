@@ -82,9 +82,13 @@ var MenuPlayer = new Class({
             }
 
             menuItem.registerMouseLeaveEvent(this);
-        }.bind(this));
+            
+        }.bind(this));       
 
         this.addEvent("MODULE_INFO", this.showModuleInformation);
+        
+        // Show the description for the introduction - emulate mouseover :)
+        this.menuItems[0].container.fireEvent("mouseenter");
     },
     showModuleInformation : function(params) {
         var moduleInfoData = params.data;
