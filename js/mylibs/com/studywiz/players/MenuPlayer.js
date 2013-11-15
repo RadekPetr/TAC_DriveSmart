@@ -73,6 +73,7 @@ var MenuPlayer = new Class({
             menuItem.show();
 
             var isLocked = this._isItemLocked(menuItemData);
+            log(menuItemData, isLocked);
             if (isLocked) {
                 menuItem.lock();
             }
@@ -82,11 +83,11 @@ var MenuPlayer = new Class({
             }
 
             menuItem.registerMouseLeaveEvent(this);
-            
-        }.bind(this));       
+
+        }.bind(this));
 
         this.addEvent("MODULE_INFO", this.showModuleInformation);
-        
+
         // Show the description for the introduction - emulate mouseover :)
         this.menuItems[0].container.fireEvent("mouseenter");
     },
@@ -116,18 +117,22 @@ var MenuPlayer = new Class({
         this.module_description.hide();
     },
     _isItemLocked : function(menuItem) {
+        var isLocked = true;
         var itemPreconditions = menuItem.preconditions;
         if (itemPreconditions.length == 0) {
-            var isLocked = false;
+            isLocked = false;
         } else {
-            var isLocked = true;
+            var completedConditionsCount = 0;
             Array.each(itemPreconditions, function(moduleID, index) {
                 var moduleState = Main.userTracker.getModuleState(moduleID);
-                var isModuleCompleted = moduleState.completed;
-                if (isModuleCompleted == true) {
-                    isLocked = false;
+                if (moduleState.completed == true) {
+                    completedConditionsCount++;
                 }
             });
+
+            if (completedConditionsCount == itemPreconditions.length) {
+                isLocked = false;
+            }
             return isLocked;
         }
     }
