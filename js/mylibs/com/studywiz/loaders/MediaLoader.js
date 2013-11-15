@@ -94,8 +94,9 @@ var MediaLoader = new Class({
                 }
             }.bind(this));
 
-            //log("this.loadQueue ", this.loadQueue, this.loadQueue.getKeys());
+            log("this.loadQueue ", this.loadQueue, this.loadQueue.getKeys());
             var overAllProgress = this._calculateProgress();
+            log ("overAllProgress", overAllProgress);
             this._updateProgressBar(overAllProgress);
             this._handleFinished(overAllProgress);
         }
@@ -186,6 +187,8 @@ var MediaLoader = new Class({
         var sum = 0;
         var sum2 = 0;
         this.loadQueue.each( function(value, key) {
+            log ("key", key, "progress", value.progress);
+            
             if (value.progress == undefined) {
                 value.progress = 0;
             }

@@ -244,12 +244,6 @@ var VideoPlayer = new Class({
     // ----------------------------------------------------------
     getLoaderInfo : function() {
 
-        // in iOS buffering does not start until play is clicked, so skip preloading
-        // http://stackoverflow.com/questions/11633929/readystate-issue-with-html5-video-elements-on-ios-safari
-        if (Browser.Platform.ios == true) {
-            this.isReady == true;
-        }
-
         var loaderInfo = new Object();
         var progress = 0;
         if (this.player != null) {
@@ -266,22 +260,20 @@ var VideoPlayer = new Class({
             ref : this,
             type : 'VIDEO'
         };
+        
+        // in iOS buffering does not start until play is clicked, so skip preloading
+        // http://stackoverflow.com/questions/11633929/readystate-issue-with-html5-video-elements-on-ios-safari
+        if (Browser.Platform.ios == true) {
+            this.isReady == true;
+           // this.player.off();
+            log (" iOS device - ready");
+        }
 
         if (this.isReady == true) {
             loaderInfo[this.options.id].progress = 1;
         }
+        log (loaderInfo[this.options.id].progress);
         return loaderInfo;
-    },
-    // ----------------------------------------------------------
-    _reportProgress : function(isReady) {
-        var loaderInfo = this.getLoaderInfo();
-        if (isReady == true) {
-            loaderInfo[this.options.id].progress = 1;
-        }
-        //  if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
-        //     this.myParent().mediaLoader.reportProgress(loaderInfo);
-        //   }
-
     },
     _getVideoData : function() {
         var data = {};

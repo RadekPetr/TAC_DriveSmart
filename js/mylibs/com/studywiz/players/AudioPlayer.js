@@ -35,7 +35,7 @@ var AudioPlayer = new Class({
     // ----------------------------------------------------------
     start : function() {
         if (this.preloaded == false) {
-            //log("++ Not preloaded yet - Loading Sound" + this.options.src);
+            log("++ Not preloaded yet - Loading Sound" + this.options.src);
             this.preloader.loadFile({
                 src : this.options.src,
                 id : this.options.id
@@ -74,9 +74,7 @@ var AudioPlayer = new Class({
         log('Play sound: ' + this.options.id + " " + this.options.src);
         if (!createjs.SoundJS.checkPlugin(true)) {
             alert('Sound plugin issue');
-        } else {
-
-            log(this.preloader);
+        } else {          
 
             this.soundInstance = createjs.SoundJS.play(this.options.id);
             log(this.soundInstance);
@@ -93,7 +91,12 @@ var AudioPlayer = new Class({
     // ----------------------------------------------------------
     _preloadComplete : function() {
         log("++ Audio Preloaded: " + this.options.id);
-        this.preloaded = true;
+         if (Browser.Platform.ios == true) {
+             this.preloaded = false;
+         } else {
+             this.preloaded = true;
+         }
+        
     }.protect(),
     // ----------------------------------------------------------
     getLoaderInfo : function() {
@@ -105,6 +108,12 @@ var AudioPlayer = new Class({
             ref : this,
             type : 'AUDIO'
         };
+
+        if (Browser.Platform.ios == true) {
+            loaderInfo[this.options.id].progress = 1;
+            log(" iOS device - ready");
+        }
+
         return loaderInfo;
     }
 });
