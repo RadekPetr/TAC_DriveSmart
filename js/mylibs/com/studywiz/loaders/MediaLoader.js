@@ -187,7 +187,7 @@ var MediaLoader = new Class({
         var sum = 0;
         var sum2 = 0;
         this.loadQueue.each( function(value, key) {
-            log ("key", key, "progress", value.progress);
+           // log ("key", key, "progress", value.progress);
             
             if (value.progress == undefined) {
                 value.progress = 0;
