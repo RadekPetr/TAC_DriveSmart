@@ -15,6 +15,7 @@ var AudioPlayer = new Class({
         this.preloaded = false;
         this.soundInstance = null;
         this.preloader = new createjs.LoadQueue();
+        this.preloader.parent = this;
         this.preloader.installPlugin(createjs.Sound);
         // TODO: handle these events handleFileError, handleProgress
         //this.preloader.onFileError = this.handleFileError();
@@ -35,13 +36,16 @@ var AudioPlayer = new Class({
     // ----------------------------------------------------------
     start : function() {
         if (this.preloaded == false) {
-
-            log("++ Not preloaded yet - Loading Sound" + this.options.src);
-            this.preloader.loadFile({
-                src : this.options.src,
-                id : this.options.id
-            }, false);
-            this.preloader.load();
+            if (Browser.Platform.ios == true) {
+                this._playSound();
+            } else {
+                log("++ Not preloaded yet - Loading Sound" + this.options.src);
+                this.preloader.loadFile({
+                    src : this.options.src,
+                    id : this.options.id
+                }, false);
+                this.preloader.load();
+            }
 
         } else {
             this._playSound();
@@ -58,8 +62,9 @@ var AudioPlayer = new Class({
     },
     // ----------------------------------------------------------
     preload : function() {
-        log("++ Audio Preload started: " + this.options.id)
-        this.preloader.addEventListener("complete", this._playSound());
+        log("++ Audio Preload started: " + this.options.id);
+        this.preloader.addEventListener("complete", createjs.proxy(this._preloadComplete, (this)));
+        this.preloader.addEventListener("error", createjs.proxy(this._preloadError, (this)));
         this.preloader.loadFile({
             src : this.options.src,
             id : this.options.id
@@ -76,30 +81,33 @@ var AudioPlayer = new Class({
         if (!createjs.Sound.isReady()) {
             alert('Sound plugin issue');
         } else {
-
             this.soundInstance = createjs.Sound.play(this.options.id);
-
-            log(this.soundInstance);
-
-            this.soundInstance.onComplete = function() {
-                this.myParent().fireEvent("TIMELINE", {
-                    type : "audio.finished",
-                    id : this.options.id,
-                    next : this.options.next
-                });
-            }.bind(this);
+            this.soundInstance.addEventListener("complete", createjs.proxy(this._onSoundComplete, (this)));
         }
+
     }.protect(),
+    _onSoundComplete : function(event) {
+
+        this.myParent().fireEvent("TIMELINE", {
+            type : "audio.finished",
+            id : this.options.id,
+            next : this.options.next
+        });
+    },
     // ----------------------------------------------------------
-    _preloadComplete : function() {
-        log("++ Audio Preloaded: " + this.options.id);
+    _preloadComplete : function(event) {
+        // log("++ Audio Preloaded: " + this.options.id);
         if (Browser.Platform.ios == true) {
             this.preloaded = false;
         } else {
             this.preloaded = true;
         }
+    },
+    // ----------------------------------------------------------
+    _preloadError : function(event) {
+        log("++ Audio Preload error: " + event);
 
-    }.protect(),
+    },
     // ----------------------------------------------------------
     getLoaderInfo : function() {
         var loaderInfo = new Object();
