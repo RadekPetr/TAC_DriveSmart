@@ -99,10 +99,10 @@ Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '1.0.1';
-Main.BUILD = '2013/11/15-3';
+Main.BUILD = '2013/11/19-js';
 
 // When running on localhost (So I can use different paths when testing)
-Main.IS_LOCAL = true;
+Main.IS_LOCAL = false;
 
 // Show hide debug panel and ignore lock status
 Main.DEBUG = true;
