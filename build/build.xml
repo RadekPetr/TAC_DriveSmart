@@ -304,13 +304,13 @@
 				<echo message="Creating directory structure... ${dir.publish}" />
 
 				<mkdir dir="${dir.intermediate}" />
-				<copy todir="${dir.intermediate}" includeEmptyDirs="true">
+				<copy todir="${dir.intermediate}" >
 					<fileset dir="${dir.source}/" excludes="${file.default.exclude}, ${file.exclude}">
 						<type type="dir" />
 					</fileset>
 				</copy>
 				<mkdir dir="${dir.publish}" />
-				<copy todir="${dir.publish}" includeEmptyDirs="true">
+				<copy todir="${dir.publish}" >
 					<fileset dir="${dir.source}/" excludes="${file.default.exclude}, ${file.exclude}">
 						<type type="dir" />
 					</fileset>
@@ -324,7 +324,7 @@
 
 		<echo message="Copying over new files..." />
 
-		<copy todir="./${dir.publish}">
+		<copy todir="./${dir.publish}" includeEmptyDirs="false">
 			<fileset dir="${dir.source}/" excludes="${file.default.exclude}, ${file.exclude}">
 				<!-- exclude files that are superseded by optimized versions with different names -->
 				<!-- this is not strictly necessary, but it avoids putting unreferenced files into your server -->
@@ -342,13 +342,13 @@
 
 		<echo message="Copying js files..." />
 
-		<copy todir="${dir.intermediate}/temp/">
+		<copy todir="${dir.intermediate}/temp/" includeEmptyDirs="false">
 			<fileset dir="${dir.source}/">
 				<include name="${dir.js}/**/*.js" />
 			</fileset>
 		</copy>
 
-		<copy todir="${dir.intermediate}/">
+		<copy todir="${dir.intermediate}/" includeEmptyDirs="false">
 			<fileset dir="${dir.source}/">
 				<include name="${dir.css}/**/*.*" />
 			</fileset>
@@ -371,7 +371,7 @@
 		</copy>
 
 
-		<copy todir="${dir.intermediate}/temp/js-min/" flatten="true"  includeEmptyDirs="false">
+		<copy todir="${dir.intermediate}/temp/js-min/" flatten="true" includeEmptyDirs="false">
 			<fileset dir="${dir.source}/">
 				<exclude name="${dir.js}/**/*mootools*.js" />
 
@@ -379,7 +379,7 @@
 			</fileset>
 		</copy>
 
-		<copy todir="${dir.intermediate}/"  includeEmptyDirs="false">
+		<copy todir="${dir.intermediate}/" includeEmptyDirs="false">
 			<fileset dir="${dir.source}/">
 				<include name="${dir.css}/**/*.*" />
 			</fileset>
@@ -413,7 +413,7 @@
 		</concat>
 
 
-		<copy todir="${dir.publish}/${dir.js.mylibs}/">
+		<copy todir="${dir.publish}/${dir.js.mylibs}/" includeEmptyDirs="false">
 			<fileset dir="${dir.source}/${dir.js.mylibs}/" includes="*moo*.min*.js" />
 		</copy>
 		<copy file="${dir.intermediate}/${dir.js}/drivesmart.js" tofile="${dir.publish}/${dir.js}/drivesmart.js" />
