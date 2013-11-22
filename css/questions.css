@@ -1,28 +1,31 @@
 .questions_panel {
 	background-color: #464646;
-	float: left;
-	border-radius: 1em 1em 1em 1em;
-	text-align: left;
-	-moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
+	float: left;	
+	text-align: left;	
 	background: rgba(0, 0, 0, 0.6);
 	color: #FFFF99;
 	min-height: 110px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
 }
 
-.questions_label_unlocked {	
+.questions_label_unlocked {
 	color: #FFFFFF;
 	display: block;
 	margin-left: 18px;
 }
 
-.questions_label_locked_correct {	
+.questions_label_locked_correct {
 	color: #00FF00;
 	display: block;
 	margin-left: 18px;
 	font-weight: bold;
 }
 
-.questions_label_locked_incorrect {	
+.questions_label_locked_incorrect {
 	color: #CCCCCC;
 	display: block;
 	margin-left: 18px;

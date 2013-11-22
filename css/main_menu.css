@@ -5,9 +5,6 @@
 	line-height: 125%;
 	background-color: #464646;
 	float: left;
-	border-radius: 1em 1em 1em 1em;
-	-moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
-	-webkit-border-radius: 0.5em 0.5em 0.5em 0.5em;
 	padding: 8px 8px 8px 8px;
 	background: rgba(0, 0, 0, 0.6);
 	position: absolute;
@@ -15,6 +12,11 @@
 	top: 350px;
 	width: 390px;
 	min-height: 70px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
 }
 .module-preview {
 	left: 440px;
@@ -46,7 +48,6 @@
 }
 
 .menu_item {
-	font-size: 1em;
 	font-family: Museo700;
 	font-size: 1em;
 	text-align: left;
@@ -75,10 +76,11 @@
 }
 
 .rotate90 {
-	transform: rotate(90deg);
 	-msTransform: rotate(90deg); /* IE 9 */
+	-ms-transform: rotate(90deg); 
 	-webkit-transform: rotate(90deg); /* Safari and Chrome */
 	-moz-transform: rotate(90deg); /* Firefox */
 	-o-transform: rotate(90deg); /* Opera */
+	transform: rotate(90deg);
 }
 
