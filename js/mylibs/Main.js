@@ -102,7 +102,7 @@ Main.VERSION = '1.0.1';
 Main.BUILD = '2013/11/21';
 
 // When running on localhost (So I can use different paths when testing)
-Main.IS_LOCAL = false;
+Main.IS_LOCAL = true;
 
 // Show hide debug panel and ignore lock status
 Main.DEBUG = true;
