@@ -580,8 +580,8 @@
     </Step>
     <Step fmt="QuestionUser" notrack="true">
       <Inter>
-        <Data correct="true">An adult on our side of the road runs out in front of us, as we swerve to the left</Data>
-        <Data correct="false">The children panic and run in front of us</Data>
+        <Data correct="false">An adult on our side of the road runs out in front of us, as we swerve to the left</Data>
+        <Data correct="true">The children panic and run in front of us</Data>
       </Inter>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
