@@ -7,11 +7,11 @@
 	padding: 8px;
 	position: absolute;
 	text-align: left;
-	top: 350px;
-	width: 430px;
+	top: 335px;
+	width: 500px;
 }
 .module-preview {
-	left: 440px;
+	left: 495px;
 	position: absolute;
 	top: 110px;
 	width: 310px;
@@ -66,3 +66,11 @@
 	transform: rotate(90deg);
 }
 
+.horizontal_dotted_line {
+	border-bottom: 4px dashed #FFFFFF;
+	position: absolute;
+}
+.vertical_dotted_line {
+	border-left: 4px dashed #FFFFFF;
+	position: absolute;
+}

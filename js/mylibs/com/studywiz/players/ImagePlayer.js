@@ -113,6 +113,7 @@ var ImagePlayer = new Class({
         this.image = new Asset.image(this.options.src, {
             style : this.options.style,
             id : this.options.id,
+            'alt': this.options.id,
             'class' : this.options['class'],
             onLoad : function() {
                 this.options.loaded = true;

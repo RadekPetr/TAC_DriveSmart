@@ -52,8 +52,43 @@ var MenuPlayer = new Class({
         }
     },
     _renderMenu : function() {
+        this._addLines();
         this._addModuleDescription();
         this._addMenuItems();
+
+    },
+
+    _addLines : function() {
+        var div1 = new Element("div", {
+            id : "line 1",
+            'class' : 'horizontal_dotted_line',
+            styles : {
+                left : '390px',
+                top : '90px',
+                width : '535px'
+            }
+        });
+        this.container.adopt(div1);
+        var div2 = new Element("div", {
+            id : "line 2",
+            'class' : 'horizontal_dotted_line',
+            styles : {
+                left : '390px',
+                top : '450px',
+                width : '535px'
+            }
+        });
+        this.container.adopt(div2);
+        var div3 = new Element("div", {
+            id : "line 3",
+            'class' : 'vertical_dotted_line',
+            styles : {
+                left : '380px',
+                top : '10px',
+                height : '540px'
+            }
+        });
+        this.container.adopt(div3);
     },
     _addMenuItems : function() {
         Array.each(this.options.data, function(menuItemData, index) {
