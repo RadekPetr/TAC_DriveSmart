@@ -45,13 +45,13 @@ UIHelpers.progressBarSetup = function(progress, id) {
 };
 
 UIHelpers.setMainPanel = function(titleText) {
-    var moduleTitle = $m(Main.DIV_ID).getElementById('module_title');
+    var moduleTitle = $m(Main.DIV_ID).getElementById('module.title');
 
     if (moduleTitle == null) {
         moduleTitle = new Element("div", {
             html : titleText,
             'class' : 'module-title no-select rotate90',
-            'id' : 'module_title'
+            'id' : 'module.title'
         });
         moduleTitle.inject($m(Main.DIV_ID),'top');
     } else {

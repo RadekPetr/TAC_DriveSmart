@@ -108,9 +108,8 @@ var MenuPlayer = new Class({
     _addModuleDescription : function() {
         this.module_description = new Element("div", {
             id : "module.description",
-            'class' : 'module-description no-select',
+            'class' : 'module-description no-select pane blue',
             styles : {
-
             }
         });
         this.container.adopt(this.module_description);

@@ -1,22 +1,14 @@
 .module-description {
-	color: #ffffff;
-	font-size: 0.80em;
-	text-align: left;
-	line-height: 125%;
-	background-color: #464646;
 	float: left;
-	padding: 8px 8px 8px 8px;
-	background: rgba(0, 0, 0, 0.6);
-	position: absolute;
+	font-size: 0.9em;
 	left: 400px;
-	top: 350px;
-	width: 390px;
+	line-height: 125%;
 	min-height: 70px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	-ms-border-radius: 5px;
-	-o-border-radius: 5px;
-	border-radius: 5px;
+	padding: 8px;
+	position: absolute;
+	text-align: left;
+	top: 350px;
+	width: 430px;
 }
 .module-preview {
 	left: 440px;
