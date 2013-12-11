@@ -18,7 +18,7 @@ var UIHelpers = new Class({
 
 // Static methods
 UIHelpers.progressBarSetup = function(progress, id) {
-    log ("Progress sent: " ,progress );
+    log("Progress sent: ", progress);
 
     var progressBarComponent = new Element('div', {
         id : "Progress_" + id,
@@ -44,8 +44,20 @@ UIHelpers.progressBarSetup = function(progress, id) {
     };
 };
 
-UIHelpers.setMainPanel = function(cssClassName) {
-    UIHelpers.setClasses($m(Main.DIV_ID), cssClassName);
+UIHelpers.setMainPanel = function(titleText) {
+    var moduleTitle = $m(Main.DIV_ID).getElementById('module_title');
+
+    if (moduleTitle == null) {
+        moduleTitle = new Element("div", {
+            html : titleText,
+            'class' : 'module-title no-select rotate90',
+            'id' : 'module_title'
+        });
+        moduleTitle.inject($m(Main.DIV_ID),'top');
+    } else {
+       moduleTitle.set('html', titleText);
+    }
+    return moduleTitle;
 };
 
 UIHelpers.setClasses = function(el, cssClasses) {

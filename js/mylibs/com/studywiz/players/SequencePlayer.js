@@ -56,7 +56,6 @@ var SequencePlayer = new Class({
         this.mediaLoader.options.next = 'Media.ready';
 
         if (this.mediaLoader.getQueueLength() > 0) {
-            
             this.mediaLoader.start(true);
         } else {
             // no media to preload so we can continue
@@ -90,15 +89,10 @@ var SequencePlayer = new Class({
                         id : myContainerID
                     });
                     myDiv.inject($m(Main.DIV_ID));
-                    // step.media.image.add(myContainerID);
-                    // TODO: adjust style based on TAC
-                    //step.media.image.show();
-                    var moduleTitle = new Element("h1", {
-                        html : this.moduleInfo.moduleTitle,
-                        'class' : 'main-title no-select'
-                    });
-                    moduleTitle.inject(myDiv);
-                    
+
+                    var moduleTitle = UIHelpers.setMainPanel(this.moduleInfo.moduleTitle);
+                    UIHelpers.setClasses(moduleTitle, 'module-title-dashboard no-select');
+
                     step.data.style = {
                         left : '10px',
                         top : '0px'
@@ -138,11 +132,8 @@ var SequencePlayer = new Class({
                     });
                     myDiv.inject($m(Main.DIV_ID));
 
-                    var moduleTitle = new Element("h1", {
-                        html : this.moduleInfo.moduleTitle,
-                        'class' : 'module-title no-select rotate90'
-                    });
-                    moduleTitle.inject(myDiv);
+                    var moduleTitle = UIHelpers.setMainPanel(this.moduleInfo.moduleTitle);
+                    UIHelpers.setClasses(moduleTitle, 'module-title no-select rotate90');
 
                     step.media.previewImage.options.style.width = '100%';
                     step.media.previewImage.options.style.height = '100%';
@@ -151,18 +142,8 @@ var SequencePlayer = new Class({
 
                     step.media.previewImage.add(myContainerID);
                     step.media.previewImage.show();
+                   
 
-                    /* var moduleTitle = new Element("h1", {
-                     html : this.moduleInfo.moduleTitle,
-                     styles : {
-                     left : '0px',
-                     top : '20%'
-                     },
-                     'class' : 'module-title no-select rotate90'
-                     });
-                     moduleTitle.inject(myDiv);
-
-                     */
                     var titleDiv = new Element("div", {
                         id : 'titles',
                         styles : {
@@ -447,7 +428,6 @@ var SequencePlayer = new Class({
                             'left' : '170px',
                             'height' : '0px',
                             'top' : (Main.VIDEO_TOP) + 'px'
-
                         }
                     });
 
@@ -501,7 +481,6 @@ var SequencePlayer = new Class({
                     });
                     break;
                 case "DragNDropFeedback":
-
                     if (this.currentSequence.length > 0) {
                         log("ERROR - DragNDropFeedback must be last in the sequence");
                     }
@@ -533,7 +512,6 @@ var SequencePlayer = new Class({
                     this._updateUserProgress();
                     break;
             }
-
         } else {
             // seq finished
             log('******** ERROR - Missing Continue STEP in this sequence');
@@ -549,7 +527,6 @@ var SequencePlayer = new Class({
             case "Question.done":
             case "QuestionFeedback.done":
             case "PlayAudio.done":
-
                 this._nextStep();
                 break;
             case "SequenceIntro.done":
@@ -1306,21 +1283,8 @@ var SequencePlayer = new Class({
         });
         myDiv.inject($m(Main.DIV_ID));
 
-        /* step.media.image.options.style.width = Main.VIDEO_WIDTH + "px";
-         step.media.image.options.style.height = Main.VIDEO_HEIGHT + "px";
-         step.media.image.options.style.left = Main.VIDEO_LEFT + "px";
-         step.media.image.options.style.top = Main.VIDEO_TOP + "px";
-
-         step.media.image.add(myContainerID);
-         step.media.image.show();
-         */
-
-        var moduleTitle = new Element("h1", {
-            html : this.moduleInfo.moduleTitle,
-            'class' : 'module-title no-select rotate90'
-        });
-        moduleTitle.inject($m(Main.DIV_ID));
-        log ("sdfasfdasdfasdfa");
+        var moduleTitle = UIHelpers.setMainPanel(this.moduleInfo.moduleTitle);
+        UIHelpers.setClasses(moduleTitle, 'module-title no-select rotate90');
 
         if (this.sequenceState.completed == true) {
             step.media.previewImage.options.style.width = '100%';

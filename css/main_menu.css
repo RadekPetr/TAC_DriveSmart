@@ -24,19 +24,6 @@
 	top: 110px;
 	width: 310px;
 }
-.main-title {
-	position: absolute;
-	font-size: 2.5em;
-	text-align: center;
-}
-.module-title {
-   font-size: 3em;
-    left: 670px;
-    line-height: 50px;
-    position: absolute;
-    top: 120px;
-    width: 300px;
-}
 
 .overall_score {
 	left: 410px;
@@ -80,7 +67,7 @@
 
 .rotate90 {
 	-msTransform: rotate(90deg); /* IE 9 */
-	-ms-transform: rotate(90deg); 
+	-ms-transform: rotate(90deg);
 	-webkit-transform: rotate(90deg); /* Safari and Chrome */
 	-moz-transform: rotate(90deg); /* Firefox */
 	-o-transform: rotate(90deg); /* Opera */

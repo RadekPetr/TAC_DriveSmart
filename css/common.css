@@ -22,9 +22,7 @@
 	left: 1px;
 	top: 0;
 	position: relative;
-
 	height: 560px;
-	
 	-webkit-box-shadow: #404040 0 0 10px;
 	-moz-box-shadow: #404040 0 0 10px;
 	box-shadow: 0 0 10px #404040;
@@ -41,11 +39,43 @@
 	color: #fff;
 	background-image: -ms-linear-gradient(top, #666666 0%, #404040 100%);
 	background-image: linear-gradient(to bottom, #666666 0%, #404040 100%);
-	
-	
 }
 .videoContainer {
-	
+
+}
+.module-title {
+	font-size: 3em;
+	left: 680px;
+	line-height: 50px;
+	position: absolute;
+	top: 150px;
+	width: 300px;
+	font-family: 'Museo700Regular';
+	font-weight: normal;
+}
+
+.module-title-dashboard {
+	font-family: 'Museo700Regular';
+	font-size: 3.5em;
+	font-weight: normal;
+	left: 450px;
+	line-height: 50px;
+	margin: 0 0 0.2em;
+	position: absolute;
+	top: 30px;
+	width: 300px;
+}
+
+.module-title-loader {
+	font-family: 'Museo700Regular';
+	font-size: 3.5em;
+	font-weight: normal;
+	left: 330px;
+	line-height: 50px;
+	margin: 0 0 0.2em;
+	position: absolute;
+	top: 190px;
+	width: 300px;
 }
 
 h1 {
@@ -58,37 +88,12 @@ h2 {
 	font-family: 'Museo700Regular';
 	color: #D7B000;
 	font-weight: normal;
-	margin: 0;	
+	margin: 0;
 }
 
 .panel {
 	box-shadow: 0 0 10px #404040;
 }
-
-.panel.loader {
-	background: url('images/loader_bkg.png');
-}
-.panel.dashboard {
-	background: url('images/dashboard_bkg.png');
-}
-.panel.kaps {
-	background: url('images/kaps_bkg.png');
-}
-.panel.scanning {
-	background: url('images/scanning_bkg.png');
-}
-.panel.concentration {
-	background: url('images/concentration_bkg.png');
-}
-.panel.country {
-	background: url('images/country_bkg.png');
-}
-.panel.urban {
-	background: url('images/urban_bkg.png');
-}
-
-
-
 
 .pane {
 	margin: 20px 0;
@@ -156,5 +161,4 @@ h2 {
 .pane.gray a {
 	color: #d7b000
 }
-
 

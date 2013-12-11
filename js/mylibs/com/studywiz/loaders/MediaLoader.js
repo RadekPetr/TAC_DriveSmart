@@ -96,7 +96,7 @@ var MediaLoader = new Class({
 
             log("this.loadQueue ", this.loadQueue, this.loadQueue.getKeys());
             var overAllProgress = this._calculateProgress();
-            log ("overAllProgress", overAllProgress);
+            log("overAllProgress", overAllProgress);
             this._updateProgressBar(overAllProgress);
             this._handleFinished(overAllProgress);
         }
@@ -109,7 +109,7 @@ var MediaLoader = new Class({
     },
     // ----------------------------------------------------------
     _addProgressBar : function() {
-        var loaderProgressBar = UIHelpers.progressBarSetup(0, "media_loader_disp");        
+        var loaderProgressBar = UIHelpers.progressBarSetup(0, "media_loader_disp");
         UIHelpers.setClasses(loaderProgressBar['holder'], "no-select load_progress");
         loaderProgressBar['holder'].inject($m(this.options.parentElementID));
         this.progressBar = loaderProgressBar['object'];
@@ -117,6 +117,8 @@ var MediaLoader = new Class({
     // ----------------------------------------------------------
     _show : function() {
         this.progressBar.show();
+        var moduleTitle = UIHelpers.setMainPanel('Loading');
+        UIHelpers.setClasses(moduleTitle, 'module-title-loader no-select');
     },
     // ----------------------------------------------------------
     hide : function() {
@@ -187,8 +189,8 @@ var MediaLoader = new Class({
         var sum = 0;
         var sum2 = 0;
         this.loadQueue.each( function(value, key) {
-           // log ("key", key, "progress", value.progress);
-            
+            // log ("key", key, "progress", value.progress);
+
             if (value.progress == undefined) {
                 value.progress = 0;
             }
