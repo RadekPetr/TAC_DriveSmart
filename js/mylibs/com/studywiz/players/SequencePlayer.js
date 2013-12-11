@@ -142,7 +142,6 @@ var SequencePlayer = new Class({
 
                     step.media.previewImage.add(myContainerID);
                     step.media.previewImage.show();
-                   
 
                     var titleDiv = new Element("div", {
                         id : 'titles',
@@ -209,7 +208,8 @@ var SequencePlayer = new Class({
 
                     // does the next step have expert audio ? Show button if yes
                     var nextStep = this.currentSequence[0];
-                    if (nextStep.expertAudio != undefined) {
+                 
+                    if (nextStep.media.expertAudio != undefined) {
                         this._addButton({
                             type : "Expert commentary",
                             next : "CommentaryIntro.expert.clicked"
@@ -370,7 +370,7 @@ var SequencePlayer = new Class({
                 case "Commentary":
                     this._removeButtons();
                     if (step.playExpert == true) {
-                        var expertAudio = this.currentStep.expertAudio;
+                        var expertAudio = this.currentStep.media.expertAudio;
                         if (expertAudio != undefined) {
                             expertAudio.options.next = '';
                             expertAudio.start();
@@ -681,8 +681,8 @@ var SequencePlayer = new Class({
                     next : "Commentary.replay.clicked"
                 });
 
-                var ExpertAudio = this.currentStep.expertAudio;
-                if (ExpertAudio != undefined) {
+                var expertAudio = this.currentStep.media.expertAudio;
+                if (expertAudio != undefined) {
                     // show play expert commentary button
                     this._addButton({
                         type : "Expert commentary 2",
@@ -720,7 +720,7 @@ var SequencePlayer = new Class({
                 this._removeFeedbackPanel();
                 this._removeButtons();
                 this._removeIntroContainers();
-                var expertAudio = this.currentStep.expertAudio;
+                var expertAudio = this.currentStep.media.expertAudio;
                 if (expertAudio != undefined) {
                     expertAudio.options.next = '';
                     expertAudio.start();
@@ -918,6 +918,7 @@ var SequencePlayer = new Class({
                     }
                     break;
                 case "ExpertAudio" :
+                    log(" Setting up expoert audio",item.value);
                     if (item.value != '') {
                         var file = Main.PATHS.audioFolder + stripFileExtension(item.value);
                         step.media.expertAudio = new AudioPlayer(this, {
@@ -928,6 +929,7 @@ var SequencePlayer = new Class({
                         });
                         this.mediaLoader.register(step.media.expertAudio.getLoaderInfo());
                     }
+                    
                     break;
                 case "DoneAudio" :
                     if (item.value != '') {

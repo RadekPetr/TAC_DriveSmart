@@ -53,9 +53,9 @@ UIHelpers.setMainPanel = function(titleText) {
             'class' : 'module-title no-select rotate90',
             'id' : 'module.title'
         });
-        moduleTitle.inject($m(Main.DIV_ID),'top');
+        moduleTitle.inject($m(Main.DIV_ID), 'top');
     } else {
-       moduleTitle.set('html', titleText);
+        moduleTitle.set('html', titleText);
     }
     return moduleTitle;
 };
@@ -123,8 +123,7 @@ UIHelpers.getButtonOptions = function(buttonType) {
             next : "Commentary.expert.clicked",
             'class' : "button position_4 pane green",
             style : {
-                left : 20,
-                top : buttonPosition.y - 45,
+                top : '395px',
                 width : '195px'
             }
         },
