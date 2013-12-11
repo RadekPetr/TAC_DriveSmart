@@ -56,7 +56,7 @@ var SequencePlayer = new Class({
         this.mediaLoader.options.next = 'Media.ready';
 
         if (this.mediaLoader.getQueueLength() > 0) {
-            UIHelpers.setMainPanel("panel loader");
+            
             this.mediaLoader.start(true);
         } else {
             // no media to preload so we can continue
@@ -93,15 +93,12 @@ var SequencePlayer = new Class({
                     // step.media.image.add(myContainerID);
                     // TODO: adjust style based on TAC
                     //step.media.image.show();
-                    /* var moduleTitle = new Element("h1", {
-                     html : this.moduleInfo.moduleTitle,
-                     'class' : 'main-title no-select'
-                     });
-                     moduleTitle.inject(myDiv);
-                     */
-
-                    UIHelpers.setMainPanel("panel dashboard");
-
+                    var moduleTitle = new Element("h1", {
+                        html : this.moduleInfo.moduleTitle,
+                        'class' : 'main-title no-select'
+                    });
+                    moduleTitle.inject(myDiv);
+                    
                     step.data.style = {
                         left : '10px',
                         top : '0px'
@@ -125,8 +122,6 @@ var SequencePlayer = new Class({
                     break;
                 case "SequenceIntro":
 
-                    UIHelpers.setMainPanel("panel " + this.moduleInfo.moduleID);
-
                     log("From Menu:", this.fromMenu);
                     this.fromMenu = false;
 
@@ -142,6 +137,12 @@ var SequencePlayer = new Class({
                         }
                     });
                     myDiv.inject($m(Main.DIV_ID));
+
+                    var moduleTitle = new Element("h1", {
+                        html : this.moduleInfo.moduleTitle,
+                        'class' : 'module-title no-select rotate90'
+                    });
+                    moduleTitle.inject(myDiv);
 
                     step.media.previewImage.options.style.width = '100%';
                     step.media.previewImage.options.style.height = '100%';
@@ -203,7 +204,6 @@ var SequencePlayer = new Class({
                     step.media.audio.start();
                     break;
                 case "ModuleIntro":
-                    UIHelpers.setMainPanel("panel " + this.moduleInfo.moduleID);
                     this._moduleIntroSetup(step);
                     break;
                 case "CommentaryIntro":
@@ -1313,18 +1313,14 @@ var SequencePlayer = new Class({
 
          step.media.image.add(myContainerID);
          step.media.image.show();
-         /*
-
-         /* var moduleTitle = new Element("h1", {
-         html : this.moduleInfo.moduleTitle,
-         styles : {
-         left : '0px',
-         top : '20%'
-         },
-         'class' : 'module-title no-select'
-         });
-         moduleTitle.inject(myDiv);
          */
+
+        var moduleTitle = new Element("h1", {
+            html : this.moduleInfo.moduleTitle,
+            'class' : 'module-title no-select rotate90'
+        });
+        moduleTitle.inject($m(Main.DIV_ID));
+        log ("sdfasfdasdfasdfa");
 
         if (this.sequenceState.completed == true) {
             step.media.previewImage.options.style.width = '100%';
@@ -1348,7 +1344,7 @@ var SequencePlayer = new Class({
             });
             titleDiv.inject(myDiv);
 
-            var moduleTitle = new Element("h1", {
+            var moduleProgress = new Element("h1", {
                 html : 'Module Progress:',
                 styles : {
                     left : '0',
@@ -1357,7 +1353,7 @@ var SequencePlayer = new Class({
                 },
                 'class' : 'sequence-title no-select'
             });
-            moduleTitle.inject(titleDiv);
+            moduleProgress.inject(titleDiv);
 
             var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
             var moduleProgressBar = UIHelpers.progressBarSetup(moduleState.progress, this.moduleInfo.moduleID);

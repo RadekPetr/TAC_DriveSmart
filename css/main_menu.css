@@ -30,9 +30,12 @@
 	text-align: center;
 }
 .module-title {
-	position: absolute;
-	font-size: 3em;
-	left: 700px;
+   font-size: 3em;
+    left: 670px;
+    line-height: 50px;
+    position: absolute;
+    top: 120px;
+    width: 300px;
 }
 
 .overall_score {

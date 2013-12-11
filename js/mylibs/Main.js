@@ -24,7 +24,7 @@ var Main = new Class({
     },
     // ----------------------------------------------------------
     start : function() {
-        UIHelpers.setMainPanel("panel_loader");
+      
         //var style = {
         //     width : (Main.WIDTH + Main.WIDTH * 0.2) + 'px',
         //     height : (Main.HEIGHT + Main.HEIGHT * 0.2) + 'px'
