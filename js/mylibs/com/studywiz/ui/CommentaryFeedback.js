@@ -28,7 +28,7 @@ var CommentaryFeedback = new Class({
 
         this.container = new Element("div", {
             id : this.options.id,
-            'class' : 'commentary_feedback no-select'
+            'class' : 'pane gray no-select'
         });
 
         var ul = new Element('ul', {
