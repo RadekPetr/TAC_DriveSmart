@@ -16,7 +16,13 @@ var AudioPlayer = new Class({
         this.soundInstance = null;
         this.preloader = new createjs.LoadQueue();
         this.preloader.parent = this;
+        createjs.FlashPlugin.BASE_PATH = Main.PATHS.flashFolder;
+        createjs.Sound.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin, createjs.FlashPlugin]);
+
+        //createjs.Sound.registerPlugin(createjs.FlashPlugin);
+
         this.preloader.installPlugin(createjs.Sound);
+
         // TODO: handle these events handleFileError, handleProgress
         //this.preloader.onFileError = this.handleFileError();
         /*  this.preloader.onProgress = function() {
