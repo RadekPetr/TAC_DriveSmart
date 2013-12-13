@@ -39,6 +39,7 @@
 	color: #fff;
 	background-image: -ms-linear-gradient(top, #666666 0%, #404040 100%);
 	background-image: linear-gradient(to bottom, #666666 0%, #404040 100%);
+	background-color: #666666;
 }
 .videoContainer {
 
@@ -120,6 +121,7 @@ h2 {
 	background-image: linear-gradient(top, #f28411,#bf5b00);
 	background-image: -ms-linear-gradient(top, #f28411 0%, #bf5b00 100%);
 	background-image: linear-gradient(to bottom, #f28411 0%, #bf5b00 100%);
+	background-color: #f28411;
 }
 .pane.green {
 	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ced649), color-stop(100%, #aaba0a));
@@ -129,6 +131,7 @@ h2 {
 	background-image: linear-gradient(top, #ced649,#aaba0a);
 	background-image: -ms-linear-gradient(top, #ced649 0%, #aaba0a 100%);
 	background-image: linear-gradient(to bottom, #ced649 0%, #aaba0a 100%);
+	background-color: #ced649;
 }
 .pane.yellow {
 	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e4d100), color-stop(100%, #d7b000));
@@ -138,6 +141,7 @@ h2 {
 	background-image: linear-gradient(top, #e4d100,#d7b000);
 	background-image: -ms-linear-gradient(top, #e4d100 0%, #d7b000 100%);
 	background-image: linear-gradient(to bottom, #e4d100 0%, #d7b000 100%);
+	background-color: #e4d100;
 }
 .pane.blue {
 	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #99d6dd), color-stop(100%, #00b5d6));
@@ -147,6 +151,7 @@ h2 {
 	background-image: linear-gradient(top, #99d6dd,#00b5d6);
 	background-image: -ms-linear-gradient(top, #99d6dd 0%, #00b5d6 100%);
 	background-image: linear-gradient(to bottom, #99d6dd 0%, #00b5d6 100%);
+	background-color: #99d6dd;
 }
 .pane.gray {
 	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #666), color-stop(100%, #404040));
@@ -157,6 +162,7 @@ h2 {
 	color: #fff;
 	background-image: -ms-linear-gradient(top, #666666 0%, #404040 100%);
 	background-image: linear-gradient(to bottom, #666666 0%, #404040 100%);
+	background-color: #666666;
 }
 .pane.gray a {
 	color: #d7b000
