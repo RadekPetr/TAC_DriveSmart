@@ -91,7 +91,6 @@ var AudioPlayer = new Class({
             this.soundInstance = createjs.Sound.play(this.options.id);
             this.soundInstance.addEventListener("complete", createjs.proxy(this._onSoundComplete, (this)));
         }
-
     }.protect(),
     _onSoundComplete : function(event) {
 
