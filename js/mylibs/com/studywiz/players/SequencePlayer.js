@@ -899,7 +899,7 @@ var SequencePlayer = new Class({
                         step.media.audio = new AudioPlayer(this, {
                             next : 'not.set',
                             id : "audio_" + index + "_" + stepOrder,
-                            src : file + ".mp3|" + file + ".ogg",
+                            src : file + ".mp3",
                             preload : 'false'
                         });
                         this.mediaLoader.register(step.media.audio.getLoaderInfo());
@@ -911,7 +911,7 @@ var SequencePlayer = new Class({
                         step.media.feedbackAudio = new AudioPlayer(this, {
                             next : 'not.set',
                             id : "audio_" + index + "_" + stepOrder,
-                            src : file + ".mp3|" + file + ".ogg",
+                            src : file + ".mp3",
                             preload : 'false'
                         });
                         this.mediaLoader.register(step.media.feedbackAudio.getLoaderInfo());
@@ -924,7 +924,7 @@ var SequencePlayer = new Class({
                         step.media.expertAudio = new AudioPlayer(this, {
                             next : 'not.set',
                             id : "audio_" + index + "_" + stepOrder,
-                            src : file + ".mp3|" + file + ".ogg",
+                            src : file + ".mp3",
                             preload : 'false'
                         });
                         this.mediaLoader.register(step.media.expertAudio.getLoaderInfo());
@@ -937,7 +937,7 @@ var SequencePlayer = new Class({
                         step.media.doneAudio = new AudioPlayer(this, {
                             next : 'not.set',
                             id : "audio_" + index + "_" + stepOrder,
-                            src : file + ".mp3|" + file + ".ogg",
+                            src : file + ".mp3",
                             preload : 'false'
                         });
                         this.mediaLoader.register(step.media.doneAudio.getLoaderInfo());

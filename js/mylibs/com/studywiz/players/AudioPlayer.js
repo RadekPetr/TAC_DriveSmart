@@ -16,8 +16,9 @@ var AudioPlayer = new Class({
         this.soundInstance = null;
         this.preloader = new createjs.LoadQueue();
         this.preloader.parent = this;
-
-        createjs.FlashPlugin.BASE_PATH = Main.PATHS.flashFolder;
+        
+        createjs.Sound.alternateExtensions = ["mp3", "ogg"];
+        createjs.FlashPlugin.swfPath = Main.PATHS.flashFolder;
         createjs.Sound.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin, createjs.FlashPlugin]);
 
         //createjs.Sound.registerPlugin(createjs.FlashPlugin);
