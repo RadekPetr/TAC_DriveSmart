@@ -12,27 +12,30 @@ var Main = new Class({
         if (isDev == true) {
             // load external js libraries so they are available to the project
 
-            this.listOfLibraries = ["css/button.css", "css/common.css", "css/dragndrop.css", "css/fonts.css", "css/loader.css", "css/main_menu.css", "css/progressbar.css", "css/questions.css", "css/radios.css", "css/sequence.css", "css/video-js.css", "js/mylibs/Base64/Base64.js", "js/mylibs/Lzw/Lzw.js", "js/mylibs/createjs/soundjs-0.5.0.min.js", "js/mylibs/video-js/video.js", "js/mylibs/com/studywiz/utils/consolelog.js", "js/mylibs/com/studywiz/ui/UIHelpers.js", "js/mylibs/com/studywiz/utils/Api.js", "js/mylibs/com/studywiz/utils/Utils.js", "js/mylibs/com/studywiz/utils/Array.sortOn.js", "js/mylibs/com/studywiz/loaders/MediaLoader.js", "js/mylibs/com/studywiz/loaders/DataLoader.js", "js/mylibs/com/studywiz/ui/dwProgressBar.js", "js/mylibs/com/studywiz/players/ImagePlayer.js", "js/mylibs/com/studywiz/players/VideoPlayer.js", "js/mylibs/com/studywiz/players/DragNDropPlayer.js", "js/mylibs/com/studywiz/players/AudioPlayer.js", "js/mylibs/com/studywiz/players/MenuPlayer.js", "js/mylibs/com/studywiz/ui/Button.js", "js/mylibs/com/studywiz/ui/CommentaryFeedback.js", "js/mylibs/createjs/preloadjs-0.4.0.min.js", "js/mylibs/com/studywiz/players/SequencePlayer.js", "js/mylibs/com/studywiz/players/ModulePlayer.js", "js/mylibs/com/studywiz/players/KeyRisksPlayer.js", "js/mylibs/com/studywiz/players/SwiffPlayer.js", "js/mylibs/com/studywiz/core/Modules.js", "js/mylibs/com/studywiz/core/User.js", "js/mylibs/com/studywiz/ui/Questions.js", "js/mylibs/com/studywiz/ui/MenuItem.js", "js/mylibs/com/studywiz/ui/Shape.js", "js/mylibs/com/studywiz/ui/Recorder.js", "js/mylibs/xml2json/xml2json.js", "js/mylibs/rightclick/rightClick.js", "js/mylibs/com/studywiz/players/Draggable.js"];
+            this.listOfLibraries = ["css/button.css", "css/common.css", "css/dragndrop.css", "css/fonts.css", "css/loader.css", "css/main_menu.css", "css/progressbar.css", "css/questions.css", "css/radios.css", "css/sequence.css", "css/video-js.css", "js/mylibs/Base64/Base64.js", "js/mylibs/Lzw/Lzw.js", "js/mylibs/createjs/flashplugin-0.5.1.min.js", "js/mylibs/createjs/soundjs-0.5.1.min.js", "js/mylibs/video-js/video.js", "js/mylibs/com/studywiz/utils/consolelog.js", "js/mylibs/com/studywiz/ui/UIHelpers.js", "js/mylibs/com/studywiz/utils/Api.js", "js/mylibs/com/studywiz/utils/Utils.js", "js/mylibs/com/studywiz/utils/Array.sortOn.js", "js/mylibs/com/studywiz/loaders/MediaLoader.js", "js/mylibs/com/studywiz/loaders/DataLoader.js", "js/mylibs/com/studywiz/ui/dwProgressBar.js", "js/mylibs/com/studywiz/players/ImagePlayer.js", "js/mylibs/com/studywiz/players/VideoPlayer.js", "js/mylibs/com/studywiz/players/DragNDropPlayer.js", "js/mylibs/com/studywiz/players/AudioPlayer.js", "js/mylibs/com/studywiz/players/MenuPlayer.js", "js/mylibs/com/studywiz/ui/Button.js", "js/mylibs/com/studywiz/ui/CommentaryFeedback.js", "js/mylibs/createjs/preloadjs-0.4.0.min.js", "js/mylibs/com/studywiz/players/SequencePlayer.js", "js/mylibs/com/studywiz/players/ModulePlayer.js", "js/mylibs/com/studywiz/players/KeyRisksPlayer.js", "js/mylibs/com/studywiz/players/SwiffPlayer.js", "js/mylibs/com/studywiz/core/Modules.js", "js/mylibs/com/studywiz/core/User.js", "js/mylibs/com/studywiz/ui/Questions.js", "js/mylibs/com/studywiz/ui/MenuItem.js", "js/mylibs/com/studywiz/ui/Shape.js", "js/mylibs/com/studywiz/ui/Recorder.js", "js/mylibs/xml2json/xml2json.js", "js/mylibs/rightclick/rightClick.js", "js/mylibs/com/studywiz/players/Draggable.js"];
 
             this.listOfLibrariesCounter = 0;
+
             Array.each(this.listOfLibraries, function(item, index) {
                 this._loadAsset(item, index);
             }.bind(this));
         } else {
             //this.start();
         }
+
     },
     // ----------------------------------------------------------
     start : function() {
-      
+        //console.log("start");
+
         //var style = {
         //     width : (Main.WIDTH + Main.WIDTH * 0.2) + 'px',
         //     height : (Main.HEIGHT + Main.HEIGHT * 0.2) + 'px'
         //  };
         // $m(Main.DIV_ID).setStyles(style);
-
+        log("API save");
         new Api(this).saveLog('info', "****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
-
+        log("API save done ");
         Main.sequencePlayer = new SequencePlayer(this, {});
         this.modules = new Modules({});
         this.modules.start();
@@ -41,6 +44,7 @@ var Main = new Class({
     // PRIVATE - load external js libraries so they are available to the project
     // only used during development, the libs are otherwise minimised and merged
     _loadAsset : function(item, index) {
+        log("load");
         var newAsset = null;
         var fileType = item.split('.').pop();
         switch (fileType) {
@@ -59,13 +63,14 @@ var Main = new Class({
                 });
                 break;
         }
-    }.protect(),
+    },
     _loadedFinished : function() {
-        console.log("Loaded " + this.listOfLibrariesCounter);
+        // console.log("Loaded " + this.listOfLibrariesCounter);
         this.listOfLibrariesCounter--;
         if (this.listOfLibrariesCounter === 0) {
+            // console.log("Fired event READY");
             this.fireEvent('READY');
-            //console.log("Fired event READY");
+
         }
     },
 });
@@ -98,7 +103,7 @@ Main.VIDEO_TOP = 20;
 Main.VIDEO_LEFT = 20;
 
 // Version stuff
-Main.VERSION = '1.0.1';
+Main.VERSION = '1.0.2';
 Main.BUILD = '2013/12/12';
 
 // When running on localhost (So I can use different paths when testing)
@@ -182,3 +187,24 @@ Main.MODULES = new Hash({
 });
 
 Main.COLORS = ['blue', 'green', 'orange'];
+
+if ( typeof Function.prototype.bind === 'undefined') {
+    Function.prototype.bind = function(target) {
+        if ( typeof this !== "function") {
+
+        } else {
+
+            var tail = Array.prototype.slice.call(arguments, 1);
+            var func = this;
+            var noop = function() {
+            };
+            var bound = function() {
+                return func.apply(this instanceof noop ? this : target || window, tail.concat(Array.prototype.slice.call(arguments)));
+                // copy arguments array!
+            };
+            noop.prototype = this.prototype;
+            bound.prototype = new noop();
+            return bound;
+        }
+    };
+}
