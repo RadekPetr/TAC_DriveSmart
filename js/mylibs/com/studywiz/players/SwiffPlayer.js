@@ -73,7 +73,8 @@ var SwiffPlayer = new Class({
                 id : 'NoFlash',
                 style : {
                     'left' : '15px',
-                    'top' : '15px'
+                    'top' : '15px',
+                    'width': '100%'
                 }
             });
             this.addEvent("TIMELINE", this.handleNavigationEvent);
