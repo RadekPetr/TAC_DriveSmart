@@ -21,6 +21,7 @@ var MenuItem = new Class({
         this.options.parent = myParent;
         this.selectedModuleID = this.options.data.moduleID;
         this.isLocked = false;
+        this.isDisabled = false; 
 
         // log(menuItem);
         var elemID = "menu_item_" + this.selectedModuleID;
@@ -49,6 +50,15 @@ var MenuItem = new Class({
         // this.container.addClass(lockedCSS);
         this.container.fade("0.7");
     },
+    disable : function() {
+        this.isLocked = true;
+        this.isDisabled = true;
+        // TODO: locked pane css
+        //var lockedCSS = 'menu_item locked no-select pane blue';
+        //  this.container.removeAttribute('class');
+        // this.container.addClass(lockedCSS);
+        this.container.fade("0.2");
+    },
     showProgress : function() {
         if (this.options.data.showProgress == true) {
             var moduleState = Main.userTracker.getModuleState(this.selectedModuleID);
@@ -57,7 +67,6 @@ var MenuItem = new Class({
                 //  this.container.adopt(symbol);
                 //  symbol.show();
             }
-            //this.container.adopt(UIHelpers.progressBarSetup(100, this.selectedModuleID)['holder']);
             this.container.adopt(UIHelpers.progressBarSetup(moduleState.progress, this.selectedModuleID)['holder']);
         }
     },

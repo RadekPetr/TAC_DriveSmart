@@ -33,6 +33,8 @@ var Main = new Class({
         //     height : (Main.HEIGHT + Main.HEIGHT * 0.2) + 'px'
         //  };
         // $m(Main.DIV_ID).setStyles(style);
+        // TODO: detect Browser versions IE9+,...
+        
         log("API save");
         new Api(this).saveLog('info', "****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
         log("API save done ");
@@ -104,7 +106,7 @@ Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '1.0.2';
-Main.BUILD = '2013/12/12';
+Main.BUILD = '2013/12/13';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;
@@ -139,6 +141,8 @@ if (Main.IS_LOCAL == true) {
     //Main.USER_MODULE_PROGRESS_GET_URL = '/user_progress/module_progress/';
     Main.LOG_POST_URL = '/logs';
 }
+
+
 
 // Defines modules
 Main.MODULES = new Hash({

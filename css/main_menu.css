@@ -29,7 +29,7 @@
 	top: 500px;
 }
 
-.menu_item {
+.menu_item {	
 	font-family: Museo700;
 	font-size: 1em;
 	text-align: left;
@@ -38,17 +38,18 @@
 	padding-right: 15px;
 	padding-left: 15px;
 	opacity: 1;
+	cursor: pointer;
 }
 
 .menu_item:hover {
-	color: #FFFF99;
+	
 }
 .menu_item.locked {
 
 }
 
 .menu_item_locked:hover {
-
+	
 }
 .progress_title {
 	position: relative;

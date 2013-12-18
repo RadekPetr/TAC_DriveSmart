@@ -36,7 +36,7 @@ UIHelpers.progressBarSetup = function(progress, id) {
         percentageClass : 'progress_perc',
         displayText : true,
         displayID : 'text_' + id,
-        displayClass : 'progress_title no-select'
+        displayClass : 'progress_title'
     });
     return {
         holder : progressBarComponent,

@@ -108,16 +108,25 @@ var MenuPlayer = new Class({
             menuItem.show();
 
             var isLocked = this._isItemLocked(menuItemData);
+            var isDisabled = this._isItemDisabled(menuItemData);
+            log("_isItemDisabled", isDisabled);
+
             log(menuItemData, isLocked);
             if (isLocked) {
                 menuItem.lock();
             }
 
-            if (isLocked != true || Main.DEBUG == true) {
-                menuItem.registerClickEvent(this.myParent());
+            if (isDisabled) {
+                menuItem.disable();
             }
 
-            menuItem.registerMouseLeaveEvent(this);
+            if (isLocked != true && isDisabled != true) {
+                menuItem.registerClickEvent(this.myParent());
+                menuItem.registerMouseLeaveEvent(this);
+            } else if (Main.DEBUG == true) {
+                menuItem.registerClickEvent(this.myParent());
+                menuItem.registerMouseLeaveEvent(this);
+            }
 
         }.bind(this));
 
@@ -169,5 +178,14 @@ var MenuPlayer = new Class({
             }
             return isLocked;
         }
+    },
+    _isItemDisabled : function(menuItem) {
+        log("menuItem.flashOnly", menuItem.flashOnly);
+        // Disable if flash is required but not available
+        var isDisabled = false;
+        if (isFlashSupported() == false && menuItem.flashOnly == true) {
+            isDisabled = true;
+        }
+        return isDisabled;
     }
 });

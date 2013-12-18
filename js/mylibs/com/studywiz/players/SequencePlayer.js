@@ -208,7 +208,7 @@ var SequencePlayer = new Class({
 
                     // does the next step have expert audio ? Show button if yes
                     var nextStep = this.currentSequence[0];
-                 
+
                     if (nextStep.media.expertAudio != undefined) {
                         this._addButton({
                             type : "Expert commentary",
@@ -918,7 +918,7 @@ var SequencePlayer = new Class({
                     }
                     break;
                 case "ExpertAudio" :
-                    log(" Setting up expoert audio",item.value);
+                    log(" Setting up expoert audio", item.value);
                     if (item.value != '') {
                         var file = Main.PATHS.audioFolder + stripFileExtension(item.value);
                         step.media.expertAudio = new AudioPlayer(this, {
@@ -929,7 +929,7 @@ var SequencePlayer = new Class({
                         });
                         this.mediaLoader.register(step.media.expertAudio.getLoaderInfo());
                     }
-                    
+
                     break;
                 case "DoneAudio" :
                     if (item.value != '') {
@@ -1006,7 +1006,8 @@ var SequencePlayer = new Class({
                             moduleID : menuItemData.attributes.moduleID,
                             preview : menuItemData.attributes.preview,
                             showProgress : menuItemData.attributes.showProgress,
-                            preconditions : preconditionsArr
+                            preconditions : preconditionsArr,
+                            flashOnly : menuItemData.attributes.flashOnly
                         };
                         menuItems.data.push(menuItem);
                     });
@@ -1074,6 +1075,7 @@ var SequencePlayer = new Class({
                     step.zones = item.attributes.data;
                     break;
                 case "Swiff":
+                    // TODO: Flash support detection
                     log(item.value);
                     step.media.swiff = new SwiffPlayer(this, {
                         swiff : {
