@@ -34,7 +34,7 @@ var Main = new Class({
         //  };
         // $m(Main.DIV_ID).setStyles(style);
         // TODO: detect Browser versions IE9+,...
-        
+
         log("API save");
         new Api(this).saveLog('info', "****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
         log("API save done ");
@@ -125,7 +125,8 @@ Main.PATHS = {
     audioFolder : 'media/sound/',
     videoFolder : 'media/video/',
     imageFolder : 'media/images/',
-    flashFolder : 'media/flash/'
+    flashFolder : 'media/flash/',
+    captionsFolder : 'media/captions/'
 };
 
 if (Main.IS_LOCAL == true) {
@@ -141,8 +142,6 @@ if (Main.IS_LOCAL == true) {
     //Main.USER_MODULE_PROGRESS_GET_URL = '/user_progress/module_progress/';
     Main.LOG_POST_URL = '/logs';
 }
-
-
 
 // Defines modules
 Main.MODULES = new Hash({
@@ -191,7 +190,7 @@ Main.MODULES = new Hash({
 });
 
 Main.COLORS = ['blue', 'green', 'orange'];
-
+/*
 if ( typeof Function.prototype.bind === 'undefined') {
     Function.prototype.bind = function(target) {
         if ( typeof this !== "function") {
@@ -212,3 +211,4 @@ if ( typeof Function.prototype.bind === 'undefined') {
         }
     };
 }
+*/
