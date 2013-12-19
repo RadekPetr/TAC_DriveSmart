@@ -878,6 +878,9 @@ var SequencePlayer = new Class({
                         var style = null;
                         var width = '100%';
                         var height = '100%';
+                        var caption = item.attributes.caption;
+                        
+                        log ("ModuleIntroVideo", item, caption);
 
                         step.media.moduleIntroVideo = new VideoPlayer(this, {
                             id : "video_" + index + "_" + stepOrder,
@@ -885,9 +888,10 @@ var SequencePlayer = new Class({
                             filename : filename,
                             width : width,
                             height : height,
-                            parentTag : Main.DIV_ID
+                            parentTag : Main.DIV_ID,
+                            captionFile : caption
                         });
-
+log (step.media.moduleIntroVideo.options.captionFile);
                         this.mediaLoader.register(step.media.moduleIntroVideo.getLoaderInfo());
                         // we want to store this so all VideoJS player can be removed correctly (see remove() in VideoPlayer)
                         this.videos.push(step.media.moduleIntroVideo);

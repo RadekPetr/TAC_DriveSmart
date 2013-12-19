@@ -21,7 +21,7 @@ var VideoPlayer = new Class({
         preload : 'auto',
         autoplay : false,
         controls : false,
-        captions : null,
+        captionFile : null,
         parentTag : Main.DIV_ID,
         filename : null
     },
@@ -57,7 +57,7 @@ var VideoPlayer = new Class({
     },
     // ---------------------------
     preload : function() {
-        log("++ Video Preload started: " + this.options.id);
+        // log("++ Video Preload started: " + this.options.id);
         // TODO: handle sitiation player is undefined
         if (this.player == undefined) {
             //    log('Undefined player ERRROR');
@@ -76,7 +76,7 @@ var VideoPlayer = new Class({
             this.player.ready(( function() {
                     this.player.options['children'] = false;
                     // this.player.TextTrack.disable();
-                    log('Player component ready ... preloading');
+                    // log('Player component ready ... preloading');
                     var data = this._getVideoData();
                     this.player.dimensions(this.options.width, this.options.height);
                     this.player.poster(data.poster.src);
@@ -92,12 +92,8 @@ var VideoPlayer = new Class({
     registerLoadEvents : function() {
         if (this.player != undefined) {
             // clear any lefover events
-            this.player.off();
+            //  this.player.off();
             // add them again
-            this.player.on("progress", function() {
-                //log("EVENT: progress", this.options.id);
-
-            }.bind(this));
 
             this.player.on("suspend", function() {
                 log("EVENT: suspend", this.options.id);
@@ -109,13 +105,19 @@ var VideoPlayer = new Class({
 
             this.player.on("canplaythrough", function() {
                 log("EVENT: **********************   canplaythrough", this.options.id);
-                this.isReady = true;               
+                this.isReady = true;
             }.bind(this));
 
             this.player.on("loadedalldata", function() {
                 log("EVENT: loadedalldata", this.options.id);
                 this.isReady = true;
-                this.player.off();
+                this.player.off('progress');
+                this.player.off('loaded');
+                this.player.off('loadstart');
+                this.player.off('suspend');
+                this.player.off('waiting');
+                this.player.off('canplaythrough');
+
             }.bind(this));
 
         }
@@ -123,13 +125,13 @@ var VideoPlayer = new Class({
     registerPlaybackEvents : function() {
         if (this.player != undefined) {
             // clear any lefover events
-            this.player.off();
+            // this.player.off();
 
             //log("Adding ended listener");
             this.player.on("ended", function() {
                 log("Video ended");
                 // remove all events
-                this.player.off();
+                this.player.off("ended");
 
                 this.myParent().fireEvent("TIMELINE", {
                     type : "video.finished",
@@ -151,25 +153,24 @@ var VideoPlayer = new Class({
     // ---------------------------
     show : function() {
         this.container.fade('show');
-        this.showCaptions();
+        if (this.options.captionFile != null && this.options.captionFile != "") {
+            this.showCaptions(this.options.captionFile);
+        }
     },
     // ---------------------------
     hide : function(speed) {
         this.container.fade('hide');
     },
-    showCaptions : function(subtitleSrc) {
-        // TODO: pass src to the player
-        /*  subtitleSrc =  "/demo.captions.vtt";
-         var data = {
-         'kind' : "subtitles",
-         'label' : "English",
-         'language' : "en",
-         'src' : subtitleSrc,
-         id : "subs"
-         };
-         this.player.addTextTrack(data['kind'], data['label'], data['language'], data);
-         this.player.showTextTrack("subs");
-         */
+    showCaptions : function(captionFile) {
+        var data = {
+            'kind' : "subtitles",
+            'label' : "English",
+            'language' : "en",
+            'src' : Main.PATHS.captionsFolder + captionFile,
+            id : "subs"
+        };
+        this.player.addTextTrack(data['kind'], data['label'], data['language'], data);
+        this.player.showTextTrack("subs");
     },
     obscure : function() {
         log("Obscure");
@@ -200,7 +201,7 @@ var VideoPlayer = new Class({
     skip : function() {
         if (this.player != null) {
             // so the end event does not fire again
-            this.player.off();
+            this.player.off("ended");
 
             this.seek(this.player.duration());
 
@@ -255,8 +256,8 @@ var VideoPlayer = new Class({
             progress = this.player.bufferedPercent();
 
             log(this.playerID + " **** Video Load progress: " + (this.player.bufferedPercent() * 100.00));
-            log(this.playerID + " **** Video Load progress buffered: ", this.player.buffered());
-            log(this.playerID + " **** Video duration: " + this.player.duration());
+            // log(this.playerID + " **** Video Load progress buffered: ", this.player.buffered());
+            // log(this.playerID + " **** Video duration: " + this.player.duration());
 
         }
         loaderInfo[this.options.id] = {
@@ -277,7 +278,7 @@ var VideoPlayer = new Class({
         if (this.isReady == true) {
             loaderInfo[this.options.id].progress = 1;
         }
-        log(loaderInfo[this.options.id].progress);
+        // log(loaderInfo[this.options.id].progress);
         return loaderInfo;
     },
     _getVideoData : function() {
