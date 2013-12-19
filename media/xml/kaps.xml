@@ -5,7 +5,7 @@
       <Preview>kaps/kaps_uit03_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
       <Audio>kaps/kaps_vwka</Audio>
-      <ModuleIntroVideo>module_intros/kaps_intro</ModuleIntroVideo>
+      <ModuleIntroVideo caption="TAC_KEEPAHEAD.vtt">module_intros/kaps</ModuleIntroVideo>
     </Step>   
   </Seq>
   <Seq trackProgress="true" desc="Kaps Exercise 1" Ex="1" >
