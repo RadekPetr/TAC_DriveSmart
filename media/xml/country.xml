@@ -5,7 +5,7 @@
       <Preview>country/country_cst16_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
       <Audio>country/country_vwcd</Audio>
-      <ModuleIntroVideo>module_intros/kaps_intro</ModuleIntroVideo>
+      <ModuleIntroVideo caption="TAC_SCANNINGINTRO.vtt">module_intros/kaps_intro</ModuleIntroVideo>
     </Step>
   </Seq>
   <Seq trackProgress="true" desc="Exercise 1" Ex="1">
