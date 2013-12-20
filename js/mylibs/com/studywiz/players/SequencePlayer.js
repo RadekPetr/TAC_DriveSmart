@@ -891,7 +891,7 @@ var SequencePlayer = new Class({
                             parentTag : Main.DIV_ID,
                             captionFile : caption
                         });
-log (step.media.moduleIntroVideo.options.captionFile);
+
                         this.mediaLoader.register(step.media.moduleIntroVideo.getLoaderInfo());
                         // we want to store this so all VideoJS player can be removed correctly (see remove() in VideoPlayer)
                         this.videos.push(step.media.moduleIntroVideo);
@@ -1294,7 +1294,7 @@ log (step.media.moduleIntroVideo.options.captionFile);
         var moduleTitle = UIHelpers.setMainPanel(this.moduleInfo.moduleTitle);
         UIHelpers.setClasses(moduleTitle, 'module-title no-select rotate90');
 
-        if (this.sequenceState.completed == true) {
+        if (this.sequenceState.completed == true || step.media.moduleIntroVideo == undefined) {
             step.media.previewImage.options.style.width = '100%';
             step.media.previewImage.options.style.height = '100%';
             step.media.previewImage.options.style.left = 0;
