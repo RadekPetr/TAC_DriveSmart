@@ -51,6 +51,7 @@ var VideoPlayer = new Class({
             'class' : this.options['class']
         });
         this.container.player.inject(this.container);
+        videojs.options.flash.swf = Main.PATHS.flashFolder + "video-js.swf";
     },
     myParent : function() {
         return this.options.parent;
@@ -65,31 +66,45 @@ var VideoPlayer = new Class({
             //      this.remove();
             //  } else {
             this.isReady = false;
+            var data = this._getVideoData();
             this.player = videojs('player_' + this.options.id, {
                 "controls" : this.options.controls,
                 "autoplay" : this.options.autoplay,
                 "preload" : this.options.preload,
                 "width" : this.options.width,
-                "height" : this.options.height
+                "height" : this.options.height,
+                "poster" : data.poster.src,
+                "tracks" : [{
+                    'kind' : "captions",
+                    'label' : "English",
+                    'language' : "en",
+                    'src' : Main.PATHS.captionsFolder + this.options.captionFile,
+                    id : "subs"
+                }]
             });
 
             this.player.ready(( function() {
-                    this.player.options['children'] = false;
+                    //this.player.options['children'] = false;
                     // this.player.TextTrack.disable();
                     // log('Player component ready ... preloading');
                     var data = this._getVideoData();
-                    this.player.dimensions(this.options.width, this.options.height);
-                    this.player.poster(data.poster.src);
+                    // this.player.dimensions(this.options.width, this.options.height);
+                    // this.player.poster(data.poster.src);
+                    if (this.options.captionFile != null && this.options.captionFile != "") {
+                        this.showCaptions(this.options.captionFile);
+                    }
                     this.player.src(data.video);
                     this.player.pause();
                     this.player.load();
                     this.registerLoadEvents();
 
                 }.bind(this)));
+
         }
 
     },
     registerLoadEvents : function() {
+        log("this.player", this.player);
         if (this.player != undefined) {
             // clear any lefover events
             //  this.player.off();
@@ -153,24 +168,14 @@ var VideoPlayer = new Class({
     // ---------------------------
     show : function() {
         this.container.fade('show');
-        if (this.options.captionFile != null && this.options.captionFile != "") {
-            this.showCaptions(this.options.captionFile);
-        }
     },
     // ---------------------------
     hide : function(speed) {
         this.container.fade('hide');
     },
-    showCaptions : function(captionFile) {
-        var data = {
-            'kind' : "subtitles",
-            'label' : "English",
-            'language' : "en",
-            'src' : Main.PATHS.captionsFolder + captionFile,
-            id : "subs"
-        };
-        this.player.addTextTrack(data['kind'], data['label'], data['language'], data);
-        this.player.showTextTrack("subs");
+    showCaptions : function(captionFile) {       
+        this.player.showTextTrack("subs");      
+        this.player.controlBar.captionsButton.show();
     },
     obscure : function() {
         log("Obscure");
