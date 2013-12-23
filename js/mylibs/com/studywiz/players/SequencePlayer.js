@@ -889,7 +889,8 @@ var SequencePlayer = new Class({
                             width : width,
                             height : height,
                             parentTag : Main.DIV_ID,
-                            captionFile : caption
+                            captionFile : caption,
+                            controls : true
                         });
 
                         this.mediaLoader.register(step.media.moduleIntroVideo.getLoaderInfo());
@@ -1085,7 +1086,7 @@ var SequencePlayer = new Class({
                         swiff : {
                             id : 'swiff.id.' + index + "_" + stepOrder
                         },
-                        src : Main.PATHS.flashFolder + item.value,
+                        src : Main.PATHS.flashFolder + item.value + "?" + Math.random(),
                         id : 'swiff' + index + "_" + stepOrder
                     });
 
