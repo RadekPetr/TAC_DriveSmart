@@ -873,14 +873,18 @@ var SequencePlayer = new Class({
                 case "ModuleIntroVideo" :
                     // only setup the video in case it was not played yet .... curretnly no way to replay it anyway
 
+                    if (Main.MODULE_INTRO_ALWAYS) {
+                        this.sequenceState.completed = false;
+                    }
+
                     if (item.value != '' && this.sequenceState.completed != true) {
                         var filename = item.value;
                         var style = null;
                         var width = '100%';
                         var height = '100%';
                         var caption = item.attributes.caption;
-                        
-                        log ("ModuleIntroVideo", item, caption);
+
+                        log("ModuleIntroVideo", item, caption);
 
                         step.media.moduleIntroVideo = new VideoPlayer(this, {
                             id : "video_" + index + "_" + stepOrder,
@@ -1294,7 +1298,9 @@ var SequencePlayer = new Class({
 
         var moduleTitle = UIHelpers.setMainPanel(this.moduleInfo.moduleTitle);
         UIHelpers.setClasses(moduleTitle, 'module-title no-select rotate90');
-
+        if (Main.MODULE_INTRO_ALWAYS) {
+            this.sequenceState.completed = false;
+        }
         if (this.sequenceState.completed == true || step.media.moduleIntroVideo == undefined) {
             step.media.previewImage.options.style.width = '100%';
             step.media.previewImage.options.style.height = '100%';
@@ -1349,7 +1355,7 @@ var SequencePlayer = new Class({
                 this.fromMenu = false;
                 step.media.audio.options.next = '';
                 step.media.audio.start();
-                this._updateUserProgress();
+
             } else {
                 // TODO: play different sound if getting to module intro from a sequence ?
             }
@@ -1363,7 +1369,7 @@ var SequencePlayer = new Class({
             this._hideInteractions();
             step.media.moduleIntroVideo.options.next = '';
             step.media.moduleIntroVideo.show();
-            step.media.moduleIntroVideo.start();
+
             this._hideOtherVideos(step.media.moduleIntroVideo.playerID);
             step.media.moduleIntroVideo.start();
 

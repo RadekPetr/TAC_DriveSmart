@@ -26,18 +26,10 @@ var Main = new Class({
     },
     // ----------------------------------------------------------
     start : function() {
-        //console.log("start");
 
-        //var style = {
-        //     width : (Main.WIDTH + Main.WIDTH * 0.2) + 'px',
-        //     height : (Main.HEIGHT + Main.HEIGHT * 0.2) + 'px'
-        //  };
-        // $m(Main.DIV_ID).setStyles(style);
         // TODO: detect Browser versions IE9+,...
 
-        log("API save");
         new Api(this).saveLog('info', "****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
-        log("API save done ");
         Main.sequencePlayer = new SequencePlayer(this, {});
         this.modules = new Modules({});
         this.modules.start();
@@ -46,7 +38,6 @@ var Main = new Class({
     // PRIVATE - load external js libraries so they are available to the project
     // only used during development, the libs are otherwise minimised and merged
     _loadAsset : function(item, index) {
-        log("load");
         var newAsset = null;
         var fileType = item.split('.').pop();
         switch (fileType) {
@@ -113,6 +104,9 @@ Main.IS_LOCAL = true;
 
 // Show hide debug panel and ignore lock status
 Main.DEBUG = true;
+
+// Play module intro video everytime - normally only the first time
+Main.MODULE_INTRO_ALWAYS = true;
 
 // Saves empty progress data on startup if true
 Main.RESET_USER_DATA = false;
