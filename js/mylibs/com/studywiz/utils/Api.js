@@ -77,7 +77,6 @@ var Api = new Class({
                 } else {
                     log("ERROR: User progress wrong reply NOT OK");
                     log(xhr);
-                    // TODO : handle error ?
                 }
             }.bind(this),
             onFailure : function(xhr) {
@@ -137,7 +136,6 @@ var Api = new Class({
                 } else {
                     log("ERROR: Save Module progress wrong reply NOT OK");
                     log(xhr);
-                    // TODO : handle error ?
                 }
             }.bind(this),
             onFailure : function(xhr) {
