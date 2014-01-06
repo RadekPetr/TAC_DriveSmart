@@ -5,7 +5,7 @@
       <Preview>scanning/scan_cst18_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vwsc2</Audio>
-      <ModuleIntroVideo caption="TAC_SCANNINGINTRO.vtt">module_intros/kaps_intro</ModuleIntroVideo>
+      <ModuleIntroVideo caption="TAC_SCANNINGINTRO.vtt">module_intros/scanning_intro</ModuleIntroVideo>
     </Step>
   </Seq>
   <Seq trackProgress="true" desc="Exercise 1" Ex="1">
