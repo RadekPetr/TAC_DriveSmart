@@ -42,11 +42,8 @@ var SequencePlayer = new Class({
     // ----------------------------------------------------------
     start : function(sequenceData) {
         this.currentSequence = Array.clone(sequenceData);
-        log ("**** 1 ");
         this.moduleInfo = this.myParent().getModuleInfo();
-        log ("**** 2 ", this.moduleInfo);
         this.sequenceState = Main.userTracker.getUserSequenceState(this.moduleInfo.currentSequenceID, this.moduleInfo.moduleID);
-        log ("**** 3 ");
         // reset scoring, so when it repeats the scores are replaced not appended (Unless this will be requested ?)
         this.sequenceState.score = new Array();
         // TODO handle mobile platforms: Browser.Platform.android, handle incompatible old browsers
@@ -62,11 +59,13 @@ var SequencePlayer = new Class({
             this.mediaLoader.start(true);
         } else {
             // no media to preload so we can continue
+
             this.fireEvent("TIMELINE", {
                 type : "preload.finished",
                 id : "no_media",
                 next : this.mediaLoader.options.next
             });
+
         }
     },
     _nextStep : function() {
@@ -189,9 +188,6 @@ var SequencePlayer = new Class({
                 case "ModuleIntro":
                     this._moduleIntroSetup(step);
                     break;
-                case "Intro":
-                    this._introductionSetup(step);
-                    break;
                 case "CommentaryIntro":
                     var myContainerID = 'CommentaryIntro.container';
                     var myDiv = new Element("div", {
@@ -244,6 +240,27 @@ var SequencePlayer = new Class({
                     this._hideOtherVideos(step.media.video.playerID);
                     //TODO: noBg1="1"
                     break;
+                case "PlayVideo_cue":
+                    this._stopPlayers();
+                    this._removeImages();
+                    this._removeButtons();
+                    this._removeIntroContainers();
+                    this._hideInteractions();
+                    step.media.video.options.next = 'PlayVideo.done';
+                    step.media.video.show();
+                    step.media.video.registerCueEvents();
+                    step.media.video.start();
+                    this._hideOtherVideos(step.media.video.playerID);
+                    break;
+
+                case "CueImage":
+                    this._removeImages();
+                    step.media.image.options.style.left = 0;
+                    step.media.image.options.style.top = 0;
+                    step.media.image.add(this.activeVideo.containerID);
+                    step.media.image.show();
+                    break;
+
                 case "ConIntro":
                     this._stopPlayers();
                     this._removeImages();
@@ -534,6 +551,23 @@ var SequencePlayer = new Class({
             case "QuestionFeedback.done":
             case "PlayAudio.done":
                 this._nextStep();
+                break;
+            case "video.cue":
+                log("cue event");
+                var nextCuePointStart = this.currentSequence[0].attributes.cueStart;
+                var currentCuePointEnd = this.currentStep.attributes.cueEnd;
+                
+                var currentTime = this.activeVideo.player.currentTime();
+                log("Cue point", currentTime, nextCuePointStart, currentCuePointEnd);
+                if (currentTime >= nextCuePointStart) {
+                    log("Cue point started", currentTime, nextCuePointStart);
+                    this._nextStep();
+                }
+                if (currentTime >= currentCuePointEnd) {
+                    log("Cue point ends", currentTime, currentCuePointEnd);
+                   // this.currentStep.media.image.hide();
+                }
+
                 break;
             case "SequenceIntro.done":
                 this._stopPlayers();
@@ -875,7 +909,7 @@ var SequencePlayer = new Class({
                     }
                     break;
                 case "ModuleIntroVideo" :
-                    // only setup the video in case it was not played yet .... curretnly no way to replay it anyway
+                    // only setup the video in case it was not played yet .... currently no way to replay it anyway
 
                     if (Main.MODULE_INTRO_ALWAYS) {
                         this.sequenceState.completed = false;
@@ -983,23 +1017,7 @@ var SequencePlayer = new Class({
                         });
                         this.mediaLoader.register(step.media.image.getLoaderInfo());
                     }
-                    break;
-                case "CueImages" :
-                    if (item.value != '') {
-                        var cueImages = item.childNodes;
-                        step.media.cueImages = new Array();
-                        Array.each(cueImages, function(cueImageData, index) {
-                            var file = Main.PATHS.imageFolder + cueImageData.value;
-                            var cueImage = new ImagePlayer(this, {
-                                src : file,
-                                title : 'CueImage',
-                                id : 'cue_image' + index + "_" + stepOrder,
-                                cue_point : cueImageData.attributes.cuePoint
-                            });
-                            step.media.cueImages.push = cueImage;
-                            this.mediaLoader.register(cueImage.getLoaderInfo());
-                        });
-                    }
+
                     break;
                 case "EmptyBkg" :
                     if (item.value != '') {
@@ -1435,83 +1453,23 @@ var SequencePlayer = new Class({
         if (Main.MODULE_INTRO_ALWAYS) {
             this.sequenceState.completed = false;
         }
-        if (this.sequenceState.completed == true || step.media.moduleIntroVideo == undefined) {
-            step.media.previewImage.options.style.width = '100%';
-            step.media.previewImage.options.style.height = '100%';
-            step.media.previewImage.options.style.left = 0;
-            step.media.previewImage.options.style.top = 0;
-
-            step.media.previewImage.add(myContainerID);
-            step.media.previewImage.show();
-
-            var titleDiv = new Element("div", {
-                id : 'titles',
-                styles : {
-                    position : 'absolute',
-                    'left' : '10px',
-                    'top' : '370px',
-                    'width' : '660px',
-                    'height' : '100px'
-                },
-                'class' : 'pane gray'
-            });
-            titleDiv.inject(myDiv);
-
-            var moduleProgress = new Element("h1", {
-                html : 'Module Progress:',
-                styles : {
-                    left : '0',
-                    top : '0',
-                    'position' : 'relative',
-                },
-                'class' : 'sequence-title no-select'
-            });
-            moduleProgress.inject(titleDiv);
-
-            var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
-            var moduleProgressBar = UIHelpers.progressBarSetup(moduleState.progress, this.moduleInfo.moduleID);
-            UIHelpers.setClasses(moduleProgressBar['holder'], "no-select module_progress_intro");
-            moduleProgressBar['holder'].inject(titleDiv);
-
-            // Already played the intro video so this time just play welcome sound
-
-            this._addButton({
-                type : "Continue",
-                next : "Continue.clicked"
-            });
-            this._addButton({
-                type : "Main Menu",
-                next : "MainMenuFromIntro.clicked"
-            });
-            this._updateUserProgress();
-
-            if (this.fromMenu == true) {
-                this.fromMenu = false;
-                step.media.audio.options.next = '';
-                step.media.audio.start();
-
-            } else {
-                // TODO: play different sound if getting to module intro from a sequence ?
-            }
+        if (this.sequenceState.completed == true) {
+            // intro already played
         } else {
-            // Play the Module Intro video
-            // allow skip ?
-            //this._removeImages();
+            // Play the Intro video
+            log("1");
             this._stopPlayers();
+            log("2");
             this._removeButtons();
+            log("3");
             this._removeIntroContainers();
             this._hideInteractions();
-            step.media.moduleIntroVideo.options.next = '';
-            step.media.moduleIntroVideo.show();
+            step.media.video.options.next = '';
+            step.media.video.show();
 
-            this._hideOtherVideos(step.media.moduleIntroVideo.playerID);
-            step.media.moduleIntroVideo.start();
+            this._hideOtherVideos(step.media.video.playerID);
+            step.media.video.start();
 
-            // Already played the intro video so this time just play welcome sound
-            this._addButton({
-                type : "Continue",
-                next : "Continue.clicked"
-            });
             this._addButton({
                 type : "Main Menu",
                 next : "MainMenuFromIntro.clicked"
@@ -1524,7 +1482,7 @@ var SequencePlayer = new Class({
             } else {
                 // TODO: play different sound if getting to module intro from a sequence ?
             }
-            // TODO: if first time go to next step
+
         }
     }.protect(),
     _addButton : function(buttonData) {

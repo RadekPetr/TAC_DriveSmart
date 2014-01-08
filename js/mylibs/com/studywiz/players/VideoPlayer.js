@@ -157,6 +157,24 @@ var VideoPlayer = new Class({
 
         }
     },
+    registerCueEvents : function() {
+        if (this.player != undefined) {
+            // clear any lefover events
+            // this.player.off();
+
+            //log("Adding ended listener");
+            this.player.on("timeupdate", function() {
+                log("Time update");
+
+                this.myParent().fireEvent("TIMELINE", {
+                    type : "video.time",
+                    id : this.options.id,
+                    next : "video.cue"
+                });
+            }.bind(this));
+
+        }
+    },
     // ---------------------------
     start : function() {
         if (this.player != null) {
