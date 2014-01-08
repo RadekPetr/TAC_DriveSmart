@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root version="1.0">
-  <Seq trackProgress="true" trackScore="false" Ex="1">
-    <Step fmt="Scene">      
-      <Image>menu/main_menu.png</Image>
-    </Step>
-  </Seq>
+	<Seq trackProgress="true" trackScore="false" Ex="0">
+		<Step fmt="Intro">
+			<Video>intro/website_intro</Video>
+			<CueImages>
+				<CueImage cuePoint="10" width ="640" height="480">intro/image1.jpg</CueImage>
+				<CueImage cuePoint="20" width ="640" height="480">intro/image2.jpg</CueImage>
+				<CueImage cuePoint="30" width ="640" height="480">intro/image3.jpg</CueImage>
+				<CueImage cuePoint="40" width ="640" height="480">intro/image4.jpg</CueImage>
+				<CueImage cuePoint="60" width ="640" height="480">intro/image5.jpg</CueImage>
+			</CueImages>
+		</Step>
+	</Seq>
 </root>
