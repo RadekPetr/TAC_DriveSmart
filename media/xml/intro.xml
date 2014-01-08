@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root version="1.0">
 	<Seq trackProgress="true" trackScore="false" Ex="0">
-		<Step fmt="Intro">
+		<Step fmt="PlayVideo_cue">
 			<Video>intro/website_intro</Video>
-			<CueImages>
-				<CueImage cuePoint="10" width ="640" height="480">intro/image1.jpg</CueImage>
-				<CueImage cuePoint="20" width ="640" height="480">intro/image2.jpg</CueImage>
-				<CueImage cuePoint="30" width ="640" height="480">intro/image3.jpg</CueImage>
-				<CueImage cuePoint="40" width ="640" height="480">intro/image4.jpg</CueImage>
-				<CueImage cuePoint="60" width ="640" height="480">intro/image5.jpg</CueImage>
-			</CueImages>
 		</Step>
+		<Step fmt="CueImage" cueStart="10" cueEnd="15" width ="640" height="480">
+			<Image>intro/image1.jpg</Image>
+		</Step>
+		<Step fmt="CueImage" cueStart="20" cueEnd="21" width ="640" height="480">
+			<Image>intro/image2.jpg</Image>
+		</Step>
+		<Step fmt="CueImage" cueStart="25" cueEnd="28" width ="640" height="480">
+			<Image>intro/image3.jpg</Image>
+		</Step>
+		<Step fmt="CueImage" cueStart="30" cueEnd="31" width ="640" height="480">
+			<Image>intro/image4.jpg</Image>
+		</Step>
+		<Step fmt="CueImage" cueStart="33" cueEnd="34" width ="640" height="480">
+			<Image>intro/image5.jpg</Image>
+		</Step>
+		<Step fmt="Continue"></Step>
+
 	</Seq>
 </root>
