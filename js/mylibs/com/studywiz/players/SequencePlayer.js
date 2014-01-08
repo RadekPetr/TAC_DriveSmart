@@ -42,8 +42,11 @@ var SequencePlayer = new Class({
     // ----------------------------------------------------------
     start : function(sequenceData) {
         this.currentSequence = Array.clone(sequenceData);
+        log ("**** 1 ");
         this.moduleInfo = this.myParent().getModuleInfo();
+        log ("**** 2 ", this.moduleInfo);
         this.sequenceState = Main.userTracker.getUserSequenceState(this.moduleInfo.currentSequenceID, this.moduleInfo.moduleID);
+        log ("**** 3 ");
         // reset scoring, so when it repeats the scores are replaced not appended (Unless this will be requested ?)
         this.sequenceState.score = new Array();
         // TODO handle mobile platforms: Browser.Platform.android, handle incompatible old browsers
@@ -176,7 +179,7 @@ var SequencePlayer = new Class({
                     });
                     this._addButton({
                         type : "Main Menu",
-                        next : "MainMenuIntro.clicked"
+                        next : "MainMenuFromIntro.clicked"
                     });
 
                     // TODO: play level chnage audio if  this.playConLevelAudio = false;
@@ -185,6 +188,9 @@ var SequencePlayer = new Class({
                     break;
                 case "ModuleIntro":
                     this._moduleIntroSetup(step);
+                    break;
+                case "Intro":
+                    this._introductionSetup(step);
                     break;
                 case "CommentaryIntro":
                     var myContainerID = 'CommentaryIntro.container';
@@ -603,7 +609,7 @@ var SequencePlayer = new Class({
                 break;
             case "End.Module.Continue.clicked":
             case "MainMenu.clicked":
-            case "MainMenuIntro.clicked":
+            case "MainMenuFromIntro.clicked":
                 /* this._stopPlayers();
                  this._removeVideos();
                  this._removeImages();
@@ -612,9 +618,7 @@ var SequencePlayer = new Class({
                  this._removeInteractions();
                  */
                 this.reset();
-
                 this.repeating = false;
-
                 this.myParent().fireEvent("SEQUENCE", {
                     type : "sequence.event",
                     next : 'sequence.exit'
@@ -978,6 +982,23 @@ var SequencePlayer = new Class({
                             id : 'image' + index + "_" + stepOrder
                         });
                         this.mediaLoader.register(step.media.image.getLoaderInfo());
+                    }
+                    break;
+                case "CueImages" :
+                    if (item.value != '') {
+                        var cueImages = item.childNodes;
+                        step.media.cueImages = new Array();
+                        Array.each(cueImages, function(cueImageData, index) {
+                            var file = Main.PATHS.imageFolder + cueImageData.value;
+                            var cueImage = new ImagePlayer(this, {
+                                src : file,
+                                title : 'CueImage',
+                                id : 'cue_image' + index + "_" + stepOrder,
+                                cue_point : cueImageData.attributes.cuePoint
+                            });
+                            step.media.cueImages.push = cueImage;
+                            this.mediaLoader.register(cueImage.getLoaderInfo());
+                        });
                     }
                     break;
                 case "EmptyBkg" :
@@ -1347,7 +1368,7 @@ var SequencePlayer = new Class({
             });
             this._addButton({
                 type : "Main Menu",
-                next : "MainMenuIntro.clicked"
+                next : "MainMenuFromIntro.clicked"
             });
             this._updateUserProgress();
 
@@ -1380,7 +1401,120 @@ var SequencePlayer = new Class({
             });
             this._addButton({
                 type : "Main Menu",
-                next : "MainMenuIntro.clicked"
+                next : "MainMenuFromIntro.clicked"
+            });
+
+            // TODO: is this needed ?
+            if (this.fromMenu == true) {
+                this.fromMenu = false;
+                this._updateUserProgress();
+            } else {
+                // TODO: play different sound if getting to module intro from a sequence ?
+            }
+            // TODO: if first time go to next step
+        }
+    }.protect(),
+    _introductionSetup : function(step) {
+
+        log("From Menu: ", this.fromMenu);
+        var myContainerID = 'Sequence.container';
+        var myDiv = new Element("div", {
+            id : myContainerID,
+            styles : {
+                position : 'absolute',
+                'left' : Main.VIDEO_LEFT + 'px',
+                'top' : Main.VIDEO_TOP + 'px',
+                'width' : Main.VIDEO_WIDTH + 'px',
+                'height' : Main.VIDEO_HEIGHT + 'px'
+            }
+        });
+        myDiv.inject($m(Main.DIV_ID));
+
+        var moduleTitle = UIHelpers.setMainPanel(this.moduleInfo.moduleTitle);
+        UIHelpers.setClasses(moduleTitle, 'module-title no-select rotate90');
+        if (Main.MODULE_INTRO_ALWAYS) {
+            this.sequenceState.completed = false;
+        }
+        if (this.sequenceState.completed == true || step.media.moduleIntroVideo == undefined) {
+            step.media.previewImage.options.style.width = '100%';
+            step.media.previewImage.options.style.height = '100%';
+            step.media.previewImage.options.style.left = 0;
+            step.media.previewImage.options.style.top = 0;
+
+            step.media.previewImage.add(myContainerID);
+            step.media.previewImage.show();
+
+            var titleDiv = new Element("div", {
+                id : 'titles',
+                styles : {
+                    position : 'absolute',
+                    'left' : '10px',
+                    'top' : '370px',
+                    'width' : '660px',
+                    'height' : '100px'
+                },
+                'class' : 'pane gray'
+            });
+            titleDiv.inject(myDiv);
+
+            var moduleProgress = new Element("h1", {
+                html : 'Module Progress:',
+                styles : {
+                    left : '0',
+                    top : '0',
+                    'position' : 'relative',
+                },
+                'class' : 'sequence-title no-select'
+            });
+            moduleProgress.inject(titleDiv);
+
+            var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
+            var moduleProgressBar = UIHelpers.progressBarSetup(moduleState.progress, this.moduleInfo.moduleID);
+            UIHelpers.setClasses(moduleProgressBar['holder'], "no-select module_progress_intro");
+            moduleProgressBar['holder'].inject(titleDiv);
+
+            // Already played the intro video so this time just play welcome sound
+
+            this._addButton({
+                type : "Continue",
+                next : "Continue.clicked"
+            });
+            this._addButton({
+                type : "Main Menu",
+                next : "MainMenuFromIntro.clicked"
+            });
+            this._updateUserProgress();
+
+            if (this.fromMenu == true) {
+                this.fromMenu = false;
+                step.media.audio.options.next = '';
+                step.media.audio.start();
+
+            } else {
+                // TODO: play different sound if getting to module intro from a sequence ?
+            }
+        } else {
+            // Play the Module Intro video
+            // allow skip ?
+            //this._removeImages();
+            this._stopPlayers();
+            this._removeButtons();
+            this._removeIntroContainers();
+            this._hideInteractions();
+            step.media.moduleIntroVideo.options.next = '';
+            step.media.moduleIntroVideo.show();
+
+            this._hideOtherVideos(step.media.moduleIntroVideo.playerID);
+            step.media.moduleIntroVideo.start();
+
+            // Already played the intro video so this time just play welcome sound
+            this._addButton({
+                type : "Continue",
+                next : "Continue.clicked"
+            });
+            this._addButton({
+                type : "Main Menu",
+                next : "MainMenuFromIntro.clicked"
             });
 
             // TODO: is this needed ?
