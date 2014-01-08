@@ -81,13 +81,11 @@ var dwProgressBar = new Class({
 
     //animates the change in percentage
     animate : function(to) {
-        log("Setting to", to);
         //log("this.perc ", this.perc);
         var myEffect = new Fx.Morph(this.perc, {
             duration : this.options.speed,
             transition : Fx.Transitions.Sine.easeOut
         });
-        log("this.calculate(to.toInt())", this.calculate(to.toInt()));
         myEffect.start({
             'width' : [0, this.calculate(to.toInt())] // Morphs the 'width' style from 900px to 300px.
         });

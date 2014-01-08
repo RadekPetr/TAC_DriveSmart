@@ -103,7 +103,6 @@ var MediaLoader = new Class({
     },
     updateProgress : function() {
         this.loadQueue.each( function(value, key) {
-            log("DEBUG ++++", value, key);
             this.reportProgress(value.ref.getLoaderInfo());
         }.bind(this));
     },
