@@ -1492,7 +1492,7 @@ var SequencePlayer = new Class({
                 var imagePlayer = new ImagePlayer(this, {
                     src : file,
                     title : 'Introduction Image',
-                    id : 'cue image' + index 
+                    id : 'cue image' + index
                 });
 
                 imagePlayer.options.style.left = cuePointData.attributes.left;
@@ -1502,7 +1502,6 @@ var SequencePlayer = new Class({
 
                 this.mediaLoader.register(imagePlayer.getLoaderInfo());
             }
-
             var cuePoint = {
                 image : imagePlayer,
                 start : cuePointData.attributes.start,
