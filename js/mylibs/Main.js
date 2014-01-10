@@ -97,7 +97,7 @@ Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '1.0.2';
-Main.BUILD = '2013/12/23';
+Main.BUILD = '2013/12/23 build 2';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;
@@ -106,7 +106,7 @@ Main.IS_LOCAL = true;
 Main.DEBUG = true;
 
 // Play module intro video everytime - normally only the first time
-Main.MODULE_INTRO_ALWAYS = true;
+Main.MODULE_INTRO_ALWAYS = false;
 
 // Saves empty progress data on startup if true
 Main.RESET_USER_DATA = false;
@@ -149,7 +149,7 @@ Main.MODULES = new Hash({
         score : 0,
         title : "Introduction",
         id : 'intro',
-        sequenceID : '1'
+        sequenceID : '0'
     },
     concentration : {
         score : 0,

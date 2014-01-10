@@ -4,11 +4,11 @@
 		<Step fmt="PlayVideo_cue">
 			<Video>intro/website_intro</Video>
 			<CuePoints>
-				<CuePoint start="3" end="5" width ="640" height="480">intro/image1.jpg</CuePoint>
-				<CuePoint start="10" end="15" width ="640" height="480">intro/image2.jpg</CuePoint>
-				<CuePoint start="22" end="25" width ="640" height="480">intro/image3.jpg</CuePoint>
-				<CuePoint start="27" end="30" width ="640" height="480">intro/image4.jpg</CuePoint>
-				<CuePoint start="32" end="35" width ="640" height="480">intro/image5.jpg</CuePoint>
+				<CuePoint start="3" end="6" width="320px" height="240px" left ="10px" top="40px">intro/image1.jpg</CuePoint>	
+				<CuePoint start="10" end="15" width="130px" height="130px" left ="300px" top="300px">intro/image2.jpg</CuePoint>
+				<CuePoint start="22" end="25" width="320px" height="240px" left ="0px" top="400px">intro/image3.jpg</CuePoint>
+				<CuePoint start="27" end="30" width="320px" height="240px" left ="300px" top="0px">intro/image4.jpg</CuePoint>
+				<CuePoint start="32" end="35" width="640px" height="480px" left ="10px" top="40px">intro/image5.jpg</CuePoint>			
 			</CuePoints>
 		</Step>
 		<Step fmt="Continue"></Step>

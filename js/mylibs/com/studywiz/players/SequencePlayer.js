@@ -249,7 +249,7 @@ var SequencePlayer = new Class({
                     step.media.video.options.next = 'PlayVideo_cue.done';
                     step.media.video.show();
                     step.media.video.registerCueEvents();
-                    step.currentCuePoint = step.data.cuePoints.shift();
+                    step.currentCuePoint = this._getNextCuePoint(step);
 
                     step.media.video.start();
                     this._hideOtherVideos(step.media.video.playerID);
@@ -559,40 +559,10 @@ var SequencePlayer = new Class({
                 break;
             case "Video.cue":
                 var step = this.currentStep;
-
                 if (step.currentCuePoint != null) {
-
-                    var cuePointStart = step.currentCuePoint.start;
-                    var cuePointEnd = step.currentCuePoint.end;
-
-                    var currentTime = this.activeVideo.player.currentTime();
-
-                    log("Cue point", currentTime, cuePointStart, cuePointEnd);
-
-                    if (currentTime >= cuePointStart && step.currentCuePoint.started == false) {
-                        step.currentCuePoint.started = true;
-                        log("Cue point started", currentTime, cuePointStart);
-                        step.currentCuePoint.image.options.style.left = 0;
-                        step.currentCuePoint.image.options.style.top = 0;
-
-                        // step.media.image.options.style.width = Main.VIDEO_WIDTH + "px";
-                        // step.media.image.options.style.height = Main.VIDEO_HEIGHT + "px";
-
-                        step.currentCuePoint.image.add(this.activeVideo.containerID);
-                        step.currentCuePoint.image.show();
-                    }
-                    if (currentTime >= cuePointEnd && step.currentCuePoint.ended == false) {
-                        step.currentCuePoint.ended = true;
-                        log("Cue point ends", currentTime, cuePointEnd);
-                        step.currentCuePoint.image.remove();
-                        if (step.data.cuePoints.length > 0) {
-                            step.currentCuePoint = step.data.cuePoints.shift();
-                        } else {
-                            step.currentCuePoint = null;
-                        }
-                    }
+                    this._checkCuePointStart(step);
+                    this._checkCuePointEnd(step);
                 }
-
                 break;
             case "SequenceIntro.done":
                 this._stopPlayers();
@@ -1163,34 +1133,7 @@ var SequencePlayer = new Class({
                     this.mediaLoader.register(step.media.swiff.getLoaderInfo());
                     break;
                 case "CuePoints":
-                    var cuePointsRawData = item.childNodes;
-                    var cuePointsData = {
-                        cuePoints : new Array()
-                    };
-
-                    Array.each(cuePointsRawData, function(cuePointData, index) {
-                        if (cuePointData.value != '') {
-                            var file = Main.PATHS.imageFolder + cuePointData.value;
-                            var imagePlayer = new ImagePlayer(this, {
-                                src : file,
-                                title : 'Introduction Image',
-                                id : 'image' + index + "_" + stepOrder
-                            });
-                            this.mediaLoader.register(imagePlayer.getLoaderInfo());
-                            log("Cue image", imagePlayer);
-                        }
-
-                        var cuePoint = {
-                            image : imagePlayer,
-                            start : cuePointData.attributes.start,
-                            end : cuePointData.attributes.end,
-                            started : false,
-                            ended : false
-                        };
-                        cuePointsData.cuePoints.push(cuePoint);
-                    }.bind(this));
-                    step.data = cuePointsData;
-                    log(" cues done");
+                    step.data = this._getCuePoints(item);
                     break;
                 default:
                 // nothing
@@ -1537,8 +1480,69 @@ var SequencePlayer = new Class({
 
         }
     }.protect(),
-    _setup_CuePoints : function() {
+    _getCuePoints : function(item) {
+        var cuePointsRawData = item.childNodes;
+        var cuePointsData = {
+            cuePoints : new Array()
+        };
 
+        Array.each(cuePointsRawData, function(cuePointData, index) {
+            if (cuePointData.value != '') {
+                var file = Main.PATHS.imageFolder + cuePointData.value;
+                var imagePlayer = new ImagePlayer(this, {
+                    src : file,
+                    title : 'Introduction Image',
+                    id : 'cue image' + index 
+                });
+
+                imagePlayer.options.style.left = cuePointData.attributes.left;
+                imagePlayer.options.style.top = cuePointData.attributes.top;
+                imagePlayer.options.style.width = cuePointData.attributes.width;
+                imagePlayer.options.style.height = cuePointData.attributes.height;
+
+                this.mediaLoader.register(imagePlayer.getLoaderInfo());
+            }
+
+            var cuePoint = {
+                image : imagePlayer,
+                start : cuePointData.attributes.start,
+                end : cuePointData.attributes.end,
+                started : false,
+                ended : false
+            };
+            cuePointsData.cuePoints.push(cuePoint);
+        }.bind(this));
+        return cuePointsData;
+    },
+    _checkCuePointStart : function(step) {
+        var cuePointStart = step.currentCuePoint.start;
+        var cuePointEnd = step.currentCuePoint.end;
+        var currentTime = this.activeVideo.player.currentTime();
+        if (currentTime >= cuePointStart && step.currentCuePoint.started == false) {
+            step.currentCuePoint.started = true;
+            log("Cue point started", currentTime, cuePointStart);
+            step.currentCuePoint.image.add(this.activeVideo.containerID);
+            step.currentCuePoint.image.show();
+        }
+
+    },
+    _checkCuePointEnd : function(step) {
+        var cuePointStart = step.currentCuePoint.start;
+        var cuePointEnd = step.currentCuePoint.end;
+        var currentTime = this.activeVideo.player.currentTime();
+        if (currentTime >= cuePointEnd && step.currentCuePoint.ended == false) {
+            step.currentCuePoint.ended = true;
+            log("Cue point ends", currentTime, cuePointEnd);
+            step.currentCuePoint.image.remove();
+            step.currentCuePoint = this._getNextCuePoint(step);
+        }
+    },
+    _getNextCuePoint : function(step) {
+        var cuePoint = null;
+        if (step.data.cuePoints.length > 0) {
+            cuePoint = step.data.cuePoints.shift();
+        }
+        return cuePoint;
     },
     _addButton : function(buttonData) {
         log(buttonData);
