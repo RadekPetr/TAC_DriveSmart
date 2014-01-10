@@ -246,9 +246,11 @@ var SequencePlayer = new Class({
                     this._removeButtons();
                     this._removeIntroContainers();
                     this._hideInteractions();
-                    step.media.video.options.next = 'PlayVideo.done';
+                    step.media.video.options.next = 'PlayVideo_cue.done';
                     step.media.video.show();
                     step.media.video.registerCueEvents();
+                    step.currentCuePoint = step.data.cuePoints.shift();
+
                     step.media.video.start();
                     this._hideOtherVideos(step.media.video.playerID);
                     break;
@@ -545,6 +547,9 @@ var SequencePlayer = new Class({
     handleNavigationEvent : function(params) {
 
         switch (params.next) {
+
+            case "PlayVideo_cue.done":
+            // TODO: anything ?
             case "Media.ready":
             case "PlayVideo.done":
             case "Question.done":
@@ -552,20 +557,40 @@ var SequencePlayer = new Class({
             case "PlayAudio.done":
                 this._nextStep();
                 break;
-            case "video.cue":
-                log("cue event");
-                var nextCuePointStart = this.currentSequence[0].attributes.cueStart;
-                var currentCuePointEnd = this.currentStep.attributes.cueEnd;
-                
-                var currentTime = this.activeVideo.player.currentTime();
-                log("Cue point", currentTime, nextCuePointStart, currentCuePointEnd);
-                if (currentTime >= nextCuePointStart) {
-                    log("Cue point started", currentTime, nextCuePointStart);
-                    this._nextStep();
-                }
-                if (currentTime >= currentCuePointEnd) {
-                    log("Cue point ends", currentTime, currentCuePointEnd);
-                   // this.currentStep.media.image.hide();
+            case "Video.cue":
+                var step = this.currentStep;
+
+                if (step.currentCuePoint != null) {
+
+                    var cuePointStart = step.currentCuePoint.start;
+                    var cuePointEnd = step.currentCuePoint.end;
+
+                    var currentTime = this.activeVideo.player.currentTime();
+
+                    log("Cue point", currentTime, cuePointStart, cuePointEnd);
+
+                    if (currentTime >= cuePointStart && step.currentCuePoint.started == false) {
+                        step.currentCuePoint.started = true;
+                        log("Cue point started", currentTime, cuePointStart);
+                        step.currentCuePoint.image.options.style.left = 0;
+                        step.currentCuePoint.image.options.style.top = 0;
+
+                        // step.media.image.options.style.width = Main.VIDEO_WIDTH + "px";
+                        // step.media.image.options.style.height = Main.VIDEO_HEIGHT + "px";
+
+                        step.currentCuePoint.image.add(this.activeVideo.containerID);
+                        step.currentCuePoint.image.show();
+                    }
+                    if (currentTime >= cuePointEnd && step.currentCuePoint.ended == false) {
+                        step.currentCuePoint.ended = true;
+                        log("Cue point ends", currentTime, cuePointEnd);
+                        step.currentCuePoint.image.remove();
+                        if (step.data.cuePoints.length > 0) {
+                            step.currentCuePoint = step.data.cuePoints.shift();
+                        } else {
+                            step.currentCuePoint = null;
+                        }
+                    }
                 }
 
                 break;
@@ -1137,6 +1162,36 @@ var SequencePlayer = new Class({
                     this.swiffs.push(step.media.swiff);
                     this.mediaLoader.register(step.media.swiff.getLoaderInfo());
                     break;
+                case "CuePoints":
+                    var cuePointsRawData = item.childNodes;
+                    var cuePointsData = {
+                        cuePoints : new Array()
+                    };
+
+                    Array.each(cuePointsRawData, function(cuePointData, index) {
+                        if (cuePointData.value != '') {
+                            var file = Main.PATHS.imageFolder + cuePointData.value;
+                            var imagePlayer = new ImagePlayer(this, {
+                                src : file,
+                                title : 'Introduction Image',
+                                id : 'image' + index + "_" + stepOrder
+                            });
+                            this.mediaLoader.register(imagePlayer.getLoaderInfo());
+                            log("Cue image", imagePlayer);
+                        }
+
+                        var cuePoint = {
+                            image : imagePlayer,
+                            start : cuePointData.attributes.start,
+                            end : cuePointData.attributes.end,
+                            started : false,
+                            ended : false
+                        };
+                        cuePointsData.cuePoints.push(cuePoint);
+                    }.bind(this));
+                    step.data = cuePointsData;
+                    log(" cues done");
+                    break;
                 default:
                 // nothing
             }
@@ -1457,11 +1512,8 @@ var SequencePlayer = new Class({
             // intro already played
         } else {
             // Play the Intro video
-            log("1");
             this._stopPlayers();
-            log("2");
             this._removeButtons();
-            log("3");
             this._removeIntroContainers();
             this._hideInteractions();
             step.media.video.options.next = '';
@@ -1485,6 +1537,9 @@ var SequencePlayer = new Class({
 
         }
     }.protect(),
+    _setup_CuePoints : function() {
+
+    },
     _addButton : function(buttonData) {
         log(buttonData);
         var buttonOptions = UIHelpers.getButtonOptions(buttonData['type']);

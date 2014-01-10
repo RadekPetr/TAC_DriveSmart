@@ -132,47 +132,30 @@ var VideoPlayer = new Class({
                 this.player.off('suspend');
                 this.player.off('waiting');
                 this.player.off('canplaythrough');
-
             }.bind(this));
-
         }
     },
     registerPlaybackEvents : function() {
         if (this.player != undefined) {
-            // clear any lefover events
-            // this.player.off();
-
-            //log("Adding ended listener");
             this.player.on("ended", function() {
-                log("Video ended");
-                // remove all events
                 this.player.off("ended");
-
                 this.myParent().fireEvent("TIMELINE", {
                     type : "video.finished",
                     id : this.options.id,
                     next : this.options.next
                 });
             }.bind(this));
-
         }
     },
     registerCueEvents : function() {
         if (this.player != undefined) {
-            // clear any lefover events
-            // this.player.off();
-
-            //log("Adding ended listener");
             this.player.on("timeupdate", function() {
-                log("Time update");
-
                 this.myParent().fireEvent("TIMELINE", {
                     type : "video.time",
                     id : this.options.id,
-                    next : "video.cue"
+                    next : "Video.cue"
                 });
             }.bind(this));
-
         }
     },
     // ---------------------------
@@ -180,7 +163,6 @@ var VideoPlayer = new Class({
         if (this.player != null) {
             this.player.play();
             this.registerPlaybackEvents();
-
         }
     },
     // ---------------------------
@@ -191,8 +173,8 @@ var VideoPlayer = new Class({
     hide : function(speed) {
         this.container.fade('hide');
     },
-    showCaptions : function(captionFile) {       
-        this.player.showTextTrack("subs");      
+    showCaptions : function(captionFile) {
+        this.player.showTextTrack("subs");
         this.player.controlBar.captionsButton.show();
     },
     obscure : function() {
@@ -210,7 +192,6 @@ var VideoPlayer = new Class({
         } else {
             this.container.set('class', 'blur');
         }
-
     },
     // ---------------------------
     stop : function() {

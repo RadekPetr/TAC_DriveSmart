@@ -3,23 +3,14 @@
 	<Seq trackProgress="true" trackScore="false" Ex="0">
 		<Step fmt="PlayVideo_cue">
 			<Video>intro/website_intro</Video>
-		</Step>
-		<Step fmt="CueImage" cueStart="10" cueEnd="15" width ="640" height="480">
-			<Image>intro/image1.jpg</Image>
-		</Step>
-		<Step fmt="CueImage" cueStart="20" cueEnd="21" width ="640" height="480">
-			<Image>intro/image2.jpg</Image>
-		</Step>
-		<Step fmt="CueImage" cueStart="25" cueEnd="28" width ="640" height="480">
-			<Image>intro/image3.jpg</Image>
-		</Step>
-		<Step fmt="CueImage" cueStart="30" cueEnd="31" width ="640" height="480">
-			<Image>intro/image4.jpg</Image>
-		</Step>
-		<Step fmt="CueImage" cueStart="33" cueEnd="34" width ="640" height="480">
-			<Image>intro/image5.jpg</Image>
+			<CuePoints>
+				<CuePoint start="3" end="5" width ="640" height="480">intro/image1.jpg</CuePoint>
+				<CuePoint start="10" end="15" width ="640" height="480">intro/image2.jpg</CuePoint>
+				<CuePoint start="22" end="25" width ="640" height="480">intro/image3.jpg</CuePoint>
+				<CuePoint start="27" end="30" width ="640" height="480">intro/image4.jpg</CuePoint>
+				<CuePoint start="32" end="35" width ="640" height="480">intro/image5.jpg</CuePoint>
+			</CuePoints>
 		</Step>
 		<Step fmt="Continue"></Step>
-
 	</Seq>
 </root>
