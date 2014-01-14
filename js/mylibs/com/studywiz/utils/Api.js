@@ -178,7 +178,10 @@ var Api = new Class({
                 this.saveLog("error", "onError saveModuleProgress" + xhr);
             }.bind(this)
         });
-        this._sendRequest(jsonRequest, requestPayload, true);
+
+        if (externalModuleID != "in") {
+            this._sendRequest(jsonRequest, requestPayload, true);
+        }
 
         // On completion of each exercise you would need to POST to /user_progress/module_progress/<module_code>
         // payload need to contain two parameters - "score" and "completed_exercises". Both integers.
@@ -213,7 +216,7 @@ var Api = new Class({
         //TODO: intro ??
         var map = new Hash({
             'main_menu' : 'mm',
-            'intro' : 'mm',
+            'intro' : 'in',
             'concentration' : 'cc',
             'country' : 'co',
             'urban' : 'ur',
