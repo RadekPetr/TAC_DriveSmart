@@ -241,18 +241,8 @@ var SequencePlayer = new Class({
                     //TODO: noBg1="1"
                     break;
                 case "PlayVideo_cue":
-                    this._stopPlayers();
-                    this._removeImages();
-                    this._removeButtons();
-                    this._removeIntroContainers();
-                    this._hideInteractions();
-                    step.media.video.options.next = 'PlayVideo_cue.done';
-                    step.media.video.show();
-                    step.media.video.registerCueEvents();
-                    step.currentCuePoint = this._getNextCuePoint(step);
-
+                    this._introductionSetup(step);
                     step.media.video.start();
-                    this._hideOtherVideos(step.media.video.playerID);
                     break;
 
                 case "CueImage":
@@ -549,7 +539,25 @@ var SequencePlayer = new Class({
         switch (params.next) {
 
             case "PlayVideo_cue.done":
-            // TODO: anything ?
+                this._removeImages();
+                this._removeButtons();
+
+                this._addButton({
+                    type : "Continue",
+                    next : "Continue.clicked"
+                });
+                this._addButton({
+                    type : "Repeat",
+                    next : "Repeat.video.clicked"
+                });
+                this._updateUserProgress();
+                break;
+            case  "Repeat.video.clicked":
+                this._stopPlayers();
+                this._removeImages();
+                //this._removeButtons();
+                this.currentStep.media.video.start();
+                break;
             case "Media.ready":
             case "PlayVideo.done":
             case "Question.done":
@@ -558,11 +566,7 @@ var SequencePlayer = new Class({
                 this._nextStep();
                 break;
             case "Video.cue":
-                var step = this.currentStep;
-                if (step.currentCuePoint != null) {
-                    this._checkCuePointStart(step);
-                    this._checkCuePointEnd(step);
-                }
+                this._checkCuePoints(this.currentStep);
                 break;
             case "SequenceIntro.done":
                 this._stopPlayers();
@@ -887,7 +891,7 @@ var SequencePlayer = new Class({
                             var width = '100%';
                             var height = '100%';
                         };
-
+                        var caption = item.attributes.caption;
                         step.media.video = new VideoPlayer(this, {
                             id : "video_" + index + "_" + stepOrder,
                             next : 'not.set',
@@ -895,6 +899,7 @@ var SequencePlayer = new Class({
                             filename : filename,
                             width : width,
                             height : height,
+                            captionFile : caption,
                             parentTag : Main.DIV_ID
                         });
 
@@ -917,8 +922,6 @@ var SequencePlayer = new Class({
                         var height = '100%';
                         var caption = item.attributes.caption;
 
-                        log("ModuleIntroVideo", item, caption);
-
                         step.media.moduleIntroVideo = new VideoPlayer(this, {
                             id : "video_" + index + "_" + stepOrder,
                             next : 'not.set',
@@ -933,6 +936,31 @@ var SequencePlayer = new Class({
                         this.mediaLoader.register(step.media.moduleIntroVideo.getLoaderInfo());
                         // we want to store this so all VideoJS player can be removed correctly (see remove() in VideoPlayer)
                         this.videos.push(step.media.moduleIntroVideo);
+                    }
+                    break;
+                case "VideoCues" :
+
+                    if (item.value != '') {
+                        var filename = item.value;
+                        var style = null;
+                        var width = '100%';
+                        var height = '100%';
+                        var caption = item.attributes.caption;
+
+                        step.media.video = new VideoPlayer(this, {
+                            id : "video_" + index + "_" + stepOrder,
+                            next : 'not.set',
+                            filename : filename,
+                            width : width,
+                            height : height,
+                            parentTag : Main.DIV_ID,
+                            captionFile : caption,
+                            controls : true
+                        });
+
+                        this.mediaLoader.register(step.media.video.getLoaderInfo());
+                        // we want to store this so all VideoJS player can be removed correctly (see remove() in VideoPlayer)
+                        this.videos.push(step.media.video);
                     }
                     break;
                 case "Audio" :
@@ -1133,7 +1161,9 @@ var SequencePlayer = new Class({
                     this.mediaLoader.register(step.media.swiff.getLoaderInfo());
                     break;
                 case "CuePoints":
+                    log("1");
                     step.data = this._getCuePoints(item);
+                    log("2");
                     break;
                 default:
                 // nothing
@@ -1430,62 +1460,26 @@ var SequencePlayer = new Class({
             // TODO: if first time go to next step
         }
     }.protect(),
-    _introductionSetup : function(step) {
-
-        log("From Menu: ", this.fromMenu);
-        var myContainerID = 'Sequence.container';
-        var myDiv = new Element("div", {
-            id : myContainerID,
-            styles : {
-                position : 'absolute',
-                'left' : Main.VIDEO_LEFT + 'px',
-                'top' : Main.VIDEO_TOP + 'px',
-                'width' : Main.VIDEO_WIDTH + 'px',
-                'height' : Main.VIDEO_HEIGHT + 'px'
-            }
-        });
-        myDiv.inject($m(Main.DIV_ID));
-
+    _introductionSetup : function(step) { 
         var moduleTitle = UIHelpers.setMainPanel(this.moduleInfo.moduleTitle);
         UIHelpers.setClasses(moduleTitle, 'module-title no-select rotate90');
-        if (Main.MODULE_INTRO_ALWAYS) {
-            this.sequenceState.completed = false;
-        }
-        if (this.sequenceState.completed == true) {
-            // intro already played
-        } else {
-            // Play the Intro video
-            this._stopPlayers();
-            this._removeButtons();
-            this._removeIntroContainers();
-            this._hideInteractions();
-            step.media.video.options.next = '';
-            step.media.video.show();
 
-            this._hideOtherVideos(step.media.video.playerID);
-            step.media.video.start();
+        // Play the Intro video
+        this._stopPlayers();
+        this._removeButtons();
+        this._removeIntroContainers();
+        this._hideInteractions();
+        step.media.video.options.next = 'PlayVideo_cue.done';
+        step.media.video.registerCueEvents();
+        step.media.video.show();
+        this._hideOtherVideos(step.media.video.playerID);
 
-            this._addButton({
-                type : "Main Menu",
-                next : "MainMenuFromIntro.clicked"
-            });
-
-            // TODO: is this needed ?
-            if (this.fromMenu == true) {
-                this.fromMenu = false;
-                this._updateUserProgress();
-            } else {
-                // TODO: play different sound if getting to module intro from a sequence ?
-            }
-
-        }
     }.protect(),
     _getCuePoints : function(item) {
         var cuePointsRawData = item.childNodes;
         var cuePointsData = {
             cuePoints : new Array()
         };
-
         Array.each(cuePointsRawData, function(cuePointData, index) {
             if (cuePointData.value != '') {
                 var file = Main.PATHS.imageFolder + cuePointData.value;
@@ -1494,54 +1488,42 @@ var SequencePlayer = new Class({
                     title : 'Introduction Image',
                     id : 'cue image' + index
                 });
-
                 imagePlayer.options.style.left = cuePointData.attributes.left;
                 imagePlayer.options.style.top = cuePointData.attributes.top;
                 imagePlayer.options.style.width = cuePointData.attributes.width;
                 imagePlayer.options.style.height = cuePointData.attributes.height;
-
                 this.mediaLoader.register(imagePlayer.getLoaderInfo());
             }
             var cuePoint = {
                 image : imagePlayer,
                 start : cuePointData.attributes.start,
                 end : cuePointData.attributes.end,
-                started : false,
-                ended : false
+                active : false
             };
             cuePointsData.cuePoints.push(cuePoint);
         }.bind(this));
         return cuePointsData;
     },
-    _checkCuePointStart : function(step) {
-        var cuePointStart = step.currentCuePoint.start;
-        var cuePointEnd = step.currentCuePoint.end;
+    _checkCuePoints : function(step) {
         var currentTime = this.activeVideo.player.currentTime();
-        if (currentTime >= cuePointStart && step.currentCuePoint.started == false) {
-            step.currentCuePoint.started = true;
-            log("Cue point started", currentTime, cuePointStart);
-            step.currentCuePoint.image.add(this.activeVideo.containerID);
-            step.currentCuePoint.image.show();
-        }
+        Array.each(step.data.cuePoints, function(cuePoint, cupePointIndex) {
+            if (currentTime >= cuePoint.start && currentTime < cuePoint.end) {
+                if (cuePoint.active == false) {
+                    cuePoint.active = true;
+                    log("Cue point started", currentTime, cuePoint);
+                    cuePoint.image.add(this.activeVideo.containerID);
+                    cuePoint.image.show();
+                }
+            };
 
-    },
-    _checkCuePointEnd : function(step) {
-        var cuePointStart = step.currentCuePoint.start;
-        var cuePointEnd = step.currentCuePoint.end;
-        var currentTime = this.activeVideo.player.currentTime();
-        if (currentTime >= cuePointEnd && step.currentCuePoint.ended == false) {
-            step.currentCuePoint.ended = true;
-            log("Cue point ends", currentTime, cuePointEnd);
-            step.currentCuePoint.image.remove();
-            step.currentCuePoint = this._getNextCuePoint(step);
-        }
-    },
-    _getNextCuePoint : function(step) {
-        var cuePoint = null;
-        if (step.data.cuePoints.length > 0) {
-            cuePoint = step.data.cuePoints.shift();
-        }
-        return cuePoint;
+            if (currentTime >= cuePoint.end) {
+                if (cuePoint.active == true) {
+                    cuePoint.active = false;
+                    log("Cue point ended", currentTime, cuePoint);
+                    cuePoint.image.remove();
+                }
+            };
+        }.bind(this));
     },
     _addButton : function(buttonData) {
         log(buttonData);
