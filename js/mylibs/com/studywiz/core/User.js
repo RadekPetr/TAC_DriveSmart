@@ -273,7 +273,6 @@ var User = new Class({
             allScores = allScores.concat(sequenceState.score);
         });
         var scoreAverage = allScores.average();
-        log("Sequence " + seq + " score: ", scoreAverage);
 
         if (scoreAverage >= 85) {
             // LEVEL INCREASE
@@ -330,9 +329,7 @@ var User = new Class({
 
     },
     getUserSequenceData : function(sequenceID, moduleID) {
-
         var moduleSequences = this._getUserData(moduleID).data;
-        log(sequenceID, moduleID, moduleSequences);
         var result = moduleSequences.filter(function(item, index) {
             return item.id == sequenceID;
         });

@@ -96,8 +96,8 @@ Main.VIDEO_TOP = 20;
 Main.VIDEO_LEFT = 20;
 
 // Version stuff
-Main.VERSION = '1.0.2';
-Main.BUILD = '2013/12/23 build 2';
+Main.VERSION = '1.0.3';
+Main.BUILD = '2014/01/15 build 1';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;
@@ -113,6 +113,9 @@ Main.RESET_USER_DATA = false;
 
 // maximum risk selectors
 Main.MAX_KEY_RISK_TRIES = 5;
+
+// maximum risk selectors
+Main.MODULE_GROUP = ['kaps', 'scanning'];
 
 // Paths definitions
 Main.PATHS = {
@@ -185,24 +188,24 @@ Main.MODULES = new Hash({
 
 Main.COLORS = ['blue', 'green', 'orange'];
 /*
-if ( typeof Function.prototype.bind === 'undefined') {
-    Function.prototype.bind = function(target) {
-        if ( typeof this !== "function") {
+ if ( typeof Function.prototype.bind === 'undefined') {
+ Function.prototype.bind = function(target) {
+ if ( typeof this !== "function") {
 
-        } else {
+ } else {
 
-            var tail = Array.prototype.slice.call(arguments, 1);
-            var func = this;
-            var noop = function() {
-            };
-            var bound = function() {
-                return func.apply(this instanceof noop ? this : target || window, tail.concat(Array.prototype.slice.call(arguments)));
-                // copy arguments array!
-            };
-            noop.prototype = this.prototype;
-            bound.prototype = new noop();
-            return bound;
-        }
-    };
-}
-*/
+ var tail = Array.prototype.slice.call(arguments, 1);
+ var func = this;
+ var noop = function() {
+ };
+ var bound = function() {
+ return func.apply(this instanceof noop ? this : target || window, tail.concat(Array.prototype.slice.call(arguments)));
+ // copy arguments array!
+ };
+ noop.prototype = this.prototype;
+ bound.prototype = new noop();
+ return bound;
+ }
+ };
+ }
+ */

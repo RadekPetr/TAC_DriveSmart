@@ -124,7 +124,6 @@ var VideoPlayer = new Class({
             }.bind(this));
 
             this.player.on("loadedalldata", function() {
-                log("EVENT: loadedalldata", this.options.id);
                 this.isReady = true;
                 this.player.off('progress');
                 this.player.off('loaded');
@@ -179,7 +178,6 @@ var VideoPlayer = new Class({
     },
     obscure : function() {
         log("Obscure");
-        log(this.container);
         //TODO: finish for IE - use an image for the mask
         if (Browser.ie) {
 
@@ -233,7 +231,6 @@ var VideoPlayer = new Class({
         }
     },
     remove : function() {
-        log('Removing player: ' + this.playerID);
         // get the videojs player with id
         var player = videojs.players[this.playerID];
         // get rid of it
@@ -260,8 +257,6 @@ var VideoPlayer = new Class({
             progress = this.player.bufferedPercent();
 
             log(this.playerID + " **** Video Load progress: " + (this.player.bufferedPercent() * 100.00));
-            // log(this.playerID + " **** Video Load progress buffered: ", this.player.buffered());
-            // log(this.playerID + " **** Video duration: " + this.player.duration());
 
         }
         loaderInfo[this.options.id] = {
@@ -282,7 +277,6 @@ var VideoPlayer = new Class({
         if (this.isReady == true) {
             loaderInfo[this.options.id].progress = 1;
         }
-        // log(loaderInfo[this.options.id].progress);
         return loaderInfo;
     },
     _getVideoData : function() {
