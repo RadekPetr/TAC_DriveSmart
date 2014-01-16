@@ -8,7 +8,6 @@
   <Seq trackProgress="false" trackScore="false" desc="Module Intro" Ex="0">
     <Step fmt="ModuleIntro">
       <Preview>kaps/kaps_uit03_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>kaps/kaps_vwka</Audio>
       <ModuleGroupIntroVideo group="kaps,scanning" caption="TAC_FIRSTMODULES.vtt">module_intros/first_modules_intro</ModuleGroupIntroVideo>
       <ModuleIntroVideo caption="TAC_KEEPAHEAD.vtt">module_intros/kaps_intro</ModuleIntroVideo>
@@ -17,7 +16,6 @@
   <Seq trackProgress="true" desc="Kaps Exercise 1" Ex="1" >
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_uia17_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>kaps/kaps_vtt1a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -47,7 +45,6 @@
   <Seq trackProgress="true" desc="Kaps Exercise 2" Ex="2">
     <Step fmt="SequenceIntro">
       <Preview>kaps/kaps_uit03_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>kaps/kaps_vtt2a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -77,7 +74,6 @@
   <Seq trackProgress="true" desc="Kaps Exercise 3" Ex="3">
     <Step fmt="SequenceIntro">
       <Preview>kaps/kaps_cst14_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>kaps/kaps_vtt2a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -107,7 +103,6 @@
   <Seq trackProgress="true" desc="Kaps Exercise 4" Ex="4">
     <Step fmt="SequenceIntro">
       <Preview>kaps/kaps_shops_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>extra/extra_vopcom.mp3</Audio>
     </Step>
     <Step fmt="CommentaryIntro">
@@ -123,7 +118,6 @@
   <Seq trackProgress="true" desc="Kaps Exercise 5" Ex="5">
     <Step fmt="SequenceIntro">
       <Preview>kaps/kaps_indust_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>kaps/kaps_vtt2a</Audio>
     </Step>
     <Step fmt="CommentaryIntro">
@@ -139,7 +133,6 @@
   <Seq trackProgress="true" desc="Kaps Exercise 6" Ex="6">
     <Step fmt="SequenceIntro">
       <Preview>kaps/kaps_fway_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>kaps/kaps_vtt2a</Audio>
     </Step>
     <Step fmt="CommentaryIntro">
