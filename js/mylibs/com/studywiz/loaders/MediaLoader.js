@@ -207,7 +207,9 @@ var MediaLoader = new Class({
         }
     }.protect(),
     getQueueLength : function() {
-        return this.loadQueue.getLength();
+        var length = this.loadQueue.getLength() + this.videoQueue.length;
+
+        return length;
     },
     reset : function() {
         clearInterval(this.preloadTimer);
