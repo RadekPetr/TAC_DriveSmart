@@ -165,9 +165,9 @@ var User = new Class({
 
         Object.append(userSequence[0], currentSequenceData);
 
-        log("userSequence[0]: ", userSequence[0], currentSequenceData);
-        log("*** User data :", this.userData);
-        log("Total score: ", this.getTotalScore());
+       // log("***  userSequence[0]: ", userSequence[0], currentSequenceData);
+       // log("*** User data :", this.userData);
+       // log("*** Total score: ", this.getTotalScore());
 
         // and store the progress on server
         this.saveProgress();
@@ -179,8 +179,19 @@ var User = new Class({
         });
         if (unfinishedSequences.length == 0) {
             log("Module is Finished");
-        }
+        }     
         return unfinishedSequences;
+    },
+    getModuleStarted : function(moduleID) {
+        var sequencesInModule = this._getUserData(moduleID).data;
+        var started = true;
+        var unfinishedSequences = sequencesInModule.filter(function(item, index) {
+            return item.completed == false;
+        });
+        if (unfinishedSequences.length == sequencesInModule.length) {
+            started = false;
+        }
+        return started;
     },
     getModuleState : function(moduleID) {
 

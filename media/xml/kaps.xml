@@ -1,10 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root version="1.0">
+  <Seq trackProgress="false" trackScore="false" desc="Module Group Intro" Ex="-1">
+    <Step fmt="ModuleGroupIntro">     
+      <ModuleIntroVideo caption="TAC_FIRSTMODULES.vtt">module_intros/first_modules_intro</ModuleIntroVideo>    
+    </Step>   
+  </Seq>
   <Seq trackProgress="false" trackScore="false" desc="Module Intro" Ex="0">
     <Step fmt="ModuleIntro">
       <Preview>kaps/kaps_uit03_start_first.jpg</Preview>
       <Image>intros/sequence_intro.png</Image>
       <Audio>kaps/kaps_vwka</Audio>
+      <ModuleGroupIntroVideo group="kaps,scanning" caption="TAC_FIRSTMODULES.vtt">module_intros/first_modules_intro</ModuleGroupIntroVideo>
       <ModuleIntroVideo caption="TAC_KEEPAHEAD.vtt">module_intros/kaps_intro</ModuleIntroVideo>
     </Step>   
   </Seq>

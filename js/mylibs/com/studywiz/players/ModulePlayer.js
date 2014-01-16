@@ -59,8 +59,31 @@ var ModulePlayer = new Class({
                 } else {
                     if (Main.sequencePlayer.fromMenu == true) {
                         this.options.currentSequenceID = 0;
+                        if (Main.MODULE_GROUP.indexOf(this.options.id) != -1) {
+                            // belongs to the group
+                            log("group");
+                            this.options.currentSequenceID = -1;
+                            var moduleGroupStarted = false;
+                            Array.each(Main.MODULE_GROUP, function(moduleID, index) {
+                                log("Module started", moduleID, Main.userTracker.getModuleStarted(moduleID));
+                                if (Main.userTracker.getModuleStarted(moduleID) == true) {
+                                    this.options.currentSequenceID = 0;
+                                    moduleGroupStarted = true;
+                                }
+                            }.bind(this));
+
+                            if (moduleGroupStarted == true) {
+                                if (unfinishedSequences[0].id == -1) {
+                                    unfinishedSequences[0].completed = true;
+                                    
+                                }
+                            };
+                            unfinishedSequences = Main.userTracker.getUnfinishedSequences(this.options.id);
+                        }
+
                     } else {
                         // get the next one
+
                         this.options.currentSequenceID = unfinishedSequences[0].id;
                     }
                     this.playSequence(this.options.currentSequenceID);
