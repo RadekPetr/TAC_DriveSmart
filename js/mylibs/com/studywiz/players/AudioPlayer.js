@@ -16,7 +16,7 @@ var AudioPlayer = new Class({
         this.soundInstance = null;
         this.preloader = new createjs.LoadQueue();
         this.preloader.parent = this;
-        
+
         createjs.Sound.alternateExtensions = ["mp3", "ogg"];
         createjs.FlashPlugin.swfPath = Main.PATHS.flashFolder;
         createjs.Sound.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin, createjs.FlashPlugin]);
@@ -70,7 +70,6 @@ var AudioPlayer = new Class({
     },
     // ----------------------------------------------------------
     preload : function() {
-        log("++ Audio Preload started: " + this.options.id);
         this.preloader.addEventListener("complete", createjs.proxy(this._preloadComplete, (this)));
         this.preloader.addEventListener("error", createjs.proxy(this._preloadError, (this)));
         this.preloader.loadFile({

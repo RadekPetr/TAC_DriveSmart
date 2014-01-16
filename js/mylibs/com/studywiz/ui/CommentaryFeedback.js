@@ -34,11 +34,8 @@ var CommentaryFeedback = new Class({
         var ul = new Element('ul', {
             id : 'feedbackList'
         });
-        log("Data:");
-        log(this.options.data);
 
         Array.each(this.options.data, function(feedbackItem, index) {
-            log(feedbackItem);
             var elemID = "feedbackItem_" + index;
             var item = new Element('li', {
                 'html' : feedbackItem.text,

@@ -30,7 +30,6 @@ var Shape = new Class({
         this.options.parent = myParent;
 
         var data = this.options.data;
-        log("Data:", this.options, myOptions);
         var tempArray = data.split("#");
         this.options.type = tempArray[0];
         if (this.options.type == null) {
@@ -41,7 +40,7 @@ var Shape = new Class({
         this.shapesArray = new Array();
         this.container = null;
         this.shapes.push(tempArray[1]);
-        log(this.shapes);
+
     },
     myParent : function() {
         return this.options.parent;
@@ -57,14 +56,12 @@ var Shape = new Class({
     },
     add : function(parentTagID) {
         var myParent = document.getElementById(parentTagID);
-        log(myParent);        
-        
         var divID = 'container_shape';
         var svgID = 'svg_wrapper';
         var myDiv = myParent.getElement('div[id=' + divID + ']');
-        
-        if (myDiv == null) {        
-             var myDiv = new Element("div", {
+
+        if (myDiv == null) {
+            var myDiv = new Element("div", {
                 id : divID
             });
             this.container = myDiv;
@@ -76,13 +73,13 @@ var Shape = new Class({
                 xmlns : "http://www.w3.org/2000/svg",
                 version : "1.1",
                 width : Main.VIDEO_WIDTH + 'px',
-                height : Main.VIDEO_HEIGHT+ 'px'
+                height : Main.VIDEO_HEIGHT + 'px'
             });
 
             this.shapeWrapper.inject(this.container);
         } else {
-            this.container = myDiv;            
-            tempID = 'container_shape';         
+            this.container = myDiv;
+            tempID = 'container_shape';
             this.shapeWrapper = this.container.getElement('svg[id=' + svgID + ']');
         }
         this.shape = null;
@@ -98,7 +95,6 @@ var Shape = new Class({
             // this.hide();
             shapeElement.setStyles(this.options.svgStyle);
             shapeElement.addEvent('click', function(e) {
-                log('clicked' + this.options.id);
                 this.myParent().fireEvent("TIMELINE", {
                     type : "shape.event",
                     id : shapeID,
@@ -146,5 +142,4 @@ var Shape = new Class({
             ((poly[i].y <= pt.y && pt.y < poly[j].y) || (poly[j].y <= pt.y && pt.y < poly[i].y)) && (pt.x < (poly[j].x - poly[i].x) * (pt.y - poly[i].y) / (poly[j].y - poly[i].y) + poly[i].x) && ( c = !c);
         return c;
     }
-});
-
+}); 

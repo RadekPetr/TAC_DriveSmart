@@ -20,7 +20,6 @@ var User = new Class({
 
         this.userData = null;
         this.api = new Api(this);
-        log("defaultData 1 ", this.defaultData);
         this.concentrationLevel = 1;
         // DEBUG: To Empty on start
         if (Main.RESET_USER_DATA == true) {
@@ -31,11 +30,7 @@ var User = new Class({
         this.api.loadUserProgress();
     },
     testLoadedUserProgress : function(userProgressData) {
-
-        // TODO: handle "no data" for just created user and error whne no data is loaded
-        // TODO: hadle version conversions - copy data from old structure to a new one if necessary
-
-        log("testLoadedUserProgress", userProgressData);
+        // TODO: handle version conversions - copy data from old structure to a new one if necessary
         if (userProgressData == null || userProgressData == undefined || userProgressData == "no data") {
             this.userData = new Hash(this.defaultData);
             this._getUserData("concentration").info.extend({
@@ -49,11 +44,8 @@ var User = new Class({
 
             this.userData = new Hash(userProgressData);
             log("Loaded user progress from server", this.userData);
-            log("1");
             this.concentrationLevel = this._getUserData("concentration").info["level"];
-            log("2");
             var userSavedVersion = this.userData.info["app_version"];
-            log("3");
             log("The user saved app_version: ", userSavedVersion);
             //TODO: Check user data version too and if different from defaults handle that - merging ?
         }
@@ -65,7 +57,6 @@ var User = new Class({
     },
     saveProgress : function() {
         // save complete progress to server
-        // log("Saving: ", this.userData);
         this._saveCompleteUserData();
         // Save module progress
         this._saveModuleProgressData();
@@ -165,9 +156,6 @@ var User = new Class({
 
         Object.append(userSequence[0], currentSequenceData);
 
-       // log("***  userSequence[0]: ", userSequence[0], currentSequenceData);
-       // log("*** User data :", this.userData);
-       // log("*** Total score: ", this.getTotalScore());
 
         // and store the progress on server
         this.saveProgress();

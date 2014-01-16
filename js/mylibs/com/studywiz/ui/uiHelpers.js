@@ -18,8 +18,6 @@ var UIHelpers = new Class({
 
 // Static methods
 UIHelpers.progressBarSetup = function(progress, id) {
-    log("Progress sent: ", progress);
-
     var progressBarComponent = new Element('div', {
         id : "Progress_" + id,
         html : "",

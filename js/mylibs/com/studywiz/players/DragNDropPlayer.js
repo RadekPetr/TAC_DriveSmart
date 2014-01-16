@@ -103,7 +103,6 @@ var DragNDropPlayer = new Class({
     },
     _prepareAreas : function() {
         var data = this.options.data.areas;
-        log("DropZones:", data);
         Array.each(data, function(dropZone, index) {
             dropZone.player = new Shape(this, dropZone);
             dropZone.player.add(this.containerID);

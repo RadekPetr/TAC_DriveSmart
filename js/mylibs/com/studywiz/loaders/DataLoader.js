@@ -71,7 +71,7 @@ var DataLoader = new Class({
             }
         }.bind(this));
 
-        log(this.sequences);
+        //log(this.sequences);
 
         this.myParent().fireEvent("DATA", {
             type : "data.ready",

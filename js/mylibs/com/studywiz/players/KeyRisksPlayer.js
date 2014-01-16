@@ -77,14 +77,12 @@ var KeyRiskPlayer = new Class({
                 var allLoaded = this.draggables.every(function(item, index) {
                     return item.options.loaded == true;
                 });
-                log("Ready: ", allLoaded);
+
                 if (allLoaded == true) {
                     this._showDraggables();
                 }
                 break;
             case "shape.clicked":
-                log("Shape clicked ID: " + params.id, params);
-
                 if (params.element.retrieve("selected") == false) {
                     this.score++;
                     params.element.store("selected", true);
@@ -121,7 +119,6 @@ var KeyRiskPlayer = new Class({
     },
     _prepareAreas : function() {
         var data = this.options.data.areas;
-        log("Areas:", data);
         Array.each(data, function(area, index) {
             area.player = new Shape(this, area);
             area.player.add(this.containerID);
