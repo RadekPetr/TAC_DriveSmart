@@ -32,18 +32,14 @@ Adjust Key Risk areas  to match the images exactly
 
 randomize questions ?
 
-Sequence and module introls artworks ???
-Default text in main menu ?
-Intro ?
-iPad testing
-Progress bars style
+
 
 iPdat: http://stackoverflow.com/questions/11633929/readystate-issue-with-html5-video-elements-on-ios-safari 
 https://gist.github.com/millermedeiros/891886
 
 
 Video scanning6 - shared_uia08_next.mp4  - not fluent
-remove <Image>intros/sequence_intro.png</Image> from xml once seq intro is finalized
+
 
 -----------------------------------------------------------------
 DONE:

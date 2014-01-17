@@ -55,7 +55,7 @@ var SequencePlayer = new Class({
         this._prepareSequenceMedia(this.currentSequence);
         this.mediaLoader.options.next = 'Media.ready';
 
-        if (this.mediaLoader.getQueueLength() > 0 ) {
+        if (this.mediaLoader.getQueueLength() > 0) {
             this.mediaLoader.start(true);
         } else {
             // no media to preload so we can continue
@@ -69,18 +69,15 @@ var SequencePlayer = new Class({
         }
     },
     _nextStep : function() {
+        this._saveScoreForPreviousStep();
+
         // take a step and decide what to do with it
-        if (this.currentStep != null) {
-            var lastStepScore = this.currentStep.score;            
-            if (lastStepScore != null && lastStepScore != undefined) {
-                this.sequenceState.score.push(lastStepScore);
-            }
-        }
         if (this.currentSequence.length > 0) {
 
-            var step = this.currentSequence.shift();
-            this.currentStep = step;
+            this.currentStep = this.currentSequence.shift();
+            var step = this.currentStep;
             var stepType = step.attributes.fmt;
+
             switch (stepType) {
                 case "Menu":
                     var myContainerID = 'Menu.container';
@@ -108,7 +105,6 @@ var SequencePlayer = new Class({
                     score.inject(myDiv);
 
                     var overallProgressBar = UIHelpers.progressBarSetup(Main.userTracker.getTotalProgress() * 100.0, "overall");
-
                     UIHelpers.setClasses(overallProgressBar['holder'], "no-select overall_progress");
                     overallProgressBar['holder'].inject(myDiv);
 
@@ -528,6 +524,16 @@ var SequencePlayer = new Class({
         }
     },
     // ----------------------------------------------------------
+    _saveScoreForPreviousStep : function() {
+        if (this.currentStep != null) {
+            var previousStepScore = this.currentStep.score;
+            if (previousStepScore != null && previousStepScore != undefined) {
+                this.sequenceState.score.push(previousStepScore);
+            }
+        }
+    },
+
+    // ----------------------------------------------------------
     // This handles all timeline events and emulates the timeline
     handleNavigationEvent : function(params) {
 
@@ -563,21 +569,9 @@ var SequencePlayer = new Class({
             case "Video.cue":
                 this._checkCuePoints(this.currentStep);
                 break;
-            case "SequenceIntro.done":
-                this._stopPlayers();
-                this._removeImages();
-                this._removeButtons();
-                this._removeIntroContainers();
-                this._nextStep();
-                break;
             case 'KRFeedback.continue.done':
-                this._stopPlayers();
                 this._removeRisks();
-                this._removeImages();
-                this._removeButtons();
-                this._removeIntroContainers();
-                this._nextStep();
-                break;
+            case "SequenceIntro.done":
             case "Skip.done":
                 this._stopPlayers();
                 this._removeImages();
@@ -638,13 +632,7 @@ var SequencePlayer = new Class({
             case "End.Module.Continue.clicked":
             case "MainMenu.clicked":
             case "MainMenuFromIntro.clicked":
-                /* this._stopPlayers();
-                 this._removeVideos();
-                 this._removeImages();
-                 this._removeButtons();
-                 this._removeIntroContainers();
-                 this._removeInteractions();
-                 */
+                
                 this.reset();
                 this.repeating = false;
                 this.myParent().fireEvent("SEQUENCE", {
@@ -911,7 +899,7 @@ var SequencePlayer = new Class({
 
                     if (item.value != '' && this.sequenceState.completed != true) {
                         var filename = item.value;
-                     
+
                         var style = null;
                         var width = '100%';
                         var height = '100%';
@@ -981,7 +969,7 @@ var SequencePlayer = new Class({
                         this.mediaLoader.register(step.media.feedbackAudio.getLoaderInfo());
                     }
                     break;
-                case "ExpertAudio" :                    
+                case "ExpertAudio" :
                     if (item.value != '') {
                         var file = Main.PATHS.audioFolder + stripFileExtension(item.value);
                         step.media.expertAudio = new AudioPlayer(this, {
@@ -1152,8 +1140,8 @@ var SequencePlayer = new Class({
                     this.swiffs.push(step.media.swiff);
                     this.mediaLoader.register(step.media.swiff.getLoaderInfo());
                     break;
-                case "CuePoints":                  
-                    step.data = this._getCuePoints(item);                  
+                case "CuePoints":
+                    step.data = this._getCuePoints(item);
                     break;
                 default:
                 // nothing
@@ -1243,7 +1231,7 @@ var SequencePlayer = new Class({
         }
         this.recorder = null;
 
-        Array.each(this.swiffs, function(item, index) {            
+        Array.each(this.swiffs, function(item, index) {
             item.remove();
             item = null;
             delete item;
@@ -1336,7 +1324,7 @@ var SequencePlayer = new Class({
             top : '25%'
         };
     }.protect(),
-    _moduleIntroSetup : function(step) {       
+    _moduleIntroSetup : function(step) {
         var myContainerID = 'SequenceIntro.container';
         var myDiv = new Element("div", {
             id : myContainerID,
@@ -1535,7 +1523,7 @@ var SequencePlayer = new Class({
         Array.each(step.data.cuePoints, function(cuePoint, cupePointIndex) {
             if (currentTime >= cuePoint.start && currentTime < cuePoint.end) {
                 if (cuePoint.active == false) {
-                    cuePoint.active = true;                    
+                    cuePoint.active = true;
                     cuePoint.image.add(this.activeVideo.containerID);
                     cuePoint.image.show();
                 }
@@ -1543,13 +1531,13 @@ var SequencePlayer = new Class({
 
             if (currentTime >= cuePoint.end) {
                 if (cuePoint.active == true) {
-                    cuePoint.active = false;                    
+                    cuePoint.active = false;
                     cuePoint.image.remove();
                 }
             };
         }.bind(this));
     },
-    _addButton : function(buttonData) {        
+    _addButton : function(buttonData) {
         var buttonOptions = UIHelpers.getButtonOptions(buttonData['type']);
         if (buttonData['next']) {
             buttonOptions['next'] = buttonData['next'];
