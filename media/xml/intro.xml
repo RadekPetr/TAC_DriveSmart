@@ -4,11 +4,18 @@
 		<Step fmt="PlayVideo_cue">
 			<VideoCues  caption="TAC_WEBSITEINTRO.vtt" >intro/website_intro</VideoCues>
 			<CuePoints>
-				<CuePoint start="3" end="6" width="320px" height="240px" left ="10px" top="40px">intro/image1.jpg</CuePoint>
-				<CuePoint start="10" end="15" width="130px" height="130px" left ="300px" top="300px">intro/image2.jpg</CuePoint>
-				<CuePoint start="22" end="25" width="320px" height="240px" left ="0px" top="400px">intro/image3.jpg</CuePoint>
-				<CuePoint start="27" end="30" width="320px" height="240px" left ="300px" top="0px">intro/image4.jpg</CuePoint>
-				<CuePoint start="32" end="35" width="640px" height="480px" left ="10px" top="40px">intro/image5.jpg</CuePoint>
+				<CuePoint start="6" end="8.1" width="400px" height="238px" left ="290px" top="210px">intro/dashboard.png</CuePoint>
+				<CuePoint start="8.1" end="11.5" width="250px" height="371px" left ="410px" top="50px">intro/intro.png</CuePoint>
+				<CuePoint start="11.5" end="18.5" width="250px" height="371px" left ="410px" top="50px">intro/intro_2.png</CuePoint>
+				<CuePoint start="18.5" end="24.5" width="250px" height="371px" left ="410px" top="50px">intro/intro_3.png</CuePoint>
+				<CuePoint start="29" end="33.5" width="400px" height="238px" left ="220px" top="210px">intro/dashboard.png</CuePoint>
+				<CuePoint start="35" end="39" width="700px" height="115px" left ="0px" top="0px">intro/top_1.png</CuePoint>
+				<CuePoint start="39" end="43" width="700px" height="115px" left ="0px" top="0px">intro/top_2.png</CuePoint>
+				<CuePoint start="43" end="46" width="700px" height="144px" left ="0px" top="0px">intro/top_3.png</CuePoint>
+				<CuePoint start="46" end="53" width="700px" height="144px" left ="0px" top="0px">intro/top_4.png</CuePoint>
+				<CuePoint start="53" end="57" width="700px" height="144px" left ="0px" top="0px">intro/top_6.png</CuePoint>
+				<CuePoint start="57" end="62" width="700px" height="144px" left ="0px" top="0px">intro/top_5.png</CuePoint>
+				<CuePoint start="63" end="66" width="700px" height="144px" left ="0px" top="0px">intro/top_7.png</CuePoint>				
 			</CuePoints>
 		</Step>
 		<Step fmt="Continue"></Step>
