@@ -134,7 +134,7 @@ var VideoPlayer = new Class({
             }.bind(this));
         }
     },
-    registerPlaybackEvents : function() {
+    registerPlaybackEndEvent : function() {
         if (this.player != undefined) {
             this.player.on("ended", function() {
                 this.player.off("ended");
@@ -145,6 +145,17 @@ var VideoPlayer = new Class({
                 });
             }.bind(this));
         }
+    },
+    registerPlaybackStartEvent : function() {
+        this.player.on("play", function() {
+            log("Play event");
+            this.player.off("play");
+            this.myParent().fireEvent("TIMELINE", {
+                type : "video.started",
+                id : this.options.id,
+                next : "video.started"
+            });
+        }.bind(this));
     },
     registerCueEvents : function() {
         if (this.player != undefined) {
@@ -161,7 +172,7 @@ var VideoPlayer = new Class({
     start : function() {
         if (this.player != null) {
             this.player.play();
-            this.registerPlaybackEvents();
+            this.registerPlaybackEndEvent();
         }
     },
     // ---------------------------

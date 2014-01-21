@@ -553,6 +553,26 @@ var SequencePlayer = new Class({
                 });
                 this._updateUserProgress();
                 break;
+            case "Module.Intro.Video.done":
+                var text = new Element("div", {
+                    html : "Click continue to start exercises",
+                    'class' : 'module_intro_text no-select',
+                    'id' : 'continue_text'
+                });
+                text.inject(this.activeVideo.container);               
+                
+                this.activeVideo.registerPlaybackEndEvent();
+                this.activeVideo.registerPlaybackStartEvent();
+                break;
+            case "video.started":
+
+                var textDiv = document.getElementById('continue_text');
+                if (textDiv != null) {
+                    textDiv.destroy();
+                }
+
+                break;
+
             case  "Repeat.video.clicked":
                 this._stopPlayers();
                 this._removeImages();
@@ -632,7 +652,7 @@ var SequencePlayer = new Class({
             case "End.Module.Continue.clicked":
             case "MainMenu.clicked":
             case "MainMenuFromIntro.clicked":
-                
+
                 this.reset();
                 this.repeating = false;
                 this.myParent().fireEvent("SEQUENCE", {
@@ -1416,7 +1436,7 @@ var SequencePlayer = new Class({
             this._removeButtons();
             this._removeIntroContainers();
             this._hideInteractions();
-            step.media.moduleIntroVideo.options.next = '';
+            step.media.moduleIntroVideo.options.next = 'Module.Intro.Video.done';
             step.media.moduleIntroVideo.show();
 
             this._hideOtherVideos(step.media.moduleIntroVideo.playerID);
