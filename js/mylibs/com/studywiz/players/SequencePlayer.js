@@ -540,6 +540,7 @@ var SequencePlayer = new Class({
         switch (params.next) {
 
             case "PlayVideo_cue.done":
+                this._updateUserProgress();
                 this._removeImages();
                 this._removeButtons();
 
@@ -548,36 +549,71 @@ var SequencePlayer = new Class({
                     next : "Continue.clicked"
                 });
                 this._addButton({
-                    type : "Repeat",
+                    type : "Repeat video",
                     next : "Repeat.video.clicked"
                 });
-                this._updateUserProgress();
+
                 break;
             case "Module.Intro.Video.done":
+                this._updateUserProgress();
                 var text = new Element("div", {
                     html : "Click continue to start exercises",
                     'class' : 'module_intro_text no-select',
                     'id' : 'continue_text'
                 });
-                text.inject(this.activeVideo.container);               
-                
+                text.inject(this.activeVideo.container);
+
+                this._addButton({
+                    type : "Continue",
+                    next : "Continue.clicked"
+                });
+                this._addButton({
+                    type : "Main Menu",
+                    next : "MainMenuFromIntro.clicked"
+                });
+                this._addButton({
+                    type : "Repeat video",
+                    next : "Repeat.video.clicked"
+                });
                 this.activeVideo.registerPlaybackEndEvent();
                 this.activeVideo.registerPlaybackStartEvent();
                 break;
-            case "video.started":
+            case "Module.Group.Intro.Video.done":
+                // Already played the intro video so this time just play welcome sound
+                this._addButton({
+                    type : "Continue",
+                    next : "Continue.clicked"
+                });
+                this._addButton({
+                    type : "Main Menu",
+                    next : "MainMenuFromIntro.clicked"
+                });
 
+                this._addButton({
+                    type : "Repeat video",
+                    next : "Repeat.video.clicked"
+                });
+
+                if (this.fromMenu == true) {
+                    this.fromMenu = false;
+                    this._updateUserProgress();
+                }
+
+                break;
+            case "video.started":
+                if (this.currentStep.media.audio != undefined) {
+                    this.currentStep.media.audio.stop();
+                }
                 var textDiv = document.getElementById('continue_text');
                 if (textDiv != null) {
                     textDiv.destroy();
                 }
-
                 break;
-
             case  "Repeat.video.clicked":
                 this._stopPlayers();
                 this._removeImages();
                 //this._removeButtons();
-                this.currentStep.media.video.start();
+                this.activeVideo.start();
                 break;
             case "Media.ready":
             case "PlayVideo.done":
@@ -627,6 +663,7 @@ var SequencePlayer = new Class({
                 });
                 break;
             case "Continue.clicked":
+
                 this.reset();
                 this.repeating = false;
                 this.myParent().fireEvent("SEQUENCE", {
@@ -913,11 +950,7 @@ var SequencePlayer = new Class({
                 case "ModuleIntroVideo" :
                     // only setup the video in case it was not played yet .... currently no way to replay it anyway
 
-                    if (Main.MODULE_INTRO_ALWAYS) {
-                        this.sequenceState.completed = false;
-                    }
-
-                    if (item.value != '' && this.sequenceState.completed != true) {
+                    if (item.value != '') {
                         var filename = item.value;
 
                         var style = null;
@@ -934,7 +967,9 @@ var SequencePlayer = new Class({
                             captionFile : caption,
                             controls : true
                         });
+                        //  if (this.sequenceState.completed != true) {
                         this.mediaLoader.register(step.media.moduleIntroVideo.getLoaderInfo());
+                        // }
                         // we want to store this so all VideoJS player can be removed correctly (see remove() in VideoPlayer)
                         this.videos.push(step.media.moduleIntroVideo);
                     }
@@ -1360,10 +1395,8 @@ var SequencePlayer = new Class({
 
         var moduleTitle = UIHelpers.setMainPanel(this.moduleInfo.moduleTitle);
         UIHelpers.setClasses(moduleTitle, 'module-title no-select rotate90');
-        if (Main.MODULE_INTRO_ALWAYS) {
-            this.sequenceState.completed = false;
-        }
-        if (this.sequenceState.completed == true || step.media.moduleIntroVideo == undefined) {
+
+        if (step.media.moduleIntroVideo == undefined) {
             step.media.previewImage.options.style.width = '100%';
             step.media.previewImage.options.style.height = '100%';
             step.media.previewImage.options.style.left = 0;
@@ -1418,20 +1451,8 @@ var SequencePlayer = new Class({
                 step.media.audio.options.next = '';
                 step.media.audio.start();
 
-            } else {
-                // TODO: play different sound if getting to module intro from a sequence ?
             }
         } else {
-            // Play the Module Intro video
-            // allow skip ?
-            //this._removeImages();
-            // ModuleGroupIntroVideo
-
-            // check if monitored modules are started
-            // getModuleState (moduleID).finishedCount > 0
-            // if not then play the first module video
-            // else play the module intro
-
             this._stopPlayers();
             this._removeButtons();
             this._removeIntroContainers();
@@ -1440,27 +1461,45 @@ var SequencePlayer = new Class({
             step.media.moduleIntroVideo.show();
 
             this._hideOtherVideos(step.media.moduleIntroVideo.playerID);
-            step.media.moduleIntroVideo.start();
+            this.activeVideo.registerPlaybackStartEvent();
 
-            // Already played the intro video so this time just play welcome sound
-            this._addButton({
-                type : "Continue",
-                next : "Continue.clicked"
-            });
-            this._addButton({
-                type : "Main Menu",
-                next : "MainMenuFromIntro.clicked"
-            });
+            this.activeVideo.registerPlaybackEndEvent();
+            log("this.sequenceState.completed", this.sequenceState.completed);
+            if (this.sequenceState.completed == true) {
+                var text = new Element("div", {
+                    html : "Click continue to start exercises or Replay video to see again the module introduction",
+                    'class' : 'module_intro_text no-select',
+                    'id' : 'continue_text'
+                });
+                text.inject(this.activeVideo.container);
+                
+                
+                
+                // Show button to skip
+                // Already played the intro video so this time just play welcome sound
+                this._addButton({
+                    type : "Continue",
+                    next : "Continue.clicked"
+                });
+                this._addButton({
+                    type : "Main Menu",
+                    next : "MainMenuFromIntro.clicked"
+                });
 
-            // TODO: is this needed ?
-            if (this.fromMenu == true) {
-                this.fromMenu = false;
-                this._updateUserProgress();
+                this._addButton({
+                    type : "Repeat video",
+                    next : "Repeat.video.clicked"
+                });              
+
+                step.media.audio.options.next = '';
+                step.media.audio.start();                
+              
+
             } else {
-                this._updateUserProgress();
-                // TODO: play different sound if getting to module intro from a sequence ?
+                step.media.moduleIntroVideo.start();
             }
-            // TODO: if first time go to next step
+            this.fromMenu = false;
+
         }
     }.protect(),
     _moduleGroupIntroSetup : function(step) {
@@ -1471,27 +1510,11 @@ var SequencePlayer = new Class({
         this._removeButtons();
         this._removeIntroContainers();
         this._hideInteractions();
-        step.media.moduleIntroVideo.options.next = '';
+        step.media.moduleIntroVideo.options.next = 'Module.Group.Intro.Video.done';
         step.media.moduleIntroVideo.show();
 
         this._hideOtherVideos(step.media.moduleIntroVideo.playerID);
         step.media.moduleIntroVideo.start();
-
-        // Already played the intro video so this time just play welcome sound
-        this._addButton({
-            type : "Continue",
-            next : "Continue.clicked"
-        });
-        this._addButton({
-            type : "Main Menu",
-            next : "MainMenuFromIntro.clicked"
-        });
-
-        // TODO: is this needed ?
-        if (this.fromMenu == true) {
-            this.fromMenu = false;
-            this._updateUserProgress();
-        }
 
     }.protect(),
     _introductionSetup : function(step) {
@@ -1503,10 +1526,25 @@ var SequencePlayer = new Class({
         this._removeButtons();
         this._removeIntroContainers();
         this._hideInteractions();
+
+        if (this.sequenceState.completed == true) {
+            // Show button to skip
+            this._addButton({
+                type : "Continue",
+                next : "Continue.clicked"
+            });
+        }
+
         step.media.video.options.next = 'PlayVideo_cue.done';
         step.media.video.registerCueEvents();
         step.media.video.show();
         this._hideOtherVideos(step.media.video.playerID);
+
+        if (this.fromMenu == true) {
+            this.fromMenu = false;
+            // Only update the progress when the video is complete
+            //this._updateUserProgress();
+        }
 
     }.protect(),
     _getCuePoints : function(item) {

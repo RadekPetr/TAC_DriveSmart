@@ -88,6 +88,12 @@ UIHelpers.getButtonOptions = function(buttonType) {
             next : "Repeat.clicked",
             'class' : "button position_3 pane blue"
         },
+        "Repeat video" : {
+            id : "button_" + buttonType,
+            text : "Repeat video",
+            next : "Repeat.video.clicked",
+            'class' : "button position_3 pane blue"
+        },
         "Done" : {
             id : "button_" + buttonType,
             text : "Done",

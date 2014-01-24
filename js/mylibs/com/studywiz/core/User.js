@@ -156,18 +156,28 @@ var User = new Class({
 
         Object.append(userSequence[0], currentSequenceData);
 
-
         // and store the progress on server
         this.saveProgress();
     },
     getUnfinishedSequences : function(moduleID) {
         var sequencesInModule = this._getUserData(moduleID).data;
-        var unfinishedSequences = sequencesInModule.filter(function(item, index) {
-            return item.completed == false;
-        });
+        log("sequencesInModule", sequencesInModule);
+
+        if ( moduleID == "intro" && Main.sequencePlayer.fromMenu == true) {
+            var unfinishedSequences = sequencesInModule.filter(function(item, index) {
+                return (item.completed == false|| item.completed == true);
+            });
+        } else {
+            var unfinishedSequences = sequencesInModule.filter(function(item, index) {
+                return item.completed == false;
+            });
+        }
+        
+        
         if (unfinishedSequences.length == 0) {
             log("Module is Finished");
-        }     
+        }
+        log("unfinishedSequences", unfinishedSequences);
         return unfinishedSequences;
     },
     getModuleStarted : function(moduleID) {
@@ -226,11 +236,11 @@ var User = new Class({
         var totalFinishedCount = 0;
         var totalCount = 0;
         Array.each(moduleIDs, function(moduleID, index) {
-            var progressObj = this.getModuleState(moduleID);           
+            var progressObj = this.getModuleState(moduleID);
             totalCount += progressObj.total;
             totalFinishedCount += progressObj.finishedCount;
         }.bind(this));
-        log ("Overall progress: ", totalFinishedCount / totalCount);
+        log("Overall progress: ", totalFinishedCount / totalCount);
         return (totalFinishedCount / totalCount);
     },
     getModuleScore : function(moduleID) {

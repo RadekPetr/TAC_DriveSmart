@@ -97,16 +97,13 @@ Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '1.0.3';
-Main.BUILD = '2014/01/15 build 1';
+Main.BUILD = '2014/01/24 build 1';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;
 
 // Show hide debug panel and ignore lock status
 Main.DEBUG = true;
-
-// Play module intro video everytime - normally only the first time
-Main.MODULE_INTRO_ALWAYS = false;
 
 // Saves empty progress data on startup if true
 Main.RESET_USER_DATA = false;

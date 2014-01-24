@@ -13,7 +13,7 @@ var VideoPlayer = new Class({
         },
         width : '100%',
         height : '100%',
-        'class' : 'video-js vjs-default-skin',
+        'class' : 'video-js vjs-default-skin vjs-big-play-hidden',
         poster : '',
         id : 'element.id',
         next : 'next.action',
@@ -136,7 +136,7 @@ var VideoPlayer = new Class({
     },
     registerPlaybackEndEvent : function() {
         if (this.player != undefined) {
-            this.player.on("ended", function() {
+             this.player.on("ended", function() {
                 this.player.off("ended");
                 this.myParent().fireEvent("TIMELINE", {
                     type : "video.finished",
@@ -148,7 +148,6 @@ var VideoPlayer = new Class({
     },
     registerPlaybackStartEvent : function() {
         this.player.on("play", function() {
-            log("Play event");
             this.player.off("play");
             this.myParent().fireEvent("TIMELINE", {
                 type : "video.started",
