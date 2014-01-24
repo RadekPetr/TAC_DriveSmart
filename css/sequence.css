@@ -19,3 +19,7 @@
 	font-size: 1.2em;
 	color: #FFFFFF;
 }
+
+.vjs-default-skin.vjs-big-play-hidden .vjs-big-play-button {
+	display: none;
+}
