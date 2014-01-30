@@ -7,15 +7,11 @@
 	-ms-user-select: none;
 	user-select: none;
 }
-
 .blur {
 	filter: url(filter.svg#blur);
 	-webkit-filter: blur(15px);
-	-ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius='15', MakeShadow='false')";
-	
+	-ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius='15', MakeShadow='false')";	
 }
-
-
 #drivesmart {
 	font-family: 'Quattrocento Sans', sans-serif;
 	font-size: 16px;
@@ -56,7 +52,6 @@
 	font-family: 'Museo700Regular';
 	font-weight: normal;
 }
-
 .module-title-dashboard {
 	font-family: 'Museo700Regular';
 	font-size: 3.5em;
@@ -68,7 +63,6 @@
 	top: 20px;
 	width: 300px;
 }
-
 .module-title-loader {
 	font-family: 'Museo700Regular';
 	font-size: 3.5em;
@@ -80,24 +74,20 @@
 	top: 190px;
 	width: 300px;
 }
-
 h1 {
 	font-family: 'Museo700Regular';
 	font-weight: normal;
 	margin: 0 0 0.2em;
 }
-
 h2 {
 	font-family: 'Museo700Regular';
 	color: #D7B000;
 	font-weight: normal;
 	margin: 0;
 }
-
 .panel {
 	box-shadow: 0 0 10px #404040;
 }
-
 .pane {
 	margin: 20px 0;
 	-webkit-box-shadow: #404040 0 0 10px;
@@ -110,11 +100,9 @@ h2 {
 	border-radius: 5px;
 	color: #000
 }
-
 .pane.menu {
 	margin: 10px 0;
 }
-
 .pane.orange {
 	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f28411), color-stop(100%, #bf5b00));
 	background-image: -webkit-linear-gradient(top, #f28411, #bf5b00);

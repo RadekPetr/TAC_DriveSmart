@@ -21,8 +21,8 @@
 	min-height: 50px;
 }
 
-.button:hover {
-	background-color: #FF9900;
+.button:hover {	
+	border: 2px solid #999;
 }
 
 .button:active {
@@ -34,23 +34,6 @@
 .button:focus {
 	outline: 0;
 	background: #fafafa;
-}
-
-.button:before {
-	background: #ccc;
-	background: rgba(0,0,0,.1);
-	float: left;
-	width: 1em;
-	text-align: center;
-	font-size: 1.5em;
-	margin: 0 1em 0 -1em;
-	padding: 0 .2em;
-	-moz-box-shadow: 1px 0 0 rgba(0,0,0,.5), 2px 0 0 rgba(255,255,255,.5);
-	-webkit-box-shadow: 1px 0 0 rgba(0,0,0,.5), 2px 0 0 rgba(255,255,255,.5);
-	box-shadow: 1px 0 0 rgba(0,0,0,.5), 2px 0 0 rgba(255,255,255,.5);
-	-moz-border-radius: .15em 0 0 .15em;
-	-webkit-border-radius: .15em 0 0 .15em;
-	border-radius: .15em 0 0 .15em;
 }
 
 .position_1 {

@@ -1,7 +1,6 @@
 .module_progress_intro {
 	color: #FFFFFF;
 }
-
 .module_intro_text {
 	font-family: 'Museo700Regular';
 	font-size: 2em;
@@ -14,12 +13,10 @@
 	top: 200px;
 	width: 500px;
 }
-
 .sequence-title {
 	font-size: 1.2em;
 	color: #FFFFFF;
 }
-
 .vjs-default-skin.vjs-big-play-hidden .vjs-big-play-button {
 	display: none;
 }
