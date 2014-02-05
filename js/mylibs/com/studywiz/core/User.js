@@ -31,8 +31,9 @@ var User = new Class({
     },
     testLoadedUserProgress : function(userProgressData) {
         // TODO: handle version conversions - copy data from old structure to a new one if necessary
+        var defaultDataHash = new Hash(this.defaultData);
         if (userProgressData == null || userProgressData == undefined || userProgressData == "no data") {
-            this.userData = new Hash(this.defaultData);
+            this.userData = defaultDataHash;
             this._getUserData("concentration").info.extend({
                 level : this.concentrationLevel
             });
@@ -47,7 +48,15 @@ var User = new Class({
             this.concentrationLevel = this._getUserData("concentration").info["level"];
             var userSavedVersion = this.userData.info["app_version"];
             log("The user saved app_version: ", userSavedVersion);
+
             //TODO: Check user data version too and if different from defaults handle that - merging ?
+            var defaultVersion = defaultDataHash.info["app_version"];
+            if (defaultVersion != userSavedVersion) {
+                log("Saved user progress is different version from default");
+               
+                //this.userData.info.app_version = Main.VERSION;
+            }
+
         }
         log("Progress data of current user: ", this.userData);
         log('All done .... starting now');
@@ -62,6 +71,9 @@ var User = new Class({
         this._saveModuleProgressData();
     },
     _saveCompleteUserData : function() {
+        // test
+        //this.userData.modules.intro = {};//( 'intro' );
+
         var json_data = JSON.encode(this.userData);
         //var compressedData = lzw_encode(json_data);
         var compressedData = this.api.encode(json_data);
@@ -163,17 +175,16 @@ var User = new Class({
         var sequencesInModule = this._getUserData(moduleID).data;
         log("sequencesInModule", sequencesInModule);
 
-        if ( moduleID == "intro" && Main.sequencePlayer.fromMenu == true) {
+        if (moduleID == "intro" && Main.sequencePlayer.fromMenu == true) {
             var unfinishedSequences = sequencesInModule.filter(function(item, index) {
-                return (item.completed == false|| item.completed == true);
+                return (item.completed == false || item.completed == true);
             });
         } else {
             var unfinishedSequences = sequencesInModule.filter(function(item, index) {
                 return item.completed == false;
             });
         }
-        
-        
+
         if (unfinishedSequences.length == 0) {
             log("Module is Finished");
         }
@@ -193,14 +204,24 @@ var User = new Class({
     },
     getModuleState : function(moduleID) {
 
-        var sequencesInModule = this._getUserData(moduleID).data;
-        var unfinishedSequences = sequencesInModule.filter(function(item, index) {
-            return item.completed == false && item.trackProgress == true;
-        });
+       // var moduleIDs = new Hash(this.userData.modules).getKeys();
+        //log(moduleID, "Module IDs", moduleIDs);
 
-        var introSequences = sequencesInModule.filter(function(item, index) {
-            return item.trackProgress == false;
-        });
+        var sequencesInModule = this._getUserData(moduleID).data;
+
+        var unfinishedSequences = new Array();
+        var introSequences = new Array();
+
+        if (sequencesInModule == undefined) {
+            var sequencesInModule = new Array();
+        } else {
+            unfinishedSequences = sequencesInModule.filter(function(item, index) {
+                return item.completed == false && item.trackProgress == true;
+            });
+            introSequences = sequencesInModule.filter(function(item, index) {
+                return item.trackProgress == false;
+            });
+        }
 
         var progressObj = {};
         // Minus the ModuleIntro
@@ -233,6 +254,7 @@ var User = new Class({
     },
     getTotalProgress : function() {
         var moduleIDs = new Hash(this.userData.modules).getKeys();
+        //log ("Module IDs",moduleIDs );
         var totalFinishedCount = 0;
         var totalCount = 0;
         Array.each(moduleIDs, function(moduleID, index) {
@@ -345,6 +367,14 @@ var User = new Class({
             log("NULLLLLLLL");
             return null;
         }
+
+    },
+    _mergeOldData: function (oldData, newData){
+        var newModuleIDs = newData.modules.getKeys();
+        newModuleIDs.each(function(item, index){
+           // TODO crawl and copy values or items
+        }
+    );
 
     }
 });

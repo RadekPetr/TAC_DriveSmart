@@ -612,6 +612,7 @@ var SequencePlayer = new Class({
             case  "Repeat.video.clicked":
                 this._stopPlayers();
                 this._removeImages();
+
                 //this._removeButtons();
                 this.activeVideo.start();
                 break;
@@ -1466,15 +1467,6 @@ var SequencePlayer = new Class({
             this.activeVideo.registerPlaybackEndEvent();
             log("this.sequenceState.completed", this.sequenceState.completed);
             if (this.sequenceState.completed == true) {
-                var text = new Element("div", {
-                    html : "Click continue to start exercises or Replay video to see again the module introduction",
-                    'class' : 'module_intro_text no-select',
-                    'id' : 'continue_text'
-                });
-                text.inject(this.activeVideo.container);
-                
-                
-                
                 // Show button to skip
                 // Already played the intro video so this time just play welcome sound
                 this._addButton({
@@ -1486,14 +1478,7 @@ var SequencePlayer = new Class({
                     next : "MainMenuFromIntro.clicked"
                 });
 
-                this._addButton({
-                    type : "Repeat video",
-                    next : "Repeat.video.clicked"
-                });              
-
-                step.media.audio.options.next = '';
-                step.media.audio.start();                
-              
+                step.media.moduleIntroVideo.start();
 
             } else {
                 step.media.moduleIntroVideo.start();
