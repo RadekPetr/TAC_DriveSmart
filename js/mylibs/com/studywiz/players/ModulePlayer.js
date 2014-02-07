@@ -109,7 +109,7 @@ var ModulePlayer = new Class({
     },
     playSequence : function(sequenceID) {
         this._prepareSequencePlayer();
-        this._updateConcentrationLevel();
+        this._updateConcentrationLevel(sequenceID);
         this.options.currentSequenceID = sequenceID;
         Main.sequencePlayer.start(this.sequences[sequenceID]);
     },
@@ -121,7 +121,7 @@ var ModulePlayer = new Class({
             sequences : this.sequences
         };
     },
-    _updateConcentrationLevel : function() {
+    _updateConcentrationLevel : function(sequenceID) {
         if (this.options.id == "concentration") {
             var level = Main.userTracker.getConcentrationLevel(parseInt(sequenceID));
             if (Main.sequencePlayer.conLevel < level) {
