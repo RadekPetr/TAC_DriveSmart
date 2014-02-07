@@ -73,7 +73,7 @@ var ModulePlayer = new Class({
                             if (moduleGroupStarted == true) {
                                 if (unfinishedSequences[0].id == -1) {
                                     unfinishedSequences[0].completed = true;
-                                    
+
                                 }
                             };
                             unfinishedSequences = Main.userTracker.getUnfinishedSequences(this.options.id);
@@ -108,25 +108,10 @@ var ModulePlayer = new Class({
         return IDs;
     },
     playSequence : function(sequenceID) {
-
+        this._prepareSequencePlayer();
+        this._updateConcentrationLevel();
         this.options.currentSequenceID = sequenceID;
-        if (Main.sequencePlayer == null) {
-            log("ERROR - Sequence player does not exist");
-        } else {
-            Main.sequencePlayer.reset();
-            Main.sequencePlayer.options.parent = this;
-        }
-
-        var currentSequence = this.sequences[this.options.currentSequenceID];
-
-        if (this.options.id == "concentration") {
-            var level = Main.userTracker.getConcentrationLevel(parseInt(sequenceID));
-            if (Main.sequencePlayer.conLevel < level) {
-                Main.sequencePlayer.playConLevelAudio = true;
-            }
-            Main.sequencePlayer.conLevel = level;
-        }
-        Main.sequencePlayer.start(currentSequence);
+        Main.sequencePlayer.start(this.sequences[sequenceID]);
     },
     getModuleInfo : function() {
         return {
@@ -135,5 +120,22 @@ var ModulePlayer = new Class({
             currentSequenceID : this.options.currentSequenceID,
             sequences : this.sequences
         };
+    },
+    _updateConcentrationLevel : function() {
+        if (this.options.id == "concentration") {
+            var level = Main.userTracker.getConcentrationLevel(parseInt(sequenceID));
+            if (Main.sequencePlayer.conLevel < level) {
+                Main.sequencePlayer.playConLevelAudio = true;
+            }
+            Main.sequencePlayer.conLevel = level;
+        }
+    },
+    _prepareSequencePlayer : function() {
+        if (Main.sequencePlayer == null) {
+            log("ERROR - Sequence player does not exist");
+        } else {
+            Main.sequencePlayer.reset();
+            Main.sequencePlayer.options.parent = this;
+        }
     }
 });
