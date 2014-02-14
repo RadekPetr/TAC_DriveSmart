@@ -44,7 +44,7 @@ var AudioPlayer = new Class({
     // ----------------------------------------------------------
     start : function() {
         if (this.preloaded == false) {
-            if (Browser.Platform.ios == true) {
+            if (Browser.Platform.ios == true || Browser.Platform.android == true) {
                 this._playSound();
             } else {
                 log("++ Not preloaded yet - Loading Sound" + this.options.src);
@@ -103,7 +103,7 @@ var AudioPlayer = new Class({
     // ----------------------------------------------------------
     _preloadComplete : function(event) {
         // log("++ Audio Preloaded: " + this.options.id);
-        if (Browser.Platform.ios == true) {
+        if (Browser.Platform.ios == true || Browser.Platform.android == true) {
             this.preloaded = false;
         } else {
             this.preloaded = true;
@@ -125,7 +125,7 @@ var AudioPlayer = new Class({
             type : 'AUDIO'
         };
 
-        if (Browser.Platform.ios == true) {
+        if (Browser.Platform.ios == true || Browser.Platform.android == true) {
             loaderInfo[this.options.id].progress = 1;
             log(" iOS device - ready");
         }
