@@ -278,7 +278,7 @@ var VideoPlayer = new Class({
 
         // in iOS buffering does not start until play is clicked, so skip preloading
         // http://stackoverflow.com/questions/11633929/readystate-issue-with-html5-video-elements-on-ios-safari
-        if (Browser.Platform.ios == true) {
+        if (Browser.Platform.ios == true || Browser.Platform.android == true) {
             this.isReady == true;
             // this.player.off();
             log(" iOS device - ready");
