@@ -3,10 +3,12 @@
  */
 
 // -----------------------------
+
 var Main = new Class({
     Implements : [Options, Events],
     // ----------------------------------------------------------
     initialize : function(isDev) {
+
         log("****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
 
         if (isDev == true) {
@@ -26,13 +28,22 @@ var Main = new Class({
     },
     // ----------------------------------------------------------
     start : function() {
+        var browserTest = this._checkBrowser();
+        if (browserTest.supported == true) {
+            new Api(this).saveLog('info', "****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
+            Main.sequencePlayer = new SequencePlayer(this, {});
+            this.modules = new Modules({});
+            this.modules.start();
+        } else {
+            var text = new Element("div", {
+                html : browserTest.message,
+                'class' : 'browser_warning_text no-select',
+                'id' : 'unsupported_text'
+            });
 
-        // TODO: detect Browser versions IE9+,...
+            text.inject($m(Main.DIV_ID));
 
-        new Api(this).saveLog('info', "****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
-        Main.sequencePlayer = new SequencePlayer(this, {});
-        this.modules = new Modules({});
-        this.modules.start();
+        }
     },
     // ----------------------------------------------------------
     // PRIVATE - load external js libraries so they are available to the project
@@ -66,6 +77,19 @@ var Main = new Class({
 
         }
     },
+    _checkBrowser : function() {
+        var browserReport = {
+            supported : true,
+            message : "isBrowserOk"
+        };
+        if (Browser.ie) {
+            if (Browser.version < 9) {
+                browserReport.message = "You seem to be running an outdated version of Internet browser on your computer (Internet Explorer " + Browser.version + "). <br/>Drive Smart requires Internet Explorer 9 or newer.<br/>   <br/> Please visit <a href=http://windows.microsoft.com/en-us/internet-explorer/download-ie>Microsoft website</a> to get the latest version. ";
+                browserReport.supported = false;
+            }
+        }
+        return browserReport;
+    }
 });
 
 // ---------------------
@@ -97,7 +121,7 @@ Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '1.0.4';
-Main.BUILD = '2014/02/05 build 1';
+Main.BUILD = '2014/02/14 build 1';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = false;
@@ -111,7 +135,7 @@ Main.RESET_USER_DATA = false;
 // maximum risk selectors
 Main.MAX_KEY_RISK_TRIES = 5;
 
-// maximum risk selectors
+// Module group intro for modules listed bellow
 Main.MODULE_GROUP = ['kaps', 'scanning'];
 
 // Paths definitions
@@ -206,3 +230,4 @@ Main.COLORS = ['blue', 'green', 'orange'];
  };
  }
  */
+
