@@ -845,6 +845,10 @@ scoreObject.showTotals = function() {
 			}
 		}
 	} else {
+		if ((showNumberScore == null) || (showNumberScore == 0) || isNaN(showNumberScore)) {
+			showNumberScore = 0;
+		}
+		
 		/// score is showNumberScore ?
 		ExternalInterface.call("log","Level 4 score ",showNumberScore);
 		ExternalInterface.call("swiffFinished", showNumberScore);
