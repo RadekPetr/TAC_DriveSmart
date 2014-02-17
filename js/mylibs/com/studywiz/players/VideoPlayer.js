@@ -172,6 +172,8 @@ var VideoPlayer = new Class({
         if (this.player != null) {
             this.player.play();
             this.registerPlaybackEndEvent();
+        } else {
+            this.preload();
         }
     },
     // ---------------------------
