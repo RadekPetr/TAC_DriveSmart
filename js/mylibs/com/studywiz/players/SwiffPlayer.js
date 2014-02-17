@@ -10,7 +10,8 @@ var SwiffPlayer = new Class({
             height : Main.VIDEO_HEIGHT + 'px',
             params : {
                 allowScriptAccess : 'always',
-                wmode : 'transparent'
+                wmode : 'transparent',
+                autoplay: 'true'
             },
             callBacks : {
                 isReady : this.isReady
@@ -165,7 +166,8 @@ var SwiffPlayer = new Class({
         this.add(Main.DIV_ID);
         // This is necessary for  IE as the flash only starts loading when visible ...
         this.container.setStyles({
-            'visibility' : 'visible'
+            'visibility' : 'visible',
+            'opacity': '1'
         });
 
     }
