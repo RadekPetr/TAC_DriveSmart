@@ -17,11 +17,12 @@
 	-webkit-box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
 	box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
 	position: absolute;
-	min-width: 140px
+	min-width: 140px;
+	min-height: 50px;
 }
 
-.button:hover {
-	background-color: #FF9900;
+.button:hover {	
+	border: 2px solid #999;
 }
 
 .button:active {
@@ -35,40 +36,23 @@
 	background: #fafafa;
 }
 
-.button:before {
-	background: #ccc;
-	background: rgba(0,0,0,.1);
-	float: left;
-	width: 1em;
-	text-align: center;
-	font-size: 1.5em;
-	margin: 0 1em 0 -1em;
-	padding: 0 .2em;
-	-moz-box-shadow: 1px 0 0 rgba(0,0,0,.5), 2px 0 0 rgba(255,255,255,.5);
-	-webkit-box-shadow: 1px 0 0 rgba(0,0,0,.5), 2px 0 0 rgba(255,255,255,.5);
-	box-shadow: 1px 0 0 rgba(0,0,0,.5), 2px 0 0 rgba(255,255,255,.5);
-	-moz-border-radius: .15em 0 0 .15em;
-	-webkit-border-radius: .15em 0 0 .15em;
-	border-radius: .15em 0 0 .15em;
-}
-
 .position_1 {
-	left: 480px;
-	top: 415px
+	left: 760px;
+	top: 470px
 }
 
 .position_2 {
-	left: 480px;
-	top: 370px
+	left: 760px;
+	top: 395px
 }
 
 .position_3 {
-	left: 480px;
-	top: 325px
+	left: 760px;
+	top: 320px
 }
 
 .position_4 {
-	left: 20px;
-	top: 415px;
+	left: 520px;
+	top: 470px;
 }
 

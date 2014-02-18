@@ -8,9 +8,16 @@ var DragNDropPlayer = new Class({
     options : {
         data : null,
         draggable_IDs : new Array("4wd", "bike", "van", "car", "cyclist", "pedestrian", "pole", "bin"),
-        id : "DragNDropPlayer",
+        id : "drag_n_drop",
         parent : null,
-        next : ""
+        next : "",
+        style : {
+            left : '30px',
+            top : '25px',
+            position : 'absolute',
+            width : '100%',
+            height : '100%'
+        }
 
     },
     initialize : function(myParent, myOptions) {
@@ -96,7 +103,6 @@ var DragNDropPlayer = new Class({
     },
     _prepareAreas : function() {
         var data = this.options.data.areas;
-        log("DropZones:", data);
         Array.each(data, function(dropZone, index) {
             dropZone.player = new Shape(this, dropZone);
             dropZone.player.add(this.containerID);

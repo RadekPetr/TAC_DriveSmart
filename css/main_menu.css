@@ -1,58 +1,55 @@
 .module-description {
-	color: #EAC749;
-	position: absolute;
-	font-size: 0.85em;
-	text-align: left;
-	line-height: 130%;
-	width: 255px;
-	background-color: #464646;
 	float: left;
-	border-radius: 1em 1em 1em 1em;
-	-moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
-	-webkit-border-radius: 0.5em 0.5em 0.5em 0.5em;
-	padding: 8px 8px 8px 8px;
-	background: rgba(0, 0, 0, 0.6);
-}
-.module-preview img {
-	clip: rect(0px, 140px, 107px, 0px);
-}
-.main-title {
+	font-size: 0.9em;
+	left: 400px;
+	line-height: 125%;
+	min-height: 70px;
+	padding: 8px;
 	position: absolute;
-	color: #ff9900;
-	font-size: 2.5em;
-	text-align: center;
+	text-align: left;
+	top: 335px;
+	width: 500px;
 }
-.module-title {
+.module-preview {
+	left: 495px;
 	position: absolute;
-	color: #ff9900;
-	font-size: 3em;
+	top: 110px;
+	width: 310px;
 }
-.sequence-title {
+
+.overall_score {
+	left: 410px;
 	position: absolute;
-	color: #EAC749;
-	font-size: 1em;
+	top: 460px;
 }
-.menu_item {
-	font-size: 1em;
-	color: #EAC749;
+
+.overall_progress {
+	left: 410px;
+	position: absolute;
+	top: 500px;
+}
+
+.menu_item {	
+	font-family: Museo700;
 	font-size: 1em;
 	text-align: left;
-	padding: 5px;
+	padding-top: 14px;
+	padding-bottom: 0;
+	padding-right: 15px;
+	padding-left: 15px;
+	opacity: 1;
+	cursor: pointer;
 }
 
 .menu_item:hover {
-	color: #FFFF99;
+	
 }
-.menu_item_locked {
-	font-size: 1em;
-	color: #EAC749;
-	font-size: 1em;
-	text-align: left;
-	padding: 5px;
+.menu_item.locked {
+
 }
 
 .menu_item_locked:hover {
-	color: #EAC749;
+	
 }
 .progress_title {
 	position: relative;
@@ -61,4 +58,31 @@
 	text-align: left;
 }
 
+.rotate90 {
+	-msTransform: rotate(90deg); /* IE 9 */
+	-ms-transform: rotate(90deg);
+	-webkit-transform: rotate(90deg); /* Safari and Chrome */
+	-moz-transform: rotate(90deg); /* Firefox */
+	-o-transform: rotate(90deg); /* Opera */
+	transform: rotate(90deg);
+}
 
+.horizontal_dotted_line {
+	border-bottom: 4px dashed #FFFFFF;
+	position: absolute;
+}
+.vertical_dotted_line {
+	border-left: 4px dashed #FFFFFF;
+	position: absolute;
+}
+
+
+.browser_warning_text {
+    font-family: 'Museo700Regular';   
+    font-weight: normal;
+    left: 100px; 
+    margin: 0 0 0.2em;
+    position: absolute;
+    text-align: center;
+    top: 200px; 
+}

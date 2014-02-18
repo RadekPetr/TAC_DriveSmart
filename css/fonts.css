@@ -24,11 +24,11 @@
 
 @font-face {
     font-family: 'Museo700Regular';
-    src: url('fonts/Museo700-Regular-webfont.eot');
-    src: url('fonts/Museo700-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/Museo700-Regular-webfont.woff') format('woff'),
-         url('fonts/Museo700-Regular-webfont.ttf') format('truetype'),
-         url('/fontsMuseo700-Regular-webfont.svg#Museo700Regular') format('svg');
+    src: url('font/Museo700-Regular-webfont.eot');
+    src: url('font/Museo700-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/Museo700-Regular-webfont.woff') format('woff'),
+         url('font/Museo700-Regular-webfont.ttf') format('truetype'),
+         url('/font/Museo700-Regular-webfont.svg#Museo700Regular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -37,5 +37,5 @@
 
 @font-face {
 	font-family: 'Candara';
-	src: url('fonts/candara.ttf') format('truetype');
+	src: url('font/candara.ttf') format('truetype');
 }

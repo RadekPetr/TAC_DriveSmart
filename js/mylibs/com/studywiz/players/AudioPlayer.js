@@ -14,16 +14,20 @@ var AudioPlayer = new Class({
         this.options.parent = myParent;
         this.preloaded = false;
         this.soundInstance = null;
-        this.preloader = new createjs.PreloadJS();
-        this.preloader.installPlugin(createjs.SoundJS);
+        this.preloader = new createjs.LoadQueue();
+        this.preloader.parent = this;
+
+        createjs.Sound.alternateExtensions = ["mp3", "ogg"];
+        createjs.FlashPlugin.swfPath = Main.PATHS.flashFolder;
+        createjs.Sound.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin, createjs.FlashPlugin]);
+
+        //createjs.Sound.registerPlugin(createjs.FlashPlugin);
+
+        this.preloader.installPlugin(createjs.Sound);
+
         // TODO: handle these events handleFileError, handleProgress
         //this.preloader.onFileError = this.handleFileError();
-        /*  this.preloader.onProgress = function() {
-         if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
-         this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
-         }
-         }.bind(this)
-         */
+
     },
     myParent : function() {
         return this.options.parent;
@@ -35,35 +39,36 @@ var AudioPlayer = new Class({
     // ----------------------------------------------------------
     start : function() {
         if (this.preloaded == false) {
-            //log("++ Not preloaded yet - Loading Sound" + this.options.src);
-            this.preloader.loadFile({
-                src : this.options.src,
-                id : this.options.id
-            }, false);
-            this.preloader.load();
-            this.preloader.onComplete = this._playSound();
+            if (Browser.Platform.ios == true || Browser.Platform.android == true) {
+                this._playSound();
+            } else {
+                log("++ Not preloaded yet - Loading Sound" + this.options.src);
+                this.preloader.loadFile({
+                    src : this.options.src,
+                    id : this.options.id
+                }, false);
+                this.preloader.load();
+            }
+
         } else {
             this._playSound();
         }
     },
-
     // ----------------------------------------------------------
     stop : function() {
         if (this.soundInstance != null) {
             this.soundInstance.stop();
         }
-
-        // createjs.SoundJS.stop();
     },
     // ----------------------------------------------------------
     preload : function() {
-        //log("++ Audio Preload started: " + this.options.id)
+        this.preloader.addEventListener("complete", createjs.proxy(this._preloadComplete, (this)));
+        this.preloader.addEventListener("error", createjs.proxy(this._preloadError, (this)));
         this.preloader.loadFile({
             src : this.options.src,
             id : this.options.id
         }, false);
         this.preloader.load();
-        this.preloader.onComplete = this._preloadComplete();
     },
     id : function() {
         return this.options.id;
@@ -72,29 +77,29 @@ var AudioPlayer = new Class({
     // PRIVATE - handle load complete
     _playSound : function() {
         log('Play sound: ' + this.options.id + " " + this.options.src);
-        if (!createjs.SoundJS.checkPlugin(true)) {
+        if (!createjs.Sound.isReady()) {
             alert('Sound plugin issue');
         } else {
-
-            log(this.preloader);
-
-            this.soundInstance = createjs.SoundJS.play(this.options.id);
-            log(this.soundInstance);
-
-            this.soundInstance.onComplete = function() {
-                this.myParent().fireEvent("TIMELINE", {
-                    type : "audio.finished",
-                    id : this.options.id,
-                    next : this.options.next
-                });
-            }.bind(this);
+            this.soundInstance = createjs.Sound.play(this.options.id);
+            this.soundInstance.addEventListener("complete", createjs.proxy(this._onSoundComplete, (this)));
         }
     }.protect(),
+    _onSoundComplete : function(event) {
+        this.myParent().fireEvent("TIMELINE", {
+            type : "audio.finished",
+            id : this.options.id,
+            next : this.options.next
+        });
+    },
     // ----------------------------------------------------------
-    _preloadComplete : function() {
+    _preloadComplete : function(event) {
         log("++ Audio Preloaded: " + this.options.id);
         this.preloaded = true;
-    }.protect(),
+    },
+    // ----------------------------------------------------------
+    _preloadError : function(event) {
+        log("++ Audio Preload error: " + event);
+    },
     // ----------------------------------------------------------
     getLoaderInfo : function() {
         var loaderInfo = new Object();
@@ -105,6 +110,12 @@ var AudioPlayer = new Class({
             ref : this,
             type : 'AUDIO'
         };
+
+        if (Browser.Platform.ios == true || Browser.Platform.android == true) {
+            loaderInfo[this.options.id].progress = 1;
+            log(" iOS device - ready");
+        }
+
         return loaderInfo;
     }
 });

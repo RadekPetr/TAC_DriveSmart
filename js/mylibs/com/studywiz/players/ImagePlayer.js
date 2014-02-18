@@ -3,9 +3,7 @@ var ImagePlayer = new Class({
     Implements : [Options, Events],
     options : {
         style : {
-            position : 'absolute',
-            top : '0px',
-            left : '0px',
+            position : 'absolute',           
             opacity : '0',
             visibility : 'hidden'
         },
@@ -18,7 +16,6 @@ var ImagePlayer = new Class({
         parentTag : null
     },
     initialize : function(myParent, myOptions) {
-        // Intial scene setup
         this.setOptions(myOptions);
         this.options.parent = myParent;
         this.containerID = 'imageContainer';
@@ -116,6 +113,7 @@ var ImagePlayer = new Class({
         this.image = new Asset.image(this.options.src, {
             style : this.options.style,
             id : this.options.id,
+            'alt': this.options.id,
             'class' : this.options['class'],
             onLoad : function() {
                 this.options.loaded = true;

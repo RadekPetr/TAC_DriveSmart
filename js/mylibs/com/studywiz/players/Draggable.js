@@ -45,8 +45,8 @@ var Draggable = new Class({
                     el = this.positions ? this.positions[i] : this.getDroppableCoordinates(el);
                     var now = getPos(this.element);
                     var now2 = new Object();
-                    now2.x = now.x - elOffset.x + this.element.get('width') / 2;
-                    now2.y = now.y - elOffset.y + this.element.get('width') / 2;
+                    now2.x = now.x - elOffset.x + (this.element.get('width') / 2) - Main.VIDEO_LEFT;
+                    now2.y = now.y - elOffset.y + (this.element.get('width') / 2) - Main.VIDEO_TOP;
                     return (now2.x > el.left && now2.x < el.right && now2.y < el.bottom && now2.y > el.top );
                 }, this);
                 return overed;
@@ -57,9 +57,9 @@ var Draggable = new Class({
                 zoneCoords = this.getDroppableCoordinates(zone);
                 var now = getPos(this.element);
                 var now2 = new Object();
-                now2.x = now.x - elOffset.x + this.element.get('width') / 2;
-                now2.y = now.y - elOffset.y + this.element.get('width') / 2;
-                log("zone:", zone, this.element, zone.retrieve('correct'));
+                now2.x = now.x - elOffset.x + (this.element.get('width') / 2) - Main.VIDEO_LEFT;
+                now2.y = now.y - elOffset.y + (this.element.get('width') / 2) - Main.VIDEO_TOP;
+               // log("zone:", zone, this.element, zone.retrieve('correct'));
                 var isOver = now2.x > zoneCoords.left && now2.x < zoneCoords.right && now2.y < zoneCoords.bottom && now2.y > zoneCoords.top;
                 var isCorrect = (this.element.id == zone.retrieve('correct'));
                 // each zone can only have one correct answer
@@ -136,14 +136,14 @@ var Draggable = new Class({
                 this._rotate(element, rotation);
             },
             onLeave : function(element, droppable) {
-                console.log(element, 'left', droppable);
+               // console.log(element, 'left', droppable);
                 this._rotate(element, 0);
             },
             onSnap : function(el) {
                 // log('on snap');
             },
             onComplete : function(el, droppable) {
-                log('Stopped dragging', el, droppable);
+               // log('Stopped dragging', el, droppable);
                 target.set('class', 'draggable');
             },
             onBeforeStart : function() {

@@ -77,14 +77,12 @@ var KeyRiskPlayer = new Class({
                 var allLoaded = this.draggables.every(function(item, index) {
                     return item.options.loaded == true;
                 });
-                log("Ready: ", allLoaded);
+
                 if (allLoaded == true) {
                     this._showDraggables();
                 }
                 break;
             case "shape.clicked":
-                log("Shape clicked ID: " + params.id, params);
-
                 if (params.element.retrieve("selected") == false) {
                     this.score++;
                     params.element.store("selected", true);
@@ -104,16 +102,13 @@ var KeyRiskPlayer = new Class({
                         title : 'Risk',
                         id : 'Risk',
                         style : {
-                            left : params._x - elOffset.x - 30,
-                            top : params._y - elOffset.y - 30
+                            left : params._x - elOffset.x - 30 - Main.VIDEO_LEFT,
+                            top : params._y - elOffset.y - 30 - Main.VIDEO_TOP
                         }
                     });
                     this.risk_image.preload();
-
                     this.risk_image.add(this.myParent().activeVideo.containerID);
                     this.risk_image.display();
-                    // TODO: wrap all risks to a div and get rid of them whne no needed
-
                     this.risk_image.tween('0', '1', 4, 'opacity', 100);
                     this.risk_selector_count++;
                 }
@@ -124,7 +119,6 @@ var KeyRiskPlayer = new Class({
     },
     _prepareAreas : function() {
         var data = this.options.data.areas;
-        log("Areas:", data);
         Array.each(data, function(area, index) {
             area.player = new Shape(this, area);
             area.player.add(this.containerID);

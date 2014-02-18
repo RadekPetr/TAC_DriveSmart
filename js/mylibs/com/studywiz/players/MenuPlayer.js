@@ -10,7 +10,8 @@ var MenuPlayer = new Class({
             top : '0px',
             left : '0px',
             'opacity' : '0',
-            'visibility' : 'hidden'
+            'visibility' : 'hidden',
+            'width' : '360px'
         },
         data : null,
         id : 'MenuPlayer',
@@ -51,31 +52,86 @@ var MenuPlayer = new Class({
         }
     },
     _renderMenu : function() {
+        this._addLines();
         this._addModuleDescription();
         this._addMenuItems();
+
+    },
+
+    _addLines : function() {
+        var div1 = new Element("div", {
+            id : "line 1",
+            'class' : 'horizontal_dotted_line',
+            styles : {
+                left : '390px',
+                top : '90px',
+                width : '535px'
+            }
+        });
+        this.container.adopt(div1);
+        var div2 = new Element("div", {
+            id : "line 2",
+            'class' : 'horizontal_dotted_line',
+            styles : {
+                left : '390px',
+                top : '450px',
+                width : '535px'
+            }
+        });
+        this.container.adopt(div2);
+        var div3 = new Element("div", {
+            id : "line 3",
+            'class' : 'vertical_dotted_line',
+            styles : {
+                left : '380px',
+                top : '10px',
+                height : '540px'
+            }
+        });
+        this.container.adopt(div3);
     },
     _addMenuItems : function() {
         Array.each(this.options.data, function(menuItemData, index) {
+            if (index <= Main.COLORS.length - 1) {
+                var itemColor = Main.COLORS[index];
+            } else {
+                var itemColor = Main.COLORS[index - Main.COLORS.length];
+            }
+
             var menuItem = new MenuItem(this, {
-                data : menuItemData
+                data : menuItemData,
+                'class' : 'menu_item no-select pane menu ' + itemColor
             });
-            this.menuItems.push(menuItem);           
+            this.menuItems.push(menuItem);
 
             menuItem.add(this.container.id);
             menuItem.show();
 
             var isLocked = this._isItemLocked(menuItemData);
+            var isDisabled = this._isItemDisabled(menuItem);
+
             if (isLocked) {
                 menuItem.lock();
             }
 
-            if (isLocked != true || Main.DEBUG == true) {
-                menuItem.registerClickEvent(this.myParent());
+            if (isDisabled) {
+                menuItem.disable();
             }
-            menuItem.registerMouseLeaveEvent(this);            
+
+            if (isLocked != true && isDisabled != true) {
+                menuItem.registerClickEvent(this.myParent());
+                menuItem.registerMouseEnterEvent(this);
+            } else if (Main.DEBUG == true) {
+                menuItem.registerClickEvent(this.myParent());
+                menuItem.registerMouseEnterEvent(this);
+            }
+
         }.bind(this));
-        
+
         this.addEvent("MODULE_INFO", this.showModuleInformation);
+
+        // Show the description for the introduction - emulate mouseover :)
+        this.menuItems[0].container.fireEvent("mouseenter");
     },
     showModuleInformation : function(params) {
         var moduleInfoData = params.data;
@@ -94,29 +150,42 @@ var MenuPlayer = new Class({
     _addModuleDescription : function() {
         this.module_description = new Element("div", {
             id : "module.description",
-            'class' : 'module-description no-select',
+            'class' : 'module-description no-select pane blue',
             styles : {
-                left : '375px',
-                top : '190px'
             }
         });
         this.container.adopt(this.module_description);
         this.module_description.hide();
     },
     _isItemLocked : function(menuItem) {
+        var isLocked = true;
         var itemPreconditions = menuItem.preconditions;
         if (itemPreconditions.length == 0) {
-            var isLocked = false;
+            isLocked = false;
         } else {
-            var isLocked = true;
+            var completedConditionsCount = 0;
             Array.each(itemPreconditions, function(moduleID, index) {
                 var moduleState = Main.userTracker.getModuleState(moduleID);
-                var isModuleCompleted = moduleState.completed;
-                if (isModuleCompleted == true) {
-                    isLocked = false;
+                if (moduleState.completed == true) {
+                    completedConditionsCount++;
                 }
             });
+
+            if (completedConditionsCount == itemPreconditions.length) {
+                isLocked = false;
+            }
             return isLocked;
         }
+    },
+    _isItemDisabled : function(menuItem) {
+        log ( "flash supported", isFlashSupported());
+        // Disable if flash is required but not available
+        var isDisabled = false;
+        if (isFlashSupported() == false && menuItem.options.data.flashOnly == true) {
+            isDisabled = true;
+            log ( "flash not supported will disable");           
+        }       
+       
+        return isDisabled;
     }
 });

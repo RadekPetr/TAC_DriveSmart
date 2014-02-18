@@ -1,6 +1,6 @@
 
 
-- Style buttons better
+
 - Review usage of holders - maybe use on central DIV for the whoe thing
 
 - Make Media class and extend it to Audio and video maybe ?
@@ -15,10 +15,6 @@
 - shapes fro KEy risks - fix IDs all inone div
 - add check for previous and next step types ?
 - allow access to lessons in finished module
-
-- Update styles whne supplied by TAC
-- Menu access logic
-
 - Store achieved concentration level in user data
 
 
@@ -27,12 +23,31 @@
 
 UD5 - hangs while loading
 UB6 "NetworkError: 416 Requested Range Not Satisfiable - http://drivesmart.studywiz.com/media/sound/urban/urban_vdub6f.mp3"
-Coutry 20 - stops after palyback ?
+
 Country 21  - click on vide whne detecting risk - how does it work ?
 Country 21/21  click repla y/ Playback button discrepancy - allow naming buttons for steps ?
-Do not preaload videos for intro modules if returning
+
+Adjust Key Risk areas  to match the images exactly
+
+
+randomize questions ?
+
+
+
+iPdat: http://stackoverflow.com/questions/11633929/readystate-issue-with-html5-video-elements-on-ios-safari 
+https://gist.github.com/millermedeiros/891886
+
+
+Video scanning6 - shared_uia08_next.mp4  - not fluent
+
+
 -----------------------------------------------------------------
 DONE:
+- Button styles
+- Completed style - Text "Completed"
+- Coutry 20 - stops after palyback ?
+- Do not preaload videos for intro modules if returning
+- Menu access logic
 - MSQ - cursor and select prevent
 - Module progress on Dashboard
 - Change radio cross to tick

@@ -20,7 +20,6 @@ var User = new Class({
 
         this.userData = null;
         this.api = new Api(this);
-        log("defaultData 1 ", this.defaultData);
         this.concentrationLevel = 1;
         // DEBUG: To Empty on start
         if (Main.RESET_USER_DATA == true) {
@@ -31,13 +30,10 @@ var User = new Class({
         this.api.loadUserProgress();
     },
     testLoadedUserProgress : function(userProgressData) {
-
-        // TODO: handle "no data" for just created user and error whne no data is loaded
-        // TODO: hadle version conversions - copy data from old structure to a new one if necessary
-
-        log("testLoadedUserProgress", userProgressData);
+        // TODO: handle version conversions - copy data from old structure to a new one if necessary
+        var defaultDataHash = new Hash(this.defaultData);
         if (userProgressData == null || userProgressData == undefined || userProgressData == "no data") {
-            this.userData = new Hash(this.defaultData);
+            this.userData = defaultDataHash;
             this._getUserData("concentration").info.extend({
                 level : this.concentrationLevel
             });
@@ -49,13 +45,18 @@ var User = new Class({
 
             this.userData = new Hash(userProgressData);
             log("Loaded user progress from server", this.userData);
-            log("1");
             this.concentrationLevel = this._getUserData("concentration").info["level"];
-            log("2");
             var userSavedVersion = this.userData.info["app_version"];
-            log("3");
             log("The user saved app_version: ", userSavedVersion);
+
             //TODO: Check user data version too and if different from defaults handle that - merging ?
+            var defaultVersion = defaultDataHash.info["app_version"];
+            if (defaultVersion != userSavedVersion) {
+                log("Saved user progress is different version from default");
+               
+                //this.userData.info.app_version = Main.VERSION;
+            }
+
         }
         log("Progress data of current user: ", this.userData);
         log('All done .... starting now');
@@ -65,12 +66,14 @@ var User = new Class({
     },
     saveProgress : function() {
         // save complete progress to server
-        // log("Saving: ", this.userData);
         this._saveCompleteUserData();
         // Save module progress
         this._saveModuleProgressData();
     },
     _saveCompleteUserData : function() {
+        // test
+        //this.userData.modules.intro = {};//( 'intro' );
+
         var json_data = JSON.encode(this.userData);
         //var compressedData = lzw_encode(json_data);
         var compressedData = this.api.encode(json_data);
@@ -165,33 +168,60 @@ var User = new Class({
 
         Object.append(userSequence[0], currentSequenceData);
 
-        log("userSequence[0]: ", userSequence[0], currentSequenceData);
-        log("*** User data :", this.userData);
-        log("Total score: ", this.getTotalScore());
-
         // and store the progress on server
         this.saveProgress();
     },
     getUnfinishedSequences : function(moduleID) {
         var sequencesInModule = this._getUserData(moduleID).data;
-        var unfinishedSequences = sequencesInModule.filter(function(item, index) {
-            return item.completed == false;
-        });
+        log("sequencesInModule", sequencesInModule);
+
+        if (moduleID == "intro" && Main.sequencePlayer.fromMenu == true) {
+            var unfinishedSequences = sequencesInModule.filter(function(item, index) {
+                return (item.completed == false || item.completed == true);
+            });
+        } else {
+            var unfinishedSequences = sequencesInModule.filter(function(item, index) {
+                return item.completed == false;
+            });
+        }
+
         if (unfinishedSequences.length == 0) {
             log("Module is Finished");
         }
+        log("unfinishedSequences", unfinishedSequences);
         return unfinishedSequences;
+    },
+    getModuleStarted : function(moduleID) {
+        var sequencesInModule = this._getUserData(moduleID).data;
+        var started = true;
+        var unfinishedSequences = sequencesInModule.filter(function(item, index) {
+            return item.completed == false;
+        });
+        if (unfinishedSequences.length == sequencesInModule.length) {
+            started = false;
+        }
+        return started;
     },
     getModuleState : function(moduleID) {
 
-        var sequencesInModule = this._getUserData(moduleID).data;
-        var unfinishedSequences = sequencesInModule.filter(function(item, index) {
-            return item.completed == false && item.trackProgress == true;
-        });
+       // var moduleIDs = new Hash(this.userData.modules).getKeys();
+        //log(moduleID, "Module IDs", moduleIDs);
 
-        var introSequences = sequencesInModule.filter(function(item, index) {
-            return item.trackProgress == false;
-        });
+        var sequencesInModule = this._getUserData(moduleID).data;
+
+        var unfinishedSequences = new Array();
+        var introSequences = new Array();
+
+        if (sequencesInModule == undefined) {
+            var sequencesInModule = new Array();
+        } else {
+            unfinishedSequences = sequencesInModule.filter(function(item, index) {
+                return item.completed == false && item.trackProgress == true;
+            });
+            introSequences = sequencesInModule.filter(function(item, index) {
+                return item.trackProgress == false;
+            });
+        }
 
         var progressObj = {};
         // Minus the ModuleIntro
@@ -222,6 +252,19 @@ var User = new Class({
         }.bind(this));
         return totalScore.average();
     },
+    getTotalProgress : function() {
+        var moduleIDs = new Hash(this.userData.modules).getKeys();
+        //log ("Module IDs",moduleIDs );
+        var totalFinishedCount = 0;
+        var totalCount = 0;
+        Array.each(moduleIDs, function(moduleID, index) {
+            var progressObj = this.getModuleState(moduleID);
+            totalCount += progressObj.total;
+            totalFinishedCount += progressObj.finishedCount;
+        }.bind(this));
+        log("Overall progress: ", totalFinishedCount / totalCount);
+        return (totalFinishedCount / totalCount);
+    },
     getModuleScore : function(moduleID) {
         var userData = this._getUserData(moduleID).data;
         // log(moduleID, userData);
@@ -250,7 +293,6 @@ var User = new Class({
             allScores = allScores.concat(sequenceState.score);
         });
         var scoreAverage = allScores.average();
-        log("Sequence " + seq + " score: ", scoreAverage);
 
         if (scoreAverage >= 85) {
             // LEVEL INCREASE
@@ -307,9 +349,7 @@ var User = new Class({
 
     },
     getUserSequenceData : function(sequenceID, moduleID) {
-
         var moduleSequences = this._getUserData(moduleID).data;
-        log(sequenceID, moduleID, moduleSequences);
         var result = moduleSequences.filter(function(item, index) {
             return item.id == sequenceID;
         });
@@ -322,11 +362,19 @@ var User = new Class({
     },
     _getUserData : function(moduleID) {
         try {
-          return this.userData.modules[moduleID]; 
-        } catch (err){
-            log ("NULLLLLLLL");
+            return this.userData.modules[moduleID];
+        } catch (err) {
+            log("NULLLLLLLL");
             return null;
         }
-        
+
+    },
+    _mergeOldData: function (oldData, newData){
+        var newModuleIDs = newData.modules.getKeys();
+        newModuleIDs.each(function(item, index){
+           // TODO crawl and copy values or items
+        }
+    );
+
     }
 });

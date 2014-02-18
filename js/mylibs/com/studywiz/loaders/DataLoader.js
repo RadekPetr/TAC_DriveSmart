@@ -29,23 +29,12 @@ var DataLoader = new Class({
 
         xml2json.convertFromURL(this.options.src, function(response) {
             this.data = response;
+           // log ( this.data);
+          //  var myJSON = JSON.encode(this.data);
+           // log (myJSON);
             this._setupSequences();
         }.bind(this));
 
-    },
-    // ----------------------------------------------------------
-    getSteps : function(sequenceId) {
-        var steps = Array.clone(this.sequences.get(sequenceId));
-        return steps;
-    },
-    getSequenceIDs : function() {
-        //TODO: handle version
-        if (this.sequences != null) {
-            var IDs = this.sequences.getKeys();
-        } else {
-            var IDs = new Array();
-        }
-        return IDs;
     },
     // ----------------------------------------------------------
     _setupSequences : function() {
@@ -71,7 +60,7 @@ var DataLoader = new Class({
             }
         }.bind(this));
 
-        log(this.sequences);
+        //log(this.sequences);
 
         this.myParent().fireEvent("DATA", {
             type : "data.ready",

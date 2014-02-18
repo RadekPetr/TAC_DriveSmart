@@ -18,7 +18,7 @@ var dwProgressBar = new Class({
 
     //options
     options : {
-        container : '$m(drivesmart)',
+        container : null,
         boxID : '',
         boxClass : 'box',
         percentageID : '',
@@ -27,10 +27,9 @@ var dwProgressBar = new Class({
         displayClass : '',
         startPercentage : 0,
         displayText : false,
-        speed : 10,
+        speed : 2,
         styles : {
-            'width' : '200px'
-            //,            'height' : '20px'
+            'width' : '300px'
         }
     },
 
@@ -47,16 +46,14 @@ var dwProgressBar = new Class({
 
     //creates the box and percentage elements
     createElements : function() {
-        this.container = new Element('div', {
-            id : 'progressBarHolder'
-        });
+        this.container = this.options.container;
 
         this.container.setStyles(this.options.style);
 
         this.box = new Element('div', {
             id : this.options.boxID,
             'class' : this.options.boxClass,
-            styles : this.options.styles
+            style : 'width:300px;'
         });
         this.perc = new Element('div', {
             id : this.options.percentageID,
@@ -73,7 +70,7 @@ var dwProgressBar = new Class({
             this.text.inject(this.container);
         }
 
-        this.container.inject(this.options.container);
+        // this.container.inject(this.options.container);
         this.set(this.options.startPercentage);
     },
 
@@ -89,13 +86,19 @@ var dwProgressBar = new Class({
             duration : this.options.speed,
             transition : Fx.Transitions.Sine.easeOut
         });
-
         myEffect.start({
             'width' : [0, this.calculate(to.toInt())] // Morphs the 'width' style from 900px to 300px.
         });
 
         if (this.options.displayText) {
-            this.text.set('text', to.toInt() + '%');
+            var progressValue;
+            if (to >= 100) {
+                progressValue = "Progress: " + "COMPLETED";
+            } else {
+                progressValue = "Progress: " + to.toInt() + '%';
+            }
+
+            this.text.set('text', progressValue);
         }
     },
 

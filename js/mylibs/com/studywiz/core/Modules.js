@@ -16,7 +16,6 @@ var Modules = new Class({
         this.modules = new Hash();
     },
     start : function() {
-        log(Main.DIV_ID);
         this.addEvent("MODULE", this.handleNavigationEvent);
         this.setupModules();
     },
@@ -43,7 +42,6 @@ var Modules = new Class({
         switch (params.next) {
             case "module.data.ready":
                 this.listOfModulesCounter--;
-                //log("Modules count: " + this.listOfModulesCounter);
                 if (this.listOfModulesCounter === 0) {
                     log("Modules READY, setting up user now ... ");
                     this._setupUser();
@@ -82,7 +80,6 @@ var Modules = new Class({
     },
     _startMainMenu : function() {
         var selectedModule = this.modules.get("main_menu");
-        log(selectedModule);
         var sequenceID = "1";
         selectedModule.playSequence(sequenceID);
     },
@@ -100,7 +97,6 @@ var Modules = new Class({
                     change : function() {
                         var selectedModuleID = moduleSelector.options[moduleSelector.selectedIndex].value;
                         var selectedModule = this.modules.get(selectedModuleID);
-                        log("Selected Module: " + selectedModuleID);
                         this._populateSequenceSelector(sequenceSelector, selectedModule);
                     }.bind(this)
                 }
@@ -152,7 +148,6 @@ var Modules = new Class({
                         var selectedModuleID = moduleSelector.options[moduleSelector.selectedIndex].value;
                         var selectedModule = this.modules.get(selectedModuleID);
                         var sequenceID = sequenceSelector.options[sequenceSelector.selectedIndex].value;
-                        log("Selected Module: " + selectedModuleID);
                         selectedModule.playSequence(sequenceID);
                     }.bind(this)
                 }

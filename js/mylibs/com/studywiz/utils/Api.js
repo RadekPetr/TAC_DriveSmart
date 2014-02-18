@@ -37,7 +37,7 @@ var Api = new Class({
                     } catch (e) {
                         log('ERROR: processing loaded user progress data ', e);
                         this.saveLog("error", "processing loaded user progress data onSuccess: " + e);
-                        // TDOD: handle errors in data - due to versions ?
+                        // TODO: handle errors in data - due to versions ?
                     }
                 }
             }.bind(this),
@@ -47,7 +47,7 @@ var Api = new Class({
             onFailure : function(xhr) {
                 if (retries >= this.options.retries) {
                     log("ERROR: loadUserProgress Failed", xhr);
-                    this.saveLog("error", "onFailure loadUserProgress, no retry left " + xhr);
+                    this.saveLog("error", "onFailure loadUserProgress, no retry left " + xhr + " " + Browser.name + " , " + Browser.version + ", " + Browser.Platform);
                     alert("SDE01: Error loading user data. \n\nPlease reload the page to try again or contact support.");
                 } else {
                     log("WARN: loadUserProgress Failed, retry:" + retries, xhr);
@@ -77,14 +77,13 @@ var Api = new Class({
                 } else {
                     log("ERROR: User progress wrong reply NOT OK");
                     log(xhr);
-                    // TODO : handle error ?
                 }
             }.bind(this),
             onFailure : function(xhr) {
 
                 if (retries >= this.options.retries) {
                     log("ERROR: saveUserProgress Failed", xhr);
-                    this.saveLog("error", "onFailure saveUserProgress, no retry left " + xhr);
+                    this.saveLog("error", "onFailure saveUserProgress, no retry left " + xhr + " " + Browser.name + " , " + Browser.version + ", " + Browser.Platform);
                     alert("SDE02: Error saving user data. \n\nPlease continue to the next activity and we will attempt to save the progress again later on.");
                 } else {
                     log("WARN: saveUserProgress Failed, retry:" + retries, xhr);
@@ -116,7 +115,7 @@ var Api = new Class({
             }.bind(this),
             onError : function(text, error) {
                 log('onError SaveProgress', text, error);
-                this.saveLog("error", "onError saveUserProgress" + text + " " + error);
+                this.saveLog("error", "onError saveUserProgress" + text + " " + error + " " + Browser.name + " , " + Browser.version + ", " + Browser.Platform);
             }.bind(this)
         });
 
@@ -137,13 +136,12 @@ var Api = new Class({
                 } else {
                     log("ERROR: Save Module progress wrong reply NOT OK");
                     log(xhr);
-                    // TODO : handle error ?
                 }
             }.bind(this),
             onFailure : function(xhr) {
                 if (retries >= this.options.retries) {
                     log("ERROR: saveUserProgress Failed", xhr);
-                    this.saveLog("error", "onFailure saveModuleProgress, no retry left " + xhr);
+                    this.saveLog("error", "onFailure saveModuleProgress, no retry left " + xhr + " " + Browser.name + " , " + Browser.version + ", " + Browser.Platform);
                     alert("SDE03: Error saving module score. \n\nPlease continue to the next activity and we will attempt to save the score again later on.");
                 } else {
                     log("WARN: saveModuleProgress Failed, retry:" + retries, xhr);
@@ -180,7 +178,10 @@ var Api = new Class({
                 this.saveLog("error", "onError saveModuleProgress" + xhr);
             }.bind(this)
         });
-        this._sendRequest(jsonRequest, requestPayload, true);
+
+        if (externalModuleID != "in") {
+            this._sendRequest(jsonRequest, requestPayload, true);
+        }
 
         // On completion of each exercise you would need to POST to /user_progress/module_progress/<module_code>
         // payload need to contain two parameters - "score" and "completed_exercises". Both integers.
@@ -215,7 +216,7 @@ var Api = new Class({
         //TODO: intro ??
         var map = new Hash({
             'main_menu' : 'mm',
-            'intro' : 'mm',
+            'intro' : 'in',
             'concentration' : 'cc',
             'country' : 'co',
             'urban' : 'ur',

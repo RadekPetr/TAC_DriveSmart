@@ -23,8 +23,6 @@ var MediaLoader = new Class({
     },
     // ----------------------------------------------------------
     register : function(loaderInfo) {
-        log("Register");
-        log(loaderInfo);
         if (this.loadQueue.has(loaderInfo.id)) {
             // nothing - already exists
         } else {
@@ -32,7 +30,6 @@ var MediaLoader = new Class({
             Object.each(loaderInfo, function(value, key) {
                 type = value.type;
             });
-            // log("Loader: ", type);
             if (type == 'VIDEO' || type == 'FLASH') {
                 this.videoQueue.push(loaderInfo);
             } else {
@@ -43,7 +40,7 @@ var MediaLoader = new Class({
     },
     // ----------------------------------------------------------
     start : function(showProgressBar) {
-
+        log("Preloader startetd ");
         // show the progress bar if requested
         if (showProgressBar == true) {
             this._addProgressBar();
@@ -57,11 +54,9 @@ var MediaLoader = new Class({
         this.loadQueue.each(function(value, key) {
             value.ref.preload();
         });
-        // log(this.loadQueue);
         // if the queue is not empty start the time to poll the progress
         if (this.loadQueue.getLength() > 0) {
             var timerFunction = function() {
-                log("***************************************   timer function called");
                 this.updateProgress();
             }.bind(this);
             this.preloadTimer = timerFunction.periodical(1000);
@@ -75,7 +70,7 @@ var MediaLoader = new Class({
     },
     // ----------------------------------------------------------
     reportProgress : function(loaderInfo) {
-        //log(loaderInfo);
+        log("this.loadQueue", this.loadQueue);
 
         if (this.options.next == null) {
             // if next action is not set do not allow reporting progress, not sure ???
@@ -87,48 +82,34 @@ var MediaLoader = new Class({
                     if (this.loadQueue[key].progress < value.progress) {
                         this.loadQueue.set(key, value);
                     }
-                    log("Reported progress: ", key, value.progress);
                 } else {
                     // don't have to add this now as we do not start the preload automatically
                     // this.register(loaderInfo)
                 }
             }.bind(this));
-
-            //log("this.loadQueue ", this.loadQueue, this.loadQueue.getKeys());
             var overAllProgress = this._calculateProgress();
             this._updateProgressBar(overAllProgress);
             this._handleFinished(overAllProgress);
         }
+
     },
     updateProgress : function() {
         this.loadQueue.each( function(value, key) {
-            log ("DEBUG ++++", value, key );
             this.reportProgress(value.ref.getLoaderInfo());
         }.bind(this));
     },
     // ----------------------------------------------------------
     _addProgressBar : function() {
-        this.progressBar = new dwProgressBar({
-            container : $m(this.options.parentElementID),
-            startPercentage : 0,
-            speed : 10,
-            boxID : 'media_loader_box',
-            boxClass : 'media_loader_box',
-            percentageID : 'media_loader_perc',
-            percentageClass : 'media_loader_perc',
-            displayID : 'media_loader_disp',
-            displayText : true,
-            style : {
-                'left' : (Main.WIDTH / 3) + 'px',
-                'top' : (Main.HEIGHT / 2) + 'px',
-                'position' : 'absolute',
-                'z-index' : '99999'
-            }
-        });
+        var loaderProgressBar = UIHelpers.progressBarSetup(0, "media_loader_disp");
+        UIHelpers.setClasses(loaderProgressBar['holder'], "no-select load_progress");
+        loaderProgressBar['holder'].inject($m(this.options.parentElementID));
+        this.progressBar = loaderProgressBar['object'];
     },
     // ----------------------------------------------------------
     _show : function() {
         this.progressBar.show();
+        var moduleTitle = UIHelpers.setMainPanel('Loading');
+        UIHelpers.setClasses(moduleTitle, 'module-title-loader no-select');
     },
     // ----------------------------------------------------------
     hide : function() {
@@ -143,17 +124,12 @@ var MediaLoader = new Class({
     },
     // ----------------------------------------------------------
     _handleFinished : function(progress) {
-        //log('progress: ', progress);
         if (progress > 99) {
             log("Preload Finished");
-            log(this.preloadTimer);
             clearInterval(this.preloadTimer);
-            // this.loadQueue.empty();
-
             this._removeCompletedFromQueue();
             // remove the progress bar, will continue silently
             this.remove();
-
             this.myParent().fireEvent("TIMELINE", {
                 type : "preload.finished",
                 id : this.options.id,
@@ -183,14 +159,11 @@ var MediaLoader = new Class({
         }.bind(this));
     },
     _addOneVideoToQueue : function() {
-        //log("this.videoQueue: ", this.videoQueue);
         if (this.videoQueue.length > 0) {
-            //log('preloading next video');
             var currentVideo = this.videoQueue.shift();
             this.loadQueue.extend(currentVideo);
         } else {
             // nothing, all loaded
-            //log("all videos done");
         }
     },
     // ----------------------------------------------------------
@@ -216,7 +189,8 @@ var MediaLoader = new Class({
         }
     }.protect(),
     getQueueLength : function() {
-        return this.loadQueue.getLength();
+        return this.loadQueue.getLength() + this.videoQueue.length;
+        ;
     },
     reset : function() {
         clearInterval(this.preloadTimer);

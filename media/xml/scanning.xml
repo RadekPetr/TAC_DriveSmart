@@ -1,17 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root version="1.0">
+  <Seq trackProgress="false" trackScore="false" desc="Module Group Intro" Ex="-1">
+    <Step fmt="ModuleGroupIntro">     
+      <ModuleIntroVideo caption="TAC_FIRSTMODULES.vtt">module_intros/first_modules_intro</ModuleIntroVideo>    
+    </Step>   
+  </Seq>
   <Seq trackProgress="false" trackScore="false" desc="Module Intro" Ex="0">
     <Step fmt="ModuleIntro">
       <Preview>scanning/scan_cst18_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vwsc2</Audio>
-      <ModuleIntroVideo>module_intros/kaps_intro</ModuleIntroVideo>
+      <ModuleIntroVideo caption="TAC_SCANNINGINTRO.vtt">module_intros/scanning_intro</ModuleIntroVideo>
     </Step>
   </Seq>
   <Seq trackProgress="true" desc="Exercise 1" Ex="1">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_uia06_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsbkr1a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -19,7 +22,7 @@
     </Step>
     <Step fmt="KeyRisk">
       <Areas>
-        <Area id="a1" data="path#m398,7c0,0 -11,314 -10,314c1,0 146,158 146,159c0,1 106,-1 106,-1c0,0 -2,-474 -2,-474c0,0 -240,2 -240,2z"></Area>
+        <Area id="a1" data="path#m455,7c0,0 -11,314 -10,314c1,0 146,158 146,159c0,1 106,-1 106,-1c0,0 -2,-474 -2,-474c0,0 -240,2 -240,2z"></Area>
       </Areas>
       <Audio>scanning/scan_vsbkr1b</Audio>
     </Step>
@@ -35,7 +38,6 @@
   <Seq trackProgress="true" desc="Exercise 2" Ex="2">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_urt10_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsbkr2a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -43,9 +45,9 @@
     </Step>
     <Step fmt="KeyRisk">
       <Areas>
-        <Area id="a1" data="path#m150,190c0,0 3,54 3,54c0,0 63,-3 63,-3c0,0 6,-25 6,-24c0,1 -1,-35 -1,-35c0,0 -71,8 -71,8z"></Area>
-        <Area id="a2" data="path#m251,195c0,1 0,32 0,32c0,0 43,2 43,2c0,0 -3,-40 -3,-39c0,1 -40,5 -40,5z"></Area>
-        <Area id="a3" data="path#m346,186c0,0 1,52 1,53c0,1 41,2 41,2c0,0 3,-61 3,-60c0,1 -45,5 -45,5z"></Area>
+        <Area id="a1" data="path#m170,210c0,0 3,54 3,54c0,0 63,-3 63,-3c0,0 6,-25 6,-24c0,1 -1,-35 -1,-35c0,0 -71,8 -71,8z"></Area>
+        <Area id="a2" data="path#m271,210c0,1 0,32 0,32c0,0 43,2 43,2c0,0 -3,-40 -3,-39c0,1 -40,5 -40,5z"></Area>
+        <Area id="a3" data="path#m370,200c0,0 1,52 1,53c0,1 41,2 41,2c0,0 3,-61 3,-60c0,1 -45,5 -45,5z"></Area>
       </Areas>
       <Audio>scanning/scan_vsbkr1b</Audio>
     </Step>
@@ -64,7 +66,6 @@
   <Seq trackProgress="true" desc="Exercise 3" Ex="3">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_cst18_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsbkr2a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -72,7 +73,7 @@
     </Step>
     <Step fmt="KeyRisk">
       <Areas>
-        <Area id="a1" data="path#m576,169c0,0 -1,67 -1,67c0,0 -54,-2 -54,-2c0,0 4,-64 4,-64c0,0 51,-1 51,-1z"></Area>
+        <Area id="a1" data="path#m625,180c0,0 -1,67 -1,67c0,0 -54,-2 -54,-2c0,0 4,-64 4,-64c0,0 51,-1 51,-1z"></Area>
       </Areas>
       <Audio>scanning/scan_vsbkr1b</Audio>
     </Step>
@@ -88,7 +89,6 @@
   <Seq trackProgress="true" desc="Exercise 4" Ex="4">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_umt02_duplicate_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsbre1a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -118,7 +118,6 @@
   <Seq trackProgress="true" desc="Exercise 5" Ex="5">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_cst11_duplicate_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsbre2a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -148,7 +147,6 @@
   <Seq trackProgress="true" desc="Exercise 6" Ex="6">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_uia08_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsbp1a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -177,7 +175,6 @@
   <Seq trackProgress="true" desc="Exercise 7" Ex="7">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_urt04_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsbp2a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -207,7 +204,6 @@
   <Seq trackProgress="true" desc="Exercise 8" Ex="8">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_umt04_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsbp2a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -237,7 +233,6 @@
   <Seq trackProgress="true" desc="Exercise 9" Ex="9">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_uia01_duplicate_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vxb</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -264,7 +259,6 @@
   <Seq trackProgress="true" desc="Exercise 10" Ex="10">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_uia03_duplicate_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsar2a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -294,7 +288,6 @@
   <Seq trackProgress="true" desc="Exercise 11" Ex="11">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_uic02_similar_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsar2a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -324,7 +317,6 @@
   <Seq trackProgress="true" desc="Exercise 12" Ex="12">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_uit01_similar_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsar2a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -354,7 +346,6 @@
   <Seq trackProgress="true" desc="Exercise 13" Ex="13">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_urt01_duplicate_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsar2a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -384,7 +375,6 @@
   <Seq trackProgress="true" desc="Exercise 14" Ex="14">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_urt07_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsar6a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -414,7 +404,6 @@
   <Seq trackProgress="true" desc="Exercise 15" Ex="15">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_urt08_duplicate_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsar6a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -444,7 +433,6 @@
   <Seq trackProgress="true" desc="Exercise 16" Ex="16">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_umj05_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsar6a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -474,7 +462,6 @@
   <Seq trackProgress="true" desc="Exercise 17" Ex="17">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_umt01_duplicate_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsar6a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -504,7 +491,6 @@
   <Seq trackProgress="true" desc="Exercise 18" Ex="18">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_umt06_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsar6a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -534,7 +520,6 @@
   <Seq trackProgress="true" desc="Exercise 19" Ex="19">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_cst26_duplicate_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsar6a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -564,7 +549,6 @@
   <Seq trackProgress="true" desc="Exercise 20" Ex="20">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_uia06_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsar6a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -594,7 +578,6 @@
   <Seq trackProgress="true" desc="Exercise 21" Ex="21">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_cst23_duplicate_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsar6a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -624,7 +607,6 @@
   <Seq trackProgress="true" desc="Exercise 22" Ex="22">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_cla01_duplicate_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsar6a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -654,7 +636,6 @@
   <Seq trackProgress="true" desc="Exercise 23" Ex="23">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_fto01_duplicate_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsar6a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -684,7 +665,6 @@
   <Seq trackProgress="true" desc="Exercise 24" Ex="24">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_faj01_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsar6a</Audio>
     </Step>
     <Step fmt="PlayVideo">
@@ -714,7 +694,6 @@
   <Seq trackProgress="true" desc="Exercise 25" Ex="25">
     <Step fmt="SequenceIntro">
       <Preview>shared/shared_faj09_start_first.jpg</Preview>
-      <Image>intros/sequence_intro.png</Image>
       <Audio>scanning/scan_vsar6a</Audio>
     </Step>
     <Step fmt="PlayVideo">

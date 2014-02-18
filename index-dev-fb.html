@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+		<meta content='' name='keywords'>
+		<meta content='' name='description'>
+		<title> Drive Smart Online - Dashboard </title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" media="all">
+		<script type="text/javascript" src="firebug/build/firebug-lite.js">{
+    overrideConsole: true,
+    startInNewWindow: false,
+    startOpened: true,
+    enableTrace: true, 
+	showIconWhenHidden:true
+}</script>
+		<!--[if lte IE 8]>
+		<link href="css/index_ie.css" media="screen" rel="stylesheet" type="text/css" />
+		<![endif]-->
+
+		<script src="js/libs/mootools-core-1.4.5.1.js"></script>
+		<script src="js/libs/mootools-more-1.4.0.1.js"></script>
+		<script src="js/mylibs/Main.js"></script>
+		<script>
+            function init() {
+			console.log("text");
+                var main = new Main(true);
+                main.addEvent('READY:once', function() {
+                    console.log("got event READY");
+                    main.start();
+                });
+            }
+		</script>
+	</head>
+	<body onload = "init();" class='bg1'>
+		<div class='container'>
+			<div class='navbar'>
+				<div class='navbar-inner blank-inner'>
+					<a href="/" class="brand drivesmart_icon"></a>
+					<ul class='nav top-menu'>
+
+						<li>
+							<a href="/about" class="menu-link">ABOUT</a>
+						</li>
+						<li class="active">
+							<a href="/dashboard" class="menu-link">DASHBOARD</a>
+						</li>
+
+						<li>
+							<a href="/hall_of_fame" class="menu-link">HALL of FAME</a>
+						</li>
+						<li>
+							<a href="/contact" class="menu-link">CONTACT</a>
+						</li>
+
+						<li>
+							<a href="/users/sign_out" class="menu-link last">LOG OUT</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<form accept-charset="UTF-8" action="" id="api_form" method="post">
+				<div style="margin:0;padding:0;display:inline">
+					<input name="utf8" type="hidden" value="&#x2713;" />
+					<input name="authenticity_token" type="hidden" value="xQQsdpHxFUN3FariqbSpHM+xBOgKtQbzq7+IB23c1cg=" />
+				</div>
+			</form>
+
+			<div id='drivesmart'></div>
+			<div class='pane gray my_details'>
+				<h2>My Details</h2>
+				<div class='row'>
+					<div class='span3'>
+						<label>Username:</label>
+					</div>
+					<div class='span6'>
+						rpetr
+					</div>
+				</div>
+				<div class='row'>
+					<div class='span3'>
+						<label>Name:</label>
+					</div>
+					<div class='span6'>
+						Radek Petr
+					</div>
+				</div>
+				<div class='row'>
+					<div class='span3'>
+						<label>Address:</label>
+					</div>
+					<div class='span6'>
+						- Unknown -
+					</div>
+				</div>
+				<div class='row'>
+					<div class='span3'>
+						<label>Email:</label>
+					</div>
+					<div class='span6'>
+						petr.radek@gmail.com
+					</div>
+				</div>
+				<div class='row'>
+					<div class='span3'>
+						<label>Phone:</label>
+					</div>
+					<div class='span6'>
+						- Unknown -
+					</div>
+				</div>
+				<div class='row'>
+					<div class='span3'>
+						<label>Email subscription:</label>
+					</div>
+					<div class='span6'>
+						Not subscribed to TAC email alerts.
+					</div>
+				</div>
+
+				<div class='action_links'>
+					<div class='action_link'>
+						<a href="/users/edit">Change my password</a>
+					</div>
+				</div>
+			</div>
+
+			<div class='footer'>
+				<a href="/privacy" class="footer-link">Privacy</a>
+				<a href="/disclaimer" class="footer-link">Disclaimer</a>
+				<a href="/terms" class="footer-link">Terms and Conditions</a>
+				<a href="/help" class="footer-link">FAQs</a>
+				<a href="http://www.tac.vic.gov.au" class="logo-link tac-logo">TAC</a>
+			</div>
+
+		</div>
+	</body>
+	<!--
+	branch: deploy | commit: 388e99f528d6c5969e62ebb073469a284ee03af6
+	-->
+	<script defer src="js/plugins.js"></script>
+	<script defer src="js/script.js"></script>
+
+</html>

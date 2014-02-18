@@ -8,7 +8,7 @@ window.log = function(){
     arguments.callee = arguments.callee.caller;
     var newarr = [].slice.call(arguments);
     (typeof console.log === 'object' ? log.apply.call(console.log, console, newarr) : console.log.apply(console, newarr));
-  }
+  }  
 };
 
 // make it safe to use console.log always

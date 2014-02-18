@@ -3,17 +3,17 @@ var VideoPlayer = new Class({
     // ---------------------------
     options : {
         style : {
-            width : Main.WIDTH + '',
-            height : Main.HEIGHT + 'px',
             position : 'absolute',
-            left : '0px',
-            top : '0px',
             opacity : '0',
-            visibility : 'hidden'
+            visibility : 'hidden',
+            'left' : Main.VIDEO_LEFT + 'px',
+            'top' : Main.VIDEO_TOP + 'px',
+            'width' : Main.VIDEO_WIDTH + 'px',
+            'height' : Main.VIDEO_HEIGHT + 'px'
         },
-        width : Main.WIDTH + 'px',
-        height : Main.HEIGHT + 'px',
-        'class' : 'video-js',
+        width : '100%',
+        height : '100%',
+        'class' : 'video-js vjs-default-skin vjs-big-play-hidden',
         poster : '',
         id : 'element.id',
         next : 'next.action',
@@ -21,6 +21,7 @@ var VideoPlayer = new Class({
         preload : 'auto',
         autoplay : false,
         controls : false,
+        captionFile : null,
         parentTag : Main.DIV_ID,
         filename : null
     },
@@ -39,7 +40,6 @@ var VideoPlayer = new Class({
         this.container = new Element("div", {
             id : this.containerID,
             'class' : 'videoContainer'
-
         });
 
         this.container.setStyles(this.options.style);
@@ -49,17 +49,16 @@ var VideoPlayer = new Class({
         this.container.player = new Element("video", {
             'id' : this.playerID,
             'class' : this.options['class']
-
         });
         this.container.player.inject(this.container);
-
+        videojs.options.flash.swf = Main.PATHS.flashFolder + "video-js.swf";
     },
     myParent : function() {
         return this.options.parent;
     },
     // ---------------------------
     preload : function() {
-        log("++ Video Preload started: " + this.options.id);
+        // log("++ Video Preload started: " + this.options.id);
         // TODO: handle sitiation player is undefined
         if (this.player == undefined) {
             //    log('Undefined player ERRROR');
@@ -67,82 +66,130 @@ var VideoPlayer = new Class({
             //      this.remove();
             //  } else {
             this.isReady = false;
+            var data = this._getVideoData();
             this.player = videojs('player_' + this.options.id, {
                 "controls" : this.options.controls,
                 "autoplay" : this.options.autoplay,
                 "preload" : this.options.preload,
                 "width" : this.options.width,
-                "height" : this.options.height
+                "height" : this.options.height,
+                "poster" : data.poster.src,
+                "tracks" : [{
+                    'kind' : "captions",
+                    'label' : "English",
+                    'language' : "en",
+                    'src' : Main.PATHS.captionsFolder + this.options.captionFile,
+                    id : "subs"
+                }]
             });
 
             this.player.ready(( function() {
-                    this.player.options['children'] = false;
+                    //this.player.options['children'] = false;
                     // this.player.TextTrack.disable();
-                    log('Player component ready ... preloading');
+                    // log('Player component ready ... preloading');
                     var data = this._getVideoData();
-                    this.player.dimensions(this.options.width, this.options.height);
-                    this.player.poster(data.poster.src);
+                    // this.player.dimensions(this.options.width, this.options.height);
+                    // this.player.poster(data.poster.src);
+                    if (this.options.captionFile != null && this.options.captionFile != "") {
+                        this.showCaptions(this.options.captionFile);
+                    }
                     this.player.src(data.video);
                     this.player.pause();
                     this.player.load();
+                    this.registerLoadEvents();
 
-                    this.player.on("progress", function() {
-                        log("EVENT: progress", this.options.id);
-
-                    }.bind(this));
-
-                    this.player.on("suspend", function() {
-                        log("EVENT: suspend", this.options.id);
-                    }.bind(this));
-
-                    this.player.on("waiting", function() {
-                        log("EVENT: **********************   waiting", this.options.id);
-                    }.bind(this));
-
-                    this.player.on("canplaythrough", function() {
-                        log("EVENT: **********************   canplaythrough", this.options.idc);
-                        this.isReady = true;
-                    }.bind(this));
-
-                    this.player.on("loadedalldata", function() {
-                        log("EVENT: loadedalldata", this.options.id);
-                        this.isReady = true;
-                    }.bind(this));
-
-                    //log("Adding ended listener");
-                    this.player.on("ended", function() {
-                        log("Video ended");
-                        // remove all events
-                        this.player.off();
-
-                        this.myParent().fireEvent("TIMELINE", {
-                            type : "video.finished",
-                            id : this.options.id,
-                            next : this.options.next
-                        });
-                    }.bind(this));
                 }.bind(this)));
+
         }
 
+    },
+    registerLoadEvents : function() {
+        log("this.player", this.player);
+        if (this.player != undefined) {
+            // clear any lefover events
+            //  this.player.off();
+            // add them again
+
+            this.player.on("suspend", function() {
+                log("EVENT: suspend", this.options.id);
+            }.bind(this));
+
+            this.player.on("waiting", function() {
+                log("EVENT: **********************   waiting", this.options.id);
+            }.bind(this));
+
+            this.player.on("canplaythrough", function() {
+                log("EVENT: **********************   canplaythrough", this.options.id);
+                this.isReady = true;
+            }.bind(this));
+
+            this.player.on("loadedalldata", function() {
+                this.isReady = true;
+                this.player.off('progress');
+                this.player.off('loaded');
+                this.player.off('loadstart');
+                this.player.off('suspend');
+                this.player.off('waiting');
+                this.player.off('canplaythrough');
+            }.bind(this));
+        }
+    },
+    registerPlaybackEndEvent : function() {
+        if (this.player != undefined) {
+             this.player.on("ended", function() {
+                this.player.off("ended");
+                this.myParent().fireEvent("TIMELINE", {
+                    type : "video.finished",
+                    id : this.options.id,
+                    next : this.options.next
+                });
+            }.bind(this));
+        }
+    },
+    registerPlaybackStartEvent : function() {
+        this.player.on("play", function() {
+            this.player.off("play");
+            this.myParent().fireEvent("TIMELINE", {
+                type : "video.started",
+                id : this.options.id,
+                next : "video.started"
+            });
+        }.bind(this));
+    },
+    registerCueEvents : function() {
+        if (this.player != undefined) {
+            this.player.on("timeupdate", function() {
+                this.myParent().fireEvent("TIMELINE", {
+                    type : "video.time",
+                    id : this.options.id,
+                    next : "Video.cue"
+                });
+            }.bind(this));
+        }
     },
     // ---------------------------
     start : function() {
         if (this.player != null) {
             this.player.play();
+            this.registerPlaybackEndEvent();
+        } else {
+            this.preload();
         }
     },
     // ---------------------------
-    show : function(speed) {
+    show : function() {
         this.container.fade('show');
-
     },
     // ---------------------------
     hide : function(speed) {
         this.container.fade('hide');
     },
+    showCaptions : function(captionFile) {
+        this.player.showTextTrack("subs");
+        this.player.controlBar.captionsButton.show();
+    },
     obscure : function() {
         log("Obscure");
-        log(this.container);
         //TODO: finish for IE - use an image for the mask
         if (Browser.ie) {
 
@@ -155,7 +202,6 @@ var VideoPlayer = new Class({
         } else {
             this.container.set('class', 'blur');
         }
-
     },
     // ---------------------------
     stop : function() {
@@ -169,7 +215,7 @@ var VideoPlayer = new Class({
     skip : function() {
         if (this.player != null) {
             // so the end event does not fire again
-            this.player.off();
+            this.player.off("ended");
 
             this.seek(this.player.duration());
 
@@ -197,11 +243,14 @@ var VideoPlayer = new Class({
         }
     },
     remove : function() {
-        log('Removing player: ' + this.playerID);   
-        // get the videojs player with id 
+        // get the videojs player with id
         var player = videojs.players[this.playerID];
         // get rid of it
-        player.dispose();
+        if (player == null) {
+            log("Video player is null");
+        } else {
+            player.dispose();
+        }
 
         if (this.container != null && this.container != undefined) {
             this.container.player.dispose();
@@ -213,14 +262,13 @@ var VideoPlayer = new Class({
     },
     // ----------------------------------------------------------
     getLoaderInfo : function() {
+
         var loaderInfo = new Object();
         var progress = 0;
         if (this.player != null) {
             progress = this.player.bufferedPercent();
 
             log(this.playerID + " **** Video Load progress: " + (this.player.bufferedPercent() * 100.00));
-            log(this.playerID + " **** Video Load progress buffered: ", this.player.buffered());
-            log(this.playerID + " **** Video duration: " + this.player.duration());
 
         }
         loaderInfo[this.options.id] = {
@@ -230,21 +278,18 @@ var VideoPlayer = new Class({
             type : 'VIDEO'
         };
 
+        // in iOS buffering does not start until play is clicked, so skip preloading
+        // http://stackoverflow.com/questions/11633929/readystate-issue-with-html5-video-elements-on-ios-safari
+        if (Browser.Platform.ios == true || Browser.Platform.android == true) {
+            this.isReady == true;
+            // this.player.off();
+            log(" iOS device - ready");
+        }
+
         if (this.isReady == true) {
             loaderInfo[this.options.id].progress = 1;
         }
         return loaderInfo;
-    },
-    // ----------------------------------------------------------
-    _reportProgress : function(isReady) {
-        var loaderInfo = this.getLoaderInfo();
-        if (isReady == true) {
-            loaderInfo[this.options.id].progress = 1;
-        }
-        //  if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
-        //     this.myParent().mediaLoader.reportProgress(loaderInfo);
-        //   }
-
     },
     _getVideoData : function() {
         var data = {};

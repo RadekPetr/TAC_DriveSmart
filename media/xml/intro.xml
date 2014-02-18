@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root version="1.0">
-  <Seq trackProgress="true" trackScore="false" Ex="1">
-    <Step fmt="Scene">      
-      <Image>menu/main_menu.png</Image>
-    </Step>
-  </Seq>
+	<Seq trackProgress="true" trackScore="false" Ex="0">
+		<Step fmt="PlayVideo_cue">
+			<VideoCues  caption="TAC_WEBSITEINTRO.vtt" >intro/website_intro</VideoCues>
+			<CuePoints>
+				<CuePoint start="6" end="8.1" width="400px" height="238px" left ="290px" top="210px">intro/dashboard.png</CuePoint>
+				<CuePoint start="8.1" end="11.5" width="250px" height="371px" left ="410px" top="50px">intro/intro.png</CuePoint>
+				<CuePoint start="11.5" end="18.5" width="250px" height="371px" left ="410px" top="50px">intro/intro_2.png</CuePoint>
+				<CuePoint start="18.5" end="24.5" width="250px" height="371px" left ="410px" top="50px">intro/intro_3.png</CuePoint>
+				<CuePoint start="29" end="33.5" width="400px" height="238px" left ="220px" top="210px">intro/dashboard.png</CuePoint>
+				<CuePoint start="35" end="39" width="700px" height="115px" left ="0px" top="0px">intro/top_1.png</CuePoint>
+				<CuePoint start="39" end="43" width="700px" height="115px" left ="0px" top="0px">intro/top_2.png</CuePoint>
+				<CuePoint start="43" end="46" width="700px" height="144px" left ="0px" top="0px">intro/top_3.png</CuePoint>
+				<CuePoint start="46" end="53" width="700px" height="144px" left ="0px" top="0px">intro/top_4.png</CuePoint>
+				<CuePoint start="53" end="57" width="700px" height="144px" left ="0px" top="0px">intro/top_6.png</CuePoint>
+				<CuePoint start="57" end="62" width="700px" height="144px" left ="0px" top="0px">intro/top_5.png</CuePoint>
+				<CuePoint start="63" end="66" width="700px" height="144px" left ="0px" top="0px">intro/top_7.png</CuePoint>				
+			</CuePoints>
+		</Step>
+		<Step fmt="Continue"></Step>
+	</Seq>
 </root>

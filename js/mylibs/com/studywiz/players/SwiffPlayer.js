@@ -6,11 +6,12 @@ var SwiffPlayer = new Class({
     options : {
         swiff : {
             id : 'Swiff',
-            width : Main.WIDTH + 'px',
-            height : Main.HEIGHT + 'px',
+            width : Main.VIDEO_WIDTH + 'px',
+            height : Main.VIDEO_HEIGHT + 'px',
             params : {
                 allowScriptAccess : 'always',
-                wmode : 'transparent'
+                wmode : 'transparent',
+                autoplay: 'true'
             },
             callBacks : {
                 isReady : this.isReady
@@ -18,11 +19,11 @@ var SwiffPlayer = new Class({
             container : null
         },
         style : {
-            position : 'absolute',
-            top : '0px',
-            left : '0px',
+            position : 'absolute',           
             opacity : '0',
-            visibility : 'hidden'
+            visibility : 'hidden',
+            left: Main.VIDEO_LEFT  + 'px',
+            top: Main.VIDEO_TOP  + 'px'
         },
         src : '',
         id : 'element.id',
@@ -62,6 +63,7 @@ var SwiffPlayer = new Class({
         if (isFlashSupported() == true) {
             this.options.swiff.container = this.container;
             this.swiff = new Swiff(this.options.src, this.options.swiff);
+            log ("Version ", detectFlash());
 
         } else {
             log("********************* No FLASH loading image");
@@ -73,7 +75,8 @@ var SwiffPlayer = new Class({
                 id : 'NoFlash',
                 style : {
                     'left' : '15px',
-                    'top' : '15px'
+                    'top' : '15px',
+                    'width': '100%'
                 }
             });
             this.addEvent("TIMELINE", this.handleNavigationEvent);
@@ -86,7 +89,6 @@ var SwiffPlayer = new Class({
         switch (params.next) {
             case "NoFlash.Ready":
                 this.removeEvents("TIMELINE");
-                log("ImageNo Flash loaded");
                 this.swiff.add(this.container.id);
                 this.swiff.show();
         }
@@ -104,7 +106,7 @@ var SwiffPlayer = new Class({
 
     },
     start : function(params) {
-        //TODO: add option to pass parameters
+        //TODO: add option to pass parameters ?
         log("***************************** Calling Start");
 
         Swiff.remote(this.swiff.toElement(), 'startSwiff', 1, 1, 1);
@@ -125,14 +127,8 @@ var SwiffPlayer = new Class({
     },
     // ---------------------------
     remove : function() {
-        //this.hide();
-        //log("Swiff remove called");
         if (this.container != null && this.container != undefined) {
-            //  log("this.container.destroy(); called");
-
             this.container.destroy();
-            // this.swiff = null;
-            // this.container = null;
         }
     },
     // ----------------------------------------------------------
@@ -169,9 +165,10 @@ var SwiffPlayer = new Class({
         }.bind(this);
 
         this.add(Main.DIV_ID);
-        // This is necessary for  IE as the flash only starts loding whne visible ...
+        // This is necessary for  IE as the flash only starts loading when visible ...
         this.container.setStyles({
-            'visibility' : 'visible'
+            'visibility' : 'visible',
+            'opacity': '1'
         });
 
     }
