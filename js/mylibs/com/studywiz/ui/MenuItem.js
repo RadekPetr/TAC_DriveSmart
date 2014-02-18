@@ -15,6 +15,7 @@ var MenuItem = new Class({
         next : 'next.action',
         parent : null,
         preview : null
+       
     },
     initialize : function(myParent, myOptions) {
         this.setOptions(myOptions);

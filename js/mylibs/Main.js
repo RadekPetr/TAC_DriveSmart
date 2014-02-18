@@ -29,6 +29,8 @@ var Main = new Class({
     // ----------------------------------------------------------
     start : function() {
         var browserTest = this._checkBrowser();
+        var ua = detectFlash();
+        log(detectFlash(), parseInt(ua.pv[0] + ua.pv[1] + ua.pv[2], 10) );
         if (browserTest.supported == true) {
             new Api(this).saveLog('info', "****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
             Main.sequencePlayer = new SequencePlayer(this, {});

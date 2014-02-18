@@ -178,13 +178,12 @@ var MenuPlayer = new Class({
         }
     },
     _isItemDisabled : function(menuItem) {
-        log ( "flash not supported", isFlashSupported());
+        log ( "flash supported", isFlashSupported());
         // Disable if flash is required but not available
         var isDisabled = false;
-        if (isFlashSupported() == false && menuItem.options.flashOnly == true) {
+        if (isFlashSupported() == false && menuItem.options.data.flashOnly == true) {
             isDisabled = true;
-            log ( "flash not supported");        
-           
+            log ( "flash not supported will disable");           
         }       
        
         return isDisabled;
