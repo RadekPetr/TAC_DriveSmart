@@ -27,12 +27,7 @@ var AudioPlayer = new Class({
 
         // TODO: handle these events handleFileError, handleProgress
         //this.preloader.onFileError = this.handleFileError();
-        /*  this.preloader.onProgress = function() {
-         if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
-         this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
-         }
-         }.bind(this)
-         */
+
     },
     myParent : function() {
         return this.options.parent;
@@ -59,14 +54,11 @@ var AudioPlayer = new Class({
             this._playSound();
         }
     },
-
     // ----------------------------------------------------------
     stop : function() {
         if (this.soundInstance != null) {
             this.soundInstance.stop();
         }
-
-        // createjs.SoundJS.stop();
     },
     // ----------------------------------------------------------
     preload : function() {
@@ -93,7 +85,6 @@ var AudioPlayer = new Class({
         }
     }.protect(),
     _onSoundComplete : function(event) {
-
         this.myParent().fireEvent("TIMELINE", {
             type : "audio.finished",
             id : this.options.id,
@@ -102,17 +93,12 @@ var AudioPlayer = new Class({
     },
     // ----------------------------------------------------------
     _preloadComplete : function(event) {
-        // log("++ Audio Preloaded: " + this.options.id);
-        if (Browser.Platform.ios == true || Browser.Platform.android == true) {
-            this.preloaded = false;
-        } else {
-            this.preloaded = true;
-        }
+        log("++ Audio Preloaded: " + this.options.id);
+        this.preloaded = true;
     },
     // ----------------------------------------------------------
     _preloadError : function(event) {
         log("++ Audio Preload error: " + event);
-
     },
     // ----------------------------------------------------------
     getLoaderInfo : function() {

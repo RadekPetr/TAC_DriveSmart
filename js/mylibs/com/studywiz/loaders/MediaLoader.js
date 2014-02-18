@@ -22,7 +22,7 @@ var MediaLoader = new Class({
         this.videoQueue = new Array();
     },
     // ----------------------------------------------------------
-    register : function(loaderInfo) { 
+    register : function(loaderInfo) {
         if (this.loadQueue.has(loaderInfo.id)) {
             // nothing - already exists
         } else {
@@ -40,7 +40,7 @@ var MediaLoader = new Class({
     },
     // ----------------------------------------------------------
     start : function(showProgressBar) {
-
+        log("Preloader startetd ");
         // show the progress bar if requested
         if (showProgressBar == true) {
             this._addProgressBar();
@@ -70,6 +70,7 @@ var MediaLoader = new Class({
     },
     // ----------------------------------------------------------
     reportProgress : function(loaderInfo) {
+        log("this.loadQueue", this.loadQueue);
 
         if (this.options.next == null) {
             // if next action is not set do not allow reporting progress, not sure ???
@@ -90,6 +91,7 @@ var MediaLoader = new Class({
             this._updateProgressBar(overAllProgress);
             this._handleFinished(overAllProgress);
         }
+
     },
     updateProgress : function() {
         this.loadQueue.each( function(value, key) {
@@ -187,7 +189,8 @@ var MediaLoader = new Class({
         }
     }.protect(),
     getQueueLength : function() {
-        return this.loadQueue.getLength() + this.videoQueue.length;;
+        return this.loadQueue.getLength() + this.videoQueue.length;
+        ;
     },
     reset : function() {
         clearInterval(this.preloadTimer);

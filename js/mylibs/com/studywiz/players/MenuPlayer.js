@@ -108,7 +108,7 @@ var MenuPlayer = new Class({
             menuItem.show();
 
             var isLocked = this._isItemLocked(menuItemData);
-            var isDisabled = this._isItemDisabled(menuItemData);
+            var isDisabled = this._isItemDisabled(menuItem);
 
             if (isLocked) {
                 menuItem.lock();
@@ -120,10 +120,10 @@ var MenuPlayer = new Class({
 
             if (isLocked != true && isDisabled != true) {
                 menuItem.registerClickEvent(this.myParent());
-                menuItem.registerMouseLeaveEvent(this);
+                menuItem.registerMouseEnterEvent(this);
             } else if (Main.DEBUG == true) {
                 menuItem.registerClickEvent(this.myParent());
-                menuItem.registerMouseLeaveEvent(this);
+                menuItem.registerMouseEnterEvent(this);
             }
 
         }.bind(this));
@@ -178,11 +178,15 @@ var MenuPlayer = new Class({
         }
     },
     _isItemDisabled : function(menuItem) {
+        log ( "flash not supported", isFlashSupported());
         // Disable if flash is required but not available
         var isDisabled = false;
-        if (isFlashSupported() == false && menuItem.flashOnly == true) {
+        if (isFlashSupported() == false && menuItem.options.flashOnly == true) {
             isDisabled = true;
-        }
+            log ( "flash not supported");        
+           
+        }       
+       
         return isDisabled;
     }
 });

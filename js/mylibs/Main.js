@@ -121,10 +121,10 @@ Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '1.0.4';
-Main.BUILD = '2014/02/14 build 1';
+Main.BUILD = '2014/02/17 build 3';
 
 // When running on localhost (So I can use different paths when testing)
-Main.IS_LOCAL = false;
+Main.IS_LOCAL = true;
 
 // Show hide debug panel and ignore lock status
 Main.DEBUG = true;
