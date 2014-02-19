@@ -36,6 +36,7 @@ var VideoPlayer = new Class({
         this.playerID = 'player_' + this.options.id;
         this.isReady = false;
         this.container = null;
+        this.isVisible = false;
 
         this.container = new Element("div", {
             id : this.containerID,
@@ -65,6 +66,9 @@ var VideoPlayer = new Class({
             //     log(this);
             //      this.remove();
             //  } else {
+
+            this.show();
+
             this.isReady = false;
             var data = this._getVideoData();
             this.player = videojs('player_' + this.options.id, {
@@ -84,12 +88,7 @@ var VideoPlayer = new Class({
             });
 
             this.player.ready(( function() {
-                    //this.player.options['children'] = false;
-                    // this.player.TextTrack.disable();
-                    // log('Player component ready ... preloading');
                     var data = this._getVideoData();
-                    // this.player.dimensions(this.options.width, this.options.height);
-                    // this.player.poster(data.poster.src);
                     if (this.options.captionFile != null && this.options.captionFile != "") {
                         this.showCaptions(this.options.captionFile);
                     }
@@ -97,11 +96,10 @@ var VideoPlayer = new Class({
                     this.player.pause();
                     this.player.load();
                     this.registerLoadEvents();
+                    this.hide();
 
                 }.bind(this)));
-
         }
-
     },
     registerLoadEvents : function() {
         log("this.player", this.player);
@@ -120,23 +118,17 @@ var VideoPlayer = new Class({
 
             this.player.on("canplaythrough", function() {
                 log("EVENT: **********************   canplaythrough", this.options.id);
-                this.isReady = true;
+                this._finishedLoading();
             }.bind(this));
 
             this.player.on("loadedalldata", function() {
-                this.isReady = true;
-                this.player.off('progress');
-                this.player.off('loaded');
-                this.player.off('loadstart');
-                this.player.off('suspend');
-                this.player.off('waiting');
-                this.player.off('canplaythrough');
+                this._finishedLoading();
             }.bind(this));
         }
     },
     registerPlaybackEndEvent : function() {
         if (this.player != undefined) {
-             this.player.on("ended", function() {
+            this.player.on("ended", function() {
                 this.player.off("ended");
                 this.myParent().fireEvent("TIMELINE", {
                     type : "video.finished",
@@ -169,8 +161,27 @@ var VideoPlayer = new Class({
     },
     // ---------------------------
     start : function() {
+
         if (this.player != null) {
+
+            //this.player.pause();
+            //this.player.load();
             this.player.play();
+
+            /* var timerFunction = function() {
+             log ("this.player.player.currentTime",this.player.currentTime());
+             if (this.player.currentTime()  < 1.0) {
+             log ("ssssss");
+             this.player.play();
+             } else {
+             log ("zzzzz");
+             clearInterval(this.playTimer);
+             }
+
+             }.bind(this);
+             this.playTimer = timerFunction.periodical(1000);
+             */
+
             this.registerPlaybackEndEvent();
         } else {
             this.preload();
@@ -179,10 +190,12 @@ var VideoPlayer = new Class({
     // ---------------------------
     show : function() {
         this.container.fade('show');
+        this.isVisible = true;
     },
     // ---------------------------
     hide : function(speed) {
         this.container.fade('hide');
+        this.isVisible = false;
     },
     showCaptions : function(captionFile) {
         this.player.showTextTrack("subs");
@@ -207,7 +220,9 @@ var VideoPlayer = new Class({
     stop : function() {
         if (this.player != null) {
             this.player.pause();
-            this.player.currentTime(0);
+            if (this.isVisible) {
+                this.player.currentTime(0);
+            }
             this.player.pause();
         }
     },
@@ -267,10 +282,9 @@ var VideoPlayer = new Class({
         var progress = 0;
         if (this.player != null) {
             progress = this.player.bufferedPercent();
-
             log(this.playerID + " **** Video Load progress: " + (this.player.bufferedPercent() * 100.00));
-
         }
+
         loaderInfo[this.options.id] = {
             'progress' : progress,
             'weight' : 2,
@@ -281,9 +295,8 @@ var VideoPlayer = new Class({
         // in iOS buffering does not start until play is clicked, so skip preloading
         // http://stackoverflow.com/questions/11633929/readystate-issue-with-html5-video-elements-on-ios-safari
         if (Browser.Platform.ios == true || Browser.Platform.android == true) {
-            this.isReady == true;
-            // this.player.off();
-            log(" iOS device - ready");
+            this.isReady = true;
+            log(" iOS device - readyggg: ", this.playerID);
         }
 
         if (this.isReady == true) {
@@ -311,6 +324,15 @@ var VideoPlayer = new Class({
             src : posterFile + "_first.jpg"
         };
         return data;
+    },
+    _finishedLoading : function() {
+        this.isReady = true;
+        this.player.off('progress');
+        this.player.off('loaded');
+        this.player.off('loadstart');
+        this.player.off('suspend');
+        this.player.off('waiting');
+        this.player.off('canplaythrough');
     }
 });
 

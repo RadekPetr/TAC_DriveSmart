@@ -229,9 +229,9 @@ var SequencePlayer = new Class({
                     this._removeIntroContainers();
                     this._hideInteractions();
                     step.media.video.options.next = 'PlayVideo.done';
+                    this._hideOtherVideos(step.media.video.playerID);
                     step.media.video.show();
                     step.media.video.start();
-                    this._hideOtherVideos(step.media.video.playerID);
                     //TODO: noBg1="1"
                     break;
                 case "PlayVideo_cue":
@@ -619,9 +619,17 @@ var SequencePlayer = new Class({
             case "Media.ready":
             case "PlayVideo.done":
             case "Question.done":
-            case "QuestionFeedback.done":
+            case "Continue_Video.clicked":
             case "PlayAudio.done":
                 this._nextStep();
+                break;
+            case "QuestionFeedback.done":
+            // to start video with user interaction in iOS
+                this._addButton({
+                    type : "Continue",
+                    next : "Continue_Video.clicked"
+                });
+
                 break;
             case "Video.cue":
                 this._checkCuePoints(this.currentStep);
