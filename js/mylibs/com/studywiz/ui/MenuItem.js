@@ -15,7 +15,7 @@ var MenuItem = new Class({
         next : 'next.action',
         parent : null,
         preview : null
-       
+
     },
     initialize : function(myParent, myOptions) {
         this.setOptions(myOptions);
@@ -26,18 +26,18 @@ var MenuItem = new Class({
 
         // log(menuItem);
         var elemID = "menu_item_" + this.selectedModuleID;
-        this.container = new Element('div', {            
+        this.container = new Element('div', {
             'id' : elemID,
             'onselectstart' : 'return false;'
         });
-        
-         this.buttonGroup = new Element('div', {
+
+        this.buttonGroup = new Element('div', {
             'html' : this.options.data.text,
             'id' : elemID,
             'onselectstart' : 'return false;',
             'class' : this.options['class']
         });
-         this.buttonGroup.inject(this.container );
+        this.buttonGroup.inject(this.container);
 
         this.options.preview = new ImagePlayer(myParent, {
             src : Main.PATHS.imageFolder + this.options.data.preview,
@@ -61,11 +61,11 @@ var MenuItem = new Class({
         this.isLocked = true;
         this.isDisabled = true;
         // TODO: locked pane css
-        this._getFlashRequiredSymbol().inject(this.container) ;
+        this._getFlashRequiredSymbol().inject(this.container);
         //var lockedCSS = 'menu_item locked no-select pane blue';
         //  this.container.removeAttribute('class');
         // this.container.addClass(lockedCSS);
-         this.buttonGroup.fade("0.2");
+        this.buttonGroup.fade("0.2");
     },
     showProgress : function() {
         if (this.options.data.showProgress == true) {
@@ -75,7 +75,7 @@ var MenuItem = new Class({
                 //  this.container.adopt(symbol);
                 //  symbol.show();
             }
-             this.buttonGroup.adopt(UIHelpers.progressBarSetup(moduleState.progress, this.selectedModuleID)['holder']);
+            this.buttonGroup.adopt(UIHelpers.progressBarSetup(moduleState.progress, this.selectedModuleID)['holder']);
         }
     },
     myParent : function() {
@@ -141,7 +141,7 @@ var MenuItem = new Class({
                     preview : this.options.preview
                 }
             });
-            
+
         }.bind(this));
 
     },
@@ -155,17 +155,16 @@ var MenuItem = new Class({
             src : file,
             next : "",
             id : 'flash required ' + this.options.data.moduleID,
-            title: 'flash required for module ' + this.options.data.text,
+            title : 'flash required for module ' + this.options.data.text,
             'class' : 'menu_item no-select'
         });
         symbolImage.preload();
         symbolImage.image.setStyles({
-           
+            'width' : '140px',
             'height' : '34px',
             'float' : 'right',
-            'position': 'relative',
+            'position' : 'relative',
             'top' : '-80px'
-           
         });
 
         return symbolImage.image;
