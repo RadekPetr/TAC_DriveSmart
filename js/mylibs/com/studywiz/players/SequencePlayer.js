@@ -575,6 +575,7 @@ var SequencePlayer = new Class({
                     type : "Repeat video",
                     next : "Repeat.video.clicked"
                 });
+                // add the event in case the user wants to play again via the controller or via repeat
                 this.activeVideo.registerPlaybackEndEvent();
                 this.activeVideo.registerPlaybackStartEvent();
                 break;
@@ -610,6 +611,7 @@ var SequencePlayer = new Class({
                 }
                 break;
             case  "Repeat.video.clicked":
+                
                 this._stopPlayers();
                 this._removeImages();
 
@@ -1442,8 +1444,7 @@ var SequencePlayer = new Class({
             var moduleProgressBar = UIHelpers.progressBarSetup(moduleState.progress, this.moduleInfo.moduleID);
             UIHelpers.setClasses(moduleProgressBar['holder'], "no-select module_progress_intro");
             moduleProgressBar['holder'].inject(titleDiv);
-
-            // Already played the intro video so this time just play welcome sound
+         
 
             this._addButton({
                 type : "Continue",
@@ -1459,24 +1460,26 @@ var SequencePlayer = new Class({
                 this.fromMenu = false;
                 step.media.audio.options.next = '';
                 step.media.audio.start();
-
             }
         } else {
             this._stopPlayers();
+            
             this._removeButtons();
             this._removeIntroContainers();
+            
             this._hideInteractions();
+            
             step.media.moduleIntroVideo.options.next = 'Module.Intro.Video.done';
             step.media.moduleIntroVideo.show();
 
             this._hideOtherVideos(step.media.moduleIntroVideo.playerID);
             this.activeVideo.registerPlaybackStartEvent();
-
             this.activeVideo.registerPlaybackEndEvent();
+            
             log("this.sequenceState.completed", this.sequenceState.completed);
-            if (this.sequenceState.completed == true) {
-                // Show button to skip
-                // Already played the intro video so this time just play welcome sound
+            
+            if (this.sequenceState.completed == true) {                
+                // Already played the intro video so this time show continue buttons
                 this._addButton({
                     type : "Continue",
                     next : "Continue.clicked"
@@ -1485,14 +1488,9 @@ var SequencePlayer = new Class({
                     type : "Main Menu",
                     next : "MainMenuFromIntro.clicked"
                 });
-
-                step.media.moduleIntroVideo.start();
-
-            } else {
-                step.media.moduleIntroVideo.start();
             }
             this.fromMenu = false;
-
+            step.media.moduleIntroVideo.start();            
         }
     }.protect(),
     _moduleGroupIntroSetup : function(step) {
