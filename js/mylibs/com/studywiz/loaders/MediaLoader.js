@@ -40,13 +40,12 @@ var MediaLoader = new Class({
     },
     // ----------------------------------------------------------
     start : function(showProgressBar) {
-        log("Preloader startetd ");
+        
         // show the progress bar if requested
         if (showProgressBar == true) {
             this._addProgressBar();
             this._show();
         }
-
         // add one video to the queue
         this._addOneVideoToQueue();
 
