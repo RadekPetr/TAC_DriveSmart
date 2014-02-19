@@ -624,7 +624,7 @@ var SequencePlayer = new Class({
                 this._nextStep();
                 break;
             case "QuestionFeedback.done":
-            // to start video with user interaction in iOS
+                // to start video with user interaction in iOS
                 this._addButton({
                     type : "Continue",
                     next : "Continue_Video.clicked"

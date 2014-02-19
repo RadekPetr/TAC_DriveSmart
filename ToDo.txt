@@ -40,7 +40,7 @@ https://gist.github.com/millermedeiros/891886
 
 Video scanning6 - shared_uia08_next.mp4  - not fluent
 
-Flash Detection - firefox disabled vs not installed , recorder no flash warning - no voice will be recorded
+Flash Detection - firefox disabled vs not installed , 
 Preloading flash timeout ?
 Intro video saving progress 2x
 Menu item disabling vs rollover text
@@ -61,6 +61,7 @@ Fixing dashboard page navigation. Currently module buttons on the left show brie
 
 -----------------------------------------------------------------
 DONE:
+recorder no flash warning - no voice will be recorded
 - Button styles
 - Completed style - Text "Completed"
 - Coutry 20 - stops after palyback ?

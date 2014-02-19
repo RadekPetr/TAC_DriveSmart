@@ -123,7 +123,7 @@ Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '1.0.4';
-Main.BUILD = '2014/02/17 build 3';
+Main.BUILD = '2014/02/19 build 1';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;
