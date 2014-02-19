@@ -113,7 +113,7 @@ var AudioPlayer = new Class({
 
         if (Browser.Platform.ios == true || Browser.Platform.android == true) {
             loaderInfo[this.options.id].progress = 1;
-            log(" iOS device - ready");
+            log(" iOS device - audio ready");
         }
 
         return loaderInfo;

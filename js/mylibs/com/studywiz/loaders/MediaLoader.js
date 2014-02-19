@@ -78,7 +78,7 @@ var MediaLoader = new Class({
         } else {
             Object.each(loaderInfo, function(value, key) {
                 if (this.loadQueue.has(key)) {
-                    // so video can keep loading but won't chnage the overall score aswe ahve already reported 100% by the canplaythrough event'
+                    // so video can keep loading but won't change the overall score as we have already reported 100% by the canplaythrough event'
                     if (this.loadQueue[key].progress < value.progress) {
                         this.loadQueue.set(key, value);
                     }
