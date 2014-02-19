@@ -67,6 +67,7 @@ var Recorder = new Class({
                 title : 'NoFlash',
                 id : 'NoFlash',
                 style : {
+                    'position': 'relative',
                     'left' : '15px',
                     'top' : '15px'
                 }
