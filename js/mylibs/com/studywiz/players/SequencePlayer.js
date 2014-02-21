@@ -611,7 +611,7 @@ var SequencePlayer = new Class({
                 }
                 break;
             case  "Repeat.video.clicked":
-                
+
                 this._stopPlayers();
                 this._removeImages();
 
@@ -626,11 +626,24 @@ var SequencePlayer = new Class({
                 this._nextStep();
                 break;
             case "QuestionFeedback.done":
-                // to start video with user interaction in iOS
-                this._addButton({
-                    type : "Continue",
-                    next : "Continue_Video.clicked"
-                });
+                // if click is required to play show continue button
+                if (Main.features.clickToPlay) {
+                    // does the next step have expert audio ? Show button if yes
+                    var nextStep = this.currentSequence[0];
+                    log("Next step is ", nextStep);
+                    if (nextStep.attributes.fmt != "Continue") {
+                        // to start video with user interaction in iOS
+                        this._addButton({
+                            type : "Continue",
+                            next : "Continue_Video.clicked"
+                        });
+                    } else {
+                        this._nextStep();
+                    }
+
+                } else {
+                    this._nextStep();
+                }
 
                 break;
             case "Video.cue":
@@ -723,6 +736,20 @@ var SequencePlayer = new Class({
             case "Cameo.visor.tween.done":
                 this.currentStep.media.video.options.next = 'Cameo.done';
                 this.currentStep.media.video.show();
+                if (Main.features.clickToPlay) {
+                    this._addButton({
+                        type : "Play Cameo",
+                        next : "PlayCameo.clicked"
+                    });
+                } else {
+                    this.currentStep.media.video.start();
+                }
+                //
+
+                // TODO: Handle iOS - add start button ?
+                break;
+            case "PlayCameo.clicked":
+                this._removeButtons();
                 this.currentStep.media.video.start();
                 break;
             case "Cameo.done":
@@ -1444,7 +1471,6 @@ var SequencePlayer = new Class({
             var moduleProgressBar = UIHelpers.progressBarSetup(moduleState.progress, this.moduleInfo.moduleID);
             UIHelpers.setClasses(moduleProgressBar['holder'], "no-select module_progress_intro");
             moduleProgressBar['holder'].inject(titleDiv);
-         
 
             this._addButton({
                 type : "Continue",
@@ -1463,22 +1489,22 @@ var SequencePlayer = new Class({
             }
         } else {
             this._stopPlayers();
-            
+
             this._removeButtons();
             this._removeIntroContainers();
-            
+
             this._hideInteractions();
-            
+
             step.media.moduleIntroVideo.options.next = 'Module.Intro.Video.done';
             step.media.moduleIntroVideo.show();
 
             this._hideOtherVideos(step.media.moduleIntroVideo.playerID);
             this.activeVideo.registerPlaybackStartEvent();
             this.activeVideo.registerPlaybackEndEvent();
-            
+
             log("this.sequenceState.completed", this.sequenceState.completed);
-            
-            if (this.sequenceState.completed == true) {                
+
+            if (this.sequenceState.completed == true) {
                 // Already played the intro video so this time show continue buttons
                 this._addButton({
                     type : "Continue",
@@ -1490,7 +1516,7 @@ var SequencePlayer = new Class({
                 });
             }
             this.fromMenu = false;
-            step.media.moduleIntroVideo.start();            
+            step.media.moduleIntroVideo.start();
         }
     }.protect(),
     _moduleGroupIntroSetup : function(step) {

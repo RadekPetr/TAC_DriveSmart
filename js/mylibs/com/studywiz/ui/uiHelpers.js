@@ -151,6 +151,15 @@ UIHelpers.getButtonOptions = function(buttonType) {
             style : {
                 width : '195px'
             }
+        },
+        "Play Cameo" : {
+            id : "button_" + buttonType,
+            text : "Play driver video",
+            next : "",
+            'class' : "button position_4 pane orange",
+            style : {
+                width : '195px'
+            }
         }
     });
     var options = presets.get(buttonType);

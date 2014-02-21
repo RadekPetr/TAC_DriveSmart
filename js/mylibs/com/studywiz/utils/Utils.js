@@ -97,3 +97,15 @@ function detectFlash() {
     };
 };
 
+function getFeatures () {
+    var featureSet = new Hash ({      
+        supportsTouch: false,
+        clickToPlay: false        
+    });
+
+    featureSet.supportsTouch ='ontouchstart' in window || navigator.msMaxTouchPoints;
+    featureSet.clickToPlay = (Browser.Platform.ios == true );
+    featureSet.clickToPlay = true;
+    return featureSet;
+};
+
