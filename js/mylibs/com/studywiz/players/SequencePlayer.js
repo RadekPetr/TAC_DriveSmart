@@ -627,8 +627,7 @@ var SequencePlayer = new Class({
                 break;
             case "QuestionFeedback.done":
                 // if click is required to play show continue button
-                if (Main.features.clickToPlay) {
-                    // does the next step have expert audio ? Show button if yes
+                if (Main.features.clickToPlay) {                    
                     var nextStep = this.currentSequence[0];
                     log("Next step is ", nextStep);
                     if (nextStep.attributes.fmt != "Continue") {
@@ -644,7 +643,6 @@ var SequencePlayer = new Class({
                 } else {
                     this._nextStep();
                 }
-
                 break;
             case "Video.cue":
                 this._checkCuePoints(this.currentStep);

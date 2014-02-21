@@ -105,7 +105,7 @@ function getFeatures () {
 
     featureSet.supportsTouch ='ontouchstart' in window || navigator.msMaxTouchPoints;
     featureSet.clickToPlay = (Browser.Platform.ios == true );
-    featureSet.clickToPlay = true;
+   // featureSet.clickToPlay = true;
     return featureSet;
 };
 
