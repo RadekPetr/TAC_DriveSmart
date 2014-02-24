@@ -54,7 +54,6 @@ var KeyRiskPlayer = new Class({
         }.bind(this));
     },
     remove : function() {
-        //TODO: use the container with other UI things, make suer null is handled
         this.hide();
         this.container.destroy();
         this.container = null;

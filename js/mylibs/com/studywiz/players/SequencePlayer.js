@@ -45,8 +45,7 @@ var SequencePlayer = new Class({
         this.moduleInfo = this.myParent().getModuleInfo();
         this.sequenceState = Main.userTracker.getUserSequenceState(this.moduleInfo.currentSequenceID, this.moduleInfo.moduleID);
         // reset scoring, so when it repeats the scores are replaced not appended (Unless this will be requested ?)
-        this.sequenceState.score = new Array();
-        // TODO handle mobile platforms: Browser.Platform.android, handle incompatible old browsers
+        this.sequenceState.score = new Array();       
         log("Starting SEQUENCE: " + this.moduleInfo.currentSequenceID);
         this._setupSequenceMedia();
     },
@@ -411,7 +410,6 @@ var SequencePlayer = new Class({
                     break;
                 case "KRFeedback":
                     this._removeButtons();
-                    // TODO: use video size for the image - maybe use css class for this
                     step.media.image.options.style.width = Main.VIDEO_WIDTH + "px";
                     step.media.image.options.style.height = Main.VIDEO_HEIGHT + "px";
                     step.media.image.options.style.left = 0;
@@ -554,8 +552,8 @@ var SequencePlayer = new Class({
                 });
 
                 break;
-            case "Module.Intro.Video.done":
-                this._updateUserProgress();
+            case "Module.Intro.Video.done":         
+                this._updateUserProgress();   
                 var text = new Element("div", {
                     html : "Click continue to start exercises",
                     'class' : 'module_intro_text no-select',
@@ -627,7 +625,7 @@ var SequencePlayer = new Class({
                 break;
             case "QuestionFeedback.done":
                 // if click is required to play show continue button
-                if (Main.features.clickToPlay) {                    
+                if (Main.features.clickToPlay == true) {
                     var nextStep = this.currentSequence[0];
                     log("Next step is ", nextStep);
                     if (nextStep.attributes.fmt != "Continue") {
@@ -742,9 +740,6 @@ var SequencePlayer = new Class({
                 } else {
                     this.currentStep.media.video.start();
                 }
-                //
-
-                // TODO: Handle iOS - add start button ?
                 break;
             case "PlayCameo.clicked":
                 this._removeButtons();
@@ -1218,7 +1213,6 @@ var SequencePlayer = new Class({
                     step.zones = item.attributes.data;
                     break;
                 case "Swiff":
-                    // TODO: Flash support detection
                     step.media.swiff = new SwiffPlayer(this, {
                         swiff : {
                             id : 'swiff.id.' + index + "_" + stepOrder
@@ -1497,8 +1491,7 @@ var SequencePlayer = new Class({
             step.media.moduleIntroVideo.show();
 
             this._hideOtherVideos(step.media.moduleIntroVideo.playerID);
-            this.activeVideo.registerPlaybackStartEvent();
-            this.activeVideo.registerPlaybackEndEvent();
+            this.activeVideo.registerPlaybackStartEvent();          
 
             log("this.sequenceState.completed", this.sequenceState.completed);
 
