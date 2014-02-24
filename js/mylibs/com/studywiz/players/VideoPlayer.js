@@ -60,15 +60,12 @@ var VideoPlayer = new Class({
     // ---------------------------
     preload : function() {
         // log("++ Video Preload started: " + this.options.id);
-        // TODO: handle sitiation player is undefined
         if (this.player == undefined) {
             //    log('Undefined player ERRROR');
             //     log(this);
             //      this.remove();
             //  } else {
-
             this.show();
-
             this.isReady = false;
             var data = this._getVideoData();
             this.player = videojs('player_' + this.options.id, {

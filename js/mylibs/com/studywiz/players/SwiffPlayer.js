@@ -105,10 +105,8 @@ var SwiffPlayer = new Class({
         RightClick.init(this.options.swiff.id, this.containerID);
 
     },
-    start : function(params) {
-        //TODO: add option to pass parameters ?
-        log("***************************** Calling Start");
-
+    start : function(params) {        
+       // log("***************************** Calling Start");
         Swiff.remote(this.swiff.toElement(), 'startSwiff', 1, 1, 1);
     },
     stop : function() {

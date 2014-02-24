@@ -179,7 +179,7 @@ var Api = new Class({
             }.bind(this)
         });
 
-        if (externalModuleID != "in") {
+        if (externalModuleID != "in" && externalModuleID != "mm") {
             this._sendRequest(jsonRequest, requestPayload, true);
         }
 
