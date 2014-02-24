@@ -25,9 +25,6 @@ var AudioPlayer = new Class({
 
         this.preloader.installPlugin(createjs.Sound);
 
-        // TODO: handle these events handleFileError, handleProgress
-        //this.preloader.onFileError = this.handleFileError();
-
     },
     myParent : function() {
         return this.options.parent;
@@ -99,6 +96,7 @@ var AudioPlayer = new Class({
     // ----------------------------------------------------------
     _preloadError : function(event) {
         log("++ Audio Preload error: " + event);
+        new Api(this).saveLog('error', "****** Audio load error file" + this.options.src + " ******");
     },
     // ----------------------------------------------------------
     getLoaderInfo : function() {
