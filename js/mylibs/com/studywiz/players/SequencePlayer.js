@@ -45,7 +45,7 @@ var SequencePlayer = new Class({
         this.moduleInfo = this.myParent().getModuleInfo();
         this.sequenceState = Main.userTracker.getUserSequenceState(this.moduleInfo.currentSequenceID, this.moduleInfo.moduleID);
         // reset scoring, so when it repeats the scores are replaced not appended (Unless this will be requested ?)
-        this.sequenceState.score = new Array();       
+        this.sequenceState.score = new Array();
         log("Starting SEQUENCE: " + this.moduleInfo.currentSequenceID);
         this._setupSequenceMedia();
     },
@@ -552,8 +552,8 @@ var SequencePlayer = new Class({
                 });
 
                 break;
-            case "Module.Intro.Video.done":         
-                this._updateUserProgress();   
+            case "Module.Intro.Video.done":
+                this._updateUserProgress();
                 var text = new Element("div", {
                     html : "Click continue to start exercises",
                     'class' : 'module_intro_text no-select',
@@ -620,15 +620,33 @@ var SequencePlayer = new Class({
             case "PlayVideo.done":
             case "Question.done":
             case "Continue_Video.clicked":
-            case "PlayAudio.done":
                 this._nextStep();
+                break;
+
+            case "PlayAudio.done":
+                if (Main.features.clickToPlay == true) {
+                    var nextStep = this.currentSequence[0];
+                    log("Next step is ", nextStep);
+                    if (nextStep.attributes.fmt != "Continue" && nextStep.attributes.fmt == "PlayVideo") {
+                        // to start video with user interaction in iOS
+                        this._addButton({
+                            type : "Continue",
+                            next : "Continue_Video.clicked"
+                        });
+                    } else {
+                        this._nextStep();
+                    }
+
+                } else {
+                    this._nextStep();
+                }
                 break;
             case "QuestionFeedback.done":
                 // if click is required to play show continue button
                 if (Main.features.clickToPlay == true) {
                     var nextStep = this.currentSequence[0];
                     log("Next step is ", nextStep);
-                    if (nextStep.attributes.fmt != "Continue") {
+                    if (nextStep.attributes.fmt != "Continue" && nextStep.attributes.fmt != "PlayAudio") {
                         // to start video with user interaction in iOS
                         this._addButton({
                             type : "Continue",
@@ -1491,7 +1509,7 @@ var SequencePlayer = new Class({
             step.media.moduleIntroVideo.show();
 
             this._hideOtherVideos(step.media.moduleIntroVideo.playerID);
-            this.activeVideo.registerPlaybackStartEvent();          
+            this.activeVideo.registerPlaybackStartEvent();
 
             log("this.sequenceState.completed", this.sequenceState.completed);
 

@@ -37,6 +37,7 @@ var VideoPlayer = new Class({
         this.isReady = false;
         this.container = null;
         this.isVisible = false;
+        this.isSuspended = false;
 
         this.container = new Element("div", {
             id : this.containerID,
@@ -90,8 +91,11 @@ var VideoPlayer = new Class({
                         this.showCaptions(this.options.captionFile);
                     }
                     this.player.src(data.video);
-                    this.player.pause();
+
                     this.player.load();
+                    log("calling play");
+                    this.player.play();
+                    this.player.pause();
                     this.registerLoadEvents();
                     this.hide();
 
@@ -99,7 +103,6 @@ var VideoPlayer = new Class({
         }
     },
     registerLoadEvents : function() {
-        log("this.player", this.player);
         if (this.player != undefined) {
             // clear any lefover events
             //  this.player.off();
@@ -107,10 +110,20 @@ var VideoPlayer = new Class({
 
             this.player.on("suspend", function() {
                 log("EVENT: suspend", this.options.id);
+                if (Browser.Platform.ios == true) {
+                    log("Consider this loaded");
+                    this._finishedLoading();
+                }
+                this.isSuspended = true;
             }.bind(this));
 
             this.player.on("waiting", function() {
                 log("EVENT: **********************   waiting", this.options.id);
+                //this.player.load();
+            }.bind(this));
+            this.player.on("progress", function() {
+                log("EVENT: **********************   progress", this.options.id);
+                this.isSuspended = false;
             }.bind(this));
 
             this.player.on("canplaythrough", function() {
@@ -120,6 +133,7 @@ var VideoPlayer = new Class({
 
             this.player.on("loadedalldata", function() {
                 this._finishedLoading();
+                this.isSuspended = false;
             }.bind(this));
         }
     },
@@ -144,6 +158,10 @@ var VideoPlayer = new Class({
                 next : "video.started"
             });
         }.bind(this));
+        this.player.on("pause", function() {
+            log("EVENT: **********************   pause", this.options.id);
+            //this.player.load();
+        }.bind(this));
     },
     registerCueEvents : function() {
         if (this.player != undefined) {
@@ -164,7 +182,7 @@ var VideoPlayer = new Class({
             //this.player.pause();
             //this.player.load();
             this.player.play();
-
+            log("Play called", this.player, this.isSuspended);
             /* var timerFunction = function() {
              log ("this.player.player.currentTime",this.player.currentTime());
              if (this.player.currentTime()  < 1.0) {
@@ -292,7 +310,7 @@ var VideoPlayer = new Class({
         // in iOS buffering does not start until play is clicked, so skip preloading
         // http://stackoverflow.com/questions/11633929/readystate-issue-with-html5-video-elements-on-ios-safari
         if (Browser.Platform.ios == true || Browser.Platform.android == true) {
-            this.isReady = true;
+            //this.isReady = true;
             log(" iOS device - readyggg: ", this.playerID);
         }
 
@@ -324,11 +342,11 @@ var VideoPlayer = new Class({
     },
     _finishedLoading : function() {
         this.isReady = true;
-        this.player.off('progress');
+        // this.player.off('progress');
         this.player.off('loaded');
         this.player.off('loadstart');
-        this.player.off('suspend');
-        this.player.off('waiting');
+        // this.player.off('suspend');
+        // this.player.off('waiting');
         this.player.off('canplaythrough');
     }
 });

@@ -30,6 +30,7 @@ var MediaLoader = new Class({
             Object.each(loaderInfo, function(value, key) {
                 type = value.type;
             });
+
             if (type == 'VIDEO' || type == 'FLASH') {
                 this.videoQueue.push(loaderInfo);
             } else {
@@ -40,7 +41,7 @@ var MediaLoader = new Class({
     },
     // ----------------------------------------------------------
     start : function(showProgressBar) {
-        
+
         // show the progress bar if requested
         if (showProgressBar == true) {
             this._addProgressBar();
