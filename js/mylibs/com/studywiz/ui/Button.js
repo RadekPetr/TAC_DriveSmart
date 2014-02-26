@@ -7,7 +7,7 @@ var Button = new Class({
 
     options : {
         style : {
-
+            'visibility' : 'hidden'
         },
         'class' : 'button',
         text : 'button text',

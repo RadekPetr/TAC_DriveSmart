@@ -118,20 +118,30 @@ var MenuPlayer = new Class({
                 menuItem.disable();
             }
 
-            if (isLocked != true && isDisabled != true) {
+            if (Main.DEBUG == true) {
                 menuItem.registerClickEvent(this.myParent());
                 menuItem.registerMouseEnterEvent(this);
-            } else if (Main.DEBUG == true) {
-                menuItem.registerClickEvent(this.myParent());
-                menuItem.registerMouseEnterEvent(this);
+            } else {
+                if (isLocked != true && isDisabled != true) {
+                    menuItem.registerClickEvent(this.myParent());
+                    menuItem.registerMouseEnterEvent(this);
+                }
+                if (isLocked == true || isDisabled == true) {
+                    menuItem.registerMouseEnterEvent(this);
+                }
             }
 
         }.bind(this));
 
-        this.addEvent("MODULE_INFO", this.showModuleInformation);
-
-        // Show the description for the introduction - emulate mouseover :)
-        this.menuItems[0].container.fireEvent("mouseenter");
+        this.showModuleInformation(this.menuItems[0].getItemOverData());
+        this.addEvent("MODULE_INFO", this.menuItemOverAction);
+    },
+    menuItemOverAction : function(params) {
+        this.showModuleInformation(params);
+        // for touch devices show start button
+        if (Main.features.supportsTouch == true && ((params.itemRef.isLocked != true && params.itemRef.isDisabled != true) || Main.DEBUG == true)) {
+            this._showStartButton(params);
+        }
     },
     showModuleInformation : function(params) {
         var moduleInfoData = params.data;
@@ -147,11 +157,25 @@ var MenuPlayer = new Class({
         previewImage.container.set('class', 'module-preview');
         previewImage.display();
     },
+    _showStartButton : function(params) {
+        Array.each(this.menuItems, function(menuItem, index) {
+            if (menuItem.selectedModuleID != params.id) {
+                menuItem.button.hide();
+            } else {
+                menuItem.button.show();
+                // hide the butten after 2 secons
+                var timerFunction = function() {
+                    menuItem.button.hide();
+                }.bind(this);
+                var timer = timerFunction.delay(1800);
+            }
+        });
+    },
     _addModuleDescription : function() {
         this.module_description = new Element("div", {
             id : "module.description",
             'class' : 'module-description no-select pane blue',
-            styles : {
+            'styles' : {
             }
         });
         this.container.adopt(this.module_description);
@@ -178,14 +202,11 @@ var MenuPlayer = new Class({
         }
     },
     _isItemDisabled : function(menuItem) {
-        log ( "flash supported", isFlashSupported());
         // Disable if flash is required but not available
         var isDisabled = false;
         if (isFlashSupported() == false && menuItem.options.data.flashOnly == true) {
             isDisabled = true;
-            log ( "flash not supported will disable");           
-        }       
-       
+        }
         return isDisabled;
     }
 });

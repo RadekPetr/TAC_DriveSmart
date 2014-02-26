@@ -24,7 +24,6 @@ var MenuItem = new Class({
         this.isLocked = false;
         this.isDisabled = false;
 
-        // log(menuItem);
         var elemID = "menu_item_" + this.selectedModuleID;
         this.container = new Element('div', {
             'id' : elemID,
@@ -37,6 +36,18 @@ var MenuItem = new Class({
             'onselectstart' : 'return false;',
             'class' : this.options['class']
         });
+
+        if (Main.features.supportsTouch == true) {
+            this.button = new Button(null, {
+                'class' : 'start_button',
+                type : "item.clicked",
+                id : this.selectedModuleID,
+                next : "Menu.item.clicked",
+                text : 'Start'
+            });
+            this.button.add(this.container);
+            //this.button.hide();
+        }
         this.buttonGroup.inject(this.container);
 
         this.options.preview = new ImagePlayer(myParent, {
@@ -121,29 +132,28 @@ var MenuItem = new Class({
         return symbolImage.image;
     },
     registerClickEvent : function(sendEventTo) {
-        this.container.addEvent("click", function() {
-            sendEventTo.fireEvent("TIMELINE", {
-                type : "item.clicked",
-                id : this.selectedModuleID,
-                next : "Menu.item.clicked"
-            });
-        }.bind(this));
-
+        if (Main.features.supportsTouch == true) {
+            this.button.registerEvent(sendEventTo);
+        } else {
+            this.container.addEvent("click", function() {
+                sendEventTo.fireEvent("TIMELINE", {
+                    type : "item.clicked",
+                    id : this.selectedModuleID,
+                    next : "Menu.item.clicked"
+                });
+            }.bind(this));
+        }
     },
-
     registerMouseEnterEvent : function(sendEventTo) {
-        this.container.addEvent("mouseenter", function() {
-            sendEventTo.fireEvent("MODULE_INFO", {
-                type : "item.over",
-                id : this.selectedModuleID,
-                data : {
-                    description : this.options.data.description,
-                    preview : this.options.preview
-                }
-            });
-
-        }.bind(this));
-
+        if (Main.features.supportsTouch == true) {
+            this.container.addEvent('touchstart', function(event) {
+                sendEventTo.fireEvent("MODULE_INFO", this.getItemOverData());
+            }.bind(this));
+        } else {
+            this.container.addEvent("mouseenter", function() {
+                sendEventTo.fireEvent("MODULE_INFO", this.getItemOverData());
+            }.bind(this));
+        }
     },
     getSelectedModuleID : function() {
         return this.selectedModuleID;
@@ -168,5 +178,17 @@ var MenuItem = new Class({
         });
 
         return symbolImage.image;
+    },
+    getItemOverData : function() {
+        var params = new Hash({
+            type : "item.over",
+            id : this.selectedModuleID,
+            itemRef: this,
+            data : {
+                description : this.options.data.description,
+                preview : this.options.preview
+            }
+        });
+        return params;
     }
 });

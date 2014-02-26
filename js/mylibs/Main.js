@@ -35,7 +35,7 @@ var Main = new Class({
         if (browserTest.supported == true) {
             new Api(this).saveLog('info', "****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
             Main.features = getFeatures();
-            log(getFeatures());
+            
             Main.sequencePlayer = new SequencePlayer(this, {});
             this.modules = new Modules({});
             this.modules.start();
@@ -126,13 +126,14 @@ Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '1.0.4';
-Main.BUILD = '2014/02/24 build 1';
+Main.BUILD = '2014/02/26 build 4';
 
 // When running on localhost (So I can use different paths when testing)
-Main.IS_LOCAL = true;
+Main.IS_LOCAL = false;
 
 // Show hide debug panel and ignore lock status
 Main.DEBUG = true;
+
 
 // Saves empty progress data on startup if true
 Main.RESET_USER_DATA = false;
