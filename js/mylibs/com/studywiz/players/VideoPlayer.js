@@ -102,6 +102,13 @@ var VideoPlayer = new Class({
                 }.bind(this)));
         }
     },
+    retryPreload : function() {
+
+        this.player.load();
+        this.player.play();
+        this.player.pause();
+        log("trying preload again");
+    },
     registerLoadEvents : function() {
         if (this.player != undefined) {
             // clear any lefover events

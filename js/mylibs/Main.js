@@ -30,9 +30,12 @@ var Main = new Class({
     start : function() {
         var browserTest = this._checkBrowser();
         var ua = detectFlash();
-        log(detectFlash(), parseInt(ua.pv[0] + ua.pv[1] + ua.pv[2], 10) );
+        log(detectFlash(), parseInt(ua.pv[0] + ua.pv[1] + ua.pv[2], 10));
+
         if (browserTest.supported == true) {
             new Api(this).saveLog('info', "****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
+            Main.features = getFeatures();
+            log(getFeatures());
             Main.sequencePlayer = new SequencePlayer(this, {});
             this.modules = new Modules({});
             this.modules.start();
@@ -123,7 +126,7 @@ Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '1.0.4';
-Main.BUILD = '2014/02/19 build 1';
+Main.BUILD = '2014/02/24 build 1';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;
@@ -210,6 +213,7 @@ Main.MODULES = new Hash({
 });
 
 Main.COLORS = ['blue', 'green', 'orange'];
+
 /*
  if ( typeof Function.prototype.bind === 'undefined') {
  Function.prototype.bind = function(target) {

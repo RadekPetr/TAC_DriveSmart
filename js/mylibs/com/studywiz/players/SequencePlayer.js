@@ -633,6 +633,7 @@ var SequencePlayer = new Class({
                             type : "Continue",
                             next : "Continue_Video.clicked"
                         });
+                        nextStep.media.video.retryPreload();
                     } else {
                         this._nextStep();
                     }
@@ -994,6 +995,9 @@ var SequencePlayer = new Class({
                         this.mediaLoader.register(step.media.video.getLoaderInfo());
                         // we want to store this so all VideoJS player can be removed correctly (see remove() in VideoPlayer)
                         this.videos.push(step.media.video);
+
+                        this._preloadPosterFrame(filename);
+
                     }
                     break;
                 case "ModuleIntroVideo" :
@@ -1021,6 +1025,8 @@ var SequencePlayer = new Class({
                         // }
                         // we want to store this so all VideoJS player can be removed correctly (see remove() in VideoPlayer)
                         this.videos.push(step.media.moduleIntroVideo);
+
+                        this._preloadPosterFrame(filename);
                     }
                     break;
 
@@ -1047,6 +1053,7 @@ var SequencePlayer = new Class({
                         this.mediaLoader.register(step.media.video.getLoaderInfo());
                         // we want to store this so all VideoJS player can be removed correctly (see remove() in VideoPlayer)
                         this.videos.push(step.media.video);
+                        this._preloadPosterFrame(filename);
                     }
                     break;
                 case "Audio" :
@@ -1528,6 +1535,16 @@ var SequencePlayer = new Class({
             step.media.moduleIntroVideo.start();
         }
     }.protect(),
+    _preloadPosterFrame : function(filename) {
+        var file = Main.PATHS.imageFolder + stripFileExtension(filename) + "_first.jpg";
+        log(" also preloading poster frame ", file);
+        var posterImage = new ImagePlayer(this, {
+            src : file,
+            title : 'Image',
+            id : 'poster_image_' + filename
+        });
+        this.mediaLoader.register(posterImage.getLoaderInfo());
+    },
     _moduleGroupIntroSetup : function(step) {
         var moduleTitle = UIHelpers.setMainPanel(this.moduleInfo.moduleTitle);
         UIHelpers.setClasses(moduleTitle, 'module-title no-select rotate90');
