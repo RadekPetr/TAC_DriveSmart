@@ -53,7 +53,7 @@ var User = new Class({
             var defaultVersion = defaultDataHash.info["app_version"];
             if (defaultVersion != userSavedVersion) {
                 log("Saved user progress is different version from default");
-               
+
                 //this.userData.info.app_version = Main.VERSION;
             }
 
@@ -173,8 +173,6 @@ var User = new Class({
     },
     getUnfinishedSequences : function(moduleID) {
         var sequencesInModule = this._getUserData(moduleID).data;
-        log("sequencesInModule", sequencesInModule);
-
         if (moduleID == "intro" && Main.sequencePlayer.fromMenu == true) {
             var unfinishedSequences = sequencesInModule.filter(function(item, index) {
                 return (item.completed == false || item.completed == true);
@@ -188,7 +186,6 @@ var User = new Class({
         if (unfinishedSequences.length == 0) {
             log("Module is Finished");
         }
-        log("unfinishedSequences", unfinishedSequences);
         return unfinishedSequences;
     },
     getModuleStarted : function(moduleID) {
@@ -204,7 +201,7 @@ var User = new Class({
     },
     getModuleState : function(moduleID) {
 
-       // var moduleIDs = new Hash(this.userData.modules).getKeys();
+        // var moduleIDs = new Hash(this.userData.modules).getKeys();
         //log(moduleID, "Module IDs", moduleIDs);
 
         var sequencesInModule = this._getUserData(moduleID).data;
@@ -364,17 +361,18 @@ var User = new Class({
         try {
             return this.userData.modules[moduleID];
         } catch (err) {
-            log("NULLLLLLLL");
+            log("NULL");
             return null;
         }
 
     },
-    _mergeOldData: function (oldData, newData){
+    
+    // unused
+    _mergeOldData : function(oldData, newData) {
         var newModuleIDs = newData.modules.getKeys();
-        newModuleIDs.each(function(item, index){
-           // TODO crawl and copy values or items
-        }
-    );
+        newModuleIDs.each(function(item, index) {
+            // TODO crawl and copy values or items
+        });
 
     }
 });

@@ -62,10 +62,6 @@ var VideoPlayer = new Class({
     preload : function() {
         // log("++ Video Preload started: " + this.options.id);
         if (this.player == undefined) {
-            //    log('Undefined player ERRROR');
-            //     log(this);
-            //      this.remove();
-            //  } else {
             this.show();
             this.isReady = false;
             var data = this._getVideoData();
@@ -91,11 +87,9 @@ var VideoPlayer = new Class({
                         this.showCaptions(this.options.captionFile);
                     }
                     this.player.src(data.video);
-
-                    this.player.load();
-                    log("calling play");
                     this.player.play();
                     this.player.pause();
+                    this.player.load();
                     this.registerLoadEvents();
                     this.hide();
 
@@ -111,10 +105,6 @@ var VideoPlayer = new Class({
     },
     registerLoadEvents : function() {
         if (this.player != undefined) {
-            // clear any lefover events
-            //  this.player.off();
-            // add them again
-
             this.player.on("suspend", function() {
                 log("EVENT: suspend", this.options.id);
                 if (Browser.Platform.ios == true) {
@@ -316,10 +306,11 @@ var VideoPlayer = new Class({
 
         // in iOS buffering does not start until play is clicked, so skip preloading
         // http://stackoverflow.com/questions/11633929/readystate-issue-with-html5-video-elements-on-ios-safari
-        if (Browser.Platform.ios == true || Browser.Platform.android == true) {
-            //this.isReady = true;
-            log(" iOS device - readyggg: ", this.playerID);
-        }
+        /* if (Browser.Platform.ios == true || Browser.Platform.android == true) {
+         //this.isReady = true;
+         log(" iOS device - readyggg: ", this.playerID);
+         }
+         */
 
         if (this.isReady == true) {
             loaderInfo[this.options.id].progress = 1;

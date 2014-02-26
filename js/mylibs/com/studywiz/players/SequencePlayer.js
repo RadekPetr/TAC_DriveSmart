@@ -8,7 +8,6 @@ var introFinished = null;
 
 function flashLoaded() {
     flashLoaded = true;
-    console.log("Flash Is ready");
 }
 
 function jsIsReady() {
@@ -1518,8 +1517,6 @@ var SequencePlayer = new Class({
             this._hideOtherVideos(step.media.moduleIntroVideo.playerID);
             this.activeVideo.registerPlaybackStartEvent();
 
-            log("this.sequenceState.completed", this.sequenceState.completed);
-
             if (this.sequenceState.completed == true) {
                 // Already played the intro video so this time show continue buttons
                 this._addButton({
@@ -1537,7 +1534,6 @@ var SequencePlayer = new Class({
     }.protect(),
     _preloadPosterFrame : function(filename) {
         var file = Main.PATHS.imageFolder + stripFileExtension(filename) + "_first.jpg";
-        log(" also preloading poster frame ", file);
         var posterImage = new ImagePlayer(this, {
             src : file,
             title : 'Image',

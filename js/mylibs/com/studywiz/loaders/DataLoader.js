@@ -29,9 +29,9 @@ var DataLoader = new Class({
 
         xml2json.convertFromURL(this.options.src, function(response) {
             this.data = response;
-           // log ( this.data);
-          //  var myJSON = JSON.encode(this.data);
-           // log (myJSON);
+            // log ( this.data);
+            // var myJSON = JSON.encode(this.data);
+            // log (myJSON);
             this._setupSequences();
         }.bind(this));
 

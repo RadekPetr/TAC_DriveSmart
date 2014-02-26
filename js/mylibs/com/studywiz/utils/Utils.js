@@ -18,7 +18,7 @@ function stripFileExtension(filename) {
 }
 
 function isFlashSupported() {
-   
+
     var flash = Browser.Plugins.Flash;
     if (flash.version >= 9) {
         return true;
@@ -47,8 +47,6 @@ function my_getDroppableCoordinates(element) {
         position.top += scroll.y;
         position.bottom += scroll.y;
     }
-    // log("-----");
-    // log(position);
     return position;
 }
 
@@ -84,9 +82,7 @@ function detectFlash() {
         } catch(e) {
         }
     }
-    
-    
-    console.log (playerVersion);
+    console.log(playerVersion);
     return {
         w3 : w3cdom,
         pv : playerVersion,
@@ -97,15 +93,19 @@ function detectFlash() {
     };
 };
 
-function getFeatures () {
-    var featureSet = new Hash ({      
-        supportsTouch: false,
-        clickToPlay: false        
+function getFeatures() {
+    var featureSet = new Hash({
+        supportsTouch : false,
+        clickToPlay : false
     });
 
-    featureSet.supportsTouch ='ontouchstart' in window || navigator.msMaxTouchPoints;
+    featureSet.supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
     featureSet.clickToPlay = (Browser.Platform.ios == true );
-   // featureSet.clickToPlay = true;
+
+    // Test as iPad
+    featureSet.clickToPlay = true;
+    featureSet.supportsTouch = true;
+
     return featureSet;
 };
 
