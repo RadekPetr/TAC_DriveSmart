@@ -38,6 +38,11 @@ var VideoPlayer = new Class({
         this.container = null;
         this.isVisible = false;
         this.isSuspended = false;
+        this.ended = false;
+
+        // if (Main.features.clickToPlay == true) {
+        //    this.options.controls = true;
+        //}
 
         this.container = new Element("div", {
             id : this.containerID,
@@ -86,10 +91,26 @@ var VideoPlayer = new Class({
                     if (this.options.captionFile != null && this.options.captionFile != "") {
                         this.showCaptions(this.options.captionFile);
                     }
+                    this.player.poster = data.poster.src;
                     this.player.src(data.video);
                     this.player.play();
-                    this.player.pause();
-                    this.player.load();
+                    this.ended = false;
+
+                    if (this.player.tech.el_.readyState !== 4) {//HAVE_ENOUGH_DATA
+                        log("readyState", this.player.readyState);
+                        //vid.addEventListener('canplaythrough', onCanPlay, false);
+                        //  vid.addEventListener('load', onCanPlay, false);
+                        //add load event as well to avoid errors, sometimes 'canplaythrough' won't dispatch.
+                        setTimeout( function() {
+                            log(" pause now");
+                            this.player.pause();
+                            //block play so it buffers before playing
+                        }.bind(this), 2);
+                        //it needs to be after a delay otherwise it doesn't work properly.
+                    } else {
+                        //video is ready
+                    }
+
                     this.registerLoadEvents();
                     this.hide();
 
@@ -98,9 +119,9 @@ var VideoPlayer = new Class({
     },
     retryPreload : function() {
 
-        this.player.load();
-        this.player.play();
-        this.player.pause();
+        //  this.player.load();
+        //  this.player.play();
+        // this.player.pause();
         log("trying preload again");
     },
     registerLoadEvents : function() {
@@ -115,21 +136,47 @@ var VideoPlayer = new Class({
             }.bind(this));
 
             this.player.on("waiting", function() {
-                log("EVENT: **********************   waiting", this.options.id);
+                log("EVENT: **********************   waiting", this.options.id, this.getReadyState(), this.getNetworkState());
                 //this.player.load();
             }.bind(this));
+            this.player.on("load", function() {
+                log("EVENT: **********************   load", this.options.id, this.getReadyState(), this.getNetworkState());
+                //this.player.load();
+            }.bind(this));
+            this.player.tech.el_.addEventListener("stalled", function() {
+
+                log("EVENT: **********************   stalled", this.options.id, this.getReadyState(), this.getNetworkState());
+
+               // alert("stalled");
+                this.retryTimer = setInterval( function() {
+                    //alert("checking" + this.ended + this.getReadyState());
+                    if (this.getReadyState()>2 && this.ended != true) {
+                        this.player.play();
+                        //alert("Play again" + this.ended);
+                         log("EVENT: **********************   restarted", this.options.id, this.getReadyState(), this.getNetworkState());
+                        // kill the timer, not needed anymore
+                        clearInterval(this.retryTimer);
+                    }
+                    if (this.ended == true) {
+                        //alert("Cleared interval as ended" + this.ended);
+                        clearInterval(this.retryTimer);
+                    }
+                }.bind(this), 4000);
+
+            }.bind(this));
             this.player.on("progress", function() {
-                log("EVENT: **********************   progress", this.options.id);
+                log("EVENT: **********************   progress", this.options.id, this.getReadyState(), this.getNetworkState());
                 this.isSuspended = false;
             }.bind(this));
 
             this.player.on("canplaythrough", function() {
-                log("EVENT: **********************   canplaythrough", this.options.id);
+                log("EVENT: **********************   canplaythrough", this.options.id, this.getReadyState(), this.getNetworkState());
                 this._finishedLoading();
             }.bind(this));
 
             this.player.on("loadedalldata", function() {
                 this._finishedLoading();
+                log("EVENT: **********************   loadedalldata", this.options.id, this.getReadyState(), this.getNetworkState());
                 this.isSuspended = false;
             }.bind(this));
         }
@@ -137,7 +184,9 @@ var VideoPlayer = new Class({
     registerPlaybackEndEvent : function() {
         if (this.player != undefined) {
             this.player.on("ended", function() {
-                this.player.off("ended");
+                this.player.userActive(false);
+                this.ended = true;
+                log("EVENT: **********************   ended", this.options.id);
                 this.myParent().fireEvent("TIMELINE", {
                     type : "video.finished",
                     id : this.options.id,
@@ -306,11 +355,15 @@ var VideoPlayer = new Class({
 
         // in iOS buffering does not start until play is clicked, so skip preloading
         // http://stackoverflow.com/questions/11633929/readystate-issue-with-html5-video-elements-on-ios-safari
-        /* if (Browser.Platform.ios == true || Browser.Platform.android == true) {
-         //this.isReady = true;
-         log(" iOS device - readyggg: ", this.playerID);
-         }
-         */
+        if (Browser.Platform.android == true) {
+            this.isReady = true;
+            log(" Abdroid device - readyggg: ", this.playerID);
+        }
+
+        //if (Browser.Platform.ios == true || Browser.Platform.android == true) {
+        //    this.isReady = true;
+        //    log(" iOS device - readyggg: ", this.playerID);
+        //}
 
         if (this.isReady == true) {
             loaderInfo[this.options.id].progress = 1;
@@ -346,6 +399,16 @@ var VideoPlayer = new Class({
         // this.player.off('suspend');
         // this.player.off('waiting');
         this.player.off('canplaythrough');
+    },
+    getReadyState : function() {
+        if (this.player != null) {
+            return this.player.tech.el_.readyState;
+        }
+    },
+    getNetworkState : function() {
+        if (this.player != null) {
+            return this.player.tech.el_.networkState;
+        }
     }
 });
 
