@@ -6886,6 +6886,15 @@ vjs.TextTrackMenuItem = vjs.MenuItem.extend({
     vjs.MenuItem.call(this, player, options);
 
     this.player_.on(track.kind() + 'trackchange', vjs.bind(this, this.update));
+                                                       
+        /**
+         * @author Michal Korotkiewicz
+         * my modification:
+         */
+        if (track.dflt()) {
+            this.player_.showTextTrack(this.track.id_, this.track.kind());
+        }
+
   }
 });
 
