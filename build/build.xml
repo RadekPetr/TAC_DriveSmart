@@ -331,6 +331,8 @@
 				<exclude name="${dir.js}/**/*.js" />
 				<exclude name="${dir.css}/**/*.css" />
 				<exclude name="${file.manifest}" />
+				<exclude name="Thumbs.db" />
+				
 			</fileset>
 		</copy>
 
@@ -418,6 +420,14 @@
 			<fileset dir="${dir.source}/${dir.js.mylibs}/" includes="*moo*.min*.js" />
 		</copy>
 		<copy file="${dir.intermediate}/${dir.js}/drivesmart.js" tofile="${dir.publish}/${dir.js}/drivesmart.js" />
+		
+		
+
+		
+		<copy file="${dir.source}/${dir.js}/libs/mootools-core-1.4.5.1.min.js" tofile="${dir.publish}/${dir.js}/libs/mootools-core-1.4.5.1.min.js" />
+		<copy file="${dir.source}/${dir.js}/libs/mootools-more-1.4.0.1.min.js" tofile="${dir.publish}/${dir.js}/libs/mootools-more-1.4.0.1.min.js" />
+		<copy file="${dir.source}/index.css" tofile="${dir.publish}/index.css" />	
+		
 
 	</target>
 
