@@ -47,6 +47,7 @@ var MediaLoader = new Class({
             this._addProgressBar();
             this._show();
         }
+
         // add one video to the queue
         this._addOneVideoToQueue();
 
@@ -189,8 +190,7 @@ var MediaLoader = new Class({
         }
     }.protect(),
     getQueueLength : function() {
-        return this.loadQueue.getLength() + this.videoQueue.length;
-        ;
+        return this.loadQueue.getLength() + this.videoQueue.length;        
     },
     reset : function() {
         clearInterval(this.preloadTimer);
