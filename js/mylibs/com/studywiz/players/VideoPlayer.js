@@ -39,10 +39,7 @@ var VideoPlayer = new Class({
         this.isVisible = false;
         this.isSuspended = false;
         this.ended = false;
-
-        // if (Main.features.clickToPlay == true) {
-        //    this.options.controls = true;
-        //}
+        this.isPaused = false;
 
         this.container = new Element("div", {
             id : this.containerID,
@@ -96,7 +93,7 @@ var VideoPlayer = new Class({
                     this.player.play();
                     this.ended = false;
 
-                    if (this.player.tech.el_.readyState !== 4) {//HAVE_ENOUGH_DATA
+                    if (this.getReadyState() !== 4) {//HAVE_ENOUGH_DATA
                         log("readyState", this.player.readyState);
                         //vid.addEventListener('canplaythrough', onCanPlay, false);
                         //  vid.addEventListener('load', onCanPlay, false);
@@ -117,19 +114,11 @@ var VideoPlayer = new Class({
                 }.bind(this)));
         }
     },
-    retryPreload : function() {
-
-        //  this.player.load();
-        //  this.player.play();
-        // this.player.pause();
-        log("trying preload again");
-    },
     registerLoadEvents : function() {
         if (this.player != undefined) {
             this.player.on("suspend", function() {
                 log("EVENT: suspend", this.options.id);
                 if (Browser.Platform.ios == true) {
-                    log("Consider this loaded");
                     this._finishedLoading();
                 }
                 this.isSuspended = true;
@@ -140,43 +129,62 @@ var VideoPlayer = new Class({
                 //this.player.load();
             }.bind(this));
             this.player.on("load", function() {
-                log("EVENT: **********************   load", this.options.id, this.getReadyState(), this.getNetworkState());
+                //log("EVENT: **********************   load", this.options.id, this.getReadyState(), this.getNetworkState());
                 //this.player.load();
+            }.bind(this));
+
+            this.player.tech.el_.addEventListener("play", function() {
+                if (Main.features.clickToPlay == true) {
+                    clearInterval(this.stalledTimer);
+                    this.lastCurrentTime = this.player.currentTime();
+                    this.stalledTimer = this.progressChecker.periodical(2000, this);
+                }
             }.bind(this));
             this.player.tech.el_.addEventListener("stalled", function() {
 
                 log("EVENT: **********************   stalled", this.options.id, this.getReadyState(), this.getNetworkState());
+                //  this.showControls();
+                //   this.player.loadingSpinner.show();
+                //  this.stalledCurrentTime = this.player.currentTime();
 
-               // alert("stalled");
-                this.retryTimer = setInterval( function() {
-                    //alert("checking" + this.ended + this.getReadyState());
-                    if (this.getReadyState()>2 && this.ended != true) {
-                        this.player.play();
-                        //alert("Play again" + this.ended);
-                         log("EVENT: **********************   restarted", this.options.id, this.getReadyState(), this.getNetworkState());
-                        // kill the timer, not needed anymore
-                        clearInterval(this.retryTimer);
-                    }
-                    if (this.ended == true) {
-                        //alert("Cleared interval as ended" + this.ended);
-                        clearInterval(this.retryTimer);
-                    }
-                }.bind(this), 4000);
+                // alert("stalled");
+                /* this.stalledTimer = setInterval( function() {
+
+                 if (this.player.currentTime() > this.stalledCurrentTime) {
+                 this.hideControls();
+                 clearInterval(this.stalledTimer);
+                 this.player.loadingSpinner.hide();
+                 }
+                 if (this.ended == true) {
+                 //alert("Cleared interval as ended" + this.ended);
+                 this.hideControls();
+                 clearInterval(this.stalledTimer);
+                 this.player.loadingSpinner.hide();
+                 }
+                 }.bind(this), 2000);
+                 */
 
             }.bind(this));
             this.player.on("progress", function() {
-                log("EVENT: **********************   progress", this.options.id, this.getReadyState(), this.getNetworkState());
+                // log("EVENT: **********************   progress", this.options.id, this.getReadyState(), this.getNetworkState());
                 this.isSuspended = false;
             }.bind(this));
 
             this.player.on("canplaythrough", function() {
-                log("EVENT: **********************   canplaythrough", this.options.id, this.getReadyState(), this.getNetworkState());
-                this._finishedLoading();
+                if (this.getReadyState() > 2 && this.getNetworkState() == 2) {
+
+                    this._finishedLoading();
+                }
+                // log("EVENT: **********************   canplaythrough", this.options.id, this.getReadyState(), this.getNetworkState());
+
             }.bind(this));
 
             this.player.on("loadedalldata", function() {
-                this._finishedLoading();
-                log("EVENT: **********************   loadedalldata", this.options.id, this.getReadyState(), this.getNetworkState());
+                if (this.getReadyState() == 4) {
+                    log("EVENT: **********************   loadedalldata", this.options.id, this.getReadyState(), this.getNetworkState());
+                    this._finishedLoading();
+                }
+
                 this.isSuspended = false;
             }.bind(this));
         }
@@ -184,7 +192,12 @@ var VideoPlayer = new Class({
     registerPlaybackEndEvent : function() {
         if (this.player != undefined) {
             this.player.on("ended", function() {
-                this.player.userActive(false);
+                // this.player.userActive(false);
+
+                this.hideControls();
+                clearInterval(this.stalledTimer);
+                this.player.loadingSpinner.hide();
+                log("2 Cleared interval as ended" + this.ended, this.stalledTimer);
                 this.ended = true;
                 log("EVENT: **********************   ended", this.options.id);
                 this.myParent().fireEvent("TIMELINE", {
@@ -222,28 +235,10 @@ var VideoPlayer = new Class({
     },
     // ---------------------------
     start : function() {
-
         if (this.player != null) {
-
-            //this.player.pause();
-            //this.player.load();
-            this.player.play();
-            log("Play called", this.player, this.isSuspended);
-            /* var timerFunction = function() {
-             log ("this.player.player.currentTime",this.player.currentTime());
-             if (this.player.currentTime()  < 1.0) {
-             log ("ssssss");
-             this.player.play();
-             } else {
-             log ("zzzzz");
-             clearInterval(this.playTimer);
-             }
-
-             }.bind(this);
-             this.playTimer = timerFunction.periodical(1000);
-             */
-
             this.registerPlaybackEndEvent();
+            this.isPaused = false;
+            this.player.play();
         } else {
             this.preload();
         }
@@ -280,6 +275,7 @@ var VideoPlayer = new Class({
     // ---------------------------
     stop : function() {
         if (this.player != null) {
+            clearInterval(this.stalledTimer);
             this.player.pause();
             if (this.isVisible) {
                 this.player.currentTime(0);
@@ -306,6 +302,7 @@ var VideoPlayer = new Class({
     pause : function() {
         if (this.player != null) {
             this.player.pause();
+            this.isPaused = true;
         }
     },
     seek : function(time) {
@@ -356,7 +353,7 @@ var VideoPlayer = new Class({
         // in iOS buffering does not start until play is clicked, so skip preloading
         // http://stackoverflow.com/questions/11633929/readystate-issue-with-html5-video-elements-on-ios-safari
         if (Browser.Platform.android == true) {
-            this.isReady = true;
+            //this.isReady = true;
             log(" Abdroid device - readyggg: ", this.playerID);
         }
 
@@ -392,13 +389,19 @@ var VideoPlayer = new Class({
         return data;
     },
     _finishedLoading : function() {
-        this.isReady = true;
-        // this.player.off('progress');
-        this.player.off('loaded');
-        this.player.off('loadstart');
-        // this.player.off('suspend');
-        // this.player.off('waiting');
-        this.player.off('canplaythrough');
+
+        if (this.isReady != true) {
+            log("!!!!!!!!!!!!!!!!!!! _finishedLoading ", this.options.id);
+            this.isReady = true;
+            // this.player.off('progress');
+            this.player.off('loaded');
+            this.player.off('loadstart');
+            // this.player.off('suspend');
+            // this.player.off('waiting');
+            this.player.off('canplaythrough');
+            this.player.off('loadedalldata');
+
+        }
     },
     getReadyState : function() {
         if (this.player != null) {
@@ -408,6 +411,35 @@ var VideoPlayer = new Class({
     getNetworkState : function() {
         if (this.player != null) {
             return this.player.tech.el_.networkState;
+        }
+    },
+    showControls : function() {
+        if (this.options.controls == false) {
+            this.player.tech.el_.setAttribute("controls", "controls");
+        }
+    },
+    hideControls : function() {
+        if (this.options.controls == false) {
+            this.player.tech.el_.removeAttribute("controls");
+        }
+    },
+    progressChecker : function() {
+        if (this.player.currentTime() > this.lastCurrentTime) {
+            this.hideControls();
+            this.player.loadingSpinner.hide();
+            this.lastCurrentTime = this.player.currentTime();
+
+        } else {
+            if (this.isPaused != true) {
+                this.showControls();
+                this.player.loadingSpinner.show();
+                this.player.play();
+            }
+        }
+        if (this.ended == true) {
+            this.hideControls();
+            clearInterval(this.stalledTimer);
+            this.player.loadingSpinner.hide();
         }
     }
 });
