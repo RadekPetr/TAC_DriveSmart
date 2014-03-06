@@ -100,11 +100,11 @@ function getFeatures() {
     });
 
     featureSet.supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
-    featureSet.clickToPlay = (Browser.Platform.ios == true );
+    featureSet.clickToPlay = (Browser.Platform.ios == true || Browser.Platform.android == true);
 
     // Test as iPad
-    featureSet.clickToPlay = true;
-    featureSet.supportsTouch = true;
+   // featureSet.clickToPlay = true;
+   // featureSet.supportsTouch = true;
 
     return featureSet;
 };
