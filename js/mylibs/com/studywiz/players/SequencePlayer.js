@@ -1,5 +1,5 @@
 /**
- * @author Radek
+ * @author Radek 2013-2014
  */
 
 var flashLoaded = false;
@@ -123,6 +123,9 @@ var SequencePlayer = new Class({
                     });
                     myDiv.inject($m(Main.DIV_ID));
 
+                    step.media.audio.options.next = '';
+                    step.media.audio.start();
+
                     var moduleTitle = UIHelpers.setMainPanel(this.moduleInfo.moduleTitle);
                     UIHelpers.setClasses(moduleTitle, 'module-title no-select rotate90');
 
@@ -171,8 +174,7 @@ var SequencePlayer = new Class({
                     });
 
                     // TODO: play level chnage audio if  this.playConLevelAudio = false;
-                    step.media.audio.options.next = '';
-                    step.media.audio.start();
+
                     break;
                 case "ModuleIntro":
                     this._moduleIntroSetup(step);
@@ -1498,11 +1500,11 @@ var SequencePlayer = new Class({
             });
             this._updateUserProgress();
 
-            if (this.fromMenu == true) {
-                this.fromMenu = false;
-                step.media.audio.options.next = '';
-                step.media.audio.start();
-            }
+            //if (this.fromMenu == true) {
+            this.fromMenu = false;
+            step.media.audio.options.next = '';
+            step.media.audio.start();
+            // }
         } else {
             this._stopPlayers();
 
