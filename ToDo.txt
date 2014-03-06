@@ -1,18 +1,4 @@
 
-
-
-- Review usage of holders - maybe use on central DIV for the whoe thing
-
-- Make Media class and extend it to Audio and video maybe ?
-
-
-- main menu
-- add browser and version detection IE9 +, ...
-
-- each step could be wrapped ina step div for easier disposal
-
-- handle debug while module is still loading
-- shapes fro KEy risks - fix IDs all inone div
 - add check for previous and next step types ?
 - allow access to lessons in finished module
 - Store achieved concentration level in user data
@@ -42,26 +28,28 @@ Video scanning6 - shared_uia08_next.mp4  - not fluent
 
 Flash Detection - firefox disabled vs not installed , 
 Preloading flash timeout ?
-Intro video saving progress 2x
-Menu item disabling vs rollover text
-Ipad menu item touch and go
+
 Ipad second videos issue
 Android errors
 Delete swfObject or use it
-
-
- Adding a message “This exercise requires Flash plug-in”  for those exercises which use Flash and continue button to move to the next one  
 Fixing dashboard page navigation. Currently module buttons on the left show brief module info on mouse over and open module on click. This needs to be adjusted for touch devices . The suggestion is to open brief module info on  module button touch and have a button in the brief description section on the right to enter the module on touch as well.
   
    Checking all supported exercises on tablet devices (iPad primarily, Geoff can help with testing on Samsung Galaxy tablet as well), Bruce reported  problems with a few exercises and we could reproduce the problems with the 2 exercises reported below: 
 
    - Scanning exercise 4 gets through you choose on of the options, then it just stops no video continues and there is no button to progress with 
         -  Keep ahead and stay safe- item 1 doesn't work correctly there is a drop down visor but the video never plays 
-
+show some message untill video is playing
+DragDrop not working on touch
 
 -----------------------------------------------------------------
 DONE:
-recorder no flash warning - no voice will be recorded
+- Menu item disabling vs rollover text
+- Ipad menu item touch and go
+- preload poster images ?
+- trigger preloading again earlier while audio is plying ?
+- Intro video saving progress 2x
+- Adding a message “This exercise requires Flash plug-in”  for those exercises which use Flash and continue button to move to the next one  - added Flash required message to main menu
+- recorder no flash warning - no voice will be recorded new image
 - Button styles
 - Completed style - Text "Completed"
 - Coutry 20 - stops after palyback ?
