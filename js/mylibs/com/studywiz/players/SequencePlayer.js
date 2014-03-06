@@ -634,7 +634,7 @@ var SequencePlayer = new Class({
                             type : "Continue",
                             next : "Continue_Video.clicked"
                         });
-                        nextStep.media.video.retryPreload();
+                        
                     } else {
                         this._nextStep();
                     }

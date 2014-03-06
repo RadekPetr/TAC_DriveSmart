@@ -94,18 +94,19 @@ var VideoPlayer = new Class({
                     this.ended = false;
 
                     if (this.getReadyState() !== 4) {//HAVE_ENOUGH_DATA
-                        log("readyState", this.player.readyState);
+                        log("readyState checking ", this.player.readyState);
                         //vid.addEventListener('canplaythrough', onCanPlay, false);
                         //  vid.addEventListener('load', onCanPlay, false);
                         //add load event as well to avoid errors, sometimes 'canplaythrough' won't dispatch.
                         setTimeout( function() {
                             log(" pause now");
-                            this.player.pause();
+                            this.pause();
                             //block play so it buffers before playing
                         }.bind(this), 2);
                         //it needs to be after a delay otherwise it doesn't work properly.
                     } else {
                         //video is ready
+                        this.pause();
                     }
 
                     this.registerLoadEvents();
@@ -133,14 +134,7 @@ var VideoPlayer = new Class({
                 //this.player.load();
             }.bind(this));
 
-            this.player.tech.el_.addEventListener("play", function() {
-                if (Main.features.clickToPlay == true) {
-                    clearInterval(this.stalledTimer);
-                    this.lastCurrentTime = this.player.currentTime();
-                    this.stalledTimer = this.progressChecker.periodical(2000, this);
-                }
-            }.bind(this));
-            this.player.tech.el_.addEventListener("stalled", function() {
+            this.player.tech.el_.addEvent("stalled", function() {
 
                 log("EVENT: **********************   stalled", this.options.id, this.getReadyState(), this.getNetworkState());
                 //  this.showControls();
@@ -191,6 +185,7 @@ var VideoPlayer = new Class({
     },
     registerPlaybackEndEvent : function() {
         if (this.player != undefined) {
+            this.player.off("ended");
             this.player.on("ended", function() {
                 // this.player.userActive(false);
 
@@ -206,21 +201,35 @@ var VideoPlayer = new Class({
                     next : this.options.next
                 });
             }.bind(this));
+
         }
     },
     registerPlaybackStartEvent : function() {
-        this.player.on("play", function() {
-            this.player.off("play");
+        //  this.player.on("play", function() {
+        this.player.tech.el_.removeEvents("play");
+        this.player.tech.el_.addEventListener("play", function() {
+            log("EVENT: **********************   play", this.options.id);
+
             this.myParent().fireEvent("TIMELINE", {
                 type : "video.started",
                 id : this.options.id,
                 next : "video.started"
             });
+            if (Main.features.clickToPlay == true) {
+                clearInterval(this.stalledTimer);
+                this.lastCurrentTime = this.player.currentTime();
+                this.stalledTimer = this.progressChecker.periodical(2000, this);
+            }
         }.bind(this));
+        this.player.off("pause");
         this.player.on("pause", function() {
             log("EVENT: **********************   pause", this.options.id);
-            //this.player.load();
+            this.isPaused = true;
+            clearInterval(this.stalledTimer);
         }.bind(this));
+        // this.player.tech.el_.addEventListener("play", function() {
+
+        //  }.bind(this));
     },
     registerCueEvents : function() {
         if (this.player != undefined) {
@@ -237,6 +246,7 @@ var VideoPlayer = new Class({
     start : function() {
         if (this.player != null) {
             this.registerPlaybackEndEvent();
+            this.registerPlaybackStartEvent();
             this.isPaused = false;
             this.player.play();
         } else {
@@ -303,6 +313,7 @@ var VideoPlayer = new Class({
         if (this.player != null) {
             this.player.pause();
             this.isPaused = true;
+            clearInterval(this.stalledTimer);
         }
     },
     seek : function(time) {
@@ -424,6 +435,7 @@ var VideoPlayer = new Class({
         }
     },
     progressChecker : function() {
+        log(" checking", this, this.player.currentTime());
         if (this.player.currentTime() > this.lastCurrentTime) {
             this.hideControls();
             this.player.loadingSpinner.hide();
