@@ -8,7 +8,138 @@ var Draggable = new Class({
         this.containerID = 'draggableImageContainer';
         this.container = null;
         this.drags = new Array();
+        Drag.implement({
+            attach : function() {
+                this.handles.addEvent('mousedown', this.bound.start);
+                this.handles.addEvent('touchstart', this.bound.start);
+                return this;
+            },
 
+            detach : function() {
+                this.handles.removeEvent('mousedown', this.bound.start);
+                this.handles.removeEvent('touchstart', this.bound.start);
+                return this;
+            },
+
+            start : function(event) {
+                var options = this.options;
+
+                if (event.rightClick)
+                    return;
+
+                if (options.preventDefault)
+                    event.preventDefault();
+                if (options.stopPropagation)
+                    event.stopPropagation();
+                this.mouse.start = event.page;
+
+                this.fireEvent('beforeStart', this.element);
+
+                var limit = options.limit;
+                this.limit = {
+                    x : [],
+                    y : []
+                };
+
+                var z, coordinates;
+                for (z in options.modifiers) {
+                    if (!options.modifiers[z])
+                        continue;
+
+                    var style = this.element.getStyle(options.modifiers[z]);
+
+                    // Some browsers (IE and Opera) don't always return pixels.
+                    if (style && !style.match(/px$/)) {
+                        if (!coordinates)
+                            coordinates = this.element.getCoordinates(this.element.getOffsetParent());
+                        style = coordinates[options.modifiers[z]];
+                    }
+
+                    if (options.style)
+                        this.value.now[z] = (style || 0).toInt();
+                    else
+                        this.value.now[z] = this.element[options.modifiers[z]];
+
+                    if (options.invert)
+                        this.value.now[z] *= -1;
+
+                    this.mouse.pos[z] = event.page[z] - this.value.now[z];
+
+                    if (limit && limit[z]) {
+                        var i = 2;
+                        while (i--) {
+                            var limitZI = limit[z][i];
+                            if (limitZI || limitZI === 0)
+                                this.limit[z][i] = ( typeof limitZI == 'function') ? limitZI() : limitZI;
+                        }
+                    }
+                }
+
+                if (typeOf(this.options.grid) == 'number')
+                    this.options.grid = {
+                        x : this.options.grid,
+                        y : this.options.grid
+                    };
+
+                var events = {
+                    mousemove : this.bound.check,
+                    mouseup : this.bound.cancel,
+                    touchmove : this.bound.check,
+                    touchend : this.bound.cancel
+                };
+                events[this.selection] = this.bound.eventStop;
+                this.document.addEvents(events);
+
+                this.document.addEvent('touchmove', this.bound.check);
+                this.document.addEvent('touchend', this.bound.check);
+            },
+
+            check : function(event) {
+                if (this.options.preventDefault)
+                    event.preventDefault();
+                var distance = Math.round(Math.sqrt(Math.pow(event.page.x - this.mouse.start.x, 2) + Math.pow(event.page.y - this.mouse.start.y, 2)));
+                if (distance > this.options.snap) {
+                    this.cancel();
+                    this.document.addEvents({
+                        mousemove : this.bound.drag,
+                        mouseup : this.bound.stop,
+                        touchmove : this.bound.drag,
+                        touchend : this.bound.stop
+                    });
+
+                    this.fireEvent('start', [this.element, event]).fireEvent('snap', this.element);
+
+                }
+            },
+
+            cancel : function(event) {
+                this.document.removeEvents({
+                    mousemove : this.bound.check,
+                    mouseup : this.bound.cancel,
+                    touchmove : this.bound.check,
+                    touchend : this.bound.cancel
+                });
+                if (event) {
+                    this.document.removeEvent(this.selection, this.bound.eventStop);
+                    this.fireEvent('cancel', this.element);
+                }
+            },
+
+            stop : function(event) {
+
+                var events = {
+                    mousemove : this.bound.drag,
+                    mouseup : this.bound.stop,
+                    touchmove : this.bound.drag,
+                    touchend : this.bound.stop
+                };
+
+                events[this.selection] = this.bound.eventStop;
+                this.document.removeEvents(events);
+                if (event)
+                    this.fireEvent('complete', [this.element, event]);
+            }
+        });
         Drag.Move.implement({
             // Drag.Move methods override to handle SVG coordinates
             getDroppableCoordinates : function(element) {
@@ -59,7 +190,7 @@ var Draggable = new Class({
                 var now2 = new Object();
                 now2.x = now.x - elOffset.x + (this.element.get('width') / 2) - Main.VIDEO_LEFT;
                 now2.y = now.y - elOffset.y + (this.element.get('width') / 2) - Main.VIDEO_TOP;
-               // log("zone:", zone, this.element, zone.retrieve('correct'));
+                // log("zone:", zone, this.element, zone.retrieve('correct'));
                 var isOver = now2.x > zoneCoords.left && now2.x < zoneCoords.right && now2.y < zoneCoords.bottom && now2.y > zoneCoords.top;
                 var isCorrect = (this.element.id == zone.retrieve('correct'));
                 // each zone can only have one correct answer
@@ -81,32 +212,27 @@ var Draggable = new Class({
             },
             // override to add class changes
             detach : function() {
-                this.handles.removeEvent('mousedown', this.bound.start);
+                if (Main.features.suportsTouch == true) {
+                    this.handles.removeEvent('touchstart', this.bound.start);
+                } else {
+                    this.handles.removeEvent('mousedown', this.bound.start);
+                }
+
                 this.element.set('class', 'non-draggable');
                 this.element.set('onselectstart', 'return false;');
                 return this;
             }
         });
+
     },
     _addEvents : function() {
+
         this.topViewImage = new Asset.image(this.options.src_top, {
             id : this.options.id,
-            onLoad : function() {
-                this.image.addEvent('mousedown', function(event) {
-                    var styles = {
-                        left : this.options.style.left,
-                        top : this.options.style.top,
-                        position : 'absolute'
-                    };
-                    var myClone = this.topViewImage.clone();
-                    myClone.set('id', this.options.id);
-                    myClone.setStyles(styles);
-                    this._addDragEvents(myClone);
-                    myClone.inject(this.container);
-                    myClone.fireEvent('mousedown', event);
-                }.bind(this));
-            }.bind(this)
+            onLoad : this._getOnLoadFunction()
         });
+
+        log(this._getOnLoadFunction());
     },
     stop : function() {
         Array.each(this.drags, function(item, index) {
@@ -136,14 +262,14 @@ var Draggable = new Class({
                 this._rotate(element, rotation);
             },
             onLeave : function(element, droppable) {
-               // console.log(element, 'left', droppable);
+                // console.log(element, 'left', droppable);
                 this._rotate(element, 0);
             },
             onSnap : function(el) {
                 // log('on snap');
             },
             onComplete : function(el, droppable) {
-               // log('Stopped dragging', el, droppable);
+                // log('Stopped dragging', el, droppable);
                 target.set('class', 'draggable');
             },
             onBeforeStart : function() {
@@ -165,5 +291,42 @@ var Draggable = new Class({
             }
         });
         this.drags.push(myDrag);
+    },
+    _getOnLoadFunction : function() {
+        var onLoadFunction;
+        if (Main.features.supportsTouch == true) {
+            onLoadFunction = function() {
+                this.image.addEvent('touchstart', function(event) {
+                    var styles = {
+                        left : this.options.style.left,
+                        top : this.options.style.top,
+                        position : 'absolute'
+                    };
+                    var myClone = this.topViewImage.clone();
+                    myClone.set('id', this.options.id);
+                    myClone.setStyles(styles);
+                    this._addDragEvents(myClone);
+                    myClone.inject(this.container);
+                    myClone.fireEvent('touchstart', event);
+                }.bind(this));
+            }.bind(this);
+        } else {
+            onLoadFunction = function() {
+                this.image.addEvent('mousedown', function(event) {
+                    var styles = {
+                        left : this.options.style.left,
+                        top : this.options.style.top,
+                        position : 'absolute'
+                    };
+                    var myClone = this.topViewImage.clone();
+                    myClone.set('id', this.options.id);
+                    myClone.setStyles(styles);
+                    this._addDragEvents(myClone);
+                    myClone.inject(this.container);
+                    myClone.fireEvent('mousedown', event);
+                }.bind(this));
+            }.bind(this);
+        }
+        return onLoadFunction;
     }
 });
