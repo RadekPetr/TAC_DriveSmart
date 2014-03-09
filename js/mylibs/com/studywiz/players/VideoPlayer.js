@@ -92,6 +92,8 @@ var VideoPlayer = new Class({
                     this.player.src(data.video);
                     this.player.play();
                     this.ended = false;
+                    this.stalledTimer = null;
+                    this.paused = false;
 
                     if (this.getReadyState() !== 4) {//HAVE_ENOUGH_DATA
                         log("readyState checking ", this.player.readyState);
@@ -216,16 +218,18 @@ var VideoPlayer = new Class({
                 next : "video.started"
             });
             if (Main.features.clickToPlay == true) {
-                clearInterval(this.stalledTimer);
+
                 this.lastCurrentTime = this.player.currentTime();
-                this.stalledTimer = this.progressChecker.periodical(2000, this);
+                if (this.stalledTimer == null) {
+                    this.stalledTimer = this.progressChecker.periodical(2000, this);
+                }
             }
         }.bind(this));
         this.player.off("pause");
         this.player.on("pause", function() {
             log("EVENT: **********************   pause", this.options.id);
-            this.isPaused = true;
-            clearInterval(this.stalledTimer);
+             this.isPaused = true;
+             clearInterval(this.stalledTimer);
         }.bind(this));
         // this.player.tech.el_.addEventListener("play", function() {
 
