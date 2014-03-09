@@ -59,6 +59,7 @@ var Button = new Class({
     },
     registerEvent : function(sendEventTo) {
         this.options.parent = sendEventTo;
+
         this.buttonElement.addEvent("click", function() {
             sendEventTo.fireEvent("TIMELINE", {
                 type : "button.clicked",
@@ -66,5 +67,8 @@ var Button = new Class({
                 next : this.options.next
             });
         }.bind(this));
+
+        //
+
     }
 });
