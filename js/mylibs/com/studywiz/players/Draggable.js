@@ -8,6 +8,7 @@ var Draggable = new Class({
         this.containerID = 'draggableImageContainer';
         this.container = null;
         this.drags = new Array();
+        // override to handle touch 
         Drag.implement({
             attach : function() {
                 this.handles.addEvent('mousedown', this.bound.start);
@@ -18,6 +19,9 @@ var Draggable = new Class({
             detach : function() {
                 this.handles.removeEvent('mousedown', this.bound.start);
                 this.handles.removeEvent('touchstart', this.bound.start);
+                
+                this.element.set('class', 'non-draggable');
+                this.element.set('onselectstart', 'return false;');
                 return this;
             },
 
@@ -89,9 +93,6 @@ var Draggable = new Class({
                 };
                 events[this.selection] = this.bound.eventStop;
                 this.document.addEvents(events);
-
-                this.document.addEvent('touchmove', this.bound.check);
-                this.document.addEvent('touchend', this.bound.check);
             },
 
             check : function(event) {
@@ -106,9 +107,7 @@ var Draggable = new Class({
                         touchmove : this.bound.drag,
                         touchend : this.bound.stop
                     });
-
                     this.fireEvent('start', [this.element, event]).fireEvent('snap', this.element);
-
                 }
             },
 
@@ -209,18 +208,7 @@ var Draggable = new Class({
                     '-moz-transform' : 'rotate(' + rotation + 'deg)', /* Firefox */
                     '-o-transform' : 'rotate(' + rotation + 'deg)' /* Opera */
                 });
-            },
-            // override to add class changes
-            detach : function() {
-                if (Main.features.suportsTouch == true) {
-                    this.handles.removeEvent('touchstart', this.bound.start);
-                } else {
-                    this.handles.removeEvent('mousedown', this.bound.start);
-                }
 
-                this.element.set('class', 'non-draggable');
-                this.element.set('onselectstart', 'return false;');
-                return this;
             }
         });
 
@@ -232,10 +220,10 @@ var Draggable = new Class({
             onLoad : this._getOnLoadFunction()
         });
 
-        log(this._getOnLoadFunction());
     },
     stop : function() {
         Array.each(this.drags, function(item, index) {
+            item.stop();
             item.detach();
         });
         this.image.removeEvents();
@@ -247,7 +235,7 @@ var Draggable = new Class({
 
         var myDrag = new Drag.Move(target, {
             precalculate : false,
-
+            preventDefault : true,
             limit : {
                 x : [0 - leftCorrection, Main.WIDTH - leftCorrection],
                 y : [0 - topCorrection, Main.HEIGHT - topCorrection]
@@ -291,6 +279,7 @@ var Draggable = new Class({
             }
         });
         this.drags.push(myDrag);
+
     },
     _getOnLoadFunction : function() {
         var onLoadFunction;
