@@ -189,13 +189,10 @@ var VideoPlayer = new Class({
         if (this.player != undefined) {
             this.player.off("ended");
             this.player.on("ended", function() {
-                // this.player.userActive(false);
 
-                this.hideControls();
-                clearInterval(this.stalledTimer);
-                this.player.loadingSpinner.hide();
-                log("2 Cleared interval as ended" + this.ended, this.stalledTimer);
                 this.ended = true;
+                this.progressChecker();
+
                 log("EVENT: **********************   ended", this.options.id);
                 this.myParent().fireEvent("TIMELINE", {
                     type : "video.finished",
@@ -208,7 +205,7 @@ var VideoPlayer = new Class({
     },
     registerPlaybackStartEvent : function() {
         //  this.player.on("play", function() {
-        this.player.tech.el_.removeEvents("play");
+        //this.player.tech.el_.removeEvents("play");
         this.player.tech.el_.addEventListener("play", function() {
             log("EVENT: **********************   play", this.options.id);
 
@@ -219,17 +216,19 @@ var VideoPlayer = new Class({
             });
             if (Main.features.clickToPlay == true) {
 
-                this.lastCurrentTime = this.player.currentTime();
                 if (this.stalledTimer == null) {
                     this.stalledTimer = this.progressChecker.periodical(2000, this);
                 }
+                this.lastCurrentTime = this.player.currentTime();
             }
         }.bind(this));
         this.player.off("pause");
         this.player.on("pause", function() {
+            // alert ("paused");
             log("EVENT: **********************   pause", this.options.id);
-             this.isPaused = true;
-             clearInterval(this.stalledTimer);
+            // this.isPaused = true;
+            // clearInterval(this.stalledTimer);
+            // alert ("paused, cleared timer");
         }.bind(this));
         // this.player.tech.el_.addEventListener("play", function() {
 
@@ -289,12 +288,11 @@ var VideoPlayer = new Class({
     // ---------------------------
     stop : function() {
         if (this.player != null) {
-            clearInterval(this.stalledTimer);
-            this.player.pause();
+            this.pause();
             if (this.isVisible) {
                 this.player.currentTime(0);
             }
-            this.player.pause();
+            this.pause();
         }
     },
     // ---------------------------
@@ -302,8 +300,9 @@ var VideoPlayer = new Class({
         if (this.player != null) {
             // so the end event does not fire again
             this.player.off("ended");
-
+            this.ended = true;
             this.seek(this.player.duration());
+            this.progressChecker();
 
             this.myParent().fireEvent("TIMELINE", {
                 type : "video.finished",
@@ -321,9 +320,10 @@ var VideoPlayer = new Class({
         }
     },
     seek : function(time) {
-        this.player.pause();
+        this.isPaused = true;
+        this.pause();
         this.player.currentTime(time);
-        this.player.pause();
+        this.pause();
     },
     volume : function(volume) {
         if (this.player != null) {
@@ -439,23 +439,23 @@ var VideoPlayer = new Class({
         }
     },
     progressChecker : function() {
-        log(" checking", this, this.player.currentTime());
-        if (this.player.currentTime() > this.lastCurrentTime) {
-            this.hideControls();
-            this.player.loadingSpinner.hide();
-            this.lastCurrentTime = this.player.currentTime();
-
-        } else {
-            if (this.isPaused != true) {
-                this.showControls();
-                this.player.loadingSpinner.show();
-                this.player.play();
-            }
-        }
         if (this.ended == true) {
             this.hideControls();
             clearInterval(this.stalledTimer);
             this.player.loadingSpinner.hide();
+        } else {
+            if (this.player.currentTime() > this.lastCurrentTime) {
+                this.hideControls();
+                this.player.loadingSpinner.hide();
+                this.lastCurrentTime = this.player.currentTime();
+
+            } else {
+                if (this.isPaused == false) {
+                    this.showControls();
+                    this.player.loadingSpinner.show();
+                    this.player.play();
+                }
+            }
         }
     }
 });
