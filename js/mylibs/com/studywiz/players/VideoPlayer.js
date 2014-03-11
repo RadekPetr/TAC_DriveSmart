@@ -167,8 +167,11 @@ var VideoPlayer = new Class({
             }.bind(this));
 
             this.player.on("canplaythrough", function() {
+                // Chrome has small buffer and will stop preloading whne full
+                if (Browser.chrome) {
+                    this._finishedLoading();
+                }
                 if (this.getReadyState() > 2 && this.getNetworkState() == 2) {
-
                     this._finishedLoading();
                 }
                 // log("EVENT: **********************   canplaythrough", this.options.id, this.getReadyState(), this.getNetworkState());
