@@ -189,7 +189,7 @@ var Draggable = new Class({
                 var now2 = new Object();
                 now2.x = now.x - elOffset.x + (this.element.get('width') / 2) - Main.VIDEO_LEFT;
                 now2.y = now.y - elOffset.y + (this.element.get('width') / 2) - Main.VIDEO_TOP;
-                // log("zone:", zone, this.element, zone.retrieve('correct'));
+                // debug("zone:", zone, this.element, zone.retrieve('correct'));
                 var isOver = now2.x > zoneCoords.left && now2.x < zoneCoords.right && now2.y < zoneCoords.bottom && now2.y > zoneCoords.top;
                 var isCorrect = (this.element.id == zone.retrieve('correct'));
                 // each zone can only have one correct answer
@@ -254,14 +254,14 @@ var Draggable = new Class({
                 this._rotate(element, 0);
             },
             onSnap : function(el) {
-                // log('on snap');
+                // debug('on snap');
             },
             onComplete : function(el, droppable) {
-                // log('Stopped dragging', el, droppable);
+                // debug('Stopped dragging', el, droppable);
                 target.set('class', 'draggable');
             },
             onBeforeStart : function() {
-                //log("beforeStart");
+                //debug("beforeStart");
                 target.set('class', 'dragging');
             },
             onDrag : function() {

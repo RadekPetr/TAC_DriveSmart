@@ -43,7 +43,7 @@ var Modules = new Class({
             case "module.data.ready":
                 this.listOfModulesCounter--;
                 if (this.listOfModulesCounter === 0) {
-                    log("Modules READY, setting up user now ... ");
+                    debug("Modules READY, setting up user now ... ");
                     this._setupUser();
                 }
                 break;
@@ -52,7 +52,7 @@ var Modules = new Class({
                 this._startMainMenu();
                 break;
             case "module.finished":
-                log("Module Finished");
+                debug("Module Finished");
                 // TODO: finish end module - do allow repeating ? Let user choose which in some Module intro screen ?
                 this._startMainMenu();
                 break;

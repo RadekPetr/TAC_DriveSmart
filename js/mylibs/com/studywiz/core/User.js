@@ -37,29 +37,29 @@ var User = new Class({
             this._getUserData("concentration").info.extend({
                 level : this.concentrationLevel
             });
-            log("No User Data saved - will create new user data from Default");
+            debug("No User Data saved - will create new user data from Default");
             var userSavedVersion = this.userData.info["app_version"];
-            log("The user app_version (using default): ", userSavedVersion);
+            debug("The user app_version (using default): ", userSavedVersion);
         } else {
             // TODO : convert all objects to hashes so I can get keys using the getKeys methods
 
             this.userData = new Hash(userProgressData);
-            log("Loaded user progress from server", this.userData);
+            debug("Loaded user progress from server", this.userData);
             this.concentrationLevel = this._getUserData("concentration").info["level"];
             var userSavedVersion = this.userData.info["app_version"];
-            log("The user saved app_version: ", userSavedVersion);
+            debug("The user saved app_version: ", userSavedVersion);
 
             //TODO: Check user data version too and if different from defaults handle that - merging ?
             var defaultVersion = defaultDataHash.info["app_version"];
             if (defaultVersion != userSavedVersion) {
-                log("Saved user progress is different version from default");
+                debug("Saved user progress is different version from default");
 
                 //this.userData.info.app_version = Main.VERSION;
             }
 
         }
-        log("Progress data of current user: ", this.userData);
-        log('All done .... starting now');
+        debug("Progress data of current user: ", this.userData);
+        debug('All done .... starting now');
         this.myParent().fireEvent("MODULE", {
             next : "main.menu.start"
         });
@@ -153,7 +153,7 @@ var User = new Class({
             app_version : Main.VERSION
         });
 
-        log("** Finished generating default user data", this.defaultData);
+        debug("** Finished generating default user data", this.defaultData);
     },
     updateSequenceProgress : function(sequenceState) {
         /// get the sequence Object and update it
@@ -163,7 +163,7 @@ var User = new Class({
         var userSequence = this.getUserSequenceData(sequenceState.id, moduleID);
 
         if (userSequence.length > 1 || userSequence.length == 0) {
-            log("ERROR");
+            debug("ERROR");
         }
 
         Object.append(userSequence[0], currentSequenceData);
@@ -184,7 +184,7 @@ var User = new Class({
         }
 
         if (unfinishedSequences.length == 0) {
-            log("Module is Finished");
+            debug("Module is Finished");
         }
         return unfinishedSequences;
     },
@@ -202,7 +202,7 @@ var User = new Class({
     getModuleState : function(moduleID) {
 
         // var moduleIDs = new Hash(this.userData.modules).getKeys();
-        //log(moduleID, "Module IDs", moduleIDs);
+        //debug(moduleID, "Module IDs", moduleIDs);
 
         var sequencesInModule = this._getUserData(moduleID).data;
 
@@ -259,12 +259,12 @@ var User = new Class({
             totalCount += progressObj.total;
             totalFinishedCount += progressObj.finishedCount;
         }.bind(this));
-        log("Overall progress: ", totalFinishedCount / totalCount);
+        debug("Overall progress: ", totalFinishedCount / totalCount);
         return (totalFinishedCount / totalCount);
     },
     getModuleScore : function(moduleID) {
         var userData = this._getUserData(moduleID).data;
-        // log(moduleID, userData);
+        // debug(moduleID, userData);
         var allScores = new Array();
         Array.each(userData, function(sequenceState, index) {
             // don't count Module Intros
@@ -273,18 +273,18 @@ var User = new Class({
             }
         });
         var totalScore = allScores.average();
-        log("Module " + moduleID + " score: ", totalScore);
+        debug("Module " + moduleID + " score: ", totalScore);
         return totalScore;
     },
     getConcentrationLevel : function(seq) {
 
         var userData = this._getUserData("concentration").data;
-        log("From:", (seq - 6), " To:", (seq + 1));
+        debug("From:", (seq - 6), " To:", (seq + 1));
         var lastSix = userData.filter(function(item, index) {
             return (parseInt(item.id) < (seq + 1) && parseInt(item.id) > (seq - 6));
         });
 
-        //   log("DEBUG: ", seq, lastSix);
+        //   debug("DEBUG: ", seq, lastSix);
         var allScores = new Array();
         Array.each(lastSix, function(sequenceState, index) {
             allScores = allScores.concat(sequenceState.score);
@@ -293,11 +293,11 @@ var User = new Class({
 
         if (scoreAverage >= 85) {
             // LEVEL INCREASE
-            log("*********** LEVEL INCREASE ***********:" + scoreAverage);
+            debug("*********** LEVEL INCREASE ***********:" + scoreAverage);
 
             /*  if (scoreAverage >= 85) {
             // LEVEL INCREASE
-            log("*********** LEVEL INCREASE ***********:" + scoreAverage);
+            debug("*********** LEVEL INCREASE ***********:" + scoreAverage);
             //TODO:  PlayLevelAudio()                //Play audio
 
             function PlayLevelAudio(){
@@ -324,7 +324,7 @@ var User = new Class({
             // There are max 0-4 levels allowed in flash
             if (this.concentrationLevel < 4) {
                 this.concentrationLevel++;
-                log("Increasing the concentration level to: ", this.concentrationLevel);
+                debug("Increasing the concentration level to: ", this.concentrationLevel);
                 // Store the current level
                 this._getUserData("concentration").info.extend({
                     level : this.concentrationLevel
@@ -361,7 +361,7 @@ var User = new Class({
         try {
             return this.userData.modules[moduleID];
         } catch (err) {
-            log("NULL");
+            debug("NULL");
             return null;
         }
 

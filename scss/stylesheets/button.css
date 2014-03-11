@@ -1,0 +1,67 @@
+/* line 8, ../sass/button.scss */
+.button {
+  cursor: pointer;
+  display: inline-block;
+  white-space: nowrap;
+  background-color: #EEC955;
+  border: 1px solid #777;
+  padding: 0 1.5em;
+  margin: 0.5em;
+  font-weight: bold;
+  font-family: "Quattrocento Sans", sans-serif;
+  line-height: 2em;
+  text-decoration: none;
+  -webkit-border-radius: 0.3em;
+  -moz-border-radius: 0.3em;
+  -ms-border-radius: 0.3em;
+  -o-border-radius: 0.3em;
+  border-radius: 0.3em;
+  -webkit-box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8) inset, 0 1px 0 rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8) inset, 0 1px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8) inset, 0 1px 0 rgba(0, 0, 0, 0.3);
+  position: absolute;
+  min-width: 140px;
+  min-height: 50px;
+}
+
+/* line 27, ../sass/button.scss */
+.button:hover {
+  border: 2px solid #999;
+}
+
+/* line 31, ../sass/button.scss */
+.button:active {
+  -webkit-box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.3) inset;
+  -moz-box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.3) inset;
+  box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.3) inset;
+}
+
+/* line 35, ../sass/button.scss */
+.button:focus {
+  outline: 0;
+  background: #fafafa;
+}
+
+/* line 40, ../sass/button.scss */
+.position_1 {
+  left: 760px;
+  top: 470px;
+}
+
+/* line 45, ../sass/button.scss */
+.position_2 {
+  left: 760px;
+  top: 395px;
+}
+
+/* line 50, ../sass/button.scss */
+.position_3 {
+  left: 760px;
+  top: 320px;
+}
+
+/* line 55, ../sass/button.scss */
+.position_4 {
+  left: 520px;
+  top: 470px;
+}

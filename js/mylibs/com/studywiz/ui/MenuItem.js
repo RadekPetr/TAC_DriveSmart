@@ -32,7 +32,7 @@ var MenuItem = new Class({
 
         this.buttonGroup = new Element('div', {
             'html' : this.options.data.text,
-            'id' : elemID,
+            'id' : elemID+"_group",
             'onselectstart' : 'return false;',
             'class' : this.options['class']
         });
@@ -66,6 +66,9 @@ var MenuItem = new Class({
         //var lockedCSS = 'menu_item locked no-select pane blue';
         //  this.container.removeAttribute('class');
         // this.container.addClass(lockedCSS);
+         this.buttonGroup.setStyles({
+            'cursor' : 'not-allowed'
+        });
         this.buttonGroup.fade("0.6");
     },
     disable : function() {
@@ -166,7 +169,7 @@ var MenuItem = new Class({
             next : "",
             id : 'flash required ' + this.options.data.moduleID,
             title : 'flash required for module ' + this.options.data.text,
-            'class' : 'menu_item no-select'
+            'class' : ''
         });
         symbolImage.preload();
         symbolImage.image.setStyles({
@@ -183,7 +186,7 @@ var MenuItem = new Class({
         var params = new Hash({
             type : "item.over",
             id : this.selectedModuleID,
-            itemRef: this,
+            itemRef : this,
             data : {
                 description : this.options.data.description,
                 preview : this.options.preview

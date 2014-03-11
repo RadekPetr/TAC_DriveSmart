@@ -46,20 +46,20 @@ var Recorder = new Class({
         var myParent = document.getElementById(parentTagID);
 
         if (this.container == null) {
-            //log("Container not found in " + parentTagID + " adding a new one");
+            //debug("Container not found in " + parentTagID + " adding a new one");
             this.container = new Element("div", {
                 id : this.containerID,
                 styles : this.options.style
             });
             this.container.inject($m(parentTagID), where);
-            // log(this.options.style);
+            // debug(this.options.style);
 
         }
         if (isFlashSupported() == true) {
             this.options.swiff.container = this.container;
             this.swiff = new Swiff(this.options.src, this.options.swiff);
         } else {
-            log("********************* No FLASH loading image");
+            debug("********************* No FLASH loading image");
             this.options.swiff.container = this.container;
             this.swiff = new ImagePlayer(this, {
                 src : Main.PATHS.imageFolder + "commentary/noflash.png",
@@ -82,7 +82,7 @@ var Recorder = new Class({
         switch (params.next) {
             case "NoFlash.Ready":
                 this.removeEvents("TIMELINE");
-                log("ImageNo Flash loaded");
+                debug("ImageNo Flash loaded");
                 this.swiff.add(this.container.id);
                 this.swiff.show();
         }

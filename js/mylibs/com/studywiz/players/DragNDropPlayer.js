@@ -81,7 +81,7 @@ var DragNDropPlayer = new Class({
                 }
             });
         });
-        log("Score: " + score, "%", score * pointsPerItem);
+        debug("Score: " + score, "%", score * pointsPerItem);
         return (score * pointsPerItem) / 100;
 
     },
@@ -93,7 +93,7 @@ var DragNDropPlayer = new Class({
                 var allLoaded = this.draggables.every(function(item, index) {
                     return item.options.loaded == true;
                 });
-                log("Ready: ", allLoaded);
+                debug("Ready: ", allLoaded);
                 if (allLoaded == true) {
                     this._showDraggables();
                 }

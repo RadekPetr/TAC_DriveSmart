@@ -29,7 +29,7 @@
 	top: 500px;
 }
 
-.menu_item {	
+.menu_item {
 	font-family: Museo700;
 	font-size: 1em;
 	text-align: left;
@@ -42,14 +42,14 @@
 }
 
 .menu_item:hover {
-	
+
 }
 .menu_item.locked {
-
+	cursor: not-allowed;
 }
 
 .menu_item_locked:hover {
-	
+
 }
 .progress_title {
 	position: relative;
@@ -76,13 +76,12 @@
 	position: absolute;
 }
 
-
 .browser_warning_text {
-    font-family: 'Museo700Regular';   
-    font-weight: normal;
-    left: 100px; 
-    margin: 0 0 0.2em;
-    position: absolute;
-    text-align: center;
-    top: 200px; 
+	font-family: 'Museo700Regular';
+	font-weight: normal;
+	left: 100px;
+	margin: 0 0 0.2em;
+	position: absolute;
+	text-align: center;
+	top: 200px;
 }

@@ -9,7 +9,7 @@ var Main = new Class({
     // ----------------------------------------------------------
     initialize : function(isDev) {
 
-        log("****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
+        debug("****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
 
         if (isDev == true) {
             // load external js libraries so they are available to the project
@@ -126,7 +126,7 @@ Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '1.0.4';
-Main.BUILD = '2014/03/9 build 2';
+Main.BUILD = '2014/03/11 build 2';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;
@@ -254,3 +254,9 @@ document.addEventListener('touchmove',function(e) {
 
 
 */
+
+ function debug (){
+     if (Main.DEBUG){
+         log (arguments);
+     }        
+}

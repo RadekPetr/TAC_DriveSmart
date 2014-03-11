@@ -39,7 +39,7 @@ var AudioPlayer = new Class({
             if (Browser.Platform.ios == true || Browser.Platform.android == true) {
                 this._playSound();
             } else {
-                log("++ Not preloaded yet - Loading Sound" + this.options.src);
+                debug("++ Not preloaded yet - Loading Sound" + this.options.src);
                 this.preloader.loadFile({
                     src : this.options.src,
                     id : this.options.id
@@ -73,7 +73,7 @@ var AudioPlayer = new Class({
     // ----------------------------------------------------------
     // PRIVATE - handle load complete
     _playSound : function() {
-        log('Play sound: ' + this.options.id + " " + this.options.src);
+        debug('Play sound: ' + this.options.id + " " + this.options.src);
         if (!createjs.Sound.isReady()) {
             alert('Sound plugin issue');
         } else {
@@ -90,12 +90,12 @@ var AudioPlayer = new Class({
     },
     // ----------------------------------------------------------
     _preloadComplete : function(event) {
-        log("++ Audio Preloaded: " + this.options.id);
+        debug("++ Audio Preloaded: " + this.options.id);
         this.preloaded = true;
     },
     // ----------------------------------------------------------
     _preloadError : function(event) {
-        log("++ Audio Preload error: " + event);
+        debug("++ Audio Preload error: " + event);
         new Api(this).saveLog('error', "****** Audio load error file" + this.options.src + " ******");
     },
     // ----------------------------------------------------------
@@ -111,7 +111,7 @@ var AudioPlayer = new Class({
 
         if (Browser.Platform.ios == true || Browser.Platform.android == true) {
             loaderInfo[this.options.id].progress = 1;
-            log(" iOS device - audio ready");
+            debug(" iOS device - audio ready");
         }
 
         return loaderInfo;

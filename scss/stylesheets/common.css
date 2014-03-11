@@ -1,0 +1,165 @@
+/* line 13, ../sass/common.scss */
+.no-select {
+  cursor: default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* line 22, ../sass/common.scss */
+.blur {
+  filter: url(filter.svg#blur);
+  -webkit-filter: blur(15px);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius='15', MakeShadow='false')";
+}
+
+/* line 27, ../sass/common.scss */
+#drivesmart {
+  font-family: "Quattrocento Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.6em;
+  font-weight: normal;
+  left: 1px;
+  top: 0;
+  position: relative;
+  height: 560px;
+  -webkit-box-shadow: 0 0 10px #404040;
+  -moz-box-shadow: 0 0 10px #404040;
+  box-shadow: 0 0 10px #404040;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/* line 44, ../sass/common.scss */
+.module-title, .module-title-dashboard, .module-title-loader {
+  font-size: 3em;
+  left: 680px;
+  line-height: 50px;
+  position: absolute;
+  top: 150px;
+  width: 300px;
+  font-family: "Museo700Regular";
+  font-weight: normal;
+}
+
+/* line 54, ../sass/common.scss */
+.module-title-dashboard {
+  font-size: 3.5em;
+  left: 510px;
+  margin: 0 0 0.2em;
+  top: 20px;
+}
+
+/* line 61, ../sass/common.scss */
+.module-title-loader {
+  font-size: 3.5em;
+  left: 330px;
+  margin: 0 0 0.2em;
+  top: 190px;
+}
+
+/* line 68, ../sass/common.scss */
+h1 {
+  font-family: "Museo700Regular";
+  font-weight: normal;
+  margin: 0 0 0.2em;
+}
+
+/* line 73, ../sass/common.scss */
+h2 {
+  font-family: "Museo700Regular";
+  color: #d7b000;
+  font-weight: normal;
+  margin: 0;
+}
+
+/* line 79, ../sass/common.scss */
+.panel {
+  box-shadow: 0 0 10px #404040;
+}
+
+/* line 82, ../sass/common.scss */
+.pane {
+  margin: 20px 0;
+  -webkit-box-shadow: #404040 0 0 10px;
+  -moz-box-shadow: #404040 0 0 10px;
+  box-shadow: #404040 0 0 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  color: black;
+}
+
+/* line 88, ../sass/common.scss */
+.pane.menu {
+  margin: 10px 0;
+}
+
+/* line 91, ../sass/common.scss */
+.pane.orange {
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YyODQxMSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2JmNWIwMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f28411), color-stop(100%, #bf5b00));
+  background: -webkit-linear-gradient(#f28411, #bf5b00);
+  background: -moz-linear-gradient(#f28411, #bf5b00);
+  background: -o-linear-gradient(#f28411, #bf5b00);
+  background: linear-gradient(#f28411, #bf5b00);
+  background-color: #f28411;
+}
+
+/* line 95, ../sass/common.scss */
+.pane.green {
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2NlZDY0OSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2FhYmEwYSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ced649), color-stop(100%, #aaba0a));
+  background: -webkit-linear-gradient(#ced649, #aaba0a);
+  background: -moz-linear-gradient(#ced649, #aaba0a);
+  background: -o-linear-gradient(#ced649, #aaba0a);
+  background: linear-gradient(#ced649, #aaba0a);
+  background-color: #ced649;
+}
+
+/* line 99, ../sass/common.scss */
+.pane.yellow {
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2U0ZDEwMCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2Q3YjAwMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e4d100), color-stop(100%, #d7b000));
+  background: -webkit-linear-gradient(#e4d100, #d7b000);
+  background: -moz-linear-gradient(#e4d100, #d7b000);
+  background: -o-linear-gradient(#e4d100, #d7b000);
+  background: linear-gradient(#e4d100, #d7b000);
+  background-color: #e4d100;
+}
+
+/* line 103, ../sass/common.scss */
+.pane.blue {
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzk5ZDZkZCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwYjVkNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #99d6dd), color-stop(100%, #00b5d6));
+  background: -webkit-linear-gradient(#99d6dd, #00b5d6);
+  background: -moz-linear-gradient(#99d6dd, #00b5d6);
+  background: -o-linear-gradient(#99d6dd, #00b5d6);
+  background: linear-gradient(#99d6dd, #00b5d6);
+  background-color: #99d6dd;
+}
+
+/* line 107, ../sass/common.scss */
+.pane.gray, #drivesmart {
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzY2NjY2NiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzQwNDA0MCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #666666), color-stop(100%, #404040));
+  background: -webkit-linear-gradient(#666666, #404040);
+  background: -moz-linear-gradient(#666666, #404040);
+  background: -o-linear-gradient(#666666, #404040);
+  background: linear-gradient(#666666, #404040);
+  background-color: #666666;
+  color: #fff;
+}
+
+/* line 112, ../sass/common.scss */
+.pane.gray a, #drivesmart a {
+  color: #d7b000;
+}

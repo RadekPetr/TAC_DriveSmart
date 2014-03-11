@@ -62,7 +62,7 @@ var VideoPlayer = new Class({
     },
     // ---------------------------
     preload : function() {
-        // log("++ Video Preload started: " + this.options.id);
+        // debug("++ Video Preload started: " + this.options.id);
         if (this.player == undefined) {
             this.show();
             this.isReady = false;
@@ -96,12 +96,11 @@ var VideoPlayer = new Class({
                     this.paused = false;
 
                     if (this.getReadyState() !== 4) {//HAVE_ENOUGH_DATA
-                        log("readyState checking ", this.player.readyState);
+                        debug("readyState checking ", this.player.readyState);
                         //vid.addEventListener('canplaythrough', onCanPlay, false);
                         //  vid.addEventListener('load', onCanPlay, false);
                         //add load event as well to avoid errors, sometimes 'canplaythrough' won't dispatch.
                         setTimeout( function() {
-                            log(" pause now");
                             this.pause();
                             //block play so it buffers before playing
                         }.bind(this), 2);
@@ -120,7 +119,7 @@ var VideoPlayer = new Class({
     registerLoadEvents : function() {
         if (this.player != undefined) {
             this.player.on("suspend", function() {
-                log("EVENT: suspend", this.options.id);
+                debug("EVENT: suspend", this.options.id);
                 if (Browser.Platform.ios == true) {
                     this._finishedLoading();
                 }
@@ -128,17 +127,17 @@ var VideoPlayer = new Class({
             }.bind(this));
 
             this.player.on("waiting", function() {
-                log("EVENT: **********************   waiting", this.options.id, this.getReadyState(), this.getNetworkState());
+                debug("EVENT: **********************   waiting", this.options.id, this.getReadyState(), this.getNetworkState());
                 //this.player.load();
             }.bind(this));
             this.player.on("load", function() {
-                //log("EVENT: **********************   load", this.options.id, this.getReadyState(), this.getNetworkState());
+                //debug("EVENT: **********************   load", this.options.id, this.getReadyState(), this.getNetworkState());
                 //this.player.load();
             }.bind(this));
 
             this.player.tech.el_.addEvent("stalled", function() {
 
-                log("EVENT: **********************   stalled", this.options.id, this.getReadyState(), this.getNetworkState());
+                debug("EVENT: **********************   stalled", this.options.id, this.getReadyState(), this.getNetworkState());
                 //  this.showControls();
                 //   this.player.loadingSpinner.show();
                 //  this.stalledCurrentTime = this.player.currentTime();
@@ -162,7 +161,7 @@ var VideoPlayer = new Class({
 
             }.bind(this));
             this.player.on("progress", function() {
-                // log("EVENT: **********************   progress", this.options.id, this.getReadyState(), this.getNetworkState());
+                // debug("EVENT: **********************   progress", this.options.id, this.getReadyState(), this.getNetworkState());
                 this.isSuspended = false;
             }.bind(this));
 
@@ -174,13 +173,13 @@ var VideoPlayer = new Class({
                 if (this.getReadyState() > 2 && this.getNetworkState() == 2) {
                     this._finishedLoading();
                 }
-                // log("EVENT: **********************   canplaythrough", this.options.id, this.getReadyState(), this.getNetworkState());
+                // debug("EVENT: **********************   canplaythrough", this.options.id, this.getReadyState(), this.getNetworkState());
 
             }.bind(this));
 
             this.player.on("loadedalldata", function() {
                 if (this.getReadyState() == 4) {
-                    log("EVENT: **********************   loadedalldata", this.options.id, this.getReadyState(), this.getNetworkState());
+                    debug("EVENT: **********************   loadedalldata", this.options.id, this.getReadyState(), this.getNetworkState());
                     this._finishedLoading();
                 }
 
@@ -196,7 +195,7 @@ var VideoPlayer = new Class({
                 this.ended = true;
                 this.progressChecker();
 
-                log("EVENT: **********************   ended", this.options.id);
+                debug("EVENT: **********************   ended", this.options.id);
                 this.myParent().fireEvent("TIMELINE", {
                     type : "video.finished",
                     id : this.options.id,
@@ -210,7 +209,7 @@ var VideoPlayer = new Class({
         //  this.player.on("play", function() {
         //this.player.tech.el_.removeEvents("play");
         this.player.tech.el_.addEventListener("play", function() {
-            log("EVENT: **********************   play", this.options.id);
+            debug("EVENT: **********************   play", this.options.id);
 
             this.myParent().fireEvent("TIMELINE", {
                 type : "video.started",
@@ -228,7 +227,7 @@ var VideoPlayer = new Class({
         this.player.off("pause");
         this.player.on("pause", function() {
             // alert ("paused");
-            log("EVENT: **********************   pause", this.options.id);
+            debug("EVENT: **********************   pause", this.options.id);
             // this.isPaused = true;
             // clearInterval(this.stalledTimer);
             // alert ("paused, cleared timer");
@@ -274,7 +273,7 @@ var VideoPlayer = new Class({
         this.player.controlBar.captionsButton.show();
     },
     obscure : function() {
-        log("Obscure");
+        debug("Obscure");
         //TODO: finish for IE - use an image for the mask
         if (Browser.ie) {
 
@@ -338,7 +337,7 @@ var VideoPlayer = new Class({
         var player = videojs.players[this.playerID];
         // get rid of it
         if (player == null) {
-            log("Video player is null");
+            debug("Video player is null");
         } else {
             player.dispose();
         }
@@ -358,7 +357,7 @@ var VideoPlayer = new Class({
         var progress = 0;
         if (this.player != null) {
             progress = this.player.bufferedPercent();
-            log(this.playerID + " **** Video Load progress: " + (this.player.bufferedPercent() * 100.00));
+            debug(this.playerID + " **** Video Load progress: " + (this.player.bufferedPercent() * 100.00));
         }
 
         loaderInfo[this.options.id] = {
@@ -372,12 +371,12 @@ var VideoPlayer = new Class({
         // http://stackoverflow.com/questions/11633929/readystate-issue-with-html5-video-elements-on-ios-safari
         if (Browser.Platform.android == true) {
             //this.isReady = true;
-            log(" Abdroid device - readyggg: ", this.playerID);
+            debug(" Abdroid device - ready: ", this.playerID);
         }
 
         //if (Browser.Platform.ios == true || Browser.Platform.android == true) {
         //    this.isReady = true;
-        //    log(" iOS device - readyggg: ", this.playerID);
+        //    debug(" iOS device - readyggg: ", this.playerID);
         //}
 
         if (this.isReady == true) {
@@ -409,7 +408,7 @@ var VideoPlayer = new Class({
     _finishedLoading : function() {
 
         if (this.isReady != true) {
-            log("!!!!!!!!!!!!!!!!!!! _finishedLoading ", this.options.id);
+            debug("!!!!!!!!!!!!!!!!!!! _finishedLoading ", this.options.id);
             this.isReady = true;
             // this.player.off('progress');
             this.player.off('loaded');

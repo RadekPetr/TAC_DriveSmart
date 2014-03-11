@@ -1,0 +1,114 @@
+﻿@import "compass/support";
+@import "compass/css3";
+@import "constants";
+
+$radius: 5px;
+$title_font: 'Museo700Regular';
+$body-font: 'Quattrocento Sans', sans-serif;
+$experimental-support-for-svg: true;
+
+
+
+
+.no-select {
+	cursor: default;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.blur {
+	filter: url(filter.svg#blur);
+	-webkit-filter: blur(15px);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius='15', MakeShadow='false')";	
+}
+#drivesmart {
+	@extend .pane.gray;
+	font-family: $body-font;
+	font-size: 16px;
+	line-height: 1.6em;
+	font-weight: normal;
+	left: 1px;
+	top: 0;
+	position: relative;
+	height: 560px;
+	@include box-shadow (0 0 10px $grey-end);
+	@include border-radius($radius);
+}
+.videoContainer {
+
+}
+
+.module-title {
+	font-size: 3em;
+	left: 680px;
+	line-height: 50px;
+	position: absolute;
+	top: 150px;
+	width: 300px;
+	font-family: $title_font;
+	font-weight: normal;
+}
+.module-title-dashboard {
+    @extend .module-title;
+	font-size: 3.5em;
+	left: 510px;
+	margin: 0 0 0.2em;
+	top: 20px;
+}
+.module-title-loader {
+    @extend .module-title;
+	font-size: 3.5em;
+	left: 330px;
+	margin: 0 0 0.2em;
+	top: 190px;
+}
+h1 {
+	font-family: $title_font;
+	font-weight: normal;
+	margin: 0 0 0.2em;
+}
+h2 {
+	font-family: $title_font;
+	color: $yellow-end;
+	font-weight: normal;
+	margin: 0;
+}
+.panel {
+	box-shadow: 0 0 10px $grey-end;
+}
+.pane {
+	margin: 20px 0;
+	@include box-shadow ($grey-end 0 0 10px);
+	@include border-radius(5px);	
+	color: #000
+}
+.pane.menu {
+	margin: 10px 0;
+}
+.pane.orange {
+	@include background(linear-gradient($orange-start, $orange-end));
+	background-color: $orange-start;
+}
+.pane.green {
+	@include background(linear-gradient($green-start, $green-end));
+	background-color: $green-start;
+}
+.pane.yellow {
+	@include background(linear-gradient($yellow-start, $yellow-end));
+	background-color: $yellow-start;
+}
+.pane.blue {
+	@include background(linear-gradient($blue-start, $blue-end));
+	background-color: $blue-start;
+}
+.pane.gray {
+	@include background(linear-gradient($grey-start, $grey-end));
+	background-color: $grey-start;	
+	color: #fff;
+}
+.pane.gray a {
+	color: $yellow-end
+}

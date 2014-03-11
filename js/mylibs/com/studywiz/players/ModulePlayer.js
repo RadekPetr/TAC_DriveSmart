@@ -33,7 +33,7 @@ var ModulePlayer = new Class({
     handleDataEvent : function(params) {
         switch (params.next) {
             case "data.ready":
-                //log("Loaded module XML");
+                //debug("Loaded module XML");
                 this.sequences = params.data;
                 this.options.module_structure_version = params.loaded_module_structure_version;
                 this.myParent().fireEvent("MODULE", {
@@ -132,7 +132,7 @@ var ModulePlayer = new Class({
     },
     _prepareSequencePlayer : function() {
         if (Main.sequencePlayer == null) {
-            log("ERROR - Sequence player does not exist");
+            debug("ERROR - Sequence player does not exist");
         } else {
             Main.sequencePlayer.reset();
             Main.sequencePlayer.options.parent = this;

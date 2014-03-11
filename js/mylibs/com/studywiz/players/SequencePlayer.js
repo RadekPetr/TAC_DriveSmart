@@ -45,7 +45,7 @@ var SequencePlayer = new Class({
         this.sequenceState = Main.userTracker.getUserSequenceState(this.moduleInfo.currentSequenceID, this.moduleInfo.moduleID);
         // reset scoring, so when it repeats the scores are replaced not appended (Unless this will be requested ?)
         this.sequenceState.score = new Array();
-        log("Starting SEQUENCE: " + this.moduleInfo.currentSequenceID);
+        debug("Starting SEQUENCE: " + this.moduleInfo.currentSequenceID);
         this._setupSequenceMedia();
     },
     // ----------------------------------------------------------
@@ -487,7 +487,7 @@ var SequencePlayer = new Class({
                     break;
                 case "DragNDropFeedback":
                     if (this.currentSequence.length > 0) {
-                        log("ERROR - DragNDropFeedback must be last in the sequence");
+                        debug("ERROR - DragNDropFeedback must be last in the sequence");
                     }
                     step.media.image.options.style.left = 0;
                     step.media.image.options.style.top = 0;
@@ -519,7 +519,7 @@ var SequencePlayer = new Class({
             }
         } else {
             // seq finished
-            log('******** ERROR - Missing Continue STEP in this sequence');
+            debug('******** ERROR - Missing Continue STEP in this sequence');
         }
     },
     // ----------------------------------------------------------
@@ -627,7 +627,7 @@ var SequencePlayer = new Class({
             case "PlayAudio.done":
                 if (Main.features.clickToPlay == true) {
                     var nextStep = this.currentSequence[0];
-                    log("Next step is ", nextStep);
+                    debug("Next step is ", nextStep);
                     if (nextStep.attributes.fmt != "Continue" && nextStep.attributes.fmt == "PlayVideo") {
                         // to start video with user interaction in iOS
                         this._addButton({
@@ -647,7 +647,7 @@ var SequencePlayer = new Class({
                 // if click is required to play show continue button
                 if (Main.features.clickToPlay == true) {
                     var nextStep = this.currentSequence[0];
-                    log("Next step is ", nextStep);
+                    debug("Next step is ", nextStep);
                     if (nextStep.attributes.fmt != "Continue" && nextStep.attributes.fmt != "PlayAudio") {
                         // to start video with user interaction in iOS
                         this._addButton({
@@ -777,7 +777,7 @@ var SequencePlayer = new Class({
                 if (nextStep.attributes.fmt == "Commentary") {
                     nextStep.playExpert = true;
                 } else {
-                    log("ERROR - next step must be Commentary after CommentaryIntro");
+                    debug("ERROR - next step must be Commentary after CommentaryIntro");
                 }
             case "CommentaryIntro.done":
                 this._stopPlayers();
@@ -878,7 +878,7 @@ var SequencePlayer = new Class({
                 if (nextStep.attributes.fmt == "DragNDropFeedback") {
                     this._nextStep();
                 } else {
-                    log("ERROR - next step must be DragNDropFeedback after DragNDrop");
+                    debug("ERROR - next step must be DragNDropFeedback after DragNDrop");
                     this._nextStep();
                 }
                 break;
@@ -952,7 +952,7 @@ var SequencePlayer = new Class({
             });
             this._prepareStepMedia(step, stepOrder);
         }.bind(this));
-        log("---------------------------- Finished setting up media from xml");
+        debug("---------------------------- Finished setting up media from xml");
     }.protect(),
     // ----------------------------------------------------------
     _prepareStepMedia : function(step, stepOrder) {
@@ -1379,10 +1379,10 @@ var SequencePlayer = new Class({
         Main.userTracker.updateSequenceProgress(this.sequenceState);
     }.protect(),
     onLoad : function() {
-        log("Called Loaded");
+        debug("Called Loaded");
     },
     isReady : function() {
-        log("Is ready ?");
+        debug("Is ready ?");
         return true;
     },
     reset : function() {

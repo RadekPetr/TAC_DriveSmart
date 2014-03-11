@@ -51,13 +51,11 @@ var SwiffPlayer = new Class({
         var myParent = document.getElementById(parentTagID);
 
         if (this.container == null) {
-            //log("Container not found in " + parentTagID + " adding a new one");
             this.container = new Element("div", {
                 id : this.containerID,
                 styles : this.options.style
             });
             this.container.inject($m(parentTagID), where);
-            // log(this.options.style);
 
         }
         if (isFlashSupported() == true) {
@@ -66,7 +64,7 @@ var SwiffPlayer = new Class({
             log ("Version ", detectFlash());
 
         } else {
-            log("********************* No FLASH loading image");
+            debug("********************* No FLASH loading image");
             this.options.swiff.container = this.container;
             this.swiff = new ImagePlayer(this, {
                 src : Main.PATHS.imageFolder + "commentary/noflash.png",
@@ -105,8 +103,8 @@ var SwiffPlayer = new Class({
         RightClick.init(this.options.swiff.id, this.containerID);
 
     },
-    start : function(params) {        
-       // log("***************************** Calling Start");
+    start : function(params) {      
+    
         Swiff.remote(this.swiff.toElement(), 'startSwiff', 1, 1, 1);
     },
     stop : function() {
@@ -147,10 +145,6 @@ var SwiffPlayer = new Class({
     preload : function() {
         swiffLoaded = function() {
             this.options.loaded = true;
-            //  log("Loaded flash", this.getLoaderInfo());
-            // if (this.myParent().mediaLoader != null && this.myParent().mediaLoader != undefined) {
-            //     this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
-            // }
             this.myParent().fireEvent("TIMELINE", {
                 type : "swiff.ready",
                 id : this.options.id,

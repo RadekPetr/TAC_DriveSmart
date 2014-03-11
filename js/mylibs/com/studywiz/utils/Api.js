@@ -26,38 +26,38 @@ var Api = new Class({
             format : 'data',
             onSuccess : function(responseText) {
                 if (responseText == 'no data' || responseText == '"no data"') {
-                    log('info', "Empty User progress data loaded - new user ? Launching with a default data set.");
+                    debug('info', "Empty User progress data loaded - new user ? Launching with a default data set.");
                     Main.userTracker.testLoadedUserProgress(undefined);
                 } else {
                     try {
-                        log("User progress data loaded OK");
+                        debug("User progress data loaded OK");
                         var decompressedData = this.decode(responseText);
                         var myProgress = JSON.decode(decompressedData);
                         Main.userTracker.testLoadedUserProgress(myProgress);
                     } catch (e) {
-                        log('ERROR: processing loaded user progress data ', e);
+                        debug('ERROR: processing loaded user progress data ', e);
                         this.saveLog("error", "processing loaded user progress data onSuccess: " + e);
                         // TODO: handle errors in data - due to versions ?
                     }
                 }
             }.bind(this),
             onComplete : function(event, xhr) {
-                log('onComplete loadProgress data reading', event, xhr);
+                debug('onComplete loadProgress data reading', event, xhr);
             }.bind(this),
             onFailure : function(xhr) {
                 if (retries >= this.options.retries) {
-                    log("ERROR: loadUserProgress Failed", xhr);
+                    debug("ERROR: loadUserProgress Failed", xhr);
                     this.saveLog("error", "onFailure loadUserProgress, no retry left " + xhr + " " + Browser.name + " , " + Browser.version + ", " + Browser.Platform);
                     alert("SDE01: Error loading user data. \n\nPlease reload the page to try again or contact support.");
                 } else {
-                    log("WARN: loadUserProgress Failed, retry:" + retries, xhr);
+                    debug("WARN: loadUserProgress Failed, retry:" + retries, xhr);
                     this.saveLog("warn", "loadUserProgress failed, retry:" + retries + "/" + this.options.retries + " " + xhr);
                     retries += 1;
                     this._sendRequest(jsonRequest, new Object(), false);
                 }
             }.bind(this),
             onError : function(text, error) {
-                log('ERROR: loadUserProgress error: ', text, error);
+                debug('ERROR: loadUserProgress error: ', text, error);
                 this.saveLog("error", "onError loadProgress" + text + " " + error);
 
             }.bind(this)
@@ -71,22 +71,22 @@ var Api = new Class({
             link : 'chain',
             method : 'post',
             onSuccess : function(xhr) {
-                log("jsonUserRequest Success", xhr);
+                debug("jsonUserRequest Success", xhr);
                 if (xhr == '"OK"' || xhr == '"ok"' || xhr == "ok" || xhr == "OK") {
-                    log("INFO: User progress data saved OK");
+                    debug("INFO: User progress data saved OK");
                 } else {
-                    log("ERROR: User progress wrong reply NOT OK");
-                    log(xhr);
+                    debug("ERROR: User progress wrong reply NOT OK");
+                    debug(xhr);
                 }
             }.bind(this),
             onFailure : function(xhr) {
 
                 if (retries >= this.options.retries) {
-                    log("ERROR: saveUserProgress Failed", xhr);
+                    debug("ERROR: saveUserProgress Failed", xhr);
                     this.saveLog("error", "onFailure saveUserProgress, no retry left " + xhr + " " + Browser.name + " , " + Browser.version + ", " + Browser.Platform);
                     alert("SDE02: Error saving user data. \n\nPlease continue to the next activity and we will attempt to save the progress again later on.");
                 } else {
-                    log("WARN: saveUserProgress Failed, retry:" + retries, xhr);
+                    debug("WARN: saveUserProgress Failed, retry:" + retries, xhr);
                     this.saveLog("warn", "saveUserProgress failed, retry:" + retries + "/" + this.options.retries + " " + xhr);
                     retries += 1;
                     this._sendRequest(jsonRequest, requestPayload, false);
@@ -94,27 +94,27 @@ var Api = new Class({
 
             }.bind(this),
             onRequest : function() {
-                // log("Save the User data version too  .... posting");
+
             }.bind(this),
             onLoadstart : function(event, xhr) {
-                // log('onLoadstart Progress data saving');
+
             }.bind(this),
             onComplete : function(event, xhr) {
-                // log('onComplete Progress data saving');
+
             }.bind(this),
             onCancel : function(event, xhr) {
-                // log('onCancel Progress data saving');
+
             }.bind(this),
             onException : function(event, xhr) {
-                log('onException Progress data saving');
+                debug('onException Progress data saving');
                 this.saveLog("error", xhr);
             }.bind(this),
             onTimeout : function(event, xhr) {
-                log('onTimeout Progress data saving');
+                debug('onTimeout Progress data saving');
                 this.saveLog("error", "Timeout saveUserProgress");
             }.bind(this),
             onError : function(text, error) {
-                log('onError SaveProgress', text, error);
+                debug('onError SaveProgress', text, error);
                 this.saveLog("error", "onError saveUserProgress" + text + " " + error + " " + Browser.name + " , " + Browser.version + ", " + Browser.Platform);
             }.bind(this)
         });
@@ -130,21 +130,21 @@ var Api = new Class({
             link : 'chain',
             method : 'post',
             onSuccess : function(xhr) {
-                log("saveModuleProgress request Success", xhr);
+                debug("saveModuleProgress request Success", xhr);
                 if (xhr == '"OK"' || xhr == '"ok"' || xhr == "ok" || xhr == "OK") {
-                    log("INFO: Module progress data saved OK");
+                    debug("INFO: Module progress data saved OK");
                 } else {
-                    log("ERROR: Save Module progress wrong reply NOT OK");
-                    log(xhr);
+                    debug("ERROR: Save Module progress wrong reply NOT OK");
+                    debug(xhr);
                 }
             }.bind(this),
             onFailure : function(xhr) {
                 if (retries >= this.options.retries) {
-                    log("ERROR: saveUserProgress Failed", xhr);
+                    debug("ERROR: saveUserProgress Failed", xhr);
                     this.saveLog("error", "onFailure saveModuleProgress, no retry left " + xhr + " " + Browser.name + " , " + Browser.version + ", " + Browser.Platform);
                     alert("SDE03: Error saving module score. \n\nPlease continue to the next activity and we will attempt to save the score again later on.");
                 } else {
-                    log("WARN: saveModuleProgress Failed, retry:" + retries, xhr);
+                    debug("WARN: saveModuleProgress Failed, retry:" + retries, xhr);
                     this.saveLog("warn", "saveModuleProgress failed, retry:" + retries + "/" + this.options.retries + " " + xhr);
                     retries += 1;
                     this._sendRequest(jsonRequest, requestPayload, true);
@@ -164,17 +164,17 @@ var Api = new Class({
                 //log('onCancel _saveModuleProgress');
             }.bind(this),
             onException : function(event, xhr) {
-                log('onException _saveModuleProgress');
+                debug('onException _saveModuleProgress');
                 this.saveLog("error", "onException saveModuleProgress" + xhr);
             }.bind(this),
             onTimeout : function(event, xhr) {
-                log('onTimeout _saveModuleProgress');
+                debug('onTimeout _saveModuleProgress');
                 // Try again then alert user
                 this.saveLog("error", "onTimeout saveModuleProgress" + xhr);
 
             }.bind(this),
             onError : function(text, error) {
-                log('onError _saveModuleProgress', text, error);
+                debug('onError _saveModuleProgress', text, error);
                 this.saveLog("error", "onError saveModuleProgress" + xhr);
             }.bind(this)
         });
@@ -202,7 +202,7 @@ var Api = new Class({
                 requestPayload.authenticity_token = authenticity_token;
                 request.send(Object.toQueryString(requestPayload));
             } else {
-                log("ERROR: NO authenticity_token found !!!");
+                debug("ERROR: NO authenticity_token found !!!");
             }
         } else {
             request.send(requestPayload);
@@ -234,10 +234,10 @@ var Api = new Class({
             link : 'chain',
             method : 'post',
             onSuccess : function(xhr) {
-                log("saveLog Success", xhr);
+                debug("saveLog Success", xhr);
             }.bind(this),
             onFailure : function(xhr) {
-                log("jsonUserRequest Failed", xhr);
+                debug("jsonUserRequest Failed", xhr);
             }.bind(this),
             onRequest : function() {
                 // log("SaveLog  .... posting");
@@ -252,13 +252,13 @@ var Api = new Class({
                 // log('onCancel saveLog data saving');
             }.bind(this),
             onException : function(event, xhr) {
-                log('onException saveLog');
+                debug('onException saveLog');
             }.bind(this),
             onTimeout : function(event, xhr) {
-                log('onTimeout saveLog');
+                debug('onTimeout saveLog');
             }.bind(this),
             onError : function(text, error) {
-                log('onError saveLog', text, error);
+                debug('onError saveLog', text, error);
             }.bind(this)
         });
 

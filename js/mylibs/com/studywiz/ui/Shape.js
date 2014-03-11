@@ -33,7 +33,7 @@ var Shape = new Class({
         var tempArray = data.split("#");
         this.options.type = tempArray[0];
         if (this.options.type == null) {
-            log("ERROR: no type defined for svg data");
+            debug("ERROR: no type defined for svg data");
         }
 
         this.shapes = new Array();

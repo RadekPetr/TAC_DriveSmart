@@ -103,8 +103,8 @@ function getFeatures() {
     featureSet.clickToPlay = (Browser.Platform.ios == true || Browser.Platform.android == true);
 
     // Test as iPad
-   // featureSet.clickToPlay = true;
-   // featureSet.supportsTouch = true;
+    //featureSet.clickToPlay = true;
+   //featureSet.supportsTouch = true;
 
     return featureSet;
 };

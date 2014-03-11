@@ -71,7 +71,7 @@ var MediaLoader = new Class({
     },
     // ----------------------------------------------------------
     reportProgress : function(loaderInfo) {
-        log("this.loadQueue", this.loadQueue);
+        debug("this.loadQueue", this.loadQueue);
 
         if (this.options.next == null) {
             // if next action is not set do not allow reporting progress, not sure ???
@@ -126,7 +126,7 @@ var MediaLoader = new Class({
     // ----------------------------------------------------------
     _handleFinished : function(progress) {
         if (progress > 99) {
-            log("Preload Finished");
+            debug("Preload Finished");
             clearInterval(this.preloadTimer);
             this._removeCompletedFromQueue();
             // remove the progress bar, will continue silently
