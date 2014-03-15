@@ -290,7 +290,7 @@ var Draggable = new Class({
                         left : this.options.style.left,
                         top : this.options.style.top,
                         position : 'absolute'
-                    };
+                    };                   
                     var myClone = this.topViewImage.clone();
                     myClone.set('id', this.options.id);
                     myClone.setStyles(styles);
@@ -298,7 +298,8 @@ var Draggable = new Class({
                     myClone.inject(this.container);
                     myClone.fireEvent('touchstart', event);
                 }.bind(this));
-            }.bind(this);
+            }.bind(this);          
+           
         } else {
             onLoadFunction = function() {
                 this.image.addEvent('mousedown', function(event) {
