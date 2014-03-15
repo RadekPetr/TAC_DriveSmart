@@ -12,7 +12,7 @@
       <ModuleIntroVideo caption="TAC_SCANNINGINTRO.vtt">module_intros/scanning_intro</ModuleIntroVideo>
     </Step>
   </Seq>
-  <Seq trackProgress="true" desc="Exercise 1" Ex="1">
+  <Seq trackProgress="true" desc="Exercise 1" Ex="1" deleted="false">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_uia06_start_first.jpg</Preview>
       <Audio>scanning/scan_vsbkr1a</Audio>
@@ -548,7 +548,7 @@
   </Seq>
   <Seq trackProgress="true" desc="Exercise 20" Ex="20">
     <Step fmt="SequenceIntro">
-      <Preview>scanning/scan_uia06_start_first.jpg</Preview>
+      <Preview>shared/shared_cst12_start_first.jpg</Preview>
       <Audio>scanning/scan_vsar6a</Audio>
     </Step>
     <Step fmt="PlayVideo">
