@@ -41,8 +41,8 @@
     </Step>
     <Step fmt="QuestionUser" notrack="true">
       <Inter>
-        <Data correct="false">The car behind us skids on the soft edge, and hits our car</Data>
-        <Data correct="true">The red car continues into the intersection, then brakes and stops in front of us</Data>
+        <Data correct="true">The car behind us skids on the soft edge, and hits our car</Data>
+        <Data correct="false">The red car continues into the intersection, then brakes and stops in front of us</Data>
       </Inter>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
@@ -83,10 +83,10 @@
     <Step fmt="Question" image="country_cst16_next_first.jpg">
       <Audio>country/country_vdcb1f</Audio>
     </Step>
-    <Step fmt="QuestionUser" notrack="true">
+    <Step fmt="QuestionUser" notrack="true" resp="2">
       <Inter>
         <Data correct="true">The soft gravel at the side of the road makes our car skid into the path of the oncoming car</Data>
-        <Data correct="false">The oncoming car loses control and moves further right</Data>
+        <Data correct="true">The oncoming car loses control and moves further right</Data>
       </Inter>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
@@ -129,11 +129,11 @@
     <Step fmt="Question" image="country_cst14_next_first.jpg">
       <Audio>country/country_vdcb1f</Audio>
     </Step>
-    <Step fmt="QuestionUser" notrack="true">
+    <Step fmt="QuestionUser" notrack="true" resp="3">
       <Inter>
         <Data correct="true">The tractor moves left at the same time as our own car</Data>
-        <Data correct="false">A car behind kept coming at high speed</Data>
-        <Data correct="false">Our car loses control on the soft edge and skids into the tractor</Data>
+        <Data correct="true">A car behind kept coming at high speed</Data>
+        <Data correct="true">Our car loses control on the soft edge and skids into the tractor</Data>
       </Inter>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
@@ -171,10 +171,10 @@
     <Step fmt="Question">
       <Audio>country/country_vdcb1f</Audio>
     </Step>
-    <Step fmt="QuestionUser" notrack="true" image="country_cla01_next_first.jpg">
+    <Step fmt="QuestionUser" notrack="true" image="country_cla01_next_first.jpg" resp="2">
       <Inter>
         <Data correct="true">Some cattle stray out in front of us, just as we come around the corner</Data>
-        <Data correct="false">A farmhand on a motorbike darts out in front of us.</Data>
+        <Data correct="true">A farmhand on a motorbike darts out in front of us.</Data>
       </Inter>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
@@ -211,10 +211,10 @@
     <Step fmt="Question">
       <Audio>country/country_vdcb4e</Audio>
     </Step>
-    <Step fmt="QuestionUser" notrack="true" image="country_cst25_next_first.jpg">
+    <Step fmt="QuestionUser" notrack="true" image="country_cst25_next_first.jpg" resp="2">
       <Inter>
         <Data correct="true">Oncoming cars appear, one overtaking the other, while we've got a really poor view of the road</Data>
-        <Data correct="false">We come across a bend in the road, when we've got a really poor view of the road</Data>
+        <Data correct="true">We come across a bend in the road, when we've got a really poor view of the road</Data>
       </Inter>
     </Step>
     <Step fmt="QuestionFeedback" FadeQ="" KeepUserSelection="1">
@@ -280,10 +280,10 @@
     <Step fmt="Question">
       <Audio>country/country_vdcb4e</Audio>
     </Step>
-    <Step fmt="QuestionUser" notrack="true" image="country_fto04_next_first.jpg">
+    <Step fmt="QuestionUser" notrack="true" image="country_fto04_next_first.jpg" resp="2">
       <Inter>
         <Data correct="true">The truck brakes suddenly when our car is close behind</Data>
-        <Data correct="false">Our driver manages to squeeze in between the two cars in the right lane, but the car ahead then brakes suddenly</Data>
+        <Data correct="true">Our driver manages to squeeze in between the two cars in the right lane, but the car ahead then brakes suddenly</Data>
       </Inter>
     </Step>
     <Step fmt="QuestionFeedback" notrack="true" FadeQ="" KeepUserSelection="1">
@@ -299,10 +299,10 @@
     <Step fmt="PlayVideo">
       <Video>country/country_fat08_start</Video>
     </Step>
-    <Step fmt="Question">
+    <Step fmt="Question" cmd="hidescreen">
       <Audio>country/country_vdfa2b</Audio>
     </Step>
-    <Step fmt="QuestionUser" cmd="">
+    <Step fmt="QuestionUser" >
       <Inter>
         <Data correct="false">Below the speed limit</Data>
         <Data correct="false">At or around the speed limit</Data>
