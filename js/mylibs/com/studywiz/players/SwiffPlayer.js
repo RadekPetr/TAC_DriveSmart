@@ -11,7 +11,7 @@ var SwiffPlayer = new Class({
             params : {
                 allowScriptAccess : 'always',
                 wmode : 'transparent',
-                autoplay: 'true'
+                autoplay : 'true'
             },
             callBacks : {
                 isReady : this.isReady
@@ -19,11 +19,11 @@ var SwiffPlayer = new Class({
             container : null
         },
         style : {
-            position : 'absolute',           
+            position : 'absolute',
             opacity : '0',
             visibility : 'hidden',
-            left: Main.VIDEO_LEFT  + 'px',
-            top: Main.VIDEO_TOP  + 'px'
+            left : Main.VIDEO_LEFT + 'px',
+            top : Main.VIDEO_TOP + 'px'
         },
         src : '',
         id : 'element.id',
@@ -61,7 +61,7 @@ var SwiffPlayer = new Class({
         if (isFlashSupported() == true) {
             this.options.swiff.container = this.container;
             this.swiff = new Swiff(this.options.src, this.options.swiff);
-            log ("Version ", detectFlash());
+            log("Version ", detectFlash());
 
         } else {
             debug("********************* No FLASH loading image");
@@ -74,7 +74,7 @@ var SwiffPlayer = new Class({
                 style : {
                     'left' : '15px',
                     'top' : '15px',
-                    'width': '100%'
+                    'width' : '100%'
                 }
             });
             this.addEvent("TIMELINE", this.handleNavigationEvent);
@@ -103,15 +103,21 @@ var SwiffPlayer = new Class({
         RightClick.init(this.options.swiff.id, this.containerID);
 
     },
-    start : function(params) {      
-    
+    start : function(params) {
+
         Swiff.remote(this.swiff.toElement(), 'startSwiff', 1, 1, 1);
+        this.swiff.toElement().focus();
     },
     stop : function() {
 
     },
     startConActivity : function(params) {
         Swiff.remote(this.swiff.toElement(), 'startSwiff', params.Ex, params.level, params.format);
+         this.swiff.toElement().focus();
+         // we need to focus on the flash element to capture keypresses, the movie calls this in the timer update every second in case the users changed the focus elsewhere
+         focusOnMe = function() {            
+            this.swiff.toElement().focus();
+        }.bind(this);
     },
     // ---------------------------
     hide : function() {
@@ -160,7 +166,7 @@ var SwiffPlayer = new Class({
         // This is necessary for  IE as the flash only starts loading when visible ...
         this.container.setStyles({
             'visibility' : 'visible',
-            'opacity': '1'
+            'opacity' : '1'
         });
 
     }

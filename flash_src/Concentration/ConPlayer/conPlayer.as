@@ -57,7 +57,7 @@ Changed feedback tolerance to 20 and 40 for headway versus number task
 
 _level0.drace = function (input){
 	trace (input);
-	ExternalInterface.call("log",input);
+	ExternalInterface.call("debug",input);
 }
 
 //trace ("Audio");
@@ -187,15 +187,16 @@ intervalObject.countDownDisplay = function() {//countdown seconds
 			Key.removeListener(keyboardListener);
 			delete juggleObject;// kill the juggler
 			delete intervalObject;// stop all the time based processes
-			// show the score dialog if required // the continue button sends the result back to the host app
-			ExternalInterface.call("log");
-			ExternalInterface.call("log", "Finished");
+			// show the score dialog if required // the continue button sends the result back to the host app			
+			ExternalInterface.call("debug", "Finished");
 			scoreObject.showTotals();
 		} else {
 			--myTimer.minutes;
 		}// count minute down
 	} else {
 		--myTimer.seconds;
+		// need to keep focus on the flash movie to capture the key presses R.
+		ExternalInterface.call("focusOnMe()");
 	}
 };
 
@@ -203,7 +204,7 @@ intervalObject.countDownDisplay = function() {//countdown seconds
 //right click trapping
 function rightClickCalled() {
 	
-	ExternalInterface.call("log", "RighClicked");
+	ExternalInterface.call("debug", "RighClicked");
 	
 	_global.direction = "b";
 		if (car._xscale > 20) {
@@ -214,7 +215,7 @@ function rightClickCalled() {
 };
 function rightClickUpCalled() {
 	
-	ExternalInterface.call("log", "RighClickedUp");
+	ExternalInterface.call("debug", "RighClickedUp");
 	
 	//if (_global.direction != "f") {//Ash/Wei Reset direction when released
 		_global.direction = "x";
@@ -356,7 +357,7 @@ intervalObject.testInZone = function() {// correct distance
 		if (myTimer.inzone < 90) {
 			++myTimer.inzone;
 			_level0.drace(myTimer.inzone);
-			ExternalInterface.call("log", "InZone", myTimer.inzone);
+			ExternalInterface.call("debug", "InZone", myTimer.inzone);
 		}
 	} else {
 		if (myTimer.inzone > 0) {
@@ -826,7 +827,7 @@ scoreObject.showTotals = function() {
 	}
 	//Ash - needed to isolate format 4 as it's just numbers only.      
 	if (_level0.format != 4) {
-		ExternalInterface.call("log","Level x score ",headScore,numScore, this.conScore);
+		ExternalInterface.call("debug","Level x score ",headScore,numScore, this.conScore);
 		ExternalInterface.call("swiffFinished", this.conScore);
 		if ((this.conScore == null) || (this.conScore == 0)) {
 			//Dismal
@@ -850,7 +851,7 @@ scoreObject.showTotals = function() {
 		}
 		
 		/// score is showNumberScore ?
-		ExternalInterface.call("log","Level 4 score ",showNumberScore);
+		ExternalInterface.call("debug","Level 4 score ",showNumberScore);
 		ExternalInterface.call("swiffFinished", showNumberScore);
 		
 		if ((this.conScore == null) || (this.conScore == 0)) {
@@ -1278,7 +1279,7 @@ function dprint(msg) {
 
 
 function PlayAudio(sFilename) {
-	ExternalInterface.call("log", "FN PlaySound " + sFilename);
+	ExternalInterface.call("debug", "FN PlaySound " + sFilename);
 	// create a new Sound object
 	var my_sound:Sound = new Sound();
 
@@ -1287,7 +1288,7 @@ function PlayAudio(sFilename) {
 		if (success) {
 			my_sound.start();
 		} else {
-			ExternalInterface.call("log","Error loading flash sound",sFilename );
+			ExternalInterface.call("debug","Error loading flash sound",sFilename );
 		}
 	};
 	// load the sound
