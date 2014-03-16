@@ -28,6 +28,7 @@ var Main = new Class({
     },
     // ----------------------------------------------------------
     start : function() {
+       
         var browserTest = this._checkBrowser();
         var ua = detectFlash();
         log(detectFlash(), parseInt(ua.pv[0] + ua.pv[1] + ua.pv[2], 10));
@@ -35,10 +36,9 @@ var Main = new Class({
         if (browserTest.supported == true) {
             new Api(this).saveLog('info', "****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
             Main.features = getFeatures();         
-
-            Main.sequencePlayer = new SequencePlayer(this, {});
-            this.modules = new Modules({});
-            this.modules.start();
+            Main.sequencePlayer = new SequencePlayer(this, {});          
+            this.modules = new Modules({});          
+            this.modules.start();          
         } else {
             var text = new Element("div", {
                 html : browserTest.message,
@@ -125,8 +125,8 @@ Main.VIDEO_TOP = 20;
 Main.VIDEO_LEFT = 20;
 
 // Version stuff
-Main.VERSION = '1.0.4';
-Main.BUILD = '2014/03/11 build 2';
+Main.VERSION = '100';
+Main.BUILD = '2014/03/16 build 2';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;
@@ -256,7 +256,7 @@ document.addEventListener('touchmove',function(e) {
 */
 
  function debug (){
-     if (Main.DEBUG){
-         log (arguments);
+     if (Main.DEBUG){         
+         log.apply (null,arguments);
      }        
 }

@@ -53,7 +53,11 @@ var User = new Class({
             var defaultVersion = defaultDataHash.info["app_version"];
             if (defaultVersion != userSavedVersion) {
                 debug("Saved user progress is different version from default");
-
+                if (parseInt(userSavedVersion) < 100) {
+                    debug("different version will delete", parseInt(userSavedVersion));
+                    alert ("Pre-release version: Some exercises were deleted, the user progress data will be reset.");
+                    Main.userTracker.saveCompleteUserData_Empty();
+                }
                 //this.userData.info.app_version = Main.VERSION;
             }
 
@@ -130,6 +134,7 @@ var User = new Class({
                 var sequenceData = moduleObject.sequences.get(sequenceID);
                 var sequenceState = new Object({
                     id : parseInt(sequenceID),
+                    desc : sequenceData.desc,
                     completed : false,
                     score : [],
                     trackProgress : sequenceData.trackProgress,
@@ -339,6 +344,7 @@ var User = new Class({
         var sequenceState = {
             moduleID : moduleID,
             id : sequenceID,
+            desc : userSequence.desc,
             completed : userSequence.completed,
             score : userSequence.score
         };
@@ -366,7 +372,7 @@ var User = new Class({
         }
 
     },
-    
+
     // unused
     _mergeOldData : function(oldData, newData) {
         var newModuleIDs = newData.modules.getKeys();

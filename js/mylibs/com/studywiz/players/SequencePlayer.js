@@ -151,7 +151,7 @@ var SequencePlayer = new Class({
                     titleDiv.inject(myDiv);
 
                     var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
-                    var sequenceTitleText = "Exercise " + this.sequenceState.id + " of " + moduleState.total;
+                    var sequenceTitleText = "Exercise " + this.sequenceState.desc + " of " + moduleState.total;
                     var sequenceTitle = new Element("h1", {
                         html : sequenceTitleText,
                         'class' : 'sequence-title no-select'

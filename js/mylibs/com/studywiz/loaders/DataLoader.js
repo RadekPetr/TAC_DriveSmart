@@ -41,6 +41,7 @@ var DataLoader = new Class({
         // TODO:  Version handling
         var sequencesData = this.data.childNodes;
         this.sequences = new Hash({});
+        var desc = 1;
         Array.each(sequencesData, function(item, index) {
             // add the option to delete sequences
             if (item.attributes.deleted == true) {
@@ -50,6 +51,11 @@ var DataLoader = new Class({
                 seq[item.attributes.Ex] = item.childNodes;
                 seq[item.attributes.Ex].trackProgress = item.attributes.trackProgress;
 
+                // this is the externally visible ex id - in case sequence is deleted the unique id is sam, but visible id gets updated, so we don't have to re-number whole xml file
+                if (item.attributes.Ex > 0) {
+                    seq[item.attributes.Ex].desc = desc;
+                    desc++;
+                };
                 // used for skipping intros for score calculations: true unless false
                 var trackScore = item.attributes.trackScore;
                 if (trackScore != false) {
@@ -60,7 +66,7 @@ var DataLoader = new Class({
             }
         }.bind(this));
 
-        //debug(this.sequences);
+        debug("_setupSequences:", this.sequences);
 
         this.myParent().fireEvent("DATA", {
             type : "data.ready",

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root version="1.0">
+<root version="1.1" modified="16/03/2014">
   <Seq trackProgress="false" trackScore="false" desc="Module Group Intro" Ex="-1">
     <Step fmt="ModuleGroupIntro">     
       <ModuleIntroVideo caption="TAC_FIRSTMODULES.vtt">module_intros/first_modules_intro</ModuleIntroVideo>    
@@ -12,7 +12,7 @@
       <ModuleIntroVideo caption="TAC_SCANNINGINTRO.vtt">module_intros/scanning_intro</ModuleIntroVideo>
     </Step>
   </Seq>
-  <Seq trackProgress="true" desc="Exercise 1" Ex="1" deleted="false">
+  <Seq trackProgress="true" desc="Exercise 1" Ex="1" deleted="true">
     <Step fmt="SequenceIntro">
       <Preview>scanning/scan_uia06_start_first.jpg</Preview>
       <Audio>scanning/scan_vsbkr1a</Audio>
