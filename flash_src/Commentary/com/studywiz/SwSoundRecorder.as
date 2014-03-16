@@ -1,7 +1,6 @@
 ﻿package com.studywiz
 {
 	import com.reintroducing.events.CustomEvent;
-	import com.studywiz.interfaces.SwMedia;
 	import com.hexagonstar.util.debug.Debug;
 	import com.dVyper.utils.Alert;
 
@@ -273,8 +272,8 @@
 					{
 						//Alert.init(Globals.main_display.stage);
 						//Alert.show("Microphone access was denied or the microphone is muted. The voice recording will not work",{buttons:["OK"]});
-						Security.showSettings();
-						alertDone = true;
+						//Security.showSettings();
+						//alertDone = true;
 					}
 					break;
 			}
