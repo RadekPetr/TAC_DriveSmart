@@ -49,14 +49,19 @@ var User = new Class({
             var userSavedVersion = this.userData.info["app_version"];
             debug("The user saved app_version: ", userSavedVersion);
 
-            //TODO: Check user data version too and if different from defaults handle that - merging ?
+
             var defaultVersion = defaultDataHash.info["app_version"];
             if (defaultVersion != userSavedVersion) {
                 debug("Saved user progress is different version from default");
-                if (parseInt(userSavedVersion) < 100) {
-                    debug("different version will delete", parseInt(userSavedVersion));
-                    alert ("Pre-release version: Some exercises were deleted, the user progress data will be reset.");
+                // in version 100 Urban 10 and Scanning 1 were deleted.
+                if (parseInt(userSavedVersion) < 100) {                   
+                    alert("Pre-release version: Some exercises were deleted, the user progress data will be reset.");
                     Main.userTracker.saveCompleteUserData_Empty();
+                    // use defaults
+                    this.userData = defaultDataHash;
+                    this._getUserData("concentration").info.extend({
+                        level : this.concentrationLevel
+                    });
                 }
                 //this.userData.info.app_version = Main.VERSION;
             }
