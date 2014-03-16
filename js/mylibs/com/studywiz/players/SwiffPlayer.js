@@ -72,7 +72,7 @@ var SwiffPlayer = new Class({
                 title : 'NoFlash',
                 id : 'NoFlash',
                 style : {
-                    'left' : '15px',
+                    'left' : '530px',
                     'top' : '15px',
                     'width' : '100%'
                 }
