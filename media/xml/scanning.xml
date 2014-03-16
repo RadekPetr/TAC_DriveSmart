@@ -53,11 +53,8 @@
     </Step>
     <Step fmt="KRFeedback">
       <Image>keyrisks/scanning_urt10.jpg</Image>
-      <Audio>scanning/scan_vsbkr2d</Audio>
-    </Step>
-    <Step fmt="PlayAudio">
       <Audio>scanning/scan_vsbkr2e</Audio>
-    </Step>
+    </Step>    
     <Step fmt="PlayVideo" noBg1="1">
       <Video>scanning/scan_urt10_next</Video>
     </Step>
