@@ -21,8 +21,8 @@ var Modules = new Class({
     },
     // ----------------------------------------------------------
     setupModules : function() {
+        console.log ("11");
         this.listOfModulesCounter = 0;
-
         Main.MODULES.each( function(value, key) {
             this.listOfModulesCounter++;
             var module = new Object();
@@ -33,8 +33,10 @@ var Modules = new Class({
                 title : value.title,
                 currentSequenceID : value.sequenceID
             });
+            
             this.modules.extend(module);
         }.bind(this));
+        
     },
     // This handles all timeline events and emulates the timeline
     handleNavigationEvent : function(params) {
