@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root version="5">
-  <Seq trackProgress="false" trackScore="false" Ex="1">
+  <Seq trackProgress="false" trackScore="false" desc="Main menu" Ex="1">
     <Step fmt="Menu">
       <Items>
         <Data flashOnly="false" showProgress="true" moduleID="intro" preview="country/country_cst16_start_first.jpg" description="This introduction provides you with an overview of the website and how to use it. You must complete this section to begin the exercises.">Introduction</Data>

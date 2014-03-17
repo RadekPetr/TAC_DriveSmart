@@ -261,7 +261,7 @@
     </Step>
     <Step fmt="Continue"></Step>
   </Seq>
-  <Seq trackProgress="true" desc="Con Ex 27-28" Ex="15">
+  <Seq trackProgress="true" desc="Con Ex 27-28" Ex="16">
     <Step fmt="SequenceIntro">
       <Preview>concentration/con_mainmenu.jpg</Preview>
       <Audio>concentration/continue</Audio>
