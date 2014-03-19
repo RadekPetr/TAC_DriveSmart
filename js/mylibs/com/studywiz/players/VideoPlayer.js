@@ -232,6 +232,16 @@ var VideoPlayer = new Class({
             // clearInterval(this.stalledTimer);
             // alert ("paused, cleared timer");
         }.bind(this));
+        this.player.on("error", function(event) {
+            // alert ("paused");
+            debug("EVENT: **********************   error ", this.options.id, event);
+            // this.isPaused = true;
+            // clearInterval(this.stalledTimer);
+            // alert ("paused, cleared timer");
+            this.player.play();
+        }.bind(this));
+        
+        
         // this.player.tech.el_.addEventListener("play", function() {
 
         //  }.bind(this));
@@ -358,6 +368,9 @@ var VideoPlayer = new Class({
         if (this.player != null) {
             progress = this.player.bufferedPercent();
             debug(this.playerID + " **** Video Load progress: " + (this.player.bufferedPercent() * 100.00));
+            if (progress >= 1) {
+                this.isReady = true;
+            }
         }
 
         loaderInfo[this.options.id] = {
@@ -390,16 +403,30 @@ var VideoPlayer = new Class({
         var videoFile = Main.PATHS.videoFolder + myFilename;
         var posterFile = Main.PATHS.imageFolder + myFilename;
         // var rand = "?" + Math.random();
-        data.video = [{
-            type : "video/mp4",
-            src : videoFile + ".mp4"
-        }, {
-            type : "video/webm",
-            src : videoFile + ".webm"
-        }, {
-            type : "video/ogg",
-            src : videoFile + ".ogv"
-        }];
+        
+        // http://stackoverflow.com/questions/16773986/html5-video-issue-with-chrome
+        if (Browser.chrome == true) {
+            data.video = [{
+                type : "video/webm",
+                src : videoFile + ".webm"
+            }, {
+                type : "video/ogg",
+                src : videoFile + ".ogv"
+            }];
+        } else {
+
+            data.video = [{
+                type : "video/mp4",
+                src : videoFile + ".mp4"
+            }, {
+                type : "video/webm",
+                src : videoFile + ".webm"
+            }, {
+                type : "video/ogg",
+                src : videoFile + ".ogv"
+            }];
+        }
+
         data.poster = {
             src : posterFile + "_first.jpg"
         };
