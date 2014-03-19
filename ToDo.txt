@@ -39,9 +39,21 @@ Fixing dashboard page navigation. Currently module buttons on the left show brie
         -  Keep ahead and stay safe- item 1 doesn't work correctly there is a drop down visor but the video never plays 
 
 
-
+urban_uic02_next - webm ogv version ending soon ?
+Start playback whne video actually starts
+Handle videoerror:
+GET http://drivesmart.studywiz.com/media/video/urban/urban_uic02_start02.webm net::ERR_CONNECTION_RESET drivesmart_1703-2.js:61
+["Video Error", Object, $family: function, $constructor: function, each: function, clone: function, clean: function…]
+0: "Video Error"
+1: Object
 -----------------------------------------------------------------
 DONE:
+- Handle video error: - retry play
+  GET http://drivesmart.studywiz.com/media/video/urban/urban_uic02_start02.webm net::ERR_CONNECTION_RESET drivesmart_1703-2.js:61
+  ["Video Error", Object, $family: function, $constructor: function, each: function, clone: function, clean: function…]
+  0: "Video Error"1: Object
+- urban_umt01_end.mp4 - pause
+- shared_cst12_next.mp4 --- very short ?
 - show some message untill video is playing - showing controlls and spinner
 - DragDrop not working on touch
 - Menu item disabling vs rollover text
