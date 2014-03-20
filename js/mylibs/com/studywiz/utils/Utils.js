@@ -104,8 +104,28 @@ function getFeatures() {
 
     // Test as iPad
     //featureSet.clickToPlay = true;
-   //featureSet.supportsTouch = true;
+    //featureSet.supportsTouch = true;
 
     return featureSet;
 };
+
+function getAndroidVersion(ua) {
+    var ua = ua || navigator.userAgent; 
+    var match = ua.match(/Android\s([0-9\.]*)/);
+    return match ? match[1] : false;
+};
+
+function isAndroid(ua) {
+    var navU = ua || navigator.userAgent; 
+    // Android Mobile
+    var isAndroidMobile = navU.indexOf('Android') > -1 && navU.indexOf('Mozilla/5.0') > -1 && navU.indexOf('AppleWebKit') > -1;
+
+    // Android Browser (not Chrome)
+    var regExAppleWebKit = new RegExp(/AppleWebKit\/([\d.]+)/);
+    var resultAppleWebKitRegEx = regExAppleWebKit.exec(navU);
+    var appleWebKitVersion = (resultAppleWebKitRegEx === null ? null : parseFloat(regExAppleWebKit.exec(navU)[1]));
+    var isAndroidBrowser = (isAndroidMobile && appleWebKitVersion !== null && appleWebKitVersion < 537);
+    return isAndroidBrowser;
+};
+
 

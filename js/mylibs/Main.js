@@ -12,33 +12,47 @@ var Main = new Class({
         debug("****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
 
         if (isDev == true) {
-            // load external js libraries so they are available to the project
+            var browserTest = this._checkBrowser();
+            log(browserTest);
+            if (browserTest.supported == true) {
+                // load external js libraries so they are available to the project
 
-            this.listOfLibraries = ["css/button.css", "css/common.css", "css/dragndrop.css", "css/fonts.css", "css/loader.css", "css/main_menu.css", "css/progressbar.css", "css/questions.css", "css/radios.css", "css/sequence.css", "css/video-js.min.css", "js/mylibs/Base64/Base64.js", "js/mylibs/Lzw/Lzw.js", "js/mylibs/createjs/soundjs-0.5.2.min.js", , "js/mylibs/createjs/preloadjs-0.4.1.min.js", "js/mylibs/createjs/flashplugin-0.5.2.min.js", "js/mylibs/video-js/video.js", "js/mylibs/com/studywiz/ui/UIHelpers.js", "js/mylibs/com/studywiz/utils/Api.js", "js/mylibs/com/studywiz/utils/Utils.js","js/mylibs/com/studywiz/utils/Array.sortOn.js", "js/mylibs/com/studywiz/loaders/MediaLoader.js", "js/mylibs/com/studywiz/loaders/DataLoader.js", "js/mylibs/com/studywiz/ui/dwProgressBar.js", "js/mylibs/com/studywiz/players/ImagePlayer.js", "js/mylibs/com/studywiz/players/VideoPlayer.js", "js/mylibs/com/studywiz/players/DragNDropPlayer.js", "js/mylibs/com/studywiz/players/AudioPlayer.js", "js/mylibs/com/studywiz/players/MenuPlayer.js", "js/mylibs/com/studywiz/ui/Button.js", "js/mylibs/com/studywiz/ui/CommentaryFeedback.js", "js/mylibs/com/studywiz/players/SequencePlayer.js", "js/mylibs/com/studywiz/players/ModulePlayer.js", "js/mylibs/com/studywiz/players/KeyRisksPlayer.js", "js/mylibs/com/studywiz/players/SwiffPlayer.js", "js/mylibs/com/studywiz/core/Modules.js", "js/mylibs/com/studywiz/core/User.js", "js/mylibs/com/studywiz/ui/Questions.js", "js/mylibs/com/studywiz/ui/MenuItem.js", "js/mylibs/com/studywiz/ui/Shape.js", "js/mylibs/com/studywiz/ui/Recorder.js", "js/mylibs/xml2json/xml2json.js", "js/mylibs/rightclick/rightClick.js", "js/mylibs/com/studywiz/players/Draggable.js"];
+                this.listOfLibraries = ['css/button.css', 'css/common.css', 'css/dragndrop.css', 'css/fonts.css', 'css/loader.css', 'css/main_menu.css', 'css/progressbar.css', 'css/questions.css', 'css/radios.css', 'css/sequence.css', 'css/video-js.min.css', 'js/mylibs/Base64/Base64.js', 'js/mylibs/Lzw/Lzw.js', 'js/mylibs/createjs/soundjs-0.5.2.min.js', 'js/mylibs/createjs/preloadjs-0.4.1.min.js', 'js/mylibs/createjs/flashplugin-0.5.2.min.js', 'js/mylibs/video-js/video.js', 'js/mylibs/com/studywiz/ui/UIHelpers.js', 'js/mylibs/com/studywiz/utils/Api.js', 'js/mylibs/com/studywiz/utils/Utils.js', 'js/mylibs/com/studywiz/utils/Array.sortOn.js', 'js/mylibs/com/studywiz/loaders/MediaLoader.js', 'js/mylibs/com/studywiz/loaders/DataLoader.js', 'js/mylibs/com/studywiz/ui/dwProgressBar.js', 'js/mylibs/com/studywiz/players/ImagePlayer.js', 'js/mylibs/com/studywiz/players/VideoPlayer.js', 'js/mylibs/com/studywiz/players/DragNDropPlayer.js', 'js/mylibs/com/studywiz/players/AudioPlayer.js', 'js/mylibs/com/studywiz/players/MenuPlayer.js', 'js/mylibs/com/studywiz/ui/Button.js', 'js/mylibs/com/studywiz/ui/CommentaryFeedback.js', 'js/mylibs/com/studywiz/players/SequencePlayer.js', 'js/mylibs/com/studywiz/players/ModulePlayer.js', 'js/mylibs/com/studywiz/players/KeyRisksPlayer.js', 'js/mylibs/com/studywiz/players/SwiffPlayer.js', 'js/mylibs/com/studywiz/core/Modules.js', 'js/mylibs/com/studywiz/core/User.js', 'js/mylibs/com/studywiz/ui/Questions.js', 'js/mylibs/com/studywiz/ui/MenuItem.js', 'js/mylibs/com/studywiz/ui/Shape.js', 'js/mylibs/com/studywiz/ui/Recorder.js', 'js/mylibs/xml2json/xml2json.js', 'js/mylibs/rightclick/rightClick.js', 'js/mylibs/com/studywiz/players/Draggable.js'];
+                this.listOfLibrariesCounter = 0;
 
-            this.listOfLibrariesCounter = 0;
+                Array.each(this.listOfLibraries, function(item, index) {
+                    this._loadAsset(item, index);
+                }.bind(this));
+            } else {
+                var text = new Element("div", {
+                    html : browserTest.message,
+                    'class' : 'browser_warning_text no-select',
+                    'id' : 'unsupported_text'
+                });
 
-            Array.each(this.listOfLibraries, function(item, index) {
-                this._loadAsset(item, index);
-            }.bind(this));
+                text.inject($m(Main.DIV_ID));
+
+            }
+
         } else {
+
             //this.start();
         }
 
     },
     // ----------------------------------------------------------
     start : function() {
-       
+
         var browserTest = this._checkBrowser();
         var ua = detectFlash();
         log(detectFlash(), parseInt(ua.pv[0] + ua.pv[1] + ua.pv[2], 10));
 
         if (browserTest.supported == true) {
             new Api(this).saveLog('info', "****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
-            Main.features = getFeatures();         
-            Main.sequencePlayer = new SequencePlayer(this, {});          
-            this.modules = new Modules({});          
-            this.modules.start();          
+            Main.features = getFeatures();
+            Main.sequencePlayer = new SequencePlayer(this, {});
+            this.modules = new Modules({});
+            this.modules.start();
         } else {
             var text = new Element("div", {
                 html : browserTest.message,
@@ -84,18 +98,87 @@ var Main = new Class({
     },
     _checkBrowser : function() {
         var browserReport = {
-            supported : true,
-            message : "isBrowserOk"
+            supported : false,
+            message : 'You seem to be using an unsupported Internet browser: ' + Browser.name + '.<br/>Drive Smart requires Internet Explorer, Chrome, Firefox, Safari or Opera.'
         };
+
+        log(Browser.name);
+        log(getAndroidVersion());
+        log(isAndroid());
+
         if (Browser.ie) {
             if (Browser.version < 9) {
-                browserReport.message = "You seem to be running an outdated version of Internet browser on your computer (Internet Explorer " + Browser.version + "). <br/>Drive Smart requires Internet Explorer 9 or newer.<br/>   <br/> Please visit <a href=http://windows.microsoft.com/en-us/internet-explorer/download-ie>Microsoft website</a> to get the latest version. ";
+                browserReport.message = 'You seem to be running an outdated version of Internet browser on your computer (Internet Explorer ' + Browser.version + '). <br/>Drive Smart requires Internet Explorer 9 or newer.<br/>   <br/> Please visit <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">Microsoft website"</a> to get the latest version. ';
                 browserReport.supported = false;
+            } else {
+                browserReport.supported = true;
             }
         }
+        if (Browser.chrome) {
+            if (Browser.version < 15) {
+                browserReport.message = 'You seem to be running an outdated version of Chrome browser on your computer (Chrome ' + Browser.version + '). <br/>Drive Smart requires Chrome 15 or newer.<br/>   <br/> Please visit <a href="http://www.google.com/chrome">Google website</a> to get the latest version. ';
+                browserReport.supported = false;
+            } else {
+                browserReport.supported = true;
+            }
+        }
+
+        if (Browser.firefox) {
+            if (Browser.version < 18) {
+                browserReport.message = 'You seem to be running an outdated version of Firefox browser on your computer (Firefox ' + Browser.version + '). <br/>Drive Smart requires Firefox 18 or newer.<br/>   <br/> Please visit <a href="http://www.mozilla.org/firefox">Mozilla website</a> to get the latest version. ';
+                browserReport.supported = false;
+            } else {
+                browserReport.supported = true;
+            }
+        }
+        if (Browser.opera) {
+            if (Browser.version < 15) {
+                browserReport.message = 'You seem to be running an outdated version of Opera browser on your computer (Opera ' + Browser.version + '). <br/>Drive Smart requires Opera 15 or newer.<br/>   <br/> Please visit <a href="http://www.opera.com/download">Opera website</a> to get the latest version. ';
+                browserReport.supported = false;
+            } else {
+                browserReport.supported = true;
+            }
+        }
+        if (Browser.safari) {
+            if (Browser.version < 5) {
+                browserReport.message = 'You seem to be running an outdated version of Safari browser on your computer (Safari ' + Browser.version + '). <br/>Drive Smart requires Safari 5 or newer.<br/>   <br/> Please visit <a href="https://www.apple.com/safari/">Apple website</a> for more information. ';
+                browserReport.supported = false;
+            } else {
+                browserReport.supported = true;
+            }
+        }
+
+        if (isAndroid()) {
+            if (parseInt(getAndroidVersion(), 10) < 3) {
+                browserReport.message = 'Drive Smart requires Android 3 or newer. ';
+                browserReport.supported = false;
+            } else {
+                browserReport.supported = true;
+            }
+        }
+
         return browserReport;
     }
 });
+
+function getAndroidVersion(ua) {
+    var ua = ua || navigator.userAgent;
+    var match = ua.match(/Android\s([0-9\.]*)/);
+    return match ? match[1] : false;
+};
+
+function isAndroid(ua) {
+    var navU = ua || navigator.userAgent;
+    // Android Mobile
+    var isAndroidMobile = navU.indexOf('Android') > -1 && navU.indexOf('Mozilla/5.0') > -1 && navU.indexOf('AppleWebKit') > -1;
+
+    // Android Browser (not Chrome)
+    var regExAppleWebKit = new RegExp(/AppleWebKit\/([\d.]+)/);
+    var resultAppleWebKitRegEx = regExAppleWebKit.exec(navU);
+    var appleWebKitVersion = (resultAppleWebKitRegEx === null ? null : parseFloat(regExAppleWebKit.exec(navU)[1]));
+    var isAndroidBrowser = (isAndroidMobile && appleWebKitVersion !== null && appleWebKitVersion < 537);
+    return isAndroidBrowser;
+};
 
 // ---------------------
 // Add static variables
@@ -126,7 +209,7 @@ Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '100';
-Main.BUILD = '2014/03/16 build 2';
+Main.BUILD = '2014/03/20 build 12';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;
@@ -237,26 +320,25 @@ Main.COLORS = ['blue', 'green', 'orange'];
  }
  */
 /*
-var xStart, yStart = 0;
- 
-document.addEventListener('touchstart',function(e) {
-    xStart = e.touches[0].screenX;
-    yStart = e.touches[0].screenY;
-});
- 
-document.addEventListener('touchmove',function(e) {
-    var xMovement = Math.abs(e.touches[0].screenX - xStart);
-    var yMovement = Math.abs(e.touches[0].screenY - yStart);
-    if((yMovement * 3) > xMovement) {
-        e.preventDefault();
+ var xStart, yStart = 0;
+
+ document.addEventListener('touchstart',function(e) {
+ xStart = e.touches[0].screenX;
+ yStart = e.touches[0].screenY;
+ });
+
+ document.addEventListener('touchmove',function(e) {
+ var xMovement = Math.abs(e.touches[0].screenX - xStart);
+ var yMovement = Math.abs(e.touches[0].screenY - yStart);
+ if((yMovement * 3) > xMovement) {
+ e.preventDefault();
+ }
+ });
+
+ */
+
+function debug() {
+    if (Main.DEBUG) {
+        log.apply(null, arguments);
     }
-});
-
-
-*/
-
- function debug (){
-     if (Main.DEBUG){         
-         log.apply (null,arguments);
-     }        
 }
