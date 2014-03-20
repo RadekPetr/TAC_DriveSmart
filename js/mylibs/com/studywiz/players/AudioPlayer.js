@@ -95,8 +95,8 @@ var AudioPlayer = new Class({
     },
     // ----------------------------------------------------------
     _preloadError : function(event) {
-        debug("++ Audio Preload error: " + event);
-        new Api(this).saveLog('error', "****** Audio load error file" + this.options.src + " ******");
+        debug("++ Audio Preload error: ", event);
+        new Api(this).saveLog('error', "****** Load error for audio: " + this.options.src + " ******");
     },
     // ----------------------------------------------------------
     getLoaderInfo : function() {
