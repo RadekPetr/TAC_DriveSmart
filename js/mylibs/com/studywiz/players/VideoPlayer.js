@@ -240,8 +240,7 @@ var VideoPlayer = new Class({
             // alert ("paused, cleared timer");
             this.player.play();
         }.bind(this));
-        
-        
+
         // this.player.tech.el_.addEventListener("play", function() {
 
         //  }.bind(this));
@@ -403,28 +402,49 @@ var VideoPlayer = new Class({
         var videoFile = Main.PATHS.videoFolder + myFilename;
         var posterFile = Main.PATHS.imageFolder + myFilename;
         // var rand = "?" + Math.random();
-        
-        // http://stackoverflow.com/questions/16773986/html5-video-issue-with-chrome
-        if (Browser.chrome == true) {
-            data.video = [{
-                type : "video/webm",
-                src : videoFile + ".webm"
-            }, {
-                type : "video/ogg",
-                src : videoFile + ".ogv"
-            }];
-        } else {
-
-            data.video = [{
-                type : "video/mp4",
-                src : videoFile + ".mp4"
-            }, {
-                type : "video/webm",
-                src : videoFile + ".webm"
-            }, {
-                type : "video/ogg",
-                src : videoFile + ".ogv"
-            }];
+        switch (Browser.name) {
+            case "chrome" :
+                // http://stackoverflow.com/questions/16773986/html5-video-issue-with-chrome
+                data.video = [{
+                    type : "video/webm",
+                    src : videoFile + ".webm"
+                }, {
+                    type : "video/ogg",
+                    src : videoFile + ".ogv"
+                }];
+                break;
+            case "firefox":
+                data.video = [{
+                    type : "video/ogg",
+                    src : videoFile + ".ogv"
+                }, {
+                    type : "video/webm",
+                    src : videoFile + ".webm"
+                }, {
+                    type : "video/mp4",
+                    src : videoFile + ".mp4"
+                }];
+                break;
+            case "opera":
+                data.video = [{
+                    type : "video/webm",
+                    src : videoFile + ".webm"
+                }, {
+                    type : "video/ogg",
+                    src : videoFile + ".ogv"
+                }];
+                break;
+            default:
+                data.video = [{
+                    type : "video/mp4",
+                    src : videoFile + ".mp4"
+                }, {
+                    type : "video/webm",
+                    src : videoFile + ".webm"
+                }, {
+                    type : "video/ogg",
+                    src : videoFile + ".ogv"
+                }];
         }
 
         data.poster = {
