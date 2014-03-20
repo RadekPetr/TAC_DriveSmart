@@ -18,7 +18,7 @@ var Recorder = new Class({
         style : {
             position : 'absolute',
             'z-index' : '99999',
-             top : Main.VIDEO_TOP +  'px',
+            top : Main.VIDEO_TOP + 'px',
             left : Main.VIDEO_LEFT + 'px'
 
         },
@@ -67,8 +67,8 @@ var Recorder = new Class({
                 title : 'NoFlash',
                 id : 'NoFlash',
                 style : {
-                    'position': 'relative',
-                    'left' : '530px',
+                    'position' : 'relative',
+                    'left' : '500px',
                     'top' : '15px'
                 }
             });
@@ -76,7 +76,20 @@ var Recorder = new Class({
             this.swiff.preload();
 
         }
-
+/*
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+        if (navigator.getUserMedia) {
+            // Call the getUserMedia method here
+            navigator.getUserMedia({audio: true}, function(){
+                console.log("ok");
+            }, function (){
+                console.log ("error");
+            });
+        } else {
+            console.log('Native device media streaming (getUserMedia) not supported in this browser.');
+            // Display a friendly "sorry" message to the user.
+        }
+*/
     },
     handleNavigationEvent : function(params) {
         switch (params.next) {
@@ -148,7 +161,8 @@ var Recorder = new Class({
     stopRecording : function() {
         if (isFlashSupported() == true) {
             Swiff.remote(this.swiff.toElement(), 'recordStop');
-        }
+        }       
+        
     },
     startRecording : function() {
         if (isFlashSupported() == true) {

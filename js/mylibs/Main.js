@@ -13,7 +13,6 @@ var Main = new Class({
 
         if (isDev == true) {
             var browserTest = this._checkBrowser();
-            log(browserTest);
             if (browserTest.supported == true) {
                 // load external js libraries so they are available to the project
 
@@ -102,9 +101,9 @@ var Main = new Class({
             message : 'You seem to be using an unsupported Internet browser: ' + Browser.name + '.<br/>Drive Smart requires Internet Explorer, Chrome, Firefox, Safari or Opera.'
         };
 
-        log(Browser.name);
-        log(getAndroidVersion());
-        log(isAndroid());
+        debug(Browser.name);
+        debug(getAndroidVersion());
+        debug(isAndroid());
 
         if (Browser.ie) {
             if (Browser.version < 9) {
@@ -212,7 +211,7 @@ Main.VERSION = '100';
 Main.BUILD = '2014/03/20 build 12';
 
 // When running on localhost (So I can use different paths when testing)
-Main.IS_LOCAL = true;
+Main.IS_LOCAL = false;
 
 // Show hide debug panel and ignore lock status
 Main.DEBUG = true;
