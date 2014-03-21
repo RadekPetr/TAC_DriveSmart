@@ -61,8 +61,6 @@ var SwiffPlayer = new Class({
         if (isFlashSupported() == true) {
             this.options.swiff.container = this.container;
             this.swiff = new Swiff(this.options.src, this.options.swiff);
-            log("Version ", detectFlash());
-
         } else {
             debug("********************* No FLASH loading image");
             this.options.swiff.container = this.container;

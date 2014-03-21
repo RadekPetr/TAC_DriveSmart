@@ -216,7 +216,7 @@ var VideoPlayer = new Class({
                 id : this.options.id,
                 next : "video.started"
             });
-            if (Main.features.clickToPlay == true) {
+            if (Main.environment.videoAutoPlay == false) {
 
                 if (this.stalledTimer == null) {
                     this.stalledTimer = this.progressChecker.periodical(2000, this);

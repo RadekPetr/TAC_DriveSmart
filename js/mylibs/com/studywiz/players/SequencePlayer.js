@@ -625,7 +625,7 @@ var SequencePlayer = new Class({
                 break;
 
             case "PlayAudio.done":
-                if (Main.features.clickToPlay == true) {
+                if (Main.environment.videoAutoPlay == false) {
                     var nextStep = this.currentSequence[0];
                     debug("Next step is ", nextStep);
                     if (nextStep.attributes.fmt != "Continue" && nextStep.attributes.fmt == "PlayVideo") {
@@ -645,7 +645,7 @@ var SequencePlayer = new Class({
                 break;
             case "QuestionFeedback.done":
                 // if click is required to play show continue button
-                if (Main.features.clickToPlay == true) {
+                if (Main.environment.videoAutoPlay== false) {
                     var nextStep = this.currentSequence[0];
                     debug("Next step is ", nextStep);
                     if (nextStep.attributes.fmt != "Continue" && nextStep.attributes.fmt != "PlayAudio") {
@@ -752,7 +752,7 @@ var SequencePlayer = new Class({
             case "Cameo.visor.tween.done":
                 this.currentStep.media.video.options.next = 'Cameo.done';
                 this.currentStep.media.video.show();
-                if (Main.features.clickToPlay) {
+                if (Main.environment.videoAutoPlay==false) {
                     this._addButton({
                         type : "Play Cameo",
                         next : "PlayCameo.clicked"

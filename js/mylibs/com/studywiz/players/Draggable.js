@@ -283,7 +283,7 @@ var Draggable = new Class({
     },
     _getOnLoadFunction : function() {
         var onLoadFunction;
-        if (Main.features.supportsTouch == true) {
+        if (Main.environment.supportsTouch == true) {
             onLoadFunction = function() {
                 this.image.addEvent('touchstart', function(event) {
                     var styles = {

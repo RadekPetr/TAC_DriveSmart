@@ -139,7 +139,7 @@ var MenuPlayer = new Class({
     menuItemOverAction : function(params) {
         this.showModuleInformation(params);
         // for touch devices show start button
-        if (Main.features.supportsTouch == true && ((params.itemRef.isLocked != true && params.itemRef.isDisabled != true) || Main.DEBUG == true)) {
+        if (Main.environment.supportsTouch == true && ((params.itemRef.isLocked != true && params.itemRef.isDisabled != true) || Main.DEBUG == true)) {
             this._showStartButton(params);
         }
     },

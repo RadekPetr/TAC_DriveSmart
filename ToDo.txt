@@ -40,12 +40,12 @@ Fixing dashboard page navigation. Currently module buttons on the left show brie
 
 
 urban_uic02_next - webm ogv version ending soon ?
-Start playback whne video actually starts
-Handle videoerror:
-GET http://drivesmart.studywiz.com/media/video/urban/urban_uic02_start02.webm net::ERR_CONNECTION_RESET drivesmart_1703-2.js:61
-["Video Error", Object, $family: function, $constructor: function, each: function, clone: function, clean: function…]
-0: "Video Error"
-1: Object
+Recorder: Start playback and recording  when  video actually starts
+
+Supported browsers: http://caniuse.com/#search=video
+Test video encoding http://broken-links.com/tests/video/comparison.html
+
+
 -----------------------------------------------------------------
 DONE:
 - Handle video error: - retry play

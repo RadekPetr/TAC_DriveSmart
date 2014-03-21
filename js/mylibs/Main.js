@@ -3,17 +3,222 @@
  */
 
 // -----------------------------
+var Environment = new Class({
+    Implements : [Options],
+    // ----------------------------------------------------------
+    options : {
+        browsers : {
+            ie : {
+                name : "Internet Explorer",
+                minVersion : 9,
+                link : '<a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">Microsoft website"</a>'
+            },
+            safari : {
+                name : "Apple Safari",
+                minVersion : 5,
+                link : '<a href="https://www.apple.com/safari/">Apple website</a>'
+            },
+            chrome : {
+                name : "Google Chrome",
+                minVersion : 15,
+                link : '<a href="http://www.google.com/chrome">Google website</a>'
+            },
+            firefox : {
+                name : "Mozilla Firefox",
+                minVersion : 18,
+                link : '<a href="http://www.mozilla.org/firefox">Mozilla website</a>'
+            },
+            opera : {
+                name : "Opera",
+                minVersion : 15,
+                link : '<a href="http://www.opera.com/download">Opera website</a>'
+            },
+            android : {
+                name : "Android",
+                minVersion : 3,
+                link : ' support website for your device '
+            },
+            unsupported : {
+                name : "unsupported",
+                minVersion : 0,
+                link : ''
+            }
+        }
+    },
+    initialize : function() {
+        this.report = this._checkBrowser();
+    },
+    _checkBrowser : function() {
+        var browser = "unknown";
+        var detectedVersion = 0;
+        var browserReport = {
+            name : "unknown",
+            version : 0,
+            supported : false,
+            message : 'You seem to be using an unsupported Internet browser.<br/>Drive Smart requires Internet Explorer, Chrome, Firefox, Safari or Opera.',
+            flash : this.detectFlash(),
+            supportsTouch : this.supportsTouch(),
+            videoAutoPlay : !(Browser.Platform.ios == true || Browser.Platform.android == true)
+        };
+
+        if ((Browser.ie )) {
+            // detect older IE versions
+            requiredBrowser = this.options.browsers.ie;
+            browserReport.name = Browser.name;
+            browserReport.version = Browser.version;
+
+        } else if ((this.detectIE().ie == true && Browser.name != "opera")) {
+            // detect IE11
+            requiredBrowser = this.options.browsers.ie;
+            browserReport.name = "ie";
+            browserReport.version = this.detectIE().version;
+
+        } else if (this.isAndroid() || Browser.Platform.android) {
+            // Detect Android
+            requiredBrowser = this.options.browsers.android;
+            browserReport.name = "android";
+            browserReport.version = parseInt(this.getAndroidVersion(), 10);
+
+        } else {
+            switch (Browser.name) {
+                case "chrome":
+                case "opera":
+                case "safari":
+                case "firefox":
+                    requiredBrowser = this.options.browsers[Browser.name];
+                    browserReport.name = Browser.name;
+                    browserReport.version = Browser.version;
+                    break;
+                default:
+                    requiredBrowser = this.options.browsers.unsupported;
+            }
+        }
+        if (requiredBrowser.name == "unsupported") {
+            browserReport.supported = false;
+        } else {
+            if (browserReport.version < requiredBrowser.minVersion) {
+                browserReport.message = 'You seem to be running an outdated version of ' + requiredBrowser.name + ' on your device (' + requiredBrowser.name + ' ' + browserReport.version + '). <br/>Drive Smart requires ' + requiredBrowser.name + ' ' + requiredBrowser.minVersion + ' or newer.<br/>   <br/> Please visit  ' + requiredBrowser.link + ' to get the latest version. ';
+                browserReport.supported = false;
+            } else {
+                browserReport.supported = true;
+            }
+        }
+        return browserReport;
+    },
+    getAndroidVersion : function(ua) {
+        var ua = ua || navigator.userAgent;
+        var match = ua.match(/Android\s([0-9\.]*)/);
+        return match ? match[1] : false;
+    },
+    isAndroid : function(ua) {
+        var navU = ua || navigator.userAgent;
+        // Android Mobile
+        var isAndroidMobile = navU.indexOf('Android') > -1 && navU.indexOf('Mozilla/5.0') > -1 && navU.indexOf('AppleWebKit') > -1;
+
+        // Android Browser (not Chrome)
+        var regExAppleWebKit = new RegExp(/AppleWebKit\/([\d.]+)/);
+        var resultAppleWebKitRegEx = regExAppleWebKit.exec(navU);
+        var appleWebKitVersion = (resultAppleWebKitRegEx === null ? null : parseFloat(regExAppleWebKit.exec(navU)[1]));
+        // var isAndroidBrowser = (isAndroidMobile && appleWebKitVersion !== null && appleWebKitVersion < 537);
+        var isAndroidBrowser = (isAndroidMobile && appleWebKitVersion !== null );
+        return isAndroidBrowser;
+    },
+    detectIE : function() {
+        var ua = window.navigator.userAgent;
+        var versionSplit = /[\/\.]/i;
+        var versionRe = /(Version)\/([\w.\/]+)/i;
+        // match for browser version
+        var operaRe = /(Opera|OPR)[\/ ]([\w.\/]+)/i;
+        var ieRe = /(?:(MSIE) |(Trident)\/.+rv:)([\w.]+)/i;
+        // must not contain 'Opera'
+        var match = ua.match(operaRe) || ua.match(ieRe);
+        if (!match) {
+            return ( {
+                ie : false,
+                version : 0
+            });
+        }
+        if (Array.prototype.filter) {
+            match = match.filter(function(item) {
+                return (item != null);
+            });
+        } else {
+            // Hello, IE8!
+            for (var j = 0; j < match.length; j++) {
+                var matchGroup = match[j];
+                if (matchGroup == null || matchGroup == '') {
+                    match.splice(j, 1);
+                    j--;
+                }
+            }
+        }
+        var name = match[1].replace('Trident', 'MSIE').replace('OPR', 'Opera');
+        var versionMatch = ua.match(versionRe) || match;
+        var version = versionMatch[2].split(versionSplit);
+
+        return ( {
+            'name' : name,
+            ie : true,
+            version : parseInt(version[0], 10)
+        });
+    },
+    detectFlash : function() {
+        var UNDEF = "undefined", OBJECT = "object", SHOCKWAVE_FLASH = "Shockwave Flash", SHOCKWAVE_FLASH_AX = "ShockwaveFlash.ShockwaveFlash", FLASH_MIME_TYPE = "application/x-shockwave-flash", EXPRESS_INSTALL_ID = "SWFObjectExprInst", ON_READY_STATE_CHANGE = "onreadystatechange", win = window, doc = document, nav = navigator;
+
+        var w3cdom = typeof doc.getElementById != UNDEF && typeof doc.getElementsByTagName != UNDEF && typeof doc.createElement != UNDEF, u = nav.userAgent.toLowerCase(), p = nav.platform.toLowerCase(), windows = p ? /win/.test(p) : /win/.test(u), mac = p ? /mac/.test(p) : /mac/.test(u), webkit = /webkit/.test(u) ? parseFloat(u.replace(/^.*webkit\/(\d+(\.\d+)?).*$/, "$1")) : false, // returns either the webkit version or false if not webkit
+        ie = !+"\v1", // feature detection based on Andrea Giammarchi's solution: http://webreflection.blogspot.com/2009/01/32-bytes-to-know-if-your-browser-is-ie.html
+        playerVersion = [0, 0, 0], d = null;
+        if ( typeof nav.plugins != UNDEF && typeof nav.plugins[SHOCKWAVE_FLASH] == OBJECT) {
+            d = nav.plugins[SHOCKWAVE_FLASH].description;
+            if (d && !( typeof nav.mimeTypes != UNDEF && nav.mimeTypes[FLASH_MIME_TYPE] && !nav.mimeTypes[FLASH_MIME_TYPE].enabledPlugin)) {// navigator.mimeTypes["application/x-shockwave-flash"].enabledPlugin indicates whether plug-ins are enabled or disabled in Safari 3+
+                plugin = true;
+                ie = false;
+                // cascaded feature detection for Internet Explorer
+                d = d.replace(/^.*\s+(\S+\s+\S+$)/, "$1");
+                playerVersion[0] = parseInt(d.replace(/^(.*)\..*$/, "$1"), 10);
+                playerVersion[1] = parseInt(d.replace(/^.*\.(.*)\s.*$/, "$1"), 10);
+                playerVersion[2] = /[a-zA-Z]/.test(d) ? parseInt(d.replace(/^.*[a-zA-Z]+(.*)$/, "$1"), 10) : 0;
+            }
+        } else if ( typeof win.ActiveXObject != UNDEF) {
+            try {
+                var a = new ActiveXObject(SHOCKWAVE_FLASH_AX);
+                if (a) {// a will return null when ActiveX is disabled
+                    d = a.GetVariable("$version");
+                    if (d) {
+                        ie = true;
+                        // cascaded feature detection for Internet Explorer
+                        d = d.split(" ")[1].split(",");
+                        playerVersion = [parseInt(d[0], 10), parseInt(d[1], 10), parseInt(d[2], 10)];
+                    }
+                }
+            } catch(e) {
+            }
+        }
+        console.log(playerVersion);
+        return {
+            w3 : w3cdom,
+            pv : playerVersion,
+            wk : webkit,
+            ie : ie,
+            win : windows,
+            mac : mac
+        };
+    },
+    supportsTouch : function() {
+        return 'ontouchstart' in window || navigator.msMaxTouchPoints;
+    }
+});
 
 var Main = new Class({
     Implements : [Options, Events],
     // ----------------------------------------------------------
     initialize : function(isDev) {
-
+        this.environment = new Environment().report;
+        log(this.environment);
         debug("****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
 
         if (isDev == true) {
-            var browserTest = this._checkBrowser();
-            if (browserTest.supported == true) {
+            if (this.environment.supported == true) {
                 // load external js libraries so they are available to the project
 
                 this.listOfLibraries = ['css/button.css', 'css/common.css', 'css/dragndrop.css', 'css/fonts.css', 'css/loader.css', 'css/main_menu.css', 'css/progressbar.css', 'css/questions.css', 'css/radios.css', 'css/sequence.css', 'css/video-js.min.css', 'js/mylibs/Base64/Base64.js', 'js/mylibs/Lzw/Lzw.js', 'js/mylibs/createjs/soundjs-0.5.2.min.js', 'js/mylibs/createjs/preloadjs-0.4.1.min.js', 'js/mylibs/createjs/flashplugin-0.5.2.min.js', 'js/mylibs/video-js/video.js', 'js/mylibs/com/studywiz/ui/UIHelpers.js', 'js/mylibs/com/studywiz/utils/Api.js', 'js/mylibs/com/studywiz/utils/Utils.js', 'js/mylibs/com/studywiz/utils/Array.sortOn.js', 'js/mylibs/com/studywiz/loaders/MediaLoader.js', 'js/mylibs/com/studywiz/loaders/DataLoader.js', 'js/mylibs/com/studywiz/ui/dwProgressBar.js', 'js/mylibs/com/studywiz/players/ImagePlayer.js', 'js/mylibs/com/studywiz/players/VideoPlayer.js', 'js/mylibs/com/studywiz/players/DragNDropPlayer.js', 'js/mylibs/com/studywiz/players/AudioPlayer.js', 'js/mylibs/com/studywiz/players/MenuPlayer.js', 'js/mylibs/com/studywiz/ui/Button.js', 'js/mylibs/com/studywiz/ui/CommentaryFeedback.js', 'js/mylibs/com/studywiz/players/SequencePlayer.js', 'js/mylibs/com/studywiz/players/ModulePlayer.js', 'js/mylibs/com/studywiz/players/KeyRisksPlayer.js', 'js/mylibs/com/studywiz/players/SwiffPlayer.js', 'js/mylibs/com/studywiz/core/Modules.js', 'js/mylibs/com/studywiz/core/User.js', 'js/mylibs/com/studywiz/ui/Questions.js', 'js/mylibs/com/studywiz/ui/MenuItem.js', 'js/mylibs/com/studywiz/ui/Shape.js', 'js/mylibs/com/studywiz/ui/Recorder.js', 'js/mylibs/xml2json/xml2json.js', 'js/mylibs/rightclick/rightClick.js', 'js/mylibs/com/studywiz/players/Draggable.js'];
@@ -24,31 +229,21 @@ var Main = new Class({
                 }.bind(this));
             } else {
                 var text = new Element("div", {
-                    html : browserTest.message,
+                    html : this.environment.message,
                     'class' : 'browser_warning_text no-select',
                     'id' : 'unsupported_text'
                 });
-
                 text.inject($m(Main.DIV_ID));
-
             }
 
         } else {
-
             //this.start();
         }
-
     },
     // ----------------------------------------------------------
     start : function() {
-
-        var browserTest = this._checkBrowser();
-        var ua = detectFlash();
-        log(detectFlash(), parseInt(ua.pv[0] + ua.pv[1] + ua.pv[2], 10));
-
-        if (browserTest.supported == true) {
+        if (this.environment.supported == true) {
             new Api(this).saveLog('info', "****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
-            Main.features = getFeatures();
             Main.sequencePlayer = new SequencePlayer(this, {});
             this.modules = new Modules({});
             this.modules.start();
@@ -94,96 +289,22 @@ var Main = new Class({
             this.fireEvent('READY');
 
         }
-    },
-    _checkBrowser : function() {
-        var browserReport = {
-            supported : false,
-            message : 'You seem to be using an unsupported Internet browser: ' + Browser.name + '.<br/>Drive Smart requires Internet Explorer, Chrome, Firefox, Safari or Opera.'
-        };
-
-        debug(Browser.name);
-        debug(getAndroidVersion());
-        debug(isAndroid());
-
-        if (Browser.ie) {
-            if (Browser.version < 9) {
-                browserReport.message = 'You seem to be running an outdated version of Internet browser on your computer (Internet Explorer ' + Browser.version + '). <br/>Drive Smart requires Internet Explorer 9 or newer.<br/>   <br/> Please visit <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">Microsoft website"</a> to get the latest version. ';
-                browserReport.supported = false;
-            } else {
-                browserReport.supported = true;
-            }
-        }
-        if (Browser.chrome) {
-            if (Browser.version < 15) {
-                browserReport.message = 'You seem to be running an outdated version of Chrome browser on your computer (Chrome ' + Browser.version + '). <br/>Drive Smart requires Chrome 15 or newer.<br/>   <br/> Please visit <a href="http://www.google.com/chrome">Google website</a> to get the latest version. ';
-                browserReport.supported = false;
-            } else {
-                browserReport.supported = true;
-            }
-        }
-
-        if (Browser.firefox) {
-            if (Browser.version < 18) {
-                browserReport.message = 'You seem to be running an outdated version of Firefox browser on your computer (Firefox ' + Browser.version + '). <br/>Drive Smart requires Firefox 18 or newer.<br/>   <br/> Please visit <a href="http://www.mozilla.org/firefox">Mozilla website</a> to get the latest version. ';
-                browserReport.supported = false;
-            } else {
-                browserReport.supported = true;
-            }
-        }
-        if (Browser.opera) {
-            if (Browser.version < 15) {
-                browserReport.message = 'You seem to be running an outdated version of Opera browser on your computer (Opera ' + Browser.version + '). <br/>Drive Smart requires Opera 15 or newer.<br/>   <br/> Please visit <a href="http://www.opera.com/download">Opera website</a> to get the latest version. ';
-                browserReport.supported = false;
-            } else {
-                browserReport.supported = true;
-            }
-        }
-        if (Browser.safari) {
-            if (Browser.version < 5) {
-                browserReport.message = 'You seem to be running an outdated version of Safari browser on your computer (Safari ' + Browser.version + '). <br/>Drive Smart requires Safari 5 or newer.<br/>   <br/> Please visit <a href="https://www.apple.com/safari/">Apple website</a> for more information. ';
-                browserReport.supported = false;
-            } else {
-                browserReport.supported = true;
-            }
-        }
-
-        if (isAndroid()) {
-            if (parseInt(getAndroidVersion(), 10) < 3) {
-                browserReport.message = 'Drive Smart requires Android 3 or newer. ';
-                browserReport.supported = false;
-            } else {
-                browserReport.supported = true;
-            }
-        }
-
-        return browserReport;
     }
 });
 
-function getAndroidVersion(ua) {
-    var ua = ua || navigator.userAgent;
-    var match = ua.match(/Android\s([0-9\.]*)/);
-    return match ? match[1] : false;
-};
+function debug() {
+    if (Main.DEBUG) {
+        log.apply(null, arguments);
+    }
+}
 
-function isAndroid(ua) {
-    var navU = ua || navigator.userAgent;
-    // Android Mobile
-    var isAndroidMobile = navU.indexOf('Android') > -1 && navU.indexOf('Mozilla/5.0') > -1 && navU.indexOf('AppleWebKit') > -1;
-
-    // Android Browser (not Chrome)
-    var regExAppleWebKit = new RegExp(/AppleWebKit\/([\d.]+)/);
-    var resultAppleWebKitRegEx = regExAppleWebKit.exec(navU);
-    var appleWebKitVersion = (resultAppleWebKitRegEx === null ? null : parseFloat(regExAppleWebKit.exec(navU)[1]));
-    var isAndroidBrowser = (isAndroidMobile && appleWebKitVersion !== null && appleWebKitVersion < 537);
-    return isAndroidBrowser;
-};
-
+// ==================================================================================================================================
 // ---------------------
 // Add static variables
 // ---------------------
 Main.sequencePlayer = null;
 Main.userTracker = null;
+Main.environment = new Environment().report;
 
 // Mootools safe mode
 var $m = document.id;
@@ -208,7 +329,7 @@ Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '100';
-Main.BUILD = '2014/03/20 build 12';
+Main.BUILD = '2014/03/21 build 1';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = false;
@@ -296,48 +417,3 @@ Main.MODULES = new Hash({
 
 Main.COLORS = ['blue', 'green', 'orange'];
 
-/*
- if ( typeof Function.prototype.bind === 'undefined') {
- Function.prototype.bind = function(target) {
- if ( typeof this !== "function") {
-
- } else {
-
- var tail = Array.prototype.slice.call(arguments, 1);
- var func = this;
- var noop = function() {
- };
- var bound = function() {
- return func.apply(this instanceof noop ? this : target || window, tail.concat(Array.prototype.slice.call(arguments)));
- // copy arguments array!
- };
- noop.prototype = this.prototype;
- bound.prototype = new noop();
- return bound;
- }
- };
- }
- */
-/*
- var xStart, yStart = 0;
-
- document.addEventListener('touchstart',function(e) {
- xStart = e.touches[0].screenX;
- yStart = e.touches[0].screenY;
- });
-
- document.addEventListener('touchmove',function(e) {
- var xMovement = Math.abs(e.touches[0].screenX - xStart);
- var yMovement = Math.abs(e.touches[0].screenY - yStart);
- if((yMovement * 3) > xMovement) {
- e.preventDefault();
- }
- });
-
- */
-
-function debug() {
-    if (Main.DEBUG) {
-        log.apply(null, arguments);
-    }
-}

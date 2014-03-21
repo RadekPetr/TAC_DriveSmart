@@ -21,6 +21,7 @@
 	left: 410px;
 	position: absolute;
 	top: 460px;
+	min-width: 400px;
 }
 
 .overall_progress {
@@ -78,10 +79,10 @@
 
 .browser_warning_text {
 	font-family: 'Museo700Regular';
-	font-weight: normal;
-	left: 100px;
+	font-weight: normal;	
 	margin: 0 0 0.2em;
-	position: absolute;
+	position: relative;
 	text-align: center;
-	top: 200px;
+	font-size: 18px;
+	top: 40%;
 }

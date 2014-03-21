@@ -37,7 +37,7 @@ var MenuItem = new Class({
             'class' : this.options['class']
         });
 
-        if (Main.features.supportsTouch == true) {
+        if (Main.environment.supportsTouch == true) {
             this.button = new Button(null, {
                 'class' : 'start_button',
                 type : "item.clicked",
@@ -135,7 +135,7 @@ var MenuItem = new Class({
         return symbolImage.image;
     },
     registerClickEvent : function(sendEventTo) {
-        if (Main.features.supportsTouch == true) {
+        if (Main.environment.supportsTouch == true) {
             this.button.registerEvent(sendEventTo);
         } else {
             this.container.addEvent("click", function() {
@@ -148,7 +148,7 @@ var MenuItem = new Class({
         }
     },
     registerMouseEnterEvent : function(sendEventTo) {
-        if (Main.features.supportsTouch == true) {
+        if (Main.environment.supportsTouch == true) {
             this.container.addEvent('touchstart', function(event) {
                 sendEventTo.fireEvent("MODULE_INFO", this.getItemOverData());
             }.bind(this));
