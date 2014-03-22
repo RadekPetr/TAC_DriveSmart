@@ -119,7 +119,7 @@ var VideoPlayer = new Class({
     registerLoadEvents : function() {
         if (this.player != undefined) {
             this.player.on("suspend", function() {
-                debug("EVENT: suspend", this.options.id);
+                //debug("EVENT: suspend", this.options.id);
                 if (Browser.Platform.ios == true) {
                     this._finishedLoading();
                 }
@@ -284,7 +284,7 @@ var VideoPlayer = new Class({
     obscure : function() {
         debug("Obscure");
         //TODO: finish for IE - use an image for the mask
-        if (Main.environment.name = "ie") {
+        if (Main.environment.name="ie") {
 
             var myMask = new Mask(this.container, {
                 style : {

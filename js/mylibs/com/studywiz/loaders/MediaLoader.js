@@ -71,7 +71,7 @@ var MediaLoader = new Class({
     },
     // ----------------------------------------------------------
     reportProgress : function(loaderInfo) {
-        debug("this.loadQueue", this.loadQueue);
+        //debug("this.loadQueue", this.loadQueue);
 
         if (this.options.next == null) {
             // if next action is not set do not allow reporting progress, not sure ???
