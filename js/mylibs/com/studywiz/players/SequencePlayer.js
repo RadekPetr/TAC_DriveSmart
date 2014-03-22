@@ -211,12 +211,22 @@ var SequencePlayer = new Class({
                             next : "CommentaryIntro.expert.clicked"
                         });
                     };
-                    this.recorder = new Recorder(this, {
-                        swiff : {
-                            id : 'Commentary'
-                        },
-                        src : Main.PATHS.flashFolder + "commentary.swf"
-                    });
+                    if ((Main.environment.name == "chrome" && Main.environment.version >= 21 && Browser.Platform.android == false) || (Main.environment.name == "firefox" && Main.environment.version >= 17 && Browser.Platform.android == false) || (Main.environment.name == "opera" && Main.environment.version >= 18) || (Main.environment.name == "chrome" && Main.environment.version >= 33 && Browser.Platform.android == true) || (Main.environment.name == "firefox" && Main.environment.version >= 26 && Browser.Platform.android == true)) {
+                        this.recorder = new NativeRecorder(this, {
+                            swiff : {
+                                id : 'Commentary'
+                            },
+                            src : ""
+                        });
+                    } else {
+                        this.recorder = new Recorder(this, {
+                            swiff : {
+                                id : 'Commentary'
+                            },
+                            src : Main.PATHS.flashFolder + "commentary.swf"
+                        });
+                    }
+
                     this.recorder.add(Main.DIV_ID);
                     // -----
                     step.media.audio.options.next = '';
@@ -634,7 +644,7 @@ var SequencePlayer = new Class({
                             type : "Continue",
                             next : "Continue_Video.clicked"
                         });
-                        
+
                     } else {
                         this._nextStep();
                     }
@@ -645,7 +655,7 @@ var SequencePlayer = new Class({
                 break;
             case "QuestionFeedback.done":
                 // if click is required to play show continue button
-                if (Main.environment.videoAutoPlay== false) {
+                if (Main.environment.videoAutoPlay == false) {
                     var nextStep = this.currentSequence[0];
                     debug("Next step is ", nextStep);
                     if (nextStep.attributes.fmt != "Continue" && nextStep.attributes.fmt != "PlayAudio") {
@@ -752,7 +762,7 @@ var SequencePlayer = new Class({
             case "Cameo.visor.tween.done":
                 this.currentStep.media.video.options.next = 'Cameo.done';
                 this.currentStep.media.video.show();
-                if (Main.environment.videoAutoPlay==false) {
+                if (Main.environment.videoAutoPlay == false) {
                     this._addButton({
                         type : "Play Cameo",
                         next : "PlayCameo.clicked"

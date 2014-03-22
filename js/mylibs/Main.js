@@ -58,8 +58,14 @@ var Environment = new Class({
             message : 'You seem to be using an unsupported Internet browser.<br/>Drive Smart requires Internet Explorer, Chrome, Firefox, Safari or Opera.',
             flash : this.detectFlash(),
             supportsTouch : this.supportsTouch(),
-            videoAutoPlay : !(Browser.Platform.ios == true || Browser.Platform.android == true)
+            videoAutoPlay : !(Browser.Platform.ios == true || Browser.Platform.android == true),
+            hasUserMedia : this.hasGetUserMedia()
         };
+
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+        
+        
+        
 
         if ((Browser.ie )) {
             // detect older IE versions
@@ -206,6 +212,9 @@ var Environment = new Class({
     },
     supportsTouch : function() {
         return 'ontouchstart' in window || navigator.msMaxTouchPoints;
+    },
+    hasGetUserMedia : function() {
+        return !!(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
     }
 });
 
@@ -221,7 +230,7 @@ var Main = new Class({
             if (this.environment.supported == true) {
                 // load external js libraries so they are available to the project
 
-                this.listOfLibraries = ['css/button.css', 'css/common.css', 'css/dragndrop.css', 'css/fonts.css', 'css/loader.css', 'css/main_menu.css', 'css/progressbar.css', 'css/questions.css', 'css/radios.css', 'css/sequence.css', 'css/video-js.min.css', 'js/mylibs/Base64/Base64.js', 'js/mylibs/Lzw/Lzw.js', 'js/mylibs/createjs/soundjs-0.5.2.min.js', 'js/mylibs/createjs/preloadjs-0.4.1.min.js', 'js/mylibs/createjs/flashplugin-0.5.2.min.js', 'js/mylibs/video-js/video.js', 'js/mylibs/com/studywiz/ui/UIHelpers.js', 'js/mylibs/com/studywiz/utils/Api.js', 'js/mylibs/com/studywiz/utils/Utils.js', 'js/mylibs/com/studywiz/utils/Array.sortOn.js', 'js/mylibs/com/studywiz/loaders/MediaLoader.js', 'js/mylibs/com/studywiz/loaders/DataLoader.js', 'js/mylibs/com/studywiz/ui/dwProgressBar.js', 'js/mylibs/com/studywiz/players/ImagePlayer.js', 'js/mylibs/com/studywiz/players/VideoPlayer.js', 'js/mylibs/com/studywiz/players/DragNDropPlayer.js', 'js/mylibs/com/studywiz/players/AudioPlayer.js', 'js/mylibs/com/studywiz/players/MenuPlayer.js', 'js/mylibs/com/studywiz/ui/Button.js', 'js/mylibs/com/studywiz/ui/CommentaryFeedback.js', 'js/mylibs/com/studywiz/players/SequencePlayer.js', 'js/mylibs/com/studywiz/players/ModulePlayer.js', 'js/mylibs/com/studywiz/players/KeyRisksPlayer.js', 'js/mylibs/com/studywiz/players/SwiffPlayer.js', 'js/mylibs/com/studywiz/core/Modules.js', 'js/mylibs/com/studywiz/core/User.js', 'js/mylibs/com/studywiz/ui/Questions.js', 'js/mylibs/com/studywiz/ui/MenuItem.js', 'js/mylibs/com/studywiz/ui/Shape.js', 'js/mylibs/com/studywiz/ui/Recorder.js', 'js/mylibs/xml2json/xml2json.js', 'js/mylibs/rightclick/rightClick.js', 'js/mylibs/com/studywiz/players/Draggable.js'];
+                this.listOfLibraries = ['css/button.css', 'css/common.css', 'css/dragndrop.css', 'css/fonts.css', 'css/loader.css', 'css/main_menu.css', 'css/progressbar.css', 'css/questions.css', 'css/radios.css', 'css/sequence.css', 'css/video-js.min.css', 'js/mylibs/Base64/Base64.js', 'js/mylibs/Lzw/Lzw.js', 'js/mylibs/createjs/soundjs-0.5.2.min.js', 'js/mylibs/createjs/preloadjs-0.4.1.min.js', 'js/mylibs/createjs/flashplugin-0.5.2.min.js', 'js/mylibs/video-js/video.js', 'js/mylibs/com/studywiz/ui/UIHelpers.js', 'js/mylibs/com/studywiz/utils/Api.js', 'js/mylibs/com/studywiz/utils/Utils.js', 'js/mylibs/com/studywiz/utils/Array.sortOn.js', 'js/mylibs/com/studywiz/loaders/MediaLoader.js', 'js/mylibs/com/studywiz/loaders/DataLoader.js', 'js/mylibs/com/studywiz/ui/dwProgressBar.js', 'js/mylibs/com/studywiz/players/ImagePlayer.js', 'js/mylibs/com/studywiz/players/VideoPlayer.js', 'js/mylibs/com/studywiz/players/DragNDropPlayer.js', 'js/mylibs/com/studywiz/players/AudioPlayer.js', 'js/mylibs/com/studywiz/players/MenuPlayer.js', 'js/mylibs/com/studywiz/ui/Button.js', 'js/mylibs/com/studywiz/ui/CommentaryFeedback.js', 'js/mylibs/com/studywiz/players/SequencePlayer.js', 'js/mylibs/com/studywiz/players/ModulePlayer.js', 'js/mylibs/com/studywiz/players/KeyRisksPlayer.js', 'js/mylibs/com/studywiz/players/SwiffPlayer.js', 'js/mylibs/com/studywiz/core/Modules.js', 'js/mylibs/com/studywiz/core/User.js', 'js/mylibs/com/studywiz/ui/Questions.js', 'js/mylibs/com/studywiz/ui/MenuItem.js', 'js/mylibs/com/studywiz/ui/Shape.js', 'js/mylibs/com/studywiz/ui/Recorder.js', 'js/mylibs/com/studywiz/ui/NativeRecorder.js','js/mylibs/xml2json/xml2json.js', 'js/mylibs/rightclick/rightClick.js', 'js/mylibs/com/studywiz/players/Draggable.js', 'js/mylibs/recorderJS/recorder.js'];
                 this.listOfLibrariesCounter = 0;
 
                 Array.each(this.listOfLibraries, function(item, index) {
@@ -332,7 +341,7 @@ Main.VERSION = '100';
 Main.BUILD = '2014/03/21 build 1';
 
 // When running on localhost (So I can use different paths when testing)
-Main.IS_LOCAL = false;
+Main.IS_LOCAL = true;
 
 // Show hide debug panel and ignore lock status
 Main.DEBUG = true;
