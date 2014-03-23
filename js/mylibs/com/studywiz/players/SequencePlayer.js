@@ -211,7 +211,10 @@ var SequencePlayer = new Class({
                             next : "CommentaryIntro.expert.clicked"
                         });
                     };
-                    if ((Main.environment.name == "chrome" && Main.environment.version >= 21 && Browser.Platform.android == false) || (Main.environment.name == "firefox" && Main.environment.version >= 17 && Browser.Platform.android == false) || (Main.environment.name == "opera" && Main.environment.version >= 18) || (Main.environment.name == "chrome" && Main.environment.version >= 33 && Browser.Platform.android == true) || (Main.environment.name == "firefox" && Main.environment.version >= 26 && Browser.Platform.android == true)) {
+                    
+                    log ("Main.environment.hasUserMedia", Main.environment.hasUserMedia);
+                    if (Main.environment.hasUserMedia==true) {
+                        log ("1");
                         this.recorder = new NativeRecorder(this, {
                             swiff : {
                                 id : 'Commentary'
@@ -219,6 +222,7 @@ var SequencePlayer = new Class({
                             src : ""
                         });
                     } else {
+                          log ("2");
                         this.recorder = new Recorder(this, {
                             swiff : {
                                 id : 'Commentary'
@@ -799,9 +803,10 @@ var SequencePlayer = new Class({
             case "Commentary.recording.done":
                 this._updateUserProgress();
                 this.recorder.stopRecording();
+                this._stopPlayers();
 
                 var feedbackAudio = this.currentStep.media.feedbackAudio;
-                if (feedbackAudio != undefined) {
+                if (feedbackAudio != undefined && feedbackAudio.played == false) {                   
                     feedbackAudio.options.next = '';
                     feedbackAudio.start();
                     // play the feedback and show text if present
@@ -820,6 +825,7 @@ var SequencePlayer = new Class({
 
                 var expertAudio = this.currentStep.media.expertAudio;
                 if (expertAudio != undefined) {
+                    
                     // show play expert commentary button
                     this._addButton({
                         type : "Expert commentary 2",

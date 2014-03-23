@@ -50,6 +50,7 @@ var Environment = new Class({
     },
     _checkBrowser : function() {
         var browser = "unknown";
+        //navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
         var detectedVersion = 0;
         var browserReport = {
             name : "unknown",
@@ -62,8 +63,8 @@ var Environment = new Class({
             hasUserMedia : this.hasGetUserMedia()
         };
 
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
         
+        console.log ("this.hasGetUserMedia()", this.hasGetUserMedia());
         
         
 

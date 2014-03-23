@@ -16,6 +16,7 @@ var AudioPlayer = new Class({
         this.soundInstance = null;
         this.preloader = new createjs.LoadQueue();
         this.preloader.parent = this;
+        this.played = false;
 
         createjs.Sound.alternateExtensions = ["mp3", "ogg"];
         createjs.FlashPlugin.swfPath = Main.PATHS.flashFolder;
@@ -79,6 +80,7 @@ var AudioPlayer = new Class({
         } else {
             this.soundInstance = createjs.Sound.play(this.options.id);
             this.soundInstance.addEventListener("complete", createjs.proxy(this._onSoundComplete, (this)));
+            this.played = true;
         }
     }.protect(),
     _onSoundComplete : function(event) {

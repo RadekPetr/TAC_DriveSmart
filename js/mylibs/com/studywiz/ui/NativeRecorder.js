@@ -134,11 +134,12 @@ var NativeRecorder = new Class({
     },
     stopRecording : function() {
         log("stop", this, this.audioRecorder);
-
-        this.audioRecorder.stop();
-        var buffers = this.audioRecorder.getBuffers( function(buffers) {
-            this.gotBuffers(buffers);
-        }.bind(this));
+        if (this.audioRecorder) {
+            this.audioRecorder.stop();
+            var buffers = this.audioRecorder.getBuffers( function(buffers) {
+                this.gotBuffers(buffers);
+            }.bind(this));
+        }
     },
     startRecording : function() {
 
@@ -171,9 +172,9 @@ var NativeRecorder = new Class({
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
         if (navigator.getUserMedia) {
             window.AudioContext = window.AudioContext || window.webkitAudioContext;
-            if (!this.audioContext) {
-                this.audioContext = new AudioContext();
-            }
+            // if (!this.audioContext) {
+            this.audioContext = new AudioContext();
+            //  }
             navigator.getUserMedia({
                 audio : true
             }, function(stream) {
@@ -190,16 +191,15 @@ var NativeRecorder = new Class({
     },
 
     gotStream : function(stream) {
-
         inputPoint = this.audioContext.createGain();
-
+        log("inputPoint", inputPoint);
         // Create an AudioNode from the stream.
         realAudioInput = this.audioContext.createMediaStreamSource(stream);
         realAudioInput.connect(inputPoint);
 
         //    audioInput = convertToMono( input );
 
-        this.audioRecorder = new Recorder(inputPoint);
+        this.audioRecorder = new JSRecorder(inputPoint);
         this.audioRecorder.clear();
         this.audioRecorder.record();
 
