@@ -111,6 +111,7 @@
     </Step>
     <Step fmt="Commentary">
       <Video>kaps/kaps_shops_start</Video>
+      <Audio>kaps/kaps_opdrive</Audio>
       <FeedbackAudio>kaps/kaps_opdrive2</FeedbackAudio>
       <ExpertAudio>kaps/opshops</ExpertAudio>
     </Step>
@@ -126,6 +127,7 @@
     </Step>
     <Step fmt="Commentary">
       <Video>kaps/kaps_indust_start</Video>
+      <Audio>kaps/kaps_opdrive</Audio>
       <FeedbackAudio>kaps/kaps_opdrive2</FeedbackAudio>
       <ExpertAudio>kaps/opindust</ExpertAudio>
     </Step>
@@ -141,6 +143,7 @@
     </Step>
     <Step fmt="Commentary">
       <Video>kaps/kaps_fway_start</Video>
+      <Audio>kaps/kaps_opdrive</Audio>
       <FeedbackAudio>kaps/kaps_opdrive2</FeedbackAudio>
       <ExpertAudio>kaps/opfreeway</ExpertAudio>
     </Step>
