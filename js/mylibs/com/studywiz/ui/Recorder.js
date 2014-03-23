@@ -37,6 +37,7 @@ var Recorder = new Class({
         this.containerID = 'recorderContainer';
         this.container = null;
         this.swiff = null;
+        this.recorded = false;
     },
     myParent : function() {
         return this.options.parent;
@@ -161,12 +162,14 @@ var Recorder = new Class({
     stopRecording : function() {
         if (isFlashSupported() == true) {
             Swiff.remote(this.swiff.toElement(), 'recordStop');
+           
         }       
         
     },
     startRecording : function() {
         if (isFlashSupported() == true) {
             Swiff.remote(this.swiff.toElement(), 'recordStart');
+             this.recorded= true;
         }
     },
     startPlayback : function() {

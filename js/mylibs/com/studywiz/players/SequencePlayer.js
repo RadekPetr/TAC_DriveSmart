@@ -211,18 +211,16 @@ var SequencePlayer = new Class({
                             next : "CommentaryIntro.expert.clicked"
                         });
                     };
-                    
-                    log ("Main.environment.hasUserMedia", Main.environment.hasUserMedia);
-                    if (Main.environment.hasUserMedia==true) {
-                        log ("1");
-                        this.recorder = new NativeRecorder(this, {
+
+                    log("Main.environment.hasUserMedia", Main.environment.hasUserMedia);
+                    if (Main.environment.hasUserMedia == true) {
+                        this.recorder = new Recorder(this, {
                             swiff : {
                                 id : 'Commentary'
                             },
-                            src : ""
+                            src : Main.PATHS.flashFolder + "commentary.swf"
                         });
                     } else {
-                          log ("2");
                         this.recorder = new Recorder(this, {
                             swiff : {
                                 id : 'Commentary'
@@ -806,11 +804,35 @@ var SequencePlayer = new Class({
                 this._stopPlayers();
 
                 var feedbackAudio = this.currentStep.media.feedbackAudio;
-                if (feedbackAudio != undefined && feedbackAudio.played == false) {                   
-                    feedbackAudio.options.next = '';
-                    feedbackAudio.start();
+                var notRecordedAudio = this.currentStep.media.audio;
+
+                if (this.recorder.recorded == true) {
+                    if (feedbackAudio != undefined && feedbackAudio.played == false) {
+                        feedbackAudio.options.next = '';
+                        feedbackAudio.start();
+                    }
                     // play the feedback and show text if present
+                    this._addButton({
+                        type : "Your commentary",
+                        next : "Commentary.replay.clicked"
+                    });
+
+                    this._addButton({
+                        type : "Repeat",
+                        next : "Commentary.repeat.clicked"
+                    });
+
+                } else {
+                    if (notRecordedAudio != undefined && notRecordedAudio.played == false) {
+                        notRecordedAudio.options.next = '';
+                        notRecordedAudio.start();
+                    }
+                    this._addButton({
+                        type : "Record 2",
+                        next : "Commentary.repeat.clicked"
+                    });
                 }
+
                 var feedbackText = this.currentStep.data;
 
                 if (feedbackText != undefined) {
@@ -818,14 +840,10 @@ var SequencePlayer = new Class({
                     this.currentStep.feedbackPanel.add(Main.DIV_ID);
                     this.currentStep.feedbackPanel.show();
                 }
-                this._addButton({
-                    type : "Your commentary",
-                    next : "Commentary.replay.clicked"
-                });
 
                 var expertAudio = this.currentStep.media.expertAudio;
                 if (expertAudio != undefined) {
-                    
+
                     // show play expert commentary button
                     this._addButton({
                         type : "Expert commentary 2",
@@ -838,10 +856,7 @@ var SequencePlayer = new Class({
                     type : "Continue",
                     next : "Continue.clicked"
                 });
-                this._addButton({
-                    type : "Repeat",
-                    next : "Commentary.repeat.clicked"
-                });
+
                 this._addButton({
                     type : "Main Menu",
                     next : "MainMenu.clicked"
@@ -1654,6 +1669,7 @@ var SequencePlayer = new Class({
     },
     _addButton : function(buttonData) {
         var buttonOptions = UIHelpers.getButtonOptions(buttonData['type']);
+        log (buttonData);
         if (buttonData['next']) {
             buttonOptions['next'] = buttonData['next'];
         }

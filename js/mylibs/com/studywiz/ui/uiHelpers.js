@@ -152,6 +152,15 @@ UIHelpers.getButtonOptions = function(buttonType) {
                 width : '195px'
             }
         },
+        "Record 2" : {
+            id : "button_" + buttonType,
+            text : "Record",
+            next : "Commentary.repeat.clicked",
+            'class' : "button position_4 pane orange",
+            style : {
+                width : '195px'
+            }
+        },
         "Play Cameo" : {
             id : "button_" + buttonType,
             text : "Play driver video",
