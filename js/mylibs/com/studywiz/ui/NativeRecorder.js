@@ -23,7 +23,7 @@ var NativeRecorder = new Class({
         id : 'element.id',
         next : 'next.action',
         parent : null,
-        parentTag : null
+        parentTag : null,
 
     },
     initialize : function(myParent, myOptions) {
@@ -32,9 +32,13 @@ var NativeRecorder = new Class({
         this.options.parent = myParent;
         this.containerID = 'recorderContainer';
         this.container = null;
-        this.swiff = null;
+        this.image = null;
         this.stream = null;
         this.recordedSound = null;
+        this.recorded = false;
+
+        this.initAudio();
+
     },
     myParent : function() {
         return this.options.parent;
@@ -53,30 +57,47 @@ var NativeRecorder = new Class({
             // debug(this.options.style);
 
         }
-
-        this.options.swiff.container = this.container;
-        this.swiff = new ImagePlayer(this, {
-            src : Main.PATHS.imageFolder + "commentary/noflash.png",
-            next : "NoFlash.Ready",
-            title : 'NoFlash',
-            id : 'NoFlash',
-            style : {
-                'position' : 'relative',
-                'left' : '500px',
-                'top' : '15px'
-            }
-        });
+        if (Main.audioRecorder == null) {
+            this.options.swiff.container = this.container;
+            this.image = new ImagePlayer(this, {
+                src : Main.PATHS.imageFolder + "commentary/nomic.png",
+                next : "Image.Ready",
+                title : 'NoMic',
+                id : 'NoMic',
+                style : {
+                    'position' : 'relative',
+                    'left' : '500px',
+                    'top' : '15px'
+                }
+            });
+        } else {
+            this.options.swiff.container = this.container;
+            this.image = new ImagePlayer(this, {
+                src : Main.PATHS.imageFolder + "commentary/mic.png",
+                next : "Image.Ready",
+                title : 'Mic',
+                id : 'Mic',
+                style : {
+                    'position' : 'relative',
+                    'left' : '500px',
+                    'top' : '15px'
+                }
+            });
+        }
         this.addEvent("TIMELINE", this.handleNavigationEvent);
-        this.swiff.preload();
+        this.image.preload();
+
+        // if Main.audioRecorder = null - load mic no allowed image
+        // if Main.audioRecorder != null - load mic  image
 
     },
     handleNavigationEvent : function(params) {
         switch (params.next) {
-            case "NoFlash.Ready":
+            case "Image.Ready":
                 this.removeEvents("TIMELINE");
                 debug("ImageNo Flash loaded");
-                this.swiff.add(this.container.id);
-                this.swiff.show();
+                this.image.add(this.container.id);
+                this.image.show();
         }
     },
     show : function() {
@@ -99,7 +120,7 @@ var NativeRecorder = new Class({
     remove : function() {
         this.hide();
         this.container.destroy();
-        this.swiff = null;
+        this.image = null;
         this.container = null;
     },
     // ----------------------------------------------------------
@@ -118,36 +139,31 @@ var NativeRecorder = new Class({
         return loaderInfo;
     },
     preload : function() {
-        this.image = new Asset.flash(this.options.src, {
-            style : this.options.style,
-            id : this.options.id,
-            onLoad : function() {
-                this.options.loaded = true;
-                this.myParent().mediaLoader.reportProgress(this.getLoaderInfo());
-                this.myParent().fireEvent("TIMELINE", {
-                    type : "image.ready",
-                    id : this.options.id,
-                    next : this.options.next
-                });
-            }.bind(this)
-        });
+
     },
     stopRecording : function() {
         log("stop", this, this.audioRecorder);
-        if (this.audioRecorder) {
-            this.audioRecorder.stop();
-            var buffers = this.audioRecorder.getBuffers( function(buffers) {
+        if (Main.audioRecorder) {
+            Main.audioRecorder.stop();
+            var buffers = Main.audioRecorder.getBuffers( function(buffers) {
                 this.gotBuffers(buffers);
             }.bind(this));
+
+            // recording animation stop
         }
     },
     startRecording : function() {
+        if (Main.audioRecorder) {
+            Main.audioRecorder.clear();
+            Main.audioRecorder.record();
+            this.recorded = true;
 
-        this.initAudio();
+            // recording animation
 
+        }
     },
     gotBuffers : function(buffers) {
-        this.audioRecorder.exportWAV( function(blob) {
+        Main.audioRecorder.exportWAV( function(blob) {
             this.doneEncoding(blob);
         }.bind(this));
 
@@ -155,6 +171,7 @@ var NativeRecorder = new Class({
     doneEncoding : function(blob) {
         this.recordedSound = window.URL.createObjectURL(blob);
         log(window.URL.createObjectURL(blob));
+        // recorded image
     },
     startPlayback : function() {
         var player = new Element("audio", {
@@ -170,19 +187,24 @@ var NativeRecorder = new Class({
     },
     initAudio : function() {
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+
         if (navigator.getUserMedia) {
             window.AudioContext = window.AudioContext || window.webkitAudioContext;
-            // if (!this.audioContext) {
-            this.audioContext = new AudioContext();
-            //  }
-            navigator.getUserMedia({
-                audio : true
-            }, function(stream) {
-                this.gotStream(stream);
-            }.bind(this), function(e) {
-                alert('Error getting audio');
-                console.log(e);
-            });
+            if (Main.audioContext == null) {
+                Main.audioContext = new AudioContext();
+            }
+
+            if (Main.audioRecorder == null) {
+                navigator.getUserMedia({
+                    audio : true
+                }, function(stream) {
+                    this.gotStream(stream);
+                }.bind(this), function(e) {
+                    alert('Access to microphone denied. Please check your settings.');
+                    Main.audioRecorder = null;
+                    console.log(e);
+                });
+            }
 
         } else {
             log("no audio");
@@ -191,17 +213,15 @@ var NativeRecorder = new Class({
     },
 
     gotStream : function(stream) {
-        inputPoint = this.audioContext.createGain();
+        inputPoint = Main.audioContext.createGain();
         log("inputPoint", inputPoint);
         // Create an AudioNode from the stream.
-        realAudioInput = this.audioContext.createMediaStreamSource(stream);
+        realAudioInput = Main.audioContext.createMediaStreamSource(stream);
         realAudioInput.connect(inputPoint);
 
         //    audioInput = convertToMono( input );
 
-        this.audioRecorder = new JSRecorder(inputPoint);
-        this.audioRecorder.clear();
-        this.audioRecorder.record();
+        Main.audioRecorder = new JSRecorder(inputPoint);
 
     }
 });

@@ -214,7 +214,7 @@ var SequencePlayer = new Class({
 
                     log("Main.environment.hasUserMedia", Main.environment.hasUserMedia);
                     if (Main.environment.hasUserMedia == true) {
-                        this.recorder = new Recorder(this, {
+                        this.recorder = new NativeRecorder(this, {
                             swiff : {
                                 id : 'Commentary'
                             },
@@ -827,6 +827,9 @@ var SequencePlayer = new Class({
                         notRecordedAudio.options.next = '';
                         notRecordedAudio.start();
                     }
+                    
+                    this.recorder.initAudio();
+                    // request access to microphone again if not granted before
                     this._addButton({
                         type : "Record 2",
                         next : "Commentary.repeat.clicked"
