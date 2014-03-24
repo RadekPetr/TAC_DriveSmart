@@ -63,11 +63,6 @@ var Environment = new Class({
             hasUserMedia : this.hasGetUserMedia()
         };
 
-        
-        console.log ("this.hasGetUserMedia()", this.hasGetUserMedia());
-        
-        
-
         if ((Browser.ie )) {
             // detect older IE versions
             requiredBrowser = this.options.browsers.ie;
@@ -223,15 +218,15 @@ var Main = new Class({
     Implements : [Options, Events],
     // ----------------------------------------------------------
     initialize : function(isDev) {
-        this.environment = new Environment().report;
-        log(this.environment);
+        Main.environment = new Environment().report;
+        log(Main.environment);
         debug("****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
 
         if (isDev == true) {
-            if (this.environment.supported == true) {
+            if (Main.environment.supported == true) {
                 // load external js libraries so they are available to the project
 
-                this.listOfLibraries = ['css/button.css', 'css/common.css', 'css/dragndrop.css', 'css/fonts.css', 'css/loader.css', 'css/main_menu.css', 'css/progressbar.css', 'css/questions.css', 'css/radios.css', 'css/sequence.css', 'css/video-js.min.css', 'js/mylibs/Base64/Base64.js', 'js/mylibs/Lzw/Lzw.js', 'js/mylibs/createjs/soundjs-0.5.2.min.js', 'js/mylibs/createjs/preloadjs-0.4.1.min.js', 'js/mylibs/createjs/flashplugin-0.5.2.min.js', 'js/mylibs/video-js/video.js', 'js/mylibs/com/studywiz/ui/UIHelpers.js', 'js/mylibs/com/studywiz/utils/Api.js', 'js/mylibs/com/studywiz/utils/Utils.js', 'js/mylibs/com/studywiz/utils/Array.sortOn.js', 'js/mylibs/com/studywiz/loaders/MediaLoader.js', 'js/mylibs/com/studywiz/loaders/DataLoader.js', 'js/mylibs/com/studywiz/ui/dwProgressBar.js', 'js/mylibs/com/studywiz/players/ImagePlayer.js', 'js/mylibs/com/studywiz/players/VideoPlayer.js', 'js/mylibs/com/studywiz/players/DragNDropPlayer.js', 'js/mylibs/com/studywiz/players/AudioPlayer.js', 'js/mylibs/com/studywiz/players/MenuPlayer.js', 'js/mylibs/com/studywiz/ui/Button.js', 'js/mylibs/com/studywiz/ui/CommentaryFeedback.js', 'js/mylibs/com/studywiz/players/SequencePlayer.js', 'js/mylibs/com/studywiz/players/ModulePlayer.js', 'js/mylibs/com/studywiz/players/KeyRisksPlayer.js', 'js/mylibs/com/studywiz/players/SwiffPlayer.js', 'js/mylibs/com/studywiz/core/Modules.js', 'js/mylibs/com/studywiz/core/User.js', 'js/mylibs/com/studywiz/ui/Questions.js', 'js/mylibs/com/studywiz/ui/MenuItem.js', 'js/mylibs/com/studywiz/ui/Shape.js', 'js/mylibs/com/studywiz/ui/Recorder.js', 'js/mylibs/com/studywiz/ui/NativeRecorder.js','js/mylibs/xml2json/xml2json.js', 'js/mylibs/rightclick/rightClick.js', 'js/mylibs/com/studywiz/players/Draggable.js', 'js/mylibs/recorderJS/JSRecorder.js'];
+                this.listOfLibraries = ['css/button.css', 'css/common.css', 'css/dragndrop.css', 'css/fonts.css', 'css/loader.css', 'css/main_menu.css', 'css/progressbar.css', 'css/questions.css', 'css/radios.css', 'css/sequence.css', 'css/video-js.min.css', 'js/mylibs/Base64/Base64.js', 'js/mylibs/Lzw/Lzw.js', 'js/mylibs/createjs/soundjs-0.5.2.min.js', 'js/mylibs/createjs/preloadjs-0.4.1.min.js', 'js/mylibs/createjs/flashplugin-0.5.2.min.js', 'js/mylibs/video-js/video.js', 'js/mylibs/com/studywiz/ui/UIHelpers.js', 'js/mylibs/com/studywiz/utils/Api.js', 'js/mylibs/com/studywiz/utils/Utils.js', 'js/mylibs/com/studywiz/utils/Array.sortOn.js', 'js/mylibs/com/studywiz/loaders/MediaLoader.js', 'js/mylibs/com/studywiz/loaders/DataLoader.js', 'js/mylibs/com/studywiz/ui/dwProgressBar.js', 'js/mylibs/com/studywiz/players/ImagePlayer.js', 'js/mylibs/com/studywiz/players/VideoPlayer.js', 'js/mylibs/com/studywiz/players/DragNDropPlayer.js', 'js/mylibs/com/studywiz/players/AudioPlayer.js', 'js/mylibs/com/studywiz/players/MenuPlayer.js', 'js/mylibs/com/studywiz/ui/Button.js', 'js/mylibs/com/studywiz/ui/CommentaryFeedback.js', 'js/mylibs/com/studywiz/players/SequencePlayer.js', 'js/mylibs/com/studywiz/players/ModulePlayer.js', 'js/mylibs/com/studywiz/players/KeyRisksPlayer.js', 'js/mylibs/com/studywiz/players/SwiffPlayer.js', 'js/mylibs/com/studywiz/core/Modules.js', 'js/mylibs/com/studywiz/core/User.js', 'js/mylibs/com/studywiz/ui/Questions.js', 'js/mylibs/com/studywiz/ui/MenuItem.js', 'js/mylibs/com/studywiz/ui/Shape.js', 'js/mylibs/com/studywiz/ui/Recorder.js', 'js/mylibs/com/studywiz/ui/NativeRecorder.js', 'js/mylibs/xml2json/xml2json.js', 'js/mylibs/rightclick/rightClick.js', 'js/mylibs/com/studywiz/players/Draggable.js', 'js/mylibs/recorderJS/JSRecorder.js', 'js/mylibs/recorderJS/RecorderWorker.js'];
                 this.listOfLibrariesCounter = 0;
 
                 Array.each(this.listOfLibraries, function(item, index) {
@@ -239,7 +234,7 @@ var Main = new Class({
                 }.bind(this));
             } else {
                 var text = new Element("div", {
-                    html : this.environment.message,
+                    html : Main.environment.message,
                     'class' : 'browser_warning_text no-select',
                     'id' : 'unsupported_text'
                 });
@@ -252,7 +247,7 @@ var Main = new Class({
     },
     // ----------------------------------------------------------
     start : function() {
-        if (this.environment.supported == true) {
+        if (Main.environment.supported == true) {
             new Api(this).saveLog('info', "****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
             Main.sequencePlayer = new SequencePlayer(this, {});
             this.modules = new Modules({});
@@ -314,7 +309,7 @@ function debug() {
 // ---------------------
 Main.sequencePlayer = null;
 Main.userTracker = null;
-Main.environment = new Environment().report;
+//Main.environment = new Environment().report;
 
 // Mootools safe mode
 var $m = document.id;
@@ -426,4 +421,6 @@ Main.MODULES = new Hash({
 });
 
 Main.COLORS = ['blue', 'green', 'orange'];
+Main.audioContext = null;
+Main.audioRecorder = null;
 

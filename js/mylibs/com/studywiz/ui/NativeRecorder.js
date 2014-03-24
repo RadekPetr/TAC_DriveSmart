@@ -142,7 +142,6 @@ var NativeRecorder = new Class({
 
     },
     stopRecording : function() {
-        log("stop", this, this.audioRecorder);
         if (Main.audioRecorder) {
             Main.audioRecorder.stop();
             var buffers = Main.audioRecorder.getBuffers( function(buffers) {
@@ -169,6 +168,7 @@ var NativeRecorder = new Class({
 
     },
     doneEncoding : function(blob) {
+        log ("blob:", blob);
         this.recordedSound = window.URL.createObjectURL(blob);
         log(window.URL.createObjectURL(blob));
         // recorded image
@@ -179,7 +179,7 @@ var NativeRecorder = new Class({
             'src' : this.recordedSound,
             'autoplay' : true
         });
-        //  player.inject($m(this.options.parentTag));
+        player.inject($m(this.options.parentTag));
 
     },
     _getUserMedia : function() {

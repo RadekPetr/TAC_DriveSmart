@@ -28,7 +28,7 @@ var RecorderWorker = new Class({
         this.recLength = 0;
         this.recBuffersL = [];
         this.recBuffersR = [];
-        this.sampleRate;
+        this.sampleRate
     },
     onmessage : function(e) {
         switch(e.data.command) {
@@ -60,8 +60,8 @@ var RecorderWorker = new Class({
         this.recBuffersR.push(inputBuffer[1]);
         this.recLength += inputBuffer[0].length;
     },
-    exportWAV : function(type) {        
-        log (this.recBuffersL,this.recBuffersR, this.recLength);
+    exportWAV : function(type) {
+        log(this.recBuffersL, this.recBuffersR, this.recLength);
         var bufferL = this.mergeBuffers(this.recBuffersL, this.recLength);
         var bufferR = this.mergeBuffers(this.recBuffersR, this.recLength);
         var interleaved = this.interleave(bufferL, bufferR);
@@ -73,7 +73,7 @@ var RecorderWorker = new Class({
         return audioBlob;
     },
     exportMonoWAV : function(type) {
-        
+
         var bufferL = this.mergeBuffers(this.recBuffersL, this.recLength);
         var dataview = this.encodeWAV(bufferL, true);
         var audioBlob = new Blob([dataview], {
