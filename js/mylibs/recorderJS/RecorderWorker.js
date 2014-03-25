@@ -16,6 +16,9 @@
  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  DEALINGS IN THE SOFTWARE.
  */
+
+/* Changed to Mootools Clas -    Radek PETR 2014 */
+
 var RecorderWorker = new Class({
 
     Implements : [Options, Events],
@@ -25,35 +28,14 @@ var RecorderWorker = new Class({
     initialize : function(myParent, myOptions) {
         this.setOptions(myOptions);
         this.options.parent = myParent;
+
+    },
+    init : function(sampleRate) {
         this.recLength = 0;
         this.recBuffersL = [];
         this.recBuffersR = [];
-        this.sampleRate
-    },
-    onmessage : function(e) {
-        switch(e.data.command) {
-            case 'init':
-                init(e.data.config);
-                break;
-            case 'record':
-                record(e.data.buffer);
-                break;
-            case 'exportWAV':
-                exportWAV(e.data.type);
-                break;
-            case 'exportMonoWAV':
-                exportMonoWAV(e.data.type);
-                break;
-            case 'getBuffers':
-                getBuffers();
-                break;
-            case 'clear':
-                clear();
-                break;
-        }
-    },
-    init : function(config) {
-        this.sampleRate = config.sampleRate;
+        this.sampleRate = null;
+        this.sampleRate = sampleRate;
     },
     record : function(inputBuffer) {
         this.recBuffersL.push(inputBuffer[0]);
@@ -61,7 +43,6 @@ var RecorderWorker = new Class({
         this.recLength += inputBuffer[0].length;
     },
     exportWAV : function(type) {
-        log(this.recBuffersL, this.recBuffersR, this.recLength);
         var bufferL = this.mergeBuffers(this.recBuffersL, this.recLength);
         var bufferR = this.mergeBuffers(this.recBuffersR, this.recLength);
         var interleaved = this.interleave(bufferL, bufferR);
@@ -69,7 +50,6 @@ var RecorderWorker = new Class({
         var audioBlob = new Blob([dataview], {
             type : type
         });
-
         return audioBlob;
     },
     exportMonoWAV : function(type) {

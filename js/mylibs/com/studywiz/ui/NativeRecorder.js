@@ -168,9 +168,7 @@ var NativeRecorder = new Class({
 
     },
     doneEncoding : function(blob) {
-        log ("blob:", blob);
         this.recordedSound = window.URL.createObjectURL(blob);
-        log(window.URL.createObjectURL(blob));
         // recorded image
     },
     startPlayback : function() {
@@ -179,7 +177,7 @@ var NativeRecorder = new Class({
             'src' : this.recordedSound,
             'autoplay' : true
         });
-        player.inject($m(this.options.parentTag));
+        //player.inject($m(this.options.parentTag));
 
     },
     _getUserMedia : function() {
@@ -200,7 +198,7 @@ var NativeRecorder = new Class({
                 }, function(stream) {
                     this.gotStream(stream);
                 }.bind(this), function(e) {
-                    alert('Access to microphone denied. Please check your settings.');
+                    alert('Access to microphone denied. Please check your browser settings.');
                     Main.audioRecorder = null;
                     console.log(e);
                 });
@@ -214,14 +212,10 @@ var NativeRecorder = new Class({
 
     gotStream : function(stream) {
         inputPoint = Main.audioContext.createGain();
-        log("inputPoint", inputPoint);
         // Create an AudioNode from the stream.
         realAudioInput = Main.audioContext.createMediaStreamSource(stream);
         realAudioInput.connect(inputPoint);
-
         //    audioInput = convertToMono( input );
-
         Main.audioRecorder = new JSRecorder(inputPoint);
-
     }
 });

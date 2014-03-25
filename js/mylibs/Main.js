@@ -334,7 +334,7 @@ Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '100';
-Main.BUILD = '2014/03/21 build 1';
+Main.BUILD = '2014/03/24 build 1 htmlRecorder';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;
