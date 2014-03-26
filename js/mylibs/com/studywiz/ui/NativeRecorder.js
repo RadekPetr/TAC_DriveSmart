@@ -33,7 +33,7 @@ var NativeRecorder = new Class({
         this.containerID = 'recorderContainer';
         this.container = null;
         this.image = null;
-        this.stream = null;
+        this.player = null;
         this.recordedSound = null;
         this.recorded = false;
 
@@ -78,11 +78,18 @@ var NativeRecorder = new Class({
     },
     // ---------------------------
     remove : function() {
+        if (this.image != null) {
+            this.image.remove();
+            this.image = null;
+        }
+        if (this.player != null) {
+             this.player.destroy();
+        }
         this.hide();
         this.container.destroy();
-        this.image.remove();
-        this.image = null;
+
         this.container = null;
+
     },
     // ----------------------------------------------------------
     getLoaderInfo : function() {
@@ -132,7 +139,11 @@ var NativeRecorder = new Class({
         this._showRecordedOk();
     },
     startPlayback : function() {
-        var player = new Element("audio", {
+        if (this.player != null) {
+           // this.player.stop();
+            this.player.destroy();
+        }
+        this.player = new Element("audio", {
             id : "playback",
             'src' : this.recordedSound,
             'autoplay' : true
@@ -189,8 +200,16 @@ var NativeRecorder = new Class({
         audioInput = realAudioInput;
         // audioInput = this._convertToMono(realAudioInput);
         audioInput.connect(inputPoint);
+        var config = new Object();
+        
+        if (Main.IS_LOCAL) {
+            config.workerPath = "js/mylibs/recorderJS/RecorderWorker.js";
 
-        Main.audioRecorder = new JSRecorder(inputPoint);
+        } else {
+            config.workerPath = "tac/drivesmart/js/mylibs/recorderJS/RecorderWorker.js";
+        }
+
+        Main.audioRecorder = new JSRecorder(inputPoint, config);
     },
     _showMicReady : function() {
         this._showStatus({
@@ -201,7 +220,8 @@ var NativeRecorder = new Class({
             style : {
                 'position' : 'relative',
                 'left' : '500px',
-                'top' : '15px'
+                'top' : '15px',
+                'width': '50px'
             }
         });
 
@@ -215,7 +235,8 @@ var NativeRecorder = new Class({
             style : {
                 'position' : 'relative',
                 'left' : '500px',
-                'top' : '15px'
+                'top' : '15px',
+                'width': '50px'
             }
         });
 
@@ -229,7 +250,8 @@ var NativeRecorder = new Class({
             style : {
                 'position' : 'relative',
                 'left' : '500px',
-                'top' : '15px'
+                'top' : '15px',
+                'width': '80px'
             }
         });
         this.image.tween('0', '1', 1000, 'opacity', 500);
@@ -243,7 +265,8 @@ var NativeRecorder = new Class({
             style : {
                 'position' : 'relative',
                 'left' : '500px',
-                'top' : '15px'
+                'top' : '15px',
+                'width': '50px'
             }
         });
     },
@@ -256,7 +279,8 @@ var NativeRecorder = new Class({
             style : {
                 'position' : 'relative',
                 'left' : '500px',
-                'top' : '15px'
+                'top' : '15px',
+                'width': '50px'
             }
         });
         this.image.tween('0', '1', 1000, 'opacity', 500);
