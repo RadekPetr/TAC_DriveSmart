@@ -50,6 +50,7 @@ var RecorderWorker = new Class({
         var audioBlob = new Blob([dataview], {
             type : type
         });
+        log("4");
         return audioBlob;
     },
     exportMonoWAV : function(type) {
@@ -66,6 +67,7 @@ var RecorderWorker = new Class({
         var buffers = [];
         buffers.push(this.mergeBuffers(this.recBuffersL, this.recLength));
         buffers.push(this.mergeBuffers(this.recBuffersR, this.recLength));
+        log("buffers", buffers);
         return buffers;
     },
     clear : function() {
@@ -100,6 +102,7 @@ var RecorderWorker = new Class({
             var s = Math.max(-1, Math.min(1, input[i]));
             output.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
         }
+        log("2");
     },
     writeString : function(view, offset, string) {
         for (var i = 0; i < string.length; i++) {
@@ -108,6 +111,7 @@ var RecorderWorker = new Class({
     },
     encodeWAV : function(samples, mono) {
         var buffer = new ArrayBuffer(44 + samples.length * 2);
+        // var buffer = new ArrayBuffer(44 + samples.length * 1);
         var view = new DataView(buffer);
 
         /* RIFF identifier */
@@ -138,7 +142,7 @@ var RecorderWorker = new Class({
         view.setUint32(40, samples.length * 2, true);
 
         this.floatTo16BitPCM(view, 44, samples);
-
+        log("3");
         return view;
     }
 });
