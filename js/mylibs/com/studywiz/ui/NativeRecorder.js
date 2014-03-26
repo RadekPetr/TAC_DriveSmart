@@ -128,7 +128,6 @@ var NativeRecorder = new Class({
     },
     doneEncoding : function(blob) {
         this.recordedSound = window.URL.createObjectURL(blob);
-        log("1");
         // recorded image
         this._showRecordedOk();
     },

@@ -17,7 +17,8 @@
  DEALINGS IN THE SOFTWARE.
  */
 
-(function(window) {   
+(function(window) {
+    var WORKER_PATH = 'js/mylibs/recorderJS/RecorderWorker.js';
 
     var JSRecorder = function(source, cfg) {
         var config = cfg || {};
@@ -29,14 +30,22 @@
             this.node = this.context.createScriptProcessor(bufferLen, 2, 2);
         }
 
-        var worker = new RecorderWorker();
-        worker.init(this.context.sampleRate);
+        var worker = new Worker(config.workerPath || WORKER_PATH);
+        worker.postMessage({
+            command : 'init',
+            config : {
+                sampleRate : this.context.sampleRate
+            }
+        });
         var recording = false, currCallback;
 
         this.node.onaudioprocess = function(e) {
             if (!recording)
                 return;
-            worker.record([e.inputBuffer.getChannelData(0), e.inputBuffer.getChannelData(1)]);
+            worker.postMessage({
+                command : 'record',
+                buffer : [e.inputBuffer.getChannelData(0), e.inputBuffer.getChannelData(1)]
+            });
         };
 
         this.configure = function(cfg) {
@@ -56,13 +65,17 @@
         };
 
         this.clear = function() {
-            worker.clear();
+            worker.postMessage({
+                command : 'clear'
+            });
         };
 
         this.getBuffers = function(cb) {
             currCallback = cb || config.callback;
 
-            currCallback(worker.getBuffers());
+            worker.postMessage({
+                command : 'getBuffers'
+            });
         };
 
         this.exportWAV = function(cb, type) {
@@ -70,7 +83,10 @@
             type = type || config.type || 'audio/wav';
             if (!currCallback)
                 throw new Error('Callback not set');
-            currCallback(worker.exportWAV(type));
+            worker.postMessage({
+                command : 'exportWAV',
+                type : type
+            });
         };
 
         this.exportMonoWAV = function(cb, type) {
@@ -78,7 +94,10 @@
             type = type || config.type || 'audio/wav';
             if (!currCallback)
                 throw new Error('Callback not set');
-            currCallback(worker.exportMonoWAV(type));
+            worker.postMessage({
+                command : 'exportMonoWAV',
+                type : type
+            });
         };
 
         worker.onmessage = function(e) {
