@@ -298,7 +298,7 @@ var Main = new Class({
 });
 
 function debug() {
-    if (Main.DEBUG) {
+    if (Main.DEBUG && Main.IS_LOCAL) {
         log.apply(null, arguments);
     }
 }
@@ -334,7 +334,7 @@ Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '100';
-Main.BUILD = '2014/03/26 build 2 htmlRecorder';
+Main.BUILD = '2014/03/27 build 1 htmlRecorder';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;
