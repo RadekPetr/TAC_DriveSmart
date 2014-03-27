@@ -26,20 +26,8 @@ https://gist.github.com/millermedeiros/891886
 
 Video scanning6 - shared_uia08_next.mp4  - not fluent
 
-Flash Detection - firefox disabled vs not installed , 
-Preloading flash timeout ?
-
-Android errors
-Delete swfObject or use it
-Fixing dashboard page navigation. Currently module buttons on the left show brief module info on mouse over and open module on click. This needs to be adjusted for touch devices . The suggestion is to open brief module info on  module button touch and have a button in the brief description section on the right to enter the module on touch as well.
-  
-   Checking all supported exercises on tablet devices (iPad primarily, Geoff can help with testing on Samsung Galaxy tablet as well), Bruce reported  problems with a few exercises and we could reproduce the problems with the 2 exercises reported below: 
-
-   - Scanning exercise 4 gets through you choose on of the options, then it just stops no video continues and there is no button to progress with 
-        -  Keep ahead and stay safe- item 1 doesn't work correctly there is a drop down visor but the video never plays 
 
 
-urban_uic02_next - webm ogv version ending soon ?
 Recorder: Start playback and recording  when  video actually starts
 
 Supported browsers: http://caniuse.com/#search=video
