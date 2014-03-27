@@ -284,7 +284,7 @@ var VideoPlayer = new Class({
     obscure : function() {
         debug("Obscure");
         //TODO: finish for IE - use an image for the mask
-        if (Main.environment.name="ie") {
+        if (Main.environment.name=="ie") {
 
             var myMask = new Mask(this.container, {
                 style : {
