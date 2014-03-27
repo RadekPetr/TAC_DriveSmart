@@ -2,17 +2,6 @@ var NativeRecorder = new Class({
 
     Implements : [Options, Events],
     options : {
-        swiff : {
-            id : 'Recorder',
-            width : Main.VIDEO_WIDTH + 'px',
-            height : '200px',
-            params : {
-            },
-            callBacks : {
-                isReady : this.isReady
-            },
-            container : null
-        },
         style : {
             position : 'absolute',
             'z-index' : '99999',
@@ -54,9 +43,8 @@ var NativeRecorder = new Class({
                 styles : this.options.style
             });
             this.container.inject($m(parentTagID), where);
-            // debug(this.options.style);
-
         }
+        //-------------------------------
         if (Main.audioRecorder == null) {
             this._showMicNotReady();
         } else {
@@ -83,13 +71,11 @@ var NativeRecorder = new Class({
             this.image = null;
         }
         if (this.player != null) {
-             this.player.destroy();
+            this.player.destroy();
         }
         this.hide();
         this.container.destroy();
-
         this.container = null;
-
     },
     // ----------------------------------------------------------
     getLoaderInfo : function() {
@@ -113,10 +99,8 @@ var NativeRecorder = new Class({
         if (Main.audioRecorder) {
             Main.audioRecorder.stop();
             var buffers = Main.audioRecorder.getBuffers( function(buffers) {
-                this.gotBuffers(buffers);
+                this._gotBuffers(buffers);
             }.bind(this));
-
-            // recording animation stop
         }
     },
     startRecording : function() {
@@ -125,22 +109,20 @@ var NativeRecorder = new Class({
             Main.audioRecorder.record();
             this.recorded = true;
             this._showRecording();
-            // recording animation
         }
     },
-    gotBuffers : function(buffers) {
+    _gotBuffers : function(buffers) {
         Main.audioRecorder.exportWAV( function(blob) {
-            this.doneEncoding(blob);
+            this._doneEncoding(blob);
         }.bind(this));
     },
-    doneEncoding : function(blob) {
+    _doneEncoding : function(blob) {
         this.recordedSound = window.URL.createObjectURL(blob);
-        // recorded image
         this._showRecordedOk();
     },
     startPlayback : function() {
         if (this.player != null) {
-           // this.player.stop();
+            // this.player.stop();
             this.player.destroy();
         }
         this.player = new Element("audio", {
@@ -148,11 +130,7 @@ var NativeRecorder = new Class({
             'src' : this.recordedSound,
             'autoplay' : true
         });
-        //player.inject($m(this.options.parentTag));
         this._showPlayback();
-    },
-    _getUserMedia : function() {
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
     },
     initAudio : function() {
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
@@ -168,18 +146,19 @@ var NativeRecorder = new Class({
                     audio : true
                 }, function(stream) {
                     this._showMicReady();
-                    this.gotStream(stream);
+                    this._gotStream(stream);
                 }.bind(this), function(e) {
                     alert('Access to microphone denied. Please check your browser settings.');
                     Main.audioRecorder = null;
                     this._showMicNotReady();
-                    console.log(e);
+                    //console.log(e);
+                    new Api(this).saveLog('warning', "*** HTML5 recorder - Access to microphone denied ****");
                 });
             }
-
         } else {
-            log("no audio");
+            alert('Your Browser does not support Audio API. Sound cannot be recorded.');
             this._showMicNotReady();
+            new Api(this).saveLog('error', "*** Could not getUserMedia ****");
         }
 
     },
@@ -193,7 +172,7 @@ var NativeRecorder = new Class({
         return merger;
     },
 
-    gotStream : function(stream) {
+    _gotStream : function(stream) {
         inputPoint = Main.audioContext.createGain();
         // Create an AudioNode from the stream.
         realAudioInput = Main.audioContext.createMediaStreamSource(stream);
@@ -201,7 +180,7 @@ var NativeRecorder = new Class({
         // audioInput = this._convertToMono(realAudioInput);
         audioInput.connect(inputPoint);
         var config = new Object();
-        
+
         if (Main.IS_LOCAL) {
             config.workerPath = "js/mylibs/recorderJS/RecorderWorker.js";
 
@@ -221,7 +200,7 @@ var NativeRecorder = new Class({
                 'position' : 'relative',
                 'left' : '500px',
                 'top' : '15px',
-                'width': '50px'
+                'width' : '50px'
             }
         });
 
@@ -236,7 +215,7 @@ var NativeRecorder = new Class({
                 'position' : 'relative',
                 'left' : '500px',
                 'top' : '15px',
-                'width': '50px'
+                'width' : '50px'
             }
         });
 
@@ -251,7 +230,7 @@ var NativeRecorder = new Class({
                 'position' : 'relative',
                 'left' : '500px',
                 'top' : '15px',
-                'width': '80px'
+                'width' : '80px'
             }
         });
         this.image.tween('0', '1', 1000, 'opacity', 500);
@@ -266,7 +245,7 @@ var NativeRecorder = new Class({
                 'position' : 'relative',
                 'left' : '500px',
                 'top' : '15px',
-                'width': '50px'
+                'width' : '50px'
             }
         });
     },
@@ -280,7 +259,7 @@ var NativeRecorder = new Class({
                 'position' : 'relative',
                 'left' : '500px',
                 'top' : '15px',
-                'width': '50px'
+                'width' : '50px'
             }
         });
         this.image.tween('0', '1', 1000, 'opacity', 500);
@@ -295,6 +274,5 @@ var NativeRecorder = new Class({
         this.image.preload();
         this.image.add(this.container.id);
         this.image.display();
-
     }
 });

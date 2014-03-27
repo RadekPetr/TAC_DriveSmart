@@ -18,7 +18,7 @@
  */
 
 (function(window) {
-    var WORKER_PATH = 'js/mylibs/recorderJS/RecorderWorker.js';
+    var WORKER_PATH = "js/mylibs/recorderJS/RecorderWorker.js";
 
     var JSRecorder = function(source, cfg) {
         var config = cfg || {};

@@ -45,7 +45,7 @@ var SequencePlayer = new Class({
         this.sequenceState = Main.userTracker.getUserSequenceState(this.moduleInfo.currentSequenceID, this.moduleInfo.moduleID);
         // reset scoring, so when it repeats the scores are replaced not appended (Unless this will be requested ?)
         this.sequenceState.score = new Array();
-        debug("Starting SEQUENCE: " + this.moduleInfo.currentSequenceID);
+        // debug("Starting SEQUENCE: " + this.moduleInfo.currentSequenceID);
         this._setupSequenceMedia();
     },
     // ----------------------------------------------------------
@@ -211,14 +211,12 @@ var SequencePlayer = new Class({
                             next : "CommentaryIntro.expert.clicked"
                         });
                     };
-
-                    log("Main.environment.hasUserMedia", Main.environment.hasUserMedia);
                     if (Main.environment.hasUserMedia == true) {
                         this.recorder = new NativeRecorder(this, {
                             swiff : {
                                 id : 'Commentary'
                             },
-                            src : Main.PATHS.flashFolder + "commentary.swf"
+                            src : ""
                         });
                     } else {
                         this.recorder = new Recorder(this, {
@@ -639,7 +637,6 @@ var SequencePlayer = new Class({
             case "PlayAudio.done":
                 if (Main.environment.videoAutoPlay == false) {
                     var nextStep = this.currentSequence[0];
-                    debug("Next step is ", nextStep);
                     if (nextStep.attributes.fmt != "Continue" && nextStep.attributes.fmt == "PlayVideo") {
                         // to start video with user interaction in iOS
                         this._addButton({
@@ -650,7 +647,6 @@ var SequencePlayer = new Class({
                     } else {
                         this._nextStep();
                     }
-
                 } else {
                     this._nextStep();
                 }
@@ -659,7 +655,7 @@ var SequencePlayer = new Class({
                 // if click is required to play show continue button
                 if (Main.environment.videoAutoPlay == false) {
                     var nextStep = this.currentSequence[0];
-                    debug("Next step is ", nextStep);
+                    //debug("Next step is ", nextStep);
                     if (nextStep.attributes.fmt != "Continue" && nextStep.attributes.fmt != "PlayAudio") {
                         // to start video with user interaction in iOS
                         this._addButton({
@@ -827,7 +823,7 @@ var SequencePlayer = new Class({
                         notRecordedAudio.options.next = '';
                         notRecordedAudio.start();
                     }
-                    
+
                     this.recorder.initAudio();
                     // request access to microphone again if not granted before
                     this._addButton({
@@ -1672,7 +1668,6 @@ var SequencePlayer = new Class({
     },
     _addButton : function(buttonData) {
         var buttonOptions = UIHelpers.getButtonOptions(buttonData['type']);
-        log (buttonData);
         if (buttonData['next']) {
             buttonOptions['next'] = buttonData['next'];
         }
