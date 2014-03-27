@@ -96,7 +96,7 @@ var VideoPlayer = new Class({
                     this.paused = false;
 
                     if (this.getReadyState() !== 4) {//HAVE_ENOUGH_DATA
-                        debug("readyState checking ", this.player.readyState);
+                        // debug("readyState checking ", this.player.readyState);
                         //vid.addEventListener('canplaythrough', onCanPlay, false);
                         //  vid.addEventListener('load', onCanPlay, false);
                         //add load event as well to avoid errors, sometimes 'canplaythrough' won't dispatch.
@@ -127,7 +127,7 @@ var VideoPlayer = new Class({
             }.bind(this));
 
             this.player.on("waiting", function() {
-                debug("EVENT: **********************   waiting", this.options.id, this.getReadyState(), this.getNetworkState());
+                // debug("EVENT: **********************   waiting", this.options.id, this.getReadyState(), this.getNetworkState());
                 //this.player.load();
             }.bind(this));
             this.player.on("load", function() {
@@ -179,7 +179,7 @@ var VideoPlayer = new Class({
 
             this.player.on("loadedalldata", function() {
                 if (this.getReadyState() == 4) {
-                    debug("EVENT: **********************   loadedalldata", this.options.id, this.getReadyState(), this.getNetworkState());
+                    // debug("EVENT: **********************   loadedalldata", this.options.id, this.getReadyState(), this.getNetworkState());
                     this._finishedLoading();
                 }
 
@@ -206,10 +206,8 @@ var VideoPlayer = new Class({
         }
     },
     registerPlaybackStartEvent : function() {
-        //  this.player.on("play", function() {
-        //this.player.tech.el_.removeEvents("play");
         this.player.tech.el_.addEventListener("play", function() {
-            debug("EVENT: **********************   play", this.options.id);
+            // debug("EVENT: **********************   play", this.options.id);
 
             this.myParent().fireEvent("TIMELINE", {
                 type : "video.started",
@@ -226,18 +224,11 @@ var VideoPlayer = new Class({
         }.bind(this));
         this.player.off("pause");
         this.player.on("pause", function() {
-            // alert ("paused");
             debug("EVENT: **********************   pause", this.options.id);
-            // this.isPaused = true;
-            // clearInterval(this.stalledTimer);
-            // alert ("paused, cleared timer");
         }.bind(this));
+        this.player.off("error");
         this.player.on("error", function(event) {
-            // alert ("paused");
             debug("EVENT: **********************   error ", this.options.id, event);
-            // this.isPaused = true;
-            // clearInterval(this.stalledTimer);
-            // alert ("paused, cleared timer");
             this.player.play();
         }.bind(this));
 
@@ -284,7 +275,7 @@ var VideoPlayer = new Class({
     obscure : function() {
         debug("Obscure");
         //TODO: finish for IE - use an image for the mask
-        if (Main.environment.name=="ie") {
+        if (Main.environment.name == "ie") {
 
             var myMask = new Mask(this.container, {
                 style : {
@@ -453,9 +444,7 @@ var VideoPlayer = new Class({
         return data;
     },
     _finishedLoading : function() {
-
         if (this.isReady != true) {
-            debug("!!!!!!!!!!!!!!!!!!! _finishedLoading ", this.options.id);
             this.isReady = true;
             // this.player.off('progress');
             this.player.off('loaded');
