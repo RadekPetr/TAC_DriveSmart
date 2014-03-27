@@ -1,22 +1,3 @@
-/*License (MIT)
-
- Copyright © 2013 Matt Diamond
-
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
- documentation files (the "Software"), to deal in the Software without restriction, including without limitation
- the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
- to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
- The above copyright notice and this permission notice shall be included in all copies or substantial portions of
- the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
- THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
- CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- DEALINGS IN THE SOFTWARE.
- */
-
 var recLength = 0, recBuffersL = [], recBuffersR = [], sampleRate;
 
 this.onmessage = function(e) {
@@ -30,11 +11,8 @@ this.onmessage = function(e) {
         case 'exportWAV':
             exportWAV(e.data.type);
             break;
-        case 'exportMonoWAV':
-            exportMonoWAV(e.data.type);
-            break;
-        case 'getBuffers':
-            getBuffers();
+        case 'getBuffer':
+            getBuffer();
             break;
         case 'clear':
             clear();
@@ -64,17 +42,7 @@ function exportWAV(type) {
     this.postMessage(audioBlob);
 }
 
-function exportMonoWAV(type) {
-    var bufferL = mergeBuffers(recBuffersL, recLength);
-    var dataview = encodeWAV(bufferL, true);
-    var audioBlob = new Blob([dataview], {
-        type : type
-    });
-
-    this.postMessage(audioBlob);
-}
-
-function getBuffers() {
+function getBuffer() {
     var buffers = [];
     buffers.push(mergeBuffers(recBuffersL, recLength));
     buffers.push(mergeBuffers(recBuffersR, recLength));
@@ -124,7 +92,7 @@ function writeString(view, offset, string) {
     }
 }
 
-function encodeWAV(samples, mono) {
+function encodeWAV(samples) {
     var buffer = new ArrayBuffer(44 + samples.length * 2);
     var view = new DataView(buffer);
 
@@ -141,7 +109,7 @@ function encodeWAV(samples, mono) {
     /* sample format (raw) */
     view.setUint16(20, 1, true);
     /* channel count */
-    view.setUint16(22, mono ? 1 : 2, true);
+    view.setUint16(22, 2, true);
     /* sample rate */
     view.setUint32(24, sampleRate, true);
     /* byte rate (sample rate * block align) */
@@ -159,3 +127,4 @@ function encodeWAV(samples, mono) {
 
     return view;
 }
+

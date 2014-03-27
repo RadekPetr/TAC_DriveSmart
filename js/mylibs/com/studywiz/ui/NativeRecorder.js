@@ -98,8 +98,8 @@ var NativeRecorder = new Class({
     stopRecording : function() {
         if (Main.audioRecorder) {
             Main.audioRecorder.stop();
-            var buffers = Main.audioRecorder.getBuffers( function(buffers) {
-                this._gotBuffers(buffers);
+            var buffers = Main.audioRecorder.getBuffer( function(buffer) {
+                this._gotBuffer(buffer);
             }.bind(this));
         }
     },
@@ -111,7 +111,7 @@ var NativeRecorder = new Class({
             this._showRecording();
         }
     },
-    _gotBuffers : function(buffers) {
+    _gotBuffer : function(buffer) {
         Main.audioRecorder.exportWAV( function(blob) {
             this._doneEncoding(blob);
         }.bind(this));
