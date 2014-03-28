@@ -342,10 +342,10 @@ Main.IS_LOCAL = false;
 Main.DEBUG = false;
 
 // Production server path
-//Main.RECORDER_WORKER_PATH = "/dashboard/js/mylibs/recorderJS/RecorderWorker.js";
+Main.RECORDER_WORKER_PATH = "/dashboard/js/mylibs/recorderJS/RecorderWorker.js";
 
 // Staging server path
- Main.RECORDER_WORKER_PATH = "tac/drivesmart/js/mylibs/recorderJS/RecorderWorker.js";
+// Main.RECORDER_WORKER_PATH = "tac/drivesmart/js/mylibs/recorderJS/RecorderWorker.js";
 
 
 // Saves empty progress data on startup if true
