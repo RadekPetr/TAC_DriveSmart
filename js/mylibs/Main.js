@@ -196,7 +196,7 @@ var Environment = new Class({
             } catch(e) {
             }
         }
-        console.log(playerVersion);
+       // console.log(playerVersion);
         return {
             w3 : w3cdom,
             pv : playerVersion,
@@ -219,8 +219,7 @@ var Main = new Class({
     // ----------------------------------------------------------
     initialize : function(isDev) {
         Main.environment = new Environment().report;
-        log(Main.environment);
-        debug("****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
+        log("****** TAC Drivesmart Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
 
         if (isDev == true) {
             if (Main.environment.supported == true) {
@@ -334,13 +333,20 @@ Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '100';
-Main.BUILD = '2014/03/27 build 1 htmlRecorder';
+Main.BUILD = '2014/03/28 Production Build 1';
 
 // When running on localhost (So I can use different paths when testing)
-Main.IS_LOCAL = true;
+Main.IS_LOCAL = false;
 
 // Show hide debug panel and ignore lock status
-Main.DEBUG = true;
+Main.DEBUG = false;
+
+// Production server path
+//Main.RECORDER_WORKER_PATH = "/dashboard/js/mylibs/recorderJS/RecorderWorker.js";
+
+// Staging server path
+ Main.RECORDER_WORKER_PATH = "tac/drivesmart/js/mylibs/recorderJS/RecorderWorker.js";
+
 
 // Saves empty progress data on startup if true
 Main.RESET_USER_DATA = false;

@@ -185,7 +185,7 @@ var NativeRecorder = new Class({
             config.workerPath = "js/mylibs/recorderJS/RecorderWorker.js";
 
         } else {
-            config.workerPath = "tac/drivesmart/js/mylibs/recorderJS/RecorderWorker.js";
+            config.workerPath = Main.RECORDER_WORKER_PATH;
         }
 
         Main.audioRecorder = new JSRecorder(inputPoint, config);
