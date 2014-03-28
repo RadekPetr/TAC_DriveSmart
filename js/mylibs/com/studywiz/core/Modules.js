@@ -21,7 +21,6 @@ var Modules = new Class({
     },
     // ----------------------------------------------------------
     setupModules : function() {
-        console.log ("11");
         this.listOfModulesCounter = 0;
         Main.MODULES.each( function(value, key) {
             this.listOfModulesCounter++;

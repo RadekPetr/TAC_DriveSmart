@@ -250,7 +250,6 @@ var Draggable = new Class({
                 this._rotate(element, rotation);
             },
             onLeave : function(element, droppable) {
-                // console.log(element, 'left', droppable);
                 this._rotate(element, 0);
             },
             onSnap : function(el) {

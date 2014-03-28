@@ -77,20 +77,6 @@ var Recorder = new Class({
             this.swiff.preload();
 
         }
-/*
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-        if (navigator.getUserMedia) {
-            // Call the getUserMedia method here
-            navigator.getUserMedia({audio: true}, function(){
-                console.log("ok");
-            }, function (){
-                console.log ("error");
-            });
-        } else {
-            console.log('Native device media streaming (getUserMedia) not supported in this browser.');
-            // Display a friendly "sorry" message to the user.
-        }
-*/
     },
     handleNavigationEvent : function(params) {
         switch (params.next) {
@@ -162,14 +148,14 @@ var Recorder = new Class({
     stopRecording : function() {
         if (isFlashSupported() == true) {
             Swiff.remote(this.swiff.toElement(), 'recordStop');
-           
-        }       
-        
+
+        }
+
     },
     startRecording : function() {
         if (isFlashSupported() == true) {
             Swiff.remote(this.swiff.toElement(), 'recordStart');
-             this.recorded= true;
+            this.recorded = true;
         }
     },
     startPlayback : function() {
