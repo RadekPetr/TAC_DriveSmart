@@ -333,13 +333,13 @@ Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '100';
-Main.BUILD = '2014/03/28 Production Build 1';
+Main.BUILD = '2014/03/31 Production Build 1';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = false;
 
 // Show hide debug panel and ignore lock status
-Main.DEBUG = false;
+Main.DEBUG = true;
 
 // Production server path
 Main.RECORDER_WORKER_PATH = "/dashboard/js/mylibs/recorderJS/RecorderWorker.js";

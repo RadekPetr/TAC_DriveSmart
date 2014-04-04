@@ -1,1 +1,1 @@
-for /r %1 %%i in (*.mpg) do "webm.bat" %%i
+for /r %1 %%i in (*.mp4) do "webm.bat" %%i
