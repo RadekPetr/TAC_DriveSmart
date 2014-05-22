@@ -33,7 +33,7 @@ Recorder: Start playback and recording  when  video actually starts
 Supported browsers: http://caniuse.com/#search=video
 Test video encoding http://broken-links.com/tests/video/comparison.html
 
-
+http://drivesmart.vic.gov.au/media/video/shared/shared_uia08_next.mp4   not fluent in IE
 -----------------------------------------------------------------
 DONE:
 - Handle video error: - retry play

@@ -339,7 +339,7 @@ Main.BUILD = '2014/03/31 Production Build 1';
 Main.IS_LOCAL = false;
 
 // Show hide debug panel and ignore lock status
-Main.DEBUG = true;
+Main.DEBUG = false;
 
 // Production server path
 Main.RECORDER_WORKER_PATH = "/dashboard/js/mylibs/recorderJS/RecorderWorker.js";
