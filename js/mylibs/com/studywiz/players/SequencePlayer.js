@@ -1648,23 +1648,26 @@ var SequencePlayer = new Class({
         return cuePointsData;
     },
     _checkCuePoints : function(step) {
-        var currentTime = this.activeVideo.player.currentTime();
-        Array.each(step.data.cuePoints, function(cuePoint, cupePointIndex) {
-            if (currentTime >= cuePoint.start && currentTime < cuePoint.end) {
-                if (cuePoint.active == false) {
-                    cuePoint.active = true;
-                    cuePoint.image.add(this.activeVideo.containerID);
-                    cuePoint.image.show();
-                }
-            };
+        // as of videojs 4.6 the end sens one more timeupdate event and the player can be already removed
+        if (this.activeVideo != null) {
+            var currentTime = this.activeVideo.player.currentTime();
+            Array.each(step.data.cuePoints, function(cuePoint, cupePointIndex) {
+                if (currentTime >= cuePoint.start && currentTime < cuePoint.end) {
+                    if (cuePoint.active == false) {
+                        cuePoint.active = true;
+                        cuePoint.image.add(this.activeVideo.containerID);
+                        cuePoint.image.show();
+                    }
+                };
 
-            if (currentTime >= cuePoint.end) {
-                if (cuePoint.active == true) {
-                    cuePoint.active = false;
-                    cuePoint.image.remove();
-                }
-            };
-        }.bind(this));
+                if (currentTime >= cuePoint.end) {
+                    if (cuePoint.active == true) {
+                        cuePoint.active = false;
+                        cuePoint.image.remove();
+                    }
+                };
+            }.bind(this));
+        }
     },
     _addButton : function(buttonData) {
         var buttonOptions = UIHelpers.getButtonOptions(buttonData['type']);
