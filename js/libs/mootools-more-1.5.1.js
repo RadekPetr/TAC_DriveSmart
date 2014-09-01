@@ -1,6 +1,16 @@
-// MooTools: the javascript framework.
-// Load this file's selection again by visiting: http://mootools.net/more/55d5bbe52f4cb23574852e13dafdfa48 
-// Or build this file again with packager using: packager build More/More More/Events.Pseudos More/Class.Refactor More/Class.Binds More/Class.Occlude More/Chain.Wait More/Array.Extras More/Number.Format More/Object.Extras More/String.Extras More/String.QueryString More/URI More/URI.Relative More/Hash More/Hash.Extras More/Element.Event.Pseudos More/Element.Event.Pseudos.Keys More/Element.Measure More/Element.Position More/Element.Shortcuts More/Fx.Elements More/Fx.Move More/Fx.Reveal More/Drag More/Drag.Move More/Request.Queue More/Request.Periodical More/Assets More/Group More/Hash.Cookie More/IframeShim More/Keyboard More/Keyboard.Extras More/Mask More/Locale More/Locale.en-US.Number
+/*
+---
+MooTools: the javascript framework
+
+web build:
+ - http://mootools.net/more/d32bf6efe954e1b902c5b261910257b9
+
+packager build:
+ - packager build More/More More/Events.Pseudos More/Class.Refactor More/Class.Binds More/Class.Occlude More/Chain.Wait More/Array.Extras More/Object.Extras More/String.Extras More/Hash More/Hash.Extras More/Element.Forms More/Elements.From More/Element.Event.Pseudos More/Element.Measure More/Element.Position More/Element.Shortcuts More/Fx.Elements More/Fx.Move More/Fx.Reveal More/Drag More/Drag.Move More/Request.Periodical More/Assets More/Color More/Swiff More/Keyboard More/Keyboard.Extras More/Mask More/Tips More/Spinner
+
+...
+*/
+
 /*
 ---
 
@@ -31,8 +41,8 @@ provides: [MooTools.More]
 */
 
 MooTools.More = {
-	'version': '1.4.0.1',
-	'build': 'a4244edf2aa97ac8a196fc96082dd35af1abab87'
+	version: '1.5.1',
+	build: '2dd695ba957196ae4b0275a690765d6636a61ccd'
 };
 
 
@@ -48,7 +58,7 @@ license: MIT-style license
 authors:
   - Arian Stolwijk
 
-requires: [Core/Class.Extras, Core/Slick.Parser, More/MooTools.More]
+requires: [Core/Class.Extras, Core/Slick.Parser, MooTools.More]
 
 provides: [Events.Pseudos]
 
@@ -211,7 +221,7 @@ authors:
 
 requires:
   - Core/Class
-  - /MooTools.More
+  - MooTools.More
 
 # Some modules declare themselves dependent on Class.Refactor
 provides: [Class.refactor, Class.Refactor]
@@ -254,7 +264,7 @@ authors:
 
 requires:
   - Core/Class
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Class.Binds]
 
@@ -294,7 +304,7 @@ authors:
 requires:
   - Core/Class
   - Core/Element
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Class.Occlude]
 
@@ -335,7 +345,7 @@ requires:
   - Core/Chain
   - Core/Element
   - Core/Fx
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Chain.Wait]
 
@@ -425,7 +435,9 @@ Array.implement({
 	sum: function(){
 		var result = 0, l = this.length;
 		if (l){
-			while (l--) result += this[l];
+			while (l--){
+				if (this[l] != null) result += parseFloat(this[l]);
+			}
 		}
 		return result;
 	},
@@ -456,6 +468,12 @@ Array.implement({
 			if (i in this) value = value === nil ? this[i] : fn.call(null, value, this[i], i, this);
 		}
 		return value;
+	},
+
+	pluck: function(prop){
+		return this.map(function(item){
+			return item[prop];
+		});
 	}
 
 });
@@ -479,7 +497,7 @@ authors:
 
 requires:
   - Core/Object
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Object.Extras]
 
@@ -529,336 +547,6 @@ Object.extend({
 });
 
 })();
-
-
-/*
----
-
-script: Locale.js
-
-name: Locale
-
-description: Provides methods for localization.
-
-license: MIT-style license
-
-authors:
-  - Aaron Newton
-  - Arian Stolwijk
-
-requires:
-  - Core/Events
-  - /Object.Extras
-  - /MooTools.More
-
-provides: [Locale, Lang]
-
-...
-*/
-
-(function(){
-
-var current = null,
-	locales = {},
-	inherits = {};
-
-var getSet = function(set){
-	if (instanceOf(set, Locale.Set)) return set;
-	else return locales[set];
-};
-
-var Locale = this.Locale = {
-
-	define: function(locale, set, key, value){
-		var name;
-		if (instanceOf(locale, Locale.Set)){
-			name = locale.name;
-			if (name) locales[name] = locale;
-		} else {
-			name = locale;
-			if (!locales[name]) locales[name] = new Locale.Set(name);
-			locale = locales[name];
-		}
-
-		if (set) locale.define(set, key, value);
-
-		
-
-		if (!current) current = locale;
-
-		return locale;
-	},
-
-	use: function(locale){
-		locale = getSet(locale);
-
-		if (locale){
-			current = locale;
-
-			this.fireEvent('change', locale);
-
-			
-		}
-
-		return this;
-	},
-
-	getCurrent: function(){
-		return current;
-	},
-
-	get: function(key, args){
-		return (current) ? current.get(key, args) : '';
-	},
-
-	inherit: function(locale, inherits, set){
-		locale = getSet(locale);
-
-		if (locale) locale.inherit(inherits, set);
-		return this;
-	},
-
-	list: function(){
-		return Object.keys(locales);
-	}
-
-};
-
-Object.append(Locale, new Events);
-
-Locale.Set = new Class({
-
-	sets: {},
-
-	inherits: {
-		locales: [],
-		sets: {}
-	},
-
-	initialize: function(name){
-		this.name = name || '';
-	},
-
-	define: function(set, key, value){
-		var defineData = this.sets[set];
-		if (!defineData) defineData = {};
-
-		if (key){
-			if (typeOf(key) == 'object') defineData = Object.merge(defineData, key);
-			else defineData[key] = value;
-		}
-		this.sets[set] = defineData;
-
-		return this;
-	},
-
-	get: function(key, args, _base){
-		var value = Object.getFromPath(this.sets, key);
-		if (value != null){
-			var type = typeOf(value);
-			if (type == 'function') value = value.apply(null, Array.from(args));
-			else if (type == 'object') value = Object.clone(value);
-			return value;
-		}
-
-		// get value of inherited locales
-		var index = key.indexOf('.'),
-			set = index < 0 ? key : key.substr(0, index),
-			names = (this.inherits.sets[set] || []).combine(this.inherits.locales).include('en-US');
-		if (!_base) _base = [];
-
-		for (var i = 0, l = names.length; i < l; i++){
-			if (_base.contains(names[i])) continue;
-			_base.include(names[i]);
-
-			var locale = locales[names[i]];
-			if (!locale) continue;
-
-			value = locale.get(key, args, _base);
-			if (value != null) return value;
-		}
-
-		return '';
-	},
-
-	inherit: function(names, set){
-		names = Array.from(names);
-
-		if (set && !this.inherits.sets[set]) this.inherits.sets[set] = [];
-
-		var l = names.length;
-		while (l--) (set ? this.inherits.sets[set] : this.inherits.locales).unshift(names[l]);
-
-		return this;
-	}
-
-});
-
-
-
-})();
-
-
-/*
----
-
-name: Locale.en-US.Number
-
-description: Number messages for US English.
-
-license: MIT-style license
-
-authors:
-  - Arian Stolwijk
-
-requires:
-  - /Locale
-
-provides: [Locale.en-US.Number]
-
-...
-*/
-
-Locale.define('en-US', 'Number', {
-
-	decimal: '.',
-	group: ',',
-
-/* 	Commented properties are the defaults for Number.format
-	decimals: 0,
-	precision: 0,
-	scientific: null,
-
-	prefix: null,
-	suffic: null,
-
-	// Negative/Currency/percentage will mixin Number
-	negative: {
-		prefix: '-'
-	},*/
-
-	currency: {
-//		decimals: 2,
-		prefix: '$ '
-	}/*,
-
-	percentage: {
-		decimals: 2,
-		suffix: '%'
-	}*/
-
-});
-
-
-
-
-/*
----
-name: Number.Format
-description: Extends the Number Type object to include a number formatting method.
-license: MIT-style license
-authors: [Arian Stolwijk]
-requires: [Core/Number, Locale.en-US.Number]
-# Number.Extras is for compatibility
-provides: [Number.Format, Number.Extras]
-...
-*/
-
-
-Number.implement({
-
-	format: function(options){
-		// Thanks dojo and YUI for some inspiration
-		var value = this;
-		options = options ? Object.clone(options) : {};
-		var getOption = function(key){
-			if (options[key] != null) return options[key];
-			return Locale.get('Number.' + key);
-		};
-
-		var negative = value < 0,
-			decimal = getOption('decimal'),
-			precision = getOption('precision'),
-			group = getOption('group'),
-			decimals = getOption('decimals');
-
-		if (negative){
-			var negativeLocale = getOption('negative') || {};
-			if (negativeLocale.prefix == null && negativeLocale.suffix == null) negativeLocale.prefix = '-';
-			['prefix', 'suffix'].each(function(key){
-				if (negativeLocale[key]) options[key] = getOption(key) + negativeLocale[key];
-			});
-
-			value = -value;
-		}
-
-		var prefix = getOption('prefix'),
-			suffix = getOption('suffix');
-
-		if (decimals !== '' && decimals >= 0 && decimals <= 20) value = value.toFixed(decimals);
-		if (precision >= 1 && precision <= 21) value = (+value).toPrecision(precision);
-
-		value += '';
-		var index;
-		if (getOption('scientific') === false && value.indexOf('e') > -1){
-			var match = value.split('e'),
-				zeros = +match[1];
-			value = match[0].replace('.', '');
-
-			if (zeros < 0){
-				zeros = -zeros - 1;
-				index = match[0].indexOf('.');
-				if (index > -1) zeros -= index - 1;
-				while (zeros--) value = '0' + value;
-				value = '0.' + value;
-			} else {
-				index = match[0].lastIndexOf('.');
-				if (index > -1) zeros -= match[0].length - index - 1;
-				while (zeros--) value += '0';
-			}
-		}
-
-		if (decimal != '.') value = value.replace('.', decimal);
-
-		if (group){
-			index = value.lastIndexOf(decimal);
-			index = (index > -1) ? index : value.length;
-			var newOutput = value.substring(index),
-				i = index;
-
-			while (i--){
-				if ((index - i - 1) % 3 == 0 && i != (index - 1)) newOutput = group + newOutput;
-				newOutput = value.charAt(i) + newOutput;
-			}
-
-			value = newOutput;
-		}
-
-		if (prefix) value = prefix + value;
-		if (suffix) value += suffix;
-
-		return value;
-	},
-
-	formatCurrency: function(decimals){
-		var locale = Locale.get('Number.currency') || {};
-		if (locale.scientific == null) locale.scientific = false;
-		locale.decimals = decimals != null ? decimals
-			: (locale.decimals == null ? 2 : locale.decimals);
-
-		return this.format(locale);
-	},
-
-	formatPercentage: function(decimals){
-		var locale = Locale.get('Number.percentage') || {};
-		if (locale.suffix == null) locale.suffix = '%';
-		locale.decimals = decimals != null ? decimals
-			: (locale.decimals == null ? 2 : locale.decimals);
-
-		return this.format(locale);
-	}
-
-});
 
 
 /*
@@ -914,10 +602,8 @@ var special = {
 	'S': /[ŠŞŚ]/g,
 	't': /[ťţ]/g,
 	'T': /[ŤŢ]/g,
-	'ue': /[ü]/g,
-	'UE': /[Ü]/g,
-	'u': /[ùúûůµ]/g,
-	'U': /[ÙÚÛŮ]/g,
+	'u': /[ùúûůüµ]/g,
+	'U': /[ÙÚÛŮÜ]/g,
 	'y': /[ÿý]/g,
 	'Y': /[ŸÝ]/g,
 	'z': /[žźż]/g,
@@ -942,7 +628,16 @@ tidy = {
 	'-': /[\u2013]/g,
 //	'--': /[\u2014]/g,
 	'&raquo;': /[\uFFFD]/g
-};
+},
+
+conversions = {
+	ms: 1,
+	s: 1000,
+	m: 6e4,
+	h: 36e5
+},
+
+findUnits = /(\d*.?\d+)([msh]+)/;
 
 var walk = function(string, replacements){
 	var result = string, key;
@@ -1004,311 +699,18 @@ String.implement({
 			if (trail) string += trail;
 		}
 		return string;
+	},
+
+	ms: function(){
+	  // "Borrowed" from https://gist.github.com/1503944
+		var units = findUnits.exec(this);
+		if (units == null) return Number(this);
+		return Number(units[1]) * conversions[units[2]];
 	}
 
 });
 
 })();
-
-
-/*
----
-
-script: String.QueryString.js
-
-name: String.QueryString
-
-description: Methods for dealing with URI query strings.
-
-license: MIT-style license
-
-authors:
-  - Sebastian Markbåge
-  - Aaron Newton
-  - Lennart Pilon
-  - Valerio Proietti
-
-requires:
-  - Core/Array
-  - Core/String
-  - /MooTools.More
-
-provides: [String.QueryString]
-
-...
-*/
-
-String.implement({
-
-	parseQueryString: function(decodeKeys, decodeValues){
-		if (decodeKeys == null) decodeKeys = true;
-		if (decodeValues == null) decodeValues = true;
-
-		var vars = this.split(/[&;]/),
-			object = {};
-		if (!vars.length) return object;
-
-		vars.each(function(val){
-			var index = val.indexOf('=') + 1,
-				value = index ? val.substr(index) : '',
-				keys = index ? val.substr(0, index - 1).match(/([^\]\[]+|(\B)(?=\]))/g) : [val],
-				obj = object;
-			if (!keys) return;
-			if (decodeValues) value = decodeURIComponent(value);
-			keys.each(function(key, i){
-				if (decodeKeys) key = decodeURIComponent(key);
-				var current = obj[key];
-
-				if (i < keys.length - 1) obj = obj[key] = current || {};
-				else if (typeOf(current) == 'array') current.push(value);
-				else obj[key] = current != null ? [current, value] : value;
-			});
-		});
-
-		return object;
-	},
-
-	cleanQueryString: function(method){
-		return this.split('&').filter(function(val){
-			var index = val.indexOf('='),
-				key = index < 0 ? '' : val.substr(0, index),
-				value = val.substr(index + 1);
-
-			return method ? method.call(null, key, value) : (value || value === 0);
-		}).join('&');
-	}
-
-});
-
-
-/*
----
-
-script: URI.js
-
-name: URI
-
-description: Provides methods useful in managing the window location and uris.
-
-license: MIT-style license
-
-authors:
-  - Sebastian Markbåge
-  - Aaron Newton
-
-requires:
-  - Core/Object
-  - Core/Class
-  - Core/Class.Extras
-  - Core/Element
-  - /String.QueryString
-
-provides: [URI]
-
-...
-*/
-
-(function(){
-
-var toString = function(){
-	return this.get('value');
-};
-
-var URI = this.URI = new Class({
-
-	Implements: Options,
-
-	options: {
-		/*base: false*/
-	},
-
-	regex: /^(?:(\w+):)?(?:\/\/(?:(?:([^:@\/]*):?([^:@\/]*))?@)?([^:\/?#]*)(?::(\d*))?)?(\.\.?$|(?:[^?#\/]*\/)*)([^?#]*)(?:\?([^#]*))?(?:#(.*))?/,
-	parts: ['scheme', 'user', 'password', 'host', 'port', 'directory', 'file', 'query', 'fragment'],
-	schemes: {http: 80, https: 443, ftp: 21, rtsp: 554, mms: 1755, file: 0},
-
-	initialize: function(uri, options){
-		this.setOptions(options);
-		var base = this.options.base || URI.base;
-		if (!uri) uri = base;
-
-		if (uri && uri.parsed) this.parsed = Object.clone(uri.parsed);
-		else this.set('value', uri.href || uri.toString(), base ? new URI(base) : false);
-	},
-
-	parse: function(value, base){
-		var bits = value.match(this.regex);
-		if (!bits) return false;
-		bits.shift();
-		return this.merge(bits.associate(this.parts), base);
-	},
-
-	merge: function(bits, base){
-		if ((!bits || !bits.scheme) && (!base || !base.scheme)) return false;
-		if (base){
-			this.parts.every(function(part){
-				if (bits[part]) return false;
-				bits[part] = base[part] || '';
-				return true;
-			});
-		}
-		bits.port = bits.port || this.schemes[bits.scheme.toLowerCase()];
-		bits.directory = bits.directory ? this.parseDirectory(bits.directory, base ? base.directory : '') : '/';
-		return bits;
-	},
-
-	parseDirectory: function(directory, baseDirectory){
-		directory = (directory.substr(0, 1) == '/' ? '' : (baseDirectory || '/')) + directory;
-		if (!directory.test(URI.regs.directoryDot)) return directory;
-		var result = [];
-		directory.replace(URI.regs.endSlash, '').split('/').each(function(dir){
-			if (dir == '..' && result.length > 0) result.pop();
-			else if (dir != '.') result.push(dir);
-		});
-		return result.join('/') + '/';
-	},
-
-	combine: function(bits){
-		return bits.value || bits.scheme + '://' +
-			(bits.user ? bits.user + (bits.password ? ':' + bits.password : '') + '@' : '') +
-			(bits.host || '') + (bits.port && bits.port != this.schemes[bits.scheme] ? ':' + bits.port : '') +
-			(bits.directory || '/') + (bits.file || '') +
-			(bits.query ? '?' + bits.query : '') +
-			(bits.fragment ? '#' + bits.fragment : '');
-	},
-
-	set: function(part, value, base){
-		if (part == 'value'){
-			var scheme = value.match(URI.regs.scheme);
-			if (scheme) scheme = scheme[1];
-			if (scheme && this.schemes[scheme.toLowerCase()] == null) this.parsed = { scheme: scheme, value: value };
-			else this.parsed = this.parse(value, (base || this).parsed) || (scheme ? { scheme: scheme, value: value } : { value: value });
-		} else if (part == 'data'){
-			this.setData(value);
-		} else {
-			this.parsed[part] = value;
-		}
-		return this;
-	},
-
-	get: function(part, base){
-		switch (part){
-			case 'value': return this.combine(this.parsed, base ? base.parsed : false);
-			case 'data' : return this.getData();
-		}
-		return this.parsed[part] || '';
-	},
-
-	go: function(){
-		document.location.href = this.toString();
-	},
-
-	toURI: function(){
-		return this;
-	},
-
-	getData: function(key, part){
-		var qs = this.get(part || 'query');
-		if (!(qs || qs === 0)) return key ? null : {};
-		var obj = qs.parseQueryString();
-		return key ? obj[key] : obj;
-	},
-
-	setData: function(values, merge, part){
-		if (typeof values == 'string'){
-			var data = this.getData();
-			data[arguments[0]] = arguments[1];
-			values = data;
-		} else if (merge){
-			values = Object.merge(this.getData(), values);
-		}
-		return this.set(part || 'query', Object.toQueryString(values));
-	},
-
-	clearData: function(part){
-		return this.set(part || 'query', '');
-	},
-
-	toString: toString,
-	valueOf: toString
-
-});
-
-URI.regs = {
-	endSlash: /\/$/,
-	scheme: /^(\w+):/,
-	directoryDot: /\.\/|\.$/
-};
-
-URI.base = new URI(Array.from(document.getElements('base[href]', true)).getLast(), {base: document.location});
-
-String.implement({
-
-	toURI: function(options){
-		return new URI(this, options);
-	}
-
-});
-
-})();
-
-
-/*
----
-
-script: URI.Relative.js
-
-name: URI.Relative
-
-description: Extends the URI class to add methods for computing relative and absolute urls.
-
-license: MIT-style license
-
-authors:
-  - Sebastian Markbåge
-
-
-requires:
-  - /Class.refactor
-  - /URI
-
-provides: [URI.Relative]
-
-...
-*/
-
-URI = Class.refactor(URI, {
-
-	combine: function(bits, base){
-		if (!base || bits.scheme != base.scheme || bits.host != base.host || bits.port != base.port)
-			return this.previous.apply(this, arguments);
-		var end = bits.file + (bits.query ? '?' + bits.query : '') + (bits.fragment ? '#' + bits.fragment : '');
-
-		if (!base.directory) return (bits.directory || (bits.file ? '' : './')) + end;
-
-		var baseDir = base.directory.split('/'),
-			relDir = bits.directory.split('/'),
-			path = '',
-			offset;
-
-		var i = 0;
-		for (offset = 0; offset < baseDir.length && offset < relDir.length && baseDir[offset] == relDir[offset]; offset++);
-		for (i = 0; i < baseDir.length - offset - 1; i++) path += '../';
-		for (i = offset; i < relDir.length - 1; i++) path += relDir[i] + '/';
-
-		return (path || (bits.file ? '' : './')) + end;
-	},
-
-	toAbsolute: function(base){
-		base = new URI(base);
-		if (base) base.set('directory', '').set('file', '');
-		return this.toRelative(base);
-	},
-
-	toRelative: function(base){
-		return this.get('value', new URI(base));
-	}
-
-});
 
 
 /*
@@ -1322,7 +724,7 @@ license: MIT-style license.
 
 requires:
   - Core/Object
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Hash]
 
@@ -1473,8 +875,8 @@ authors:
   - Aaron Newton
 
 requires:
-  - /Hash
-  - /Object.Extras
+  - Hash
+  - Object.Extras
 
 provides: [Hash.Extras]
 
@@ -1501,6 +903,190 @@ Hash.implement({
 /*
 ---
 
+script: Element.Forms.js
+
+name: Element.Forms
+
+description: Extends the Element native object to include methods useful in managing inputs.
+
+license: MIT-style license
+
+authors:
+  - Aaron Newton
+
+requires:
+  - Core/Element
+  - String.Extras
+  - MooTools.More
+
+provides: [Element.Forms]
+
+...
+*/
+
+Element.implement({
+
+	tidy: function(){
+		this.set('value', this.get('value').tidy());
+	},
+
+	getTextInRange: function(start, end){
+		return this.get('value').substring(start, end);
+	},
+
+	getSelectedText: function(){
+		if (this.setSelectionRange) return this.getTextInRange(this.getSelectionStart(), this.getSelectionEnd());
+		return document.selection.createRange().text;
+	},
+
+	getSelectedRange: function(){
+		if (this.selectionStart != null){
+			return {
+				start: this.selectionStart,
+				end: this.selectionEnd
+			};
+		}
+
+		var pos = {
+			start: 0,
+			end: 0
+		};
+		var range = this.getDocument().selection.createRange();
+		if (!range || range.parentElement() != this) return pos;
+		var duplicate = range.duplicate();
+
+		if (this.type == 'text'){
+			pos.start = 0 - duplicate.moveStart('character', -100000);
+			pos.end = pos.start + range.text.length;
+		} else {
+			var value = this.get('value');
+			var offset = value.length;
+			duplicate.moveToElementText(this);
+			duplicate.setEndPoint('StartToEnd', range);
+			if (duplicate.text.length) offset -= value.match(/[\n\r]*$/)[0].length;
+			pos.end = offset - duplicate.text.length;
+			duplicate.setEndPoint('StartToStart', range);
+			pos.start = offset - duplicate.text.length;
+		}
+		return pos;
+	},
+
+	getSelectionStart: function(){
+		return this.getSelectedRange().start;
+	},
+
+	getSelectionEnd: function(){
+		return this.getSelectedRange().end;
+	},
+
+	setCaretPosition: function(pos){
+		if (pos == 'end') pos = this.get('value').length;
+		this.selectRange(pos, pos);
+		return this;
+	},
+
+	getCaretPosition: function(){
+		return this.getSelectedRange().start;
+	},
+
+	selectRange: function(start, end){
+		if (this.setSelectionRange){
+			this.focus();
+			this.setSelectionRange(start, end);
+		} else {
+			var value = this.get('value');
+			var diff = value.substr(start, end - start).replace(/\r/g, '').length;
+			start = value.substr(0, start).replace(/\r/g, '').length;
+			var range = this.createTextRange();
+			range.collapse(true);
+			range.moveEnd('character', start + diff);
+			range.moveStart('character', start);
+			range.select();
+		}
+		return this;
+	},
+
+	insertAtCursor: function(value, select){
+		var pos = this.getSelectedRange();
+		var text = this.get('value');
+		this.set('value', text.substring(0, pos.start) + value + text.substring(pos.end, text.length));
+		if (select !== false) this.selectRange(pos.start, pos.start + value.length);
+		else this.setCaretPosition(pos.start + value.length);
+		return this;
+	},
+
+	insertAroundCursor: function(options, select){
+		options = Object.append({
+			before: '',
+			defaultMiddle: '',
+			after: ''
+		}, options);
+
+		var value = this.getSelectedText() || options.defaultMiddle;
+		var pos = this.getSelectedRange();
+		var text = this.get('value');
+
+		if (pos.start == pos.end){
+			this.set('value', text.substring(0, pos.start) + options.before + value + options.after + text.substring(pos.end, text.length));
+			this.selectRange(pos.start + options.before.length, pos.end + options.before.length + value.length);
+		} else {
+			var current = text.substring(pos.start, pos.end);
+			this.set('value', text.substring(0, pos.start) + options.before + current + options.after + text.substring(pos.end, text.length));
+			var selStart = pos.start + options.before.length;
+			if (select !== false) this.selectRange(selStart, selStart + current.length);
+			else this.setCaretPosition(selStart + text.length);
+		}
+		return this;
+	}
+
+});
+
+
+/*
+---
+
+script: Elements.From.js
+
+name: Elements.From
+
+description: Returns a collection of elements from a string of html.
+
+license: MIT-style license
+
+authors:
+  - Aaron Newton
+
+requires:
+  - Core/String
+  - Core/Element
+  - MooTools.More
+
+provides: [Elements.from, Elements.From]
+
+...
+*/
+
+Elements.from = function(text, excludeScripts){
+	if (excludeScripts || excludeScripts == null) text = text.stripScripts();
+
+	var container, match = text.match(/^\s*(?:<!--.*?-->\s*)*<(t[dhr]|tbody|tfoot|thead)/i);
+
+	if (match){
+		container = new Element('table');
+		var tag = match[1].toLowerCase();
+		if (['td', 'th', 'tr'].contains(tag)){
+			container = new Element('tbody').inject(container);
+			if (tag != 'tr') container = new Element('tr').inject(container);
+		}
+	}
+
+	return (container || new Element('div')).set('html', text).getChildren();
+};
+
+
+/*
+---
+
 name: Element.Event.Pseudos
 
 description: Adds the functionality to add pseudo events for Elements
@@ -1512,7 +1098,7 @@ authors:
 
 requires: [Core/Element.Event, Core/Element.Delegation, Events.Pseudos]
 
-provides: [Element.Event.Pseudos, Element.Delegation]
+provides: [Element.Event.Pseudos, Element.Delegation.Pseudo]
 
 ...
 */
@@ -1539,89 +1125,6 @@ var proto = Element.prototype;
 /*
 ---
 
-name: Element.Event.Pseudos.Keys
-
-description: Adds functionality fire events if certain keycombinations are pressed
-
-license: MIT-style license
-
-authors:
-  - Arian Stolwijk
-
-requires: [Element.Event.Pseudos]
-
-provides: [Element.Event.Pseudos.Keys]
-
-...
-*/
-
-(function(){
-
-var keysStoreKey = '$moo:keys-pressed',
-	keysKeyupStoreKey = '$moo:keys-keyup';
-
-
-DOMEvent.definePseudo('keys', function(split, fn, args){
-
-	var event = args[0],
-		keys = [],
-		pressed = this.retrieve(keysStoreKey, []);
-
-	keys.append(split.value.replace('++', function(){
-		keys.push('+'); // shift++ and shift+++a
-		return '';
-	}).split('+'));
-
-	pressed.include(event.key);
-
-	if (keys.every(function(key){
-		return pressed.contains(key);
-	})) fn.apply(this, args);
-
-	this.store(keysStoreKey, pressed);
-
-	if (!this.retrieve(keysKeyupStoreKey)){
-		var keyup = function(event){
-			(function(){
-				pressed = this.retrieve(keysStoreKey, []).erase(event.key);
-				this.store(keysStoreKey, pressed);
-			}).delay(0, this); // Fix for IE
-		};
-		this.store(keysKeyupStoreKey, keyup).addEvent('keyup', keyup);
-	}
-
-});
-
-DOMEvent.defineKeys({
-	'16': 'shift',
-	'17': 'control',
-	'18': 'alt',
-	'20': 'capslock',
-	'33': 'pageup',
-	'34': 'pagedown',
-	'35': 'end',
-	'36': 'home',
-	'144': 'numlock',
-	'145': 'scrolllock',
-	'186': ';',
-	'187': '=',
-	'188': ',',
-	'190': '.',
-	'191': '/',
-	'192': '`',
-	'219': '[',
-	'220': '\\',
-	'221': ']',
-	'222': "'",
-	'107': '+'
-}).defineKey(Browser.firefox ? 109 : 189, '-');
-
-})();
-
-
-/*
----
-
 script: Element.Measure.js
 
 name: Element.Measure
@@ -1638,7 +1141,7 @@ authors:
 requires:
   - Core/Element.Style
   - Core/Element.Dimensions
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Element.Measure]
 
@@ -1855,13 +1358,15 @@ var local = Element.Position = {
 	},
 
 	setOffsetOption: function(element, options){
-		var parentOffset = {x: 0, y: 0},
-			offsetParent = element.measure(function(){
-				return document.id(this.getOffsetParent());
-			}),
-			parentScroll = offsetParent.getScroll();
+		var parentOffset = {x: 0, y: 0};
+		var parentScroll = {x: 0, y: 0};
+		var offsetParent = element.measure(function(){
+			return document.id(this.getOffsetParent());
+		});
 
 		if (!offsetParent || offsetParent == element.getDocument().body) return;
+
+		parentScroll = offsetParent.getScroll();
 		parentOffset = offsetParent.measure(function(){
 			var position = this.getPosition();
 			if (this.getStyle('position') == 'fixed'){
@@ -2041,7 +1546,7 @@ authors:
 
 requires:
   - Core/Element.Style
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Element.Shortcuts]
 
@@ -2119,7 +1624,7 @@ authors:
 
 requires:
   - Core/Fx.CSS
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Fx.Elements]
 
@@ -2195,7 +1700,7 @@ authors:
 
 requires:
   - Core/Fx.Morph
-  - /Element.Position
+  - Element.Position
 
 provides: [Fx.Move]
 
@@ -2268,8 +1773,8 @@ authors:
 
 requires:
   - Core/Fx.Morph
-  - /Element.Shortcuts
-  - /Element.Measure
+  - Element.Shortcuts
+  - Element.Measure
 
 provides: [Fx.Reveal]
 
@@ -2304,13 +1809,13 @@ Fx.Reveal = new Class({
 		widthOverride: null,*/
 		link: 'cancel',
 		styles: ['padding', 'border', 'margin'],
-		transitionOpacity: !Browser.ie6,
+		transitionOpacity: 'opacity' in document.documentElement,
 		mode: 'vertical',
 		display: function(){
 			return this.element.get('tag') != 'tr' ? 'block' : 'table-row';
 		},
 		opacity: 1,
-		hideInputs: Browser.ie ? 'select, input, textarea, object, embed' : null
+		hideInputs: !('opacity' in document.documentElement) ? 'select, input, textarea, object, embed' : null
 	},
 
 	dissolve: function(){
@@ -2522,7 +2027,7 @@ requires:
   - Core/Element.Event
   - Core/Element.Style
   - Core/Element.Dimensions
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Drag]
 ...
@@ -2549,6 +2054,7 @@ var Drag = new Class({
 		invert: false,
 		preventDefault: false,
 		stopPropagation: false,
+		compensateScroll: false,
 		modifiers: {x: 'left', y: 'top'}
 	},
 
@@ -2567,11 +2073,16 @@ var Drag = new Class({
 		this.handles = ((htype == 'array' || htype == 'collection') ? $$(this.options.handle) : document.id(this.options.handle)) || this.element;
 		this.mouse = {'now': {}, 'pos': {}};
 		this.value = {'start': {}, 'now': {}};
+		this.offsetParent = (function(el){
+			var offsetParent = el.getOffsetParent();
+			var isBody = !offsetParent || (/^(?:body|html)$/i).test(offsetParent.tagName);
+			return isBody ? window : document.id(offsetParent);
+		})(this.element);
+		this.selection = 'selectstart' in document ? 'selectstart' : 'mousedown';
 
-		this.selection = (Browser.ie) ? 'selectstart' : 'mousedown';
+		this.compensateScroll = {start: {}, diff: {}, last: {}};
 
-
-		if (Browser.ie && !Drag.ondragstartFixed){
+		if ('ondragstart' in document && !('FileReader' in window) && !Drag.ondragstartFixed){
 			document.ondragstart = Function.from(false);
 			Drag.ondragstartFixed = true;
 		}
@@ -2582,19 +2093,47 @@ var Drag = new Class({
 			drag: this.drag.bind(this),
 			stop: this.stop.bind(this),
 			cancel: this.cancel.bind(this),
-			eventStop: Function.from(false)
+			eventStop: Function.from(false),
+			scrollListener: this.scrollListener.bind(this)
 		};
 		this.attach();
 	},
 
 	attach: function(){
 		this.handles.addEvent('mousedown', this.bound.start);
+		if (this.options.compensateScroll) this.offsetParent.addEvent('scroll', this.bound.scrollListener);
 		return this;
 	},
 
 	detach: function(){
 		this.handles.removeEvent('mousedown', this.bound.start);
+		if (this.options.compensateScroll) this.offsetParent.removeEvent('scroll', this.bound.scrollListener);
 		return this;
+	},
+
+	scrollListener: function(){
+
+		if (!this.mouse.start) return;
+		var newScrollValue = this.offsetParent.getScroll();
+
+		if (this.element.getStyle('position') == 'absolute'){
+			var scrollDiff = this.sumValues(newScrollValue, this.compensateScroll.last, -1);
+			this.mouse.now = this.sumValues(this.mouse.now, scrollDiff, 1);
+		} else {
+			this.compensateScroll.diff = this.sumValues(newScrollValue, this.compensateScroll.start, -1);
+		}
+		if (this.offsetParent != window) this.compensateScroll.diff = this.sumValues(this.compensateScroll.start, newScrollValue, -1);
+		this.compensateScroll.last = newScrollValue;
+		this.render(this.options);
+	},
+
+	sumValues: function(alpha, beta, op){
+		var sum = {}, options = this.options;
+		for (z in options.modifiers){
+			if (!options.modifiers[z]) continue;
+			sum[z] = alpha[z] + beta[z] * op;
+		}
+		return sum;
 	},
 
 	start: function(event){
@@ -2604,14 +2143,15 @@ var Drag = new Class({
 
 		if (options.preventDefault) event.preventDefault();
 		if (options.stopPropagation) event.stopPropagation();
+		this.compensateScroll.start = this.compensateScroll.last = this.offsetParent.getScroll();
+		this.compensateScroll.diff = {x: 0, y: 0};
 		this.mouse.start = event.page;
-
 		this.fireEvent('beforeStart', this.element);
 
 		var limit = options.limit;
 		this.limit = {x: [], y: []};
 
-		var z, coordinates;
+		var z, coordinates, offsetParent = this.offsetParent == window ? null : this.offsetParent;
 		for (z in options.modifiers){
 			if (!options.modifiers[z]) continue;
 
@@ -2619,7 +2159,7 @@ var Drag = new Class({
 
 			// Some browsers (IE and Opera) don't always return pixels.
 			if (style && !style.match(/px$/)){
-				if (!coordinates) coordinates = this.element.getCoordinates(this.element.getOffsetParent());
+				if (!coordinates) coordinates = this.element.getCoordinates(offsetParent);
 				style = coordinates[options.modifiers[z]];
 			}
 
@@ -2667,16 +2207,19 @@ var Drag = new Class({
 
 	drag: function(event){
 		var options = this.options;
-
 		if (options.preventDefault) event.preventDefault();
-		this.mouse.now = event.page;
+		this.mouse.now = this.sumValues(event.page, this.compensateScroll.diff, -1);
 
+		this.render(options);
+		this.fireEvent('drag', [this.element, event]);
+	},  
+
+	render: function(options){
 		for (var z in options.modifiers){
 			if (!options.modifiers[z]) continue;
 			this.value.now[z] = this.mouse.now[z] - this.mouse.pos[z];
 
 			if (options.invert) this.value.now[z] *= -1;
-
 			if (options.limit && this.limit[z]){
 				if ((this.limit[z][1] || this.limit[z][1] === 0) && (this.value.now[z] > this.limit[z][1])){
 					this.value.now[z] = this.limit[z][1];
@@ -2684,14 +2227,10 @@ var Drag = new Class({
 					this.value.now[z] = this.limit[z][0];
 				}
 			}
-
 			if (options.grid[z]) this.value.now[z] -= ((this.value.now[z] - (this.limit[z][0]||0)) % options.grid[z]);
-
 			if (options.style) this.element.setStyle(options.modifiers[z], this.value.now[z] + options.unit);
 			else this.element[options.modifiers[z]] = this.value.now[z];
 		}
-
-		this.fireEvent('drag', [this.element, event]);
 	},
 
 	cancel: function(event){
@@ -2712,6 +2251,7 @@ var Drag = new Class({
 		};
 		events[this.selection] = this.bound.eventStop;
 		this.document.removeEvents(events);
+		this.mouse.start = null;
 		if (event) this.fireEvent('complete', [this.element, event]);
 	}
 
@@ -2756,7 +2296,7 @@ authors:
 
 requires:
   - Core/Element.Dimensions
-  - /Drag
+  - Drag
 
 provides: [Drag.Move]
 
@@ -2783,10 +2323,7 @@ Drag.Move = new Class({
 		element = this.element;
 
 		this.droppables = $$(this.options.droppables);
-		this.container = document.id(this.options.container);
-
-		if (this.container && typeOf(this.container) != 'element')
-			this.container = document.id(this.container.getDocument().body);
+		this.setContainer(this.options.container);
 
 		if (this.options.style){
 			if (this.options.modifiers.x == 'left' && this.options.modifiers.y == 'top'){
@@ -2802,6 +2339,13 @@ Drag.Move = new Class({
 
 		this.addEvent('start', this.checkDroppables, true);
 		this.overed = null;
+	},
+	
+	setContainer: function(container) {
+		this.container = document.id(container);
+		if (this.container && typeOf(this.container) != 'element'){
+			this.container = document.id(this.container.getDocument().body);
+		}
 	},
 
 	start: function(event){
@@ -2826,7 +2370,8 @@ Drag.Move = new Class({
 			elementBorder = {},
 			containerMargin = {},
 			containerBorder = {},
-			offsetParentPadding = {};
+			offsetParentPadding = {},
+			offsetScroll = offsetParent.getScroll();
 
 		['top', 'right', 'bottom', 'left'].each(function(pad){
 			elementMargin[pad] = element.getStyle('margin-' + pad).toInt();
@@ -2838,10 +2383,10 @@ Drag.Move = new Class({
 
 		var width = element.offsetWidth + elementMargin.left + elementMargin.right,
 			height = element.offsetHeight + elementMargin.top + elementMargin.bottom,
-			left = 0,
-			top = 0,
-			right = containerCoordinates.right - containerBorder.right - width,
-			bottom = containerCoordinates.bottom - containerBorder.bottom - height;
+			left = 0 + offsetScroll.x,
+			top = 0 + offsetScroll.y,
+			right = containerCoordinates.right - containerBorder.right - width + offsetScroll.x,
+			bottom = containerCoordinates.bottom - containerBorder.bottom - height + offsetScroll.y;
 
 		if (this.options.includeMargins){
 			left += elementMargin.left;
@@ -2867,7 +2412,9 @@ Drag.Move = new Class({
 
 			if (container != offsetParent){
 				left += containerMargin.left + offsetParentPadding.left;
-				top += ((Browser.ie6 || Browser.ie7) ? 0 : containerMargin.top) + offsetParentPadding.top;
+				if (!offsetParentPadding.left && left < 0) left = 0;
+				top += offsetParent == document.body ? 0 : containerMargin.top + offsetParentPadding.top;
+				if (!offsetParentPadding.top && top < 0) top = 0;
 			}
 		} else {
 			left -= elementMargin.left;
@@ -2938,220 +2485,6 @@ Element.implement({
 /*
 ---
 
-script: Request.Queue.js
-
-name: Request.Queue
-
-description: Controls several instances of Request and its variants to run only one request at a time.
-
-license: MIT-style license
-
-authors:
-  - Aaron Newton
-
-requires:
-  - Core/Element
-  - Core/Request
-  - /Class.Binds
-
-provides: [Request.Queue]
-
-...
-*/
-
-Request.Queue = new Class({
-
-	Implements: [Options, Events],
-
-	Binds: ['attach', 'request', 'complete', 'cancel', 'success', 'failure', 'exception'],
-
-	options: {/*
-		onRequest: function(argsPassedToOnRequest){},
-		onSuccess: function(argsPassedToOnSuccess){},
-		onComplete: function(argsPassedToOnComplete){},
-		onCancel: function(argsPassedToOnCancel){},
-		onException: function(argsPassedToOnException){},
-		onFailure: function(argsPassedToOnFailure){},
-		onEnd: function(){},
-		*/
-		stopOnFailure: true,
-		autoAdvance: true,
-		concurrent: 1,
-		requests: {}
-	},
-
-	initialize: function(options){
-		var requests;
-		if (options){
-			requests = options.requests;
-			delete options.requests;
-		}
-		this.setOptions(options);
-		this.requests = {};
-		this.queue = [];
-		this.reqBinders = {};
-
-		if (requests) this.addRequests(requests);
-	},
-
-	addRequest: function(name, request){
-		this.requests[name] = request;
-		this.attach(name, request);
-		return this;
-	},
-
-	addRequests: function(obj){
-		Object.each(obj, function(req, name){
-			this.addRequest(name, req);
-		}, this);
-		return this;
-	},
-
-	getName: function(req){
-		return Object.keyOf(this.requests, req);
-	},
-
-	attach: function(name, req){
-		if (req._groupSend) return this;
-		['request', 'complete', 'cancel', 'success', 'failure', 'exception'].each(function(evt){
-			if (!this.reqBinders[name]) this.reqBinders[name] = {};
-			this.reqBinders[name][evt] = function(){
-				this['on' + evt.capitalize()].apply(this, [name, req].append(arguments));
-			}.bind(this);
-			req.addEvent(evt, this.reqBinders[name][evt]);
-		}, this);
-		req._groupSend = req.send;
-		req.send = function(options){
-			this.send(name, options);
-			return req;
-		}.bind(this);
-		return this;
-	},
-
-	removeRequest: function(req){
-		var name = typeOf(req) == 'object' ? this.getName(req) : req;
-		if (!name && typeOf(name) != 'string') return this;
-		req = this.requests[name];
-		if (!req) return this;
-		['request', 'complete', 'cancel', 'success', 'failure', 'exception'].each(function(evt){
-			req.removeEvent(evt, this.reqBinders[name][evt]);
-		}, this);
-		req.send = req._groupSend;
-		delete req._groupSend;
-		return this;
-	},
-
-	getRunning: function(){
-		return Object.filter(this.requests, function(r){
-			return r.running;
-		});
-	},
-
-	isRunning: function(){
-		return !!(Object.keys(this.getRunning()).length);
-	},
-
-	send: function(name, options){
-		var q = function(){
-			this.requests[name]._groupSend(options);
-			this.queue.erase(q);
-		}.bind(this);
-
-		q.name = name;
-		if (Object.keys(this.getRunning()).length >= this.options.concurrent || (this.error && this.options.stopOnFailure)) this.queue.push(q);
-		else q();
-		return this;
-	},
-
-	hasNext: function(name){
-		return (!name) ? !!this.queue.length : !!this.queue.filter(function(q){ return q.name == name; }).length;
-	},
-
-	resume: function(){
-		this.error = false;
-		(this.options.concurrent - Object.keys(this.getRunning()).length).times(this.runNext, this);
-		return this;
-	},
-
-	runNext: function(name){
-		if (!this.queue.length) return this;
-		if (!name){
-			this.queue[0]();
-		} else {
-			var found;
-			this.queue.each(function(q){
-				if (!found && q.name == name){
-					found = true;
-					q();
-				}
-			});
-		}
-		return this;
-	},
-
-	runAll: function(){
-		this.queue.each(function(q){
-			q();
-		});
-		return this;
-	},
-
-	clear: function(name){
-		if (!name){
-			this.queue.empty();
-		} else {
-			this.queue = this.queue.map(function(q){
-				if (q.name != name) return q;
-				else return false;
-			}).filter(function(q){
-				return q;
-			});
-		}
-		return this;
-	},
-
-	cancel: function(name){
-		this.requests[name].cancel();
-		return this;
-	},
-
-	onRequest: function(){
-		this.fireEvent('request', arguments);
-	},
-
-	onComplete: function(){
-		this.fireEvent('complete', arguments);
-		if (!this.queue.length) this.fireEvent('end');
-	},
-
-	onCancel: function(){
-		if (this.options.autoAdvance && !this.error) this.runNext();
-		this.fireEvent('cancel', arguments);
-	},
-
-	onSuccess: function(){
-		if (this.options.autoAdvance && !this.error) this.runNext();
-		this.fireEvent('success', arguments);
-	},
-
-	onFailure: function(){
-		this.error = true;
-		if (!this.options.stopOnFailure && this.options.autoAdvance) this.runNext();
-		this.fireEvent('failure', arguments);
-	},
-
-	onException: function(){
-		this.error = true;
-		if (!this.options.stopOnFailure && this.options.autoAdvance) this.runNext();
-		this.fireEvent('exception', arguments);
-	}
-
-});
-
-
-/*
----
-
 script: Request.Periodical.js
 
 name: Request.Periodical
@@ -3165,7 +2498,7 @@ authors:
 
 requires:
   - Core/Request
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Request.Periodical]
 
@@ -3218,7 +2551,7 @@ authors:
 
 requires:
   - Core/Element.Event
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Assets]
 
@@ -3239,7 +2572,7 @@ var Asset = {
 		delete properties.document;
 
 		if (load){
-			if (typeof script.onreadystatechange != 'undefined'){
+			if (!script.addEventListener){
 				script.addEvent('readystatechange', function(){
 					if (['loaded', 'complete'].contains(this.readyState)) load.call(this);
 				});
@@ -3254,22 +2587,40 @@ var Asset = {
 	css: function(source, properties){
 		if (!properties) properties = {};
 
-		var link = new Element('link', {
-			rel: 'stylesheet',
-			media: 'screen',
-			type: 'text/css',
-			href: source
+		var load = properties.onload || properties.onLoad,
+			doc = properties.document || document,
+			timeout = properties.timeout || 3000;
+
+		['onload', 'onLoad', 'document'].each(function(prop){
+			delete properties[prop];
 		});
 
-		var load = properties.onload || properties.onLoad,
-			doc = properties.document || document;
+		var link = new Element('link', {
+			type: 'text/css',
+			rel: 'stylesheet',
+			media: 'screen',
+			href: source
+		}).setProperties(properties).inject(doc.head);
 
-		delete properties.onload;
-		delete properties.onLoad;
-		delete properties.document;
-
-		if (load) link.addEvent('load', load);
-		return link.set(properties).inject(doc.head);
+		if (load){
+			// based on article at http://www.yearofmoo.com/2011/03/cross-browser-stylesheet-preloading.html
+			var loaded = false, retries = 0;
+			var check = function(){
+				var stylesheets = document.styleSheets;
+				for (var i = 0; i < stylesheets.length; i++){
+					var file = stylesheets[i];
+					var owner = file.ownerNode ? file.ownerNode : file.owningElement;
+					if (owner && owner == link){
+						loaded = true;
+						return load.call(link);
+					}
+				}
+				retries++;
+				if (!loaded && retries < timeout / 50) return setTimeout(check, 50);
+			}
+			setTimeout(check, 0);
+		}
+		return link;
 	},
 
 	image: function(source, properties){
@@ -3338,11 +2689,11 @@ var Asset = {
 /*
 ---
 
-script: Group.js
+script: Color.js
 
-name: Group
+name: Color
 
-description: Class for monitoring collections of events
+description: Class for creating and manipulating colors in JavaScript. Supports HSB -> RGB Conversions and vice versa.
 
 license: MIT-style license
 
@@ -3350,40 +2701,147 @@ authors:
   - Valerio Proietti
 
 requires:
-  - Core/Events
-  - /MooTools.More
+  - Core/Array
+  - Core/String
+  - Core/Number
+  - Core/Hash
+  - Core/Function
+  - MooTools.More
 
-provides: [Group]
+provides: [Color]
 
 ...
 */
 
 (function(){
 
-this.Group = new Class({
+var Color = this.Color = new Type('Color', function(color, type){
+	if (arguments.length >= 3){
+		type = 'rgb'; color = Array.slice(arguments, 0, 3);
+	} else if (typeof color == 'string'){
+		if (color.match(/rgb/)) color = color.rgbToHex().hexToRgb(true);
+		else if (color.match(/hsb/)) color = color.hsbToRgb();
+		else color = color.hexToRgb(true);
+	}
+	type = type || 'rgb';
+	switch (type){
+		case 'hsb':
+			var old = color;
+			color = color.hsbToRgb();
+			color.hsb = old;
+		break;
+		case 'hex': color = color.hexToRgb(true); break;
+	}
+	color.rgb = color.slice(0, 3);
+	color.hsb = color.hsb || color.rgbToHsb();
+	color.hex = color.rgbToHex();
+	return Object.append(color, this);
+});
 
-	initialize: function(){
-		this.instances = Array.flatten(arguments);
+Color.implement({
+
+	mix: function(){
+		var colors = Array.slice(arguments);
+		var alpha = (typeOf(colors.getLast()) == 'number') ? colors.pop() : 50;
+		var rgb = this.slice();
+		colors.each(function(color){
+			color = new Color(color);
+			for (var i = 0; i < 3; i++) rgb[i] = Math.round((rgb[i] / 100 * (100 - alpha)) + (color[i] / 100 * alpha));
+		});
+		return new Color(rgb, 'rgb');
 	},
 
-	addEvent: function(type, fn){
-		var instances = this.instances,
-			len = instances.length,
-			togo = len,
-			args = new Array(len),
-			self = this;
+	invert: function(){
+		return new Color(this.map(function(value){
+			return 255 - value;
+		}));
+	},
 
-		instances.each(function(instance, i){
-			instance.addEvent(type, function(){
-				if (!args[i]) togo--;
-				args[i] = arguments;
-				if (!togo){
-					fn.call(self, instances, instance, args);
-					togo = len;
-					args = new Array(len);
-				}
-			});
-		});
+	setHue: function(value){
+		return new Color([value, this.hsb[1], this.hsb[2]], 'hsb');
+	},
+
+	setSaturation: function(percent){
+		return new Color([this.hsb[0], percent, this.hsb[2]], 'hsb');
+	},
+
+	setBrightness: function(percent){
+		return new Color([this.hsb[0], this.hsb[1], percent], 'hsb');
+	}
+
+});
+
+this.$RGB = function(r, g, b){
+	return new Color([r, g, b], 'rgb');
+};
+
+this.$HSB = function(h, s, b){
+	return new Color([h, s, b], 'hsb');
+};
+
+this.$HEX = function(hex){
+	return new Color(hex, 'hex');
+};
+
+Array.implement({
+
+	rgbToHsb: function(){
+		var red = this[0],
+				green = this[1],
+				blue = this[2],
+				hue = 0;
+		var max = Math.max(red, green, blue),
+				min = Math.min(red, green, blue);
+		var delta = max - min;
+		var brightness = max / 255,
+				saturation = (max != 0) ? delta / max : 0;
+		if (saturation != 0){
+			var rr = (max - red) / delta;
+			var gr = (max - green) / delta;
+			var br = (max - blue) / delta;
+			if (red == max) hue = br - gr;
+			else if (green == max) hue = 2 + rr - br;
+			else hue = 4 + gr - rr;
+			hue /= 6;
+			if (hue < 0) hue++;
+		}
+		return [Math.round(hue * 360), Math.round(saturation * 100), Math.round(brightness * 100)];
+	},
+
+	hsbToRgb: function(){
+		var br = Math.round(this[2] / 100 * 255);
+		if (this[1] == 0){
+			return [br, br, br];
+		} else {
+			var hue = this[0] % 360;
+			var f = hue % 60;
+			var p = Math.round((this[2] * (100 - this[1])) / 10000 * 255);
+			var q = Math.round((this[2] * (6000 - this[1] * f)) / 600000 * 255);
+			var t = Math.round((this[2] * (6000 - this[1] * (60 - f))) / 600000 * 255);
+			switch (Math.floor(hue / 60)){
+				case 0: return [br, t, p];
+				case 1: return [q, br, p];
+				case 2: return [p, br, t];
+				case 3: return [p, q, br];
+				case 4: return [t, p, br];
+				case 5: return [br, p, q];
+			}
+		}
+		return false;
+	}
+
+});
+
+String.implement({
+
+	rgbToHsb: function(){
+		var rgb = this.match(/\d{1,3}/g);
+		return (rgb) ? rgb.rgbToHsb() : null;
+	},
+
+	hsbToRgb: function(){
+		var hsb = this.match(/\d{1,3}/g);
+		return (hsb) ? hsb.hsbToRgb() : null;
 	}
 
 });
@@ -3391,199 +2849,207 @@ this.Group = new Class({
 })();
 
 
-/*
----
-
-script: Hash.Cookie.js
-
-name: Hash.Cookie
-
-description: Class for creating, reading, and deleting Cookies in JSON format.
-
-license: MIT-style license
-
-authors:
-  - Valerio Proietti
-  - Aaron Newton
-
-requires:
-  - Core/Cookie
-  - Core/JSON
-  - /MooTools.More
-  - /Hash
-
-provides: [Hash.Cookie]
-
-...
-*/
-
-Hash.Cookie = new Class({
-
-	Extends: Cookie,
-
-	options: {
-		autoSave: true
-	},
-
-	initialize: function(name, options){
-		this.parent(name, options);
-		this.load();
-	},
-
-	save: function(){
-		var value = JSON.encode(this.hash);
-		if (!value || value.length > 4096) return false; //cookie would be truncated!
-		if (value == '{}') this.dispose();
-		else this.write(value);
-		return true;
-	},
-
-	load: function(){
-		this.hash = new Hash(JSON.decode(this.read(), true));
-		return this;
-	}
-
-});
-
-Hash.each(Hash.prototype, function(method, name){
-	if (typeof method == 'function') Hash.Cookie.implement(name, function(){
-		var value = method.apply(this.hash, arguments);
-		if (this.options.autoSave) this.save();
-		return value;
-	});
-});
-
 
 /*
 ---
 
-script: IframeShim.js
+name: Swiff
 
-name: IframeShim
+description: Wrapper for embedding SWF movies. Supports External Interface Communication.
 
-description: Defines IframeShim, a class for obscuring select lists and flash objects in IE.
+license: MIT-style license.
 
-license: MIT-style license
+credits:
+  - Flash detection & Internet Explorer + Flash Player 9 fix inspired by SWFObject.
 
-authors:
-  - Aaron Newton
+requires: [Core/Options, Core/Object, Core/Element]
 
-requires:
-  - Core/Element.Event
-  - Core/Element.Style
-  - Core/Options
-  - Core/Events
-  - /Element.Position
-  - /Class.Occlude
-
-provides: [IframeShim]
+provides: Swiff
 
 ...
 */
 
-var IframeShim = new Class({
+(function(){
 
-	Implements: [Options, Events, Class.Occlude],
+var Swiff = this.Swiff = new Class({
+
+	Implements: Options,
 
 	options: {
-		className: 'iframeShim',
-		src: 'javascript:false;document.write("");',
-		display: false,
-		zIndex: null,
-		margin: 0,
-		offset: {x: 0, y: 0},
-		browsers: (Browser.ie6 || (Browser.firefox && Browser.version < 3 && Browser.Platform.mac))
+		id: null,
+		height: 1,
+		width: 1,
+		container: null,
+		properties: {},
+		params: {
+			quality: 'high',
+			allowScriptAccess: 'always',
+			wMode: 'window',
+			swLiveConnect: true
+		},
+		callBacks: {},
+		vars: {}
 	},
 
-	property: 'IframeShim',
+	toElement: function(){
+		return this.object;
+	},
 
-	initialize: function(element, options){
-		this.element = document.id(element);
-		if (this.occlude()) return this.occluded;
+	initialize: function(path, options){
+		this.instance = 'Swiff_' + String.uniqueID();
+
 		this.setOptions(options);
-		this.makeShim();
-		return this;
-	},
+		options = this.options;
+		var id = this.id = options.id || this.instance;
+		var container = document.id(options.container);
 
-	makeShim: function(){
-		if (this.options.browsers){
-			var zIndex = this.element.getStyle('zIndex').toInt();
+		Swiff.CallBacks[this.instance] = {};
 
-			if (!zIndex){
-				zIndex = 1;
-				var pos = this.element.getStyle('position');
-				if (pos == 'static' || !pos) this.element.setStyle('position', 'relative');
-				this.element.setStyle('zIndex', zIndex);
-			}
-			zIndex = ((this.options.zIndex != null || this.options.zIndex === 0) && zIndex > this.options.zIndex) ? this.options.zIndex : zIndex - 1;
-			if (zIndex < 0) zIndex = 1;
-			this.shim = new Element('iframe', {
-				src: this.options.src,
-				scrolling: 'no',
-				frameborder: 0,
-				styles: {
-					zIndex: zIndex,
-					position: 'absolute',
-					border: 'none',
-					filter: 'progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=0)'
-				},
-				'class': this.options.className
-			}).store('IframeShim', this);
-			var inject = (function(){
-				this.shim.inject(this.element, 'after');
-				this[this.options.display ? 'show' : 'hide']();
-				this.fireEvent('inject');
-			}).bind(this);
-			if (!IframeShim.ready) window.addEvent('load', inject);
-			else inject();
+		var params = options.params, vars = options.vars, callBacks = options.callBacks;
+		var properties = Object.append({height: options.height, width: options.width}, options.properties);
+
+		var self = this;
+
+		for (var callBack in callBacks){
+			Swiff.CallBacks[this.instance][callBack] = (function(option){
+				return function(){
+					return option.apply(self.object, arguments);
+				};
+			})(callBacks[callBack]);
+			vars[callBack] = 'Swiff.CallBacks.' + this.instance + '.' + callBack;
+		}
+
+		params.flashVars = Object.toQueryString(vars);
+		if ('ActiveXObject' in window){
+			properties.classid = 'clsid:D27CDB6E-AE6D-11cf-96B8-444553540000';
+			params.movie = path;
 		} else {
-			this.position = this.hide = this.show = this.dispose = Function.from(this);
+			properties.type = 'application/x-shockwave-flash';
 		}
-	},
+		properties.data = path;
 
-	position: function(){
-		if (!IframeShim.ready || !this.shim) return this;
-		var size = this.element.measure(function(){
-			return this.getSize();
-		});
-		if (this.options.margin != undefined){
-			size.x = size.x - (this.options.margin * 2);
-			size.y = size.y - (this.options.margin * 2);
-			this.options.offset.x += this.options.margin;
-			this.options.offset.y += this.options.margin;
+		var build = '<object id="' + id + '"';
+		for (var property in properties) build += ' ' + property + '="' + properties[property] + '"';
+		build += '>';
+		for (var param in params){
+			if (params[param]) build += '<param name="' + param + '" value="' + params[param] + '" />';
 		}
-		this.shim.set({width: size.x, height: size.y}).position({
-			relativeTo: this.element,
-			offset: this.options.offset
-		});
+		build += '</object>';
+		this.object = ((container) ? container.empty() : new Element('div')).set('html', build).firstChild;
+	},
+
+	replaces: function(element){
+		element = document.id(element, true);
+		element.parentNode.replaceChild(this.toElement(), element);
 		return this;
 	},
 
-	hide: function(){
-		if (this.shim) this.shim.setStyle('display', 'none');
+	inject: function(element){
+		document.id(element, true).appendChild(this.toElement());
 		return this;
 	},
 
-	show: function(){
-		if (this.shim) this.shim.setStyle('display', 'block');
-		return this.position();
-	},
-
-	dispose: function(){
-		if (this.shim) this.shim.dispose();
-		return this;
-	},
-
-	destroy: function(){
-		if (this.shim) this.shim.destroy();
-		return this;
+	remote: function(){
+		return Swiff.remote.apply(Swiff, [this.toElement()].append(arguments));
 	}
 
 });
 
-window.addEvent('load', function(){
-	IframeShim.ready = true;
+Swiff.CallBacks = {};
+
+Swiff.remote = function(obj, fn){
+	var rs = obj.CallFunction('<invoke name="' + fn + '" returntype="javascript">' + __flash__argumentsToXML(arguments, 2) + '</invoke>');
+	return eval(rs);
+};
+
+})();
+
+
+/*
+---
+
+name: Element.Event.Pseudos.Keys
+
+description: Adds functionality fire events if certain keycombinations are pressed
+
+license: MIT-style license
+
+authors:
+  - Arian Stolwijk
+
+requires: [Element.Event.Pseudos]
+
+provides: [Element.Event.Pseudos.Keys]
+
+...
+*/
+
+(function(){
+
+var keysStoreKey = '$moo:keys-pressed',
+	keysKeyupStoreKey = '$moo:keys-keyup';
+
+
+DOMEvent.definePseudo('keys', function(split, fn, args){
+
+	var event = args[0],
+		keys = [],
+		pressed = this.retrieve(keysStoreKey, []),
+		value = split.value;
+
+	if (value != '+') keys.append(value.replace('++', function(){
+		keys.push('+'); // shift++ and shift+++a
+		return '';
+	}).split('+'));
+	else keys = ['+'];
+
+	pressed.include(event.key);
+
+	if (keys.every(function(key){
+		return pressed.contains(key);
+	})) fn.apply(this, args);
+
+	this.store(keysStoreKey, pressed);
+
+	if (!this.retrieve(keysKeyupStoreKey)){
+		var keyup = function(event){
+			(function(){
+				pressed = this.retrieve(keysStoreKey, []).erase(event.key);
+				this.store(keysStoreKey, pressed);
+			}).delay(0, this); // Fix for IE
+		};
+		this.store(keysKeyupStoreKey, keyup).addEvent('keyup', keyup);
+	}
+
 });
+
+DOMEvent.defineKeys({
+	'16': 'shift',
+	'17': 'control',
+	'18': 'alt',
+	'20': 'capslock',
+	'33': 'pageup',
+	'34': 'pagedown',
+	'35': 'end',
+	'36': 'home',
+	'144': 'numlock',
+	'145': 'scrolllock',
+	'186': ';',
+	'187': '=',
+	'188': ',',
+	'190': '.',
+	'191': '/',
+	'192': '`',
+	'219': '[',
+	'220': '\\',
+	'221': ']',
+	'222': "'",
+	'107': '+',
+	'109': '-', // subtract
+	'189': '-'  // dash
+})
+
+})();
 
 
 /*
@@ -3767,21 +3233,25 @@ provides: [Keyboard]
 		});
 
 		if (!parsed[type]){
-			var key, mods = {};
-			type.split('+').each(function(part){
-				if (regex.test(part)) mods[part] = true;
-				else key = part;
-			});
+		    if (type != '+'){
+				var key, mods = {};
+				type.split('+').each(function(part){
+					if (regex.test(part)) mods[part] = true;
+					else key = part;
+				});
 
-			mods.control = mods.control || mods.ctrl; // allow both control and ctrl
+				mods.control = mods.control || mods.ctrl; // allow both control and ctrl
 
-			var keys = [];
-			modifiers.each(function(mod){
-				if (mods[mod]) keys.push(mod);
-			});
+				var keys = [];
+				modifiers.each(function(mod){
+					if (mods[mod]) keys.push(mod);
+				});
 
-			if (key) keys.push(key);
-			parsed[type] = keys.join('+');
+				if (key) keys.push(key);
+				parsed[type] = keys.join('+');
+			} else {
+			    parsed[type] = type;
+			}
 		}
 
 		return eventType + ':keys(' + parsed[type] + ')';
@@ -3790,7 +3260,7 @@ provides: [Keyboard]
 	Keyboard.each = function(keyboard, fn){
 		var current = keyboard || Keyboard.manager;
 		while (current){
-			fn.run(current);
+			fn(current);
 			current = current._activeKB;
 		}
 	};
@@ -3845,8 +3315,8 @@ authors:
   - Perrin Westrich
 
 requires:
-  - /Keyboard
-  - /MooTools.More
+  - Keyboard
+  - MooTools.More
 
 provides: [Keyboard.Extras]
 
@@ -3944,6 +3414,145 @@ Keyboard.getShortcuts = function(name, keyboard){
 /*
 ---
 
+script: IframeShim.js
+
+name: IframeShim
+
+description: Defines IframeShim, a class for obscuring select lists and flash objects in IE.
+
+license: MIT-style license
+
+authors:
+  - Aaron Newton
+
+requires:
+  - Core/Element.Event
+  - Core/Element.Style
+  - Core/Options
+  - Core/Events
+  - Element.Position
+  - Class.Occlude
+
+provides: [IframeShim]
+
+...
+*/
+
+(function(){
+
+var browsers = false;
+
+
+this.IframeShim = new Class({
+
+	Implements: [Options, Events, Class.Occlude],
+
+	options: {
+		className: 'iframeShim',
+		src: 'javascript:false;document.write("");',
+		display: false,
+		zIndex: null,
+		margin: 0,
+		offset: {x: 0, y: 0},
+		browsers: browsers
+	},
+
+	property: 'IframeShim',
+
+	initialize: function(element, options){
+		this.element = document.id(element);
+		if (this.occlude()) return this.occluded;
+		this.setOptions(options);
+		this.makeShim();
+		return this;
+	},
+
+	makeShim: function(){
+		if (this.options.browsers){
+			var zIndex = this.element.getStyle('zIndex').toInt();
+
+			if (!zIndex){
+				zIndex = 1;
+				var pos = this.element.getStyle('position');
+				if (pos == 'static' || !pos) this.element.setStyle('position', 'relative');
+				this.element.setStyle('zIndex', zIndex);
+			}
+			zIndex = ((this.options.zIndex != null || this.options.zIndex === 0) && zIndex > this.options.zIndex) ? this.options.zIndex : zIndex - 1;
+			if (zIndex < 0) zIndex = 1;
+			this.shim = new Element('iframe', {
+				src: this.options.src,
+				scrolling: 'no',
+				frameborder: 0,
+				styles: {
+					zIndex: zIndex,
+					position: 'absolute',
+					border: 'none',
+					filter: 'progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=0)'
+				},
+				'class': this.options.className
+			}).store('IframeShim', this);
+			var inject = (function(){
+				this.shim.inject(this.element, 'after');
+				this[this.options.display ? 'show' : 'hide']();
+				this.fireEvent('inject');
+			}).bind(this);
+			if (!IframeShim.ready) window.addEvent('load', inject);
+			else inject();
+		} else {
+			this.position = this.hide = this.show = this.dispose = Function.from(this);
+		}
+	},
+
+	position: function(){
+		if (!IframeShim.ready || !this.shim) return this;
+		var size = this.element.measure(function(){
+			return this.getSize();
+		});
+		if (this.options.margin != undefined){
+			size.x = size.x - (this.options.margin * 2);
+			size.y = size.y - (this.options.margin * 2);
+			this.options.offset.x += this.options.margin;
+			this.options.offset.y += this.options.margin;
+		}
+		this.shim.set({width: size.x, height: size.y}).position({
+			relativeTo: this.element,
+			offset: this.options.offset
+		});
+		return this;
+	},
+
+	hide: function(){
+		if (this.shim) this.shim.setStyle('display', 'none');
+		return this;
+	},
+
+	show: function(){
+		if (this.shim) this.shim.setStyle('display', 'block');
+		return this.position();
+	},
+
+	dispose: function(){
+		if (this.shim) this.shim.dispose();
+		return this;
+	},
+
+	destroy: function(){
+		if (this.shim) this.shim.destroy();
+		return this;
+	}
+
+});
+
+})();
+
+window.addEvent('load', function(){
+	IframeShim.ready = true;
+});
+
+
+/*
+---
+
 script: Mask.js
 
 name: Mask
@@ -3959,9 +3568,9 @@ requires:
   - Core/Options
   - Core/Events
   - Core/Element.Event
-  - /Class.Binds
-  - /Element.Position
-  - /IframeShim
+  - Class.Binds
+  - Element.Position
+  - IframeShim
 
 provides: [Mask]
 
@@ -4024,7 +3633,7 @@ var Mask = new Class({
 	},
 
 	inject: function(target, where){
-		where = where || (this.options.inject ? this.options.inject.where : '') || this.target == document.body ? 'inside' : 'after';
+		where = where || (this.options.inject ? this.options.inject.where : '') || (this.target == document.body ? 'inside' : 'after');
 		target = target || (this.options.inject && this.options.inject.target) || this.target;
 
 		this.element.inject(target, where);
@@ -4148,6 +3757,489 @@ Element.implement({
 
 	unmask: function(){
 		this.get('mask').hide();
+		return this;
+	}
+
+});
+
+
+/*
+---
+
+script: Tips.js
+
+name: Tips
+
+description: Class for creating nice tips that follow the mouse cursor when hovering an element.
+
+license: MIT-style license
+
+authors:
+  - Valerio Proietti
+  - Christoph Pojer
+  - Luis Merino
+
+requires:
+  - Core/Options
+  - Core/Events
+  - Core/Element.Event
+  - Core/Element.Style
+  - Core/Element.Dimensions
+  - MooTools.More
+
+provides: [Tips]
+
+...
+*/
+
+(function(){
+
+var read = function(option, element){
+	return (option) ? (typeOf(option) == 'function' ? option(element) : element.get(option)) : '';
+};
+
+this.Tips = new Class({
+
+	Implements: [Events, Options],
+
+	options: {/*
+		id: null,
+		onAttach: function(element){},
+		onDetach: function(element){},
+		onBound: function(coords){},*/
+		onShow: function(){
+			this.tip.setStyle('display', 'block');
+		},
+		onHide: function(){
+			this.tip.setStyle('display', 'none');
+		},
+		title: 'title',
+		text: function(element){
+			return element.get('rel') || element.get('href');
+		},
+		showDelay: 100,
+		hideDelay: 100,
+		className: 'tip-wrap',
+		offset: {x: 16, y: 16},
+		windowPadding: {x:0, y:0},
+		fixed: false,
+		waiAria: true
+	},
+
+	initialize: function(){
+		var params = Array.link(arguments, {
+			options: Type.isObject,
+			elements: function(obj){
+				return obj != null;
+			}
+		});
+		this.setOptions(params.options);
+		if (params.elements) this.attach(params.elements);
+		this.container = new Element('div', {'class': 'tip'});
+
+		if (this.options.id){
+			this.container.set('id', this.options.id);
+			if (this.options.waiAria) this.attachWaiAria();
+		}
+	},
+
+	toElement: function(){
+		if (this.tip) return this.tip;
+
+		this.tip = new Element('div', {
+			'class': this.options.className,
+			styles: {
+				position: 'absolute',
+				top: 0,
+				left: 0
+			}
+		}).adopt(
+			new Element('div', {'class': 'tip-top'}),
+			this.container,
+			new Element('div', {'class': 'tip-bottom'})
+		);
+
+		return this.tip;
+	},
+
+	attachWaiAria: function(){
+		var id = this.options.id;
+		this.container.set('role', 'tooltip');
+
+		if (!this.waiAria){
+			this.waiAria = {
+				show: function(element){
+					if (id) element.set('aria-describedby', id);
+					this.container.set('aria-hidden', 'false');
+				},
+				hide: function(element){
+					if (id) element.erase('aria-describedby');
+					this.container.set('aria-hidden', 'true');
+				}
+			};
+		}
+		this.addEvents(this.waiAria);
+	},
+
+	detachWaiAria: function(){
+		if (this.waiAria){
+			this.container.erase('role');
+			this.container.erase('aria-hidden');
+			this.removeEvents(this.waiAria);
+		}
+	},
+
+	attach: function(elements){
+		$$(elements).each(function(element){
+			var title = read(this.options.title, element),
+				text = read(this.options.text, element);
+
+			element.set('title', '').store('tip:native', title).retrieve('tip:title', title);
+			element.retrieve('tip:text', text);
+			this.fireEvent('attach', [element]);
+
+			var events = ['enter', 'leave'];
+			if (!this.options.fixed) events.push('move');
+
+			events.each(function(value){
+				var event = element.retrieve('tip:' + value);
+				if (!event) event = function(event){
+					this['element' + value.capitalize()].apply(this, [event, element]);
+				}.bind(this);
+
+				element.store('tip:' + value, event).addEvent('mouse' + value, event);
+			}, this);
+		}, this);
+
+		return this;
+	},
+
+	detach: function(elements){
+		$$(elements).each(function(element){
+			['enter', 'leave', 'move'].each(function(value){
+				element.removeEvent('mouse' + value, element.retrieve('tip:' + value)).eliminate('tip:' + value);
+			});
+
+			this.fireEvent('detach', [element]);
+
+			if (this.options.title == 'title'){ // This is necessary to check if we can revert the title
+				var original = element.retrieve('tip:native');
+				if (original) element.set('title', original);
+			}
+		}, this);
+
+		return this;
+	},
+
+	elementEnter: function(event, element){
+		clearTimeout(this.timer);
+		this.timer = (function(){
+			this.container.empty();
+
+			['title', 'text'].each(function(value){
+				var content = element.retrieve('tip:' + value);
+				var div = this['_' + value + 'Element'] = new Element('div', {
+						'class': 'tip-' + value
+					}).inject(this.container);
+				if (content) this.fill(div, content);
+			}, this);
+			this.show(element);
+			this.position((this.options.fixed) ? {page: element.getPosition()} : event);
+		}).delay(this.options.showDelay, this);
+	},
+
+	elementLeave: function(event, element){
+		clearTimeout(this.timer);
+		this.timer = this.hide.delay(this.options.hideDelay, this, element);
+		this.fireForParent(event, element);
+	},
+
+	setTitle: function(title){
+		if (this._titleElement){
+			this._titleElement.empty();
+			this.fill(this._titleElement, title);
+		}
+		return this;
+	},
+
+	setText: function(text){
+		if (this._textElement){
+			this._textElement.empty();
+			this.fill(this._textElement, text);
+		}
+		return this;
+	},
+
+	fireForParent: function(event, element){
+		element = element.getParent();
+		if (!element || element == document.body) return;
+		if (element.retrieve('tip:enter')) element.fireEvent('mouseenter', event);
+		else this.fireForParent(event, element);
+	},
+
+	elementMove: function(event, element){
+		this.position(event);
+	},
+
+	position: function(event){
+		if (!this.tip) document.id(this);
+
+		var size = window.getSize(), scroll = window.getScroll(),
+			tip = {x: this.tip.offsetWidth, y: this.tip.offsetHeight},
+			props = {x: 'left', y: 'top'},
+			bounds = {y: false, x2: false, y2: false, x: false},
+			obj = {};
+
+		for (var z in props){
+			obj[props[z]] = event.page[z] + this.options.offset[z];
+			if (obj[props[z]] < 0) bounds[z] = true;
+			if ((obj[props[z]] + tip[z] - scroll[z]) > size[z] - this.options.windowPadding[z]){
+				obj[props[z]] = event.page[z] - this.options.offset[z] - tip[z];
+				bounds[z+'2'] = true;
+			}
+		}
+
+		this.fireEvent('bound', bounds);
+		this.tip.setStyles(obj);
+	},
+
+	fill: function(element, contents){
+		if (typeof contents == 'string') element.set('html', contents);
+		else element.adopt(contents);
+	},
+
+	show: function(element){
+		if (!this.tip) document.id(this);
+		if (!this.tip.getParent()) this.tip.inject(document.body);
+		this.fireEvent('show', [this.tip, element]);
+	},
+
+	hide: function(element){
+		if (!this.tip) document.id(this);
+		this.fireEvent('hide', [this.tip, element]);
+	}
+
+});
+
+})();
+
+
+/*
+---
+
+script: Spinner.js
+
+name: Spinner
+
+description: Adds a semi-transparent overlay over a dom element with a spinnin ajax icon.
+
+license: MIT-style license
+
+authors:
+  - Aaron Newton
+
+requires:
+  - Core/Fx.Tween
+  - Core/Request
+  - Class.refactor
+  - Mask
+
+provides: [Spinner]
+
+...
+*/
+
+var Spinner = new Class({
+
+	Extends: Mask,
+
+	Implements: Chain,
+
+	options: {/*
+		message: false,*/
+		'class': 'spinner',
+		containerPosition: {},
+		content: {
+			'class': 'spinner-content'
+		},
+		messageContainer: {
+			'class': 'spinner-msg'
+		},
+		img: {
+			'class': 'spinner-img'
+		},
+		fxOptions: {
+			link: 'chain'
+		}
+	},
+
+	initialize: function(target, options){
+		this.target = document.id(target) || document.id(document.body);
+		this.target.store('spinner', this);
+		this.setOptions(options);
+		this.render();
+		this.inject();
+
+		// Add this to events for when noFx is true; parent methods handle hide/show.
+		var deactivate = function(){ this.active = false; }.bind(this);
+		this.addEvents({
+			hide: deactivate,
+			show: deactivate
+		});
+	},
+
+	render: function(){
+		this.parent();
+
+		this.element.set('id', this.options.id || 'spinner-' + String.uniqueID());
+
+		this.content = document.id(this.options.content) || new Element('div', this.options.content);
+		this.content.inject(this.element);
+
+		if (this.options.message){
+			this.msg = document.id(this.options.message) || new Element('p', this.options.messageContainer).appendText(this.options.message);
+			this.msg.inject(this.content);
+		}
+
+		if (this.options.img){
+			this.img = document.id(this.options.img) || new Element('div', this.options.img);
+			this.img.inject(this.content);
+		}
+
+		this.element.set('tween', this.options.fxOptions);
+	},
+
+	show: function(noFx){
+		if (this.active) return this.chain(this.show.bind(this));
+		if (!this.hidden){
+			this.callChain.delay(20, this);
+			return this;
+		}
+
+		this.target.set('aria-busy', 'true');
+		this.active = true;
+
+		return this.parent(noFx);
+	},
+
+	showMask: function(noFx){
+		var pos = function(){
+			this.content.position(Object.merge({
+				relativeTo: this.element
+			}, this.options.containerPosition));
+		}.bind(this);
+
+		if (noFx){
+			this.parent();
+			pos();
+		} else {
+			if (!this.options.style.opacity) this.options.style.opacity = this.element.getStyle('opacity').toFloat();
+			this.element.setStyles({
+				display: 'block',
+				opacity: 0
+			}).tween('opacity', this.options.style.opacity);
+			pos();
+			this.hidden = false;
+			this.fireEvent('show');
+			this.callChain();
+		}
+	},
+
+	hide: function(noFx){
+		if (this.active) return this.chain(this.hide.bind(this));
+		if (this.hidden){
+			this.callChain.delay(20, this);
+			return this;
+		}
+
+		this.target.set('aria-busy', 'false');
+		this.active = true;
+
+		return this.parent(noFx);
+	},
+
+	hideMask: function(noFx){
+		if (noFx) return this.parent();
+		this.element.tween('opacity', 0).get('tween').chain(function(){
+			this.element.setStyle('display', 'none');
+			this.hidden = true;
+			this.fireEvent('hide');
+			this.callChain();
+		}.bind(this));
+	},
+
+	destroy: function(){
+		this.content.destroy();
+		this.parent();
+		this.target.eliminate('spinner');
+	}
+
+});
+
+Request = Class.refactor(Request, {
+
+	options: {
+		useSpinner: false,
+		spinnerOptions: {},
+		spinnerTarget: false
+	},
+
+	initialize: function(options){
+		this._send = this.send;
+		this.send = function(options){
+			var spinner = this.getSpinner();
+			if (spinner) spinner.chain(this._send.pass(options, this)).show();
+			else this._send(options);
+			return this;
+		};
+		this.previous(options);
+	},
+
+	getSpinner: function(){
+		if (!this.spinner){
+			var update = document.id(this.options.spinnerTarget) || document.id(this.options.update);
+			if (this.options.useSpinner && update){
+				update.set('spinner', this.options.spinnerOptions);
+				var spinner = this.spinner = update.get('spinner');
+				['complete', 'exception', 'cancel'].each(function(event){
+					this.addEvent(event, spinner.hide.bind(spinner));
+				}, this);
+			}
+		}
+		return this.spinner;
+	}
+
+});
+
+Element.Properties.spinner = {
+
+	set: function(options){
+		var spinner = this.retrieve('spinner');
+		if (spinner) spinner.destroy();
+		return this.eliminate('spinner').store('spinner:options', options);
+	},
+
+	get: function(){
+		var spinner = this.retrieve('spinner');
+		if (!spinner){
+			spinner = new Spinner(this, this.retrieve('spinner:options'));
+			this.store('spinner', spinner);
+		}
+		return spinner;
+	}
+
+};
+
+Element.implement({
+
+	spin: function(options){
+		if (options) this.set('spinner', options);
+		this.get('spinner').show();
+		return this;
+	},
+
+	unspin: function(){
+		this.get('spinner').hide();
 		return this;
 	}
 
