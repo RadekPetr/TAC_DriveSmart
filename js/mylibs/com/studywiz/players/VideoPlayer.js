@@ -120,7 +120,7 @@ var VideoPlayer = new Class({
         if (this.player != undefined) {
             this.player.on("suspend", function() {
                 //debug("EVENT: suspend", this.options.id);
-                if (Browser.Platform.ios == true) {
+                if (Browser.platform = "ios") {
                     this._finishedLoading();
                 }
                 this.isSuspended = true;
@@ -167,7 +167,7 @@ var VideoPlayer = new Class({
 
             this.player.on("canplaythrough", function() {
                 // Chrome has small buffer and will stop preloading whne full
-                if (Browser.chrome) {
+                if (Browser.name == "chrome") {
                     this._finishedLoading();
                 }
                 if (this.getReadyState() > 2 && this.getNetworkState() == 2) {
@@ -372,12 +372,12 @@ var VideoPlayer = new Class({
 
         // in iOS buffering does not start until play is clicked, so skip preloading
         // http://stackoverflow.com/questions/11633929/readystate-issue-with-html5-video-elements-on-ios-safari
-        if (Browser.Platform.android == true) {
+        if (Browser.platform == "android") {
             //this.isReady = true;
             debug(" Abdroid device - ready: ", this.playerID);
         }
 
-        //if (Browser.Platform.ios == true || Browser.Platform.android == true) {
+        //if (Browser.platform=="ios"  || Browser.platform=="android") {
         //    this.isReady = true;
         //    debug(" iOS device - readyggg: ", this.playerID);
         //}
@@ -394,48 +394,48 @@ var VideoPlayer = new Class({
         var posterFile = Main.PATHS.imageFolder + myFilename;
         // var rand = "?" + Math.random();
         switch (Browser.name) {
-            case "chrome" :
-                // http://stackoverflow.com/questions/16773986/html5-video-issue-with-chrome
-                data.video = [{
-                    type : "video/webm",
-                    src : videoFile + ".webm"
-                }, {
-                    type : "video/ogg",
-                    src : videoFile + ".ogv"
-                }];
-                break;
-            case "firefox":
-                data.video = [{
-                    type : "video/ogg",
-                    src : videoFile + ".ogv"
-                }, {
-                    type : "video/webm",
-                    src : videoFile + ".webm"
-                }, {
-                    type : "video/mp4",
-                    src : videoFile + ".mp4"
-                }];
-                break;
-            case "opera":
-                data.video = [{
-                    type : "video/webm",
-                    src : videoFile + ".webm"
-                }, {
-                    type : "video/ogg",
-                    src : videoFile + ".ogv"
-                }];
-                break;
-            default:
-                data.video = [{
-                    type : "video/mp4",
-                    src : videoFile + ".mp4"
-                }, {
-                    type : "video/webm",
-                    src : videoFile + ".webm"
-                }, {
-                    type : "video/ogg",
-                    src : videoFile + ".ogv"
-                }];
+        case "chrome" :
+            // http://stackoverflow.com/questions/16773986/html5-video-issue-with-chrome
+            data.video = [{
+                type : "video/webm",
+                src : videoFile + ".webm"
+            }, {
+                type : "video/ogg",
+                src : videoFile + ".ogv"
+            }];
+            break;
+        case "firefox":
+            data.video = [{
+                type : "video/ogg",
+                src : videoFile + ".ogv"
+            }, {
+                type : "video/webm",
+                src : videoFile + ".webm"
+            }, {
+                type : "video/mp4",
+                src : videoFile + ".mp4"
+            }];
+            break;
+        case "opera":
+            data.video = [{
+                type : "video/webm",
+                src : videoFile + ".webm"
+            }, {
+                type : "video/ogg",
+                src : videoFile + ".ogv"
+            }];
+            break;
+        default:
+            data.video = [{
+                type : "video/mp4",
+                src : videoFile + ".mp4"
+            }, {
+                type : "video/webm",
+                src : videoFile + ".webm"
+            }, {
+                type : "video/ogg",
+                src : videoFile + ".ogv"
+            }];
         }
 
         data.poster = {

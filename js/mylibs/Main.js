@@ -57,25 +57,19 @@ var Environment = new Class({
             version : 0,
             supported : false,
             message : 'You seem to be using an unsupported Internet browser.<br/>Drive Smart requires Internet Explorer, Chrome, Firefox, Safari or Opera.',
-            flash : this.detectFlash(),
+            flash : this.checkFlash(),
             supportsTouch : this.supportsTouch(),
-            videoAutoPlay : !(Browser.Platform.ios == true || Browser.Platform.android == true),
+            videoAutoPlay : !(Browser.platform == "ios" || Browser.platform == "android"),
             hasUserMedia : this.hasGetUserMedia()
         };
 
-        if ((Browser.ie )) {
-            // detect older IE versions
+        if (Browser.name = "ie") {
+            // Detect IE
             requiredBrowser = this.options.browsers.ie;
             browserReport.name = Browser.name;
             browserReport.version = Browser.version;
 
-        } else if ((this.detectIE().ie == true && Browser.name != "opera")) {
-            // detect IE11
-            requiredBrowser = this.options.browsers.ie;
-            browserReport.name = "ie";
-            browserReport.version = this.detectIE().version;
-
-        } else if (this.isAndroid() || Browser.Platform.android) {
+        } else if (this.isAndroid() || Browser.platform == "android") {
             // Detect Android
             requiredBrowser = this.options.browsers.android;
             browserReport.name = "android";
@@ -83,16 +77,16 @@ var Environment = new Class({
 
         } else {
             switch (Browser.name) {
-                case "chrome":
-                case "opera":
-                case "safari":
-                case "firefox":
-                    requiredBrowser = this.options.browsers[Browser.name];
-                    browserReport.name = Browser.name;
-                    browserReport.version = Browser.version;
-                    break;
-                default:
-                    requiredBrowser = this.options.browsers.unsupported;
+            case "chrome":
+            case "opera":
+            case "safari":
+            case "firefox":
+                requiredBrowser = this.options.browsers[Browser.name];
+                browserReport.name = Browser.name;
+                browserReport.version = Browser.version;
+                break;
+            default:
+                requiredBrowser = this.options.browsers.unsupported;
             }
         }
         if (requiredBrowser.name == "unsupported") {
@@ -105,6 +99,7 @@ var Environment = new Class({
                 browserReport.supported = true;
             }
         }
+        console.log(browserReport);
         return browserReport;
     },
     getAndroidVersion : function(ua) {
@@ -125,86 +120,8 @@ var Environment = new Class({
         var isAndroidBrowser = (isAndroidMobile && appleWebKitVersion !== null );
         return isAndroidBrowser;
     },
-    detectIE : function() {
-        var ua = window.navigator.userAgent;
-        var versionSplit = /[\/\.]/i;
-        var versionRe = /(Version)\/([\w.\/]+)/i;
-        // match for browser version
-        var operaRe = /(Opera|OPR)[\/ ]([\w.\/]+)/i;
-        var ieRe = /(?:(MSIE) |(Trident)\/.+rv:)([\w.]+)/i;
-        // must not contain 'Opera'
-        var match = ua.match(operaRe) || ua.match(ieRe);
-        if (!match) {
-            return ( {
-                ie : false,
-                version : 0
-            });
-        }
-        if (Array.prototype.filter) {
-            match = match.filter(function(item) {
-                return (item != null);
-            });
-        } else {
-            // Hello, IE8!
-            for (var j = 0; j < match.length; j++) {
-                var matchGroup = match[j];
-                if (matchGroup == null || matchGroup == '') {
-                    match.splice(j, 1);
-                    j--;
-                }
-            }
-        }
-        var name = match[1].replace('Trident', 'MSIE').replace('OPR', 'Opera');
-        var versionMatch = ua.match(versionRe) || match;
-        var version = versionMatch[2].split(versionSplit);
-
-        return ( {
-            'name' : name,
-            ie : true,
-            version : parseInt(version[0], 10)
-        });
-    },
-    detectFlash : function() {
-        var UNDEF = "undefined", OBJECT = "object", SHOCKWAVE_FLASH = "Shockwave Flash", SHOCKWAVE_FLASH_AX = "ShockwaveFlash.ShockwaveFlash", FLASH_MIME_TYPE = "application/x-shockwave-flash", EXPRESS_INSTALL_ID = "SWFObjectExprInst", ON_READY_STATE_CHANGE = "onreadystatechange", win = window, doc = document, nav = navigator;
-
-        var w3cdom = typeof doc.getElementById != UNDEF && typeof doc.getElementsByTagName != UNDEF && typeof doc.createElement != UNDEF, u = nav.userAgent.toLowerCase(), p = nav.platform.toLowerCase(), windows = p ? /win/.test(p) : /win/.test(u), mac = p ? /mac/.test(p) : /mac/.test(u), webkit = /webkit/.test(u) ? parseFloat(u.replace(/^.*webkit\/(\d+(\.\d+)?).*$/, "$1")) : false, // returns either the webkit version or false if not webkit
-        ie = !+"\v1", // feature detection based on Andrea Giammarchi's solution: http://webreflection.blogspot.com/2009/01/32-bytes-to-know-if-your-browser-is-ie.html
-        playerVersion = [0, 0, 0], d = null;
-        if ( typeof nav.plugins != UNDEF && typeof nav.plugins[SHOCKWAVE_FLASH] == OBJECT) {
-            d = nav.plugins[SHOCKWAVE_FLASH].description;
-            if (d && !( typeof nav.mimeTypes != UNDEF && nav.mimeTypes[FLASH_MIME_TYPE] && !nav.mimeTypes[FLASH_MIME_TYPE].enabledPlugin)) {// navigator.mimeTypes["application/x-shockwave-flash"].enabledPlugin indicates whether plug-ins are enabled or disabled in Safari 3+
-                plugin = true;
-                ie = false;
-                // cascaded feature detection for Internet Explorer
-                d = d.replace(/^.*\s+(\S+\s+\S+$)/, "$1");
-                playerVersion[0] = parseInt(d.replace(/^(.*)\..*$/, "$1"), 10);
-                playerVersion[1] = parseInt(d.replace(/^.*\.(.*)\s.*$/, "$1"), 10);
-                playerVersion[2] = /[a-zA-Z]/.test(d) ? parseInt(d.replace(/^.*[a-zA-Z]+(.*)$/, "$1"), 10) : 0;
-            }
-        } else if ( typeof win.ActiveXObject != UNDEF) {
-            try {
-                var a = new ActiveXObject(SHOCKWAVE_FLASH_AX);
-                if (a) {// a will return null when ActiveX is disabled
-                    d = a.GetVariable("$version");
-                    if (d) {
-                        ie = true;
-                        // cascaded feature detection for Internet Explorer
-                        d = d.split(" ")[1].split(",");
-                        playerVersion = [parseInt(d[0], 10), parseInt(d[1], 10), parseInt(d[2], 10)];
-                    }
-                }
-            } catch(e) {
-            }
-        }
-       // console.log(playerVersion);
-        return {
-            w3 : w3cdom,
-            pv : playerVersion,
-            wk : webkit,
-            ie : ie,
-            win : windows,
-            mac : mac
-        };
+    checkFlash : function() {
+        return (detectFlash());
     },
     supportsTouch : function() {
         return 'ontouchstart' in window || navigator.msMaxTouchPoints;
@@ -213,6 +130,50 @@ var Environment = new Class({
         return !!(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
     }
 });
+
+function detectFlash() {
+    var UNDEF = "undefined", OBJECT = "object", SHOCKWAVE_FLASH = "Shockwave Flash", SHOCKWAVE_FLASH_AX = "ShockwaveFlash.ShockwaveFlash", FLASH_MIME_TYPE = "application/x-shockwave-flash", EXPRESS_INSTALL_ID = "SWFObjectExprInst", ON_READY_STATE_CHANGE = "onreadystatechange", win = window, doc = document, nav = navigator;
+
+    var w3cdom = typeof doc.getElementById != UNDEF && typeof doc.getElementsByTagName != UNDEF && typeof doc.createElement != UNDEF, u = nav.userAgent.toLowerCase(), p = nav.platform.toLowerCase(), windows = p ? /win/.test(p) : /win/.test(u), mac = p ? /mac/.test(p) : /mac/.test(u), webkit = /webkit/.test(u) ? parseFloat(u.replace(/^.*webkit\/(\d+(\.\d+)?).*$/, "$1")) : false, // returns either the webkit version or false if not webkit
+    ie = !+"\v1", // feature detection based on Andrea Giammarchi's solution: http://webreflection.blogspot.com/2009/01/32-bytes-to-know-if-your-browser-is-ie.html
+    playerVersion = [0, 0, 0], d = null;
+    if ( typeof nav.plugins != UNDEF && typeof nav.plugins[SHOCKWAVE_FLASH] == OBJECT) {
+        d = nav.plugins[SHOCKWAVE_FLASH].description;
+        if (d && !( typeof nav.mimeTypes != UNDEF && nav.mimeTypes[FLASH_MIME_TYPE] && !nav.mimeTypes[FLASH_MIME_TYPE].enabledPlugin)) {// navigator.mimeTypes["application/x-shockwave-flash"].enabledPlugin indicates whether plug-ins are enabled or disabled in Safari 3+
+            plugin = true;
+            ie = false;
+            // cascaded feature detection for Internet Explorer
+            d = d.replace(/^.*\s+(\S+\s+\S+$)/, "$1");
+            playerVersion[0] = parseInt(d.replace(/^(.*)\..*$/, "$1"), 10);
+            playerVersion[1] = parseInt(d.replace(/^.*\.(.*)\s.*$/, "$1"), 10);
+            playerVersion[2] = /[a-zA-Z]/.test(d) ? parseInt(d.replace(/^.*[a-zA-Z]+(.*)$/, "$1"), 10) : 0;
+        }
+    } else if ( typeof win.ActiveXObject != UNDEF) {
+        try {
+            var a = new ActiveXObject(SHOCKWAVE_FLASH_AX);
+            if (a) {// a will return null when ActiveX is disabled
+                d = a.GetVariable("$version");
+                if (d) {
+                    ie = true;
+                    // cascaded feature detection for Internet Explorer
+                    d = d.split(" ")[1].split(",");
+                    playerVersion = [parseInt(d[0], 10), parseInt(d[1], 10), parseInt(d[2], 10)];
+                }
+            }
+        } catch(e) {
+        }
+    }
+    // console.log(playerVersion);
+    return {
+        w3 : w3cdom,
+        pv : playerVersion,
+        wk : webkit,
+        ie : ie,
+        win : windows,
+        mac : mac
+    };
+
+};
 
 var Main = new Class({
     Implements : [Options, Events],
@@ -269,20 +230,20 @@ var Main = new Class({
         var newAsset = null;
         var fileType = item.split('.').pop();
         switch (fileType) {
-            case "js" :
-                newAsset = new Asset.javascript(item, {
-                    id : index,
-                    onLoad : function() {
-                        this._loadedFinished();
-                    }.bind(this)
-                });
-                this.listOfLibrariesCounter++;
-                break;
-            case  "css" :
-                newAsset = new Asset.css(item, {
-                    id : index
-                });
-                break;
+        case "js" :
+            newAsset = new Asset.javascript(item, {
+                id : index,
+                onLoad : function() {
+                    this._loadedFinished();
+                }.bind(this)
+            });
+            this.listOfLibrariesCounter++;
+            break;
+        case  "css" :
+            newAsset = new Asset.css(item, {
+                id : index
+            });
+            break;
         }
     },
     _loadedFinished : function() {
@@ -332,8 +293,8 @@ Main.VIDEO_TOP = 20;
 Main.VIDEO_LEFT = 20;
 
 // Version stuff
-Main.VERSION = '101';
-Main.BUILD = '2014/08/06 Videojs 4.7.0';
+Main.VERSION = '102';
+Main.BUILD = '2014/09/02 Videojs 4.7.0, MooTools 1.5.1';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;
@@ -346,7 +307,6 @@ Main.RECORDER_WORKER_PATH = "/dashboard/js/mylibs/recorderJS/RecorderWorker.js";
 
 // Staging server path
 // Main.RECORDER_WORKER_PATH = "tac/drivesmart/js/mylibs/recorderJS/RecorderWorker.js";
-
 
 // Saves empty progress data on startup if true
 Main.RESET_USER_DATA = false;

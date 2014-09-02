@@ -37,7 +37,7 @@ var AudioPlayer = new Class({
     // ----------------------------------------------------------
     start : function() {
         if (this.preloaded == false) {
-            if (Browser.Platform.ios == true || Browser.Platform.android == true) {
+            if (Browser.platform == "ios" || Browser.platform == "android") {
                 this._playSound();
             } else {
                 debug("++ Not preloaded yet - Loading Sound" + this.options.src);
@@ -111,7 +111,7 @@ var AudioPlayer = new Class({
             type : 'AUDIO'
         };
 
-        if (Browser.Platform.ios == true || Browser.Platform.android == true) {
+        if (Browser.platform == "ios" || Browser.platform == "android") {
             loaderInfo[this.options.id].progress = 1;
             debug(" iOS device - audio ready");
         }

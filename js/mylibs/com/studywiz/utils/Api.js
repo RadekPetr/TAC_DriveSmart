@@ -47,7 +47,7 @@ var Api = new Class({
             onFailure : function(xhr) {
                 if (retries >= this.options.retries) {
                     debug("ERROR: loadUserProgress Failed", xhr);
-                    this.saveLog("error", "onFailure loadUserProgress, no retry left " + xhr + " " + Browser.name + " , " + Browser.version + ", " + Browser.Platform);
+                    this.saveLog("error", "onFailure loadUserProgress, no retry left " + xhr + " " + Browser.name + " , " + Browser.version + ", " + Browser.platform);
                     alert("SDE01: Error loading user data. \n\nPlease reload the page to try again or contact support.");
                 } else {
                     debug("WARN: loadUserProgress Failed, retry:" + retries, xhr);
@@ -83,7 +83,7 @@ var Api = new Class({
 
                 if (retries >= this.options.retries) {
                     debug("ERROR: saveUserProgress Failed", xhr);
-                    this.saveLog("error", "onFailure saveUserProgress, no retry left " + xhr + " " + Browser.name + " , " + Browser.version + ", " + Browser.Platform);
+                    this.saveLog("error", "onFailure saveUserProgress, no retry left " + xhr + " " + Browser.name + " , " + Browser.version + ", " + Browser.platform);
                     alert("SDE02: Error saving user data. \n\nPlease continue to the next activity and we will attempt to save the progress again later on.");
                 } else {
                     debug("WARN: saveUserProgress Failed, retry:" + retries, xhr);
@@ -115,7 +115,7 @@ var Api = new Class({
             }.bind(this),
             onError : function(text, error) {
                 debug('onError SaveProgress', text, error);
-                this.saveLog("error", "onError saveUserProgress" + text + " " + error + " " + Browser.name + " , " + Browser.version + ", " + Browser.Platform);
+                this.saveLog("error", "onError saveUserProgress" + text + " " + error + " " + Browser.name + " , " + Browser.version + ", " + Browser.platform);
             }.bind(this)
         });
 
@@ -141,7 +141,7 @@ var Api = new Class({
             onFailure : function(xhr) {
                 if (retries >= this.options.retries) {
                     debug("ERROR: saveUserProgress Failed", xhr);
-                    this.saveLog("error", "onFailure saveModuleProgress, no retry left " + xhr + " " + Browser.name + " , " + Browser.version + ", " + Browser.Platform);
+                    this.saveLog("error", "onFailure saveModuleProgress, no retry left " + xhr + " " + Browser.name + " , " + Browser.version + ", " + Browser.platform);
                     alert("SDE03: Error saving module score. \n\nPlease continue to the next activity and we will attempt to save the score again later on.");
                 } else {
                     debug("WARN: saveModuleProgress Failed, retry:" + retries, xhr);
