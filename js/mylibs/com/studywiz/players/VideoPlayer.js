@@ -120,7 +120,7 @@ var VideoPlayer = new Class({
         if (this.player != undefined) {
             this.player.on("suspend", function() {
                 //debug("EVENT: suspend", this.options.id);
-                if (Browser.platform = "ios") {
+                if (Browser.platform == "ios") {
                     this._finishedLoading();
                 }
                 this.isSuspended = true;
