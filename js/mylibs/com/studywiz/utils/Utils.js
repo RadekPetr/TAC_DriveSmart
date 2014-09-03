@@ -17,13 +17,9 @@ function stripFileExtension(filename) {
     return filename;
 }
 
-function isFlashSupported() {   
-    log ("Browser.platform", Browser.platform);
-    log ("Browser.name", Browser.name);
-    log ("Browser.version", Browser.version);
-    var flash = detectFlash().pv[0];
-    log("Major flash Version", flash);
-    if (flash.version >= 9) {
+function isFlashSupported() {       
+    var flash = detectFlash();    
+    if (flash.pv[0] >= 9) {
         return true;
     } else {
         return false;

@@ -58,7 +58,9 @@ var SwiffPlayer = new Class({
             this.container.inject($m(parentTagID), where);
 
         }
+
         if (isFlashSupported() == true) {
+            
             this.options.swiff.container = this.container;
             this.swiff = new Swiff(this.options.src, this.options.swiff);
         } else {
