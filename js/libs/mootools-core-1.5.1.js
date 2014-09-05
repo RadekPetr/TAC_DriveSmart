@@ -3508,7 +3508,7 @@ if (window.attachEvent && !window.addEventListener){
 		Object.each(collected, clean);
 		if (window.CollectGarbage) CollectGarbage();
 		window.removeListener('unload', gc);
-	}
+	};
 	window.addListener('unload', gc);
 }
 /*</ltIE9>*/
@@ -3699,7 +3699,7 @@ var normalizeWheelSpeed = function(event){
         normalized = -(rawAmount % 3 == 0 ? rawAmount / 3 : rawAmount * 10);
     }
     return normalized;
-}
+};
 
 var DOMEvent = this.DOMEvent = new Type('DOMEvent', function(event, win){
 	if (!win) win = window;
