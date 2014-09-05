@@ -2617,7 +2617,7 @@ var Asset = {
 				}
 				retries++;
 				if (!loaded && retries < timeout / 50) return setTimeout(check, 50);
-			};
+			}
 			setTimeout(check, 0);
 		}
 		return link;
@@ -3047,7 +3047,7 @@ DOMEvent.defineKeys({
 	'107': '+',
 	'109': '-', // subtract
 	'189': '-'  // dash
-});
+})
 
 })();
 
