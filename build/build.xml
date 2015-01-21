@@ -400,9 +400,9 @@
 			</filelist>
 
 			<filelist dir="./${dir.intermediate}/temp/js-min/">
-				<file name="soundjs-0.5.2.min.js" />
-				<file name="flashplugin-0.5.2.min.js" />				
-				<file name="preloadjs-0.4.1.min.js" />
+				<file name="soundjs-0.6.0.min.js" />
+				<file name="flashaudioplugin-0.6.0.min.js" />				
+				<file name="preloadjs-0.6.0.min.js" />
 			</filelist>
 			<fileset dir="./${dir.intermediate}/temp/js-min/">
 				<include name="*-min.js" />
