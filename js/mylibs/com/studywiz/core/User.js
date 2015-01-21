@@ -83,7 +83,7 @@ var User = new Class({
         // test
         //this.userData.modules.intro = {};//( 'intro' );
 
-        var json_data = $m(JSON.encode(this.userData));
+        var json_data = JSON.encode(this.userData);
         //var compressedData = lzw_encode(json_data);
         var compressedData = this.api.encode(json_data);
         var requestPayload = {

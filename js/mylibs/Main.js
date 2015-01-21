@@ -252,7 +252,8 @@ var Main = new Class({
         if (this.listOfLibrariesCounter === 0) {
             // console.log("Fired event READY");
             this.fireEvent('READY');
-
+            // To remove conflict with CreateJS JSON and Mootools http://bestiejs.github.io/json3/
+            JSON3.noConflict();
         }
     }
 });
