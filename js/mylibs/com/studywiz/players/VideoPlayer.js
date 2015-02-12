@@ -178,8 +178,9 @@ var VideoPlayer = new Class({
             }.bind(this));
 
             this.player.on("loadedalldata", function() {
+               
                 if (this.getReadyState() == 4) {
-                    // debug("EVENT: **********************   loadedalldata", this.options.id, this.getReadyState(), this.getNetworkState());
+                     // debug("EVENT: **********************   loadedalldata", this.options.id, this.getReadyState(), this.getNetworkState());
                     this._finishedLoading();
                 }
 
@@ -358,7 +359,7 @@ var VideoPlayer = new Class({
         if (this.player != null) {
             progress = this.player.bufferedPercent();
             debug(this.playerID + " **** Video Load progress: " + (this.player.bufferedPercent() * 100.00));
-            if (progress >= 1) {
+            if (progress >= 0.98) {
                 this.isReady = true;
             }
         }
