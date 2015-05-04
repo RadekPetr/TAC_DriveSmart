@@ -8,20 +8,25 @@ var Draggable = new Class({
         this.containerID = 'draggableImageContainer';
         this.container = null;
         this.drags = new Array();
-        // override to handle touch 
+        // override to handle touch
         Drag.implement({
             attach : function() {
                 this.handles.addEvent('mousedown', this.bound.start);
                 this.handles.addEvent('touchstart', this.bound.start);
+                if (this.options.compensateScroll)
+                    this.offsetParent.addEvent('scroll', this.bound.scrollListener);
                 return this;
             },
 
             detach : function() {
                 this.handles.removeEvent('mousedown', this.bound.start);
                 this.handles.removeEvent('touchstart', this.bound.start);
-                
+
                 this.element.set('class', 'non-draggable');
                 this.element.set('onselectstart', 'return false;');
+
+                if (this.options.compensateScroll)
+                    this.offsetParent.removeEvent('scroll', this.bound.scrollListener);
                 return this;
             },
 
@@ -35,8 +40,12 @@ var Draggable = new Class({
                     event.preventDefault();
                 if (options.stopPropagation)
                     event.stopPropagation();
+                this.compensateScroll.start = this.compensateScroll.last = this.offsetParent.getScroll();
+                this.compensateScroll.diff = {
+                    x : 0,
+                    y : 0
+                };
                 this.mouse.start = event.page;
-
                 this.fireEvent('beforeStart', this.element);
 
                 var limit = options.limit;
@@ -45,7 +54,7 @@ var Draggable = new Class({
                     y : []
                 };
 
-                var z, coordinates;
+                var z, coordinates, offsetParent = this.offsetParent == window ? null : this.offsetParent;
                 for (z in options.modifiers) {
                     if (!options.modifiers[z])
                         continue;
@@ -55,7 +64,7 @@ var Draggable = new Class({
                     // Some browsers (IE and Opera) don't always return pixels.
                     if (style && !style.match(/px$/)) {
                         if (!coordinates)
-                            coordinates = this.element.getCoordinates(this.element.getOffsetParent());
+                            coordinates = this.element.getCoordinates(offsetParent);
                         style = coordinates[options.modifiers[z]];
                     }
 
@@ -125,16 +134,15 @@ var Draggable = new Class({
             },
 
             stop : function(event) {
-
                 var events = {
                     mousemove : this.bound.drag,
                     mouseup : this.bound.stop,
                     touchmove : this.bound.drag,
                     touchend : this.bound.stop
                 };
-
                 events[this.selection] = this.bound.eventStop;
                 this.document.removeEvents(events);
+                this.mouse.start = null;
                 if (event)
                     this.fireEvent('complete', [this.element, event]);
             }
@@ -260,7 +268,6 @@ var Draggable = new Class({
                 target.set('class', 'draggable');
             },
             onBeforeStart : function() {
-                //debug("beforeStart");
                 target.set('class', 'dragging');
             },
             onDrag : function() {
@@ -278,7 +285,6 @@ var Draggable = new Class({
             }
         });
         this.drags.push(myDrag);
-
     },
     _getOnLoadFunction : function() {
         var onLoadFunction;
@@ -289,7 +295,7 @@ var Draggable = new Class({
                         left : this.options.style.left,
                         top : this.options.style.top,
                         position : 'absolute'
-                    };                   
+                    };
                     var myClone = this.topViewImage.clone();
                     myClone.set('id', this.options.id);
                     myClone.setStyles(styles);
@@ -297,8 +303,8 @@ var Draggable = new Class({
                     myClone.inject(this.container);
                     myClone.fireEvent('touchstart', event);
                 }.bind(this));
-            }.bind(this);          
-           
+            }.bind(this);
+
         } else {
             onLoadFunction = function() {
                 this.image.addEvent('mousedown', function(event) {
