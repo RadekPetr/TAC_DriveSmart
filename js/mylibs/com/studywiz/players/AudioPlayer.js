@@ -19,13 +19,10 @@ var AudioPlayer = new Class({
         this.played = false;
 
         createjs.Sound.alternateExtensions = ["mp3", "ogg"];
-        createjs.FlashPlugin.swfPath = Main.PATHS.flashFolder;
-        createjs.Sound.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin, createjs.FlashPlugin]);
-
-        //createjs.Sound.registerPlugin(createjs.FlashPlugin);
+        createjs.FlashAudioPlugin.swfPath = Main.PATHS.flashFolder;
+        createjs.Sound.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin, createjs.FlashAudioPlugin]);
 
         this.preloader.installPlugin(createjs.Sound);
-
     },
     myParent : function() {
         return this.options.parent;
