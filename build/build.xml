@@ -424,8 +424,8 @@
 		
 
 		
-		<copy file="${dir.source}/${dir.js}/libs/mootools-core-1.5.1.min.js" tofile="${dir.publish}/${dir.js}/libs/mootools-core-1.5.1.min.js" />
-		<copy file="${dir.source}/${dir.js}/libs/mootools-more-1.5.1.min.js" tofile="${dir.publish}/${dir.js}/libs/mootools-more-1.5.1.min.js" />
+		<copy file="${dir.source}/${dir.js}/libs/mootools-core-1.5.2.min.js" tofile="${dir.publish}/${dir.js}/libs/mootools-core-1.5.1.min.js" />
+		<copy file="${dir.source}/${dir.js}/libs/mootools-more-1.5.2.min.js" tofile="${dir.publish}/${dir.js}/libs/mootools-more-1.5.1.min.js" />
 		<copy file="${dir.source}/${dir.js}/mylibs/recorderJS/RecorderWorker.js" tofile="${dir.publish}/${dir.js}/mylibs/recorderJS/RecorderWorker.js" />
 		<copy file="${dir.source}/index.css" tofile="${dir.publish}/index.css" />	
 		
