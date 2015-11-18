@@ -75,7 +75,9 @@ var VideoPlayer = new Class({
 				"height" : this.options.height,
 				"poster" : data.poster.src
 			});
-
+			this.player.width = this.options.width;
+			this.player.height = this.options.height;
+			
 			this.player.ready((function() {
 				var data = this._getVideoData();
 				if (this.options.captionFile != null
@@ -134,7 +136,7 @@ var VideoPlayer = new Class({
 				// this.player.load();
 			}.bind(this));
 
-			this.player.tech.el_.addEvent("stalled", function() {
+			this.player.tech_.el_.addEvent("stalled", function() {
 
 				debug("EVENT: **********************   stalled",
 						this.options.id, this.getReadyState(), this
@@ -211,7 +213,7 @@ var VideoPlayer = new Class({
 		}
 	},
 	registerPlaybackStartEvent : function() {
-		this.player.tech.el_.addEventListener("play", function() {
+		this.player.tech_.el_.addEventListener("play", function() {
 			// debug("EVENT: ********************** play", this.options.id);
 
 			this.myParent().fireEvent("TIMELINE", {
@@ -239,7 +241,7 @@ var VideoPlayer = new Class({
 			this.player.play();
 		}.bind(this));
 
-		// this.player.tech.el_.addEventListener("play", function() {
+		// this.player.tech_.el_.addEventListener("play", function() {
 
 		// }.bind(this));
 	},
@@ -480,22 +482,22 @@ var VideoPlayer = new Class({
 	},
 	getReadyState : function() {
 		if (this.player != null) {
-			return this.player.tech.el_.readyState;
+			return this.player.tech_.el_.readyState;
 		}
 	},
 	getNetworkState : function() {
 		if (this.player != null) {
-			return this.player.tech.el_.networkState;
+			return this.player.tech_.el_.networkState;
 		}
 	},
 	showControls : function() {
 		if (this.options.controls == false) {
-			this.player.tech.el_.setAttribute("controls", "controls");
+			this.player.tech_.el_.setAttribute("controls", "controls");
 		}
 	},
 	hideControls : function() {
 		if (this.options.controls == false) {
-			this.player.tech.el_.removeAttribute("controls");
+			this.player.tech_.el_.removeAttribute("controls");
 		}
 	},
 	progressChecker : function() {
