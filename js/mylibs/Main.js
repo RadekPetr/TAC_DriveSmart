@@ -208,6 +208,8 @@ var Main = new Class({
     // ----------------------------------------------------------
     start : function() {
         if (Main.environment.supported == true) {
+            // To remove conflict with CreateJS JSON and Mootools http://bestiejs.github.io/json3/
+            JSON3.noConflict();
             new Api(this).saveLog('info', "****** Version: " + Main.VERSION + " Build: " + Main.BUILD + " ******");
             Main.sequencePlayer = new SequencePlayer(this, {});
             this.modules = new Modules({});
