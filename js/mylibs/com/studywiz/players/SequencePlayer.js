@@ -1008,8 +1008,9 @@ var SequencePlayer = new Class({
                     } else {
                         style = {
                         };
-                        var width = '100%';
-                        var height = '100%';
+                        var width = Main.VIDEO_WIDTH;
+                        var height = Main.VIDEO_HEIGHT;
+
                     };
                     var caption = item.attributes.caption;
                     step.media.video = new VideoPlayer(this, {
@@ -1038,8 +1039,8 @@ var SequencePlayer = new Class({
                     var filename = item.value;
 
                     var style = null;
-                    var width = '100%';
-                    var height = '100%';
+                    var width = Main.VIDEO_WIDTH;
+                    var height = Main.VIDEO_HEIGHT;
                     var caption = item.attributes.caption;
                     step.media.moduleIntroVideo = new VideoPlayer(this, {
                         id : "video_" + index + "_" + stepOrder,
@@ -1066,8 +1067,8 @@ var SequencePlayer = new Class({
                 if (item.value != '') {
                     var filename = item.value;
                     var style = null;
-                    var width = '100%';
-                    var height = '100%';
+                    var width = Main.VIDEO_WIDTH;
+                    var height = Main.VIDEO_HEIGHT;
                     var caption = item.attributes.caption;
 
                     step.media.video = new VideoPlayer(this, {
