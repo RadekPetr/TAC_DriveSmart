@@ -356,7 +356,7 @@ var VideoPlayer = new Class({
 	},
 	remove : function() {
 		// get the videojs player with id
-		var player = videojs.getPlayers[this.playerID];
+		var player = videojs.players[this.playerID];
 		// get rid of it
 		if (player == null) {
 			debug("Video player is null");
