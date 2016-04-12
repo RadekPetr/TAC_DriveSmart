@@ -255,7 +255,7 @@ var Main = new Class({
             // console.log("Fired event READY");
             this.fireEvent('READY');
             // To remove conflict with CreateJS JSON and Mootools http://bestiejs.github.io/json3/
-            JSON3.noConflict();
+            //JSON3.noConflict();
         }
     }
 });
@@ -297,7 +297,7 @@ Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '106';
-Main.BUILD = '2016/01/11 Videojs 5.5.1, MooTools 1.5.2';
+Main.BUILD = '2016/04/11 Videojs 5.5.1, MooTools 1.6.0';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;
