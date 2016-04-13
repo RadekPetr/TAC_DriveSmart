@@ -149,15 +149,7 @@ var User = new Class({
             });
             var moduleData = new Hash();
 
-           // sequences.sortOn("id", Array.NUMERIC);
-            
-            sequences.sort(
-            		function(a, b){
-            	 
-            			return b.id-a.id;
-            	}
-            		);
-            
+            sequences.sortOn("id", Array.NUMERIC);
             moduleData.set(key, new Hash({
                 info : new Hash({
                     data_version : moduleObject.options.module_structure_version
