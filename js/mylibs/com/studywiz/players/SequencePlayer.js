@@ -316,6 +316,7 @@ var SequencePlayer = new Class({
                 });
                 break;
             case "Question":
+            debug ("************** Question");
                 // TODO: maybe add attribute to wait or not
                 step.media.audio.options.next = 'Question.done';
                 step.media.audio.start();
