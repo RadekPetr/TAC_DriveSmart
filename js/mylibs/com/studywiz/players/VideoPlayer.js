@@ -27,6 +27,7 @@ var VideoPlayer = new Class({
 	},
 	// ----------------------------------------------------------
 	initialize : function(myParent, myOptions) {
+		videojs.options.flash.swf = Main.PATHS.flashFolder + "video-js.swf";
 
 		this.setOptions(myOptions);
 		this.options.parent = myParent;
@@ -40,22 +41,20 @@ var VideoPlayer = new Class({
 		this.isSuspended = false;
 		this.ended = false;
 		this.isPaused = false;
+		this.player = null;
 
-		this.container = new Element("div", {
+		this.container = this._prepareContainer({
 			id : this.containerID,
-			'class' : 'videoContainer'
-		});
-
-		this.container.setStyles(this.options.style);
-
-		this.container.inject($m(this.options.parentTag));
+			style : this.options.style,
+			parentTag : this.options.parentTag
+		})
 
 		this.container.player = new Element("video", {
 			'id' : this.playerID,
 			'class' : this.options['class']
 		});
 		this.container.player.inject(this.container);
-		videojs.options.flash.swf = Main.PATHS.flashFolder + "video-js.swf";
+
 	},
 	myParent : function() {
 		return this.options.parent;
@@ -63,7 +62,7 @@ var VideoPlayer = new Class({
 	// ---------------------------
 	preload : function() {
 		// debug("++ Video Preload started: " + this.options.id);
-		if (this.player == undefined) {
+		if (this.player == null) {
 			this.show();
 			this.isReady = false;
 			var data = this._getVideoData();
@@ -77,7 +76,7 @@ var VideoPlayer = new Class({
 			});
 			this.player.width = this.options.width;
 			this.player.height = this.options.height;
-			
+
 			this.player.ready((function() {
 				var data = this._getVideoData();
 				if (this.options.captionFile != null
@@ -115,7 +114,7 @@ var VideoPlayer = new Class({
 		}
 	},
 	registerLoadEvents : function() {
-		if (this.player != undefined) {
+		if (this.player != null) {
 			this.player.on("suspend", function() {
 				// debug("EVENT: suspend", this.options.id);
 				if (Browser.platform == "ios") {
@@ -166,14 +165,15 @@ var VideoPlayer = new Class({
 			}.bind(this));
 
 			this.player.on("canplaythrough", function() {
-				// Chrome has small buffer and will stop preloading whne full
+				// Chrome has small buffer and will stop preloading when full
+				
 				if (Browser.name == "chrome") {
 					this._finishedLoading();
-				}
-				if (this.getReadyState() > 2 && this.getNetworkState() == 2) {
+				} else if (this.getReadyState() > 2
+						&& this.getNetworkState() == 2) {
 					this._finishedLoading();
 				}
-				// debug("EVENT: ********************** canplaythrough",
+				 debug("EVENT: ********************** canplaythrough",Browser.name);
 				// this.options.id, this.getReadyState(),
 				// this.getNetworkState());
 
@@ -193,7 +193,7 @@ var VideoPlayer = new Class({
 		}
 	},
 	registerPlaybackEndEvent : function() {
-		if (this.player != undefined) {
+		if (this.player != null) {
 			this.player.off("ended");
 			this.player.on("ended",
 					function() {
@@ -241,12 +241,9 @@ var VideoPlayer = new Class({
 			this.player.play();
 		}.bind(this));
 
-		// this.player.tech_.el_.addEventListener("play", function() {
-
-		// }.bind(this));
 	},
 	registerCueEvents : function() {
-		if (this.player != undefined) {
+		if (this.player != null) {
 			this.player.on("timeupdate", function() {
 				this.myParent().fireEvent("TIMELINE", {
 					type : "video.time",
@@ -264,6 +261,7 @@ var VideoPlayer = new Class({
 			this.isPaused = false;
 			this.player.play();
 		} else {
+			// in case that for some reason the video is still not ready
 			this.preload();
 		}
 	},
@@ -295,11 +293,11 @@ var VideoPlayer = new Class({
 		this.player.controlBar.captionsButton.show();
 	},
 	obscure : function() {
-		debug("Obscure");
+		debug("Obscure", Main.environment.name );
 		// TODO: finish for IE - use an image for the mask
 		if (Main.environment.name == "ie") {
 
-			var myMask = new Mask(this.container, {
+			var myMask = new Mask(this.container.player, {
 				style : {
 					'background' : 'rgba(00,00,00,0.98)'
 				}
@@ -317,6 +315,7 @@ var VideoPlayer = new Class({
 				this.player.currentTime(0);
 			}
 			this.pause();
+			clearInterval(this.stalledTimer);
 		}
 	},
 	// ---------------------------
@@ -356,7 +355,7 @@ var VideoPlayer = new Class({
 	},
 	remove : function() {
 		// get the videojs player with id
-		var player = videojs.players[this.playerID];		
+		var player = videojs.players[this.playerID];
 		// get rid of it
 		if (player == null) {
 			debug("Video player is null");
@@ -410,6 +409,16 @@ var VideoPlayer = new Class({
 			loaderInfo[this.options.id].progress = 1;
 		}
 		return loaderInfo;
+	},
+	_prepareContainer : function(containerData) {
+		var newContainer = new Element("div", {
+			id : containerData.id,
+			'class' : 'videoContainer'
+		});
+		newContainer.setStyles(containerData.style);
+		newContainer.inject($m(containerData.parentTag));
+		return newContainer;
+
 	},
 	_getVideoData : function() {
 		var data = {};
