@@ -55,7 +55,7 @@ var MediaLoader = new Class({
         this.loadQueue.each(function(value, key) {
             value.ref.preload();
         });
-        // if the queue is not empty start the time to poll the progress
+        // if the queue is not empty start the timer to poll the progress
         if (this.loadQueue.getLength() > 0) {
             var timerFunction = function() {
                 this.updateProgress();
