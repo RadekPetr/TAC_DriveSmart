@@ -62,8 +62,8 @@ var Environment = new Class({
             videoAutoPlay : !(Browser.platform == "ios" || Browser.platform == "android"),
             hasUserMedia : this.hasGetUserMedia()
         };
-
-        if (Browser.name = "ie") {
+       // Browser.name = "ie";
+        if (Browser.name == "ie") {
             // Detect IE
             requiredBrowser = this.options.browsers.ie;
             browserReport.name = Browser.name;
