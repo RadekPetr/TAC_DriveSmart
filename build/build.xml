@@ -400,9 +400,9 @@
 			</filelist>
 
 			<filelist dir="./${dir.intermediate}/temp/js-min/">
-				<file name="soundjs-0.6.1.min.js" />
+				<file name="soundjs-0.6.2.min.js" />
 				<file name="flashaudioplugin-0.6.1.min.js" />				
-				<file name="preloadjs-0.6.1.min.js" />
+				<file name="preloadjs-0.6.2.min.js" />
 			</filelist>
 			<fileset dir="./${dir.intermediate}/temp/js-min/">
 				<include name="*-min.js" />
@@ -424,8 +424,8 @@
 		
 
 		
-		<copy file="${dir.source}/${dir.js}/libs/mootools-core-1.5.2.min.js" tofile="${dir.publish}/${dir.js}/libs/mootools-core-1.5.2.min.js" />
-		<copy file="${dir.source}/${dir.js}/libs/mootools-more-1.5.2.min.js" tofile="${dir.publish}/${dir.js}/libs/mootools-more-1.5.2.min.js" />
+		<copy file="${dir.source}/${dir.js}/libs/mootools-core-1.6.0.min.js" tofile="${dir.publish}/${dir.js}/libs/mootools-core-1.6.0.min.js" />
+		<copy file="${dir.source}/${dir.js}/libs/mootools-more-1.6.0.min.js" tofile="${dir.publish}/${dir.js}/libs/mootools-more-1.6.0.min.js" />
 		<copy file="${dir.source}/${dir.js}/mylibs/recorderJS/RecorderWorker.js" tofile="${dir.publish}/${dir.js}/mylibs/recorderJS/RecorderWorker.js" />
 		<copy file="${dir.source}/index.css" tofile="${dir.publish}/index.css" />	
 		
