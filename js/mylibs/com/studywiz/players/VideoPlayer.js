@@ -276,7 +276,7 @@ var VideoPlayer = new Class({
 		this.isVisible = false;
 	},
 	showCaptions : function(captionFile) {
-
+// Remove experimentally//
 		this.player.addRemoteTextTrack({
 			'kind' : "captions",
 			'label' : "English",
@@ -286,11 +286,12 @@ var VideoPlayer = new Class({
 			'default' : true
 		});
 
-		var textTrackDisplay = this.player.textTracks();
-		track = textTrackDisplay[0];
-		track['mode'] = 'showing';
+		//var textTrackDisplay = this.player.textTracks();
+	//	track = textTrackDisplay[0];
+		//track['mode'] = 'showing';
 
-		this.player.controlBar.captionsButton.show();
+		//this.player.controlBar.captionsButton.show();
+		
 	},
 	obscure : function() {
 		debug("Obscure", Main.environment.name );
