@@ -38,6 +38,11 @@ var Environment = new Class({
                 minVersion : 3,
                 link : ' support website for your device '
             },
+            edge : {
+                name : "Edge",
+                minVersion : 10,
+                link : ' Windows update '
+            },
             unsupported : {
                 name : "unsupported",
                 minVersion : 0,
@@ -81,6 +86,7 @@ var Environment = new Class({
             case "opera":
             case "safari":
             case "firefox":
+            case "edge":
                 requiredBrowser = this.options.browsers[Browser.name];
                 browserReport.name = Browser.name;
                 browserReport.version = Browser.version;
