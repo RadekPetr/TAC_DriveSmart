@@ -47,7 +47,7 @@ var VideoPlayer = new Class({
 			id: this.containerID,
 			style: this.options.style,
 			parentTag: this.options.parentTag
-		})
+		});
 
 		this.container.player = new Element("video", {
 			'id': this.playerID,
