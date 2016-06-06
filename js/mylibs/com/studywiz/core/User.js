@@ -152,11 +152,10 @@ var User = new Class({
            // sequences.sortOn("id", Array.NUMERIC);
             
             sequences.sort(
-            		function(a, b){
-            	 
-            			return b.id-a.id;
-            	}
-            		);
+                function (b, a) {
+                    return b.id - a.id;
+                }
+            );
             
             moduleData.set(key, new Hash({
                 info : new Hash({
