@@ -89,6 +89,7 @@ var MenuItem = new Class({
                 //  this.container.adopt(symbol);
                 //  symbol.show();
             }
+            debug ("Module progress", this.selectedModuleID,moduleState.progress );
             this.buttonGroup.adopt(UIHelpers.progressBarSetup(moduleState.progress, this.selectedModuleID)['holder']);
         }
     },

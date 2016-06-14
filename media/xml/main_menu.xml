@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root version="6">
+<root version="5">
   <Seq trackProgress="false" trackScore="false" desc="Main menu" Ex="1">
     <Step fmt="Menu">
       <Items>

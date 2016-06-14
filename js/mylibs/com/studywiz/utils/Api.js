@@ -267,7 +267,7 @@ var Api = new Class({
     },
 
     encode : function(input) {
-        //log("To Compress:", input);
+        log("To Compress:", input);
         var compressedString = Lzw.encode(input);
         //log("compressedString:", compressedString);
         var encodedBase64 = Base64.encode(compressedString);
@@ -281,7 +281,7 @@ var Api = new Class({
         var decodedBase64String = Base64.decode(input);
         var decompressedString = Lzw.decode(decodedBase64String);
         //log("decodedBase64String:", decodedBase64String);
-        //log("decompressedString:", decompressedString);
+        log("decompressedString:", decompressedString);
         return decompressedString;
     }
 });

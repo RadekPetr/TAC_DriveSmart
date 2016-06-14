@@ -17,7 +17,9 @@ function stripFileExtension(filename) {
     return filename;
 }
 
-function isFlashSupported() {       
+function isFlashSupported() {  
+    return false;
+         
     var flash = detectFlash();    
     if (flash.pv[0] >= 9) {
         return true;

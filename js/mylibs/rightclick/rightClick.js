@@ -33,7 +33,9 @@ var RightClick = {
                 RightClick.killEvents(ev);
             };
             window.addEventListener("mousedown", this.onGeckoMouse, true);
-            window.addEventListener("mouseup", this.onGeckoMouseUp, true);
+            window.addEventListener("mouseup", this.onGeckoMouseUp, true); 
+            window.addEventListener("mouseup", this.onGeckoMouseUp, false);
+
         } else {
             document.oncontextmenu = function() {
                 if (window.event.srcElement.id == RightClick.FlashObjectID)
