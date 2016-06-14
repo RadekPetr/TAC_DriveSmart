@@ -294,6 +294,7 @@ var User = new Class({
         return (totalFinishedCount / totalCount);
     },
     getModuleScore : function(moduleID) {
+        // TODO: 100 score for disabled concentration
         var userData = this._getUserData(moduleID).data;
         // debug(moduleID, userData);
         var allScores = new Array();
