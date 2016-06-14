@@ -121,9 +121,9 @@ var Api = new Class({
 
         this._sendRequest(jsonRequest, requestPayload, false);
     },
-    saveModuleProgress : function(requestPayload) {
+    saveModuleProgress : function(requestPayload, moduleID) {
         var retries = 0;
-        var externalModuleID = this._moduleIdMapping(Main.sequencePlayer.sequenceState.moduleID);
+        var externalModuleID = this._moduleIdMapping(moduleID);
 
         var jsonRequest = new Request({
             url : Main.USER_MODULE_PROGRESS_POST_URL + externalModuleID,

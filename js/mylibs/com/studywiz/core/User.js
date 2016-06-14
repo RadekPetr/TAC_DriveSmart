@@ -111,8 +111,9 @@ var User = new Class({
             completed_exercises : moduleState.finishedCount
         };
 
-        this.api.saveModuleProgress(requestPayload);
+        this.api.saveModuleProgress(requestPayload, moduleID);
     },
+
     setDefaultUserData : function(modules) {
         // storing the version of the data structure at the time of creation as data_version for each module and
         // also the app_version for the whole data structure
