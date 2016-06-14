@@ -295,9 +295,8 @@ var User = new Class({
     },
     getModuleScore: function (moduleID) {
         // 100 score for disabled concentration
-
         var userData = this.getModuleUserData(moduleID);
-        if (userData.info.disabled == false) {
+        if (userData.info.disabled == false || userData.info.disabled == undefined) {
             // debug(moduleID, userData);
             var allScores = new Array();
             Array.each(userData.data, function (sequenceState, index) {
@@ -307,11 +306,12 @@ var User = new Class({
                 }
             });
             var totalScore = allScores.average();
-            debug("Module " + moduleID + " score: ", totalScore);
         } else {
             // 100% score for disabled modules (aka concentration)
             var totalScore = 1;
-        }
+        } 
+        debug("Module " + moduleID + " score: ", totalScore);
+
         return totalScore;
     },
     getConcentrationLevel : function(seq) {
