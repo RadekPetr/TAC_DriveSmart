@@ -106,10 +106,15 @@ var MenuPlayer = new Class({
             var isLocked = this._isItemLocked(menuItemData);
             var isDisabled = this._isItemDisabledBecauseNoFlash(menuItem);
 
-            // store the module status in module info
-            Main.userTracker.getModuleUserData(menuItem.selectedModuleID).info.extend({
+            // store the module status in module info           
+            // it is an object actually so have to use append
+            Object.append(Main.userTracker.getModuleUserData(menuItem.selectedModuleID).info, {
                 disabled: isDisabled
-            });
+            })
+
+           // Main.userTracker.getModuleUserData(menuItem.selectedModuleID).info.extend({
+         //       disabled: isDisabled
+         //   });
 
             this.menuItems.push(menuItem);
 
