@@ -113,7 +113,20 @@ var User = new Class({
 
         this.api.saveModuleProgress(requestPayload, moduleID);
     },
+    // Flash not enabled, save concentration module
+    saveConcentrationModuleFullProgressData: function () {
+        var moduleID = "concentration";
+        // If flash not found make score 1
+        var moduleScore = 1;
+        var moduleState = this.getModuleState(moduleID);
 
+        var requestPayload = new Object();
+        requestPayload = {
+            score: (moduleScore * 100).toInt(),
+            completed_exercises: moduleState.finishedCount
+        };
+        this.api.saveModuleProgress(requestPayload, moduleID);
+    },
     setDefaultUserData : function(modules) {
         // storing the version of the data structure at the time of creation as data_version for each module and
         // also the app_version for the whole data structure
