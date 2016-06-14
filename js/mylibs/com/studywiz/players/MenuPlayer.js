@@ -102,18 +102,19 @@ var MenuPlayer = new Class({
                 data: menuItemData,
                 'class': 'menu_item no-select pane menu ' + itemColor
             });
-            this.menuItems.push(menuItem);
-
-            menuItem.add(this.container.id);
-            menuItem.show();
 
             var isLocked = this._isItemLocked(menuItemData);
-            var isDisabled = this._isItemDisabledBecauseNoFlash (menuItem);
+            var isDisabled = this._isItemDisabledBecauseNoFlash(menuItem);
 
             // store the module status in module info
             Main.userTracker.getModuleUserData(menuItem.selectedModuleID).info.extend({
                 disabled: isDisabled
             });
+
+            this.menuItems.push(menuItem);
+
+            menuItem.add(this.container.id);
+            menuItem.show();            
 
             if (isLocked) {
                 menuItem.lock();
@@ -123,9 +124,9 @@ var MenuPlayer = new Class({
                 menuItem.disable();
             }
             // Save concentration if disabled      
-            if (isDisabled == true && menuItem.selectedModuleID == 'concentration') {
-                Main.userTracker.saveConcentrationModuleFullProgressData();
-            } 
+            //if (isDisabled == true && menuItem.selectedModuleID == 'concentration') {
+          //      Main.userTracker.saveConcentrationModuleFullProgressData();
+          //  } 
             
           
 

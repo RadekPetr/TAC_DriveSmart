@@ -230,12 +230,12 @@ var User = new Class({
         }
         return started;
     },
-    getModuleState : function(moduleID) {
+    getModuleState: function (moduleID) {
 
         // var moduleIDs = new Hash(this.userData.modules).getKeys();
         //debug(moduleID, "Module IDs", moduleIDs);
-
-        var sequencesInModule = this.getModuleUserData(moduleID).data;
+        var userData = this.getModuleUserData(moduleID);
+        var sequencesInModule = userData.data;
 
         var unfinishedSequences = new Array();
         var introSequences = new Array();
@@ -243,26 +243,35 @@ var User = new Class({
         if (sequencesInModule == undefined) {
             var sequencesInModule = new Array();
         } else {
-            unfinishedSequences = sequencesInModule.filter(function(item, index) {
+            unfinishedSequences = sequencesInModule.filter(function (item, index) {
                 return item.completed == false && item.trackProgress == true;
             });
-            introSequences = sequencesInModule.filter(function(item, index) {
+            introSequences = sequencesInModule.filter(function (item, index) {
                 return item.trackProgress == false;
             });
         }
 
         var progressObj = {};
-        // Minus the ModuleIntro
-        progressObj.total = sequencesInModule.length - introSequences.length;
-        progressObj.finishedCount = progressObj.total - unfinishedSequences.length;
-        if (progressObj.finishedCount == 0) {
-            progressObj.progress = 0;
-        } else {
-            progressObj.progress = (progressObj.finishedCount / progressObj.total) * 100;
-        }
-        if (progressObj.total == progressObj.finishedCount) {
+        if (userData.info.disabled == true) {
+            // For disabled modules pretend they are finished
+            // Minus the ModuleIntro
+            progressObj.total = sequencesInModule.length - introSequences.length;
+            progressObj.finishedCount = progressObj.total;
+            progressObj.progress = 100;
             progressObj.completed = true;
-        }
+        } else {
+            // Minus the ModuleIntro
+            progressObj.total = sequencesInModule.length - introSequences.length;
+            progressObj.finishedCount = progressObj.total - unfinishedSequences.length;
+            if (progressObj.finishedCount == 0) {
+                progressObj.progress = 0;
+            } else {
+                progressObj.progress = (progressObj.finishedCount / progressObj.total) * 100;
+            }
+            if (progressObj.total == progressObj.finishedCount) {
+                progressObj.completed = true;
+            }
+        }     
         return progressObj;
     },
     getTotalScore : function() {
