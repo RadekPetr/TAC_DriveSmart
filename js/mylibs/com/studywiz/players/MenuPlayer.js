@@ -108,7 +108,7 @@ var MenuPlayer = new Class({
             menuItem.show();
 
             var isLocked = this._isItemLocked(menuItemData);
-            var isDisabled = this._isItemDisabled(menuItem);
+            var isDisabled = this._isItemDisabledBecauseNoFlash (menuItem);
 
             if (isLocked) {
                 menuItem.lock();
@@ -206,7 +206,7 @@ var MenuPlayer = new Class({
             return isLocked;
         }
     },
-    _isItemDisabled: function (menuItem) {
+    _isItemDisabledBecauseNoFlash: function (menuItem) {
         // Disable if flash is required but not available
         var isDisabled = false;
         if (isFlashSupported() == false && menuItem.options.data.flashOnly == true) {
