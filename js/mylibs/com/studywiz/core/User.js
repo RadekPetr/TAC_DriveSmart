@@ -34,7 +34,7 @@ var User = new Class({
         var defaultDataHash = new Hash(this.defaultData);
         if (userProgressData == null || userProgressData == undefined || userProgressData == "no data") {
             this.userData = defaultDataHash;
-            this._getUserData("concentration").info.extend({
+            this.getModuleUserData("concentration").info.extend({
                 level : this.concentrationLevel
             });
             debug("No User Data saved - will create new user data from Default");
@@ -45,7 +45,7 @@ var User = new Class({
 
             this.userData = new Hash(userProgressData);
             debug("Loaded user progress from server", this.userData);
-            this.concentrationLevel = this._getUserData("concentration").info["level"];
+            this.concentrationLevel = this.getModuleUserData("concentration").info["level"];
             var userSavedVersion = this.userData.info["app_version"];
             debug("The user saved app_version: ", userSavedVersion);
 
@@ -59,7 +59,7 @@ var User = new Class({
                     Main.userTracker.saveCompleteUserData_Empty();
                     // use defaults
                     this.userData = defaultDataHash;
-                    this._getUserData("concentration").info.extend({
+                    this.getModuleUserData("concentration").info.extend({
                         level : this.concentrationLevel
                     });
                 }
@@ -203,7 +203,7 @@ var User = new Class({
         this.saveProgress();
     },
     getUnfinishedSequences : function(moduleID) {
-        var sequencesInModule = this._getUserData(moduleID).data;
+        var sequencesInModule = this.getModuleUserData(moduleID).data;
         if (moduleID == "intro" && Main.sequencePlayer.fromMenu == true) {
             var unfinishedSequences = sequencesInModule.filter(function(item, index) {
                 return (item.completed == false || item.completed == true);
@@ -220,7 +220,7 @@ var User = new Class({
         return unfinishedSequences;
     },
     getModuleStarted : function(moduleID) {
-        var sequencesInModule = this._getUserData(moduleID).data;
+        var sequencesInModule = this.getModuleUserData(moduleID).data;
         var started = true;
         var unfinishedSequences = sequencesInModule.filter(function(item, index) {
             return item.completed == false;
@@ -235,7 +235,7 @@ var User = new Class({
         // var moduleIDs = new Hash(this.userData.modules).getKeys();
         //debug(moduleID, "Module IDs", moduleIDs);
 
-        var sequencesInModule = this._getUserData(moduleID).data;
+        var sequencesInModule = this.getModuleUserData(moduleID).data;
 
         var unfinishedSequences = new Array();
         var introSequences = new Array();
@@ -295,7 +295,7 @@ var User = new Class({
     },
     getModuleScore : function(moduleID) {
         // TODO: 100 score for disabled concentration
-        var userData = this._getUserData(moduleID).data;
+        var userData = this.getModuleUserData(moduleID).data;
         // debug(moduleID, userData);
         var allScores = new Array();
         Array.each(userData, function(sequenceState, index) {
@@ -310,7 +310,7 @@ var User = new Class({
     },
     getConcentrationLevel : function(seq) {
 
-        var userData = this._getUserData("concentration").data;
+        var userData = this.getModuleUserData("concentration").data;
         debug("From:", (seq - 6), " To:", (seq + 1));
         var lastSix = userData.filter(function(item, index) {
             return (parseInt(item.id) < (seq + 1) && parseInt(item.id) > (seq - 6));
@@ -358,7 +358,7 @@ var User = new Class({
                 this.concentrationLevel++;
                 debug("Increasing the concentration level to: ", this.concentrationLevel);
                 // Store the current level
-                this._getUserData("concentration").info.extend({
+                this.getModuleUserData("concentration").info.extend({
                     level : this.concentrationLevel
                 });
             }
@@ -379,7 +379,7 @@ var User = new Class({
 
     },
     getUserSequenceData : function(sequenceID, moduleID) {
-        var moduleSequences = this._getUserData(moduleID).data;
+        var moduleSequences = this.getModuleUserData(moduleID).data;
         var result = moduleSequences.filter(function(item, index) {
             return item.id == sequenceID;
         });
@@ -390,7 +390,7 @@ var User = new Class({
     myParent : function() {
         return this.options.parent;
     },
-    _getUserData : function(moduleID) {
+    getModuleUserData : function(moduleID) {
         try {
             return this.userData.modules[moduleID];
         } catch (err) {

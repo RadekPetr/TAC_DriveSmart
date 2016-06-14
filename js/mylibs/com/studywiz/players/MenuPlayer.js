@@ -110,6 +110,11 @@ var MenuPlayer = new Class({
             var isLocked = this._isItemLocked(menuItemData);
             var isDisabled = this._isItemDisabledBecauseNoFlash (menuItem);
 
+            // store the module status in module info
+            Main.userTracker.getModuleUserData(menuItem.selectedModuleID).info.extend({
+                disabled: isDisabled
+            }); 
+
             if (isLocked) {
                 menuItem.lock();
             }
@@ -120,7 +125,9 @@ var MenuPlayer = new Class({
             // Save concentration if disabled      
             if (isDisabled == true && menuItem.selectedModuleID == 'concentration') {
                 Main.userTracker.saveConcentrationModuleFullProgressData();
-            }
+            } 
+            
+          
 
 
             if (Main.DEBUG == true) {
