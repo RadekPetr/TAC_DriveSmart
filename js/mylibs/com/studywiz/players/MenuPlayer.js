@@ -113,7 +113,7 @@ var MenuPlayer = new Class({
             // store the module status in module info
             Main.userTracker.getModuleUserData(menuItem.selectedModuleID).info.extend({
                 disabled: isDisabled
-            }); 
+            });
 
             if (isLocked) {
                 menuItem.lock();
