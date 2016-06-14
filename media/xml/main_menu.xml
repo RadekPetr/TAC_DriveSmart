@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root version="5">
+<root version="6">
   <Seq trackProgress="false" trackScore="false" desc="Main menu" Ex="1">
     <Step fmt="Menu">
       <Items>
@@ -7,8 +7,8 @@
         <Data flashOnly="false" showProgress="true" preconditions= "intro" moduleID="scanning" preview="scanning/scan_umt06_next_last.jpg" description="Scanning means always looking around for other vehicles, motorcyclists, cyclists and pedestrians. This module will help you to develop your hazard perception skills by asking you to identify potential hazards in many different situations.">Scanning</Data>
         <Data flashOnly="false" showProgress="true" preconditions= "intro" moduleID="kaps" preview="kaps/kaps_shops_start_first.jpg" description="The Keep Ahead and Play Safe exercises will help you to improve your ability to identify and avoid hazards. Keeping ahead means looking far beyond our own car to see potential hazards on the road. Playing it safe means avoiding risks, wherever possible, by always choosing the safer option.">Keep Ahead &amp; Play Safe</Data>
         <Data flashOnly="true" showProgress="true" preconditions= "intro" moduleID="concentration" preview="concentration/con_mainmenu.jpg" description="The Concentration exercises will help improve your ability to concentrate on more than one thing at a time. Similar exercises have been used in the past to help develop the concentration span of airline pilots.">Concentration</Data>
-        <Data flashOnly="false" showProgress="true" preconditions= "concentration,kaps,scanning" moduleID="country" preview="country/country_cla03_start_first.jpg" description="The country driving exercises will help you to develop your hazard perception skills in regional and rural environments.">Country Driving</Data>
-        <Data flashOnly="false" showProgress="true" preconditions= "concentration,kaps,scanning" moduleID="urban" preview="urban/urban_umt02_next_last.jpg" description="The urban driving exercises will help you to develop your hazard perception skills in an urban environment.">Urban Driving</Data>
+        <Data flashOnly="false" showProgress="true" preconditions= "intro" moduleID="country" preview="country/country_cla03_start_first.jpg" description="The country driving exercises will help you to develop your hazard perception skills in regional and rural environments.">Country Driving</Data>
+        <Data flashOnly="false" showProgress="true" preconditions= "intro" moduleID="urban" preview="urban/urban_umt02_next_last.jpg" description="The urban driving exercises will help you to develop your hazard perception skills in an urban environment.">Urban Driving</Data>
       </Items>
     </Step>
   </Seq>
