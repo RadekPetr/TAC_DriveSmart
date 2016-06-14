@@ -293,19 +293,25 @@ var User = new Class({
         debug("Overall progress: ", totalFinishedCount / totalCount);
         return (totalFinishedCount / totalCount);
     },
-    getModuleScore : function(moduleID) {
-        // TODO: 100 score for disabled concentration
-        var userData = this.getModuleUserData(moduleID).data;
-        // debug(moduleID, userData);
-        var allScores = new Array();
-        Array.each(userData, function(sequenceState, index) {
-            // don't count Module Intros
-            if (sequenceState.trackScore != "false") {
-                allScores = allScores.concat(sequenceState.score);
-            }
-        });
-        var totalScore = allScores.average();
-        debug("Module " + moduleID + " score: ", totalScore);
+    getModuleScore: function (moduleID) {
+        // 100 score for disabled concentration
+
+        var userData = this.getModuleUserData(moduleID);
+        if (userData.info.disabled == false) {
+            // debug(moduleID, userData);
+            var allScores = new Array();
+            Array.each(userData.data, function (sequenceState, index) {
+                // don't count Module Intros
+                if (sequenceState.trackScore != "false") {
+                    allScores = allScores.concat(sequenceState.score);
+                }
+            });
+            var totalScore = allScores.average();
+            debug("Module " + moduleID + " score: ", totalScore);
+        } else {
+            // 100% score for disabled modules (aka concentration)
+            var totalScore = 1;
+        }
         return totalScore;
     },
     getConcentrationLevel : function(seq) {
