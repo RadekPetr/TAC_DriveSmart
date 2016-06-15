@@ -20,6 +20,7 @@ var SequencePlayer = new Class({
         parent: null
     },
     initialize: function (myParent, module, myOptions) {
+        this.currentModule = module;
 
         this.setOptions(myOptions);
         this.options.parent = myParent;
@@ -175,7 +176,26 @@ var SequencePlayer = new Class({
                         next: "MainMenuFromIntro.clicked"
                     });
 
-                    // TODO: play level chnage audio if  this.playConLevelAudio = false;
+                    // Previous button - show if there is something before
+                    debug ("this.currentModule", this.currentModule);
+                    if (this.currentModule.getPreviousSequenceID() != null) {
+                        this._addButton({
+                            type: "Previous",
+                            next: "Previous.clicked"
+                        });
+                    }
+
+
+                // TODO:
+                // if module is not finished
+                // if from menu - go to next unfinished lesson
+                // show (Blue) Repeat and Go to Previous for completed lessons
+                // Show (Green) Continue - goes to next unfinished and Go to Previous for incompleted lessons or if next lesson is incomplete
+
+                // If module is complete
+                // if from menu go to start
+
+                // TODO: play level chnage audio if  this.playConLevelAudio = false;
 
                     break;
                 case "ModuleIntro":
@@ -748,6 +768,14 @@ var SequencePlayer = new Class({
                 this.myParent().fireEvent("SEQUENCE", {
                     type: "sequence.event",
                     next: 'sequence.exit'
+                });
+                break;
+            case "Previous.clicked":
+                this.reset();
+                this.repeating = false;
+                this.myParent().fireEvent("SEQUENCE", {
+                    type: "sequence.event",
+                    next: 'sequence.previous'
                 });
                 break;
             case "Cameo.visor.image.ready":

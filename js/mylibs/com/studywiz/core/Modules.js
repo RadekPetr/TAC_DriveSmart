@@ -60,6 +60,7 @@ var Modules = new Class({
             case "module.start":
                 Main.sequencePlayer.fromMenu = true;
                 var selectedModule = this.modules.get(this.options.moduleID);
+                Main.sequencePlayer.currentModule =selectedModule;
                 selectedModule.fireEvent("SEQUENCE", {
                     type : "sequence.event",
                     next : 'sequence.next'

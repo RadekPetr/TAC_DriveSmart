@@ -169,7 +169,13 @@ UIHelpers.getButtonOptions = function(buttonType) {
             style : {
                 width : '195px'
             }
-        }
+        },
+        "Previous" : {
+            id : "button_" + buttonType,
+            text : "Previous",
+            next : "Previous.clicked",
+            'class' : "button position_3 pane blue"
+        },
     });
     var options = presets.get(buttonType);
     return options;
