@@ -137,7 +137,8 @@ var User = new Class({
         //          data:[],
         //          info:
         //               {
-        //                 data_version:x
+        //                 data_version:x,
+        //                 disabled:x
         //               }
         //        }
         //     },
@@ -146,7 +147,8 @@ var User = new Class({
         //
         modules.each( function(moduleObject, key, hash) {
             var moduleInfo = moduleObject.getModuleInfo();
-            var sequenceIds = moduleObject.sequences.getKeys();
+            var sequenceIds = Object.keys(moduleObject.sequences);
+           
             var sequences = new Array();
 
             Array.each(sequenceIds, function(sequenceID, index) {
@@ -173,7 +175,8 @@ var User = new Class({
             
             moduleData.set(key, new Hash({
                 info : new Hash({
-                    data_version : moduleObject.options.module_structure_version
+                    data_version : moduleObject.options.module_structure_version,
+                    disabled: false
                 }),
                 data : sequences
             }));
