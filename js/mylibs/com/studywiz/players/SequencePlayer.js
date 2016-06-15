@@ -177,11 +177,19 @@ var SequencePlayer = new Class({
                     });
 
                     // Previous button - show if there is something before
-                    debug ("this.currentModule", this.currentModule);
+                  
                     if (this.currentModule.getPreviousSequenceID() != null) {
                         this._addButton({
-                            type: "Previous",
-                            next: "Previous.clicked"
+                            type: "Previous_Sequence",
+                            next: "Previous_Sequence.clicked"
+                        });
+                    }
+
+                   
+                    if (this.currentModule.getNextSequenceID() != null) {
+                        this._addButton({
+                            type: "Next_Sequence",
+                            next: "Next_Sequence.clicked"
                         });
                     }
 
@@ -770,12 +778,20 @@ var SequencePlayer = new Class({
                     next: 'sequence.exit'
                 });
                 break;
-            case "Previous.clicked":
+            case "Previous_Sequence.clicked":
                 this.reset();
                 this.repeating = false;
                 this.myParent().fireEvent("SEQUENCE", {
                     type: "sequence.event",
-                    next: 'sequence.previous'
+                    next: 'repeat.previous'
+                });
+                break;
+            case "Next_Sequence.clicked":
+                this.reset();
+                this.repeating = false;
+                this.myParent().fireEvent("SEQUENCE", {
+                    type: "sequence.event",
+                    next: 'repeat.next'
                 });
                 break;
             case "Cameo.visor.image.ready":

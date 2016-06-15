@@ -50,8 +50,15 @@ var ModulePlayer = new Class({
                 this.playSequence(this.options.currentSequenceID);
                 break;
 
-            case "sequence.previous":
+            case "repeat.previous":
                 var sequenceID = this.getPreviousSequenceID();
+                if (sequenceID != null) {
+                    this.options.currentSequenceID = sequenceID;
+                    this.playSequence(sequenceID);
+                }
+                break;
+            case "repeat.next":
+                var sequenceID = this.getNextSequenceID();
                 if (sequenceID != null) {
                     this.options.currentSequenceID = sequenceID;
                     this.playSequence(sequenceID);
