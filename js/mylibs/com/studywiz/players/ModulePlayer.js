@@ -151,17 +151,10 @@ var ModulePlayer = new Class({
         if (indexOfCurrentSequence > 0) {
             var previousSequenceID = IDsWithoutIntros[indexOfCurrentSequence - 1]
             debug(IDsWithoutIntros, this.options.currentSequenceID, "previousSequenceID", previousSequenceID);
-           return previousSequenceID;
-           // this.options.currentSequenceID = previousSequenceID;
-
-           /// this.playSequence(this.options.currentSequenceID);
-            //var current =this.options.currentSequenceID;
+           return previousSequenceID;          
         } else {
             return null;
-            // theere is no previous sequence, should not get here
         }
-
-
     },
      getNextSequenceID: function () {
         var sequenceIDs = this.getModuleSequenceIDs();
@@ -174,13 +167,8 @@ var ModulePlayer = new Class({
             var nextSequenceID = IDsWithoutIntros[indexOfCurrentSequence + 1]
             debug(IDsWithoutIntros, this.options.currentSequenceID, "previousSequenceID", nextSequenceID);
            return nextSequenceID;
-           // this.options.currentSequenceID = previousSequenceID;
-
-           /// this.playSequence(this.options.currentSequenceID);
-            //var current =this.options.currentSequenceID;
         } else {
             return null;
-            // theere is no previous sequence, should not get here
         }
     },
     _updateConcentrationLevel: function (sequenceID) {
