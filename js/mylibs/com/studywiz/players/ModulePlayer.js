@@ -154,29 +154,29 @@ var ModulePlayer = new Class({
         var IDsWithoutIntros = sequenceIDs.filter(function (item, index) {
             return item != 0 && item != -1;
         });
-        var indexOfCurrentSequence = IDsWithoutIntros.indexOf(this.options.currentSequenceID);
+        var indexOfCurrentSequence = IDsWithoutIntros.indexOf(this.options.currentSequenceID + "");
         if (indexOfCurrentSequence > 0) {
-            var previousSequenceID = IDsWithoutIntros[indexOfCurrentSequence - 1]
-            debug(IDsWithoutIntros, this.options.currentSequenceID, "previousSequenceID", previousSequenceID);
-           return previousSequenceID;          
+            var previousSequenceID = IDsWithoutIntros[indexOfCurrentSequence - 1]           
         } else {
-            return null;
+            previousSequenceID = null;
         }
+        debug(IDsWithoutIntros,indexOfCurrentSequence, this.options.currentSequenceID, "++++++ previousSequenceID", previousSequenceID);
+        return previousSequenceID;
     },
-     getNextSequenceID: function () {
+    getNextSequenceID: function () {
         var sequenceIDs = this.getModuleSequenceIDs();
         // filter out intros
         var IDsWithoutIntros = sequenceIDs.filter(function (item, index) {
             return item != 0 && item != -1;
         });
-        var indexOfCurrentSequence = IDsWithoutIntros.indexOf(this.options.currentSequenceID);
-        if (indexOfCurrentSequence < IDsWithoutIntros.length) {
-            var nextSequenceID = IDsWithoutIntros[indexOfCurrentSequence + 1]
-            debug(IDsWithoutIntros, this.options.currentSequenceID, "previousSequenceID", nextSequenceID);
-           return nextSequenceID;
+        var indexOfCurrentSequence = IDsWithoutIntros.indexOf(this.options.currentSequenceID + "");
+        if (indexOfCurrentSequence < IDsWithoutIntros.length && indexOfCurrentSequence!=-1) {
+            var nextSequenceID = IDsWithoutIntros[indexOfCurrentSequence + 1]       
         } else {
-            return null;
+            nextSequenceID = null;
         }
+        debug(IDsWithoutIntros, indexOfCurrentSequence, this.options.currentSequenceID, "++++++ nextSequenceID", nextSequenceID);
+        return nextSequenceID;
     },
     _updateConcentrationLevel: function (sequenceID) {
         if (this.options.id == "concentration") {

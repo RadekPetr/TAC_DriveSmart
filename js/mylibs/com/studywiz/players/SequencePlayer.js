@@ -176,23 +176,19 @@ var SequencePlayer = new Class({
                         next: "MainMenuFromIntro.clicked"
                     });
 
-                    // Previous button - show if there is something before
-                  
-                    if (this.currentModule.getPreviousSequenceID() != null) {
-                        this._addButton({
-                            type: "Previous_Sequence",
-                            next: "Previous_Sequence.clicked"
-                        });
-                    }
-
-                   
-                    if (this.currentModule.getNextSequenceID() != null) {
-                        this._addButton({
-                            type: "Next_Sequence",
-                            next: "Next_Sequence.clicked"
-                        });
-                    }
-
+                    // Previous button - show if there is something before                 
+                  if (this.currentModule.getNextSequenceID() != null) {
+                      this._addButton({
+                          type: "Next_Sequence",
+                          next: "Next_Sequence.clicked"
+                      });
+                  }
+                  if (this.currentModule.getPreviousSequenceID() != null) {
+                      this._addButton({
+                          type: "Previous_Sequence",
+                          next: "Previous_Sequence.clicked"
+                      });
+                  }
 
                 // TODO:
                 // if module is not finished
