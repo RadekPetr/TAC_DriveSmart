@@ -150,6 +150,7 @@ var Modules = new Class({
                         var selectedModuleID = moduleSelector.options[moduleSelector.selectedIndex].value;
                         var selectedModule = this.modules.get(selectedModuleID);
                         var sequenceID = sequenceSelector.options[sequenceSelector.selectedIndex].value;
+                        Main.sequencePlayer.currentModule = selectedModule;
                         selectedModule.playSequence(sequenceID);
                     }.bind(this)
                 }
