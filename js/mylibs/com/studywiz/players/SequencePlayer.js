@@ -167,7 +167,7 @@ var SequencePlayer = new Class({
                     UIHelpers.setClasses(moduleProgressBar['holder'], "no-select module_progress_intro");
                     moduleProgressBar['holder'].inject(titleDiv);
 
-                    if (this.sequenceState.completed  == false) {
+                    if (this.sequenceState.completed == false) {
                         this._addButton({
                             type: "Continue",
                             next: "SequenceIntro.done"
@@ -185,7 +185,7 @@ var SequencePlayer = new Class({
                     });
 
                     // Previous button - show if there is something before                 
-                    if (this.currentModule.getNextSequenceID() != null ) {
+                    if (this.currentModule.getNextSequenceID() != null) {
                         this._addButton({
                             type: "Next_Sequence",
                             next: "Next_Sequence.clicked"
@@ -382,10 +382,29 @@ var SequencePlayer = new Class({
                     break;
                 case "Continue":
                     // NOTE IMPORTANT - this only can be at the end of the sequence !!!!
-                    this._addButton({
-                        type: "Continue",
-                        next: "Continue.clicked"
-                    });
+
+                    var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
+                    // Handle finished module situation
+                    if (moduleState.completed == false) {
+                        this._addButton({
+                            type: "Continue",
+                            next: "Continue.clicked"
+                        });
+                    } else {
+                        // Continue - go to next if module is complete                 
+                        if (this.currentModule.getNextSequenceID() != null) {
+                            this._addButton({
+                                type: "Continue",
+                                next: "Next_Sequence.clicked"
+                            });
+                        }
+                    }
+
+
+
+
+
+
                     this._addButton({
                         type: "Main Menu",
                         next: "MainMenu.clicked"
@@ -1587,7 +1606,7 @@ var SequencePlayer = new Class({
                 next: "MainMenuFromIntro.clicked"
             });
 
-           
+
             this._updateUserProgress();
 
             //if (this.fromMenu == true) {
@@ -1609,6 +1628,7 @@ var SequencePlayer = new Class({
             this._hideOtherVideos(step.media.moduleIntroVideo.playerID);
             this.activeVideo.registerPlaybackStartEvent();
             // Already played the intro video so this time show continue buttons
+            var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
             if (this.sequenceState.completed == true) {
                 // Handle finished module situation
                 if (moduleState.completed == false) {
@@ -1629,7 +1649,7 @@ var SequencePlayer = new Class({
                 this._addButton({
                     type: "Main Menu",
                     next: "MainMenuFromIntro.clicked"
-                });               
+                });
             }
             this.fromMenu = false;
             step.media.moduleIntroVideo.start();
