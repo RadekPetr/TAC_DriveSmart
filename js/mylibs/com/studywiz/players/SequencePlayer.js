@@ -167,39 +167,38 @@ var SequencePlayer = new Class({
                     UIHelpers.setClasses(moduleProgressBar['holder'], "no-select module_progress_intro");
                     moduleProgressBar['holder'].inject(titleDiv);
 
-                    this._addButton({
-                        type: "Continue",
-                        next: "SequenceIntro.done"
-                    });
+                    if (moduleState.completed == false) {
+                        this._addButton({
+                            type: "Continue",
+                            next: "SequenceIntro.done"
+                        });
+                    } else {
+                        this._addButton({
+                            type: "Repeat Exercize",
+                            next: "SequenceIntro.done"
+                        });
+                    }
+
                     this._addButton({
                         type: "Main Menu",
                         next: "MainMenuFromIntro.clicked"
                     });
 
                     // Previous button - show if there is something before                 
-                  if (this.currentModule.getNextSequenceID() != null) {
-                      this._addButton({
-                          type: "Next_Sequence",
-                          next: "Next_Sequence.clicked"
-                      });
-                  }
-                  if (this.currentModule.getPreviousSequenceID() != null) {
-                      this._addButton({
-                          type: "Previous_Sequence",
-                          next: "Previous_Sequence.clicked"
-                      });
-                  }
+                    if (this.currentModule.getNextSequenceID() != null ) {
+                        this._addButton({
+                            type: "Next_Sequence",
+                            next: "Next_Sequence.clicked"
+                        });
+                    }
+                    if (this.currentModule.getPreviousSequenceID() != null) {
+                        this._addButton({
+                            type: "Previous_Sequence",
+                            next: "Previous_Sequence.clicked"
+                        });
+                    }
 
-                // TODO:
-                // if module is not finished
-                // if from menu - go to next unfinished lesson
-                // show (Blue) Repeat and Go to Previous for completed lessons
-                // Show (Green) Continue - goes to next unfinished and Go to Previous for incompleted lessons or if next lesson is incomplete
-
-                // If module is complete
-                // if from menu go to start
-
-                // TODO: play level chnage audio if  this.playConLevelAudio = false;
+                    // TODO: play level chnage audio if  this.playConLevelAudio = false;
 
                     break;
                 case "ModuleIntro":
@@ -1528,6 +1527,8 @@ var SequencePlayer = new Class({
         var moduleTitle = UIHelpers.setMainPanel(this.moduleInfo.moduleTitle);
         UIHelpers.setClasses(moduleTitle, 'module-title no-select rotate90');
 
+        var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
+
         if (step.media.moduleIntroVideo == undefined) {
             step.media.previewImage.options.style.width = '100%';
             step.media.previewImage.options.style.height = '100%';
@@ -1561,38 +1562,39 @@ var SequencePlayer = new Class({
             });
             moduleProgress.inject(titleDiv);
 
-            var moduleState = Main.userTracker.getModuleState(this.moduleInfo.moduleID);
             var moduleProgressBar = UIHelpers.progressBarSetup(moduleState.progress, this.moduleInfo.moduleID);
             UIHelpers.setClasses(moduleProgressBar['holder'], "no-select module_progress_intro");
             moduleProgressBar['holder'].inject(titleDiv);
 
-            this._addButton({
-                type: "Continue",
-                next: "Continue.clicked"
-            });
+            // Handle finished module situation
+            if (moduleState.completed == false) {
+                this._addButton({
+                    type: "Continue",
+                    next: "Continue.clicked"
+                });
+            } else {
+                // Continue - go to next if module is complete                 
+                if (this.currentModule.getNextSequenceID() != null) {
+                    this._addButton({
+                        type: "Continue",
+                        next: "Next_Sequence.clicked"
+                    });
+                }
+            }
+
             this._addButton({
                 type: "Main Menu",
                 next: "MainMenuFromIntro.clicked"
             });
-            /*
-// If lesson completed - then chnage Continue to Repeat
-// Or set repeating = true
-            // If there is a next sequence show
+
+            // Next button - show if there is something next                 
+            if (this.currentModule.getNextSequenceID() != null) {
                 this._addButton({
-                            type : "Next",
-                            next : "Next_Sequence.clicked"
-                        });
+                    type: "Next_Sequence",
+                    next: "Next_Sequence.clicked"
+                });
+            }
 
-            // If thre is previous sequence show Previous
-            this._addButton({
-                            type : "Previous",
-                            next : "Previous_Sequence.clicked"
-                        });
-
-          
-            
-            
-            */
             this._updateUserProgress();
 
             //if (this.fromMenu == true) {
@@ -1613,17 +1615,37 @@ var SequencePlayer = new Class({
 
             this._hideOtherVideos(step.media.moduleIntroVideo.playerID);
             this.activeVideo.registerPlaybackStartEvent();
-
+            // Already played the intro video so this time show continue buttons
             if (this.sequenceState.completed == true) {
-                // Already played the intro video so this time show continue buttons
-                this._addButton({
-                    type: "Continue",
-                    next: "Continue.clicked"
-                });
+                // Handle finished module situation
+                if (moduleState.completed == false) {
+                    this._addButton({
+                        type: "Continue",
+                        next: "Continue.clicked"
+                    });
+                } else {
+                    // Continue - go to next if module is complete                 
+                    if (this.currentModule.getNextSequenceID() != null) {
+                        this._addButton({
+                            type: "Continue",
+                            next: "Next_Sequence.clicked"
+                        });
+                    }
+                }
+
                 this._addButton({
                     type: "Main Menu",
                     next: "MainMenuFromIntro.clicked"
                 });
+
+
+                // Next button - show if there is something next                 
+                if (this.currentModule.getNextSequenceID() != null) {
+                    this._addButton({
+                        type: "Next_Sequence",
+                        next: "Next_Sequence.clicked"
+                    });
+                }
             }
             this.fromMenu = false;
             step.media.moduleIntroVideo.start();

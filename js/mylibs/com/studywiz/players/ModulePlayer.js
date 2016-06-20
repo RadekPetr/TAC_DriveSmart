@@ -68,10 +68,18 @@ var ModulePlayer = new Class({
                 var moduleSequences = this.getModuleSequenceIDs();
                 var unfinishedSequences = Main.userTracker.getUnfinishedSequences(this.options.id);
                 if (unfinishedSequences.length == 0) {
-                    // is last
-                    this.myParent().fireEvent("MODULE", {
-                        next: "module.finished"
-                    });
+                    if (Main.sequencePlayer.fromMenu == true) {
+                        //  repeating module
+                        // TODO - need to be able to repeat 0 sequence
+                        this.options.currentSequenceID = 0;
+                        this.playSequence(this.options.currentSequenceID);
+                    } else {
+                        // is last = finish module
+                        this.myParent().fireEvent("MODULE", {
+                            next: "module.finished"
+                        });
+                    }
+
                 } else {
                     if (Main.sequencePlayer.fromMenu == true) {
                         this.options.currentSequenceID = 0;
@@ -150,31 +158,39 @@ var ModulePlayer = new Class({
     },
     getPreviousSequenceID: function () {
         var sequenceIDs = this.getModuleSequenceIDs();
+        var  previousSequenceID = null;
         // filter out intros
         var IDsWithoutIntros = sequenceIDs.filter(function (item, index) {
-            return item != 0 && item != -1;
+            return item != -1;
         });
+        
         var indexOfCurrentSequence = IDsWithoutIntros.indexOf(this.options.currentSequenceID + "");
         if (indexOfCurrentSequence > 0) {
-            var previousSequenceID = IDsWithoutIntros[indexOfCurrentSequence - 1]           
-        } else {
-            previousSequenceID = null;
-        }
-        debug(IDsWithoutIntros,indexOfCurrentSequence, this.options.currentSequenceID, "++++++ previousSequenceID", previousSequenceID);
+            previousSequenceID = IDsWithoutIntros[indexOfCurrentSequence - 1]
+        } 
+
+        debug(IDsWithoutIntros, indexOfCurrentSequence, this.options.currentSequenceID, "++++++ previousSequenceID", previousSequenceID);
         return previousSequenceID;
     },
     getNextSequenceID: function () {
         var sequenceIDs = this.getModuleSequenceIDs();
+        var nextSequenceID = null;
         // filter out intros
         var IDsWithoutIntros = sequenceIDs.filter(function (item, index) {
-            return item != 0 && item != -1;
+            return item != -1;
         });
         var indexOfCurrentSequence = IDsWithoutIntros.indexOf(this.options.currentSequenceID + "");
-        if (indexOfCurrentSequence < IDsWithoutIntros.length && indexOfCurrentSequence!=-1) {
-            var nextSequenceID = IDsWithoutIntros[indexOfCurrentSequence + 1]       
-        } else {
-            nextSequenceID = null;
-        }
+        
+
+        if (indexOfCurrentSequence < IDsWithoutIntros.length && indexOfCurrentSequence != -1) {
+
+            var nextSequenceInList = IDsWithoutIntros[indexOfCurrentSequence + 1];
+            var sequenceState = Main.userTracker.getUserSequenceState(this.options.currentSequenceID,         this.getModuleInfo().moduleID);
+
+            if (sequenceState.completed==true) {
+                nextSequenceID = nextSequenceInList;
+            } 
+        } 
         debug(IDsWithoutIntros, indexOfCurrentSequence, this.options.currentSequenceID, "++++++ nextSequenceID", nextSequenceID);
         return nextSequenceID;
     },
