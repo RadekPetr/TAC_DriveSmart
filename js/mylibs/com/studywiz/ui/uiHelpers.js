@@ -178,15 +178,15 @@ UIHelpers.getButtonOptions = function(buttonType) {
         },
         "Previous_Sequence" : {
             id : "button_" + buttonType,
-            text : "Previous",
+            text : "< Previous",
             next : "Previous_Sequence.clicked",
-            'class' : "button position_3 pane blue"
+            'class' : "button position_6 pane blue"
         },
         "Next_Sequence" : {
             id : "button_" + buttonType,
-            text : "Next",
+            text : "Next >",
             next : "Next_Sequence.clicked",
-            'class' : "button position_4 pane orange"
+            'class' : "button position_5 pane blue"
         }
     });
     var options = presets.get(buttonType);

@@ -80,3 +80,17 @@
 	top: 470px;
 }
 
+.position_5 {
+	left:570px;
+	top: 430px;	
+	min-width:110px;
+	min-height: 25px;
+}
+
+.position_6 {
+	left:450px;
+	top: 430px;
+	min-width:110px;
+	min-height: 25px;
+}
+
