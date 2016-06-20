@@ -84,7 +84,7 @@ UIHelpers.getButtonOptions = function(buttonType) {
         },
         "Repeat Exercize" : {
             id : "button_" + buttonType,
-            text : "Repeat",
+            text : "Continue (Repeat)",
             next : "Continue.clicked",
             'class' : "button position_1 pane green"
         },
