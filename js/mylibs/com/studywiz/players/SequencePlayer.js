@@ -167,7 +167,7 @@ var SequencePlayer = new Class({
                     UIHelpers.setClasses(moduleProgressBar['holder'], "no-select module_progress_intro");
                     moduleProgressBar['holder'].inject(titleDiv);
 
-                    if (moduleState.completed == false) {
+                    if (this.sequenceState.completed  == false) {
                         this._addButton({
                             type: "Continue",
                             next: "SequenceIntro.done"
@@ -1587,14 +1587,7 @@ var SequencePlayer = new Class({
                 next: "MainMenuFromIntro.clicked"
             });
 
-            // Next button - show if there is something next                 
-            if (this.currentModule.getNextSequenceID() != null) {
-                this._addButton({
-                    type: "Next_Sequence",
-                    next: "Next_Sequence.clicked"
-                });
-            }
-
+           
             this._updateUserProgress();
 
             //if (this.fromMenu == true) {
@@ -1636,16 +1629,7 @@ var SequencePlayer = new Class({
                 this._addButton({
                     type: "Main Menu",
                     next: "MainMenuFromIntro.clicked"
-                });
-
-
-                // Next button - show if there is something next                 
-                if (this.currentModule.getNextSequenceID() != null) {
-                    this._addButton({
-                        type: "Next_Sequence",
-                        next: "Next_Sequence.clicked"
-                    });
-                }
+                });               
             }
             this.fromMenu = false;
             step.media.moduleIntroVideo.start();

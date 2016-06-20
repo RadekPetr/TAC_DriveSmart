@@ -161,7 +161,7 @@ var ModulePlayer = new Class({
         var  previousSequenceID = null;
         // filter out intros
         var IDsWithoutIntros = sequenceIDs.filter(function (item, index) {
-            return item != -1;
+            return (item != -1 || item != 0);
         });
         
         var indexOfCurrentSequence = IDsWithoutIntros.indexOf(this.options.currentSequenceID + "");
