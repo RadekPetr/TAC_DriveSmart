@@ -65,7 +65,8 @@ var Environment = new Class({
             flash : this.checkFlash(),
             supportsTouch : this.supportsTouch(),
             videoAutoPlay : !(Browser.platform == "ios" || Browser.platform == "android"),
-            hasUserMedia : this.hasGetUserMedia()
+            hasUserMedia : this.hasGetUserMedia(),
+            protocol : this.getProtocol()
         };
        // Browser.name = "ie";
         if (Browser.name == "ie") {
@@ -132,8 +133,12 @@ var Environment = new Class({
     supportsTouch : function() {
         return 'ontouchstart' in window || navigator.msMaxTouchPoints;
     },
-    hasGetUserMedia : function() {
+    hasGetUserMedia: function () {
+       // debug("navigator.webkitGetUserMedia", navigator.webkitGetUserMedia, "navigator.mediaDevices.getUserMedia({audio:true})", navigator.mediaDevices.getUserMedia({ audio: true }));
         return !!(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+    },
+    getProtocol: function () {
+        return document.location.protocol;
     }
 });
 
@@ -302,8 +307,8 @@ Main.VIDEO_TOP = 20;
 Main.VIDEO_LEFT = 20;
 
 // Version stuff
-Main.VERSION = '106';
-Main.BUILD = '2016/04/11 Videojs 5.5.1, MooTools 1.6.0';
+Main.VERSION = '107';
+Main.BUILD = '2016/06/21 Videojs 5.8.8, MooTools 1.6.0';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;
