@@ -109,6 +109,17 @@ var instance:Object = null;
 var method:Function = rightClickUpCalled;
 var wasSuccessful:Boolean = ExternalInterface.addCallback(methodName, instance, method);
 
+var methodName:String = "leftClick";
+var instance:Object = null;
+var method:Function = leftClickCalled;
+var wasSuccessful:Boolean = ExternalInterface.addCallback(methodName, instance, method);
+
+var methodName:String = "leftClickUp";
+var instance:Object = null;
+var method:Function = leftClickUpCalled;
+var wasSuccessful:Boolean = ExternalInterface.addCallback(methodName, instance, method);
+
+
 //===============================================================================================
 // MOUSE AND KEYBOARD LISTENERS
 //===============================================================================================
@@ -220,6 +231,25 @@ function rightClickUpCalled() {
 	//if (_global.direction != "f") {//Ash/Wei Reset direction when released
 		_global.direction = "x";
 	//}
+	
+	
+};
+
+//----------------------------------------------------------------------------------------------
+//right click trapping
+function leftClickCalled() {
+	
+	ExternalInterface.call("debug", "LeftClicked");
+	
+	_global.direction = "f";// left mouse pushed, ASH -> change b to f
+	scoreObject.displayScore();
+	
+	
+};
+function leftClickUpCalled() {
+	
+	ExternalInterface.call("debug", "LeftClickedUp");	
+	_global.direction = "x";
 	
 	
 };
