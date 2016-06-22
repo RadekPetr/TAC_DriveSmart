@@ -1,7 +1,7 @@
 var recLength = 0, recBuffersL = [], recBuffersR = [], sampleRate;
 
-this.onmessage = function(e) {
-    switch(e.data.command) {
+this.onmessage = function (e) {
+    switch (e.data.command) {
         case 'init':
             init(e.data.config);
             break;
@@ -36,7 +36,7 @@ function exportWAV(type) {
     var interleaved = interleave(bufferL, bufferR);
     var dataview = encodeWAV(interleaved);
     var audioBlob = new Blob([dataview], {
-        type : type
+        type: type
     });
 
     this.postMessage(audioBlob);
@@ -80,7 +80,7 @@ function interleave(inputL, inputR) {
 }
 
 function floatTo16BitPCM(output, offset, input) {
-    for (var i = 0; i < input.length; i++, offset += 2) {
+    for (var i = 0; i < input.length; i++ , offset += 2) {
         var s = Math.max(-1, Math.min(1, input[i]));
         output.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
     }
