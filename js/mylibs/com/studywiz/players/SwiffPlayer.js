@@ -91,17 +91,27 @@ var SwiffPlayer = new Class({
                 this.swiff.show();
         }
     },
-    show : function() {
-
+    show: function () {
         this.container.fade('in');
+        var myMask = new Mask(this.options.swiff.id, {
+            style: {
+                'background': 'rgba(00,00,00,0.001)'
+            },
+            id: "Mask_" + this.options.swiff.id
+        });
+        myMask.show();
         RightClick.init(this.options.swiff.id, this.containerID);
-
     },
-    display : function() {
-
-        this.container.fade('show');
+    display: function () {
+        this.container.fade('show');               
+        var myMask = new Mask(this.options.swiff.id, {
+            style: {
+                'background': 'rgba(00,00,00,0.001)'
+            },
+            id: "Mask_" + this.options.swiff.id
+        });
+        myMask.show();
         RightClick.init(this.options.swiff.id, this.containerID);
-
     },
     start : function(params) {
 
