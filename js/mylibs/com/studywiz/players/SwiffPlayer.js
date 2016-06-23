@@ -140,6 +140,7 @@ var SwiffPlayer = new Class({
     // ---------------------------
     remove : function() {
         if (this.container != null && this.container != undefined) {
+            RightClick.remove();
             this.container.destroy();
         }
     },

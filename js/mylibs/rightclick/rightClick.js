@@ -21,6 +21,13 @@ var RightClick = {
         window.addEventListener("mousedown", this.onGeckoMouse, true);
         window.addEventListener("mouseup", this.onGeckoMouseUp, true);
     },
+    /**
+     *  DeConstructor
+     */
+    remove : function (){
+         window.removeEventListener("mousedown", this.onGeckoMouse, true);
+        window.removeEventListener("mouseup", this.onGeckoMouseUp, true);
+    },
 
     /**
      * GECKO / WEBKIT event overkill
