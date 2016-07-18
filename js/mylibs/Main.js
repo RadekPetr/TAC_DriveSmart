@@ -40,7 +40,7 @@ var Environment = new Class({
             },
             edge : {
                 name : "Edge",
-                minVersion : 10,
+                minVersion : 13,
                 link : ' Windows update '
             },
             unsupported : {
