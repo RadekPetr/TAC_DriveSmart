@@ -1,0 +1,6 @@
+video::-webkit-media-text-track-display {  
+	text-align: center;
+ 	font: 23.7px sans-serif;
+	position: relative; 
+	bottom: 0px; 
+}

@@ -63,7 +63,7 @@ var VideoPlayer = new Class({
 	preload: function () {
 		// debug("++ Video Preload started: " + this.options.id);
 		if (this.player == null) {
-			this.show();
+			//this.show();
 			this.isReady = false;
 			var data = this._getVideoData();
 			this.player = videojs('player_' + this.options.id, {
