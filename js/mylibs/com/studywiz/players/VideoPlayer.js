@@ -119,7 +119,7 @@ var VideoPlayer = new Class({
 	registerLoadEvents: function () {
 		if (this.player != null) {
 			this.player.on("suspend", function () {
-				debug("EVENT: suspend", this.options.id);
+				// debug("EVENT: suspend", this.options.id);
 				if (Browser.platform == "ios") {
 					this._finishedLoading();
 				}
@@ -169,7 +169,8 @@ var VideoPlayer = new Class({
 
 			this.player.on("canplaythrough", function () {
 				// Chrome has small buffer and will stop preloading when full
-				if (Browser.name == "chrome" ) {					
+				
+				if (Browser.name == "chrome") {					
 					this._finishedLoading();
 				} else if (this.getReadyState() > 2
 					&& this.getNetworkState() == 2) {
@@ -262,8 +263,7 @@ var VideoPlayer = new Class({
 			this.registerPlaybackStartEvent();
 			this.isPaused = false;
 			this.player.play();
-		} else {
-			debug ("Video not ready - reload");
+		} else {			
 			// in case that for some reason the video is still not ready
 			this.preload();
 		}
@@ -278,8 +278,7 @@ var VideoPlayer = new Class({
 		this.container.fade('hide');
 		this.isVisible = false;
 	},
-	showCaptions: function (captionFile) {
-		debug ("captionFile", captionFile);
+	showCaptions: function (captionFile) {		
 		// Remove experimentally//
 		this.player.addRemoteTextTrack({
 			'kind': "captions",
@@ -289,7 +288,6 @@ var VideoPlayer = new Class({
 			id: "subs",
 			'default': true
 		});
-		debug ("a");
 		if (Browser.name != 'chrome' && Browser.platform!="android") {
 			var textTrackDisplay = this.player.textTracks();
 			track = textTrackDisplay[0];
@@ -297,7 +295,6 @@ var VideoPlayer = new Class({
 
 			this.player.controlBar.captionsButton.show();
 		}
-		debug ("b");
 	},
 	obscure: function () {
 		debug("Obscure", Main.environment.name);
