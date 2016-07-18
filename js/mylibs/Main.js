@@ -307,8 +307,8 @@ Main.VIDEO_TOP = 20;
 Main.VIDEO_LEFT = 20;
 
 // Version stuff
-Main.VERSION = '107';
-Main.BUILD = '2016/06/21 Videojs 5.8.8, MooTools 1.6.0';
+Main.VERSION = '108';
+Main.BUILD = '2016/07/18 Videojs 5.8.8, MooTools 1.6.0';
 
 // When running on localhost (So I can use different paths when testing)
 Main.IS_LOCAL = true;

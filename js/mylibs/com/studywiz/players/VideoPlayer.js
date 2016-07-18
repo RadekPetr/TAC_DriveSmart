@@ -296,9 +296,8 @@ var VideoPlayer = new Class({
 	},
 	obscure: function () {
 		debug("Obscure", Main.environment.name);
-		// TODO: finish for IE - use an image for the mask
-		if (Main.environment.name == "ie") {
-
+		// Edge v13 has issue with Blur mask rendering 
+		if (Main.environment.name == "ie" || (Main.environment.name == "edge" && Main.environment.version < 14.14371)) {
 			var myMask = new Mask(this.container.player, {
 				style: {
 					'background': 'rgba(00,00,00,0.98)'
