@@ -308,10 +308,10 @@ Main.VIDEO_LEFT = 20;
 
 // Version stuff
 Main.VERSION = '110';
-Main.BUILD = '2016/08/25 Videojs 5.11.4, MooTools 1.6.0';
+Main.BUILD = '2016/08/31 Videojs 5.11.4, MooTools 1.6.0';
 
 // When running on localhost (So I can use different paths when testing)
-Main.IS_LOCAL = true;
+Main.IS_LOCAL = false;
 
 // Show hide debug panel and ignore lock status
 Main.DEBUG = true;
