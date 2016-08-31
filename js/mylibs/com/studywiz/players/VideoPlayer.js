@@ -76,13 +76,13 @@ var VideoPlayer = new Class({
 			});
 			this.player.width = this.options.width;
 			this.player.height = this.options.height;
-			
+
 			this.player.ready((function () {
-				
+
 				var data = this._getVideoData();
-				
+
 				if (this.options.captionFile != null
-					&& this.options.captionFile != "") {					
+					&& this.options.captionFile != "") {
 					this.showCaptions(this.options.captionFile);
 				}
 				this.player.poster = data.poster.src;
@@ -92,7 +92,7 @@ var VideoPlayer = new Class({
 				this.stalledTimer = null;
 				this.paused = false;
 
-			
+
 				if (this.getReadyState() !== 4) {// HAVE_ENOUGH_DATA
 					// debug("readyState checking ", this.player.readyState);
 					// vid.addEventListener('canplaythrough', onCanPlay, false);
@@ -169,8 +169,8 @@ var VideoPlayer = new Class({
 
 			this.player.on("canplaythrough", function () {
 				// Chrome has small buffer and will stop preloading when full
-				
-				if (Browser.name == "chrome") {					
+
+				if (Browser.name == "chrome") {
 					this._finishedLoading();
 				} else if (this.getReadyState() > 2
 					&& this.getNetworkState() == 2) {
@@ -263,7 +263,7 @@ var VideoPlayer = new Class({
 			this.registerPlaybackStartEvent();
 			this.isPaused = false;
 			this.player.play();
-		} else {			
+		} else {
 			// in case that for some reason the video is still not ready
 			this.preload();
 		}
@@ -278,7 +278,7 @@ var VideoPlayer = new Class({
 		this.container.fade('hide');
 		this.isVisible = false;
 	},
-	showCaptions: function (captionFile) {		
+	showCaptions: function (captionFile) {
 		// Remove experimentally//
 		this.player.addRemoteTextTrack({
 			'kind': "captions",
@@ -288,11 +288,13 @@ var VideoPlayer = new Class({
 			id: "subs",
 			'default': true
 		});
-		if (Browser.name != 'chrome' && Browser.platform!="android") {
+		// TODO: better to handle errors then do this per browser
+		// force showing text tracks - does not work on some browsers 
+
+		if ((Browser.name != 'chrome' && Browser.platform != "android") && (Browser.name != 'safari' && Browser.platform != "ios")) {
 			var textTrackDisplay = this.player.textTracks();
 			track = textTrackDisplay[0];
 			track['mode'] = 'showing';
-
 			this.player.controlBar.captionsButton.show();
 		}
 	},
@@ -398,8 +400,8 @@ var VideoPlayer = new Class({
 		// in iOS buffering does not start until play is clicked, so skip
 		// preloading
 		// http://stackoverflow.com/questions/11633929/readystate-issue-with-html5-video-elements-on-ios-safari
-		if (Browser.platform == "android" && Browser.name !="chrome") {
-			this.isReady = true;		
+		if (Browser.platform == "android" && Browser.name != "chrome") {
+			this.isReady = true;
 			debug(" Android device - ready: ", this.playerID, loaderInfo.progress);
 		}
 

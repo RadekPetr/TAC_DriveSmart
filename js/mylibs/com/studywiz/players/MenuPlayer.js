@@ -112,14 +112,14 @@ var MenuPlayer = new Class({
                 disabled: isDisabled
             })
 
-           // Main.userTracker.getModuleUserData(menuItem.selectedModuleID).info.extend({
-         //       disabled: isDisabled
-         //   });
+            // Main.userTracker.getModuleUserData(menuItem.selectedModuleID).info.extend({
+            //       disabled: isDisabled
+            //   });
 
             this.menuItems.push(menuItem);
 
             menuItem.add(this.container.id);
-            menuItem.show();            
+            menuItem.show();
 
             if (isLocked) {
                 menuItem.lock();
@@ -130,13 +130,13 @@ var MenuPlayer = new Class({
             }
             // Save concentration if disabled      
             //if (isDisabled == true && menuItem.selectedModuleID == 'concentration') {
-          //      Main.userTracker.saveConcentrationModuleFullProgressData();
-          //  } 
-            
-          
+            //      Main.userTracker.saveConcentrationModuleFullProgressData();
+            //  } 
 
 
-            if (Main.DEBUG == true) {
+
+
+            if (Main.DEBUG_LOCKED_MENU == true) {
                 menuItem.registerClickEvent(this.myParent());
                 menuItem.registerMouseEnterEvent(this);
             } else {
@@ -157,7 +157,7 @@ var MenuPlayer = new Class({
     menuItemOverAction: function (params) {
         this.showModuleInformation(params);
         // for touch devices show start button
-        if (Main.environment.supportsTouch == true && ((params.itemRef.isLocked != true && params.itemRef.isDisabled != true) || Main.DEBUG == true)) {
+        if (Main.environment.supportsTouch == true && ((params.itemRef.isLocked != true && params.itemRef.isDisabled != true) || Main.DEBUG_LOCKED_MENU == true)) {
             this._showStartButton(params);
         }
     },
