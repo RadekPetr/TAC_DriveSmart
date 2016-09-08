@@ -154,7 +154,7 @@ var MediaLoader = new Class({
     },
     _removeCompletedFromQueue : function() {
         this.loadQueue.each( function(value, key) {
-            if (value.progress == 1) {
+            if (value.progress >= 1) {
                 this.loadQueue.erase(key);
             }
         }.bind(this));
