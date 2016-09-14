@@ -72,9 +72,9 @@ var SequencePlayer = new Class({
 
         // take a step and decide what to do with it
         if (this.currentSequence.length > 0) {
-            console.log(this.currentSequence);
+           // console.log(this.currentSequence);
             this.currentStep = this.currentSequence.shift();
-            console.log(this.currentStep);
+           // console.log(this.currentStep);
 
             var step = this.currentStep;
             var stepType = step.attributes.fmt;
@@ -656,8 +656,8 @@ var SequencePlayer = new Class({
 
                 break;
             case "video.started":
-                console.log("Video Started");
-                console.log(params);
+               // console.log("Video Started");
+               // console.log(params);
                 if (this.currentStep.media.audio != undefined) {
                     this.currentStep.media.audio.stop();
                 }

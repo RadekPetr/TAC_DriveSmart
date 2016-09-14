@@ -109,7 +109,7 @@ var VideoPlayer = new Class({
 					// video is ready
 					this.pause();
 				}
-				console.log("this.getNetworkState()", this.getNetworkState());
+				// console.log("this.getNetworkState()", this.getNetworkState());
 				this.registerLoadEvents();
 				this.hide();
 
