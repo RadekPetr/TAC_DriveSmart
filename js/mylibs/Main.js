@@ -106,7 +106,7 @@ var Environment = new Class({
                 browserReport.supported = true;
             }
         }
-        Debug(browserReport);
+        debug(browserReport);
         return browserReport;
     },
     getAndroidVersion : function(ua) {
@@ -307,11 +307,11 @@ Main.VIDEO_TOP = 20;
 Main.VIDEO_LEFT = 20;
 
 // Version stuff
-Main.VERSION = '112';
-Main.BUILD = '2016/09/12 Videojs 5.11.4, MooTools 1.6.0';
+Main.VERSION = '113';
+Main.BUILD = '2016/09/13 Videojs 5.11.4, MooTools 1.6.0';
 
 // When running on localhost (So I can use different paths when testing)
-Main.IS_LOCAL = false;
+Main.IS_LOCAL = true;
 
 // Show hide debug panel and ignore lock status
 Main.DEBUG = false;
